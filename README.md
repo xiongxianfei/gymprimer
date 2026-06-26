@@ -1,30 +1,21 @@
-# GitHub Repository Template
+# GymPrimer
 
-A small, language-agnostic template for starting a new GitHub repository with only the essentials.
+<!-- vision:start -->
 
-## Included
+**Pitch.** GymPrimer is an open-source educational reference for gym beginners. For every common machine and movement, it provides a reviewed, plain-language card that explains what the exercise trains, how to set up the equipment, how the movement works phase by phase, what to feel, what to avoid, and when to stop.
 
-- `README.md` — project overview and setup notes
-- `LICENSE` — project license
-- `CONTRIBUTING.md` — contribution guidelines
-- `CODE_OF_CONDUCT.md` — community expectations
-- `SECURITY.md` — vulnerability reporting instructions
-- `.gitignore` — common local files to ignore
+**What makes it different.** GymPrimer is upstream of workout prescription. While exercise databases list muscles and workout apps prescribe sets, GymPrimer teaches beginners how to use the equipment in the first place. Reviewed cards over generated answers; depth, correctness, and reviewable illustrations over broad coverage.
 
-## Use this template
+**Who it is for.** Adults in their first ninety days of regular gym training, or returning after a long break. Launch content is English-first, with Chinese treated as a first-class future locale. Also for the trainers, physical therapists, clinicians, content authors, illustrators, translators, and engineers who maintain the library together.
 
-1. Create a new repository from this template.
-2. Replace placeholder text with project-specific details.
-3. Keep only the files your project will actively maintain.
-4. Add tests, scripts, and CI only after the project has real commands to run.
+For goals, non-goals, commitments, refusals, and what would prove this project wrong, see [VISION.md](./VISION.md).
 
-## Recommended repository settings
-
-- Use `main` as the default branch.
-- Require pull requests before merging when collaborating.
-- Prefer small, focused pull requests.
-- Protect important branches from force pushes.
+<!-- vision:end -->
 
 ## License
 
-Licensed under Apache-2.0.
+GymPrimer is released under the Apache License 2.0. See [LICENSE](./LICENSE).
+
+## Status
+
+This repository currently contains only the project vision and supporting strategic-positioning rationale. Content schema, exercise cards, review workflow, and frontend are not yet implemented. See [VISION.md](./VISION.md) for the open questions that need to be resolved before implementation can begin.
