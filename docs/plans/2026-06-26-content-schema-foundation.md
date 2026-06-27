@@ -72,13 +72,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: review-requested
-- Last reviewed milestone: M3
-- Review status: code-review-m3-r2 clean-with-notes
-- Remaining in-scope implementation milestones: M4
-- Next stage: code-review
+- Current milestone state: resolution-needed
+- Last reviewed milestone: M4
+- Review status: code-review-m4-r1 changes-requested
+- Remaining in-scope implementation milestones: M4 resolution
+- Next stage: review-resolution
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1-M3 are closed after code review, and M4 is implemented and awaiting code review.
+- Reason final closeout is or is not ready: M1-M3 are closed after code review, but M4 has CR-M4-1 open and needs a review-resolution implementation before code-review M4 R2.
 
 ## Milestones
 
@@ -236,7 +236,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 
 ### M4. Generated Output, Example Content Set, Developer Documentation, and Local Quality Gate
 
-- Milestone state: planned
+- Milestone state: resolution-needed
 - Goal: Produce deterministic generated publication output for a small reviewed example set, document the local validation workflow, and prepare the repository for later CI without claiming CI exists.
 - Requirements: R30-R36, R38-R40, AC1-AC2, AC32-AC34
 - Files/components likely touched:

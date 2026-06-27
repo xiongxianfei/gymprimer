@@ -16,3 +16,4 @@
 | 2026-06-27 | [code-review-m2-r2](reviews/code-review-m2-r2.md) | M2 resolution commit `d83d30f` | clean-with-notes | none | [review-resolution.md](review-resolution.md) |
 | 2026-06-27 | [code-review-m3-r1](reviews/code-review-m3-r1.md) | M3 implementation commit `3b17f04` | changes-requested | CR-M3-1, CR-M3-2 | [review-resolution.md](review-resolution.md) |
 | 2026-06-27 | [code-review-m3-r2](reviews/code-review-m3-r2.md) | M3 resolution commit `c80048c` | clean-with-notes | none | [review-resolution.md](review-resolution.md) |
+| 2026-06-27 | [code-review-m4-r1](reviews/code-review-m4-r1.md) | M4 implementation commit `fe8bba8` | changes-requested | CR-M4-1 | [review-resolution.md](review-resolution.md) |

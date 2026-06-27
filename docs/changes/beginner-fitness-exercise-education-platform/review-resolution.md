@@ -158,3 +158,15 @@ Evidence:
 - `generated/review-routing-validation-report.json` includes loaded `review_routing_policy` metadata.
 
 `code-review-m3-r2` accepted the resolution with no material findings. M3 is closed and the next stage is implementation of M4.
+
+## Code-review M4 R1 resolution
+
+Status: resolution-needed.
+
+### CR-M4-1 - Generated-output exclusion tests do not prove all M4 publication-boundary cases
+
+Required outcome: M4 generated-output proof must show the public package excludes every T14 boundary category: draft/unpublished, hidden, superseded, unlicensed/internal-only, blocked safety category, and review-expired records.
+
+Safe resolution path: Add focused M4 regression coverage for each exclusion category. The unlicensed/internal-only case must not be excluded only because it is also unpublished; the test should isolate license/publication-rights gating through a direct eligibility assertion or generated-output fixture that exercises that branch. Add blocked safety and review-expired generated-output assertions, refresh generated evidence, rerun M4 validation, and submit code-review M4 R2.
+
+Resolution: pending.
