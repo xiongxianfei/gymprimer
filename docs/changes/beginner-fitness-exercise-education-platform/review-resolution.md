@@ -2,7 +2,7 @@
 
 ## Status
 
-open
+resolved
 
 ## Findings
 
@@ -15,8 +15,8 @@ open
 | PR1 | [plan-review-r1](reviews/plan-review-r1.md) | major | Make negative-match privacy scan validation commands executable with correct pass/fail semantics. | resolved-in-plan-review-r2 |
 | TSR1 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | major | Add explicit command classification, owner, milestone, failure behavior, and test-to-milestone mapping. | resolved-in-test-spec-review-r2 |
 | TSR2 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | major | Replace free-form manual QA bullets with stable manual proof records including evidence, environment, pass/fail conditions, rationale, and owner. | resolved-in-test-spec-review-r2 |
-| CR-M2-1 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Reject public cards using a media asset with `license_kind = unlicensed_internal_only` and prove the media-asset case. | addressed-pending-rereview |
-| CR-M2-2 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Validate supplemental-media metadata and reject supplemental media that overrides, replaces, or contradicts canonical text/SVG steps. | addressed-pending-rereview |
+| CR-M2-1 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Reject public cards using a media asset with `license_kind = unlicensed_internal_only` and prove the media-asset case. | resolved-in-code-review-m2-r2 |
+| CR-M2-2 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Validate supplemental-media metadata and reject supplemental media that overrides, replaces, or contradicts canonical text/SVG steps. | resolved-in-code-review-m2-r2 |
 
 ## Resolution notes
 
@@ -73,7 +73,7 @@ Status: resolved-in-test-spec-review-r2.
 
 ## Code-review M2 R1 resolution
 
-Status: addressed-pending-rereview.
+Status: resolved-in-code-review-m2-r2.
 
 ### CR-M2-1 - Media asset public-license gate
 
@@ -114,4 +114,4 @@ Evidence:
 
 - `generated/invalid-fixture-report.json` now includes `supplemental_media_missing_authority` and `supplemental_media_overrides_canonical_steps` for the invalid supplemental media fixture.
 
-Status: ready for code-review M2 R2.
+`code-review-m2-r2` accepted the resolution with no material findings. M2 is closed and the next stage is implementation of M3.
