@@ -1,0 +1,16 @@
+C4Context
+  title GymPrimer Content Platform - System Context
+
+  Person(author, "Author or contributor", "Creates and revises exercise education content, taxonomy, policies, and media metadata.")
+  Person(reviewer, "Expert reviewer", "Approves card, safety, clinical, locale, taxonomy, or licensing changes according to review tier.")
+  Person(beginner, "Beginner reader", "Uses future public GymPrimer pages generated from reviewed content.")
+
+  System(repo, "GymPrimer repository", "Reviewed source content, schemas, media metadata, audit records, validation tooling, and generated publication artifacts.")
+  System_Ext(future_ui, "Future website/app", "Renders validated generated content. Not defined in this architecture.")
+  System_Ext(future_ai, "Future constrained AI layer", "May retrieve from reviewed generated content later. Not a source of truth.")
+
+  Rel(author, repo, "Authors source files and opens review changes")
+  Rel(reviewer, repo, "Reviews content digests and records approval events")
+  Rel(repo, future_ui, "Publishes validated generated content")
+  Rel(beginner, future_ui, "Reads reviewed exercise guidance")
+  Rel(future_ai, repo, "Reads reviewed generated content if later approved")

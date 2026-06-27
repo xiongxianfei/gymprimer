@@ -1,0 +1,201 @@
+# Review Resolution: Beginner Fitness Exercise Education Platform
+
+## Status
+
+resolved
+
+## Findings
+
+| Finding ID | Review | Severity | Required outcome | Status |
+| --- | --- | --- | --- | --- |
+| SR1 | [spec-review-r1](reviews/spec-review-r1.md) | major | Define unambiguous review and publication state semantics. | resolved-in-r2 |
+| SR2 | [spec-review-r1](reviews/spec-review-r1.md) | major | Make tiered review obligations testable for card publication and review-sensitive edits. | resolved-in-r2 |
+| SR3 | [spec-review-r1](reviews/spec-review-r1.md) | major | Add minimum controlled values or a required seed taxonomy fixture. | resolved-in-r2 |
+| SR4 | [spec-review-r2](reviews/spec-review-r2.md) | major | Use one normative English locale key consistently across requirements, examples, enums, acceptance criteria, and validation behavior. | resolved-in-r3 |
+| PR1 | [plan-review-r1](reviews/plan-review-r1.md) | major | Make negative-match privacy scan validation commands executable with correct pass/fail semantics. | resolved-in-plan-review-r2 |
+| TSR1 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | major | Add explicit command classification, owner, milestone, failure behavior, and test-to-milestone mapping. | resolved-in-test-spec-review-r2 |
+| TSR2 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | major | Replace free-form manual QA bullets with stable manual proof records including evidence, environment, pass/fail conditions, rationale, and owner. | resolved-in-test-spec-review-r2 |
+| CR-M2-1 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Reject public cards using a media asset with `license_kind = unlicensed_internal_only` and prove the media-asset case. | resolved-in-code-review-m2-r2 |
+| CR-M2-2 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Validate supplemental-media metadata and reject supplemental media that overrides, replaces, or contradicts canonical text/SVG steps. | resolved-in-code-review-m2-r2 |
+| CR-M3-1 | [code-review-m3-r1](reviews/code-review-m3-r1.md) | major | Compute review-routing checks from repository-native policy data and prove policy-file loading. | resolved-in-code-review-m3-r2 |
+| CR-M3-2 | [code-review-m3-r1](reviews/code-review-m3-r1.md) | major | Reject direct `review_expired -> approved` mutation without recorded review-completion evidence. | resolved-in-code-review-m3-r2 |
+
+## Resolution notes
+
+- SR1 addressed in `specs/content-schema.md` by splitting lifecycle into `review_status` and `publication_status`, adding allowed transition tables, publication eligibility invariants, review-sensitive edit behavior, and separate lifecycle audit fields.
+- SR2 addressed in `specs/content-schema.md` by adding a review-routing matrix, reviewer-tier semantics, cumulative review obligations, and elevated-risk default-deny behavior.
+- SR3 addressed in `specs/content-schema.md` by adding minimum v1 controlled enums and taxonomy-extension behavior.
+- Additional examples and acceptance criteria were added for lifecycle transitions, review routing, taxonomy validation, and audit events.
+- SR4 addressed in `specs/content-schema.md` by standardizing the required English locale key to `en-US`, rejecting bare `en` in v1, adding migration conflict behavior, and adding locale-specific acceptance criteria.
+
+`spec-review-r3` approved the revised spec with no material findings. The next stage is architecture, after normalizing `specs/content-schema.md` status from `draft` to `approved` before downstream artifacts rely on it.
+
+`plan-review-r1` requested changes because the plan's privacy scan commands used plain `rg`, which fails when no forbidden strings are found. PR1 is addressed in `docs/plans/2026-06-26-content-schema-foundation.md` by replacing those commands with planned `tools/validation/privacy_scan.py` wrapper commands, defining negative-match exit semantics, adding wrapper fixture expectations, and deferring Semgrep/Gitleaks/Presidio to later validation hardening.
+
+`plan-review-r2` approved the revised plan with no material findings. The next stage is test-spec.
+
+`test-spec-review-r1` requested changes because `specs/content-schema.test.md` did not make command ownership, command milestone timing, test-to-milestone mapping, or manual-proof evidence records explicit enough for implementation handoff. The revision was applied and approved by `test-spec-review-r2`.
+
+## Test-spec-review R1 resolution
+
+### TSR1 - Milestone and command ownership
+
+Resolution: addressed in `specs/content-schema.test.md` by adding a `Milestone and command ownership` section.
+
+Changes:
+
+- Added command classifications.
+- Added command ownership table for `unittest`, `validate_content.py`, `privacy_scan.py`, generated-output determinism, and lifecycle state-sync evidence commands.
+- Added owner `implementation milestone maintainer` for planned implementation commands.
+- Added owning milestone and first-pass milestone for each command.
+- Added pre-milestone absence/failure behavior.
+- Added expected nonzero behavior and evidence artifacts.
+- Added T1-T16 milestone map.
+- Added milestone proof expectations for M1-M4.
+
+Status: resolved-in-test-spec-review-r2.
+
+### TSR2 - Manual proof records
+
+Resolution: addressed in `specs/content-schema.test.md` by replacing free-form manual QA bullets with formal manual proof records.
+
+Changes:
+
+- Added MP1 lifecycle-state synchronization inspection.
+- Added MP2 generated-output source-boundary inspection.
+- Added MP3 fixture privacy spot-check.
+- Added MP4 scope/non-goal inspection.
+- Added MP5 developer-command documentation check.
+- Each manual proof now includes automation rationale, exact steps, required environment, evidence artifact, pass condition, failure condition, owner, and owning milestone.
+- Added TSR1 and TSR2 acceptance criteria to make review-blocker closure testable.
+
+Status: resolved-in-test-spec-review-r2.
+
+`test-spec-review-r2` approved the revised test spec with no material findings. Implementation handoff is allowed for M1 under the approved plan. This does not claim any implementation, tests, CI, verification, PR readiness, or final closeout has completed.
+
+## Code-review M2 R1 resolution
+
+Status: resolved-in-code-review-m2-r2.
+
+### CR-M2-1 - Media asset public-license gate
+
+Required outcome: Public cards must reject any media asset, including supplemental media, whose `license_kind` is `unlicensed_internal_only`, and tests must prove the media-asset case.
+
+Safe resolution path: Add supplemental/media asset validation for `media_kind`, `license_kind`, and public-publication rights; add a regression where the card-level license is publishable but supplemental media is internal-only.
+
+Resolution: addressed by adding supplemental-media validation in `tools/validation/validate_content.py`. The validator now checks every supplemental media item for valid `media_kind`, valid `license_kind`, and rejects `license_kind = unlicensed_internal_only` on public cards with `license_not_public`.
+
+Tests added:
+
+- `test_public_card_rejects_internal_only_supplemental_media_asset`
+- `test_supplemental_media_unknown_media_kind_is_rejected`
+- `test_supplemental_media_unknown_license_kind_is_rejected`
+
+Evidence:
+
+- `generated/invalid-fixture-report.json` now includes `license_not_public` for `supplemental_media[0].license_kind`.
+
+### CR-M2-2 - Supplemental-media source-of-truth boundary
+
+Required outcome: Supplemental media must be optional, metadata-complete when present, and unable to override, replace, or contradict canonical reviewed text/SVG steps.
+
+Safe resolution path: Add a minimal supplemental-media contract in the validator and regression tests for missing metadata and explicit replace/override language.
+
+Resolution: addressed by adding a minimal supplemental-media contract. Supplemental media remains optional, but when present each item must be an object with valid `media_kind`, valid `license_kind`, a title or label, and `authoritative_status = supplemental`. The validator rejects `is_source_of_truth = true`, non-supplemental authority status, and explicit replace/override/source-of-truth language in selected copy fields.
+
+Tests added:
+
+- `test_supplemental_media_missing_media_kind_is_rejected`
+- `test_supplemental_media_missing_license_kind_is_rejected`
+- `test_supplemental_media_source_of_truth_claim_is_rejected`
+- `test_supplemental_media_boolean_source_of_truth_claim_is_rejected`
+- `test_supplemental_media_override_language_is_rejected`
+- `test_valid_supplemental_media_is_allowed`
+
+Evidence:
+
+- `generated/invalid-fixture-report.json` now includes `supplemental_media_missing_authority` and `supplemental_media_overrides_canonical_steps` for the invalid supplemental media fixture.
+
+`code-review-m2-r2` accepted the resolution with no material findings. M2 is closed and the next stage is implementation of M3.
+
+## Code-review M3 R1 resolution
+
+Status: resolved-in-code-review-m3-r2.
+
+### CR-M3-1 - Review-routing policy data is not the executable source
+
+Required outcome: Publication eligibility and missing-tier checks must be computed from the repository-native review-routing policy data, or an explicit generated/loaded policy fixture that is validated against the same source of truth.
+
+Safe resolution path: Load `content/policies/review-routing-v1.json` through a bounded validator input path, validate its shape, and pass the loaded route map into `required_review_groups()` and `validate_review_routing()`. Add a regression that fails if the validator ignores the policy data file.
+
+Resolution: addressed by loading `content/policies/review-routing-v1.json` as the default repository-native review-routing policy source, validating the policy shape, recording policy metadata in validation reports, and passing the loaded route map into review-routing and lifecycle approval checks. The in-code review route matrix was removed as the executable source of truth.
+
+Tests added:
+
+- `test_review_routing_uses_loaded_policy_file_for_required_tiers`
+- `test_review_routing_policy_missing_required_review_groups_is_rejected`
+- `test_review_routing_report_includes_loaded_policy_metadata`
+- `test_review_expired_to_approved_required_tiers_come_from_loaded_policy`
+
+### CR-M3-2 - Direct `review_expired -> approved` transition is accepted
+
+Required outcome: A `review_expired -> approved` transition must be accepted only when the lifecycle event represents recorded review completion and the card has current digest-scoped approval evidence for the required tiers.
+
+Safe resolution path: Add a transition trigger check for `review_expired -> approved`, requiring a review-completion event type plus current approval evidence, and emit a stable error for direct mutation. Add a regression test and fixture proving direct mutation fails while a valid recorded review completion path passes.
+
+Resolution: addressed by adding a special transition gate for `review_expired -> approved`. The transition now requires `event_type = review_completion` and current digest-scoped approval evidence satisfying the loaded review-routing policy. Direct system mutation is rejected with `review_expired_to_approved_requires_review_completion`; missing current approval evidence is rejected with `review_expired_to_approved_missing_current_approval`.
+
+Tests added:
+
+- `test_review_expired_to_approved_direct_system_mutation_is_rejected`
+- `test_review_expired_to_approved_without_current_digest_approval_is_rejected`
+- `test_review_expired_to_approved_with_recorded_review_completion_passes`
+- `test_review_expired_to_approved_required_tiers_come_from_loaded_policy`
+
+Evidence:
+
+- `generated/lifecycle-validation-report.json` includes `review_expired_to_approved_requires_review_completion`.
+- `generated/review-routing-validation-report.json` includes loaded `review_routing_policy` metadata.
+
+`code-review-m3-r2` accepted the resolution with no material findings. M3 is closed and the next stage is implementation of M4.
+
+## Code-review M4 R1 resolution
+
+Status: resolved-in-code-review-m4-r2.
+
+### CR-M4-1 - Generated-output exclusion tests do not prove all M4 publication-boundary cases
+
+Required outcome: M4 generated-output proof must show the public package excludes every T14 boundary category: draft/unpublished, hidden, superseded, unlicensed/internal-only, blocked safety category, and review-expired records.
+
+Safe resolution path: Add focused M4 regression coverage for each exclusion category. The unlicensed/internal-only case must not be excluded only because it is also unpublished; the test should isolate license/publication-rights gating through a direct eligibility assertion or generated-output fixture that exercises that branch. Add blocked safety and review-expired generated-output assertions, refresh generated evidence, rerun M4 validation, and submit code-review M4 R2.
+
+Resolution: addressed by adding `test_public_output_excludes_all_publication_boundary_failures` to `tests/test_generated_output_m4.py`. The new test creates one public-ready control card plus isolated exclusion variants for `publication_status = unpublished`, `publication_status = hidden`, `publication_status = superseded`, `license.license_kind = unlicensed_internal_only` while still published, `review_status = review_expired` while still published, and `safety_category = blocked_rehab` while still published. It asserts that the generated public package contains only the control card.
+
+Tests added or revised:
+
+- `test_public_output_excludes_all_publication_boundary_failures`
+- `test_public_content_package_is_filtered_and_deterministic` was narrowed so the internal-only case no longer appears as an unpublished overlapping exclusion.
+
+Validation evidence refreshed:
+
+- `generated/test-results.txt`
+- `generated/validation-report.json`
+- `generated/public-content.json`
+- `generated/invalid-fixture-report.json`
+- `generated/lifecycle-validation-report.json`
+- `generated/review-routing-validation-report.json`
+- `generated/privacy-scan-report.json`
+
+Validation passed:
+
+- `python3 -m unittest tests.test_generated_output_m4`
+- `python3 -m unittest discover -s tests`
+- `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json`
+- `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out /tmp/gymprimer-validation-report.json --emit-public /tmp/gymprimer-public-content.json`
+- `diff -u generated/public-content.json /tmp/gymprimer-public-content.json`
+- `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`
+- `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --out generated/lifecycle-validation-report.json --expect-mixed`
+- `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`
+- `python3 tools/validation/privacy_scan.py --pattern 'private|/home/|secret|PHI|personal health' -- generated/`
+
+Status: resolved in code-review M4 R2 with no material findings. M4 is closed and no implementation milestones remain open.

@@ -1,0 +1,11 @@
+{
+  "controlled_enum_source": "content/taxonomy/v1.json",
+  "description": "M2 taxonomy contract summary for v1 controlled values and stable taxonomy IDs.",
+  "kind": "taxonomy",
+  "locale_keys": [
+    "en-US",
+    "zh-Hans"
+  ],
+  "schema_version": "content-schema-v1",
+  "status": "m2-contract"
+}

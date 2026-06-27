@@ -1,0 +1,1540 @@
+#!/usr/bin/env python3
+"""Validate repository-native GymPrimer content cards."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import re
+import sys
+from pathlib import Path
+from typing import Any
+
+
+DEFAULT_SCHEMA_VERSION = "content-schema-v1"
+DEFAULT_REVIEW_ROUTING_POLICY_PATH = Path("content/policies/review-routing-v1.json")
+CARD_SUFFIXES = {".json"}
+
+CONTROLLED_ENUMS: dict[str, set[str]] = {
+    "card_type": {
+        "exercise",
+        "equipment_guide",
+        "movement_pattern",
+        "training_principle",
+        "safety_policy",
+        "glossary",
+    },
+    "difficulty": {"beginner", "beginner_plus", "intermediate", "advanced"},
+    "safety_category": {"standard", "caution", "elevated_risk", "blocked_rehab", "policy_only"},
+    "review_status": {"draft", "in_review", "changes_requested", "approved", "review_expired"},
+    "publication_status": {"unpublished", "published", "hidden", "superseded"},
+    "review_tier": {
+        "trainer",
+        "strength_coach",
+        "physical_therapist",
+        "sports_medicine_clinician",
+        "schema_owner",
+        "locale_reviewer",
+        "content_ops",
+        "legal_policy",
+    },
+    "review_scope": {
+        "card_content",
+        "equipment_setup",
+        "movement_mechanics",
+        "training_principle",
+        "safety_language_policy",
+        "card_safety_language",
+        "emergency_criteria_policy",
+        "elevated_risk_card",
+        "taxonomy_change",
+        "media_equivalence",
+        "translation_equivalence",
+        "licensing",
+    },
+    "locale": {"en-US", "zh-Hans"},
+    "contribution_provenance": {
+        "expert_authored",
+        "staff_authored_expert_reviewed",
+        "ai_assisted_expert_reviewed",
+        "imported_licensed_expert_reviewed",
+        "user_submitted_unreviewed",
+    },
+    "media_kind": {"video", "image", "diagram", "animation", "thumbnail", "caption_file", "transcript", "audio"},
+    "license_kind": {
+        "owned",
+        "third_party_licensed",
+        "cc_by",
+        "cc_by_sa",
+        "public_domain",
+        "unlicensed_internal_only",
+    },
+    "movement_pattern": {
+        "squat",
+        "hinge",
+        "lunge",
+        "push_horizontal",
+        "push_vertical",
+        "pull_horizontal",
+        "pull_vertical",
+        "carry",
+        "brace_anti_extension",
+        "brace_anti_rotation",
+        "rotation",
+        "locomotion",
+        "cardio_rowing",
+        "cardio_cycling",
+        "cardio_running",
+        "mobility",
+    },
+    "equipment_kind": {
+        "bodyweight",
+        "dumbbell",
+        "barbell",
+        "kettlebell",
+        "cable_machine",
+        "selectorized_machine",
+        "bench",
+        "resistance_band",
+        "rowing_machine",
+        "stationary_bike",
+        "treadmill",
+        "mat",
+        "sled",
+        "pullup_assist_machine",
+    },
+}
+
+DEFAULT_MUSCLES = {
+    "latissimus_dorsi",
+    "biceps_brachii",
+    "posterior_deltoid",
+    "pectoralis_major",
+    "quadriceps",
+    "hamstrings",
+    "gluteus_maximus",
+    "gluteus_medius",
+    "hip_flexors",
+    "core",
+}
+
+LOCALIZED_REQUIRED_FIELDS = {
+    "title",
+    "aliases",
+    "summary",
+    "purpose",
+    "equipment_setup",
+    "start_position",
+    "movement_phases",
+    "breathing_bracing",
+    "common_mistakes",
+    "regressions",
+    "progressions",
+    "what_you_should_feel",
+    "what_you_should_not_feel",
+    "safety_notes",
+    "canonical_svg_text",
+}
+
+TOP_LEVEL_REQUIRED_FIELDS = {
+    "schema_version",
+    "card_id",
+    "version_id",
+    "card_type",
+    "review_status",
+    "publication_status",
+    "difficulty",
+    "safety_category",
+    "equipment",
+    "movement_patterns",
+    "primary_muscles",
+    "secondary_muscles",
+    "stabilizers",
+    "canonical_svg_steps",
+    "license",
+    "contribution_provenance",
+    "locales",
+}
+
+DISCLAIMER_TEXT = (
+    "GymPrimer is educational content, not medical advice. Talk to a qualified professional before starting a new "
+    "exercise program; stop and seek qualified help for sharp, radiating, worsening, or unusual symptoms."
+)
+
+DIAGNOSIS_OR_TREATMENT_PATTERN = re.compile(
+    r"\b(diagnose|diagnoses|diagnosis|treat|treats|treatment|cure|cures|rehab|rehabilitate|rehabilitation)\b",
+    re.IGNORECASE,
+)
+
+PROHIBITED_PERSONALIZATION_FIELDS = {
+    "personalized_workout_plan",
+    "user_profile",
+    "medical_screening_results",
+    "injury_diagnosis",
+    "rehab_protocol",
+}
+
+SUPPLEMENTAL_MEDIA_COPY_FIELDS = {
+    "title",
+    "label",
+    "caption",
+    "description",
+    "instructional_copy",
+    "notes",
+    "transcript_summary",
+}
+
+SUPPLEMENTAL_MEDIA_AUTHORITY_PATTERN = re.compile(
+    r"\b(replaces?|overrides?|supersedes?|contradicts?)\b"
+    r"|\bsource of truth\b"
+    r"|\bauthoritative version\b"
+    r"|\bignore the canonical\b"
+    r"|\binstead of the canonical\b"
+    r"|\bfollow this instead\b"
+    r"|\bdo this instead\b",
+    re.IGNORECASE,
+)
+
+ALLOWED_REVIEW_TRANSITIONS = {
+    ("draft", "in_review"),
+    ("in_review", "approved"),
+    ("in_review", "changes_requested"),
+    ("changes_requested", "draft"),
+    ("changes_requested", "in_review"),
+    ("approved", "review_expired"),
+    ("review_expired", "in_review"),
+    ("review_expired", "approved"),
+}
+
+ALLOWED_PUBLICATION_TRANSITIONS = {
+    ("unpublished", "published"),
+    ("published", "hidden"),
+    ("hidden", "published"),
+    ("published", "superseded"),
+    ("hidden", "superseded"),
+    ("unpublished", "superseded"),
+}
+
+AUDIT_EVENT_REQUIRED_FIELDS = {
+    "card_id",
+    "version_id",
+    "locale",
+    "event_type",
+    "review_status_before",
+    "review_status_after",
+    "publication_status_before",
+    "publication_status_after",
+    "actor_id",
+    "actor_role",
+    "required_review_tiers",
+    "completed_review_tiers",
+    "content_digest_before",
+    "content_digest_after",
+    "timestamp",
+    "reason",
+}
+
+APPROVAL_EVENT_REQUIRED_FIELDS = {
+    "reviewer_public_id",
+    "review_tier",
+    "review_scope",
+    "timestamp",
+    "content_digest",
+}
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Validate GymPrimer source content.")
+    parser.add_argument("--source", help="Content source directory.")
+    parser.add_argument("--fixtures", help="Fixture source directory. Alias for --source.")
+    parser.add_argument("--schemas", required=True, help="Schema directory.")
+    parser.add_argument("--media", required=True, help="Media directory.")
+    parser.add_argument("--out", help="Validation report output path.")
+    parser.add_argument("--report", help="Validation report output path. Alias for --out.")
+    parser.add_argument("--emit-public", help="Write deterministic reviewed public content package to this path.")
+    parser.add_argument(
+        "--review-routing-policy",
+        default=str(DEFAULT_REVIEW_ROUTING_POLICY_PATH),
+        help="Repository-native review-routing policy JSON path.",
+    )
+    parser.add_argument(
+        "--expect-invalid",
+        action="store_true",
+        help="Exit 0 only when validation completes and at least one content finding is produced.",
+    )
+    parser.add_argument(
+        "--expect-mixed",
+        action="store_true",
+        help="Exit 0 only when validation completes with at least one valid and one invalid card.",
+    )
+    return parser
+
+
+def schema_version(schemas: Path) -> str:
+    version_file = schemas / "content-schema-version.txt"
+    if version_file.exists():
+        version = version_file.read_text(encoding="utf-8").strip()
+        return version or DEFAULT_SCHEMA_VERSION
+
+    report_schema = schemas / "validation-report.schema.json"
+    if report_schema.exists():
+        try:
+            data = json.loads(report_schema.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            return DEFAULT_SCHEMA_VERSION
+        value = data.get("schema_version")
+        if isinstance(value, str) and value:
+            return value
+
+    return DEFAULT_SCHEMA_VERSION
+
+
+def base_report(version: str, status: str) -> dict[str, Any]:
+    return {
+        "schema_version": version,
+        "status": status,
+        "review_routing_policy": {},
+        "counts": {
+            "valid_cards": 0,
+            "invalid_cards": 0,
+            "warnings": 0,
+            "review_sensitive_changes": 0,
+        },
+        "findings": [],
+        "warnings": [],
+        "privacy": {
+            "pii_required": False,
+            "sensitive_data_allowed": False,
+            "absolute_paths_redacted": True,
+        },
+    }
+
+
+def write_report(path: Path, report: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def missing_path_finding(role: str) -> dict[str, str]:
+    return {
+        "code": "missing_path",
+        "path_role": role,
+        "message": f"Required {role} path does not exist.",
+    }
+
+
+def load_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def review_routing_policy_finding(code: str, field: str, message: str) -> dict[str, str]:
+    return finding(code, "review-routing-policy", field, message)
+
+
+def display_path(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(Path.cwd().resolve()))
+    except ValueError:
+        return str(path)
+
+
+def policy_source_path(path: Path) -> Path:
+    if path.is_absolute():
+        return path
+    return Path.cwd() / path
+
+
+def load_review_routing_policy(path: Path, taxonomy: dict[str, set[str]]) -> tuple[dict[str, Any], dict[str, list[set[str]]], list[dict[str, str]]]:
+    source = policy_source_path(path)
+    metadata: dict[str, Any] = {
+        "policy_id": "",
+        "schema_version": "",
+        "source_path": display_path(source),
+        "digest": "",
+        "route_count": 0,
+    }
+    findings: list[dict[str, str]] = []
+    routes: dict[str, list[set[str]]] = {}
+
+    if not source.exists() or source.is_dir():
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_missing",
+                "review_routing_policy",
+                "Review-routing policy file is missing.",
+            )
+        )
+        return metadata, routes, findings
+
+    raw = source.read_bytes()
+    metadata["digest"] = "sha256:" + hashlib.sha256(raw).hexdigest()
+    try:
+        data = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_invalid_json",
+                "review_routing_policy",
+                "Review-routing policy JSON is invalid.",
+            )
+        )
+        return metadata, routes, findings
+
+    if not isinstance(data, dict):
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_invalid",
+                "review_routing_policy",
+                "Review-routing policy must be a JSON object.",
+            )
+        )
+        return metadata, routes, findings
+
+    policy_id = data.get("policy_id")
+    if not is_nonempty(policy_id):
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_missing_policy_id",
+                "policy_id",
+                "Review-routing policy requires policy_id.",
+            )
+        )
+    else:
+        metadata["policy_id"] = policy_id
+
+    schema = data.get("schema_version")
+    if not is_nonempty(schema):
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_missing_schema_version",
+                "schema_version",
+                "Review-routing policy requires schema_version.",
+            )
+        )
+    else:
+        metadata["schema_version"] = schema
+
+    categories = data.get("change_categories")
+    if categories is None:
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_missing_change_categories",
+                "change_categories",
+                "Review-routing policy requires change_categories.",
+            )
+        )
+        return metadata, routes, findings
+    if not isinstance(categories, dict):
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_invalid_change_categories",
+                "change_categories",
+                "Review-routing policy change_categories must be an object.",
+            )
+        )
+        return metadata, routes, findings
+
+    for category, route in sorted(categories.items()):
+        route_path = f"change_categories.{category}"
+        if not isinstance(category, str) or not category:
+            findings.append(
+                review_routing_policy_finding(
+                    "review_routing_policy_invalid_change_category",
+                    "change_categories",
+                    "Review-routing policy change category keys must be non-empty strings.",
+                )
+            )
+            continue
+        if not isinstance(route, dict):
+            findings.append(
+                review_routing_policy_finding(
+                    "review_routing_policy_invalid_route",
+                    route_path,
+                    "Review-routing policy route must be an object.",
+                )
+            )
+            continue
+
+        scope = route.get("scope")
+        if isinstance(scope, str) and scope not in taxonomy.get("review_scope", set()):
+            findings.append(
+                review_routing_policy_finding(
+                    "review_routing_policy_unknown_scope",
+                    f"{route_path}.scope",
+                    "Review-routing policy route has an unknown scope.",
+                )
+            )
+
+        groups = route.get("required_review_groups")
+        if not isinstance(groups, list) or not groups:
+            findings.append(
+                review_routing_policy_finding(
+                    "review_routing_policy_missing_required_review_groups",
+                    f"{route_path}.required_review_groups",
+                    "Review-routing policy route requires required_review_groups.",
+                )
+            )
+            continue
+
+        normalized: list[set[str]] = []
+        for group_index, group in enumerate(groups):
+            group_path = f"{route_path}.required_review_groups[{group_index}]"
+            if not isinstance(group, list) or not group:
+                findings.append(
+                    review_routing_policy_finding(
+                        "review_routing_policy_unknown_review_group",
+                        group_path,
+                        "Review-routing policy review groups must be non-empty review-tier lists.",
+                    )
+                )
+                continue
+            options: set[str] = set()
+            for tier in group:
+                if not isinstance(tier, str) or tier not in taxonomy.get("review_tier", set()):
+                    findings.append(
+                        review_routing_policy_finding(
+                            "review_routing_policy_unknown_review_group",
+                            group_path,
+                            "Review-routing policy route references an unknown review tier.",
+                        )
+                    )
+                else:
+                    options.add(tier)
+            if options:
+                normalized.append(options)
+        if normalized:
+            routes[category] = normalized
+
+    metadata["route_count"] = len(routes)
+    return metadata, routes, findings
+
+
+def load_taxonomy(source: Path) -> dict[str, set[str]]:
+    taxonomy = {key: set(values) for key, values in CONTROLLED_ENUMS.items()}
+    taxonomy["muscles"] = set(DEFAULT_MUSCLES)
+
+    candidates = [
+        source / "taxonomy" / "v1.json",
+        source / "content" / "taxonomy" / "v1.json",
+        Path.cwd() / "content" / "taxonomy" / "v1.json",
+    ]
+    for candidate in candidates:
+        if not candidate.exists():
+            continue
+        try:
+            data = load_json(candidate)
+        except (json.JSONDecodeError, OSError):
+            continue
+        for key, value in data.items():
+            if isinstance(value, list) and all(isinstance(item, str) for item in value):
+                taxonomy[key] = set(value)
+        break
+
+    return taxonomy
+
+
+def discover_card_files(source: Path) -> list[Path]:
+    return sorted(
+        path
+        for path in source.rglob("*")
+        if path.is_file() and path.suffix.lower() in CARD_SUFFIXES and "cards" in path.parts
+    )
+
+
+def is_public(card: dict[str, Any]) -> bool:
+    return card.get("publication_status") == "published" or card.get("publishable") is True
+
+
+def is_public_package_eligible(card: dict[str, Any]) -> bool:
+    return (
+        card.get("publication_status") == "published"
+        and card.get("review_status") == "approved"
+        and card.get("safety_category") not in {"blocked_rehab", "elevated_risk"}
+        and card.get("license", {}).get("license_kind") != "unlicensed_internal_only"
+        and card.get("contribution_provenance") != "user_submitted_unreviewed"
+    )
+
+
+def finding(
+    code: str,
+    card_id: str,
+    field: str,
+    message: str,
+    locale: str | None = None,
+    **extra: str,
+) -> dict[str, str]:
+    item = {
+        "code": code,
+        "card_id": card_id,
+        "field": field,
+        "message": message,
+    }
+    if locale is not None:
+        item["locale"] = locale
+    item.update(extra)
+    return item
+
+
+def is_nonempty(value: Any) -> bool:
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, (list, dict)):
+        return bool(value)
+    return value is not None
+
+
+def iter_text(value: Any) -> list[str]:
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, list):
+        texts: list[str] = []
+        for item in value:
+            texts.extend(iter_text(item))
+        return texts
+    if isinstance(value, dict):
+        texts = []
+        for item in value.values():
+            texts.extend(iter_text(item))
+        return texts
+    return []
+
+
+def validate_enum(
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    taxonomy: dict[str, set[str]],
+    card_id: str,
+    field: str,
+    enum_name: str | None = None,
+) -> None:
+    enum_key = enum_name or field
+    value = card.get(field)
+    if value is None:
+        return
+    if not isinstance(value, str) or value not in taxonomy.get(enum_key, set()):
+        findings.append(finding("enum_unknown", card_id, field, f"Unknown controlled value for {field}."))
+
+
+def validate_string_list_taxonomy(
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    taxonomy: dict[str, set[str]],
+    card_id: str,
+    field: str,
+    taxonomy_key: str,
+) -> None:
+    values = card.get(field)
+    if not isinstance(values, list) or not values:
+        findings.append(finding("required_field_missing", card_id, field, f"{field} must be a nonempty list."))
+        return
+    allowed = taxonomy.get(taxonomy_key, set())
+    for value in values:
+        if not isinstance(value, str) or value not in allowed:
+            findings.append(finding("taxonomy_unknown", card_id, field, f"Unknown taxonomy id in {field}."))
+
+
+def validate_locale(
+    locale: str,
+    branch: Any,
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    card_id: str,
+) -> None:
+    if not isinstance(branch, dict):
+        findings.append(finding("locale_branch_invalid", card_id, f"locales.{locale}", "Locale branch must be an object.", locale))
+        return
+
+    for field_name in sorted(LOCALIZED_REQUIRED_FIELDS):
+        if not is_nonempty(branch.get(field_name)):
+            findings.append(
+                finding(
+                    "required_localized_field_missing",
+                    card_id,
+                    f"locales.{locale}.{field_name}",
+                    f"Required localized field {field_name} is missing.",
+                    locale,
+                )
+            )
+
+    accessible_text = branch.get("canonical_svg_text")
+    svg_steps = card.get("canonical_svg_steps", [])
+    if isinstance(accessible_text, dict) and isinstance(svg_steps, list):
+        for step in svg_steps:
+            if not isinstance(step, str) or not is_nonempty(accessible_text.get(step)):
+                findings.append(
+                    finding(
+                        "media_accessible_text_missing",
+                        card_id,
+                        f"locales.{locale}.canonical_svg_text",
+                        "Every canonical SVG step needs accessible text in each published locale.",
+                        locale,
+                    )
+                )
+
+    safety_notes = branch.get("safety_notes", [])
+    if is_public(card) and DISCLAIMER_TEXT not in "\n".join(iter_text(safety_notes)):
+        findings.append(
+            finding(
+                "disclaimer_missing",
+                card_id,
+                f"locales.{locale}.safety_notes",
+                "Public content requires the approved educational disclaimer.",
+                locale,
+            )
+        )
+
+    combined_text = "\n".join(iter_text(branch))
+    if DIAGNOSIS_OR_TREATMENT_PATTERN.search(combined_text):
+        findings.append(
+            finding(
+                "diagnosis_treatment_claim",
+                card_id,
+                f"locales.{locale}",
+                "Content must not claim diagnosis, treatment, cure, or rehabilitation.",
+                locale,
+            )
+        )
+
+
+def validate_supplemental_media(
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    taxonomy: dict[str, set[str]],
+    card_id: str,
+) -> None:
+    media_items = card.get("supplemental_media", [])
+    if media_items is None:
+        return
+    if not isinstance(media_items, list):
+        findings.append(
+            finding(
+                "supplemental_media_not_list",
+                card_id,
+                "supplemental_media",
+                "Supplemental media must be a list when present.",
+            )
+        )
+        return
+
+    for index, item in enumerate(media_items):
+        path = f"supplemental_media[{index}]"
+        if not isinstance(item, dict):
+            findings.append(
+                finding(
+                    "supplemental_media_item_not_object",
+                    card_id,
+                    path,
+                    "Each supplemental media item must be an object.",
+                )
+            )
+            continue
+
+        media_kind = item.get("media_kind")
+        if not is_nonempty(media_kind):
+            findings.append(
+                finding(
+                    "supplemental_media_missing_media_kind",
+                    card_id,
+                    f"{path}.media_kind",
+                    "Supplemental media requires media_kind.",
+                )
+            )
+        elif not isinstance(media_kind, str) or media_kind not in taxonomy.get("media_kind", set()):
+            findings.append(
+                finding(
+                    "unknown_media_kind",
+                    card_id,
+                    f"{path}.media_kind",
+                    "Supplemental media uses an unknown media_kind.",
+                )
+            )
+
+        license_kind = item.get("license_kind")
+        if not is_nonempty(license_kind):
+            findings.append(
+                finding(
+                    "supplemental_media_missing_license_kind",
+                    card_id,
+                    f"{path}.license_kind",
+                    "Supplemental media requires license_kind.",
+                )
+            )
+        elif not isinstance(license_kind, str) or license_kind not in taxonomy.get("license_kind", set()):
+            findings.append(
+                finding(
+                    "unknown_license_kind",
+                    card_id,
+                    f"{path}.license_kind",
+                    "Supplemental media uses an unknown license_kind.",
+                )
+            )
+        elif is_public(card) and license_kind == "unlicensed_internal_only":
+            findings.append(
+                finding(
+                    "license_not_public",
+                    card_id,
+                    f"{path}.license_kind",
+                    "Public cards cannot reference supplemental media with internal-only rights.",
+                )
+            )
+
+        if not is_nonempty(item.get("title")) and not is_nonempty(item.get("label")):
+            findings.append(
+                finding(
+                    "supplemental_media_missing_label",
+                    card_id,
+                    path,
+                    "Supplemental media requires a title or label.",
+                )
+            )
+
+        authoritative_status = item.get("authoritative_status")
+        if authoritative_status is None:
+            findings.append(
+                finding(
+                    "supplemental_media_missing_authority",
+                    card_id,
+                    f"{path}.authoritative_status",
+                    "Supplemental media must explicitly be marked as supplemental.",
+                )
+            )
+        elif authoritative_status != "supplemental":
+            findings.append(
+                finding(
+                    "supplemental_media_not_authoritative",
+                    card_id,
+                    f"{path}.authoritative_status",
+                    "Supplemental media must not be canonical or source-of-truth media.",
+                )
+            )
+
+        if item.get("is_source_of_truth") is True:
+            findings.append(
+                finding(
+                    "supplemental_media_not_authoritative",
+                    card_id,
+                    f"{path}.is_source_of_truth",
+                    "Supplemental media must not claim source-of-truth status.",
+                )
+            )
+
+        for field_name in sorted(SUPPLEMENTAL_MEDIA_COPY_FIELDS):
+            value = item.get(field_name)
+            if not isinstance(value, str):
+                continue
+            if SUPPLEMENTAL_MEDIA_AUTHORITY_PATTERN.search(value):
+                findings.append(
+                    finding(
+                        "supplemental_media_overrides_canonical_steps",
+                        card_id,
+                        f"{path}.{field_name}",
+                        "Supplemental media must not claim to replace, override, contradict, or supersede canonical reviewed steps.",
+                    )
+                )
+
+
+def review_tier_label(options: set[str]) -> str:
+    return next(iter(options)) if len(options) == 1 else "_or_".join(sorted(options))
+
+
+def completed_review_tiers(card: dict[str, Any]) -> set[str]:
+    tiers: set[str] = set()
+    review = card.get("review")
+    if isinstance(review, dict) and isinstance(review.get("review_tier"), str):
+        tiers.add(review["review_tier"])
+    for event in card.get("approval_events", []) if isinstance(card.get("approval_events", []), list) else []:
+        if isinstance(event, dict) and isinstance(event.get("review_tier"), str):
+            tiers.add(event["review_tier"])
+    return tiers
+
+
+def validate_approval_events(
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    taxonomy: dict[str, set[str]],
+    card_id: str,
+) -> None:
+    events = card.get("approval_events", [])
+    current_digest = card.get("content_digest")
+    review = card.get("review")
+    if isinstance(current_digest, str) and isinstance(review, dict):
+        review_digest = review.get("content_digest")
+        if isinstance(review_digest, str) and review_digest != current_digest:
+            findings.append(
+                finding(
+                    "approval_digest_mismatch",
+                    card_id,
+                    "review.content_digest",
+                    "Review metadata digest must match the current content digest.",
+                )
+            )
+    if events is None:
+        return
+    if not isinstance(events, list):
+        findings.append(finding("approval_events_not_list", card_id, "approval_events", "Approval events must be a list."))
+        return
+
+    for index, event in enumerate(events):
+        path = f"approval_events[{index}]"
+        if not isinstance(event, dict):
+            findings.append(finding("approval_event_not_object", card_id, path, "Approval event must be an object."))
+            continue
+        for field_name in sorted(APPROVAL_EVENT_REQUIRED_FIELDS):
+            if not is_nonempty(event.get(field_name)):
+                findings.append(
+                    finding(
+                        "approval_event_missing_field",
+                        card_id,
+                        f"{path}.{field_name}",
+                        "Approval events require reviewer tier, scope, identity, timestamp, and digest.",
+                    )
+                )
+        event_digest = event.get("content_digest")
+        if isinstance(current_digest, str) and isinstance(event_digest, str) and event_digest != current_digest:
+            findings.append(
+                finding(
+                    "approval_digest_mismatch",
+                    card_id,
+                    f"{path}.content_digest",
+                    "Approval event digest must match the current content digest.",
+                )
+            )
+        tier = event.get("review_tier")
+        if isinstance(tier, str) and tier not in taxonomy.get("review_tier", set()):
+            findings.append(finding("enum_unknown", card_id, f"{path}.review_tier", "Unknown review tier."))
+        scope = event.get("review_scope")
+        if isinstance(scope, str) and scope not in taxonomy.get("review_scope", set()):
+            findings.append(finding("enum_unknown", card_id, f"{path}.review_scope", "Unknown review scope."))
+
+
+def current_digest_scoped_review_tiers(card: dict[str, Any]) -> set[str]:
+    current_digest = card.get("content_digest")
+    if not isinstance(current_digest, str):
+        return set()
+    tiers: set[str] = set()
+    events = card.get("approval_events", [])
+    if not isinstance(events, list):
+        return tiers
+    for event in events:
+        if not isinstance(event, dict):
+            continue
+        if event.get("content_digest") != current_digest:
+            continue
+        tier = event.get("review_tier")
+        if isinstance(tier, str):
+            tiers.add(tier)
+    return tiers
+
+
+def review_groups_satisfied(groups: list[set[str]], tiers: set[str]) -> bool:
+    return all(tiers.intersection(options) for options in groups)
+
+
+def validate_review_expired_to_approved_transition(
+    card: dict[str, Any],
+    event: dict[str, Any],
+    path: str,
+    route_map: dict[str, list[set[str]]],
+    findings: list[dict[str, str]],
+    card_id: str,
+) -> None:
+    if event.get("event_type") != "review_completion":
+        findings.append(
+            finding(
+                "review_expired_to_approved_requires_review_completion",
+                card_id,
+                f"{path}.event_type",
+                "review_expired to approved requires a recorded review-completion event.",
+            )
+        )
+
+    required_groups = required_review_groups(card, route_map, findings, card_id)
+    if required_groups and not review_groups_satisfied(required_groups, current_digest_scoped_review_tiers(card)):
+        findings.append(
+            finding(
+                "review_expired_to_approved_missing_current_approval",
+                card_id,
+                "approval_events",
+                "review_expired to approved requires current digest-scoped approval for all required review tiers.",
+            )
+        )
+
+
+def validate_lifecycle_event(
+    card: dict[str, Any],
+    card_id: str,
+    event: Any,
+    index: int,
+    collection_name: str,
+    route_map: dict[str, list[set[str]]],
+    findings: list[dict[str, str]],
+) -> None:
+    path = f"{collection_name}[{index}]"
+    if not isinstance(event, dict):
+        findings.append(finding("audit_event_not_object", card_id, path, "Lifecycle audit event must be an object."))
+        return
+
+    if "lifecycle_status" in event:
+        findings.append(
+            finding(
+                "lifecycle_status_combined_forbidden",
+                card_id,
+                f"{path}.lifecycle_status",
+                "Audit output must not collapse review and publication state into one lifecycle status.",
+            )
+        )
+
+    for field_name in sorted(AUDIT_EVENT_REQUIRED_FIELDS):
+        if not is_nonempty(event.get(field_name)):
+            findings.append(
+                finding(
+                    "audit_event_missing_field",
+                    card_id,
+                    f"{path}.{field_name}",
+                    "Lifecycle audit events require separate review/publication before and after fields.",
+                )
+            )
+
+    review_before = event.get("review_status_before")
+    review_after = event.get("review_status_after")
+    if review_before == "review_expired" and review_after == "approved":
+        validate_review_expired_to_approved_transition(card, event, path, route_map, findings, card_id)
+    if isinstance(review_before, str) and isinstance(review_after, str) and review_before != review_after:
+        if (review_before, review_after) not in ALLOWED_REVIEW_TRANSITIONS:
+            findings.append(
+                finding(
+                    "review_transition_invalid",
+                    card_id,
+                    path,
+                    "Review transition is not allowed by the content lifecycle contract.",
+                )
+            )
+
+    publication_before = event.get("publication_status_before")
+    publication_after = event.get("publication_status_after")
+    if isinstance(publication_before, str) and isinstance(publication_after, str) and publication_before != publication_after:
+        if (publication_before, publication_after) not in ALLOWED_PUBLICATION_TRANSITIONS:
+            findings.append(
+                finding(
+                    "publication_transition_invalid",
+                    card_id,
+                    path,
+                    "Publication transition is not allowed by the content lifecycle contract.",
+                )
+            )
+        if publication_after == "published" and event.get("review_status_after") != "approved":
+            findings.append(finding("review_not_approved", card_id, path, "Only approved content can become published."))
+        if (publication_before, publication_after) == ("hidden", "published") and event.get("eligibility_rechecked") is not True:
+            findings.append(
+                finding(
+                    "publication_eligibility_recheck_required",
+                    card_id,
+                    path,
+                    "Restoring hidden content requires publication eligibility recalculation.",
+                )
+            )
+        if publication_before == "superseded" and publication_after == "published":
+            findings.append(finding("version_superseded", card_id, path, "Superseded versions cannot become published again."))
+
+
+def validate_lifecycle_events(
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    card_id: str,
+    route_map: dict[str, list[set[str]]],
+) -> None:
+    for collection_name in ("lifecycle_events", "audit_events"):
+        events = card.get(collection_name, [])
+        if events is None:
+            continue
+        if not isinstance(events, list):
+            findings.append(finding("audit_events_not_list", card_id, collection_name, "Lifecycle audit events must be a list."))
+            continue
+        for index, event in enumerate(events):
+            validate_lifecycle_event(card, card_id, event, index, collection_name, route_map, findings)
+
+
+def validate_review_sensitive_edit(card: dict[str, Any], findings: list[dict[str, str]], card_id: str) -> None:
+    edit = card.get("edit_event")
+    if edit is None:
+        return
+    if not isinstance(edit, dict):
+        findings.append(finding("edit_event_not_object", card_id, "edit_event", "Edit event must be an object."))
+        return
+    if edit.get("review_sensitive") is not True:
+        return
+
+    source_publication = edit.get("source_publication_status")
+    if source_publication == "published":
+        if edit.get("creates_new_version") is not True or edit.get("new_publication_status") != "unpublished":
+            findings.append(
+                finding(
+                    "review_sensitive_edit_requires_new_version",
+                    card_id,
+                    "edit_event",
+                    "Review-sensitive edits to published content must create a new unpublished version.",
+                )
+            )
+    elif source_publication == "unpublished":
+        if edit.get("new_review_status") != "review_expired":
+            findings.append(
+                finding(
+                    "review_sensitive_edit_requires_review_expired",
+                    card_id,
+                    "edit_event.new_review_status",
+                    "Review-sensitive edits to approved unpublished content must expire review.",
+                )
+            )
+
+
+def required_review_groups(
+    card: dict[str, Any],
+    route_map: dict[str, list[set[str]]],
+    findings: list[dict[str, str]] | None = None,
+    card_id: str = "unknown-card",
+) -> list[set[str]]:
+    groups: list[set[str]] = []
+    categories = card.get("change_categories", [])
+    if not isinstance(categories, list):
+        return groups
+    for category in categories:
+        if isinstance(category, str):
+            route_groups = route_map.get(category)
+            if route_groups is None:
+                if findings is not None:
+                    findings.append(
+                        finding(
+                            "unknown_change_category",
+                            card_id,
+                            "change_categories",
+                            "Change category is not present in the active review-routing policy.",
+                            change_category=category,
+                        )
+                    )
+                continue
+            groups.extend(route_groups)
+    if card.get("safety_category") == "elevated_risk":
+        groups.extend(route_map.get("elevated_risk_card", []))
+    return groups
+
+
+def validate_review_routing(
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    card_id: str,
+    route_map: dict[str, list[set[str]]],
+) -> None:
+    tiers = completed_review_tiers(card)
+    seen_missing: set[str] = set()
+    for options in required_review_groups(card, route_map, findings, card_id):
+        if tiers.intersection(options):
+            continue
+        label = review_tier_label(options)
+        if label in seen_missing:
+            continue
+        seen_missing.add(label)
+        findings.append(
+            finding(
+                "missing_review_tier",
+                card_id,
+                "approval_events",
+                "Required review tier is missing for the current change category.",
+                required_tier=label,
+            )
+        )
+
+
+def validate_publication_eligibility(card: dict[str, Any], findings: list[dict[str, str]], card_id: str) -> None:
+    public_or_requested = is_public(card) or card.get("publish_request") is True
+    if is_public(card) and card.get("review_status") != "approved":
+        findings.append(finding("review_not_approved", card_id, "review_status", "Published content requires approved review state."))
+
+    if card.get("publish_request") is True:
+        if card.get("publication_status") == "superseded":
+            findings.append(finding("version_superseded", card_id, "publication_status", "Superseded versions are not publishable."))
+        if card.get("review_status") != "approved":
+            findings.append(finding("review_not_approved", card_id, "review_status", "Publication requests require approved review state."))
+        if card.get("publication_status") not in {"unpublished", "hidden", "superseded"}:
+            findings.append(
+                finding(
+                    "publication_status_not_publishable",
+                    card_id,
+                    "publication_status",
+                    "Only unpublished or hidden versions are eligible for a publish request.",
+                )
+            )
+
+    if public_or_requested and card.get("safety_category") == "elevated_risk" and card.get("elevated_risk_policy_approved") is not True:
+        findings.append(
+            finding(
+                "elevated_risk_policy_not_defined",
+                card_id,
+                "safety_category",
+                "Elevated-risk content is not publishable until elevated-risk policy is approved.",
+            )
+        )
+
+    if public_or_requested and card.get("safety_category") == "blocked_rehab":
+        findings.append(
+            finding(
+                "blocked_rehab_not_publishable",
+                card_id,
+                "safety_category",
+                "Rehab, diagnosis, and injury-treatment content is not publishable in v1.",
+            )
+        )
+
+
+def validate_card(
+    card: dict[str, Any],
+    taxonomy: dict[str, set[str]],
+    media: Path,
+    route_map: dict[str, list[set[str]]],
+) -> list[dict[str, str]]:
+    card_id = str(card.get("card_id") or "unknown-card")
+    findings: list[dict[str, str]] = []
+
+    for field_name in sorted(TOP_LEVEL_REQUIRED_FIELDS):
+        if not is_nonempty(card.get(field_name)):
+            findings.append(finding("required_field_missing", card_id, field_name, f"Required field {field_name} is missing."))
+
+    for prohibited in sorted(PROHIBITED_PERSONALIZATION_FIELDS):
+        if prohibited in card:
+            findings.append(
+                finding(
+                    "prohibited_personalization_field",
+                    card_id,
+                    prohibited,
+                    "Content cards must not collect user-specific screening, advice, or program fields.",
+                )
+            )
+
+    validate_enum(card, findings, taxonomy, card_id, "card_type")
+    validate_enum(card, findings, taxonomy, card_id, "difficulty")
+    validate_enum(card, findings, taxonomy, card_id, "safety_category")
+    validate_enum(card, findings, taxonomy, card_id, "review_status")
+    validate_enum(card, findings, taxonomy, card_id, "publication_status")
+    validate_enum(card, findings, taxonomy, card_id, "contribution_provenance")
+    validate_publication_eligibility(card, findings, card_id)
+
+    validate_string_list_taxonomy(card, findings, taxonomy, card_id, "equipment", "equipment_kind")
+    validate_string_list_taxonomy(card, findings, taxonomy, card_id, "movement_patterns", "movement_pattern")
+    validate_string_list_taxonomy(card, findings, taxonomy, card_id, "primary_muscles", "muscles")
+    validate_string_list_taxonomy(card, findings, taxonomy, card_id, "secondary_muscles", "muscles")
+    validate_string_list_taxonomy(card, findings, taxonomy, card_id, "stabilizers", "muscles")
+
+    locales = card.get("locales")
+    if not isinstance(locales, dict) or not locales:
+        findings.append(finding("required_field_missing", card_id, "locales", "Card requires locale branches."))
+        if is_public(card):
+            findings.append(
+                finding(
+                    "required_locale_missing",
+                    card_id,
+                    "locales.en-US",
+                    "Public content requires the en-US locale branch.",
+                )
+            )
+    else:
+        if "en" in locales and "en-US" in locales:
+            findings.append(
+                finding(
+                    "locale_migration_conflict",
+                    card_id,
+                    "locales",
+                    "Bare en and en-US cannot coexist; migration requires manual resolution.",
+                )
+            )
+        for locale, branch in sorted(locales.items()):
+            if locale not in taxonomy.get("locale", set()):
+                findings.append(finding("locale_unknown", card_id, f"locales.{locale}", "Unknown v1 locale key.", locale))
+                continue
+            validate_locale(locale, branch, card, findings, card_id)
+        if is_public(card) and "en-US" not in locales:
+            findings.append(
+                finding(
+                    "required_locale_missing",
+                    card_id,
+                    "locales.en-US",
+                    "Public content requires the en-US locale branch.",
+                )
+            )
+
+    svg_steps = card.get("canonical_svg_steps")
+    if not isinstance(svg_steps, list) or not 3 <= len(svg_steps) <= 6:
+        findings.append(
+            finding(
+                "canonical_svg_step_count",
+                card_id,
+                "canonical_svg_steps",
+                "Canonical SVG cards require three to six steps.",
+            )
+        )
+    elif any(not isinstance(step, str) or not step.endswith(".svg") for step in svg_steps):
+        findings.append(
+            finding("canonical_svg_reference_invalid", card_id, "canonical_svg_steps", "Canonical SVG references must be SVG paths.")
+        )
+    else:
+        for step in svg_steps:
+            if not (media / "svg" / step).exists():
+                findings.append(
+                    finding(
+                        "canonical_svg_missing",
+                        card_id,
+                        "canonical_svg_steps",
+                        "Canonical SVG reference is missing from media/svg.",
+                    )
+                )
+
+    validate_supplemental_media(card, findings, taxonomy, card_id)
+    validate_approval_events(card, findings, taxonomy, card_id)
+    validate_lifecycle_events(card, findings, card_id, route_map)
+    validate_review_sensitive_edit(card, findings, card_id)
+    validate_review_routing(card, findings, card_id, route_map)
+
+    license_info = card.get("license")
+    if not isinstance(license_info, dict):
+        findings.append(finding("license_metadata_missing", card_id, "license", "License metadata is required."))
+    else:
+        license_kind = license_info.get("license_kind")
+        if not isinstance(license_kind, str) or license_kind not in taxonomy.get("license_kind", set()):
+            findings.append(finding("enum_unknown", card_id, "license.license_kind", "Unknown license kind."))
+        if is_public(card) and license_kind == "unlicensed_internal_only":
+            findings.append(finding("license_not_public", card_id, "license.license_kind", "Public cards cannot use internal-only rights."))
+        for required in ("code_license", "content_license", "attribution"):
+            if is_public(card) and not is_nonempty(license_info.get(required)):
+                findings.append(finding("license_metadata_missing", card_id, f"license.{required}", "Public license metadata is incomplete."))
+
+    if is_public(card) and card.get("contribution_provenance") == "user_submitted_unreviewed":
+        findings.append(
+            finding(
+                "expert_review_required",
+                card_id,
+                "contribution_provenance",
+                "Unreviewed user-submitted content cannot be published.",
+            )
+        )
+
+    progressions = []
+    if isinstance(locales, dict):
+        branch = locales.get("en-US")
+        if isinstance(branch, dict) and isinstance(branch.get("progressions"), list):
+            progressions = branch["progressions"]
+    for index, progression in enumerate(progressions):
+        if not isinstance(progression, dict) or not is_nonempty(progression.get("readiness_cue")):
+            findings.append(
+                finding(
+                    "progression_readiness_missing",
+                    card_id,
+                    f"locales.en-US.progressions[{index}]",
+                    "Progressions require beginner-readable readiness cues.",
+                )
+            )
+
+    if is_public(card):
+        review = card.get("review")
+        if not isinstance(review, dict):
+            findings.append(finding("review_metadata_missing", card_id, "review", "Public cards require review metadata."))
+        else:
+            for required in ("reviewer_public_id", "review_tier", "review_date", "content_digest"):
+                if not is_nonempty(review.get(required)):
+                    findings.append(finding("review_metadata_missing", card_id, f"review.{required}", "Public review metadata is incomplete."))
+            tier = review.get("review_tier")
+            if isinstance(tier, str) and tier not in taxonomy.get("review_tier", set()):
+                findings.append(finding("enum_unknown", card_id, "review.review_tier", "Unknown review tier."))
+
+    return findings
+
+
+def localized_aliases(card: dict[str, Any]) -> dict[str, list[str]]:
+    aliases: dict[str, list[str]] = {}
+    locales = card.get("locales")
+    if not isinstance(locales, dict):
+        return aliases
+    for locale, branch in sorted(locales.items()):
+        if isinstance(branch, dict) and isinstance(branch.get("aliases"), list):
+            aliases[locale] = [item for item in branch["aliases"] if isinstance(item, str)]
+    return aliases
+
+
+def public_locale_payload(card: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    payload: dict[str, dict[str, Any]] = {}
+    locales = card.get("locales")
+    if not isinstance(locales, dict):
+        return payload
+    for locale, branch in sorted(locales.items()):
+        if not isinstance(branch, dict):
+            continue
+        payload[locale] = {
+            "aliases": branch.get("aliases", []),
+            "breathing_bracing": branch.get("breathing_bracing", ""),
+            "common_mistakes": branch.get("common_mistakes", []),
+            "equipment_setup": branch.get("equipment_setup", []),
+            "movement_phases": branch.get("movement_phases", []),
+            "purpose": branch.get("purpose", ""),
+            "regressions": branch.get("regressions", []),
+            "safety_notes": branch.get("safety_notes", []),
+            "start_position": branch.get("start_position", ""),
+            "summary": branch.get("summary", ""),
+            "title": branch.get("title", ""),
+            "what_you_should_feel": branch.get("what_you_should_feel", []),
+            "what_you_should_not_feel": branch.get("what_you_should_not_feel", []),
+        }
+        if "progressions" in branch:
+            payload[locale]["progressions"] = branch["progressions"]
+    return payload
+
+
+def public_card_payload(card: dict[str, Any]) -> dict[str, Any]:
+    primary = card.get("primary_muscles", [])
+    secondary = card.get("secondary_muscles", [])
+    stabilizers = card.get("stabilizers", [])
+    return {
+        "card_id": card.get("card_id"),
+        "card_type": card.get("card_type"),
+        "canonical_svg_steps": card.get("canonical_svg_steps", []),
+        "comprehension_prompts": card.get("comprehension_prompts", []),
+        "discovery": {
+            "aliases": localized_aliases(card),
+            "difficulty": card.get("difficulty"),
+            "equipment": card.get("equipment", []),
+            "movement_patterns": card.get("movement_patterns", []),
+            "primary_muscles": primary,
+            "secondary_muscles": secondary,
+            "stabilizers": stabilizers,
+            "title": {
+                locale: branch.get("title")
+                for locale, branch in sorted(card.get("locales", {}).items())
+                if isinstance(branch, dict) and isinstance(branch.get("title"), str)
+            },
+        },
+        "license": {
+            "attribution": card.get("license", {}).get("attribution"),
+            "content_license": card.get("license", {}).get("content_license"),
+            "license_kind": card.get("license", {}).get("license_kind"),
+        },
+        "locales": public_locale_payload(card),
+        "relationships": {
+            "alternative_exercises": card.get("alternative_exercises", []),
+            "related_glossary_terms": card.get("related_glossary_terms", []),
+        },
+        "schema_version": card.get("schema_version"),
+        "version_id": card.get("version_id"),
+    }
+
+
+def public_content_package(cards: list[dict[str, Any]], schema_version_value: str) -> dict[str, Any]:
+    public_cards = [public_card_payload(card) for card in cards if is_public_package_eligible(card)]
+    public_cards.sort(key=lambda item: (str(item.get("card_id")), str(item.get("version_id"))))
+    return {
+        "schema_version": schema_version_value,
+        "source_boundary": "repository-reviewed-public-content",
+        "counts": {
+            "cards": len(public_cards),
+        },
+        "cards": public_cards,
+    }
+
+
+def validate(args: argparse.Namespace) -> int:
+    source_arg = args.source or args.fixtures
+    out_arg = args.out or args.report or "generated/validation-report.json"
+    source = Path(source_arg) if source_arg else Path("__missing_source__")
+    schemas = Path(args.schemas)
+    media = Path(args.media)
+    out = Path(out_arg)
+
+    version = schema_version(schemas) if schemas.exists() else DEFAULT_SCHEMA_VERSION
+    report = base_report(version, "pass")
+
+    missing_roles = [
+        role
+        for role, path in (("source", source), ("schemas", schemas), ("media", media))
+        if not path.exists()
+    ]
+    if missing_roles:
+        report["status"] = "error"
+        report["findings"] = [missing_path_finding(role) for role in missing_roles]
+        write_report(out, report)
+        return 2
+
+    taxonomy = load_taxonomy(source)
+    policy_metadata, route_map, policy_findings = load_review_routing_policy(Path(args.review_routing_policy), taxonomy)
+    report["review_routing_policy"] = policy_metadata
+    if policy_findings:
+        report["status"] = "fail"
+        report["findings"].extend(policy_findings)
+        write_report(out, report)
+        return 1
+
+    card_files = discover_card_files(source)
+    if not card_files:
+        report["warnings"].append(
+            {
+                "code": "no_cards_found",
+                "message": "No content card files were found under the source path.",
+            }
+        )
+        report["counts"]["warnings"] = 1
+
+    valid_cards: list[dict[str, Any]] = []
+    for card_file in card_files:
+        try:
+            card = load_json(card_file)
+        except json.JSONDecodeError:
+            report["findings"].append(finding("json_invalid", "unknown-card", card_file.name, "Card JSON is invalid."))
+            report["counts"]["invalid_cards"] += 1
+            continue
+
+        if not isinstance(card, dict):
+            report["findings"].append(finding("card_invalid", "unknown-card", card_file.name, "Card file must contain a JSON object."))
+            report["counts"]["invalid_cards"] += 1
+            continue
+
+        card_findings = validate_card(card, taxonomy, media, route_map)
+        if card_findings:
+            report["counts"]["invalid_cards"] += 1
+            report["findings"].extend(card_findings)
+        else:
+            report["counts"]["valid_cards"] += 1
+            valid_cards.append(card)
+
+    if report["findings"]:
+        report["status"] = "fail"
+
+    write_report(out, report)
+    if args.emit_public:
+        write_json(Path(args.emit_public), public_content_package(valid_cards, version))
+
+    if args.expect_invalid:
+        return 0 if report["status"] == "fail" and report["findings"] else 1
+    if args.expect_mixed:
+        return 0 if report["counts"]["valid_cards"] > 0 and report["counts"]["invalid_cards"] > 0 else 1
+    return 1 if report["status"] == "fail" else 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    try:
+        return validate(args)
+    except OSError as exc:
+        out = Path(args.out)
+        report = base_report(DEFAULT_SCHEMA_VERSION, "error")
+        report["findings"] = [
+            {
+                "code": "io_error",
+                "message": exc.__class__.__name__,
+            }
+        ]
+        write_report(out, report)
+        return 2
+
+
+if __name__ == "__main__":
+    sys.exit(main())

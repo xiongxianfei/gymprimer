@@ -1,0 +1,43 @@
+{
+  "description": "M2 executable card contract summary. The Python validator is the authoritative local executable validator for this slice.",
+  "kind": "card",
+  "localized_required_fields": [
+    "title",
+    "aliases",
+    "summary",
+    "purpose",
+    "equipment_setup",
+    "start_position",
+    "movement_phases",
+    "breathing_bracing",
+    "common_mistakes",
+    "regressions",
+    "progressions",
+    "what_you_should_feel",
+    "what_you_should_not_feel",
+    "safety_notes",
+    "canonical_svg_text"
+  ],
+  "publication_required_locale": "en-US",
+  "schema_version": "content-schema-v1",
+  "status": "m2-contract",
+  "top_level_required_fields": [
+    "schema_version",
+    "card_id",
+    "version_id",
+    "card_type",
+    "review_status",
+    "publication_status",
+    "difficulty",
+    "safety_category",
+    "equipment",
+    "movement_patterns",
+    "primary_muscles",
+    "secondary_muscles",
+    "stabilizers",
+    "canonical_svg_steps",
+    "license",
+    "contribution_provenance",
+    "locales"
+  ]
+}

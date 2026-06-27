@@ -1,0 +1,56 @@
+{
+  "counts": {
+    "invalid_cards": 2,
+    "review_sensitive_changes": 0,
+    "valid_cards": 0,
+    "warnings": 0
+  },
+  "findings": [
+    {
+      "card_id": "fixture-bare-en",
+      "code": "locale_unknown",
+      "field": "locales.en",
+      "locale": "en",
+      "message": "Unknown v1 locale key."
+    },
+    {
+      "card_id": "fixture-bare-en",
+      "code": "required_locale_missing",
+      "field": "locales.en-US",
+      "message": "Public content requires the en-US locale branch."
+    },
+    {
+      "card_id": "fixture-supplemental-media",
+      "code": "license_not_public",
+      "field": "supplemental_media[0].license_kind",
+      "message": "Public cards cannot reference supplemental media with internal-only rights."
+    },
+    {
+      "card_id": "fixture-supplemental-media",
+      "code": "supplemental_media_missing_authority",
+      "field": "supplemental_media[0].authoritative_status",
+      "message": "Supplemental media must explicitly be marked as supplemental."
+    },
+    {
+      "card_id": "fixture-supplemental-media",
+      "code": "supplemental_media_overrides_canonical_steps",
+      "field": "supplemental_media[0].caption",
+      "message": "Supplemental media must not claim to replace, override, contradict, or supersede canonical reviewed steps."
+    }
+  ],
+  "privacy": {
+    "absolute_paths_redacted": true,
+    "pii_required": false,
+    "sensitive_data_allowed": false
+  },
+  "review_routing_policy": {
+    "digest": "sha256:fc97eafee157f56ef5655655a4627e4684711da723ab2dd41715d4ab475bf023",
+    "policy_id": "review-routing-v1",
+    "route_count": 12,
+    "schema_version": "review-routing-policy-v1",
+    "source_path": "content/policies/review-routing-v1.json"
+  },
+  "schema_version": "content-schema-v1",
+  "status": "fail",
+  "warnings": []
+}

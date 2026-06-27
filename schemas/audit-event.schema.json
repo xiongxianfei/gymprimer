@@ -1,0 +1,27 @@
+{
+  "description": "M3 audit event contract summary for separate review/publication lifecycle state changes.",
+  "forbidden_fields": [
+    "lifecycle_status"
+  ],
+  "kind": "audit_event",
+  "required_fields": [
+    "card_id",
+    "version_id",
+    "locale",
+    "event_type",
+    "review_status_before",
+    "review_status_after",
+    "publication_status_before",
+    "publication_status_after",
+    "actor_id",
+    "actor_role",
+    "required_review_tiers",
+    "completed_review_tiers",
+    "content_digest_before",
+    "content_digest_after",
+    "timestamp",
+    "reason"
+  ],
+  "schema_version": "content-schema-v1",
+  "status": "m3-contract"
+}
