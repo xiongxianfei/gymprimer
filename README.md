@@ -18,4 +18,12 @@ GymPrimer is released under the Apache License 2.0. See [LICENSE](./LICENSE).
 
 ## Status
 
-This repository currently contains only the project vision and supporting strategic-positioning rationale. Content schema, exercise cards, review workflow, and frontend are not yet implemented. See [VISION.md](./VISION.md) for the open questions that need to be resolved before implementation can begin.
+This repository currently contains the project vision, approved content-schema artifacts, repository-native source fixtures, local validation tools, and deterministic generated-output evidence. It does not yet contain a frontend, CMS, AI assistant, public exercise library, or CI workflow.
+
+Local validation:
+
+```sh
+python3 -m unittest discover -s tests
+python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json
+python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI|personal health" -- generated/
+```

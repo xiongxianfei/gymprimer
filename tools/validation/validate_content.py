@@ -251,6 +251,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--media", required=True, help="Media directory.")
     parser.add_argument("--out", help="Validation report output path.")
     parser.add_argument("--report", help="Validation report output path. Alias for --out.")
+    parser.add_argument("--emit-public", help="Write deterministic reviewed public content package to this path.")
     parser.add_argument(
         "--review-routing-policy",
         default=str(DEFAULT_REVIEW_ROUTING_POLICY_PATH),
@@ -312,6 +313,11 @@ def base_report(version: str, status: str) -> dict[str, Any]:
 def write_report(path: Path, report: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def missing_path_finding(role: str) -> dict[str, str]:
@@ -542,6 +548,16 @@ def discover_card_files(source: Path) -> list[Path]:
 
 def is_public(card: dict[str, Any]) -> bool:
     return card.get("publication_status") == "published" or card.get("publishable") is True
+
+
+def is_public_package_eligible(card: dict[str, Any]) -> bool:
+    return (
+        card.get("publication_status") == "published"
+        and card.get("review_status") == "approved"
+        and card.get("safety_category") not in {"blocked_rehab", "elevated_risk"}
+        and card.get("license", {}).get("license_kind") != "unlicensed_internal_only"
+        and card.get("contribution_provenance") != "user_submitted_unreviewed"
+    )
 
 
 def finding(
@@ -1335,6 +1351,96 @@ def validate_card(
     return findings
 
 
+def localized_aliases(card: dict[str, Any]) -> dict[str, list[str]]:
+    aliases: dict[str, list[str]] = {}
+    locales = card.get("locales")
+    if not isinstance(locales, dict):
+        return aliases
+    for locale, branch in sorted(locales.items()):
+        if isinstance(branch, dict) and isinstance(branch.get("aliases"), list):
+            aliases[locale] = [item for item in branch["aliases"] if isinstance(item, str)]
+    return aliases
+
+
+def public_locale_payload(card: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    payload: dict[str, dict[str, Any]] = {}
+    locales = card.get("locales")
+    if not isinstance(locales, dict):
+        return payload
+    for locale, branch in sorted(locales.items()):
+        if not isinstance(branch, dict):
+            continue
+        payload[locale] = {
+            "aliases": branch.get("aliases", []),
+            "breathing_bracing": branch.get("breathing_bracing", ""),
+            "common_mistakes": branch.get("common_mistakes", []),
+            "equipment_setup": branch.get("equipment_setup", []),
+            "movement_phases": branch.get("movement_phases", []),
+            "purpose": branch.get("purpose", ""),
+            "regressions": branch.get("regressions", []),
+            "safety_notes": branch.get("safety_notes", []),
+            "start_position": branch.get("start_position", ""),
+            "summary": branch.get("summary", ""),
+            "title": branch.get("title", ""),
+            "what_you_should_feel": branch.get("what_you_should_feel", []),
+            "what_you_should_not_feel": branch.get("what_you_should_not_feel", []),
+        }
+        if "progressions" in branch:
+            payload[locale]["progressions"] = branch["progressions"]
+    return payload
+
+
+def public_card_payload(card: dict[str, Any]) -> dict[str, Any]:
+    primary = card.get("primary_muscles", [])
+    secondary = card.get("secondary_muscles", [])
+    stabilizers = card.get("stabilizers", [])
+    return {
+        "card_id": card.get("card_id"),
+        "card_type": card.get("card_type"),
+        "canonical_svg_steps": card.get("canonical_svg_steps", []),
+        "comprehension_prompts": card.get("comprehension_prompts", []),
+        "discovery": {
+            "aliases": localized_aliases(card),
+            "difficulty": card.get("difficulty"),
+            "equipment": card.get("equipment", []),
+            "movement_patterns": card.get("movement_patterns", []),
+            "primary_muscles": primary,
+            "secondary_muscles": secondary,
+            "stabilizers": stabilizers,
+            "title": {
+                locale: branch.get("title")
+                for locale, branch in sorted(card.get("locales", {}).items())
+                if isinstance(branch, dict) and isinstance(branch.get("title"), str)
+            },
+        },
+        "license": {
+            "attribution": card.get("license", {}).get("attribution"),
+            "content_license": card.get("license", {}).get("content_license"),
+            "license_kind": card.get("license", {}).get("license_kind"),
+        },
+        "locales": public_locale_payload(card),
+        "relationships": {
+            "alternative_exercises": card.get("alternative_exercises", []),
+            "related_glossary_terms": card.get("related_glossary_terms", []),
+        },
+        "schema_version": card.get("schema_version"),
+        "version_id": card.get("version_id"),
+    }
+
+
+def public_content_package(cards: list[dict[str, Any]], schema_version_value: str) -> dict[str, Any]:
+    public_cards = [public_card_payload(card) for card in cards if is_public_package_eligible(card)]
+    public_cards.sort(key=lambda item: (str(item.get("card_id")), str(item.get("version_id"))))
+    return {
+        "schema_version": schema_version_value,
+        "source_boundary": "repository-reviewed-public-content",
+        "counts": {
+            "cards": len(public_cards),
+        },
+        "cards": public_cards,
+    }
+
+
 def validate(args: argparse.Namespace) -> int:
     source_arg = args.source or args.fixtures
     out_arg = args.out or args.report or "generated/validation-report.json"
@@ -1376,6 +1482,7 @@ def validate(args: argparse.Namespace) -> int:
         )
         report["counts"]["warnings"] = 1
 
+    valid_cards: list[dict[str, Any]] = []
     for card_file in card_files:
         try:
             card = load_json(card_file)
@@ -1395,11 +1502,14 @@ def validate(args: argparse.Namespace) -> int:
             report["findings"].extend(card_findings)
         else:
             report["counts"]["valid_cards"] += 1
+            valid_cards.append(card)
 
     if report["findings"]:
         report["status"] = "fail"
 
     write_report(out, report)
+    if args.emit_public:
+        write_json(Path(args.emit_public), public_content_package(valid_cards, version))
 
     if args.expect_invalid:
         return 0 if report["status"] == "fail" and report["findings"] else 1

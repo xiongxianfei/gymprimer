@@ -72,13 +72,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M3
 - Review status: code-review-m3-r2 clean-with-notes
 - Remaining in-scope implementation milestones: M4
-- Next stage: implement
+- Next stage: code-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1-M3 are closed after code review, and M4 has not started.
+- Reason final closeout is or is not ready: M1-M3 are closed after code review, and M4 is implemented and awaiting code review.
 
 ## Milestones
 
@@ -335,6 +335,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: `code-review-m3-r1` requested changes for CR-M3-1 and CR-M3-2. M3 remains open and routes to review-resolution before any M4 implementation.
 - 2026-06-27: M3 review-resolution implemented. Validator now loads `content/policies/review-routing-v1.json`, reports policy metadata, and rejects direct `review_expired -> approved` mutation without review-completion evidence. Added regression tests and lifecycle fixtures for the M3 R1 findings.
 - 2026-06-27: `code-review-m3-r2` recorded a clean re-review with no material findings. M3 closed and workflow routed to M4 implementation.
+- 2026-06-27: M4 implementation completed and moved to review-requested. Added deterministic public content package emission, M4 generated-output/performance tests, generated public-content evidence, local validation docs, and MP2/MP4 manual proofs.
 
 ## Decision log
 
@@ -383,6 +384,12 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M3 review-resolution validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --out generated/lifecycle-validation-report.json --expect-mixed`.
 - 2026-06-27: M3 review-resolution validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`.
 - 2026-06-27: M3 review-resolution privacy scans passed for `generated/validation-report.json` and `generated/`.
+- 2026-06-27: M4 red test run: `python3 -m unittest tests.test_generated_output_m4` failed because `--emit-public` did not exist yet.
+- 2026-06-27: M4 validation passed: `python3 -m unittest discover -s tests`.
+- 2026-06-27: M4 validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json`.
+- 2026-06-27: M4 deterministic output validation passed: `diff -u generated/public-content.json /tmp/gymprimer-public-content.json`.
+- 2026-06-27: M4 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI|personal health" -- generated/`.
+- 2026-06-27: MP2 and MP4 manual proofs recorded under `generated/manual-proof/`.
 
 ## Outcome and retrospective
 
@@ -391,4 +398,4 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M4 implementation. Not ready for verification, PR, or final closeout until M4 implementation, code review, review-resolution if needed, explain-change, verification, and downstream gates complete.
+- Ready for code-review of M4. Not ready for verification, PR, or final closeout until M4 code review, review-resolution if needed, explain-change, verification, and downstream gates complete.
