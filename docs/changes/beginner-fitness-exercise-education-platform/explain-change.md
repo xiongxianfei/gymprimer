@@ -1,10 +1,10 @@
-# Explain Change: Content Schema Foundation M1-M2
+# Explain Change: Content Schema Foundation M1-M3
 
 ## Scope
 
-M1 established the repository scaffold, schema shells, validator harness, privacy scan helper, and first local tests. M2 adds executable validation for the v1 card content contract.
+M1 established the repository scaffold, schema shells, validator harness, privacy scan helper, and first local tests. M2 adds executable validation for the v1 card content contract. M3 adds lifecycle, review-routing, publication eligibility, approval-event, and audit-event validation.
 
-This change does not implement lifecycle transitions, review routing, generated public content, CI, UI, CMS, AI behavior, legal policy, public launch content, or a broad exercise library.
+This change does not implement generated public content, CI, UI, CMS, AI behavior, legal policy, public launch content, or a broad exercise library.
 
 ## Changes
 
@@ -18,7 +18,10 @@ This change does not implement lifecycle transitions, review routing, generated 
 - Added one valid repository example card for the lat pulldown plus three canonical SVG step examples.
 - Updated schema summary files for card, taxonomy, and media contracts.
 - Added M2 tests for accepted `en-US` and `zh-Hans` card shape plus invalid locale, enum, taxonomy, SVG, safety, licensing, provenance, and review-metadata cases.
+- Added M3 tests and fixtures for lifecycle transitions, review-sensitive edits, publication eligibility, review-routing obligations, elevated-risk default-deny, blocked rehab publication blocking, approval events, and audit events.
+- Added review-event and audit-event schema summaries plus `content/policies/review-routing-v1.json`.
 - Added generated validation evidence and MP3 fixture privacy proof for M2.
+- Added generated lifecycle/review-routing validation evidence and MP1 lifecycle state-sync proof for M3.
 
 ## Requirement Coverage
 
@@ -28,13 +31,17 @@ This change does not implement lifecycle transitions, review routing, generated 
 - R30-R33 and AC7, AC26-AC27, AC32-AC33: actionable validation findings, privacy-safe reports, license metadata, contribution provenance, and review metadata blockers.
 - R37-R40 and AC34: no user-specific program fields, no PII dependency, schema versioning, and architecture-aligned source/schema/media/generated boundaries.
 
-R19-R29, AC8-AC21, and AC28-AC31 remain M3 lifecycle, review-routing, publication eligibility, and audit work.
+- R19-R29 and AC8-AC21, AC28-AC31: separate lifecycle state fields, allowed transition validation, review-sensitive edit rules, hiding/superseding/reverting support, digest-scoped approval events, review-routing tier checks, elevated-risk default-deny, blocked-rehab publication blocking, and audit-event schema checks.
+
+R34-R36 and generated public output remain M4 work.
 
 ## Validation
 
 - `python3 -m unittest discover -s tests`
 - `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`
 - `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`
+- `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --out generated/lifecycle-validation-report.json --expect-mixed`
+- `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`
 - `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json`
 
 All commands passed locally. CI is not configured.

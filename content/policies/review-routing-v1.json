@@ -1,0 +1,75 @@
+{
+  "change_categories": {
+    "card_safety_language": [
+      [
+        "physical_therapist"
+      ]
+    ],
+    "elevated_risk_card": [
+      [
+        "sports_medicine_clinician"
+      ],
+      [
+        "trainer",
+        "strength_coach"
+      ]
+    ],
+    "emergency_criteria_policy": [
+      [
+        "sports_medicine_clinician"
+      ]
+    ],
+    "equipment_setup": [
+      [
+        "trainer",
+        "strength_coach"
+      ]
+    ],
+    "exercise_mechanics": [
+      [
+        "trainer",
+        "strength_coach"
+      ]
+    ],
+    "general_training_principle": [
+      [
+        "trainer",
+        "strength_coach"
+      ]
+    ],
+    "licensing": [
+      [
+        "content_ops"
+      ]
+    ],
+    "media_equivalence": [
+      [
+        "trainer",
+        "strength_coach"
+      ]
+    ],
+    "safety_language_policy": [
+      [
+        "physical_therapist"
+      ]
+    ],
+    "standard_safety_template": [
+      [
+        "trainer",
+        "strength_coach"
+      ]
+    ],
+    "taxonomy_change": [
+      [
+        "schema_owner"
+      ]
+    ],
+    "translation_equivalence": [
+      [
+        "locale_reviewer"
+      ]
+    ]
+  },
+  "schema_version": "content-schema-v1",
+  "status": "m3-contract"
+}

@@ -37,6 +37,20 @@ CONTROLLED_ENUMS: dict[str, set[str]] = {
         "content_ops",
         "legal_policy",
     },
+    "review_scope": {
+        "card_content",
+        "equipment_setup",
+        "movement_mechanics",
+        "training_principle",
+        "safety_language_policy",
+        "card_safety_language",
+        "emergency_criteria_policy",
+        "elevated_risk_card",
+        "taxonomy_change",
+        "media_equivalence",
+        "translation_equivalence",
+        "licensing",
+    },
     "locale": {"en-US", "zh-Hans"},
     "contribution_provenance": {
         "expert_authored",
@@ -180,6 +194,68 @@ SUPPLEMENTAL_MEDIA_AUTHORITY_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
+ALLOWED_REVIEW_TRANSITIONS = {
+    ("draft", "in_review"),
+    ("in_review", "approved"),
+    ("in_review", "changes_requested"),
+    ("changes_requested", "draft"),
+    ("changes_requested", "in_review"),
+    ("approved", "review_expired"),
+    ("review_expired", "in_review"),
+    ("review_expired", "approved"),
+}
+
+ALLOWED_PUBLICATION_TRANSITIONS = {
+    ("unpublished", "published"),
+    ("published", "hidden"),
+    ("hidden", "published"),
+    ("published", "superseded"),
+    ("hidden", "superseded"),
+    ("unpublished", "superseded"),
+}
+
+AUDIT_EVENT_REQUIRED_FIELDS = {
+    "card_id",
+    "version_id",
+    "locale",
+    "event_type",
+    "review_status_before",
+    "review_status_after",
+    "publication_status_before",
+    "publication_status_after",
+    "actor_id",
+    "actor_role",
+    "required_review_tiers",
+    "completed_review_tiers",
+    "content_digest_before",
+    "content_digest_after",
+    "timestamp",
+    "reason",
+}
+
+APPROVAL_EVENT_REQUIRED_FIELDS = {
+    "reviewer_public_id",
+    "review_tier",
+    "review_scope",
+    "timestamp",
+    "content_digest",
+}
+
+REVIEW_ROUTE_GROUPS: dict[str, list[set[str]]] = {
+    "exercise_mechanics": [{"trainer", "strength_coach"}],
+    "equipment_setup": [{"trainer", "strength_coach"}],
+    "general_training_principle": [{"trainer", "strength_coach"}],
+    "standard_safety_template": [{"trainer", "strength_coach"}],
+    "card_safety_language": [{"physical_therapist"}],
+    "safety_language_policy": [{"physical_therapist"}],
+    "emergency_criteria_policy": [{"sports_medicine_clinician"}],
+    "elevated_risk_card": [{"sports_medicine_clinician"}, {"trainer", "strength_coach"}],
+    "media_equivalence": [{"trainer", "strength_coach"}],
+    "translation_equivalence": [{"locale_reviewer"}],
+    "taxonomy_change": [{"schema_owner"}],
+    "licensing": [{"content_ops"}],
+}
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Validate GymPrimer source content.")
@@ -193,6 +269,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--expect-invalid",
         action="store_true",
         help="Exit 0 only when validation completes and at least one content finding is produced.",
+    )
+    parser.add_argument(
+        "--expect-mixed",
+        action="store_true",
+        help="Exit 0 only when validation completes with at least one valid and one invalid card.",
     )
     return parser
 
@@ -289,7 +370,14 @@ def is_public(card: dict[str, Any]) -> bool:
     return card.get("publication_status") == "published" or card.get("publishable") is True
 
 
-def finding(code: str, card_id: str, field: str, message: str, locale: str | None = None) -> dict[str, str]:
+def finding(
+    code: str,
+    card_id: str,
+    field: str,
+    message: str,
+    locale: str | None = None,
+    **extra: str,
+) -> dict[str, str]:
     item = {
         "code": code,
         "card_id": card_id,
@@ -298,6 +386,7 @@ def finding(code: str, card_id: str, field: str, message: str, locale: str | Non
     }
     if locale is not None:
         item["locale"] = locale
+    item.update(extra)
     return item
 
 
@@ -559,6 +648,273 @@ def validate_supplemental_media(
                 )
 
 
+def review_tier_label(options: set[str]) -> str:
+    return next(iter(options)) if len(options) == 1 else "_or_".join(sorted(options))
+
+
+def completed_review_tiers(card: dict[str, Any]) -> set[str]:
+    tiers: set[str] = set()
+    review = card.get("review")
+    if isinstance(review, dict) and isinstance(review.get("review_tier"), str):
+        tiers.add(review["review_tier"])
+    for event in card.get("approval_events", []) if isinstance(card.get("approval_events", []), list) else []:
+        if isinstance(event, dict) and isinstance(event.get("review_tier"), str):
+            tiers.add(event["review_tier"])
+    return tiers
+
+
+def validate_approval_events(
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    taxonomy: dict[str, set[str]],
+    card_id: str,
+) -> None:
+    events = card.get("approval_events", [])
+    current_digest = card.get("content_digest")
+    review = card.get("review")
+    if isinstance(current_digest, str) and isinstance(review, dict):
+        review_digest = review.get("content_digest")
+        if isinstance(review_digest, str) and review_digest != current_digest:
+            findings.append(
+                finding(
+                    "approval_digest_mismatch",
+                    card_id,
+                    "review.content_digest",
+                    "Review metadata digest must match the current content digest.",
+                )
+            )
+    if events is None:
+        return
+    if not isinstance(events, list):
+        findings.append(finding("approval_events_not_list", card_id, "approval_events", "Approval events must be a list."))
+        return
+
+    for index, event in enumerate(events):
+        path = f"approval_events[{index}]"
+        if not isinstance(event, dict):
+            findings.append(finding("approval_event_not_object", card_id, path, "Approval event must be an object."))
+            continue
+        for field_name in sorted(APPROVAL_EVENT_REQUIRED_FIELDS):
+            if not is_nonempty(event.get(field_name)):
+                findings.append(
+                    finding(
+                        "approval_event_missing_field",
+                        card_id,
+                        f"{path}.{field_name}",
+                        "Approval events require reviewer tier, scope, identity, timestamp, and digest.",
+                    )
+                )
+        event_digest = event.get("content_digest")
+        if isinstance(current_digest, str) and isinstance(event_digest, str) and event_digest != current_digest:
+            findings.append(
+                finding(
+                    "approval_digest_mismatch",
+                    card_id,
+                    f"{path}.content_digest",
+                    "Approval event digest must match the current content digest.",
+                )
+            )
+        tier = event.get("review_tier")
+        if isinstance(tier, str) and tier not in taxonomy.get("review_tier", set()):
+            findings.append(finding("enum_unknown", card_id, f"{path}.review_tier", "Unknown review tier."))
+        scope = event.get("review_scope")
+        if isinstance(scope, str) and scope not in taxonomy.get("review_scope", set()):
+            findings.append(finding("enum_unknown", card_id, f"{path}.review_scope", "Unknown review scope."))
+
+
+def validate_lifecycle_event(
+    card_id: str,
+    event: Any,
+    index: int,
+    collection_name: str,
+    findings: list[dict[str, str]],
+) -> None:
+    path = f"{collection_name}[{index}]"
+    if not isinstance(event, dict):
+        findings.append(finding("audit_event_not_object", card_id, path, "Lifecycle audit event must be an object."))
+        return
+
+    if "lifecycle_status" in event:
+        findings.append(
+            finding(
+                "lifecycle_status_combined_forbidden",
+                card_id,
+                f"{path}.lifecycle_status",
+                "Audit output must not collapse review and publication state into one lifecycle status.",
+            )
+        )
+
+    for field_name in sorted(AUDIT_EVENT_REQUIRED_FIELDS):
+        if not is_nonempty(event.get(field_name)):
+            findings.append(
+                finding(
+                    "audit_event_missing_field",
+                    card_id,
+                    f"{path}.{field_name}",
+                    "Lifecycle audit events require separate review/publication before and after fields.",
+                )
+            )
+
+    review_before = event.get("review_status_before")
+    review_after = event.get("review_status_after")
+    if isinstance(review_before, str) and isinstance(review_after, str) and review_before != review_after:
+        if (review_before, review_after) not in ALLOWED_REVIEW_TRANSITIONS:
+            findings.append(
+                finding(
+                    "review_transition_invalid",
+                    card_id,
+                    path,
+                    "Review transition is not allowed by the content lifecycle contract.",
+                )
+            )
+
+    publication_before = event.get("publication_status_before")
+    publication_after = event.get("publication_status_after")
+    if isinstance(publication_before, str) and isinstance(publication_after, str) and publication_before != publication_after:
+        if (publication_before, publication_after) not in ALLOWED_PUBLICATION_TRANSITIONS:
+            findings.append(
+                finding(
+                    "publication_transition_invalid",
+                    card_id,
+                    path,
+                    "Publication transition is not allowed by the content lifecycle contract.",
+                )
+            )
+        if publication_after == "published" and event.get("review_status_after") != "approved":
+            findings.append(finding("review_not_approved", card_id, path, "Only approved content can become published."))
+        if (publication_before, publication_after) == ("hidden", "published") and event.get("eligibility_rechecked") is not True:
+            findings.append(
+                finding(
+                    "publication_eligibility_recheck_required",
+                    card_id,
+                    path,
+                    "Restoring hidden content requires publication eligibility recalculation.",
+                )
+            )
+        if publication_before == "superseded" and publication_after == "published":
+            findings.append(finding("version_superseded", card_id, path, "Superseded versions cannot become published again."))
+
+
+def validate_lifecycle_events(card: dict[str, Any], findings: list[dict[str, str]], card_id: str) -> None:
+    for collection_name in ("lifecycle_events", "audit_events"):
+        events = card.get(collection_name, [])
+        if events is None:
+            continue
+        if not isinstance(events, list):
+            findings.append(finding("audit_events_not_list", card_id, collection_name, "Lifecycle audit events must be a list."))
+            continue
+        for index, event in enumerate(events):
+            validate_lifecycle_event(card_id, event, index, collection_name, findings)
+
+
+def validate_review_sensitive_edit(card: dict[str, Any], findings: list[dict[str, str]], card_id: str) -> None:
+    edit = card.get("edit_event")
+    if edit is None:
+        return
+    if not isinstance(edit, dict):
+        findings.append(finding("edit_event_not_object", card_id, "edit_event", "Edit event must be an object."))
+        return
+    if edit.get("review_sensitive") is not True:
+        return
+
+    source_publication = edit.get("source_publication_status")
+    if source_publication == "published":
+        if edit.get("creates_new_version") is not True or edit.get("new_publication_status") != "unpublished":
+            findings.append(
+                finding(
+                    "review_sensitive_edit_requires_new_version",
+                    card_id,
+                    "edit_event",
+                    "Review-sensitive edits to published content must create a new unpublished version.",
+                )
+            )
+    elif source_publication == "unpublished":
+        if edit.get("new_review_status") != "review_expired":
+            findings.append(
+                finding(
+                    "review_sensitive_edit_requires_review_expired",
+                    card_id,
+                    "edit_event.new_review_status",
+                    "Review-sensitive edits to approved unpublished content must expire review.",
+                )
+            )
+
+
+def required_review_groups(card: dict[str, Any]) -> list[set[str]]:
+    groups: list[set[str]] = []
+    categories = card.get("change_categories", [])
+    if not isinstance(categories, list):
+        return groups
+    for category in categories:
+        if isinstance(category, str):
+            groups.extend(REVIEW_ROUTE_GROUPS.get(category, []))
+    if card.get("safety_category") == "elevated_risk":
+        groups.extend(REVIEW_ROUTE_GROUPS["elevated_risk_card"])
+    return groups
+
+
+def validate_review_routing(card: dict[str, Any], findings: list[dict[str, str]], card_id: str) -> None:
+    tiers = completed_review_tiers(card)
+    seen_missing: set[str] = set()
+    for options in required_review_groups(card):
+        if tiers.intersection(options):
+            continue
+        label = review_tier_label(options)
+        if label in seen_missing:
+            continue
+        seen_missing.add(label)
+        findings.append(
+            finding(
+                "missing_review_tier",
+                card_id,
+                "approval_events",
+                "Required review tier is missing for the current change category.",
+                required_tier=label,
+            )
+        )
+
+
+def validate_publication_eligibility(card: dict[str, Any], findings: list[dict[str, str]], card_id: str) -> None:
+    public_or_requested = is_public(card) or card.get("publish_request") is True
+    if is_public(card) and card.get("review_status") != "approved":
+        findings.append(finding("review_not_approved", card_id, "review_status", "Published content requires approved review state."))
+
+    if card.get("publish_request") is True:
+        if card.get("publication_status") == "superseded":
+            findings.append(finding("version_superseded", card_id, "publication_status", "Superseded versions are not publishable."))
+        if card.get("review_status") != "approved":
+            findings.append(finding("review_not_approved", card_id, "review_status", "Publication requests require approved review state."))
+        if card.get("publication_status") not in {"unpublished", "hidden", "superseded"}:
+            findings.append(
+                finding(
+                    "publication_status_not_publishable",
+                    card_id,
+                    "publication_status",
+                    "Only unpublished or hidden versions are eligible for a publish request.",
+                )
+            )
+
+    if public_or_requested and card.get("safety_category") == "elevated_risk" and card.get("elevated_risk_policy_approved") is not True:
+        findings.append(
+            finding(
+                "elevated_risk_policy_not_defined",
+                card_id,
+                "safety_category",
+                "Elevated-risk content is not publishable until elevated-risk policy is approved.",
+            )
+        )
+
+    if public_or_requested and card.get("safety_category") == "blocked_rehab":
+        findings.append(
+            finding(
+                "blocked_rehab_not_publishable",
+                card_id,
+                "safety_category",
+                "Rehab, diagnosis, and injury-treatment content is not publishable in v1.",
+            )
+        )
+
+
 def validate_card(card: dict[str, Any], taxonomy: dict[str, set[str]], media: Path) -> list[dict[str, str]]:
     card_id = str(card.get("card_id") or "unknown-card")
     findings: list[dict[str, str]] = []
@@ -584,6 +940,7 @@ def validate_card(card: dict[str, Any], taxonomy: dict[str, set[str]], media: Pa
     validate_enum(card, findings, taxonomy, card_id, "review_status")
     validate_enum(card, findings, taxonomy, card_id, "publication_status")
     validate_enum(card, findings, taxonomy, card_id, "contribution_provenance")
+    validate_publication_eligibility(card, findings, card_id)
 
     validate_string_list_taxonomy(card, findings, taxonomy, card_id, "equipment", "equipment_kind")
     validate_string_list_taxonomy(card, findings, taxonomy, card_id, "movement_patterns", "movement_pattern")
@@ -655,6 +1012,10 @@ def validate_card(card: dict[str, Any], taxonomy: dict[str, set[str]], media: Pa
                 )
 
     validate_supplemental_media(card, findings, taxonomy, card_id)
+    validate_approval_events(card, findings, taxonomy, card_id)
+    validate_lifecycle_events(card, findings, card_id)
+    validate_review_sensitive_edit(card, findings, card_id)
+    validate_review_routing(card, findings, card_id)
 
     license_info = card.get("license")
     if not isinstance(license_info, dict):
@@ -770,6 +1131,8 @@ def validate(args: argparse.Namespace) -> int:
 
     if args.expect_invalid:
         return 0 if report["status"] == "fail" and report["findings"] else 1
+    if args.expect_mixed:
+        return 0 if report["counts"]["valid_cards"] > 0 and report["counts"]["invalid_cards"] > 0 else 1
     return 1 if report["status"] == "fail" else 0
 
 

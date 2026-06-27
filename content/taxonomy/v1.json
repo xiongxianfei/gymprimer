@@ -101,6 +101,20 @@
     "approved",
     "review_expired"
   ],
+  "review_scope": [
+    "card_content",
+    "equipment_setup",
+    "movement_mechanics",
+    "training_principle",
+    "safety_language_policy",
+    "card_safety_language",
+    "emergency_criteria_policy",
+    "elevated_risk_card",
+    "taxonomy_change",
+    "media_equivalence",
+    "translation_equivalence",
+    "licensing"
+  ],
   "review_tier": [
     "trainer",
     "strength_coach",

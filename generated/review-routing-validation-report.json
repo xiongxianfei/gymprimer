@@ -1,0 +1,32 @@
+{
+  "counts": {
+    "invalid_cards": 1,
+    "review_sensitive_changes": 0,
+    "valid_cards": 1,
+    "warnings": 0
+  },
+  "findings": [
+    {
+      "card_id": "fixture-routing-invalid",
+      "code": "missing_review_tier",
+      "field": "approval_events",
+      "message": "Required review tier is missing for the current change category.",
+      "required_tier": "physical_therapist"
+    },
+    {
+      "card_id": "fixture-routing-invalid",
+      "code": "missing_review_tier",
+      "field": "approval_events",
+      "message": "Required review tier is missing for the current change category.",
+      "required_tier": "sports_medicine_clinician"
+    }
+  ],
+  "privacy": {
+    "absolute_paths_redacted": true,
+    "pii_required": false,
+    "sensitive_data_allowed": false
+  },
+  "schema_version": "content-schema-v1",
+  "status": "fail",
+  "warnings": []
+}

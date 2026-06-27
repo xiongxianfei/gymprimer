@@ -1,0 +1,24 @@
+{
+  "counts": {
+    "invalid_cards": 1,
+    "review_sensitive_changes": 0,
+    "valid_cards": 1,
+    "warnings": 0
+  },
+  "findings": [
+    {
+      "card_id": "fixture-lifecycle-invalid",
+      "code": "review_transition_invalid",
+      "field": "lifecycle_events[0]",
+      "message": "Review transition is not allowed by the content lifecycle contract."
+    }
+  ],
+  "privacy": {
+    "absolute_paths_redacted": true,
+    "pii_required": false,
+    "sensitive_data_allowed": false
+  },
+  "schema_version": "content-schema-v1",
+  "status": "fail",
+  "warnings": []
+}

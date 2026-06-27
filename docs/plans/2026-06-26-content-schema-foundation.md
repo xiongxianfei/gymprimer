@@ -72,13 +72,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
 - Review status: code-review-m2-r2 clean-with-notes
-- Remaining in-scope implementation milestones: M3, M4
-- Next stage: implement
+- Remaining in-scope implementation milestones: M4
+- Next stage: code-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1-M2 are closed after code review, but M3-M4 have not started.
+- Reason final closeout is or is not ready: M1-M2 are closed after code review, M3 is implemented and awaiting code review, and M4 has not started.
 
 ## Milestones
 
@@ -182,7 +182,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 
 ### M3. Lifecycle, Review Routing, Publication Eligibility, and Audit Validation
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Implement lifecycle state validation, allowed transitions, review-sensitive edit handling, review-routing matrix checks, publication eligibility, audit-event schema checks, and digest-scoped approval behavior.
 - Requirements: R19-R29, R30-R31, R38-R40, AC8-AC21, AC28-AC31, AC33-AC34
 - Files/components likely touched:
@@ -330,6 +330,8 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: `code-review-m2-r1` requested changes for CR-M2-1 and CR-M2-2. M2 remains open and routes to review-resolution before any M3 implementation.
 - 2026-06-27: Addressed CR-M2-1 and CR-M2-2 by adding supplemental-media validation for media/license metadata, public-license gating, non-authoritative status, source-of-truth claims, and explicit override language. M2 moved back to review-requested for code-review M2 R2.
 - 2026-06-27: `code-review-m2-r2` recorded a clean re-review with no material findings. M2 closed and workflow routed to M3 implementation.
+- 2026-06-27: M3 implementation started. Scope is limited to lifecycle transition validation, publication eligibility, review-sensitive edit behavior, digest-scoped approval events, audit-event field checks, review-routing tier checks, elevated-risk default-deny, and `blocked_rehab` publication blockers.
+- 2026-06-27: M3 implementation completed and moved to review-requested. Added lifecycle/review-routing tests, mixed fixture directories, review/audit schema summaries, review-routing policy data, M3 validator rules, generated reports, and MP1 lifecycle state-sync proof.
 
 ## Decision log
 
@@ -339,6 +341,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 | 2026-06-26 | Split implementation into scaffold, content validation, lifecycle/review validation, and generated-output milestones. | Each slice is reviewable and maps to distinct spec/architecture risks. | One large validator milestone; starting with generated output before validation gates exist. |
 | 2026-06-27 | Resolve PR1 with a local `privacy_scan.py` wrapper instead of adding OSS scanners to the first slice. | PR1 is an exit-code contract problem, not a need for a broad privacy platform. The wrapper gives stable negative-match semantics now while preserving a path to Semgrep, Gitleaks, or Presidio later. | Plain `rg` commands; immediate Semgrep/Gitleaks/Presidio adoption; vendoring scanner source code. |
 | 2026-06-27 | Keep M2 validation JSON-only and add CLI aliases for recorded command shapes. | The approved plan and test spec both describe local Python validation, but existing records used both `--out` and `--report`, and both `--source` and `--fixtures`. Supporting aliases keeps the validation command contract executable without introducing dependencies. | Rewriting approved artifacts around one spelling only; adding a package manager or external schema library in M2. |
+| 2026-06-27 | Encode M3 review-routing obligations as data-shaped tier groups. | The spec requires cumulative review obligations and trainer-or-strength-coach alternatives. Tier groups keep that logic auditable and make missing-tier reports deterministic. | Hard-coding each test case; collapsing alternatives into one flat credential. |
 
 ## Surprises and discoveries
 
@@ -365,6 +368,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M2 review-resolution validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
 - 2026-06-27: M2 review-resolution validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`.
 - 2026-06-27: M2 review-resolution privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
+- 2026-06-27: M3 red test run: `python3 -m unittest tests.test_lifecycle_m3 tests.test_review_routing_m3` failed because the M2 validator ignored lifecycle events, audit events, approval events, publication eligibility, and review-routing requirements.
+- 2026-06-27: M3 validation passed: `python3 -m unittest discover -s tests`.
+- 2026-06-27: M3 validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
+- 2026-06-27: M3 validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --out generated/lifecycle-validation-report.json --expect-mixed`.
+- 2026-06-27: M3 validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`.
+- 2026-06-27: M3 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
+- 2026-06-27: MP1 manual proof recorded at `generated/manual-proof/MP1-lifecycle-state-sync.md`.
 
 ## Outcome and retrospective
 
@@ -373,4 +383,4 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implementation of M3. Not ready for verification, PR, or final closeout until M3-M4 implementation, code reviews, review-resolution if needed, explain-change, verification, and downstream gates complete.
+- Ready for code-review of M3. Not ready for M4 implementation, verification, PR, or final closeout until M3 code review closes and M4 implementation, code review, review-resolution if needed, explain-change, verification, and downstream gates complete.

@@ -1,6 +1,13 @@
 {
-  "schema_version": "content-schema-v1",
+  "description": "M3 review event contract summary for digest-scoped approval events and review-routing validation.",
   "kind": "review_event",
-  "status": "m1-shell",
-  "description": "Placeholder review-event schema shell. Review routing and digest-scoped approvals are implemented in M3."
+  "required_fields": [
+    "reviewer_public_id",
+    "review_tier",
+    "review_scope",
+    "timestamp",
+    "content_digest"
+  ],
+  "schema_version": "content-schema-v1",
+  "status": "m3-contract"
 }
