@@ -161,7 +161,7 @@ Evidence:
 
 ## Code-review M4 R1 resolution
 
-Status: resolution-needed.
+Status: ready-for-code-review-m4-r2.
 
 ### CR-M4-1 - Generated-output exclusion tests do not prove all M4 publication-boundary cases
 
@@ -169,4 +169,33 @@ Required outcome: M4 generated-output proof must show the public package exclude
 
 Safe resolution path: Add focused M4 regression coverage for each exclusion category. The unlicensed/internal-only case must not be excluded only because it is also unpublished; the test should isolate license/publication-rights gating through a direct eligibility assertion or generated-output fixture that exercises that branch. Add blocked safety and review-expired generated-output assertions, refresh generated evidence, rerun M4 validation, and submit code-review M4 R2.
 
-Resolution: pending.
+Resolution: addressed by adding `test_public_output_excludes_all_publication_boundary_failures` to `tests/test_generated_output_m4.py`. The new test creates one public-ready control card plus isolated exclusion variants for `publication_status = unpublished`, `publication_status = hidden`, `publication_status = superseded`, `license.license_kind = unlicensed_internal_only` while still published, `review_status = review_expired` while still published, and `safety_category = blocked_rehab` while still published. It asserts that the generated public package contains only the control card.
+
+Tests added or revised:
+
+- `test_public_output_excludes_all_publication_boundary_failures`
+- `test_public_content_package_is_filtered_and_deterministic` was narrowed so the internal-only case no longer appears as an unpublished overlapping exclusion.
+
+Validation evidence refreshed:
+
+- `generated/test-results.txt`
+- `generated/validation-report.json`
+- `generated/public-content.json`
+- `generated/invalid-fixture-report.json`
+- `generated/lifecycle-validation-report.json`
+- `generated/review-routing-validation-report.json`
+- `generated/privacy-scan-report.json`
+
+Validation passed:
+
+- `python3 -m unittest tests.test_generated_output_m4`
+- `python3 -m unittest discover -s tests`
+- `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json`
+- `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out /tmp/gymprimer-validation-report.json --emit-public /tmp/gymprimer-public-content.json`
+- `diff -u generated/public-content.json /tmp/gymprimer-public-content.json`
+- `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`
+- `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --out generated/lifecycle-validation-report.json --expect-mixed`
+- `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`
+- `python3 tools/validation/privacy_scan.py --pattern 'private|/home/|secret|PHI|personal health' -- generated/`
+
+Status: ready for code-review M4 R2.

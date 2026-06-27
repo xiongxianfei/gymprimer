@@ -2,7 +2,7 @@
 
 ## Scope
 
-M1 established the repository scaffold, schema shells, validator harness, privacy scan helper, and first local tests. M2 adds executable validation for the v1 card content contract. M3 adds lifecycle, review-routing, publication eligibility, approval-event, and audit-event validation. M3 review-resolution makes review routing policy-driven and gates `review_expired -> approved` on recorded review-completion evidence. M4 adds deterministic public content package emission for eligible reviewed cards.
+M1 established the repository scaffold, schema shells, validator harness, privacy scan helper, and first local tests. M2 adds executable validation for the v1 card content contract. M3 adds lifecycle, review-routing, publication eligibility, approval-event, and audit-event validation. M3 review-resolution makes review routing policy-driven and gates `review_expired -> approved` on recorded review-completion evidence. M4 adds deterministic public content package emission for eligible reviewed cards. M4 review-resolution adds generated-output boundary regression coverage for each required exclusion category.
 
 This change does not implement CI, UI, CMS, AI behavior, legal policy, public launch operations, or a broad exercise library.
 
@@ -23,7 +23,7 @@ This change does not implement CI, UI, CMS, AI behavior, legal policy, public la
 - Updated the validator to load `content/policies/review-routing-v1.json` as the executable review-routing source of truth and report policy metadata.
 - Added a special lifecycle gate so `review_expired -> approved` requires `review_completion` plus current digest-scoped approvals.
 - Added `--emit-public` to produce `generated/public-content.json` from valid, published, approved repository-native cards only.
-- Added M4 generated-output tests for deterministic reruns, non-public content exclusion, discovery fields, source-boundary behavior, and 60-card local performance smoke.
+- Added M4 generated-output tests for deterministic reruns, non-public content exclusion, isolated publication-boundary exclusion cases, discovery fields, source-boundary behavior, and 60-card local performance smoke.
 - Added generated validation evidence and MP3 fixture privacy proof for M2.
 - Added generated lifecycle/review-routing validation evidence and MP1 lifecycle state-sync proof for M3.
 - Added generated public-content evidence plus MP2 source-boundary and MP4 scope/non-goal proofs for M4.

@@ -60,9 +60,6 @@ class GeneratedOutputM4Tests(unittest.TestCase):
         self.write_card(self.card_variant("ex-draft", publication_status="unpublished", review_status="draft"), "02-draft.json")
         self.write_card(self.card_variant("ex-hidden", publication_status="hidden"), "03-hidden.json")
         self.write_card(self.card_variant("ex-superseded", publication_status="superseded"), "04-superseded.json")
-        internal_only = self.card_variant("ex-internal-only", publication_status="unpublished")
-        internal_only["license"]["license_kind"] = "unlicensed_internal_only"
-        self.write_card(internal_only, "05-internal-only.json")
 
         first_public = self.source / "public-content.json"
         second_public = self.source / "public-content-rerun.json"
@@ -87,6 +84,35 @@ class GeneratedOutputM4Tests(unittest.TestCase):
         self.assertNotIn("reviewer_public_id", json.dumps(public_card, sort_keys=True))
         self.assertNotIn("draft", json.dumps(first_payload, sort_keys=True).lower())
         self.assertNotIn(str(self.source), json.dumps(first_payload, sort_keys=True))
+
+    def test_public_output_excludes_all_publication_boundary_failures(self):
+        self.write_card(self.card_variant("ex-public-control"), "01-public-control.json")
+        self.write_card(self.card_variant("ex-unpublished", publication_status="unpublished"), "02-unpublished.json")
+        self.write_card(self.card_variant("ex-hidden", publication_status="hidden"), "03-hidden.json")
+        self.write_card(self.card_variant("ex-superseded", publication_status="superseded"), "04-superseded.json")
+
+        internal_only = self.card_variant("ex-internal-only")
+        internal_only["license"]["license_kind"] = "unlicensed_internal_only"
+        self.write_card(internal_only, "05-internal-only.json")
+
+        review_expired = self.card_variant("ex-review-expired", review_status="review_expired")
+        self.write_card(review_expired, "06-review-expired.json")
+
+        blocked_rehab = self.card_variant("ex-blocked-rehab")
+        blocked_rehab["safety_category"] = "blocked_rehab"
+        self.write_card(blocked_rehab, "07-blocked-rehab.json")
+
+        result, payload = self.run_validator(self.source / "boundary-public-content.json")
+
+        self.assertEqual(result.returncode, 1, result.stderr)
+        public_ids = {card["card_id"] for card in payload["cards"]}
+        self.assertEqual(public_ids, {"ex-public-control"})
+        self.assertNotIn("ex-unpublished", public_ids)
+        self.assertNotIn("ex-hidden", public_ids)
+        self.assertNotIn("ex-superseded", public_ids)
+        self.assertNotIn("ex-internal-only", public_ids)
+        self.assertNotIn("ex-review-expired", public_ids)
+        self.assertNotIn("ex-blocked-rehab", public_ids)
 
     def test_pilot_size_generation_completes_under_ten_seconds(self):
         for index in range(60):
