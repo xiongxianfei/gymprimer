@@ -115,3 +115,23 @@ Evidence:
 - `generated/invalid-fixture-report.json` now includes `supplemental_media_missing_authority` and `supplemental_media_overrides_canonical_steps` for the invalid supplemental media fixture.
 
 `code-review-m2-r2` accepted the resolution with no material findings. M2 is closed and the next stage is implementation of M3.
+
+## Code-review M3 R1 resolution
+
+Status: pending-review-resolution.
+
+### CR-M3-1 - Review-routing policy data is not the executable source
+
+Required outcome: Publication eligibility and missing-tier checks must be computed from the repository-native review-routing policy data, or an explicit generated/loaded policy fixture that is validated against the same source of truth.
+
+Safe resolution path: Load `content/policies/review-routing-v1.json` through a bounded validator input path, validate its shape, and pass the loaded route map into `required_review_groups()` and `validate_review_routing()`. Add a regression that fails if the validator ignores the policy data file.
+
+Resolution: pending.
+
+### CR-M3-2 - Direct `review_expired -> approved` transition is accepted
+
+Required outcome: A `review_expired -> approved` transition must be accepted only when the lifecycle event represents recorded review completion and the card has current digest-scoped approval evidence for the required tiers.
+
+Safe resolution path: Add a transition trigger check for `review_expired -> approved`, requiring a review-completion event type plus current approval evidence, and emit a stable error for direct mutation. Add a regression test and fixture proving direct mutation fails while a valid recorded review completion path passes.
+
+Resolution: pending.
