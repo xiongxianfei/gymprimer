@@ -72,13 +72,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: resolution-needed
+- Current milestone state: review-requested
 - Last reviewed milestone: M3
-- Review status: code-review-m3-r1 changes-requested
+- Review status: code-review-m3-r1 changes-requested; review-resolution implemented and awaiting M3 R2
 - Remaining in-scope implementation milestones: M3, M4
-- Next stage: review-resolution
+- Next stage: code-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1-M2 are closed after code review, M3 has material findings CR-M3-1 and CR-M3-2 requiring review-resolution and re-review, and M4 has not started.
+- Reason final closeout is or is not ready: M1-M2 are closed after code review, M3 review-resolution is implemented but awaiting re-review, and M4 has not started.
 
 ## Milestones
 
@@ -333,6 +333,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M3 implementation started. Scope is limited to lifecycle transition validation, publication eligibility, review-sensitive edit behavior, digest-scoped approval events, audit-event field checks, review-routing tier checks, elevated-risk default-deny, and `blocked_rehab` publication blockers.
 - 2026-06-27: M3 implementation completed and moved to review-requested. Added lifecycle/review-routing tests, mixed fixture directories, review/audit schema summaries, review-routing policy data, M3 validator rules, generated reports, and MP1 lifecycle state-sync proof.
 - 2026-06-27: `code-review-m3-r1` requested changes for CR-M3-1 and CR-M3-2. M3 remains open and routes to review-resolution before any M4 implementation.
+- 2026-06-27: M3 review-resolution implemented. Validator now loads `content/policies/review-routing-v1.json`, reports policy metadata, and rejects direct `review_expired -> approved` mutation without review-completion evidence. Added regression tests and lifecycle fixtures for the M3 R1 findings.
 
 ## Decision log
 
@@ -376,6 +377,11 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M3 validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`.
 - 2026-06-27: M3 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
 - 2026-06-27: MP1 manual proof recorded at `generated/manual-proof/MP1-lifecycle-state-sync.md`.
+- 2026-06-27: M3 review-resolution validation passed: `python3 -m unittest discover -s tests`.
+- 2026-06-27: M3 review-resolution validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
+- 2026-06-27: M3 review-resolution validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --out generated/lifecycle-validation-report.json --expect-mixed`.
+- 2026-06-27: M3 review-resolution validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`.
+- 2026-06-27: M3 review-resolution privacy scans passed for `generated/validation-report.json` and `generated/`.
 
 ## Outcome and retrospective
 
@@ -384,4 +390,4 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for review-resolution of CR-M3-1 and CR-M3-2. Not ready for M4 implementation, verification, PR, or final closeout until M3 is fixed, rerun, re-reviewed, and closed, then M4 implementation, code review, review-resolution if needed, explain-change, verification, and downstream gates complete.
+- Ready for code-review M3 R2. Not ready for M4 implementation, verification, PR, or final closeout until M3 is re-reviewed and closed, then M4 implementation, code review, review-resolution if needed, explain-change, verification, and downstream gates complete.

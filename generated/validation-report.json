@@ -11,6 +11,13 @@
     "pii_required": false,
     "sensitive_data_allowed": false
   },
+  "review_routing_policy": {
+    "digest": "sha256:fc97eafee157f56ef5655655a4627e4684711da723ab2dd41715d4ab475bf023",
+    "policy_id": "review-routing-v1",
+    "route_count": 12,
+    "schema_version": "review-routing-policy-v1",
+    "source_path": "content/policies/review-routing-v1.json"
+  },
   "schema_version": "content-schema-v1",
   "status": "pass",
   "warnings": []

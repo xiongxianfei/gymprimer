@@ -42,12 +42,17 @@ def audit_event() -> dict:
 
 
 class LifecycleM3Tests(unittest.TestCase):
-    def run_validator(self, card: dict) -> tuple[subprocess.CompletedProcess[str], dict]:
+    def run_validator(self, card: dict, policy: dict | None = None) -> tuple[subprocess.CompletedProcess[str], dict]:
         source = Path(tempfile.mkdtemp(prefix="gymprimer-lifecycle-test-"))
         self.addCleanup(shutil.rmtree, source)
         cards = source / "cards"
         cards.mkdir(parents=True)
         (cards / "card.json").write_text(json.dumps(card, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        extra_args = []
+        if policy is not None:
+            policy_path = source / "fixture-routing-policy.json"
+            policy_path.write_text(json.dumps(policy, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+            extra_args = ["--review-routing-policy", str(policy_path)]
         out = source / "report.json"
         result = subprocess.run(
             [
@@ -61,6 +66,7 @@ class LifecycleM3Tests(unittest.TestCase):
                 str(REPO_ROOT / "media"),
                 "--out",
                 str(out),
+                *extra_args,
             ],
             cwd=REPO_ROOT,
             text=True,
@@ -166,6 +172,91 @@ class LifecycleM3Tests(unittest.TestCase):
         card["content_digest"] = "sha256:current"
         card["approval_events"] = [approval(digest="sha256:stale")]
         self.assert_invalid(card, "approval_digest_mismatch")
+
+    def test_review_expired_to_approved_direct_system_mutation_is_rejected(self):
+        card = valid_card()
+        card["content_digest"] = "sha256:test-digest"
+        card["change_categories"] = ["exercise_mechanics"]
+        card["approval_events"] = [approval("trainer", "movement_mechanics")]
+        card["lifecycle_events"] = [
+            {
+                **audit_event(),
+                "event_type": "direct_system_mutation",
+                "review_status_before": "review_expired",
+                "review_status_after": "approved",
+                "publication_status_before": "unpublished",
+                "publication_status_after": "unpublished",
+            }
+        ]
+        self.assert_invalid(card, "review_expired_to_approved_requires_review_completion")
+
+    def test_review_expired_to_approved_without_current_digest_approval_is_rejected(self):
+        card = valid_card()
+        card["content_digest"] = "sha256:current"
+        card["change_categories"] = ["exercise_mechanics"]
+        card["approval_events"] = [approval("trainer", "movement_mechanics", digest="sha256:old")]
+        card["lifecycle_events"] = [
+            {
+                **audit_event(),
+                "event_type": "review_completion",
+                "review_status_before": "review_expired",
+                "review_status_after": "approved",
+                "publication_status_before": "unpublished",
+                "publication_status_after": "unpublished",
+            }
+        ]
+        self.assert_invalid(card, "review_expired_to_approved_missing_current_approval")
+
+    def test_review_expired_to_approved_with_recorded_review_completion_passes(self):
+        card = valid_card()
+        card["content_digest"] = "sha256:test-digest"
+        card["change_categories"] = ["exercise_mechanics"]
+        card["approval_events"] = [approval("trainer", "movement_mechanics")]
+        card["lifecycle_events"] = [
+            {
+                **audit_event(),
+                "event_type": "review_completion",
+                "review_status_before": "review_expired",
+                "review_status_after": "approved",
+                "publication_status_before": "unpublished",
+                "publication_status_after": "unpublished",
+            }
+        ]
+        result, report = self.run_validator(card)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(report["status"], "pass")
+
+    def test_review_expired_to_approved_required_tiers_come_from_loaded_policy(self):
+        card = valid_card()
+        card["content_digest"] = "sha256:test-digest"
+        card["change_categories"] = ["fixture_policy_probe"]
+        card["approval_events"] = [approval("trainer", "movement_mechanics")]
+        card["lifecycle_events"] = [
+            {
+                **audit_event(),
+                "event_type": "review_completion",
+                "review_status_before": "review_expired",
+                "review_status_after": "approved",
+                "publication_status_before": "unpublished",
+                "publication_status_after": "unpublished",
+            }
+        ]
+        policy = {
+            "policy_id": "fixture-review-routing-policy",
+            "schema_version": "review-routing-policy-v1",
+            "change_categories": {
+                "fixture_policy_probe": {
+                    "required_review_groups": [["physical_therapist"]],
+                    "scope": "card_safety_language",
+                }
+            },
+        }
+        result, report = self.run_validator(card, policy)
+        self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertIn(
+            "review_expired_to_approved_missing_current_approval",
+            {finding["code"] for finding in report["findings"]},
+        )
 
 
 if __name__ == "__main__":

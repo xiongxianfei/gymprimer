@@ -17,6 +17,8 @@ resolved
 | TSR2 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | major | Replace free-form manual QA bullets with stable manual proof records including evidence, environment, pass/fail conditions, rationale, and owner. | resolved-in-test-spec-review-r2 |
 | CR-M2-1 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Reject public cards using a media asset with `license_kind = unlicensed_internal_only` and prove the media-asset case. | resolved-in-code-review-m2-r2 |
 | CR-M2-2 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Validate supplemental-media metadata and reject supplemental media that overrides, replaces, or contradicts canonical text/SVG steps. | resolved-in-code-review-m2-r2 |
+| CR-M3-1 | [code-review-m3-r1](reviews/code-review-m3-r1.md) | major | Compute review-routing checks from repository-native policy data and prove policy-file loading. | ready-for-code-review-m3-r2 |
+| CR-M3-2 | [code-review-m3-r1](reviews/code-review-m3-r1.md) | major | Reject direct `review_expired -> approved` mutation without recorded review-completion evidence. | ready-for-code-review-m3-r2 |
 
 ## Resolution notes
 
@@ -118,7 +120,7 @@ Evidence:
 
 ## Code-review M3 R1 resolution
 
-Status: pending-review-resolution.
+Status: ready-for-code-review-m3-r2.
 
 ### CR-M3-1 - Review-routing policy data is not the executable source
 
@@ -126,7 +128,14 @@ Required outcome: Publication eligibility and missing-tier checks must be comput
 
 Safe resolution path: Load `content/policies/review-routing-v1.json` through a bounded validator input path, validate its shape, and pass the loaded route map into `required_review_groups()` and `validate_review_routing()`. Add a regression that fails if the validator ignores the policy data file.
 
-Resolution: pending.
+Resolution: addressed by loading `content/policies/review-routing-v1.json` as the default repository-native review-routing policy source, validating the policy shape, recording policy metadata in validation reports, and passing the loaded route map into review-routing and lifecycle approval checks. The in-code review route matrix was removed as the executable source of truth.
+
+Tests added:
+
+- `test_review_routing_uses_loaded_policy_file_for_required_tiers`
+- `test_review_routing_policy_missing_required_review_groups_is_rejected`
+- `test_review_routing_report_includes_loaded_policy_metadata`
+- `test_review_expired_to_approved_required_tiers_come_from_loaded_policy`
 
 ### CR-M3-2 - Direct `review_expired -> approved` transition is accepted
 
@@ -134,4 +143,18 @@ Required outcome: A `review_expired -> approved` transition must be accepted onl
 
 Safe resolution path: Add a transition trigger check for `review_expired -> approved`, requiring a review-completion event type plus current approval evidence, and emit a stable error for direct mutation. Add a regression test and fixture proving direct mutation fails while a valid recorded review completion path passes.
 
-Resolution: pending.
+Resolution: addressed by adding a special transition gate for `review_expired -> approved`. The transition now requires `event_type = review_completion` and current digest-scoped approval evidence satisfying the loaded review-routing policy. Direct system mutation is rejected with `review_expired_to_approved_requires_review_completion`; missing current approval evidence is rejected with `review_expired_to_approved_missing_current_approval`.
+
+Tests added:
+
+- `test_review_expired_to_approved_direct_system_mutation_is_rejected`
+- `test_review_expired_to_approved_without_current_digest_approval_is_rejected`
+- `test_review_expired_to_approved_with_recorded_review_completion_passes`
+- `test_review_expired_to_approved_required_tiers_come_from_loaded_policy`
+
+Evidence:
+
+- `generated/lifecycle-validation-report.json` includes `review_expired_to_approved_requires_review_completion`.
+- `generated/review-routing-validation-report.json` includes loaded `review_routing_policy` metadata.
+
+Status: ready for code-review M3 R2.

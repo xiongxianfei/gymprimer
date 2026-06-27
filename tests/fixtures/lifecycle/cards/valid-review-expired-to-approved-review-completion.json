@@ -1,0 +1,127 @@
+{
+  "approval_events": [
+    {
+      "content_digest": "sha256:test-digest",
+      "review_scope": "movement_mechanics",
+      "review_tier": "trainer",
+      "reviewer_public_id": "trainer-reviewer",
+      "timestamp": "2026-06-27T12:00:00Z"
+    }
+  ],
+  "canonical_svg_steps": [
+    "examples/lat-pulldown-step-1.svg",
+    "examples/lat-pulldown-step-2.svg",
+    "examples/lat-pulldown-step-3.svg"
+  ],
+  "card_id": "fixture-lifecycle-review-completion-valid",
+  "card_type": "exercise",
+  "change_categories": [
+    "exercise_mechanics"
+  ],
+  "content_digest": "sha256:test-digest",
+  "contribution_provenance": "staff_authored_expert_reviewed",
+  "difficulty": "beginner",
+  "equipment": [
+    "selectorized_machine"
+  ],
+  "license": {
+    "attribution": "GymPrimer contributors",
+    "code_license": "Apache-2.0",
+    "content_license": "CC-BY-4.0",
+    "license_kind": "cc_by"
+  },
+  "lifecycle_events": [
+    {
+      "actor_id": "trainer-reviewer",
+      "actor_role": "trainer",
+      "card_id": "fixture-lifecycle-review-completion-valid",
+      "completed_review_tiers": [
+        "trainer"
+      ],
+      "content_digest_after": "sha256:test-digest",
+      "content_digest_before": "sha256:test-digest",
+      "event_type": "review_completion",
+      "locale": "en-US",
+      "publication_status_after": "unpublished",
+      "publication_status_before": "unpublished",
+      "reason": "Recorded review completion after review expiration.",
+      "required_review_tiers": [
+        "trainer"
+      ],
+      "review_status_after": "approved",
+      "review_status_before": "review_expired",
+      "timestamp": "2026-06-27T12:00:00Z",
+      "version_id": "v1"
+    }
+  ],
+  "locales": {
+    "en-US": {
+      "aliases": [
+        "Front lat pulldown"
+      ],
+      "breathing_bracing": "Exhale as you pull and inhale as you return.",
+      "canonical_svg_text": {
+        "examples/lat-pulldown-step-1.svg": "Start seated with the bar overhead.",
+        "examples/lat-pulldown-step-2.svg": "Pull the bar toward the upper chest.",
+        "examples/lat-pulldown-step-3.svg": "Return the bar upward with control."
+      },
+      "common_mistakes": [
+        "Leaning far back instead of pulling with control."
+      ],
+      "equipment_setup": [
+        "Adjust the thigh pad so your legs stay down without discomfort."
+      ],
+      "movement_phases": [
+        "Pull the bar toward the upper chest with controlled tempo.",
+        "Pause briefly without shrugging.",
+        "Return the bar upward under control."
+      ],
+      "progressions": [
+        {
+          "readiness_cue": "Use this only after you can keep the shoulders controlled for every rep.",
+          "title": "Slower return"
+        }
+      ],
+      "purpose": "Teach a controlled vertical pulling pattern with machine support.",
+      "regressions": [
+        "Use a lighter pin setting and a shorter range you can control."
+      ],
+      "safety_notes": [
+        "GymPrimer is educational content, not medical advice. Talk to a qualified professional before starting a new exercise program; stop and seek qualified help for sharp, radiating, worsening, or unusual symptoms."
+      ],
+      "start_position": "Sit tall, hold the bar just wider than shoulder width, and keep your ribs stacked.",
+      "summary": "A beginner pull exercise for learning how to train the upper back.",
+      "title": "Lat pulldown",
+      "what_you_should_feel": [
+        "Work through the sides of the upper back."
+      ],
+      "what_you_should_not_feel": [
+        "Sharp, radiating, worsening, or unusual symptoms."
+      ]
+    }
+  },
+  "movement_patterns": [
+    "pull_vertical"
+  ],
+  "primary_muscles": [
+    "latissimus_dorsi"
+  ],
+  "publication_status": "unpublished",
+  "review": {
+    "content_digest": "sha256:test-digest",
+    "review_date": "2026-06-27",
+    "review_tier": "trainer",
+    "reviewer_public_id": "trainer-reviewer-a"
+  },
+  "review_status": "approved",
+  "safety_category": "standard",
+  "schema_version": "content-schema-v1",
+  "secondary_muscles": [
+    "biceps_brachii"
+  ],
+  "stabilizers": [
+    "core"
+  ],
+  "supplemental_media": [],
+  "version_id": "v1"
+}

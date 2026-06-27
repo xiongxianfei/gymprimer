@@ -1,8 +1,8 @@
 {
   "counts": {
-    "invalid_cards": 1,
+    "invalid_cards": 2,
     "review_sensitive_changes": 0,
-    "valid_cards": 1,
+    "valid_cards": 2,
     "warnings": 0
   },
   "findings": [
@@ -11,12 +11,25 @@
       "code": "review_transition_invalid",
       "field": "lifecycle_events[0]",
       "message": "Review transition is not allowed by the content lifecycle contract."
+    },
+    {
+      "card_id": "fixture-lifecycle-direct-mutation-invalid",
+      "code": "review_expired_to_approved_requires_review_completion",
+      "field": "lifecycle_events[0].event_type",
+      "message": "review_expired to approved requires a recorded review-completion event."
     }
   ],
   "privacy": {
     "absolute_paths_redacted": true,
     "pii_required": false,
     "sensitive_data_allowed": false
+  },
+  "review_routing_policy": {
+    "digest": "sha256:fc97eafee157f56ef5655655a4627e4684711da723ab2dd41715d4ab475bf023",
+    "policy_id": "review-routing-v1",
+    "route_count": 12,
+    "schema_version": "review-routing-policy-v1",
+    "source_path": "content/policies/review-routing-v1.json"
   },
   "schema_version": "content-schema-v1",
   "status": "fail",

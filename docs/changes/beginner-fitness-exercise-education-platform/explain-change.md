@@ -2,7 +2,7 @@
 
 ## Scope
 
-M1 established the repository scaffold, schema shells, validator harness, privacy scan helper, and first local tests. M2 adds executable validation for the v1 card content contract. M3 adds lifecycle, review-routing, publication eligibility, approval-event, and audit-event validation.
+M1 established the repository scaffold, schema shells, validator harness, privacy scan helper, and first local tests. M2 adds executable validation for the v1 card content contract. M3 adds lifecycle, review-routing, publication eligibility, approval-event, and audit-event validation. M3 review-resolution now makes review routing policy-driven and gates `review_expired -> approved` on recorded review-completion evidence.
 
 This change does not implement generated public content, CI, UI, CMS, AI behavior, legal policy, public launch content, or a broad exercise library.
 
@@ -20,6 +20,8 @@ This change does not implement generated public content, CI, UI, CMS, AI behavio
 - Added M2 tests for accepted `en-US` and `zh-Hans` card shape plus invalid locale, enum, taxonomy, SVG, safety, licensing, provenance, and review-metadata cases.
 - Added M3 tests and fixtures for lifecycle transitions, review-sensitive edits, publication eligibility, review-routing obligations, elevated-risk default-deny, blocked rehab publication blocking, approval events, and audit events.
 - Added review-event and audit-event schema summaries plus `content/policies/review-routing-v1.json`.
+- Updated the validator to load `content/policies/review-routing-v1.json` as the executable review-routing source of truth and report policy metadata.
+- Added a special lifecycle gate so `review_expired -> approved` requires `review_completion` plus current digest-scoped approvals.
 - Added generated validation evidence and MP3 fixture privacy proof for M2.
 - Added generated lifecycle/review-routing validation evidence and MP1 lifecycle state-sync proof for M3.
 

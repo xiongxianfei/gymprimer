@@ -1,75 +1,112 @@
 {
   "change_categories": {
-    "card_safety_language": [
-      [
-        "physical_therapist"
-      ]
-    ],
-    "elevated_risk_card": [
-      [
-        "sports_medicine_clinician"
+    "card_safety_language": {
+      "required_review_groups": [
+        [
+          "physical_therapist"
+        ]
       ],
-      [
-        "trainer",
-        "strength_coach"
-      ]
-    ],
-    "emergency_criteria_policy": [
-      [
-        "sports_medicine_clinician"
-      ]
-    ],
-    "equipment_setup": [
-      [
-        "trainer",
-        "strength_coach"
-      ]
-    ],
-    "exercise_mechanics": [
-      [
-        "trainer",
-        "strength_coach"
-      ]
-    ],
-    "general_training_principle": [
-      [
-        "trainer",
-        "strength_coach"
-      ]
-    ],
-    "licensing": [
-      [
-        "content_ops"
-      ]
-    ],
-    "media_equivalence": [
-      [
-        "trainer",
-        "strength_coach"
-      ]
-    ],
-    "safety_language_policy": [
-      [
-        "physical_therapist"
-      ]
-    ],
-    "standard_safety_template": [
-      [
-        "trainer",
-        "strength_coach"
-      ]
-    ],
-    "taxonomy_change": [
-      [
-        "schema_owner"
-      ]
-    ],
-    "translation_equivalence": [
-      [
-        "locale_reviewer"
-      ]
-    ]
+      "scope": "card_safety_language"
+    },
+    "elevated_risk_card": {
+      "required_review_groups": [
+        [
+          "sports_medicine_clinician"
+        ],
+        [
+          "trainer",
+          "strength_coach"
+        ]
+      ],
+      "scope": "elevated_risk_card"
+    },
+    "emergency_criteria_policy": {
+      "required_review_groups": [
+        [
+          "sports_medicine_clinician"
+        ]
+      ],
+      "scope": "emergency_criteria_policy"
+    },
+    "equipment_setup": {
+      "required_review_groups": [
+        [
+          "trainer",
+          "strength_coach"
+        ]
+      ],
+      "scope": "equipment_setup"
+    },
+    "exercise_mechanics": {
+      "required_review_groups": [
+        [
+          "trainer",
+          "strength_coach"
+        ]
+      ],
+      "scope": "movement_mechanics"
+    },
+    "general_training_principle": {
+      "required_review_groups": [
+        [
+          "trainer",
+          "strength_coach"
+        ]
+      ],
+      "scope": "training_principle"
+    },
+    "licensing": {
+      "required_review_groups": [
+        [
+          "content_ops"
+        ]
+      ],
+      "scope": "licensing"
+    },
+    "media_equivalence": {
+      "required_review_groups": [
+        [
+          "trainer",
+          "strength_coach"
+        ]
+      ],
+      "scope": "media_equivalence"
+    },
+    "safety_language_policy": {
+      "required_review_groups": [
+        [
+          "physical_therapist"
+        ]
+      ],
+      "scope": "safety_language_policy"
+    },
+    "standard_safety_template": {
+      "required_review_groups": [
+        [
+          "trainer",
+          "strength_coach"
+        ]
+      ],
+      "scope": "card_safety_language"
+    },
+    "taxonomy_change": {
+      "required_review_groups": [
+        [
+          "schema_owner"
+        ]
+      ],
+      "scope": "taxonomy_change"
+    },
+    "translation_equivalence": {
+      "required_review_groups": [
+        [
+          "locale_reviewer"
+        ]
+      ],
+      "scope": "translation_equivalence"
+    }
   },
-  "schema_version": "content-schema-v1",
+  "policy_id": "review-routing-v1",
+  "schema_version": "review-routing-policy-v1",
   "status": "m3-contract"
 }

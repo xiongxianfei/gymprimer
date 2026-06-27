@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -12,6 +13,7 @@ from typing import Any
 
 
 DEFAULT_SCHEMA_VERSION = "content-schema-v1"
+DEFAULT_REVIEW_ROUTING_POLICY_PATH = Path("content/policies/review-routing-v1.json")
 CARD_SUFFIXES = {".json"}
 
 CONTROLLED_ENUMS: dict[str, set[str]] = {
@@ -241,22 +243,6 @@ APPROVAL_EVENT_REQUIRED_FIELDS = {
     "content_digest",
 }
 
-REVIEW_ROUTE_GROUPS: dict[str, list[set[str]]] = {
-    "exercise_mechanics": [{"trainer", "strength_coach"}],
-    "equipment_setup": [{"trainer", "strength_coach"}],
-    "general_training_principle": [{"trainer", "strength_coach"}],
-    "standard_safety_template": [{"trainer", "strength_coach"}],
-    "card_safety_language": [{"physical_therapist"}],
-    "safety_language_policy": [{"physical_therapist"}],
-    "emergency_criteria_policy": [{"sports_medicine_clinician"}],
-    "elevated_risk_card": [{"sports_medicine_clinician"}, {"trainer", "strength_coach"}],
-    "media_equivalence": [{"trainer", "strength_coach"}],
-    "translation_equivalence": [{"locale_reviewer"}],
-    "taxonomy_change": [{"schema_owner"}],
-    "licensing": [{"content_ops"}],
-}
-
-
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Validate GymPrimer source content.")
     parser.add_argument("--source", help="Content source directory.")
@@ -265,6 +251,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--media", required=True, help="Media directory.")
     parser.add_argument("--out", help="Validation report output path.")
     parser.add_argument("--report", help="Validation report output path. Alias for --out.")
+    parser.add_argument(
+        "--review-routing-policy",
+        default=str(DEFAULT_REVIEW_ROUTING_POLICY_PATH),
+        help="Repository-native review-routing policy JSON path.",
+    )
     parser.add_argument(
         "--expect-invalid",
         action="store_true",
@@ -301,6 +292,7 @@ def base_report(version: str, status: str) -> dict[str, Any]:
     return {
         "schema_version": version,
         "status": status,
+        "review_routing_policy": {},
         "counts": {
             "valid_cards": 0,
             "invalid_cards": 0,
@@ -332,6 +324,188 @@ def missing_path_finding(role: str) -> dict[str, str]:
 
 def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def review_routing_policy_finding(code: str, field: str, message: str) -> dict[str, str]:
+    return finding(code, "review-routing-policy", field, message)
+
+
+def display_path(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(Path.cwd().resolve()))
+    except ValueError:
+        return str(path)
+
+
+def policy_source_path(path: Path) -> Path:
+    if path.is_absolute():
+        return path
+    return Path.cwd() / path
+
+
+def load_review_routing_policy(path: Path, taxonomy: dict[str, set[str]]) -> tuple[dict[str, Any], dict[str, list[set[str]]], list[dict[str, str]]]:
+    source = policy_source_path(path)
+    metadata: dict[str, Any] = {
+        "policy_id": "",
+        "schema_version": "",
+        "source_path": display_path(source),
+        "digest": "",
+        "route_count": 0,
+    }
+    findings: list[dict[str, str]] = []
+    routes: dict[str, list[set[str]]] = {}
+
+    if not source.exists() or source.is_dir():
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_missing",
+                "review_routing_policy",
+                "Review-routing policy file is missing.",
+            )
+        )
+        return metadata, routes, findings
+
+    raw = source.read_bytes()
+    metadata["digest"] = "sha256:" + hashlib.sha256(raw).hexdigest()
+    try:
+        data = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_invalid_json",
+                "review_routing_policy",
+                "Review-routing policy JSON is invalid.",
+            )
+        )
+        return metadata, routes, findings
+
+    if not isinstance(data, dict):
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_invalid",
+                "review_routing_policy",
+                "Review-routing policy must be a JSON object.",
+            )
+        )
+        return metadata, routes, findings
+
+    policy_id = data.get("policy_id")
+    if not is_nonempty(policy_id):
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_missing_policy_id",
+                "policy_id",
+                "Review-routing policy requires policy_id.",
+            )
+        )
+    else:
+        metadata["policy_id"] = policy_id
+
+    schema = data.get("schema_version")
+    if not is_nonempty(schema):
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_missing_schema_version",
+                "schema_version",
+                "Review-routing policy requires schema_version.",
+            )
+        )
+    else:
+        metadata["schema_version"] = schema
+
+    categories = data.get("change_categories")
+    if categories is None:
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_missing_change_categories",
+                "change_categories",
+                "Review-routing policy requires change_categories.",
+            )
+        )
+        return metadata, routes, findings
+    if not isinstance(categories, dict):
+        findings.append(
+            review_routing_policy_finding(
+                "review_routing_policy_invalid_change_categories",
+                "change_categories",
+                "Review-routing policy change_categories must be an object.",
+            )
+        )
+        return metadata, routes, findings
+
+    for category, route in sorted(categories.items()):
+        route_path = f"change_categories.{category}"
+        if not isinstance(category, str) or not category:
+            findings.append(
+                review_routing_policy_finding(
+                    "review_routing_policy_invalid_change_category",
+                    "change_categories",
+                    "Review-routing policy change category keys must be non-empty strings.",
+                )
+            )
+            continue
+        if not isinstance(route, dict):
+            findings.append(
+                review_routing_policy_finding(
+                    "review_routing_policy_invalid_route",
+                    route_path,
+                    "Review-routing policy route must be an object.",
+                )
+            )
+            continue
+
+        scope = route.get("scope")
+        if isinstance(scope, str) and scope not in taxonomy.get("review_scope", set()):
+            findings.append(
+                review_routing_policy_finding(
+                    "review_routing_policy_unknown_scope",
+                    f"{route_path}.scope",
+                    "Review-routing policy route has an unknown scope.",
+                )
+            )
+
+        groups = route.get("required_review_groups")
+        if not isinstance(groups, list) or not groups:
+            findings.append(
+                review_routing_policy_finding(
+                    "review_routing_policy_missing_required_review_groups",
+                    f"{route_path}.required_review_groups",
+                    "Review-routing policy route requires required_review_groups.",
+                )
+            )
+            continue
+
+        normalized: list[set[str]] = []
+        for group_index, group in enumerate(groups):
+            group_path = f"{route_path}.required_review_groups[{group_index}]"
+            if not isinstance(group, list) or not group:
+                findings.append(
+                    review_routing_policy_finding(
+                        "review_routing_policy_unknown_review_group",
+                        group_path,
+                        "Review-routing policy review groups must be non-empty review-tier lists.",
+                    )
+                )
+                continue
+            options: set[str] = set()
+            for tier in group:
+                if not isinstance(tier, str) or tier not in taxonomy.get("review_tier", set()):
+                    findings.append(
+                        review_routing_policy_finding(
+                            "review_routing_policy_unknown_review_group",
+                            group_path,
+                            "Review-routing policy route references an unknown review tier.",
+                        )
+                    )
+                else:
+                    options.add(tier)
+            if options:
+                normalized.append(options)
+        if normalized:
+            routes[category] = normalized
+
+    metadata["route_count"] = len(routes)
+    return metadata, routes, findings
 
 
 def load_taxonomy(source: Path) -> dict[str, set[str]]:
@@ -722,11 +896,66 @@ def validate_approval_events(
             findings.append(finding("enum_unknown", card_id, f"{path}.review_scope", "Unknown review scope."))
 
 
+def current_digest_scoped_review_tiers(card: dict[str, Any]) -> set[str]:
+    current_digest = card.get("content_digest")
+    if not isinstance(current_digest, str):
+        return set()
+    tiers: set[str] = set()
+    events = card.get("approval_events", [])
+    if not isinstance(events, list):
+        return tiers
+    for event in events:
+        if not isinstance(event, dict):
+            continue
+        if event.get("content_digest") != current_digest:
+            continue
+        tier = event.get("review_tier")
+        if isinstance(tier, str):
+            tiers.add(tier)
+    return tiers
+
+
+def review_groups_satisfied(groups: list[set[str]], tiers: set[str]) -> bool:
+    return all(tiers.intersection(options) for options in groups)
+
+
+def validate_review_expired_to_approved_transition(
+    card: dict[str, Any],
+    event: dict[str, Any],
+    path: str,
+    route_map: dict[str, list[set[str]]],
+    findings: list[dict[str, str]],
+    card_id: str,
+) -> None:
+    if event.get("event_type") != "review_completion":
+        findings.append(
+            finding(
+                "review_expired_to_approved_requires_review_completion",
+                card_id,
+                f"{path}.event_type",
+                "review_expired to approved requires a recorded review-completion event.",
+            )
+        )
+
+    required_groups = required_review_groups(card, route_map, findings, card_id)
+    if required_groups and not review_groups_satisfied(required_groups, current_digest_scoped_review_tiers(card)):
+        findings.append(
+            finding(
+                "review_expired_to_approved_missing_current_approval",
+                card_id,
+                "approval_events",
+                "review_expired to approved requires current digest-scoped approval for all required review tiers.",
+            )
+        )
+
+
 def validate_lifecycle_event(
+    card: dict[str, Any],
     card_id: str,
     event: Any,
     index: int,
     collection_name: str,
+    route_map: dict[str, list[set[str]]],
     findings: list[dict[str, str]],
 ) -> None:
     path = f"{collection_name}[{index}]"
@@ -757,6 +986,8 @@ def validate_lifecycle_event(
 
     review_before = event.get("review_status_before")
     review_after = event.get("review_status_after")
+    if review_before == "review_expired" and review_after == "approved":
+        validate_review_expired_to_approved_transition(card, event, path, route_map, findings, card_id)
     if isinstance(review_before, str) and isinstance(review_after, str) and review_before != review_after:
         if (review_before, review_after) not in ALLOWED_REVIEW_TRANSITIONS:
             findings.append(
@@ -795,7 +1026,12 @@ def validate_lifecycle_event(
             findings.append(finding("version_superseded", card_id, path, "Superseded versions cannot become published again."))
 
 
-def validate_lifecycle_events(card: dict[str, Any], findings: list[dict[str, str]], card_id: str) -> None:
+def validate_lifecycle_events(
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    card_id: str,
+    route_map: dict[str, list[set[str]]],
+) -> None:
     for collection_name in ("lifecycle_events", "audit_events"):
         events = card.get(collection_name, [])
         if events is None:
@@ -804,7 +1040,7 @@ def validate_lifecycle_events(card: dict[str, Any], findings: list[dict[str, str
             findings.append(finding("audit_events_not_list", card_id, collection_name, "Lifecycle audit events must be a list."))
             continue
         for index, event in enumerate(events):
-            validate_lifecycle_event(card_id, event, index, collection_name, findings)
+            validate_lifecycle_event(card, card_id, event, index, collection_name, route_map, findings)
 
 
 def validate_review_sensitive_edit(card: dict[str, Any], findings: list[dict[str, str]], card_id: str) -> None:
@@ -840,23 +1076,46 @@ def validate_review_sensitive_edit(card: dict[str, Any], findings: list[dict[str
             )
 
 
-def required_review_groups(card: dict[str, Any]) -> list[set[str]]:
+def required_review_groups(
+    card: dict[str, Any],
+    route_map: dict[str, list[set[str]]],
+    findings: list[dict[str, str]] | None = None,
+    card_id: str = "unknown-card",
+) -> list[set[str]]:
     groups: list[set[str]] = []
     categories = card.get("change_categories", [])
     if not isinstance(categories, list):
         return groups
     for category in categories:
         if isinstance(category, str):
-            groups.extend(REVIEW_ROUTE_GROUPS.get(category, []))
+            route_groups = route_map.get(category)
+            if route_groups is None:
+                if findings is not None:
+                    findings.append(
+                        finding(
+                            "unknown_change_category",
+                            card_id,
+                            "change_categories",
+                            "Change category is not present in the active review-routing policy.",
+                            change_category=category,
+                        )
+                    )
+                continue
+            groups.extend(route_groups)
     if card.get("safety_category") == "elevated_risk":
-        groups.extend(REVIEW_ROUTE_GROUPS["elevated_risk_card"])
+        groups.extend(route_map.get("elevated_risk_card", []))
     return groups
 
 
-def validate_review_routing(card: dict[str, Any], findings: list[dict[str, str]], card_id: str) -> None:
+def validate_review_routing(
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    card_id: str,
+    route_map: dict[str, list[set[str]]],
+) -> None:
     tiers = completed_review_tiers(card)
     seen_missing: set[str] = set()
-    for options in required_review_groups(card):
+    for options in required_review_groups(card, route_map, findings, card_id):
         if tiers.intersection(options):
             continue
         label = review_tier_label(options)
@@ -915,7 +1174,12 @@ def validate_publication_eligibility(card: dict[str, Any], findings: list[dict[s
         )
 
 
-def validate_card(card: dict[str, Any], taxonomy: dict[str, set[str]], media: Path) -> list[dict[str, str]]:
+def validate_card(
+    card: dict[str, Any],
+    taxonomy: dict[str, set[str]],
+    media: Path,
+    route_map: dict[str, list[set[str]]],
+) -> list[dict[str, str]]:
     card_id = str(card.get("card_id") or "unknown-card")
     findings: list[dict[str, str]] = []
 
@@ -1013,9 +1277,9 @@ def validate_card(card: dict[str, Any], taxonomy: dict[str, set[str]], media: Pa
 
     validate_supplemental_media(card, findings, taxonomy, card_id)
     validate_approval_events(card, findings, taxonomy, card_id)
-    validate_lifecycle_events(card, findings, card_id)
+    validate_lifecycle_events(card, findings, card_id, route_map)
     validate_review_sensitive_edit(card, findings, card_id)
-    validate_review_routing(card, findings, card_id)
+    validate_review_routing(card, findings, card_id, route_map)
 
     license_info = card.get("license")
     if not isinstance(license_info, dict):
@@ -1094,6 +1358,14 @@ def validate(args: argparse.Namespace) -> int:
         return 2
 
     taxonomy = load_taxonomy(source)
+    policy_metadata, route_map, policy_findings = load_review_routing_policy(Path(args.review_routing_policy), taxonomy)
+    report["review_routing_policy"] = policy_metadata
+    if policy_findings:
+        report["status"] = "fail"
+        report["findings"].extend(policy_findings)
+        write_report(out, report)
+        return 1
+
     card_files = discover_card_files(source)
     if not card_files:
         report["warnings"].append(
@@ -1117,7 +1389,7 @@ def validate(args: argparse.Namespace) -> int:
             report["counts"]["invalid_cards"] += 1
             continue
 
-        card_findings = validate_card(card, taxonomy, media)
+        card_findings = validate_card(card, taxonomy, media, route_map)
         if card_findings:
             report["counts"]["invalid_cards"] += 1
             report["findings"].extend(card_findings)
