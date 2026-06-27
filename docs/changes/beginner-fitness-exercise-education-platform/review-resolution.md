@@ -17,8 +17,8 @@ resolved
 | TSR2 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | major | Replace free-form manual QA bullets with stable manual proof records including evidence, environment, pass/fail conditions, rationale, and owner. | resolved-in-test-spec-review-r2 |
 | CR-M2-1 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Reject public cards using a media asset with `license_kind = unlicensed_internal_only` and prove the media-asset case. | resolved-in-code-review-m2-r2 |
 | CR-M2-2 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Validate supplemental-media metadata and reject supplemental media that overrides, replaces, or contradicts canonical text/SVG steps. | resolved-in-code-review-m2-r2 |
-| CR-M3-1 | [code-review-m3-r1](reviews/code-review-m3-r1.md) | major | Compute review-routing checks from repository-native policy data and prove policy-file loading. | ready-for-code-review-m3-r2 |
-| CR-M3-2 | [code-review-m3-r1](reviews/code-review-m3-r1.md) | major | Reject direct `review_expired -> approved` mutation without recorded review-completion evidence. | ready-for-code-review-m3-r2 |
+| CR-M3-1 | [code-review-m3-r1](reviews/code-review-m3-r1.md) | major | Compute review-routing checks from repository-native policy data and prove policy-file loading. | resolved-in-code-review-m3-r2 |
+| CR-M3-2 | [code-review-m3-r1](reviews/code-review-m3-r1.md) | major | Reject direct `review_expired -> approved` mutation without recorded review-completion evidence. | resolved-in-code-review-m3-r2 |
 
 ## Resolution notes
 
@@ -120,7 +120,7 @@ Evidence:
 
 ## Code-review M3 R1 resolution
 
-Status: ready-for-code-review-m3-r2.
+Status: resolved-in-code-review-m3-r2.
 
 ### CR-M3-1 - Review-routing policy data is not the executable source
 
@@ -157,4 +157,4 @@ Evidence:
 - `generated/lifecycle-validation-report.json` includes `review_expired_to_approved_requires_review_completion`.
 - `generated/review-routing-validation-report.json` includes loaded `review_routing_policy` metadata.
 
-Status: ready for code-review M3 R2.
+`code-review-m3-r2` accepted the resolution with no material findings. M3 is closed and the next stage is implementation of M4.

@@ -71,9 +71,9 @@ If this guide is silent for an artifact type and a stage skill has a safe portab
 - Current plan review: `docs/changes/beginner-fitness-exercise-education-platform/reviews/plan-review-r2.md`
 - Current test spec: `specs/content-schema.test.md`
 - Current test spec review: `docs/changes/beginner-fitness-exercise-education-platform/reviews/test-spec-review-r2.md`
-- Current code review: `docs/changes/beginner-fitness-exercise-education-platform/reviews/code-review-m3-r1.md`
-- Current readiness: ready for `code-review` M3 R2
-- Next valid skill: `code-review`
+- Current code review: `docs/changes/beginner-fitness-exercise-education-platform/reviews/code-review-m3-r2.md`
+- Current readiness: ready for `implement` M4
+- Next valid skill: `implement`
 
 ## Routing notes
 

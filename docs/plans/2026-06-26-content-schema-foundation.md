@@ -71,14 +71,14 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: review-requested
+- Current milestone: M4
+- Current milestone state: planned
 - Last reviewed milestone: M3
-- Review status: code-review-m3-r1 changes-requested; review-resolution implemented and awaiting M3 R2
-- Remaining in-scope implementation milestones: M3, M4
-- Next stage: code-review
+- Review status: code-review-m3-r2 clean-with-notes
+- Remaining in-scope implementation milestones: M4
+- Next stage: implement
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1-M2 are closed after code review, M3 review-resolution is implemented but awaiting re-review, and M4 has not started.
+- Reason final closeout is or is not ready: M1-M3 are closed after code review, and M4 has not started.
 
 ## Milestones
 
@@ -334,6 +334,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M3 implementation completed and moved to review-requested. Added lifecycle/review-routing tests, mixed fixture directories, review/audit schema summaries, review-routing policy data, M3 validator rules, generated reports, and MP1 lifecycle state-sync proof.
 - 2026-06-27: `code-review-m3-r1` requested changes for CR-M3-1 and CR-M3-2. M3 remains open and routes to review-resolution before any M4 implementation.
 - 2026-06-27: M3 review-resolution implemented. Validator now loads `content/policies/review-routing-v1.json`, reports policy metadata, and rejects direct `review_expired -> approved` mutation without review-completion evidence. Added regression tests and lifecycle fixtures for the M3 R1 findings.
+- 2026-06-27: `code-review-m3-r2` recorded a clean re-review with no material findings. M3 closed and workflow routed to M4 implementation.
 
 ## Decision log
 
@@ -390,4 +391,4 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review M3 R2. Not ready for M4 implementation, verification, PR, or final closeout until M3 is re-reviewed and closed, then M4 implementation, code review, review-resolution if needed, explain-change, verification, and downstream gates complete.
+- Ready for M4 implementation. Not ready for verification, PR, or final closeout until M4 implementation, code review, review-resolution if needed, explain-change, verification, and downstream gates complete.
