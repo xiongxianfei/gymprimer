@@ -72,8 +72,9 @@ If this guide is silent for an artifact type and a stage skill has a safe portab
 - Current test spec: `specs/content-schema.test.md`
 - Current test spec review: `docs/changes/beginner-fitness-exercise-education-platform/reviews/test-spec-review-r2.md`
 - Current code review: `docs/changes/beginner-fitness-exercise-education-platform/reviews/code-review-m4-r2.md`
-- Current readiness: ready for `verify`
-- Next valid skill: `verify`
+- Current verification: `docs/changes/beginner-fitness-exercise-education-platform/verify-report.md`
+- Current readiness: branch-ready for `pr`
+- Next valid skill: `pr`
 
 ## Routing notes
 

@@ -5,7 +5,7 @@ milestone_state: closed
 last_reviewed_milestone: M4
 last_review: docs/changes/beginner-fitness-exercise-education-platform/reviews/code-review-m4-r2.md
 next_milestone: none
-next_stage: verify
+next_stage: pr
 validation:
   - command: python3 -m unittest discover -s tests
     result: pass
@@ -51,3 +51,7 @@ manual_proof:
     result: pass
     evidence: generated/manual-proof/MP5-developer-command-documentation-check.md
 ci: not-configured
+verify:
+  status: pass
+  evidence: docs/changes/beginner-fitness-exercise-education-platform/verify-report.md
+  branch_ready: true

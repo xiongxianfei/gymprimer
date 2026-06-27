@@ -118,7 +118,8 @@ Workflow completion claims require durable evidence: changed files, linked artif
 
 ## Current Assumptions And Gaps
 
-This repository currently has vision and governance artifacts but no implementation, specs, architecture docs, test framework, package configuration, CI workflows, or project map. Until those exist, agents MUST treat implementation requests as requiring upstream specification and validation setup rather than assuming a stack or workflow.
+This repository now has vision and governance artifacts, an approved content schema, architecture records, a project map, local validation tooling, repository-native content fixtures, generated validation artifacts, and Python `unittest` coverage for the content-schema foundation. It still has no frontend application stack, package manager, hosted CI workflow, deployment target, CMS integration, public release process, or production exercise library.
+
+Until those exist, agents MUST NOT assume a frontend framework, hosting provider, CI result, CMS workflow, package-manager dependency model, or release process. Implementation requests outside the reviewed content-schema foundation still require the appropriate upstream proposal, spec, architecture, plan, tests, review, and verification evidence.
 
 The README status text may lag behind vision decisions outside the managed vision front matter. Broad README maintenance requires explicit authorization unless paired with a requested README update.
-
