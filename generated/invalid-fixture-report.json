@@ -1,0 +1,31 @@
+{
+  "counts": {
+    "invalid_cards": 1,
+    "review_sensitive_changes": 0,
+    "valid_cards": 0,
+    "warnings": 0
+  },
+  "findings": [
+    {
+      "card_id": "fixture-bare-en",
+      "code": "locale_unknown",
+      "field": "locales.en",
+      "locale": "en",
+      "message": "Unknown v1 locale key."
+    },
+    {
+      "card_id": "fixture-bare-en",
+      "code": "required_locale_missing",
+      "field": "locales.en-US",
+      "message": "Public content requires the en-US locale branch."
+    }
+  ],
+  "privacy": {
+    "absolute_paths_redacted": true,
+    "pii_required": false,
+    "sensitive_data_allowed": false
+  },
+  "schema_version": "content-schema-v1",
+  "status": "fail",
+  "warnings": []
+}

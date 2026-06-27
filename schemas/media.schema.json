@@ -1,6 +1,13 @@
 {
-  "schema_version": "content-schema-v1",
+  "canonical_svg": {
+    "maximum_steps": 6,
+    "minimum_steps": 3,
+    "required_per_locale_text_field": "canonical_svg_text",
+    "source_root": "media/svg"
+  },
+  "description": "M2 media metadata contract summary for canonical SVG references.",
   "kind": "media",
-  "status": "m1-shell",
-  "description": "Placeholder media metadata schema shell. Canonical SVG and supplemental media checks are implemented in M2."
+  "schema_version": "content-schema-v1",
+  "status": "m2-contract",
+  "supplemental_media_source_of_truth": false
 }

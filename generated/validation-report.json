@@ -2,8 +2,8 @@
   "counts": {
     "invalid_cards": 0,
     "review_sensitive_changes": 0,
-    "valid_cards": 0,
-    "warnings": 1
+    "valid_cards": 1,
+    "warnings": 0
   },
   "findings": [],
   "privacy": {
@@ -13,10 +13,5 @@
   },
   "schema_version": "content-schema-v1",
   "status": "pass",
-  "warnings": [
-    {
-      "code": "no_cards_found",
-      "message": "No content card files were found under the source path."
-    }
-  ]
+  "warnings": []
 }

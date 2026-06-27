@@ -1,6 +1,11 @@
 {
-  "schema_version": "content-schema-v1",
+  "controlled_enum_source": "content/taxonomy/v1.json",
+  "description": "M2 taxonomy contract summary for v1 controlled values and stable taxonomy IDs.",
   "kind": "taxonomy",
-  "status": "m1-shell",
-  "description": "Placeholder taxonomy schema shell. Controlled enum validation is implemented in M2."
+  "locale_keys": [
+    "en-US",
+    "zh-Hans"
+  ],
+  "schema_version": "content-schema-v1",
+  "status": "m2-contract"
 }

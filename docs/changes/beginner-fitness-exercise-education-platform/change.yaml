@@ -1,11 +1,11 @@
 change_id: beginner-fitness-exercise-education-platform
 active_plan: docs/plans/2026-06-26-content-schema-foundation.md
-current_milestone: M1
-milestone_state: closed
+current_milestone: M2
+milestone_state: review-requested
 last_reviewed_milestone: M1
 last_review: docs/changes/beginner-fitness-exercise-education-platform/reviews/code-review-m1-r1.md
-next_milestone: M2
-next_stage: implement
+next_milestone: M3
+next_stage: code-review
 validation:
   - command: python3 -m unittest discover -s tests
     result: pass
@@ -13,10 +13,16 @@ validation:
   - command: python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json
     result: pass
     evidence: generated/validation-report.json
-  - command: python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" -- generated/validation-report.json
+  - command: python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid
+    result: pass
+    evidence: generated/invalid-fixture-report.json
+  - command: python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json
     result: pass
     evidence: generated/privacy-scan-report.json
 manual_proof:
+  - id: MP3
+    result: pass
+    evidence: generated/manual-proof/MP3-fixture-privacy-spot-check.md
   - id: MP5
     result: pass
     evidence: generated/manual-proof/MP5-developer-command-documentation-check.md

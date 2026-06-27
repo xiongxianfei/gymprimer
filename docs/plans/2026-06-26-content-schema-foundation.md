@@ -72,13 +72,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
 - Review status: plan-review-r2 approved; test-spec-review-r2 approved
-- Remaining in-scope implementation milestones: M2, M3, M4
-- Next stage: implement
+- Remaining in-scope implementation milestones: M3, M4
+- Next stage: code-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 is closed after clean code review, but M2-M4 have not started.
+- Reason final closeout is or is not ready: M1 is closed after clean code review, M2 is implemented and awaiting code review, and M3-M4 have not started.
 
 ## Milestones
 
@@ -132,7 +132,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 
 ### M2. Content, Taxonomy, Locale, Media, Licensing, and Safety Validation
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Implement card-shape validation for required localized fields, controlled enums, taxonomy references, locale migration rules, canonical SVG references, accessible text, licensing metadata, contribution provenance, and basic safety-language blockers.
 - Requirements: R1-R18, R30-R33, R37-R40, AC1-AC7, AC22-AC27, AC32-AC34
 - Files/components likely touched:
@@ -165,13 +165,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - Validation commands:
   - `python3 -m unittest discover -s tests`
   - `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`
-  - `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --expect-invalid`
+  - `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`
 - Expected observable result: Fixtures prove the validator accepts valid v1 card shape and rejects the spec-defined taxonomy, locale, media, safety, licensing, and provenance failures.
 - Commit message: `M2: validate card content contract`
 - Milestone closeout:
   - validation passed
   - progress updated
-  - decision log updated if needed
+  - decision log updated
   - validation notes updated
   - milestone committed
 - Risks:
@@ -286,7 +286,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 
 - `python3 -m unittest discover -s tests`: run all local validator and fixture tests once tests exist.
 - `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`: validate repository source content.
-- `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --expect-invalid`: prove invalid fixtures fail for expected reasons.
+- `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`: prove invalid fixtures fail for expected reasons.
 - `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json`: prove generated public output is gated by validation.
 - `diff -u generated/public-content.json /tmp/gymprimer-public-content.json`: prove deterministic generated output when run twice against the same input.
 - `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI|personal health" -- generated/`: check generated validation/public output for obvious forbidden private data leakage; exit `0` means the scan completed and no forbidden pattern was found.
@@ -325,6 +325,8 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M1 implementation started. Scope is limited to repository scaffold, schema notes, validator CLI/report contract, privacy scan helper, M1 tests, generated validation report, and change-local metadata/reasoning.
 - 2026-06-27: M1 implementation completed and moved to review-requested. Added repository scaffold, schema shells, `validate_content.py`, `privacy_scan.py`, M1 unit tests, generated validation reports, MP5 manual proof, change metadata, and durable change explanation.
 - 2026-06-27: `code-review-m1-r1` recorded a clean first-pass review with no material findings. M1 closed and workflow routed to M2 implementation.
+- 2026-06-27: M2 implementation started. Scope is limited to card-shape validation, v1 controlled enums, seed taxonomy, locale rules, canonical SVG checks, safety-language blockers, licensing/provenance blockers, fixtures, generated reports, and MP3 manual proof.
+- 2026-06-27: M2 implementation completed and moved to review-requested. Added the v1 taxonomy fixture, one reviewed example card, canonical SVG examples, M2 validator rules, content-contract tests, invalid fixture evidence, updated schema summaries, generated reports, and MP3 manual proof.
 
 ## Decision log
 
@@ -333,11 +335,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 | 2026-06-26 | Use JSON fixtures and Python standard-library validator for the first implementation slice. | The repository has no package manager or app stack, and the approved architecture defers implementation language to planning. This minimizes dependencies while proving the content contract. | CMS-first implementation; TypeScript package setup before UI requirements exist; YAML-first implementation requiring a dependency. |
 | 2026-06-26 | Split implementation into scaffold, content validation, lifecycle/review validation, and generated-output milestones. | Each slice is reviewable and maps to distinct spec/architecture risks. | One large validator milestone; starting with generated output before validation gates exist. |
 | 2026-06-27 | Resolve PR1 with a local `privacy_scan.py` wrapper instead of adding OSS scanners to the first slice. | PR1 is an exit-code contract problem, not a need for a broad privacy platform. The wrapper gives stable negative-match semantics now while preserving a path to Semgrep, Gitleaks, or Presidio later. | Plain `rg` commands; immediate Semgrep/Gitleaks/Presidio adoption; vendoring scanner source code. |
+| 2026-06-27 | Keep M2 validation JSON-only and add CLI aliases for recorded command shapes. | The approved plan and test spec both describe local Python validation, but existing records used both `--out` and `--report`, and both `--source` and `--fixtures`. Supporting aliases keeps the validation command contract executable without introducing dependencies. | Rewriting approved artifacts around one spelling only; adding a package manager or external schema library in M2. |
 
 ## Surprises and discoveries
 
 - No implementation, test framework, package manifest, CI, source fixtures, or generated-output convention exists yet.
 - The current plan can proceed without choosing a frontend framework or hosting provider.
+- M2 safety-language validation is intentionally a narrow string blocker for diagnosis, treatment, cure, and rehabilitation claims. Deeper clinical routing remains M3 or a later safety/governance artifact, not M2.
 
 ## Validation notes
 
@@ -348,6 +352,12 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M1 validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
 - 2026-06-27: M1 validation passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" -- generated/validation-report.json`.
 - 2026-06-27: MP5 manual proof recorded at `generated/manual-proof/MP5-developer-command-documentation-check.md`.
+- 2026-06-27: M2 red test run: `python3 -m unittest discover -s tests` failed because the M1 validator accepted invalid M2 card fixtures and did not support `--expect-invalid`.
+- 2026-06-27: M2 validation passed: `python3 -m unittest discover -s tests`.
+- 2026-06-27: M2 validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
+- 2026-06-27: M2 validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`.
+- 2026-06-27: M2 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
+- 2026-06-27: MP3 manual proof recorded at `generated/manual-proof/MP3-fixture-privacy-spot-check.md`.
 
 ## Outcome and retrospective
 
@@ -356,4 +366,4 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implementation of M2. Not ready for verification, PR, or final closeout until M2-M4 implementation, code reviews, review-resolution if needed, explain-change, verification, and downstream gates complete.
+- Ready for code-review of M2. Not ready for M3 implementation, verification, PR, or final closeout until M2 code review closes and M3-M4 implementation, code reviews, review-resolution if needed, explain-change, verification, and downstream gates complete.
