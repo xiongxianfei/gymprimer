@@ -11,3 +11,4 @@
 | 2026-06-27 | [plan-review-r2](reviews/plan-review-r2.md) | `docs/plans/2026-06-26-content-schema-foundation.md` | approved | none | [review-resolution.md](review-resolution.md) |
 | 2026-06-27 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | `specs/content-schema.test.md` | changes-requested | TSR1, TSR2 | [review-resolution.md](review-resolution.md) |
 | 2026-06-27 | [test-spec-review-r2](reviews/test-spec-review-r2.md) | `specs/content-schema.test.md` | approved | none | [review-resolution.md](review-resolution.md) |
+| 2026-06-27 | [code-review-m1-r1](reviews/code-review-m1-r1.md) | M1 implementation commit `bf32ef7` | clean-with-notes | none | not-required |

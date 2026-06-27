@@ -71,20 +71,20 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 
 ## Current Handoff Summary
 
-- Current milestone: M1
-- Current milestone state: review-requested
-- Last reviewed milestone: none
+- Current milestone: M2
+- Current milestone state: planned
+- Last reviewed milestone: M1
 - Review status: plan-review-r2 approved; test-spec-review-r2 approved
-- Remaining in-scope implementation milestones: M1, M2, M3, M4
-- Next stage: code-review
+- Remaining in-scope implementation milestones: M2, M3, M4
+- Next stage: implement
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 implementation is review-requested, but code review has not completed and M2-M4 have not started.
+- Reason final closeout is or is not ready: M1 is closed after clean code review, but M2-M4 have not started.
 
 ## Milestones
 
 ### M1. Repository Scaffold, Schema Shells, and Validator Harness
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Create the repository-native source layout and a runnable validation harness with schema-version awareness, deterministic report shape, fixture discovery, and privacy-safe error output.
 - Requirements: R1, R30, R31, R38, R40, AC33, AC34
 - Files/components likely touched:
@@ -324,6 +324,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: `test-spec-review-r2` approved the proof map and allowed implementation handoff for M1.
 - 2026-06-27: M1 implementation started. Scope is limited to repository scaffold, schema notes, validator CLI/report contract, privacy scan helper, M1 tests, generated validation report, and change-local metadata/reasoning.
 - 2026-06-27: M1 implementation completed and moved to review-requested. Added repository scaffold, schema shells, `validate_content.py`, `privacy_scan.py`, M1 unit tests, generated validation reports, MP5 manual proof, change metadata, and durable change explanation.
+- 2026-06-27: `code-review-m1-r1` recorded a clean first-pass review with no material findings. M1 closed and workflow routed to M2 implementation.
 
 ## Decision log
 
@@ -355,4 +356,4 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M1. Not ready for verification, PR, or final closeout until code review, review-resolution if needed, explain-change, verification, and downstream gates complete.
+- Ready for implementation of M2. Not ready for verification, PR, or final closeout until M2-M4 implementation, code reviews, review-resolution if needed, explain-change, verification, and downstream gates complete.
