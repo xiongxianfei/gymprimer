@@ -5,7 +5,7 @@ milestone_state: closed
 last_reviewed_milestone: M4
 last_review: docs/changes/beginner-fitness-exercise-education-platform/reviews/code-review-m4-r2.md
 next_milestone: none
-next_stage: explain-change
+next_stage: verify
 validation:
   - command: python3 -m unittest discover -s tests
     result: pass

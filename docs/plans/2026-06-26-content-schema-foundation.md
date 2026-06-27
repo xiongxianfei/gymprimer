@@ -76,9 +76,9 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - Last reviewed milestone: M4
 - Review status: code-review-m4-r2 clean-with-notes
 - Remaining in-scope implementation milestones: none
-- Next stage: explain-change
+- Next stage: verify
 - Final closeout readiness: ready for final closeout sequence
-- Reason final closeout is or is not ready: M1-M4 are closed after code review. Final closeout still needs explain-change, verification, and downstream PR handoff before branch or PR readiness can be claimed.
+- Reason final closeout is or is not ready: M1-M4 are closed after code review and the change rationale has been refreshed. Final closeout still needs verification and downstream PR handoff before branch or PR readiness can be claimed.
 
 ## Milestones
 
@@ -407,4 +407,4 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for `explain-change`. Not ready for verification or PR until final closeout explanation and verification are complete.
+- Ready for `verify`. Not ready for PR until final verification is complete.

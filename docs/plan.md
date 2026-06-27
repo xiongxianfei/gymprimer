@@ -5,7 +5,7 @@
 - [Content Schema Foundation](plans/2026-06-26-content-schema-foundation.md)
   - Status: draft
   - Current milestone: M4
-  - Next stage: explain-change
+  - Next stage: verify
   - Active context: implements the approved content schema and repository-native reviewed-content architecture.
 
 ## Blocked
