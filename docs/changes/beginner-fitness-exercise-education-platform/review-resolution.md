@@ -161,7 +161,7 @@ Evidence:
 
 ## Code-review M4 R1 resolution
 
-Status: ready-for-code-review-m4-r2.
+Status: resolved-in-code-review-m4-r2.
 
 ### CR-M4-1 - Generated-output exclusion tests do not prove all M4 publication-boundary cases
 
@@ -198,4 +198,4 @@ Validation passed:
 - `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`
 - `python3 tools/validation/privacy_scan.py --pattern 'private|/home/|secret|PHI|personal health' -- generated/`
 
-Status: ready for code-review M4 R2.
+Status: resolved in code-review M4 R2 with no material findings. M4 is closed and no implementation milestones remain open.

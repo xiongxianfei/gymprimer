@@ -72,13 +72,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: review-requested
+- Current milestone state: closed
 - Last reviewed milestone: M4
-- Review status: CR-M4-1 addressed; awaiting code-review-m4-r2
-- Remaining in-scope implementation milestones: M4 review-resolution re-review
-- Next stage: code-review
-- Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1-M3 are closed after code review, and CR-M4-1 has been implemented with refreshed evidence. M4 still needs code-review M4 R2 before final closeout can begin.
+- Review status: code-review-m4-r2 clean-with-notes
+- Remaining in-scope implementation milestones: none
+- Next stage: explain-change
+- Final closeout readiness: ready for final closeout sequence
+- Reason final closeout is or is not ready: M1-M4 are closed after code review. Final closeout still needs explain-change, verification, and downstream PR handoff before branch or PR readiness can be claimed.
 
 ## Milestones
 
@@ -182,7 +182,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 
 ### M3. Lifecycle, Review Routing, Publication Eligibility, and Audit Validation
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Implement lifecycle state validation, allowed transitions, review-sensitive edit handling, review-routing matrix checks, publication eligibility, audit-event schema checks, and digest-scoped approval behavior.
 - Requirements: R19-R29, R30-R31, R38-R40, AC8-AC21, AC28-AC31, AC33-AC34
 - Files/components likely touched:
@@ -338,6 +338,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M4 implementation completed and moved to review-requested. Added deterministic public content package emission, M4 generated-output/performance tests, generated public-content evidence, local validation docs, and MP2/MP4 manual proofs.
 - 2026-06-27: `code-review-m4-r1` requested changes for CR-M4-1. M4 remained open because generated-output tests did not independently prove unlicensed/internal-only, review-expired, and blocked-safety exclusion cases.
 - 2026-06-27: Addressed CR-M4-1 by adding a generated-output boundary matrix test with one public-ready control card and isolated unpublished, hidden, superseded, internal-only license, review-expired, and blocked-rehab variants. M4 moved back to review-requested for code-review M4 R2.
+- 2026-06-27: `code-review-m4-r2` recorded a clean re-review with no material findings. M4 closed and all in-scope implementation milestones are complete.
 
 ## Decision log
 
@@ -406,4 +407,4 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review M4 R2. Not ready for verification, PR, or final closeout until M4 code review closes, then explain-change, verification, and downstream gates complete.
+- Ready for `explain-change`. Not ready for verification or PR until final closeout explanation and verification are complete.
