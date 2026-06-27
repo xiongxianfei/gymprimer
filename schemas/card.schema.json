@@ -1,0 +1,6 @@
+{
+  "schema_version": "content-schema-v1",
+  "kind": "card",
+  "status": "m1-shell",
+  "description": "Placeholder card schema shell. Detailed card fields are implemented in M2."
+}

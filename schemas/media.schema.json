@@ -1,0 +1,6 @@
+{
+  "schema_version": "content-schema-v1",
+  "kind": "media",
+  "status": "m1-shell",
+  "description": "Placeholder media metadata schema shell. Canonical SVG and supplemental media checks are implemented in M2."
+}

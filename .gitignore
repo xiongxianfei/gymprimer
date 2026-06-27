@@ -22,3 +22,7 @@ Thumbs.db
 /.cursor/
 /windsurf/
 /.gemini/
+
+# Python
+__pycache__/
+*.py[cod]

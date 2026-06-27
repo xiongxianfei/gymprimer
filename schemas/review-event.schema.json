@@ -1,0 +1,6 @@
+{
+  "schema_version": "content-schema-v1",
+  "kind": "review_event",
+  "status": "m1-shell",
+  "description": "Placeholder review-event schema shell. Review routing and digest-scoped approvals are implemented in M3."
+}

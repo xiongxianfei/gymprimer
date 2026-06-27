@@ -1,0 +1,6 @@
+{
+  "schema_version": "content-schema-v1",
+  "kind": "taxonomy",
+  "status": "m1-shell",
+  "description": "Placeholder taxonomy schema shell. Controlled enum validation is implemented in M2."
+}

@@ -2,9 +2,9 @@
 
 ## Status
 
-draft
+accepted
 
-This proposal records a product-direction recommendation for review. It is not accepted, implementation-ready, medically validated, or ready for public release.
+This proposal records an accepted product direction. It is not implementation-ready, medically validated, or ready for public release.
 
 ## Problem
 
@@ -243,6 +243,35 @@ Rollback options:
 - Add warning banners to content categories under review.
 - Pause public onboarding if safety incidents exceed the threshold defined in a later safety spec.
 
+## Legal, Licensing, and Disclaimers
+
+This proposal records product-direction intent, not legal advice. Final public-beta language should be reviewed by qualified counsel.
+
+Immediate zero-cost posture:
+
+- Put a plain-language disclaimer in every exercise-card footer and the site footer: "GymPrimer is educational content, not medical advice. Talk to a qualified professional before starting a new exercise program; stop and seek qualified help for sharp, radiating, worsening, or unusual symptoms."
+- Keep the existing Apache 2.0 `LICENSE` for code.
+- Add `LICENSE-content.md` before accepting content contributions, documenting that educational content is licensed under CC BY 4.0 with attributed contribution.
+- Adopt DCO sign-offs for contributions.
+- Do not add a CLA unless a future proposal identifies a concrete relicensing or contributor-rights need.
+
+Before public beta:
+
+- Draft Terms of Use and Privacy Policy.
+- Prefer collecting no personally identifiable information in v1 unless a spec explicitly justifies it.
+- Hire a health-tech or consumer-app attorney for a focused review of disclaimer wording, terms, privacy, and contributor license posture.
+- Create an incident-response one-pager for reports that a card caused injury, contains factual errors, or has unsafe guidance. The maintainer team should triage within 48 hours, decide whether to hide, revert, or fix the content, and run a postmortem for material incidents.
+
+After public beta has measurable reach:
+
+- Consider USPTO wordmark registration for "GymPrimer" to reduce brand-squatting risk.
+
+Deliberately deferred:
+
+- HIPAA analysis beyond a light counsel check, because the intended v1 is educational content and should not collect health records.
+- FDA software-as-medical-device review unless future functionality moves beyond education into diagnosis, treatment, or individualized medical recommendations.
+- Professional liability insurance unless counsel recommends it based on actual product scope, review process, or distribution model.
+
 ## Risks and Mitigations
 
 | Risk | Impact | Mitigation |
@@ -254,6 +283,8 @@ Rollback options:
 | Too much anatomy jargon | Medium | Plain language, glossary, everyday terms beside anatomy names |
 | Accessibility gaps | Medium | WCAG 2.2 AA-oriented checks, text alternatives, keyboard support |
 | Licensing or media mismatch | Medium | Apache-compatible source posture, SVG canonical media, explicit licensing for supplemental assets |
+| Contributor-license ambiguity | Medium | Separate code and content licensing, `LICENSE-content.md`, DCO sign-offs, and counsel review before public beta |
+| Legal or disclaimer gaps | High | Plain-language disclaimer immediately; Terms of Use, Privacy Policy, incident response, and attorney review before public beta |
 | Locale migration debt | Medium | Locale-aware schema from day one even when launch cards are English |
 | Review bottlenecks | Medium | Tiered review model and safety-policy review rather than clinician review of every low-risk setup detail |
 | Scope creep into programming | Medium | Training principles limited to literacy; workout plans remain out of scope |
@@ -271,6 +302,8 @@ Rollback options:
 | Locale-aware English-first schema | same-slice dependency | Prevents Chinese support from becoming a migration later |
 | Tiered expert review workflow | same-slice dependency | Required for trustworthy publication |
 | Safety and escalation rules | same-slice dependency | Required before public use |
+| Disclaimer, terms, privacy, and incident-response posture | same-slice dependency | Required before public beta because the product is health-adjacent |
+| Code/content licensing and DCO posture | same-slice dependency | Required before accepting public content contributions |
 | Accessibility and plain-language standards | same-slice dependency | Required for beginner comprehension and inclusive access |
 | Beginner training-principles literacy | first-slice candidate | Useful only where it supports exercise literacy without prescribing plans |
 | Search and equipment lookup | first-slice candidate | Needed for in-gym discovery, but exact UX belongs in spec |
@@ -291,7 +324,7 @@ Rollback options:
 - What minimum validation tooling should exist before the first content cards are accepted?
 - Who owns maintainer and security contact addresses before public contribution begins?
 - Which exact 40-60 exercises are in the first reviewed pilot?
-- What legal review or disclaimer process is needed before public beta?
+- Who will own the legal-review relationship and budget approval before public beta?
 
 These questions do not block proposal review. They should be resolved in specs, architecture, and review-governance artifacts before implementation.
 
@@ -304,22 +337,26 @@ These questions do not block proposal review. They should be resolved in specs, 
 | 2026-06-26 | Prioritize 40-60 reviewed exercises over a large database | Improves quality, comprehension testing, and review cadence | Hundreds of shallow entries |
 | 2026-06-26 | Use reviewed text and SVG step cards as source of truth | Matches current vision and keeps media diffable, accessible, and language-neutral | Video-first launch |
 | 2026-06-26 | Keep training principles literacy bounded | Helps beginners interpret exercise cards without turning GymPrimer into a workout planner | Full training program curriculum |
+| 2026-06-26 | Stage legal, licensing, and disclaimer work | Keeps early contribution posture clear while reserving counsel review for public beta | CLA-first approach; public beta without terms/privacy review |
 
 ## Next Artifacts
 
 1. Proposal review for this artifact.
 2. Content and schema spec covering exercise cards, locale-aware fields, taxonomy, review metadata, SVG media, and validation rules.
 3. Safety and governance spec covering disclaimers, stop rules, excluded use cases, tiered review, escalation language, and incident thresholds.
-4. UX spec covering exercise pages, search, equipment lookup, glossary, comprehension checks, and accessibility expectations.
-5. Architecture package after the specs stabilize, covering content storage, validation pipeline, review workflow, frontend, analytics, media boundaries, and optional AI boundary.
-6. Test specification mapping schema, content validation, accessibility, safety refusal, comprehension, and review-currency checks.
+4. Contribution and licensing spec covering Apache 2.0 code licensing, CC BY 4.0 content licensing, DCO sign-offs, content attribution, and no-CLA rationale.
+5. Public-beta legal operations artifact covering Terms of Use, Privacy Policy, attorney review, and incident response.
+6. UX spec covering exercise pages, search, equipment lookup, glossary, comprehension checks, and accessibility expectations.
+7. Architecture package after the specs stabilize, covering content storage, validation pipeline, review workflow, frontend, analytics, media boundaries, licensing boundaries, and optional AI boundary.
+8. Test specification mapping schema, content validation, accessibility, safety refusal, comprehension, review-currency, licensing, and incident-response checks.
 
 ## Follow-on Artifacts
 
-None yet
+- Proposal review: `docs/changes/beginner-fitness-exercise-education-platform/reviews/proposal-review-r1.md`
+- Content and schema spec: `specs/content-schema.md`
 
 ## Readiness
 
-This proposal is ready for proposal review as a draft product-direction proposal.
+This proposal is accepted as product direction after clean proposal review.
 
-It is not ready for spec, architecture, planning, implementation, public release, or medical/legal reliance. Acceptance should come only after proposal review resolves vision-fit concerns around bounded training-principles content, scope budget, architecture direction, safety governance, and first-slice boundaries.
+It is ready to feed downstream specs. It is not ready for architecture, planning, implementation, public release, or medical/legal reliance until the required specs are written and reviewed.

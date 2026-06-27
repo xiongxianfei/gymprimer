@@ -1,0 +1,6 @@
+{
+  "schema_version": "content-schema-v1",
+  "kind": "audit_event",
+  "status": "m1-shell",
+  "description": "Placeholder audit-event schema shell. Lifecycle audit checks are implemented in M3."
+}

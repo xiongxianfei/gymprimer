@@ -1,0 +1,25 @@
+C4Container
+  title GymPrimer Content Platform - Container View
+
+  Person(author, "Author or contributor")
+  Person(reviewer, "Expert reviewer")
+  Person(maintainer, "Maintainer")
+
+  System_Boundary(repo, "GymPrimer repository") {
+    Container(source, "Source content package", "YAML/JSON/SVG source files", "Cards, taxonomy, policies, media metadata, canonical SVGs, and audit events.")
+    Container(schemas, "Schema package", "Machine-readable schemas", "Card, taxonomy, media, review event, audit event, and validation report contracts.")
+    Container(validator, "Validation and publication gate", "CLI/tooling", "Checks schema, taxonomy, locales, lifecycle, review routing, licensing, safety, media, and migration rules.")
+    Container(generated, "Generated content package", "Generated structured data", "Publication-ready content for future UI/search layers.")
+    Container(docs, "Lifecycle artifacts", "Markdown", "Vision, proposal, specs, architecture, ADRs, reviews, and workflow evidence.")
+  }
+
+  System_Ext(future_ui, "Future website/app", "Consumes generated reviewed content.")
+
+  Rel(author, source, "Edits")
+  Rel(reviewer, source, "Approves digest-scoped review events")
+  Rel(maintainer, validator, "Runs publication gate")
+  Rel(source, validator, "Provides content, taxonomy, policy, audit, and media metadata")
+  Rel(schemas, validator, "Defines validation contracts")
+  Rel(validator, generated, "Emits only after all gates pass")
+  Rel(generated, future_ui, "Feeds")
+  Rel(docs, validator, "Defines governing requirements")
