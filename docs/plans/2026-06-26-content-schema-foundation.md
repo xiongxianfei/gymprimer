@@ -72,13 +72,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: review-requested
+- Current milestone state: resolution-needed
 - Last reviewed milestone: M1
-- Review status: plan-review-r2 approved; test-spec-review-r2 approved
-- Remaining in-scope implementation milestones: M3, M4
-- Next stage: code-review
+- Review status: code-review-m2-r1 changes-requested
+- Remaining in-scope implementation milestones: M2, M3, M4
+- Next stage: review-resolution
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 is closed after clean code review, M2 is implemented and awaiting code review, and M3-M4 have not started.
+- Reason final closeout is or is not ready: M2 has unresolved code-review findings, and M3-M4 have not started.
 
 ## Milestones
 
@@ -132,7 +132,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 
 ### M2. Content, Taxonomy, Locale, Media, Licensing, and Safety Validation
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: Implement card-shape validation for required localized fields, controlled enums, taxonomy references, locale migration rules, canonical SVG references, accessible text, licensing metadata, contribution provenance, and basic safety-language blockers.
 - Requirements: R1-R18, R30-R33, R37-R40, AC1-AC7, AC22-AC27, AC32-AC34
 - Files/components likely touched:
@@ -327,6 +327,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: `code-review-m1-r1` recorded a clean first-pass review with no material findings. M1 closed and workflow routed to M2 implementation.
 - 2026-06-27: M2 implementation started. Scope is limited to card-shape validation, v1 controlled enums, seed taxonomy, locale rules, canonical SVG checks, safety-language blockers, licensing/provenance blockers, fixtures, generated reports, and MP3 manual proof.
 - 2026-06-27: M2 implementation completed and moved to review-requested. Added the v1 taxonomy fixture, one reviewed example card, canonical SVG examples, M2 validator rules, content-contract tests, invalid fixture evidence, updated schema summaries, generated reports, and MP3 manual proof.
+- 2026-06-27: `code-review-m2-r1` requested changes for CR-M2-1 and CR-M2-2. M2 remains open and routes to review-resolution before any M3 implementation.
 
 ## Decision log
 
@@ -366,4 +367,4 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M2. Not ready for M3 implementation, verification, PR, or final closeout until M2 code review closes and M3-M4 implementation, code reviews, review-resolution if needed, explain-change, verification, and downstream gates complete.
+- Ready for review-resolution of M2 findings CR-M2-1 and CR-M2-2. Not ready for M3 implementation, verification, PR, or final closeout until M2 review-resolution and re-review close and M3-M4 implementation, code reviews, review-resolution if needed, explain-change, verification, and downstream gates complete.

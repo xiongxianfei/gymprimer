@@ -2,7 +2,7 @@
 
 ## Status
 
-resolved
+open
 
 ## Findings
 
@@ -15,6 +15,8 @@ resolved
 | PR1 | [plan-review-r1](reviews/plan-review-r1.md) | major | Make negative-match privacy scan validation commands executable with correct pass/fail semantics. | resolved-in-plan-review-r2 |
 | TSR1 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | major | Add explicit command classification, owner, milestone, failure behavior, and test-to-milestone mapping. | resolved-in-test-spec-review-r2 |
 | TSR2 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | major | Replace free-form manual QA bullets with stable manual proof records including evidence, environment, pass/fail conditions, rationale, and owner. | resolved-in-test-spec-review-r2 |
+| CR-M2-1 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Reject public cards using a media asset with `license_kind = unlicensed_internal_only` and prove the media-asset case. | pending |
+| CR-M2-2 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Validate supplemental-media metadata and reject supplemental media that overrides, replaces, or contradicts canonical text/SVG steps. | pending |
 
 ## Resolution notes
 
@@ -68,3 +70,19 @@ Changes:
 Status: resolved-in-test-spec-review-r2.
 
 `test-spec-review-r2` approved the revised test spec with no material findings. Implementation handoff is allowed for M1 under the approved plan. This does not claim any implementation, tests, CI, verification, PR readiness, or final closeout has completed.
+
+## Code-review M2 R1 resolution
+
+Status: pending.
+
+### CR-M2-1 - Media asset public-license gate
+
+Required outcome: Public cards must reject any media asset, including supplemental media, whose `license_kind` is `unlicensed_internal_only`, and tests must prove the media-asset case.
+
+Safe resolution path: Add supplemental/media asset validation for `media_kind`, `license_kind`, and public-publication rights; add a regression where the card-level license is publishable but supplemental media is internal-only.
+
+### CR-M2-2 - Supplemental-media source-of-truth boundary
+
+Required outcome: Supplemental media must be optional, metadata-complete when present, and unable to override, replace, or contradict canonical reviewed text/SVG steps.
+
+Safe resolution path: Add a minimal supplemental-media contract in the validator and regression tests for missing metadata and explicit replace/override language.
