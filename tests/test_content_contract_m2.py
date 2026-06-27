@@ -109,6 +109,16 @@ def zh_hans_locale() -> dict:
     }
 
 
+def valid_supplemental_media() -> dict:
+    return {
+        "media_kind": "video",
+        "license_kind": "cc_by",
+        "authoritative_status": "supplemental",
+        "title": "Lat pulldown side-view demonstration",
+        "caption": "Supplemental demonstration of the reviewed setup and movement phases.",
+    }
+
+
 class ContentContractM2Tests(unittest.TestCase):
     def run_validator(self, source: Path, *extra: str) -> tuple[subprocess.CompletedProcess[str], dict]:
         report_dir = Path(tempfile.mkdtemp(prefix="gymprimer-validator-test-"))
@@ -266,6 +276,101 @@ class ContentContractM2Tests(unittest.TestCase):
             lambda card: card["license"].__setitem__("license_kind", "unlicensed_internal_only"),
             "license_not_public",
         )
+
+    def test_public_card_rejects_internal_only_supplemental_media_asset(self):
+        self.assert_invalid(
+            lambda card: card.__setitem__(
+                "supplemental_media",
+                [
+                    {
+                        **valid_supplemental_media(),
+                        "license_kind": "unlicensed_internal_only",
+                    }
+                ],
+            ),
+            "license_not_public",
+        )
+
+    def test_supplemental_media_missing_media_kind_is_rejected(self):
+        self.assert_invalid(
+            lambda card: card.__setitem__(
+                "supplemental_media",
+                [{key: value for key, value in valid_supplemental_media().items() if key != "media_kind"}],
+            ),
+            "supplemental_media_missing_media_kind",
+        )
+
+    def test_supplemental_media_missing_license_kind_is_rejected(self):
+        self.assert_invalid(
+            lambda card: card.__setitem__(
+                "supplemental_media",
+                [{key: value for key, value in valid_supplemental_media().items() if key != "license_kind"}],
+            ),
+            "supplemental_media_missing_license_kind",
+        )
+
+    def test_supplemental_media_unknown_media_kind_is_rejected(self):
+        self.assert_invalid(
+            lambda card: card.__setitem__(
+                "supplemental_media",
+                [{**valid_supplemental_media(), "media_kind": "hologram"}],
+            ),
+            "unknown_media_kind",
+        )
+
+    def test_supplemental_media_unknown_license_kind_is_rejected(self):
+        self.assert_invalid(
+            lambda card: card.__setitem__(
+                "supplemental_media",
+                [{**valid_supplemental_media(), "license_kind": "cc_by_4_0"}],
+            ),
+            "unknown_license_kind",
+        )
+
+    def test_supplemental_media_source_of_truth_claim_is_rejected(self):
+        self.assert_invalid(
+            lambda card: card.__setitem__(
+                "supplemental_media",
+                [{**valid_supplemental_media(), "authoritative_status": "canonical"}],
+            ),
+            "supplemental_media_not_authoritative",
+        )
+
+    def test_supplemental_media_boolean_source_of_truth_claim_is_rejected(self):
+        self.assert_invalid(
+            lambda card: card.__setitem__(
+                "supplemental_media",
+                [{**valid_supplemental_media(), "is_source_of_truth": True}],
+            ),
+            "supplemental_media_not_authoritative",
+        )
+
+    def test_supplemental_media_override_language_is_rejected(self):
+        self.assert_invalid(
+            lambda card: card.__setitem__(
+                "supplemental_media",
+                [
+                    {
+                        **valid_supplemental_media(),
+                        "caption": "This video replaces the canonical SVG steps.",
+                    }
+                ],
+            ),
+            "supplemental_media_overrides_canonical_steps",
+        )
+
+    def test_valid_supplemental_media_is_allowed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp)
+            card = valid_card()
+            card["supplemental_media"] = [valid_supplemental_media()]
+            self.write_card(source, card)
+
+            result, report = self.run_validator(source)
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(report["status"], "pass")
+            self.assertEqual(report["counts"]["valid_cards"], 1)
 
     def test_user_submitted_unreviewed_is_rejected(self):
         self.assert_invalid(

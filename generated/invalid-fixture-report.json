@@ -1,6 +1,6 @@
 {
   "counts": {
-    "invalid_cards": 1,
+    "invalid_cards": 2,
     "review_sensitive_changes": 0,
     "valid_cards": 0,
     "warnings": 0
@@ -18,6 +18,24 @@
       "code": "required_locale_missing",
       "field": "locales.en-US",
       "message": "Public content requires the en-US locale branch."
+    },
+    {
+      "card_id": "fixture-supplemental-media",
+      "code": "license_not_public",
+      "field": "supplemental_media[0].license_kind",
+      "message": "Public cards cannot reference supplemental media with internal-only rights."
+    },
+    {
+      "card_id": "fixture-supplemental-media",
+      "code": "supplemental_media_missing_authority",
+      "field": "supplemental_media[0].authoritative_status",
+      "message": "Supplemental media must explicitly be marked as supplemental."
+    },
+    {
+      "card_id": "fixture-supplemental-media",
+      "code": "supplemental_media_overrides_canonical_steps",
+      "field": "supplemental_media[0].caption",
+      "message": "Supplemental media must not claim to replace, override, contradict, or supersede canonical reviewed steps."
     }
   ],
   "privacy": {

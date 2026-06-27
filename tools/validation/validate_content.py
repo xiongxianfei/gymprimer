@@ -159,6 +159,27 @@ PROHIBITED_PERSONALIZATION_FIELDS = {
     "rehab_protocol",
 }
 
+SUPPLEMENTAL_MEDIA_COPY_FIELDS = {
+    "title",
+    "label",
+    "caption",
+    "description",
+    "instructional_copy",
+    "notes",
+    "transcript_summary",
+}
+
+SUPPLEMENTAL_MEDIA_AUTHORITY_PATTERN = re.compile(
+    r"\b(replaces?|overrides?|supersedes?|contradicts?)\b"
+    r"|\bsource of truth\b"
+    r"|\bauthoritative version\b"
+    r"|\bignore the canonical\b"
+    r"|\binstead of the canonical\b"
+    r"|\bfollow this instead\b"
+    r"|\bdo this instead\b",
+    re.IGNORECASE,
+)
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Validate GymPrimer source content.")
@@ -401,6 +422,143 @@ def validate_locale(
         )
 
 
+def validate_supplemental_media(
+    card: dict[str, Any],
+    findings: list[dict[str, str]],
+    taxonomy: dict[str, set[str]],
+    card_id: str,
+) -> None:
+    media_items = card.get("supplemental_media", [])
+    if media_items is None:
+        return
+    if not isinstance(media_items, list):
+        findings.append(
+            finding(
+                "supplemental_media_not_list",
+                card_id,
+                "supplemental_media",
+                "Supplemental media must be a list when present.",
+            )
+        )
+        return
+
+    for index, item in enumerate(media_items):
+        path = f"supplemental_media[{index}]"
+        if not isinstance(item, dict):
+            findings.append(
+                finding(
+                    "supplemental_media_item_not_object",
+                    card_id,
+                    path,
+                    "Each supplemental media item must be an object.",
+                )
+            )
+            continue
+
+        media_kind = item.get("media_kind")
+        if not is_nonempty(media_kind):
+            findings.append(
+                finding(
+                    "supplemental_media_missing_media_kind",
+                    card_id,
+                    f"{path}.media_kind",
+                    "Supplemental media requires media_kind.",
+                )
+            )
+        elif not isinstance(media_kind, str) or media_kind not in taxonomy.get("media_kind", set()):
+            findings.append(
+                finding(
+                    "unknown_media_kind",
+                    card_id,
+                    f"{path}.media_kind",
+                    "Supplemental media uses an unknown media_kind.",
+                )
+            )
+
+        license_kind = item.get("license_kind")
+        if not is_nonempty(license_kind):
+            findings.append(
+                finding(
+                    "supplemental_media_missing_license_kind",
+                    card_id,
+                    f"{path}.license_kind",
+                    "Supplemental media requires license_kind.",
+                )
+            )
+        elif not isinstance(license_kind, str) or license_kind not in taxonomy.get("license_kind", set()):
+            findings.append(
+                finding(
+                    "unknown_license_kind",
+                    card_id,
+                    f"{path}.license_kind",
+                    "Supplemental media uses an unknown license_kind.",
+                )
+            )
+        elif is_public(card) and license_kind == "unlicensed_internal_only":
+            findings.append(
+                finding(
+                    "license_not_public",
+                    card_id,
+                    f"{path}.license_kind",
+                    "Public cards cannot reference supplemental media with internal-only rights.",
+                )
+            )
+
+        if not is_nonempty(item.get("title")) and not is_nonempty(item.get("label")):
+            findings.append(
+                finding(
+                    "supplemental_media_missing_label",
+                    card_id,
+                    path,
+                    "Supplemental media requires a title or label.",
+                )
+            )
+
+        authoritative_status = item.get("authoritative_status")
+        if authoritative_status is None:
+            findings.append(
+                finding(
+                    "supplemental_media_missing_authority",
+                    card_id,
+                    f"{path}.authoritative_status",
+                    "Supplemental media must explicitly be marked as supplemental.",
+                )
+            )
+        elif authoritative_status != "supplemental":
+            findings.append(
+                finding(
+                    "supplemental_media_not_authoritative",
+                    card_id,
+                    f"{path}.authoritative_status",
+                    "Supplemental media must not be canonical or source-of-truth media.",
+                )
+            )
+
+        if item.get("is_source_of_truth") is True:
+            findings.append(
+                finding(
+                    "supplemental_media_not_authoritative",
+                    card_id,
+                    f"{path}.is_source_of_truth",
+                    "Supplemental media must not claim source-of-truth status.",
+                )
+            )
+
+        for field_name in sorted(SUPPLEMENTAL_MEDIA_COPY_FIELDS):
+            value = item.get(field_name)
+            if not isinstance(value, str):
+                continue
+            if SUPPLEMENTAL_MEDIA_AUTHORITY_PATTERN.search(value):
+                findings.append(
+                    finding(
+                        "supplemental_media_overrides_canonical_steps",
+                        card_id,
+                        f"{path}.{field_name}",
+                        "Supplemental media must not claim to replace, override, contradict, or supersede canonical reviewed steps.",
+                    )
+                )
+
+
 def validate_card(card: dict[str, Any], taxonomy: dict[str, set[str]], media: Path) -> list[dict[str, str]]:
     card_id = str(card.get("card_id") or "unknown-card")
     findings: list[dict[str, str]] = []
@@ -495,6 +653,8 @@ def validate_card(card: dict[str, Any], taxonomy: dict[str, set[str]], media: Pa
                         "Canonical SVG reference is missing from media/svg.",
                     )
                 )
+
+    validate_supplemental_media(card, findings, taxonomy, card_id)
 
     license_info = card.get("license")
     if not isinstance(license_info, dict):

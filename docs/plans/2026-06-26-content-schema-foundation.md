@@ -72,13 +72,13 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: resolution-needed
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
-- Review status: code-review-m2-r1 changes-requested
+- Review status: code-review-m2-r1 findings addressed; awaiting M2 R2 review
 - Remaining in-scope implementation milestones: M2, M3, M4
-- Next stage: review-resolution
+- Next stage: code-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M2 has unresolved code-review findings, and M3-M4 have not started.
+- Reason final closeout is or is not ready: M2 findings are addressed but awaiting re-review, and M3-M4 have not started.
 
 ## Milestones
 
@@ -132,7 +132,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 
 ### M2. Content, Taxonomy, Locale, Media, Licensing, and Safety Validation
 
-- Milestone state: resolution-needed
+- Milestone state: review-requested
 - Goal: Implement card-shape validation for required localized fields, controlled enums, taxonomy references, locale migration rules, canonical SVG references, accessible text, licensing metadata, contribution provenance, and basic safety-language blockers.
 - Requirements: R1-R18, R30-R33, R37-R40, AC1-AC7, AC22-AC27, AC32-AC34
 - Files/components likely touched:
@@ -328,6 +328,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M2 implementation started. Scope is limited to card-shape validation, v1 controlled enums, seed taxonomy, locale rules, canonical SVG checks, safety-language blockers, licensing/provenance blockers, fixtures, generated reports, and MP3 manual proof.
 - 2026-06-27: M2 implementation completed and moved to review-requested. Added the v1 taxonomy fixture, one reviewed example card, canonical SVG examples, M2 validator rules, content-contract tests, invalid fixture evidence, updated schema summaries, generated reports, and MP3 manual proof.
 - 2026-06-27: `code-review-m2-r1` requested changes for CR-M2-1 and CR-M2-2. M2 remains open and routes to review-resolution before any M3 implementation.
+- 2026-06-27: Addressed CR-M2-1 and CR-M2-2 by adding supplemental-media validation for media/license metadata, public-license gating, non-authoritative status, source-of-truth claims, and explicit override language. M2 moved back to review-requested for code-review M2 R2.
 
 ## Decision log
 
@@ -359,6 +360,10 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M2 validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`.
 - 2026-06-27: M2 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
 - 2026-06-27: MP3 manual proof recorded at `generated/manual-proof/MP3-fixture-privacy-spot-check.md`.
+- 2026-06-27: M2 review-resolution validation passed: `python3 -m unittest discover -s tests`.
+- 2026-06-27: M2 review-resolution validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
+- 2026-06-27: M2 review-resolution validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`.
+- 2026-06-27: M2 review-resolution privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
 
 ## Outcome and retrospective
 
@@ -367,4 +372,4 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for review-resolution of M2 findings CR-M2-1 and CR-M2-2. Not ready for M3 implementation, verification, PR, or final closeout until M2 review-resolution and re-review close and M3-M4 implementation, code reviews, review-resolution if needed, explain-change, verification, and downstream gates complete.
+- Ready for code-review M2 R2. Not ready for M3 implementation, verification, PR, or final closeout until M2 re-review closes and M3-M4 implementation, code reviews, review-resolution if needed, explain-change, verification, and downstream gates complete.

@@ -15,8 +15,8 @@ open
 | PR1 | [plan-review-r1](reviews/plan-review-r1.md) | major | Make negative-match privacy scan validation commands executable with correct pass/fail semantics. | resolved-in-plan-review-r2 |
 | TSR1 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | major | Add explicit command classification, owner, milestone, failure behavior, and test-to-milestone mapping. | resolved-in-test-spec-review-r2 |
 | TSR2 | [test-spec-review-r1](reviews/test-spec-review-r1.md) | major | Replace free-form manual QA bullets with stable manual proof records including evidence, environment, pass/fail conditions, rationale, and owner. | resolved-in-test-spec-review-r2 |
-| CR-M2-1 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Reject public cards using a media asset with `license_kind = unlicensed_internal_only` and prove the media-asset case. | pending |
-| CR-M2-2 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Validate supplemental-media metadata and reject supplemental media that overrides, replaces, or contradicts canonical text/SVG steps. | pending |
+| CR-M2-1 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Reject public cards using a media asset with `license_kind = unlicensed_internal_only` and prove the media-asset case. | addressed-pending-rereview |
+| CR-M2-2 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | major | Validate supplemental-media metadata and reject supplemental media that overrides, replaces, or contradicts canonical text/SVG steps. | addressed-pending-rereview |
 
 ## Resolution notes
 
@@ -73,7 +73,7 @@ Status: resolved-in-test-spec-review-r2.
 
 ## Code-review M2 R1 resolution
 
-Status: pending.
+Status: addressed-pending-rereview.
 
 ### CR-M2-1 - Media asset public-license gate
 
@@ -81,8 +81,37 @@ Required outcome: Public cards must reject any media asset, including supplement
 
 Safe resolution path: Add supplemental/media asset validation for `media_kind`, `license_kind`, and public-publication rights; add a regression where the card-level license is publishable but supplemental media is internal-only.
 
+Resolution: addressed by adding supplemental-media validation in `tools/validation/validate_content.py`. The validator now checks every supplemental media item for valid `media_kind`, valid `license_kind`, and rejects `license_kind = unlicensed_internal_only` on public cards with `license_not_public`.
+
+Tests added:
+
+- `test_public_card_rejects_internal_only_supplemental_media_asset`
+- `test_supplemental_media_unknown_media_kind_is_rejected`
+- `test_supplemental_media_unknown_license_kind_is_rejected`
+
+Evidence:
+
+- `generated/invalid-fixture-report.json` now includes `license_not_public` for `supplemental_media[0].license_kind`.
+
 ### CR-M2-2 - Supplemental-media source-of-truth boundary
 
 Required outcome: Supplemental media must be optional, metadata-complete when present, and unable to override, replace, or contradict canonical reviewed text/SVG steps.
 
 Safe resolution path: Add a minimal supplemental-media contract in the validator and regression tests for missing metadata and explicit replace/override language.
+
+Resolution: addressed by adding a minimal supplemental-media contract. Supplemental media remains optional, but when present each item must be an object with valid `media_kind`, valid `license_kind`, a title or label, and `authoritative_status = supplemental`. The validator rejects `is_source_of_truth = true`, non-supplemental authority status, and explicit replace/override/source-of-truth language in selected copy fields.
+
+Tests added:
+
+- `test_supplemental_media_missing_media_kind_is_rejected`
+- `test_supplemental_media_missing_license_kind_is_rejected`
+- `test_supplemental_media_source_of_truth_claim_is_rejected`
+- `test_supplemental_media_boolean_source_of_truth_claim_is_rejected`
+- `test_supplemental_media_override_language_is_rejected`
+- `test_valid_supplemental_media_is_allowed`
+
+Evidence:
+
+- `generated/invalid-fixture-report.json` now includes `supplemental_media_missing_authority` and `supplemental_media_overrides_canonical_steps` for the invalid supplemental media fixture.
+
+Status: ready for code-review M2 R2.
