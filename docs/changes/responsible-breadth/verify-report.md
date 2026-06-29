@@ -24,7 +24,7 @@ passed, PR-body readiness, PR-open readiness, or final lifecycle Done.
 | Source count, source index, and source quality | RB-T5, RB-T10, RB-T11, RB-T12, RB-T13 | `SOURCES.md`, expanded pages, manual proof records | Checker passed; manual source/scope records pass. | pass |
 | Red-flag routing and safety boundaries | RB-T3, RB-T8, RB-MP1 | `about/red-flags.md`, pattern/condition pages | Checker passed; RB-MP1 pass; red-flags links appear before self-management sections. | pass |
 | Review metadata and cadence | RB-T4, RB-T17 | expanded pages, RB-MP8 | Checker passed metadata and review-date rules; lifecycle ledger pass. | pass |
-| Visual/media boundary and provenance inheritance | RB-T15, RB-MP7; Markdown-first media tests | expanded pages, `media/` rules inherited | No new media added; RB-MP7 records no-media proof; Markdown-first regression tests passed. | pass |
+| Visual/media boundary and provenance inheritance | RB-T15, RB-MP7; Markdown-first media tests | expanded pages, `media/` rules inherited, `media/svg/patterns/anterior-pelvic-tilt-comparison.svg` | One original SVG alignment visual was added for anterior pelvic tilt; RB-MP7 records necessity and no raster provenance requirement; Markdown-first regression tests passed. | pass |
 | Promotion gate and lifecycle sync | RB-T16, RB-T17, review records | `README.md`, `docs/plan.md`, plan body, `change.yaml` | README promotion is covered by tests; review-resolution is closed; plan index and plan body agree. | pass |
 | Privacy and no runtime product | RB-T20, guardrail tests | expanded pages, proof records, docs | Privacy scan passed; no symptom checker, API, CMS, hosted app, or user data added. | pass |
 | mdBook derived-output boundary | RB-T18, RB-MP9 | README and proof records | `command -v mdbook || true` produced no path output; RB-MP9 records explicit deferral. | pass |
@@ -54,7 +54,7 @@ Working directory: repository root.
 | `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'` | pass | Ran 15 tests: OK. |
 | `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` | pass | Ran 51 tests: OK. |
 | `python3 tools/checks/check_markdown_first.py README.md SOURCES.md about patterns conditions principles programs` | pass | `checked 7 Markdown file(s): pass` |
-| `python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md about patterns conditions principles programs docs/changes/responsible-breadth media` | pass | `checked 50 file(s): privacy pass` |
+| `python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md about patterns conditions principles programs docs/changes/responsible-breadth media` | pass | `checked 51 file(s): privacy pass` |
 | `command -v mdbook || true` | pass for availability probe | Exit 0 with no path output; mdBook is unavailable, so no build is claimed. |
 | `git diff --cached --check` | pass | Exit 0 with no output. |
 

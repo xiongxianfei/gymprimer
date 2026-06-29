@@ -9,6 +9,6 @@
   - For each page, answer: what is this page for, what does it not do, when should a reader leave GymPrimer, and which source would support the main claim.
   - Record only non-identifying notes.
 - Pass/fail result: pass
-- Failure notes: Informal self-check found each page states its purpose, boundary, red-flags or scope limits, and source section plainly. External beginner-reader testing remains useful before promotion but is not available in this local implementation pass.
+- Failure notes: Informal self-check found each page states its purpose, boundary, red-flags or scope limits, and source section plainly. After PR feedback, the anterior-pelvic-tilt page now adds a working definition, observation-not-diagnosis cues, stronger uncertainty language, professional routing by type, and a "Where to next" block. External beginner-reader testing remains useful before broader scaling but is not available in this local implementation pass.
 - Re-run trigger: Any edit to a first expanded proof-slice page or any reader report of confusion.
 - Privacy statement: No identifying reader details, private health profiles, symptom histories, contact details, local absolute paths, or secrets are included.

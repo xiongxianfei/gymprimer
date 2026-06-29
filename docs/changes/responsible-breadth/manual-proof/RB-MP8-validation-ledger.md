@@ -22,5 +22,5 @@
 | `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'` | Passed: 15 tests. |
 | `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` | Passed: 51 tests. |
 | `python3 tools/checks/check_markdown_first.py README.md SOURCES.md about patterns conditions principles programs` | Passed: checked 7 Markdown files. |
-| `python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md about patterns conditions principles programs docs/changes/responsible-breadth media` | Passed: checked 50 files. |
+| `python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md about patterns conditions principles programs docs/changes/responsible-breadth media` | Passed: checked 51 files. |
 | `command -v mdbook \|\| true` | Ran with exit 0 and no path output; mdBook is unavailable in this environment. |

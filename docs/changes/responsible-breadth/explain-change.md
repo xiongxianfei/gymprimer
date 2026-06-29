@@ -45,6 +45,17 @@ treatment, personalized programming, or runtime decision support.
 | Tests | `tests/test_responsible_breadth_m1.py` | Prove page-class routing, contracts, metadata, red-flag order, source count, guardrails, references/templates, real pages, promotion, and proof records. | 15 Responsible Breadth tests passed. |
 | Content and templates | `about/`, `patterns/`, `conditions/`, `principles/`, `programs/`, `docs/templates/`, `SOURCES.md`, `CONTRIBUTING.md` | Add the red-flags reference, first expanded proof slice, reusable source seed, page templates, and higher-bar contributor guidance. | M2-M4 validation and manual proof records. |
 
+## PR Feedback Update
+
+The anterior-pelvic-tilt page was expanded after PR feedback identified the
+first version as structurally compliant but too thin for beginner use. The
+update adds a working definition, observation-not-diagnosis cues, inline
+topic-specific red flags, stronger uncertainty language, professional routing
+by type, an original SVG alignment comparison, and a "Where to next" block
+using existing primer pages. The page-contract split suggestion for a future
+mandatory "How to notice this in yourself" section was not folded into this PR
+because that would require a spec/template amendment.
+
 ## Tests Added Or Changed
 
 - Responsible Breadth tests cover RB-T1 through RB-T20 at the level required by

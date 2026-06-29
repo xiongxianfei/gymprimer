@@ -42,3 +42,4 @@ notes:
   - Final holistic code-review R1 passed with no material findings; explain-change is next.
   - Explain-change refreshed the durable rationale for the final reviewed diff; verify is next.
   - Verify passed with fresh local validation evidence in docs/changes/responsible-breadth/verify-report.md; PR is next and requires separate authorization.
+  - PR feedback on the anterior-pelvic-tilt page was addressed by expanding the page, adding an original SVG alignment visual, strengthening sources, and rerunning local validation.

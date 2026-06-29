@@ -20,6 +20,9 @@ Rules:
 - [NHS back pain patient guidance][nhs-back-pain]
 - [NHS Inform back problems guidance][nhs-inform-back-problems]
 - [Mayo Clinic back pain when to see a doctor][mayo-back-pain-when-to-see-doctor]
+- [Mayo Clinic posture and body alignment Q&A][mayo-posture-body-alignment]
+- [PubMed: Lederman 2011 postural-structural-biomechanical model][pubmed-lederman-psb-model]
+- [PubMed: Herrington 2011 pelvic tilt in asymptomatic population][pubmed-herrington-pelvic-tilt]
 - [MedlinePlus acute low back pain][medlineplus-low-back-pain-acute]
 - [NICE low back pain and sciatica guideline][nice-low-back-pain-sciatica]
 - [American College of Physicians low back pain guideline][acp-low-back-pain-guideline]
@@ -35,6 +38,9 @@ Each page still needs its own matching reference definition so the page renders 
 [nhs-back-pain]: https://www.nhs.uk/conditions/back-pain/
 [nhs-inform-back-problems]: https://www.nhsinform.scot/illnesses-and-conditions/muscle-bone-and-joints/back-problems/back-problems/
 [mayo-back-pain-when-to-see-doctor]: https://www.mayoclinic.org/symptoms/back-pain/basics/when-to-see-doctor/sym-20050878
+[mayo-posture-body-alignment]: https://newsnetwork.mayoclinic.org/discussion/mayo-clinic-q-and-a-proper-posture-and-body-alignment/
+[pubmed-lederman-psb-model]: https://pubmed.ncbi.nlm.nih.gov/21419349/
+[pubmed-herrington-pelvic-tilt]: https://pubmed.ncbi.nlm.nih.gov/21658988/
 [medlineplus-low-back-pain-acute]: https://medlineplus.gov/ency/article/007425.htm
 [nice-low-back-pain-sciatica]: https://www.nice.org.uk/guidance/ng59
 [acp-low-back-pain-guideline]: https://www.acpjournals.org/doi/10.7326/M16-2367
