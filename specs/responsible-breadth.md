@@ -2,12 +2,14 @@
 
 ## Status
 
-draft
+approved
 
 Previously approved in
-`docs/changes/responsible-breadth/reviews/spec-review-r2.md`. This draft
-amendment incorporates the approved layout architecture review and the first
-pattern-page refinement.
+`docs/changes/responsible-breadth/reviews/spec-review-r2.md`. This amendment
+was approved in
+`docs/changes/apt-pattern-architecture/reviews/spec-review-r2.md` and
+incorporates the approved layout architecture review and the first pattern-page
+refinement.
 
 ## Related proposal
 
