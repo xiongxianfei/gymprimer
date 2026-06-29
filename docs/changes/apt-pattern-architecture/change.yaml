@@ -1,7 +1,7 @@
 change_id: apt-pattern-architecture
 proposal: docs/proposals/2026-06-29-responsible-breadth.md
-status: test-spec-review-needed
-current_stage: test-spec-review
+status: implementation-ready
+current_stage: implement
 created_date: 2026-06-29
 notes:
   - Follow-up to the merged Responsible Breadth proof slice.
@@ -11,7 +11,8 @@ notes:
   - Validation and manual proof must confirm the page remains education, not diagnosis, treatment, individualized care, or a posture-correction promise.
   - Spec-review R2 approved the media-purpose amendment.
   - Architecture-review R2 approved the expanded raster media-purpose validation boundary after lifecycle status normalization.
-  - Test-spec now needs review for RB-T21/RB-T22 coverage of pattern-page architecture and expanded media-purpose validation.
+  - Test-spec-review R1 approved RB-T21/RB-T22 coverage of pattern-page architecture and expanded media-purpose validation.
+  - Implementation can now add or reconcile RB-T21/RB-T22 proof for this follow-up amendment.
 validation:
   - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 16 tests"
   - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 51 tests"

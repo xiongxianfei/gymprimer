@@ -6,3 +6,4 @@
 | SR-R1 | 2026-06-29 | spec-review | `docs/changes/apt-pattern-architecture/reviews/spec-review-r1.md` | changes-requested | SR-APT-SPEC-1 | addressed pending spec-review R2 |
 | SR-R2 | 2026-06-29 | spec-review | `docs/changes/apt-pattern-architecture/reviews/spec-review-r2.md` | approved | 0 | SR-APT-SPEC-1 resolved |
 | AR-R2 | 2026-06-29 | architecture-review | `docs/changes/apt-pattern-architecture/reviews/architecture-review-r2.md` | approved | 0 | normalized; ready for test-spec update |
+| TSR-R1 | 2026-06-29 | test-spec-review | `docs/changes/apt-pattern-architecture/reviews/test-spec-review-r1.md` | approved | 0 | ready for implementation |
