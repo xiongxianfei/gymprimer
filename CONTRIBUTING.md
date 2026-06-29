@@ -18,9 +18,22 @@ v0.1 accepts beginner training principles, common machine exercises, low-risk bo
 
 Do not add barbell lifts, Olympic lifting, kettlebell ballistic lifts, plyometrics, sprint programming, sport-specific programming, injury-specific advice, posture-correction protocols, pain treatment, diagnosis, or rehabilitation pathways.
 
+Responsible Breadth pages add static consumer education for accepted patterns,
+conditions, programming principles, and program examples. Pattern, condition,
+and program-example changes require higher-bar review: source traceability,
+red-flag routing, non-diagnostic language, no individualized treatment, no
+personalized programming, and explicit scope-boundary fit. The higher bar means
+no personalized programming. Do not submit
+symptom checkers, diagnosis flows, treatment plans, rehab progressions,
+injury-specific substitutions, or user-adaptive programs.
+
 ## Safety and citations
 
-Every safety-relevant page needs a prominent disclaimer stating that GymPrimer is educational content, not medical advice and not personalized coaching.
+Original v0.1 exercise pages use a prominent disclaimer stating that GymPrimer
+is educational content, not medical advice and not personalized coaching.
+Responsible Breadth pages use required scope notes, red-flag routing, and the
+project-level disclaimer instead of repeating a full disclaimer block on every
+page.
 
 Safety warnings require claim-level citations to public, named sources. A global source in `SOURCES.md` is not enough for a safety claim; readers must be able to verify the claim from the page they are reading.
 

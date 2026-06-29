@@ -17,6 +17,13 @@ Rules:
 - [Mayo Clinic weight training technique guidance][mayo-weight-training]
 - [ACSM resistance training guidance][acsm-resistance-training]
 - [CDC plain-language communication resources][cdc-plain-language]
+- [NHS back pain patient guidance][nhs-back-pain]
+- [NHS Inform back problems guidance][nhs-inform-back-problems]
+- [Mayo Clinic back pain when to see a doctor][mayo-back-pain-when-to-see-doctor]
+- [MedlinePlus acute low back pain][medlineplus-low-back-pain-acute]
+- [NICE low back pain and sciatica guideline][nice-low-back-pain-sciatica]
+- [American College of Physicians low back pain guideline][acp-low-back-pain-guideline]
+- [The Fitness Wiki basic beginner routine][rfitness-basic-beginner-routine]
 
 Each page still needs its own matching reference definition so the page renders as standalone Markdown.
 
@@ -25,3 +32,10 @@ Each page still needs its own matching reference definition so the page renders 
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
 [cdc-plain-language]: https://www.cdc.gov/health-literacy/php/develop-materials/plain-language.html
+[nhs-back-pain]: https://www.nhs.uk/conditions/back-pain/
+[nhs-inform-back-problems]: https://www.nhsinform.scot/illnesses-and-conditions/muscle-bone-and-joints/back-problems/back-problems/
+[mayo-back-pain-when-to-see-doctor]: https://www.mayoclinic.org/symptoms/back-pain/basics/when-to-see-doctor/sym-20050878
+[medlineplus-low-back-pain-acute]: https://medlineplus.gov/ency/article/007425.htm
+[nice-low-back-pain-sciatica]: https://www.nice.org.uk/guidance/ng59
+[acp-low-back-pain-guideline]: https://www.acpjournals.org/doi/10.7326/M16-2367
+[rfitness-basic-beginner-routine]: https://thefitness.wiki/routines/r-fitness-basic-beginner-routine/

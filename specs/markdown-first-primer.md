@@ -290,6 +290,19 @@ Outputs:
 
 ## Compatibility and migration
 
+- Compatibility note: Responsible Breadth expansion.
+  This spec remains the governing contract for the original Markdown-first v0.1
+  slice and for shared Markdown source-of-truth, citation, media, privacy,
+  mdBook-derived-output, and promotion requirements.
+- If `specs/responsible-breadth.md` is approved, it governs expanded pattern,
+  condition, programming-principle, static program-example, and expanded
+  visual-standard pages. For those expanded page types only,
+  `specs/responsible-breadth.md` supersedes this spec's original v0.1
+  content-scope exclusions.
+- This spec's prohibitions on diagnosis, personalized treatment, personalized
+  programming, rehabilitation protocols, unsafe media, private data, and
+  AI-generated source-of-truth content remain active unless a later
+  higher-ranked artifact explicitly changes them.
 - Existing structured-platform artifacts remain in the repository as historical context until a superseding ADR or archive decision changes their status.
 - Existing generated output and validator artifacts are not v0.1 product surfaces for the Markdown-first primer.
 - Stable Markdown paths and headings become compatibility surfaces once linked from `README.md` or `SUMMARY.md`.

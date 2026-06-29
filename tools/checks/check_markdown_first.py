@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 from collections import defaultdict
+from datetime import date
 import os
 from pathlib import Path
 import re
@@ -34,6 +35,60 @@ EXCLUDED_SCOPE_TERMS = (
     "treat pain",
     "treating pain",
     "posture correction",
+)
+RESPONSIBLE_BREADTH_PAGE_CLASSES = {
+    "patterns": "pattern_page",
+    "conditions": "condition_page",
+    "principles": "programming_principle_page",
+    "programs": "program_example_page",
+    "exercises": "expanded_exercise_page",
+}
+RESPONSIBLE_BREADTH_METADATA_FIELDS = (
+    "Author",
+    "Created",
+    "Last reviewed",
+    "Next review due",
+    "Review scope",
+)
+PATTERN_CONDITION_SECTIONS = (
+    "## What this page is",
+    "## What this page is not",
+    "## Red flags",
+    "## Plain-language overview",
+    "## What mainstream sources generally agree on",
+    "## What is uncertain or mixed",
+    "## Commonly recommended self-management themes",
+    "## What to avoid",
+    "## When to see a professional",
+    "## Sources",
+    "## Author and review date",
+)
+PROGRAM_PRINCIPLE_SECTIONS = (
+    "## What this page is",
+    "## What this page is not",
+    "## Plain-language overview",
+    "## Sources",
+)
+PROGRAM_EXAMPLE_SECTIONS = (
+    "## What this page is",
+    "## What this page is not",
+    "## Example week",
+    "## Sources",
+)
+RESPONSIBLE_BREADTH_FORBIDDEN_PATTERNS = (
+    re.compile(r"\byou have\b", re.IGNORECASE),
+    re.compile(r"\btreatment plan\b", re.IGNORECASE),
+    re.compile(r"\brehab(?:ilitation)? progression\b", re.IGNORECASE),
+    re.compile(r"\bcorrect(?:ive|ion) routine\b", re.IGNORECASE),
+    re.compile(r"\bfix (?:this|your|it)\b", re.IGNORECASE),
+    re.compile(r"\bfollow this program\b", re.IGNORECASE),
+    re.compile(r"\bfor your [a-z -]*pain\b", re.IGNORECASE),
+    re.compile(r"\bsymptom checker\b", re.IGNORECASE),
+    re.compile(r"\bdiagnostic decision tree\b", re.IGNORECASE),
+    re.compile(r"\bpost-surgical\b", re.IGNORECASE),
+    re.compile(r"\bpregnan(?:cy|t)\b", re.IGNORECASE),
+    re.compile(r"\bpediatric\b", re.IGNORECASE),
+    re.compile(r"\boncology\b", re.IGNORECASE),
 )
 SUPPORT_FILENAMES = {
     "README.md",
@@ -159,6 +214,37 @@ def repo_relative_path(path: Path, root: Path = ROOT) -> str | None:
         return path.resolve().relative_to(root.resolve()).as_posix()
     except ValueError:
         return None
+
+
+def responsible_breadth_page_class(path: Path, root: Path = ROOT) -> str | None:
+    relative = repo_relative_path(path, root)
+    if relative is None:
+        return None
+    first_part = relative.split("/", 1)[0]
+    return RESPONSIBLE_BREADTH_PAGE_CLASSES.get(first_part)
+
+
+def parse_metadata(lines: list[str]) -> dict[str, str]:
+    metadata: dict[str, str] = {}
+    for line in lines[:20]:
+        for field in RESPONSIBLE_BREADTH_METADATA_FIELDS:
+            prefix = f"{field}:"
+            if line.startswith(prefix):
+                metadata[field] = line.removeprefix(prefix).strip()
+    return metadata
+
+
+def parse_iso_date(value: str) -> date | None:
+    try:
+        return date.fromisoformat(value)
+    except ValueError:
+        return None
+
+
+def heading_position(text: str, heading_prefix: str) -> int:
+    pattern = re.compile(rf"^{re.escape(heading_prefix)}(?:$|[:\n ])", re.MULTILINE)
+    match = pattern.search(text)
+    return -1 if match is None else match.start()
 
 
 def is_remote_media_reference(target: str) -> bool:
@@ -324,6 +410,73 @@ def validate_media_reference(
     return validate_raster_provenance(page_path, asset_path, provenance_rows, root)
 
 
+def validate_responsible_breadth_page(
+    path: Path,
+    page_class: str,
+    text: str,
+    lines: list[str],
+    cited_ids: set[str],
+) -> list[Finding]:
+    findings: list[Finding] = []
+
+    required_sections: tuple[str, ...] = ()
+    if page_class in {"pattern_page", "condition_page"}:
+        required_sections = PATTERN_CONDITION_SECTIONS
+    elif page_class == "programming_principle_page":
+        required_sections = PROGRAM_PRINCIPLE_SECTIONS
+    elif page_class == "program_example_page":
+        required_sections = PROGRAM_EXAMPLE_SECTIONS
+
+    for section in required_sections:
+        if heading_position(text, section) == -1:
+            findings.append(Finding(path, "RB002", f"Responsible Breadth section is missing: {section.removeprefix('## ')}"))
+
+    metadata = parse_metadata(lines)
+    for field in RESPONSIBLE_BREADTH_METADATA_FIELDS:
+        if field not in metadata:
+            findings.append(Finding(path, "RB003", f"Responsible Breadth metadata field is missing: {field}"))
+
+    created = parse_iso_date(metadata.get("Created", ""))
+    next_review = parse_iso_date(metadata.get("Next review due", ""))
+    if created is None and "Created" in metadata:
+        findings.append(Finding(path, "RB003", "Responsible Breadth metadata field has invalid date: Created"))
+    if next_review is None and "Next review due" in metadata:
+        findings.append(Finding(path, "RB003", "Responsible Breadth metadata field has invalid date: Next review due"))
+    if created is not None and next_review is not None:
+        days_until_review = (next_review - created).days
+        if days_until_review < 0:
+            findings.append(Finding(path, "RB003", "Next review due must not precede Created"))
+        if page_class in {"pattern_page", "condition_page", "program_example_page"} and days_until_review > 90:
+            findings.append(
+                Finding(path, "RB003", "safety-relevant Responsible Breadth pages need first review due within 90 days")
+            )
+        if page_class in {"expanded_exercise_page", "programming_principle_page"} and days_until_review > 366:
+            findings.append(Finding(path, "RB003", "Responsible Breadth review due date is too far in the future"))
+
+    if page_class in {"pattern_page", "condition_page"}:
+        red_flags_position = heading_position(text, "## Red flags")
+        self_management_position = heading_position(text, "## Commonly recommended self-management themes")
+        if red_flags_position == -1:
+            findings.append(Finding(path, "RB004", "red-flags section is missing"))
+        elif "../about/red-flags.md" not in text and "about/red-flags.md" not in text:
+            findings.append(Finding(path, "RB004", "red-flags section must link to about/red-flags.md"))
+        elif self_management_position != -1 and red_flags_position > self_management_position:
+            findings.append(Finding(path, "RB004", "red-flags routing must appear before self-management discussion"))
+
+    if len(cited_ids) < 3:
+        findings.append(
+            Finding(path, "RB005", f"Responsible Breadth pages must cite at least three named sources; found {len(cited_ids)}")
+        )
+
+    for pattern in RESPONSIBLE_BREADTH_FORBIDDEN_PATTERNS:
+        match = pattern.search(text)
+        if match:
+            findings.append(Finding(path, "RB006", f"Responsible Breadth forbidden scope language found: {match.group(0)}"))
+            break
+
+    return findings
+
+
 def check_page(
     path: Path,
     global_sources: dict[str, str],
@@ -339,8 +492,9 @@ def check_page(
     ids = source_ids(text)
     urls = source_urls(text)
     cited_ids = cited_reference_ids(text)
+    rb_page_class = responsible_breadth_page_class(path, root)
 
-    if not has_prominent_disclaimer(lines):
+    if rb_page_class is None and not has_prominent_disclaimer(lines):
         findings.append(
             Finding(
                 path,
@@ -406,11 +560,14 @@ def check_page(
     if cjk_character_count(text) > 20:
         findings.append(Finding(path, "MF006", "full-card Chinese translation is outside v0.1 scope"))
 
-    lower_text = text.lower()
-    for term in EXCLUDED_SCOPE_TERMS:
-        if term in lower_text:
-            findings.append(Finding(path, "MF007", f"excluded v0.1 scope term found: {term}"))
-            break
+    if rb_page_class is None:
+        lower_text = text.lower()
+        for term in EXCLUDED_SCOPE_TERMS:
+            if term in lower_text:
+                findings.append(Finding(path, "MF007", f"excluded v0.1 scope term found: {term}"))
+                break
+    else:
+        findings.extend(validate_responsible_breadth_page(path, rb_page_class, text, lines, cited_ids))
 
     for match in IMAGE_RE.finditer(text):
         alt_text = match.group(1).strip()

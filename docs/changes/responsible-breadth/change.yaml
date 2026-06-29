@@ -1,0 +1,44 @@
+change_id: responsible-breadth
+proposal: docs/proposals/2026-06-29-responsible-breadth.md
+status: verified
+current_stage: pr
+created_date: 2026-06-29
+autoprogression:
+  profile: implementation-through-verify
+  requested: "auto-through: verify"
+  authorized_date: 2026-06-29
+  status: completed
+  phase: C
+  stop_before: pr
+notes:
+  - Formal review record for the Responsible Breadth direction-change proposal.
+  - Direct proposal-review request remains isolated; no automatic downstream handoff.
+  - Proposal-review R3 approved the direction and closed PR-RB-1.
+  - Proposal status normalized to accepted before constitution amendment.
+  - Constitution amended before vision amendment, preserving source-of-truth order.
+  - Vision and README front-matter amended to match Responsible Breadth.
+  - Draft spec created at specs/responsible-breadth.md.
+  - Spec-review R1 requested changes for same-rank compatibility with specs/markdown-first-primer.md.
+  - SR-RB-1 addressed by adding a same-rank compatibility contract and reciprocal Markdown-first compatibility note.
+  - Spec-review R2 approved the Responsible Breadth spec with architecture as the next stage.
+  - Responsible Breadth spec status normalized to approved before architecture reliance.
+  - Canonical architecture package and Responsible Breadth ADR drafted for architecture review.
+  - Architecture-review R1 approved the canonical architecture update and Responsible Breadth ADR with plan as the next stage.
+  - Architecture package normalized to approved and Responsible Breadth ADR normalized to accepted before planning reliance.
+  - Responsible Breadth execution plan drafted at docs/plans/2026-06-29-responsible-breadth.md.
+  - Plan-review R1 approved the Responsible Breadth execution plan with test-spec as the next stage.
+  - Responsible Breadth test spec drafted at specs/responsible-breadth.test.md for test-spec-review.
+  - Test-spec-review R1 blocked implementation handoff on TSR-RB-1 because the plan artifact lifecycle state still contradicts plan-review approval.
+  - TSR-RB-1 resolved by normalizing lifecycle/status and handoff text without changing milestone scope, validation obligations, requirements, or test mappings.
+  - Test-spec-review R2 approved the Responsible Breadth proof map with implementation handoff allowed for M1.
+  - M1 implemented the Responsible Breadth validation/proof scaffold and is ready for code-review.
+  - Code-review M1 R1 closed M1 with no material findings; M2 implementation is next.
+  - M2 implemented the project-level red-flags reference, templates, source seed, contributor guidance, and RB-MP1 proof; M2 is ready for code-review.
+  - Code-review M2 R1 closed M2 with no material findings; M3 implementation is next.
+  - M3 implemented the first expanded proof-slice pages and RB-MP2 through RB-MP7 proof; M3 is ready for code-review.
+  - Code-review M3 R1 closed M3 with no material findings; M4 implementation is next.
+  - M4 promoted the Responsible Breadth proof-slice pages, recorded final validation ledger and mdBook deferral; M4 is ready for code-review.
+  - Code-review M4 R1 closed M4 with no material findings; final holistic code-review is next.
+  - Final holistic code-review R1 passed with no material findings; explain-change is next.
+  - Explain-change refreshed the durable rationale for the final reviewed diff; verify is next.
+  - Verify passed with fresh local validation evidence in docs/changes/responsible-breadth/verify-report.md; PR is next and requires separate authorization.

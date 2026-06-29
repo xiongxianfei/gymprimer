@@ -2,6 +2,19 @@
 
 ## Active
 
+- [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
+  - Status: active
+  - Plan lifecycle state: active
+  - Current milestone: lifecycle closeout
+  - Current milestone state: verified
+  - Last reviewed milestone: final holistic code-review
+  - Next stage: pr
+  - Active context: Proposal, spec, architecture, and ADR are approved. The
+    plan passed plan-review R1, the test spec passed test-spec-review R2, and
+    M1-M4 plus final holistic code-review are closed. Explain-change is
+    complete and verify passed; PR handoff is next and requires separate
+    authorization.
+
 - [Markdown-First Gym Primer](plans/2026-06-27-markdown-first-gym-primer.md)
   - Status: active
   - Plan lifecycle state: active
@@ -15,8 +28,7 @@
 
 ## Blocked
 
-- None for the active change. Implementation milestones, explain-change, and
-  verify are closed.
+- None for active changes.
 
 ## Superseded
 
