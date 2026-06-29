@@ -363,6 +363,15 @@ treated as current.
 
 R29. Visuals MUST be necessary for beginner comprehension, not decorative.
 
+R29a. Expanded pattern, condition, and exercise pages SHOULD prefer
+high-quality human-reviewed raster illustrations over SVG diagrams when the
+visual needs realistic body position, anatomical context, or beginner-readable
+movement detail.
+
+R29b. SVG diagrams MAY remain valid only when they are simple enough for
+beginner comprehension and pass visual-necessity review; SVG is not the
+preferred first-slice visual format for expanded pattern or exercise teaching.
+
 R30. Machine exercise pages SHOULD include equipment setup visuals when text
 alone is insufficient for identification or setup.
 
@@ -384,14 +393,30 @@ R35. Raster media under `media/` MUST satisfy the existing provenance contract
 before a page referencing it is promoted.
 
 R35a. Pattern, condition, and exercise visuals MUST be selected for reader
-comprehension. If an original SVG is hard for beginners to interpret, the page
-MAY use a high-quality human-reviewed AI-generated raster illustration instead,
-provided the image remains a support asset and satisfies the provenance
-contract.
+comprehension. High-quality human-reviewed AI-generated raster illustrations are
+allowed for expanded pages when the image remains a support asset and satisfies
+the provenance contract.
 
 R35b. Generated raster images MUST NOT be treated as evidence for anatomy,
 exercise technique, safety, diagnosis, treatment, or programming claims. The
 Markdown text and cited sources remain the source of truth.
+
+R35c. For expanded Responsible Breadth pages, the allowed
+`media/PROVENANCE.md` `media_purpose` values are:
+`equipment_identification`, `key_movement_illustration`,
+`pattern_alignment_illustration`, `anatomical_region_illustration`, and
+`exercise_preview_illustration`.
+
+R35d. `pattern_alignment_illustration` MUST be used only for non-diagnostic
+visual comparison or alignment education on pattern pages.
+
+R35e. `anatomical_region_illustration` MUST be used only for plain anatomical
+region context on condition pages and MUST NOT imply diagnosis, pathology, or
+treatment.
+
+R35f. `exercise_preview_illustration` MUST be used only for compact exercise
+support images referenced from pattern or condition pages; the linked exercise
+page remains the source of truth for full setup and movement instructions.
 
 R36. Pattern, condition, and program-example PRs MUST receive higher-bar review
 than ordinary exercise-page wording edits.
@@ -646,6 +671,14 @@ promotion until the exercise pages exist or the pattern page stays draft-only.
 EC13. A page replaces a confusing SVG with a generated raster image but omits
 the `media/PROVENANCE.md` row: fails media provenance validation.
 
+EC14. A pattern page uses a generated alignment image with
+`media_purpose = key_movement_illustration`: fails expanded media-purpose
+validation because the deterministic purpose is
+`pattern_alignment_illustration`.
+
+EC15. A condition page uses an anatomical-region image that visually implies a
+specific reader diagnosis or pathology: fails even when provenance exists.
+
 ## Non-goals
 
 - Personalized symptom checking, diagnosis, or treatment routing.
@@ -699,6 +732,11 @@ important notes.
 AC12. Any generated raster image used because an SVG is insufficient has an
 approved provenance row and remains subordinate to Markdown text and cited
 sources.
+
+AC13. Expanded-page generated raster images use deterministic media-purpose
+values, including `pattern_alignment_illustration` for pattern alignment,
+`anatomical_region_illustration` for condition anatomy context, and
+`exercise_preview_illustration` for compact exercise support images.
 
 AC-COMP-1. The spec states that `specs/markdown-first-primer.md` remains
 governing for the original five-page v0.1 slice.
