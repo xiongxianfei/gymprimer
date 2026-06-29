@@ -2,11 +2,11 @@
 
 <!-- vision:start -->
 
-When a beginner is standing in front of an unfamiliar gym machine and needs to train safely without guessing, GymPrimer helps them understand what the exercise is for, how to set up the equipment, what the movement should feel like, and when to stop.
+GymPrimer is an open-source Markdown primer for gym beginners. It teaches exercise literacy before workout prescription through short, citation-backed pages that explain what an exercise is for, how to set up the equipment, what the movement should feel like, common mistakes, easier options, and when to stop.
 
-GymPrimer is an open-source educational reference for exercise literacy. It is upstream of workout prescription: reviewed cards over generated answers, canonical SVG step cards over video-first instruction, and depth/correctness over shallow exercise count.
+The repository is the primary product. GymPrimer trades breadth and polish for verifiable beginner understanding: a small Markdown corpus, plain language, conservative scope, prominent disclaimers, and sources a reader can check. Optional mdBook HTML can improve navigation later, but Markdown remains the source of truth.
 
-It is for adults in their first ninety days of regular gym training, people returning after a long break, and the trainers, physical therapists, clinicians, content authors, illustrators, translators, and engineers who maintain reviewed exercise cards together. Launch content is English-first, with Chinese treated as a first-class future locale.
+It is for adults in their first ninety days of regular gym training, people returning after a long break, and maintainers, authors, translators, illustrators, and reviewers who want to improve beginner exercise education in public. Launch content is English-first, with Chinese aliases and later separate-locale translation possible after the English format is proven.
 
 <!-- vision:end -->
 
@@ -16,9 +16,9 @@ For goals, non-goals, commitments, refusals, and what would prove this project w
 
 - [Security](#security)
 - [Background](#background)
-- [Install](#install)
 - [Usage](#usage)
-- [API](#api)
+- [Repository Layout](#repository-layout)
+- [Validation](#validation)
 - [Maintainers](#maintainers)
 - [Thanks](#thanks)
 - [Contributing](#contributing)
@@ -32,62 +32,58 @@ Security reporting is documented in [SECURITY.md](./SECURITY.md). The security c
 
 ## Background
 
-This repository currently contains the project vision, approved content-schema artifacts, repository-native source fixtures, local validation tools, and deterministic generated-output evidence. It does not yet contain a frontend, CMS, AI assistant, public exercise library, or CI workflow.
+GymPrimer is now a Markdown-first primer. The source of truth is the Markdown corpus in this repository, supported by page-local citations, [SOURCES.md](./SOURCES.md), contributor guidance, and templates.
 
-The current implementation proves a content foundation:
+The old structured content-schema platform, generated JSON package, expert-review lifecycle, and validator workflow are superseded historical artifacts. They remain in the repository for traceability, but they are not the v0.1 product route.
 
-- reviewed source content lives under `content/`;
-- canonical SVG media lives under `media/svg/`;
-- machine-readable schema summaries live under `schemas/`;
-- local validation tools live under `tools/validation/`;
-- generated validation and public-content artifacts live under `generated/`.
-
-The first generated public package contains one reviewed example card. It is evidence for the schema and validation workflow, not a launch library.
-
-## Install
-
-No package installation is required for the current repository foundation.
-
-Prerequisites:
-
-- Python 3
-- Git
-- `rg` for the optional state-sync checks used in workflow artifacts
-
-Clone the repository and run commands from the repository root.
+The v0.1 implementation is staged. M1 establishes the active route, contributor contract, templates, and legacy supersession. The first five real Markdown pages are drafted in M3, then promoted only after the required checks and beginner read-test evidence exist.
 
 ## Usage
 
-Run the local validation suite:
+Browse the repository directly. No app, database, generated HTML, account, local server, or generated JSON package is required to use promoted Markdown content.
+
+Current active support files:
+
+- [CONTRIBUTING.md](./CONTRIBUTING.md): contributor contract, citation expectations, scope rules, media rules, privacy rules, and inbound license terms.
+- [SOURCES.md](./SOURCES.md): global source index for sources reused across more than one page.
+- [CONTENT_LICENSE.md](./CONTENT_LICENSE.md): license split for code/tooling and written content/original diagrams.
+- [docs/templates/exercise-card.md](./docs/templates/exercise-card.md): exercise-page template.
+- [docs/templates/principle-page.md](./docs/templates/principle-page.md): principle-page template.
+
+Draft first-slice pages, not yet promoted:
+
+- [Beginner Training Principles](01-getting-started/beginner-training-principles.md)
+- [Lat Pulldown](02-machines/lat-pulldown.md)
+- [Seated Row](02-machines/seated-row.md)
+- [Chest Press](02-machines/chest-press.md)
+- [Incline Push-Up](03-bodyweight/incline-push-up.md)
+
+These pages must not be described as published, approved, expert-reviewed, or promoted source content until the M3 milestone has beginner read-test evidence and review approval.
+
+## Repository Layout
+
+- `README.md`: repository entry point and product navigation after pages are promoted.
+- `SOURCES.md`: reusable public source index.
+- `CONTRIBUTING.md`: contribution rules for Markdown-first content.
+- `CONTENT_LICENSE.md`: license posture for code/tooling and content/media.
+- `docs/templates/`: source templates for exercise and principle pages.
+- `01-getting-started/`, `02-machines/`, `03-bodyweight/`: planned first-slice Markdown directories.
+- `media/`: optional original SVG diagrams and approved AI-generated raster
+  illustrations with provenance; no third-party screenshots, stock photos, or
+  borrowed public web images for v0.1.
+- `content/`, `schemas/`, `generated/`, `tools/validation/`: superseded structured-platform artifacts retained as historical evidence.
+
+## Validation
+
+No hosted CI workflow is configured yet.
+
+For M1, run the Markdown-first contract tests and structural checks:
 
 ```sh
-python3 -m unittest discover -s tests
+python3 -m unittest tests.test_markdown_first_contract tests.test_markdown_first_templates tests.test_markdown_first_legacy_boundary
 ```
 
-Validate repository content and emit deterministic public output:
-
-```sh
-python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json
-```
-
-Run the generated-output privacy scan:
-
-```sh
-python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI|personal health" -- generated/
-```
-
-The generated public package is [generated/public-content.json](./generated/public-content.json). Future UI or search layers should consume generated public content, not raw draft source files.
-
-## API
-
-GymPrimer does not expose a public runtime API yet.
-
-Current command-line interfaces:
-
-- `tools/validation/validate_content.py`: validates repository-native content and can emit `generated/public-content.json`.
-- `tools/validation/privacy_scan.py`: runs negative-match privacy checks with explicit exit codes.
-
-These CLIs are validation tooling for the content foundation, not a stable public product API.
+Later milestones add `tools/checks/` for Markdown-first source, disclaimer, citation, scope, media, and privacy checks. The old `tools/validation/` commands are historical structured-platform tooling, not active v0.1 product validation.
 
 ## Maintainers
 
@@ -101,8 +97,8 @@ GymPrimer is shaped by open-source documentation practice, plain-language health
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-For this stage of the project, keep contributions focused on reviewed content-schema foundation work unless a proposal/spec/architecture update has accepted a broader change.
+For this stage of the project, keep contributions focused on the Markdown-first primer contract unless a proposal, spec, and architecture update accept a broader change.
 
 ## License
 
-GymPrimer is released under the Apache License 2.0. See [LICENSE](./LICENSE).
+GymPrimer code and tooling are released under Apache-2.0. Written educational content and original diagrams are provided under CC BY 4.0. See [LICENSE](./LICENSE) and [CONTENT_LICENSE.md](./CONTENT_LICENSE.md).

@@ -2,13 +2,15 @@
 
 ## Status
 
-- Status: draft
-- Plan lifecycle state: draft
-- Terminal disposition: not-applicable
+- Status: superseded
+- Plan lifecycle state: superseded
+- Terminal disposition: superseded-by `docs/plans/2026-06-27-markdown-first-gym-primer.md`
 
 ## Purpose / big picture
 
-Implement the repository-native content foundation described by the approved content schema and architecture. The first implementation slice should create the source layout, machine-readable schema contracts, validator CLI, fixtures, and generated-output boundary needed to prove GymPrimer can validate beginner exercise cards before any public UI, CMS, AI, or large content library exists.
+This plan is superseded by `docs/plans/2026-06-27-markdown-first-gym-primer.md` after the accepted Markdown-first direction change. It remains as historical context for the prior structured-platform path and must not be used as active implementation guidance unless a later accepted proposal reactivates it.
+
+The original plan implemented the repository-native content foundation described by the approved content schema and architecture. The first implementation slice would create the source layout, machine-readable schema contracts, validator CLI, fixtures, and generated-output boundary needed to prove GymPrimer could validate beginner exercise cards before any public UI, CMS, AI, or large content library existed.
 
 This plan sequences implementation only. It does not revisit product direction, safety policy, legal language, UI/search behavior, or the exact first 40-60 exercise list.
 
@@ -71,14 +73,14 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 
 ## Current Handoff Summary
 
-- Current milestone: M4
+- Current milestone: none
 - Current milestone state: closed
 - Last reviewed milestone: M4
-- Review status: code-review-m4-r2 clean-with-notes
+- Review status: superseded by Markdown-first direction before PR handoff
 - Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: ready for final closeout sequence
-- Reason final closeout is or is not ready: M1-M4 are closed after code review, the change rationale is current, and final verification passed. PR handoff still needs the `pr` stage before PR body/open readiness can be claimed.
+- Next stage: none
+- Final closeout readiness: not-applicable
+- Reason final closeout is or is not ready: This plan is no longer active execution guidance. The active route is `docs/plans/2026-06-27-markdown-first-gym-primer.md`.
 
 ## Milestones
 

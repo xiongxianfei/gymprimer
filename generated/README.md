@@ -1,10 +1,9 @@
 # Generated Output
 
-Generated validation reports and publication-ready content packages are written
-here by local validation commands.
+Superseded structured-platform artifact.
 
-Generated artifacts are evidence and publication output, not reviewed source of
-truth.
+The generated public JSON package belonged to the prior structured content-schema platform. That direction has been superseded by the Markdown-first primer direction.
 
-`public-content.json` is deterministic for the same source inputs and includes
-only valid, published, approved cards from repository-native sources.
+Generated files remain historical evidence or future derived output only. They are not the Markdown-first v0.1 source of truth.
+
+Do not use `generated/` as active product output unless a later accepted proposal defines a new derived-output contract.

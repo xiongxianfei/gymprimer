@@ -1,25 +1,26 @@
 C4Container
-  title GymPrimer Content Platform - Container View
+  title GymPrimer Markdown-First Primer - Container View
 
-  Person(author, "Author or contributor")
-  Person(reviewer, "Expert reviewer")
-  Person(maintainer, "Maintainer")
+  Person(beginner, "Beginner reader")
+  Person(contributor, "Contributor or maintainer")
 
   System_Boundary(repo, "GymPrimer repository") {
-    Container(source, "Source content package", "YAML/JSON/SVG source files", "Cards, taxonomy, policies, media metadata, canonical SVGs, and audit events.")
-    Container(schemas, "Schema package", "Machine-readable schemas", "Card, taxonomy, media, review event, audit event, and validation report contracts.")
-    Container(validator, "Validation and publication gate", "CLI/tooling", "Checks schema, taxonomy, locales, lifecycle, review routing, licensing, safety, media, and migration rules.")
-    Container(generated, "Generated content package", "Generated structured data", "Publication-ready content for future UI/search layers.")
-    Container(docs, "Lifecycle artifacts", "Markdown", "Vision, proposal, specs, architecture, ADRs, reviews, and workflow evidence.")
+    Container(markdown, "Markdown corpus", "Markdown", "README navigation, first-slice pages, page-local sources, and global source index.")
+    Container(contrib, "Contribution and license contract", "Markdown", "CONTRIBUTING, content license, citation, scope, and media rules.")
+    Container(media, "Optional support media", "SVG/AI raster assets", "Necessary equipment or movement visuals referenced by relative path.")
+    Container(provenance, "Media provenance index", "Markdown table", "media/PROVENANCE.md rows keyed by exact asset_path for AI-generated raster assets.")
+    Container(checks, "Lightweight checks and proof", "Scripts/manual records", "Disclaimer, source, scope, media path, link, privacy, mdBook, and reader-test evidence.")
+    Container(book, "Optional mdBook output", "Generated static HTML", "Derived convenience output, not source of truth.")
+    Container(history, "Historical platform artifacts", "Docs/generated evidence", "Prior schema, validator, generated output, ADRs, and reviews retained for traceability.")
   }
 
-  System_Ext(future_ui, "Future website/app", "Consumes generated reviewed content.")
-
-  Rel(author, source, "Edits")
-  Rel(reviewer, source, "Approves digest-scoped review events")
-  Rel(maintainer, validator, "Runs publication gate")
-  Rel(source, validator, "Provides content, taxonomy, policy, audit, and media metadata")
-  Rel(schemas, validator, "Defines validation contracts")
-  Rel(validator, generated, "Emits only after all gates pass")
-  Rel(generated, future_ui, "Feeds")
-  Rel(docs, validator, "Defines governing requirements")
+  Rel(beginner, markdown, "Reads")
+  Rel(contributor, markdown, "Authors and reviews")
+  Rel(contributor, contrib, "Follows")
+  Rel(markdown, media, "References by relative path")
+  Rel(checks, provenance, "Validates AI raster provenance")
+  Rel(checks, markdown, "Checks")
+  Rel(checks, media, "Checks path, purpose, and rights evidence")
+  Rel(media, provenance, "AI raster assets require exact matching row")
+  Rel(markdown, book, "Generates derived HTML")
+  Rel(history, markdown, "Does not override current source")

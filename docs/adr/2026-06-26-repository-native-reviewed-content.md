@@ -2,7 +2,9 @@
 
 ## Status
 
-accepted
+superseded
+
+Superseded by: `docs/adr/2026-06-27-markdown-first-citation-based-authority.md`
 
 ## Context
 

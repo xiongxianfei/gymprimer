@@ -1,0 +1,316 @@
+change_id: markdown-first-gym-primer
+status: in-progress
+current_stage: pr
+next_stage: pr
+
+proposal: docs/proposals/2026-06-27-markdown-first-gym-primer.md
+proposal_status: accepted
+proposal_review: docs/changes/markdown-first-gym-primer/reviews/proposal-review-r2.md
+
+current_spec: specs/markdown-first-primer.md
+current_spec_status: approved
+current_spec_review: docs/changes/markdown-first-gym-primer/reviews/spec-review-r3.md
+
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/markdown-first-gym-primer/reviews/architecture-review-r3.md
+current_adr: docs/adr/2026-06-27-markdown-first-citation-based-authority.md
+current_media_adr: docs/adr/2026-06-28-ai-generated-raster-media-provenance.md
+current_media_adr_status: accepted
+
+current_plan: docs/plans/2026-06-27-markdown-first-gym-primer.md
+current_plan_status: active
+current_plan_review: docs/changes/markdown-first-gym-primer/reviews/plan-review-r3.md
+plan_index: docs/plan.md
+
+current_code_review: docs/changes/markdown-first-gym-primer/reviews/code-review-m4-r1.md
+current_verification: docs/changes/markdown-first-gym-primer/verify-report.md
+current_milestone: M4
+current_milestone_name: Optional mdBook and Final Local Quality Gate
+current_milestone_state: closed
+last_reviewed_milestone: M4
+
+current_test_spec: specs/markdown-first-primer.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/markdown-first-gym-primer/reviews/test-spec-review-r4.md
+review_resolution: docs/changes/markdown-first-gym-primer/review-resolution.md
+open_findings: []
+
+causal_link:
+  reason: "Approved proposal-review R2 accepted the Markdown-first direction; spec-review R1 and architecture-review R1 approved the v0.1 contract and design with no material findings."
+  vision_update: VISION.md
+  constitution_update: CONSTITUTION.md
+  agent_rules_update: AGENTS.md
+  spec_update: specs/markdown-first-primer.md
+  architecture_update: docs/architecture/system/architecture.md
+  adr_update: docs/adr/2026-06-27-markdown-first-citation-based-authority.md
+  plan_update: docs/plans/2026-06-27-markdown-first-gym-primer.md
+  strategic_positioning: docs/vision/strategic-positioning.md
+  explain_change: docs/changes/markdown-first-gym-primer/explain-change.md
+
+validation:
+  - command: python3 -m unittest tests.test_markdown_first_mdbook tests.test_markdown_first_observability tests.test_markdown_first_compatibility
+    result: pass
+    evidence: 7 M4 mdBook deferral, observability, and compatibility tests passed after adding MP4 and MP5
+  - command: command -v mdbook || true
+    result: pass
+    evidence: no mdBook executable was found; M4 uses the documented deferral path
+  - command: if command -v mdbook >/dev/null 2>&1; then mdbook build; else printf 'mdbook not installed; mdBook deferred\n'; fi
+    result: pass
+    evidence: command printed mdbook not installed; mdBook deferred
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: 51 Markdown-first tests passed after M4 proof and tests were added
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md CONTRIBUTING.md CONTENT_LICENSE.md 01-getting-started 02-machines 03-bodyweight
+    result: pass
+    evidence: first-slice Markdown pages and guidance files pass source, disclaimer, scope, media, and citation checks after M4
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md CONTRIBUTING.md CONTENT_LICENSE.md 01-getting-started 02-machines 03-bodyweight media docs/changes/markdown-first-gym-primer
+    result: pass
+    evidence: first-slice pages, media, provenance records, and change-local proof records pass privacy scan after M4
+  - command: if rg -n "barbell|deadlift|bench press|Olympic|kettlebell|plyometric|sprint|diagnos|rehab|treat pain|posture correction" 01-getting-started 02-machines 03-bodyweight; then exit 1; else printf "no excluded-scope terms found\n"; fi
+    result: pass
+    evidence: excluded-scope scan printed no excluded-scope terms found after M4
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: 44 Markdown-first tests passed after CR-M3-1 MP3 comprehension evidence update
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md CONTRIBUTING.md CONTENT_LICENSE.md 01-getting-started 02-machines 03-bodyweight
+    result: pass
+    evidence: first-slice Markdown pages and guidance files pass source, disclaimer, scope, media, and citation checks after CR-M3-1 resolution
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md CONTRIBUTING.md CONTENT_LICENSE.md 01-getting-started 02-machines 03-bodyweight media docs/changes/markdown-first-gym-primer/manual-proof
+    result: pass
+    evidence: first-slice pages, media, provenance records, and manual proof records pass privacy scan after CR-M3-1 resolution
+  - command: if rg -n "barbell|deadlift|bench press|Olympic|kettlebell|plyometric|sprint|diagnos|rehab|treat pain|posture correction" 01-getting-started 02-machines 03-bodyweight; then exit 1; else printf "no excluded-scope terms found\n"; fi
+    result: pass
+    evidence: excluded-scope scan printed no excluded-scope terms found after CR-M3-1 resolution
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: 44 Markdown-first tests passed after recording MP3 beginner-reader evidence and routing M3 to code-review R2
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md CONTRIBUTING.md CONTENT_LICENSE.md 01-getting-started 02-machines 03-bodyweight
+    result: pass
+    evidence: first-slice Markdown pages and guidance files pass source, disclaimer, scope, media, and citation checks after MP3 evidence update
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md CONTRIBUTING.md CONTENT_LICENSE.md 01-getting-started 02-machines 03-bodyweight media docs/changes/markdown-first-gym-primer/manual-proof
+    result: pass
+    evidence: first-slice pages, media assets, provenance records, and manual proof records pass the privacy scan after MP3 evidence update
+  - command: markdownlint --disable MD013 -- docs/changes/markdown-first-gym-primer/manual-proof/MP3-beginner-read-test.md docs/plans/2026-06-27-markdown-first-gym-primer.md docs/plan.md docs/workflows.md
+    result: pass
+    evidence: scoped Markdown lint passed for the MP3 evidence record and routing documents with line length disabled
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after MP3 evidence and routing updates
+  - command: python3 -m unittest tests.test_markdown_first_guardrails
+    result: pass
+    evidence: 17 M3A guardrail tests passed for text-only pages, SVG media, raster provenance, remote images, outside-media paths, unsupported extensions, and missing assets
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: 44 Markdown-first tests passed after M3A media classification and provenance validation implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md 01-getting-started 02-machines 03-bodyweight
+    result: pass
+    evidence: first-slice Markdown pages pass the updated checker with deterministic media classification
+  - command: python3 -m unittest tests.test_markdown_first_privacy
+    result: pass
+    evidence: 3 privacy tests passed after narrowing an M3A false-positive privacy pattern
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md CONTRIBUTING.md CONTENT_LICENSE.md media docs/changes/markdown-first-gym-primer
+    result: pass
+    evidence: media provenance files and change-local proof records pass the privacy scan
+  - command: markdownlint --disable MD013 -- media/PROVENANCE.md docs/changes/markdown-first-gym-primer/manual-proof/MP6-ai-raster-media-review.md docs/changes/markdown-first-gym-primer/explain-change.md docs/plans/2026-06-27-markdown-first-gym-primer.md docs/plan.md docs/workflows.md specs/markdown-first-primer.test.md
+    result: pass
+    evidence: scoped Markdown lint passed for M3A media provenance and handoff documents with line-length disabled
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M3A implementation and handoff updates
+  - command: rg -n "T14|T15|M3A|R41|R42|R43|R44|R45|R46|R47|R48|R49|R50|R51|R52|R53|AC15|AC16|AC17|AC18|AC19" specs/markdown-first-primer.test.md
+    result: pass
+    evidence: M3A media classification and provenance requirements are mapped in the test spec
+  - command: for id in $(seq 1 53); do rg -q "R${id}\\b" specs/markdown-first-primer.test.md || { echo "missing R${id}"; exit 1; }; done
+    result: pass
+    evidence: R1-R53 appear in the requirement coverage map or test cases after the M3A proof-map update
+  - command: for id in $(seq 1 8); do rg -q "E${id}\\b" specs/markdown-first-primer.test.md || { echo "missing E${id}"; exit 1; }; done; for id in $(seq 1 16); do rg -q "EC${id}\\b" specs/markdown-first-primer.test.md || { echo "missing EC${id}"; exit 1; }; done
+    result: pass
+    evidence: E1-E8 and EC1-EC16 appear in the test spec after the M3A proof-map update
+  - command: python3 -m unittest tests.test_markdown_first_real_pages
+    result: pass
+    evidence: 3 M3 real-page tests passed after adding the five draft pages and README draft links
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: 32 Markdown-first tests passed with the M3 draft pages present
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md 01-getting-started 02-machines 03-bodyweight
+    result: pass
+    evidence: first-slice Markdown pages pass source, disclaimer, scope, media, and citation checks
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md CONTRIBUTING.md CONTENT_LICENSE.md 01-getting-started 02-machines 03-bodyweight docs/changes/markdown-first-gym-primer/manual-proof
+    result: pass
+    evidence: first-slice pages and manual proof records pass the privacy scan
+  - command: rg -n "AI-generated raster illustration|Media provenance record|R41|R42|R43|R44|R45|AC14" specs/markdown-first-primer.md
+    result: pass
+    evidence: draft spec amendment records AI-generated raster illustration and provenance requirements
+  - command: rg -n "media/PROVENANCE.md|asset_path|media_purpose|review_status|media_provenance_missing|media_page_refs_mismatch|AC19" specs/markdown-first-primer.md
+    result: pass
+    evidence: SR-MEDIA-1 spec revision defines centralized provenance, exact mapping, status values, and stable failure codes
+  - command: markdownlint 01-getting-started 02-machines 03-bodyweight docs/changes/markdown-first-gym-primer/manual-proof
+    result: pass
+    evidence: scoped lint passed for the new M3 content and manual proof records
+  - command: markdownlint "**/*.md"
+    result: fail
+    evidence: repository-wide lint has broad pre-existing MD013/table/reference findings and is not a current M3 gate
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M3 draft changes
+  - command: python3 -m unittest tests.test_markdown_first_citations
+    result: pass
+    evidence: 10 citation and source-index tests passed after CR-M2-1 resolution
+  - command: python3 tools/checks/check_markdown_first.py tests/fixtures/markdown-first/citations/missing-global-source-id.md; test $? -eq 1
+    result: pass
+    evidence: adversarial missing global source ID fixture now fails with source_id_missing_from_sources_md for unknown-source
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: 29 Markdown-first contract, template, legacy, page-structure, citation/source-index, guardrail, and privacy tests passed after CR-M2-1 resolution
+  - command: python3 tools/checks/check_markdown_first.py --help
+    result: pass
+    evidence: Markdown-first checker CLI help exits successfully
+  - command: python3 tools/checks/check_privacy.py -- README.md CONTRIBUTING.md SOURCES.md CONTENT_LICENSE.md
+    result: pass
+    evidence: repository guidance files pass the negative-match privacy scan
+  - command: if command -v markdownlint >/dev/null 2>&1; then markdownlint "**/*.md"; else printf 'markdownlint not installed\n'; fi
+    result: skipped
+    evidence: markdownlint not installed; CMD6 deferred as conditional/external
+  - command: python3 -m unittest tests.test_markdown_first_contract tests.test_markdown_first_templates tests.test_markdown_first_legacy_boundary
+    result: pass
+    evidence: 7 M1 contract/template/legacy-boundary tests passed after implementation
+  - command: rg -n "Markdown-first|source of truth|01-getting-started|02-machines|03-bodyweight|SOURCES.md" README.md
+    result: pass
+    evidence: README routes to Markdown-first source-of-truth guidance and planned first-slice paths
+  - command: rg -n "Apache-2.0|CC BY 4.0|right to submit|third-party media|claim-level|not medical advice" CONTRIBUTING.md CONTENT_LICENSE.md
+    result: pass
+    evidence: contributor and license docs include required license, source, media, and safety terms
+  - command: test -f SOURCES.md && test -f CONTENT_LICENSE.md && test -f docs/templates/exercise-card.md && test -f docs/templates/principle-page.md
+    result: pass
+    evidence: M1 source index, content license, and templates exist
+  - command: rg -n "superseded|Markdown-first" docs/plans/2026-06-26-content-schema-foundation.md content/README.md schemas/README.md generated/README.md tools/validation/README.md
+    result: pass
+    evidence: old structured-platform plan and implementation directories are visibly superseded
+  - command: wc -w VISION.md docs/vision/strategic-positioning.md docs/changes/markdown-first-gym-primer/explain-change.md
+    result: pass
+    evidence: VISION.md is 632 words; generated or revised vision limit is 900 words
+  - command: rg -n "^(# |## )" VISION.md
+    result: pass
+    evidence: VISION.md has the required section order and no Open questions section was needed
+  - command: rg -n "\\b(MUST|SHOULD|MAY)\\b" VISION.md
+    result: pass
+    evidence: no requirements vocabulary found in VISION.md
+  - command: rg -n "<!-- vision:(start|end) -->|Markdown primer|source of truth|VISION.md" README.md
+    result: pass
+    evidence: README has one valid marker block and front-matter derived from VISION.md
+  - command: if rg -n "reviewed exercise cards|tiered review|canonical SVG|locale-aware schema|visible reviewer|public review history|generated public content|review-status lifecycle" CONSTITUTION.md AGENTS.md; then exit 1; else printf "no stale old-platform governance phrases found\n"; fi
+    result: pass
+    evidence: no stale old-platform governance phrases found in active governance files
+  - command: rg -n "^(## Project Purpose|## Source Of Truth Order|## Spec-Driven Rules|## Test-Driven Rules|## Architecture Rules|## Security And Privacy Rules|## Compatibility Rules|## Verification Rules|## Review Rules|## Documentation Rules|## Agent Behavior Rules|## Standard Workflow And Manual Skill Use|## Current Assumptions And Gaps)$" CONSTITUTION.md
+    result: pass
+    evidence: constitution retains required governance sections
+  - command: rg -n "^(## Status|## Related proposal|## Goal and context|## Glossary|## Examples first|## Requirements|## Inputs and outputs|## State and invariants|## Error and boundary behavior|## Compatibility and migration|## Observability|## Security and privacy|## Accessibility and UX|## Performance expectations|## Edge cases|## Non-goals|## Acceptance criteria|## Open questions|## Next artifacts|## Follow-on artifacts|## Readiness)$" specs/markdown-first-primer.md
+    result: pass
+    evidence: spec contains required sections
+  - command: rg -n "Review status: approved|Immediate next stage: architecture|Eventual test-spec readiness: conditionally-ready|Material findings: none" docs/changes/markdown-first-gym-primer/reviews/spec-review-r1.md
+    result: pass
+    evidence: spec-review-r1 approved with no material findings and architecture as next stage
+  - command: rg -n "^- approved$|^approved$" specs/markdown-first-primer.md
+    result: pass
+    evidence: spec status normalized to approved after clean spec-review-r1
+  - command: rg -n "Markdown-first citation-based authority|superseded|Superseded by" docs/adr/2026-06-27-markdown-first-citation-based-authority.md docs/adr/2026-06-26-repository-native-reviewed-content.md
+    result: pass
+    evidence: new ADR accepted and old ADR marked superseded
+  - command: rg -n "^(## Introduction and Goals|## Architecture Constraints|## Context and Scope|## Solution Strategy|## Building Block View|## Runtime View|## Deployment View|## Crosscutting Concepts|## Architecture Decisions|## Quality Requirements|## Risks and Technical Debt|## Glossary)$" docs/architecture/system/architecture.md
+    result: pass
+    evidence: canonical architecture retains required arc42 sections
+  - command: rg -n "Review status: approved|Material findings: none|Next stage: plan|Review resolution: not-required" docs/changes/markdown-first-gym-primer/reviews/architecture-review-r1.md
+    result: pass
+    evidence: architecture-review-r1 approved with no material findings and plan as next stage
+  - command: rg -n "^- approved$|architecture-review-r1|ready for execution planning" docs/architecture/system/architecture.md
+    result: pass
+    evidence: architecture status normalized to approved after clean architecture-review-r1
+  - command: rg -n "^- Status:|^- Plan lifecycle state:|^- Terminal disposition:" docs/plans/2026-06-27-markdown-first-gym-primer.md docs/plans/2026-06-26-content-schema-foundation.md
+    result: pass
+    evidence: active and superseded plan lifecycle markers are present
+  - command: rg -n "Current milestone: M1|Next stage: plan-review|Superseded by:" docs/plan.md
+    result: pass
+    evidence: plan index routes Markdown-first to plan-review and preserves the old plan as superseded
+  - command: if rg -n 'Next valid skill: `plan`|ready to normalize to approved|Do not rely on `docs/architecture/system/architecture.md` downstream' docs/workflows.md docs/changes/markdown-first-gym-primer/change.yaml docs/plan.md; then exit 1; else printf 'no stale plan-route or architecture-normalization blockers found\n'; fi
+    result: pass
+    evidence: no stale plan-route or architecture-normalization blockers found
+  - command: if rg -n '<[^>]+>' docs/plans/2026-06-27-markdown-first-gym-primer.md docs/plan.md; then exit 1; else printf 'no template placeholders found in active plan surfaces\n'; fi
+    result: pass
+    evidence: no template placeholders found in active plan surfaces
+  - command: if command -v markdownlint >/dev/null 2>&1; then markdownlint docs/plans/2026-06-27-markdown-first-gym-primer.md docs/plan.md docs/workflows.md; else printf 'markdownlint not installed\n'; fi
+    result: skipped
+    evidence: markdownlint not installed
+  - command: rg -n "Review status: approved|Material findings: none|Immediate next stage: test-spec|Review resolution: not-required" docs/changes/markdown-first-gym-primer/reviews/plan-review-r1.md
+    result: pass
+    evidence: plan-review-r1 approved with no material findings and test-spec as next stage
+  - command: rg -n "^(## Status|## Related spec and plan|## Testing strategy|## Requirement coverage map|## Example coverage map|## Edge case coverage|## Test cases|## Fixtures and data|## Mocking/stubbing policy|## Migration or compatibility tests|## Observability verification|## Security/privacy verification|## Performance checks|## Manual QA checklist|## What not to test and why|## Uncovered gaps|## Next artifacts|## Follow-on artifacts|## Readiness)$" specs/markdown-first-primer.test.md
+    result: pass
+    evidence: test spec contains required sections
+  - command: for id in $(seq 1 40); do rg -q "R${id}\\b" specs/markdown-first-primer.test.md || exit 1; done
+    result: pass
+    evidence: R1-R40 appear in the requirement coverage map or test cases
+  - command: for id in $(seq 1 40); do rg -q "R${id}\\b" specs/markdown-first-primer.test.md || { echo "missing R${id}"; exit 1; }; done; for id in $(seq 1 5); do rg -q "E${id}\\b" specs/markdown-first-primer.test.md || { echo "missing E${id}"; exit 1; }; done; for id in $(seq 1 10); do rg -q "EC${id}\\b" specs/markdown-first-primer.test.md || { echo "missing EC${id}"; exit 1; }; done; printf 'requirements examples and edge cases covered\n'
+    result: pass
+    evidence: requirements, examples, and edge cases covered
+  - command: if rg -n '<[^>]+>' specs/markdown-first-primer.test.md; then exit 1; else printf 'no template placeholders found\n'; fi
+    result: pass
+    evidence: no template placeholders found in test spec
+  - command: rg -n 'current_stage: test-spec|next_stage: test-spec-review|current_test_spec:|current_test_spec_status: draft|Next valid skill: `test-spec-review`|Current readiness: test spec drafted' docs/changes/markdown-first-gym-primer/change.yaml docs/workflows.md
+    result: pass
+    evidence: workflow metadata routes to test-spec-review
+  - command: if rg -n 'Next valid skill: `test-spec`|next_stage: test-spec$|Current readiness: plan-review approved' docs/workflows.md docs/changes/markdown-first-gym-primer/change.yaml; then exit 1; else printf 'no stale test-spec routing found\n'; fi
+    result: pass
+    evidence: no stale test-spec routing found
+  - command: if command -v markdownlint >/dev/null 2>&1; then markdownlint specs/markdown-first-primer.test.md docs/workflows.md; else printf 'markdownlint not installed\n'; fi
+    result: skipped
+    evidence: markdownlint not installed
+  - command: rg -n "Review status: changes-requested|Material findings: TSR1|Immediate next stage: test-spec revision|Implementation handoff: not-allowed|Finding ID: TSR1" docs/changes/markdown-first-gym-primer/reviews/test-spec-review-r1.md
+    result: pass
+    evidence: test-spec-review-r1 recorded TSR1 and blocks implementation handoff
+  - command: rg -n 'test-spec-review-r1|TSR1|review-resolution.md|current_stage: test-spec-review|next_stage: test-spec|open_findings|Next valid skill: `test-spec`|implementation handoff is not allowed' docs/changes/markdown-first-gym-primer/review-log.md docs/changes/markdown-first-gym-primer/review-resolution.md docs/changes/markdown-first-gym-primer/change.yaml docs/workflows.md
+    result: pass
+    evidence: review log, resolution, change metadata, and workflow route back to test-spec with TSR1 open
+  - command: if rg -n '<[^>]+>' docs/changes/markdown-first-gym-primer/reviews/test-spec-review-r1.md docs/changes/markdown-first-gym-primer/review-resolution.md; then exit 1; else printf 'no template placeholders found in test-spec-review artifacts\n'; fi
+    result: pass
+    evidence: no template placeholders found in test-spec-review artifacts
+  - command: rg -n "^(## Milestone and proof ownership|## Test ownership map|## Planned validation command ownership|## Manual proof ownership|## Milestone closeout proof|## TSR1 resolution acceptance criteria)$" specs/markdown-first-primer.test.md
+    result: pass
+    evidence: TSR1 ownership sections are present
+  - command: for id in $(seq 1 13); do rg -q "\\| T${id} \\|" specs/markdown-first-primer.test.md || { echo "missing T${id} ownership"; exit 1; }; done
+    result: pass
+    evidence: T1-T13 have ownership rows
+  - command: for id in $(seq 1 9); do rg -q "\\| CMD${id} \\|" specs/markdown-first-primer.test.md || { echo "missing CMD${id} ownership"; exit 1; }; done
+    result: pass
+    evidence: CMD1-CMD9 have command ownership rows
+  - command: for id in $(seq 1 5); do rg -q "\\| MP${id} \\|" specs/markdown-first-primer.test.md || { echo "missing MP${id} ownership"; exit 1; }; done
+    result: pass
+    evidence: MP1-MP5 have manual proof ownership rows
+  - command: rg -n 'current_stage: test-spec|next_stage: test-spec-review|Current readiness: TSR1 resolution drafted|Next valid skill: `test-spec-review`|ready-for-rereview|Status: ready for test-spec-review R2' docs/changes/markdown-first-gym-primer/change.yaml docs/workflows.md docs/changes/markdown-first-gym-primer/review-resolution.md
+    result: pass
+    evidence: metadata and workflow route TSR1 resolution to test-spec-review R2
+  - command: rg -n "^(## Status|## Related spec and plan|## Testing strategy|## Milestone and proof ownership|## Test ownership map|## Planned validation command ownership|## Manual proof ownership|## Milestone closeout proof|## TSR1 resolution acceptance criteria|## Requirement coverage map|## Example coverage map|## Edge case coverage|## Test cases|## Fixtures and data|## Mocking/stubbing policy|## Migration or compatibility tests|## Observability verification|## Security/privacy verification|## Performance checks|## Manual QA checklist|## What not to test and why|## Uncovered gaps|## Next artifacts|## Follow-on artifacts|## Readiness)$" specs/markdown-first-primer.test.md
+    result: pass
+    evidence: test spec retains required sections and added TSR1 ownership sections
+  - command: for id in $(seq 1 40); do rg -q "R${id}\\b" specs/markdown-first-primer.test.md || { echo "missing R${id}"; exit 1; }; done; for id in $(seq 1 5); do rg -q "E${id}\\b" specs/markdown-first-primer.test.md || { echo "missing E${id}"; exit 1; }; done; for id in $(seq 1 10); do rg -q "EC${id}\\b" specs/markdown-first-primer.test.md || { echo "missing EC${id}"; exit 1; }; done; printf 'requirements examples and edge cases covered\n'
+    result: pass
+    evidence: requirement, example, and edge-case coverage preserved after TSR1 revision
+  - command: if command -v markdownlint >/dev/null 2>&1; then markdownlint specs/markdown-first-primer.test.md docs/changes/markdown-first-gym-primer/review-resolution.md docs/workflows.md; else printf 'markdownlint not installed\n'; fi
+    result: skipped
+    evidence: markdownlint not installed
+  - command: rg -n "Review status: approved|Material findings: none|Immediate next stage: implement|Implementation handoff: allowed|TSR1 is resolved" docs/changes/markdown-first-gym-primer/reviews/test-spec-review-r2.md
+    result: pass
+    evidence: test-spec-review-r2 approved implementation handoff and resolved TSR1
+  - command: rg -n 'closed|resolved|test-spec-review-r2|Current readiness: test-spec-review R2 approved|Next valid skill: `implement`|next_stage: implement|current_test_spec_review: docs/changes/markdown-first-gym-primer/reviews/test-spec-review-r2.md|open_findings: \[\]' docs/changes/markdown-first-gym-primer/review-resolution.md docs/workflows.md docs/changes/markdown-first-gym-primer/review-log.md <(sed -n '1,35p' docs/changes/markdown-first-gym-primer/change.yaml)
+    result: pass
+    evidence: current-state metadata, workflow, review log, and resolution route to implement with TSR1 closed
+  - command: if rg -n 'Next valid skill: `test-spec-review`|next_stage: test-spec-review|Open blockers: TSR1|ready-for-rereview' docs/workflows.md docs/changes/markdown-first-gym-primer/review-resolution.md <(sed -n '1,35p' docs/changes/markdown-first-gym-primer/change.yaml); then exit 1; else printf 'no stale test-spec-review blocker routing found in current state\n'; fi
+    result: pass
+    evidence: no stale test-spec-review blocker routing found in current state
+  - command: if rg -n '<[^>]+>' docs/changes/markdown-first-gym-primer/reviews/test-spec-review-r2.md docs/changes/markdown-first-gym-primer/review-resolution.md; then exit 1; else printf 'no template placeholders found in R2 artifacts\n'; fi
+    result: pass
+    evidence: no template placeholders found in R2 artifacts
+  - command: if command -v markdownlint >/dev/null 2>&1; then markdownlint docs/changes/markdown-first-gym-primer/reviews/test-spec-review-r2.md docs/changes/markdown-first-gym-primer/review-resolution.md docs/workflows.md; else printf 'markdownlint not installed\n'; fi
+    result: skipped
+    evidence: markdownlint not installed
+ci: not-configured
