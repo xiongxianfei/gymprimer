@@ -4,6 +4,11 @@
 
 accepted
 
+Amended by
+`docs/adr/2026-06-29-expanded-raster-media-purposes.md` for expanded
+Responsible Breadth page media purposes. This ADR remains active for original
+Markdown-first v0.1 media and for the shared centralized provenance mechanism.
+
 ## Context
 
 The Markdown-first v0.1 spec now allows pictures only when they are necessary

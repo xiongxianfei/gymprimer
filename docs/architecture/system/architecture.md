@@ -2,9 +2,10 @@
 
 ## Status
 
-- approved
+- draft amendment
 
-This layout-view amendment was approved by
+This media-purpose amendment is ready for architecture review. The prior
+layout-view amendment was approved by
 `docs/changes/apt-pattern-architecture/reviews/architecture-review-r1.md`.
 
 Prior approved baselines:
@@ -25,9 +26,11 @@ Prior approved baselines:
   - `../../changes/markdown-first-gym-primer/reviews/spec-review-r1.md`
   - `../../changes/markdown-first-gym-primer/reviews/spec-review-r3.md`
   - `../../changes/responsible-breadth/reviews/spec-review-r2.md`
+  - `../../changes/apt-pattern-architecture/reviews/spec-review-r2.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
+  - `../../adr/2026-06-29-expanded-raster-media-purposes.md`
   - `../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md`
   - `../../adr/2026-06-26-repository-native-reviewed-content.md` (superseded)
 
@@ -49,7 +52,7 @@ Goals:
 - Keep Markdown pages as canonical source.
 - Make citation coverage, disclaimers, scope boundaries, media provenance, and
   privacy checkable.
-- Allow only necessary v0.1 supporting visuals with deterministic provenance.
+- Allow only necessary supporting visuals with deterministic provenance.
 - Keep mdBook optional and derived.
 - Add expanded static content without introducing diagnosis, treatment,
   individualized programming, symptom collection, or runtime decision support.
@@ -83,8 +86,11 @@ Goals:
 - Symptom-checker flows, diagnostic decision trees, personalized plans,
   treatment protocols, rehabilitation pathways, return-to-training
   prescriptions, and specialized-population content remain out of scope.
-- Images are optional in v0.1 and may be used only when necessary for equipment
-  identification or key movement illustration.
+- Images are optional. Original Markdown-first v0.1 media remains limited to
+  equipment identification and key movement illustration. Expanded Responsible
+  Breadth pages may also use generated raster support images for pattern
+  alignment, anatomical region context, and compact exercise previews when
+  those images satisfy the stricter expanded media-purpose rules.
 - AI-generated raster illustrations must be project-reviewed support assets
   with one matching row in `media/PROVENANCE.md`.
 - Safety claims require claim-level citations and page-local sources.
@@ -108,8 +114,8 @@ Out of scope:
 - AI-generated exercise guidance as source of truth.
 - User-input collection, symptom triage, diagnosis, personalized programming,
   treatment planning, and rehab decision support.
-- Decorative, stock, screenshot, commercial-machine, anatomy-poster,
-  medical, rehab, or identifying-person media in v0.1.
+- Decorative, stock, screenshot, commercial-machine, borrowed anatomy-poster,
+  diagnostic/pathology-implying, rehab-protocol, or identifying-person media.
 
 See [diagrams/context.mmd](diagrams/context.mmd) for the C4 system context view.
 
@@ -123,9 +129,12 @@ The architecture favors:
 - page-local sources over global-only bibliography;
 - manual or lightweight checks over schema/lifecycle gates;
 - no image over unnecessary image use;
-- simple original SVG over generated raster when a vector diagram is enough;
-- human-reviewed AI-generated raster only when needed for equipment
-  identification or key movement illustration;
+- high-quality human-reviewed raster over SVG for expanded pages when realistic
+  body position, anatomical context, or beginner-readable movement detail is
+  needed;
+- simple original SVG only when it is sufficient for beginner comprehension;
+- human-reviewed AI-generated raster only when needed for an allowed media
+  purpose;
 - centralized media provenance over sidecar-per-image metadata;
 - path-classified expanded static pages over a database or CMS taxonomy;
 - page-local safety boundaries and review metadata over hidden lifecycle state;
@@ -149,7 +158,7 @@ does not get flattened together with workflow evidence or tooling.
 | --- | --- | --- |
 | Project references | `README.md`, `CONTRIBUTING.md`, `SOURCES.md`, `CONTENT_LICENSE.md`, `about/red-flags.md` | Project entry, contribution rules, reusable source index, safety routing, and licensing. |
 | Content | `01-getting-started/`, `02-machines/`, `03-bodyweight/`, `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/` | Canonical Markdown product pages. Current v0.1 compatibility keeps numbered exercise-literacy paths; target normalization is one canonical content directory per content type. |
-| Media | `media/`, `media/PROVENANCE.md`, currently `media/equipment/` and `media/movements/` | Optional supporting illustrations referenced by Markdown. Target normalization is subject co-location under `media/<content-type>/<slug>/` after a migration spec. |
+| Media | `media/`, `media/PROVENANCE.md`, currently `media/equipment/` and `media/movements/` | Optional supporting illustrations referenced by Markdown. Raster assets use provenance purpose values to distinguish equipment, movement, pattern alignment, anatomy context, and exercise previews. Target normalization is subject co-location under `media/<content-type>/<slug>/` after a migration spec. |
 | Governance | `docs/proposals/`, `docs/adr/`, `docs/architecture/` | Accepted direction, durable decisions, and canonical architecture. These remain under `docs/` per RigorLoop workflow requirements. |
 | Tooling and operations | `tools/`, `specs/`, `docs/changes/`, `docs/plans/`, `docs/learn/`, optional `book.toml` and `SUMMARY.md` | Validation, specs/test specs, plans, proof records, learning records, and optional derived-site configuration. These serve content but are not product content blocks. |
 
@@ -256,7 +265,13 @@ Media validation flow:
 8. The row must have required fields, `asset_type = ai_generated_raster`, an
    allowed `media_purpose`, `review_status = approved`, and `page_refs` that
    include the referencing Markdown page.
-9. Remote image URLs, image paths outside `media/`, unsupported extensions,
+9. For original Markdown-first v0.1 pages, allowed `media_purpose` values
+   remain `equipment_identification` and `key_movement_illustration`.
+10. For expanded Responsible Breadth pages, allowed `media_purpose` values are
+   `equipment_identification`, `key_movement_illustration`,
+   `pattern_alignment_illustration`, `anatomical_region_illustration`, and
+   `exercise_preview_illustration`.
+11. Remote image URLs, image paths outside `media/`, unsupported extensions,
    missing local media files, missing provenance, incomplete provenance,
    non-approved provenance, out-of-scope purpose, or mismatched `page_refs`
    block promotion.
@@ -363,10 +378,16 @@ Source quality and proof:
 Media:
 
 - Images are optional; a text-only page can be valid.
-- Allowed v0.1 media purposes are `equipment_identification` and
-  `key_movement_illustration`.
-- Media choice follows this preference order: no image, simple original SVG,
-  then AI-generated raster illustration when SVG is not enough.
+- Original Markdown-first v0.1 media purposes are `equipment_identification`
+  and `key_movement_illustration`.
+- Expanded Responsible Breadth media purposes add
+  `pattern_alignment_illustration`, `anatomical_region_illustration`, and
+  `exercise_preview_illustration`.
+- Expanded pages should prefer high-quality human-reviewed raster
+  illustrations over SVG diagrams when the visual needs realistic body
+  position, anatomical context, or beginner-readable movement detail.
+- SVG diagrams remain valid only when simple enough for beginner comprehension
+  and when they pass visual-necessity review.
 - In v0.1 promoted pages, original educational diagrams are SVG files under
   `media/`.
 - Any raster image under `media/` with extension `.png`, `.jpg`, `.jpeg`, or
@@ -374,6 +395,14 @@ Media:
 - AI-generated raster illustrations require one centralized provenance row in
   `media/PROVENANCE.md`.
 - Provenance matching is exact by normalized repository-relative `asset_path`.
+- `pattern_alignment_illustration` is limited to non-diagnostic visual
+  comparison or alignment education on pattern pages.
+- `anatomical_region_illustration` is limited to plain anatomical region
+  context on condition pages and must not imply diagnosis, pathology, or
+  treatment.
+- `exercise_preview_illustration` is limited to compact exercise support images
+  referenced from pattern or condition pages; the linked exercise page remains
+  the source of truth for setup and movement instructions.
 - Original raster drawings, original photos, third-party licensed raster
   assets, screenshots, stock assets, and commercial machine images are out of
   scope unless a later spec revision changes the media contract.
@@ -409,6 +438,7 @@ Observability:
 
 - [ADR 2026-06-27: Markdown-first citation-based authority](../../adr/2026-06-27-markdown-first-citation-based-authority.md) - Make Markdown the v0.1 source of truth and use citation-based authority.
 - [ADR 2026-06-28: AI-generated raster media provenance](../../adr/2026-06-28-ai-generated-raster-media-provenance.md) - Allow narrow AI-generated raster support assets with centralized provenance.
+- [ADR 2026-06-29: Expanded raster media purposes](../../adr/2026-06-29-expanded-raster-media-purposes.md) - Add expanded-page raster purposes for pattern alignment, anatomical region context, and exercise previews.
 - [ADR 2026-06-29: Responsible Breadth static content boundaries](../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md) - Add path-classified expanded static content classes with higher-bar proof, red-flag routing, and no runtime personalization.
 - [ADR 2026-06-26: Repository-native reviewed content](../../adr/2026-06-26-repository-native-reviewed-content.md) - Superseded structured-platform decision retained as history.
 
@@ -421,6 +451,8 @@ Observability:
 | Scope safety | A contributor adds rehab, diagnosis, pain treatment, or advanced lifting content. | The page is blocked before promotion. |
 | Media licensing | A page references media. | The media is original or clearly project-licensed and referenced by relative path. |
 | Media provenance | A page references an AI-generated raster image. | The image has one approved `media/PROVENANCE.md` row with exact `asset_path`, valid purpose, required fields, and matching `page_refs`. |
+| Expanded media purpose | A pattern page references an alignment image. | The provenance row uses `pattern_alignment_illustration`, not a generic movement purpose. |
+| Condition image safety | A condition page references an anatomical-region image. | The image gives region context without implying diagnosis, pathology, or treatment. |
 | Page classification | An expanded static content page is reviewed. | Its path maps to exactly one page class or the page declares one equivalent class before promotion. |
 | Red-flag routing | A pattern or condition page discusses self-management themes. | The page links the red-flags reference before self-management discussion. |
 | Source quality | A condition page cites three weak sources. | The page fails until it has the required institutional, guideline, patient-education, or supporting source mix. |
@@ -442,6 +474,9 @@ Observability:
   library grows beyond the first slice.
 - AI-generated raster illustrations may look plausible while showing unsafe or
   misleading setup details; human review remains mandatory.
+- Expanded anatomy and alignment raster images may imply diagnosis or pathology
+  if prompted or reviewed poorly; purpose-specific manual visual review remains
+  mandatory.
 - Expanded static content source quality and non-prescription boundaries are partly
   semantic and will depend on disciplined manual proof until tooling matures.
 - Expanded top-level directories may create navigation sprawl if README and
@@ -473,18 +508,20 @@ Observability:
 
 ## Next artifacts
 
-- Architecture review for this repository-layout view update.
+- Architecture review for this media-purpose validation-boundary amendment.
 - A future spec/ADR migration for physical directory normalization before
   moving published Markdown paths or media paths.
 
 ## Follow-on artifacts
 
-- None for implementation from this architecture update alone. Physical
-  directory migration requires a spec amendment, architecture-review approval,
-  test-spec updates, and a migration plan.
+- New ADR: `../../adr/2026-06-29-expanded-raster-media-purposes.md`.
+- Physical directory migration still requires a spec amendment,
+  architecture-review approval, test-spec updates, and a migration plan.
 
 ## Readiness
 
-This architecture package is ready for architecture review for the layout-view
-update. It is not implementation-ready for physical directory migration until
-the governing specs and ADRs are amended and reviewed.
+This architecture package is ready for architecture review for the expanded
+media-purpose amendment. It is not implementation-ready for validation changes
+until architecture review is recorded and any findings are resolved. It is not
+implementation-ready for physical directory migration until the governing specs
+and ADRs are amended and reviewed for that separate migration.

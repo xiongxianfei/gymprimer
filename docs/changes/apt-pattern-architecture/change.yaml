@@ -1,7 +1,7 @@
 change_id: apt-pattern-architecture
 proposal: docs/proposals/2026-06-29-responsible-breadth.md
-status: implementation-review-needed
-current_stage: code-review
+status: architecture-review-needed
+current_stage: architecture-review
 created_date: 2026-06-29
 notes:
   - Follow-up to the merged Responsible Breadth proof slice.
@@ -9,9 +9,11 @@ notes:
   - Keeps the existing Responsible Breadth contract headings intact while adding operational subsections inside the approved page shape.
   - Adds standalone exercise pages and generated raster sequence images so the APT page does not link to non-existent solution content.
   - Validation and manual proof must confirm the page remains education, not diagnosis, treatment, individualized care, or a posture-correction promise.
+  - Spec-review R2 approved the media-purpose amendment; architecture now needs review for the expanded raster media-purpose validation boundary.
 validation:
   - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 16 tests"
   - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 51 tests"
   - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md about patterns conditions principles programs exercises -- passed, checked 13 Markdown files"
   - "python3 tools/checks/check_privacy.py README.md SOURCES.md about patterns conditions principles programs exercises docs/templates docs/changes/apt-pattern-architecture docs/changes/responsible-breadth docs/learn media -- passed, checked 77 files"
+  - "python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/architecture/system/diagrams/container.mmd docs/adr/2026-06-28-ai-generated-raster-media-provenance.md docs/adr/2026-06-29-expanded-raster-media-purposes.md -- passed, checked 4 files"
   - "git diff --check -- passed"
