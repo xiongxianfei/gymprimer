@@ -2,11 +2,11 @@
 
 <!-- vision:start -->
 
-GymPrimer is an open-source Markdown primer for gym beginners. It teaches exercise literacy before workout prescription through short, citation-backed pages that explain what an exercise is for, how to set up the equipment, what the movement should feel like, common mistakes, easier options, and when to stop.
+GymPrimer is an open-source Markdown primer for gym beginners. It teaches exercise, movement, and training literacy through short, citation-backed pages that explain what an exercise is for, how to set up equipment, what movement should feel like, what common problems may mean in general, how basic training structure works, and when to stop and seek help.
 
-The repository is the primary product. GymPrimer trades breadth and polish for verifiable beginner understanding: a small Markdown corpus, plain language, conservative scope, prominent disclaimers, and sources a reader can check. Optional mdBook HTML can improve navigation later, but Markdown remains the source of truth.
+The repository is the primary product. GymPrimer trades breadth, polish, and personalization for verifiable beginner understanding: Markdown-first pages, plain language, citation discipline, honest authorship, and red-flag routing. Optional mdBook HTML can improve navigation later, but Markdown remains the source of truth.
 
-It is for adults in their first ninety days of regular gym training, people returning after a long break, and maintainers, authors, translators, illustrators, and reviewers who want to improve beginner exercise education in public. Launch content is English-first, with Chinese aliases and later separate-locale translation possible after the English format is proven.
+It is for adults in their first ninety days of regular gym training, or returning after a long break, who feel lost around machines, simple dumbbell movements, bodyweight progressions, recurring aches, common posture patterns, or basic training structure. It is also for maintainers, authors, translators, illustrators, and reviewers who want to improve beginner exercise education in public.
 
 <!-- vision:end -->
 
@@ -49,6 +49,18 @@ Current active support files:
 - [CONTENT_LICENSE.md](./CONTENT_LICENSE.md): license split for code/tooling and written content/original diagrams.
 - [docs/templates/exercise-card.md](./docs/templates/exercise-card.md): exercise-page template.
 - [docs/templates/principle-page.md](./docs/templates/principle-page.md): principle-page template.
+- [about/red-flags.md](./about/red-flags.md): red-flag routing reference for safety-relevant pages.
+- [docs/templates/pattern-page.md](./docs/templates/pattern-page.md): pattern-page template.
+- [docs/templates/condition-page.md](./docs/templates/condition-page.md): condition-page template.
+- [docs/templates/programming-principle-page.md](./docs/templates/programming-principle-page.md): programming-principle template.
+- [docs/templates/program-example-page.md](./docs/templates/program-example-page.md): static program-example template.
+
+Promoted Responsible Breadth proof-slice pages:
+
+- [Anterior Pelvic Tilt](./patterns/anterior-pelvic-tilt.md)
+- [Non-Specific Chronic Low Back Pain](./conditions/non-specific-chronic-low-back-pain.md)
+- [How Many Days a Week Should I Train?](./principles/how-many-days-a-week.md)
+- [Generic 3-Day Full-Body Example](./programs/generic-3-day-full-body-example.md)
 
 Draft first-slice pages, not yet promoted:
 
@@ -67,7 +79,8 @@ These pages must not be described as published, approved, expert-reviewed, or pr
 - `CONTRIBUTING.md`: contribution rules for Markdown-first content.
 - `CONTENT_LICENSE.md`: license posture for code/tooling and content/media.
 - `docs/templates/`: source templates for exercise and principle pages.
-- `01-getting-started/`, `02-machines/`, `03-bodyweight/`: planned first-slice Markdown directories.
+- `01-getting-started/`, `02-machines/`, `03-bodyweight/`: planned exercise-literacy Markdown directories.
+- `about/`, `patterns/`, `conditions/`, `principles/`, `programs/`: Responsible Breadth Markdown directories.
 - `media/`: optional original SVG diagrams and approved AI-generated raster
   illustrations with provenance; no third-party screenshots, stock photos, or
   borrowed public web images for v0.1.
@@ -83,7 +96,15 @@ For M1, run the Markdown-first contract tests and structural checks:
 python3 -m unittest tests.test_markdown_first_contract tests.test_markdown_first_templates tests.test_markdown_first_legacy_boundary
 ```
 
-Later milestones add `tools/checks/` for Markdown-first source, disclaimer, citation, scope, media, and privacy checks. The old `tools/validation/` commands are historical structured-platform tooling, not active v0.1 product validation.
+Responsible Breadth validation uses:
+
+```sh
+python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'
+python3 tools/checks/check_markdown_first.py README.md SOURCES.md about patterns conditions principles programs
+python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md about patterns conditions principles programs docs/changes/responsible-breadth media
+```
+
+The old `tools/validation/` commands are historical structured-platform tooling, not active v0.1 product validation.
 
 ## Maintainers
 

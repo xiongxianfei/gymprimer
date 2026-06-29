@@ -20,7 +20,7 @@ When sources conflict, agents MUST stop and surface the conflict unless the requ
 
 ## Work Rules
 
-- Agents MUST keep GymPrimer aligned with `VISION.md`: a Markdown-first, citation-based exercise-literacy primer for beginners, not a workout planner, clinical product, AI coach, hosted app, or video-first media project.
+- Agents MUST keep GymPrimer aligned with `CONSTITUTION.md` and `VISION.md`: a Markdown-first, citation-based beginner primer, not a workout planner, clinical product, AI coach, hosted app, or video-first media project. Expanded pattern, condition, programming-literacy, or program-example content MUST NOT rely on the Responsible Breadth direction until ADRs, specs, architecture, plans, tests, and validation are updated in source-of-truth order.
 - Agents MUST use the standard workflow for material changes: proposal when direction is uncertain, spec before behavior or content-contract changes, architecture before cross-component or data-model decisions, plan before multi-step implementation, tests before production changes, review before completion claims, and verification before handoff.
 - Agents MAY invoke an individual skill directly for isolated work, but MUST report what artifact was changed and what validation was run.
 - Agents MUST NOT implement substantive behavior, Markdown content contracts, citation policy, safety, localization, licensing, generated output, or media-source changes from chat alone. Capture the requirement in the appropriate durable artifact first.
