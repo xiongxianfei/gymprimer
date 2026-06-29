@@ -1,0 +1,17 @@
+change_id: apt-pattern-architecture
+proposal: docs/proposals/2026-06-29-responsible-breadth.md
+status: implementation-review-needed
+current_stage: code-review
+created_date: 2026-06-29
+notes:
+  - Follow-up to the merged Responsible Breadth proof slice.
+  - Refines the first pattern page into a reusable reader journey: pain point, observable pattern, movement contributors, and linked exercise options.
+  - Keeps the existing Responsible Breadth contract headings intact while adding operational subsections inside the approved page shape.
+  - Adds standalone exercise pages and generated raster sequence images so the APT page does not link to non-existent solution content.
+  - Validation and manual proof must confirm the page remains education, not diagnosis, treatment, individualized care, or a posture-correction promise.
+validation:
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 16 tests"
+  - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 51 tests"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md about patterns conditions principles programs exercises -- passed, checked 13 Markdown files"
+  - "python3 tools/checks/check_privacy.py README.md SOURCES.md about patterns conditions principles programs exercises docs/templates docs/changes/apt-pattern-architecture docs/changes/responsible-breadth docs/learn media -- passed, checked 77 files"
+  - "git diff --check -- passed"

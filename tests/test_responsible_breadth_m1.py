@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -362,6 +363,7 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
                 "conditions",
                 "principles",
                 "programs",
+                "exercises",
             ],
             cwd=ROOT,
             text=True,
@@ -371,6 +373,31 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
         )
 
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_anterior_pelvic_tilt_solution_links_have_real_targets(self) -> None:
+        page = ROOT / "patterns/anterior-pelvic-tilt.md"
+        text = page.read_text(encoding="utf-8")
+        expected_exercises = (
+            "exercises/dead-bug.md",
+            "exercises/plank.md",
+            "exercises/bird-dog.md",
+            "exercises/glute-bridge.md",
+            "exercises/hip-hinge.md",
+            "exercises/kneeling-hip-flexor-stretch.md",
+        )
+
+        for relative_path in expected_exercises:
+            pattern_link = "../" + relative_path
+            self.assertIn(pattern_link, text)
+            exercise_path = ROOT / relative_path
+            self.assertTrue(exercise_path.exists(), relative_path)
+
+            exercise_text = exercise_path.read_text(encoding="utf-8")
+            image_links = re.findall(r"!\[[^\]]+\]\((../media/movements/[^)]+\.png)\)", exercise_text)
+            self.assertTrue(image_links, f"{relative_path} needs at least one raster example")
+            for image_link in image_links:
+                image_path = (exercise_path.parent / image_link).resolve()
+                self.assertTrue(image_path.exists(), image_link)
 
     def test_first_expanded_pages_are_promoted_after_m4_evidence(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
