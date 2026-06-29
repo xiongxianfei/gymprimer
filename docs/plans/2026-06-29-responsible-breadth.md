@@ -433,6 +433,9 @@ changes begin.
   pattern-page reader journey, exercise preview annotations, existing exercise
   targets, and expanded raster media-purpose validation. The follow-up is ready
   for code-review and does not reopen original M1-M4 scope.
+- 2026-06-29: Removed duplicate pattern-page preview image copies after
+  review. The pattern page now links exercise options textually, while exercise
+  pages own the sequence images.
 
 ## Decision log
 
@@ -461,7 +464,7 @@ changes begin.
   as planned; no `SUMMARY.md`, `book.toml`, generated HTML, or media files were
   added.
 - APT follow-up touched `patterns/anterior-pelvic-tilt.md`,
-  `media/PROVENANCE.md`, generated raster preview assets,
+  `media/PROVENANCE.md`, generated raster sequence provenance,
   `tools/checks/check_markdown_first.py`, Responsible Breadth tests, and
   change-local proof/rationale. Constitution, vision, proposal, spec,
   architecture, ADR, and original M1-M4 scope are unaffected.

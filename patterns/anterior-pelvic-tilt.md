@@ -109,17 +109,14 @@ These exercises train the rib-cage and pelvis relationship without forcing the l
   - *Fix reason:* trains anti-extension control while the arms and legs move.
   - *Used muscles:* rectus abdominis, obliques, and transverse abdominis primary; hip flexors secondary in a controlled range.
   - *Important note:* shorten the arm or leg reach if the low back lifts away from the floor.
-  - ![Dead bug position preview](../media/movements/dead-bug-preview.png)
 - **[Plank](../exercises/plank.md)**
   - *Fix reason:* trains whole-body trunk stiffness without hanging on the low-back arch.
   - *Used muscles:* rectus abdominis, obliques, transverse abdominis, glutes, and shoulders.
   - *Important note:* keep ribs down and glutes lightly engaged; sagging at the hips reinforces the same arching strategy.
-  - ![Plank position preview](../media/movements/plank-preview.png)
 - **[Bird dog](../exercises/bird-dog.md)**
   - *Fix reason:* trains trunk stability while hip extension and shoulder flexion happen together.
   - *Used muscles:* gluteus maximus, lumbar extensors, deep trunk muscles, shoulders, and hamstrings.
   - *Important note:* move slowly and keep the pelvis level instead of letting one hip drop or hike.
-  - ![Bird dog position preview](../media/movements/bird-dog-preview.png)
 
 ### 4. Strengthen hip extensors
 
@@ -129,12 +126,10 @@ These exercises build glute and hamstring capacity so hip extension does not hav
   - *Fix reason:* trains hip extension with low spinal load.
   - *Used muscles:* gluteus maximus primary; hamstrings and trunk muscles secondary.
   - *Important note:* finish by squeezing the glutes, not by driving the ribs up and over-arching the low back.
-  - ![Glute bridge position preview](../media/movements/glute-bridge-preview.png)
 - **[Hip hinge](../exercises/hip-hinge.md)**
   - *Fix reason:* teaches bending from the hips while keeping the ribs and pelvis organized.
   - *Used muscles:* hamstrings and gluteus maximus primary; spinal erectors and trunk muscles secondary.
   - *Important note:* stop the descent before the low back rounds or over-arches. [Mayo Clinic][mayo-weight-training]
-  - ![Hip hinge position preview](../media/movements/hip-hinge-preview.png)
 
 ### 5. Use hip-flexor mobility as an option, not proof
 
@@ -144,7 +139,6 @@ Stretching can be useful for some people, but a stretch helping does not prove t
   - *Fix reason:* gives the iliopsoas and rectus femoris a simple stretch option while practicing pelvis position.
   - *Used muscles:* stretches iliopsoas and rectus femoris on the rear leg; lightly uses glutes and trunk muscles for position.
   - *Important note:* gently squeeze the rear glute and tuck the pelvis before moving forward; leaning back moves the stretch into the low back.
-  - ![Kneeling hip-flexor stretch position preview](../media/movements/kneeling-hip-flexor-stretch-preview.png)
 
 ### 6. Train the body consistently, not specially
 
