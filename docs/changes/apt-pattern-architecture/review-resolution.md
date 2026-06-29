@@ -1,16 +1,16 @@
 # Review Resolution: APT Pattern Architecture
 
-## Open findings
+## Findings
 
 | Finding ID | Source review | Status | Summary |
 | --- | --- | --- | --- |
-| SR-APT-SPEC-1 | `docs/changes/apt-pattern-architecture/reviews/spec-review-r1.md` | addressed-pending-review | Generated raster support for pattern and condition visuals lacked a deterministic `media_purpose` compatibility rule with the inherited Markdown-first provenance enum. |
+| SR-APT-SPEC-1 | `docs/changes/apt-pattern-architecture/reviews/spec-review-r1.md` | resolved | Generated raster support for pattern and condition visuals lacked a deterministic `media_purpose` compatibility rule with the inherited Markdown-first provenance enum. |
 
 ## Spec-review R1 resolution
 
 ### SR-APT-SPEC-1 - Generated pattern and condition visuals need media-purpose compatibility
 
-Status: addressed pending spec-review R2.
+Status: resolved by `docs/changes/apt-pattern-architecture/reviews/spec-review-r2.md`.
 
 Required outcome: revise `specs/responsible-breadth.md` so generated raster
 images used by pattern and condition pages have a deterministic provenance
@@ -34,4 +34,7 @@ Resolution:
 - Added acceptance coverage requiring deterministic expanded-page media-purpose
   values.
 
-Ready to request spec-review R2.
+Spec-review R2 approved the amended spec with no material findings. The next
+stage is architecture because the new expanded-page media-purpose enum affects
+architecture/ADR validation boundaries before test-spec or implementation can
+rely on it.
