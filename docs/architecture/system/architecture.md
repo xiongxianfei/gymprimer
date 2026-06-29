@@ -2,10 +2,11 @@
 
 ## Status
 
-- draft amendment
+- approved
 
-This media-purpose amendment is ready for architecture review. The prior
-layout-view amendment was approved by
+This media-purpose amendment was approved by
+`docs/changes/apt-pattern-architecture/reviews/architecture-review-r2.md`. The
+prior layout-view amendment was approved by
 `docs/changes/apt-pattern-architecture/reviews/architecture-review-r1.md`.
 
 Prior approved baselines:
@@ -508,7 +509,7 @@ Observability:
 
 ## Next artifacts
 
-- Architecture review for this media-purpose validation-boundary amendment.
+- Test-spec review for the media-purpose validation-boundary amendment.
 - A future spec/ADR migration for physical directory normalization before
   moving published Markdown paths or media paths.
 
@@ -520,8 +521,7 @@ Observability:
 
 ## Readiness
 
-This architecture package is ready for architecture review for the expanded
-media-purpose amendment. It is not implementation-ready for validation changes
-until architecture review is recorded and any findings are resolved. It is not
-implementation-ready for physical directory migration until the governing specs
-and ADRs are amended and reviewed for that separate migration.
+This architecture package is approved for the expanded media-purpose amendment.
+Validation changes may rely on it after test-spec review maps the proof. It is
+not implementation-ready for physical directory migration until the governing
+specs and ADRs are amended and reviewed for that separate migration.
