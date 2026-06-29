@@ -2,9 +2,10 @@
 
 ## Status
 
-- draft amendment
+- approved
 
-This layout-view amendment is ready for architecture review.
+This layout-view amendment was approved by
+`docs/changes/apt-pattern-architecture/reviews/architecture-review-r1.md`.
 
 Prior approved baselines:
 
