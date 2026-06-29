@@ -1,16 +1,14 @@
 C4Context
-  title GymPrimer Content Platform - System Context
+  title GymPrimer Markdown-First Primer - System Context
 
-  Person(author, "Author or contributor", "Creates and revises exercise education content, taxonomy, policies, and media metadata.")
-  Person(reviewer, "Expert reviewer", "Approves card, safety, clinical, locale, taxonomy, or licensing changes according to review tier.")
-  Person(beginner, "Beginner reader", "Uses future public GymPrimer pages generated from reviewed content.")
+  Person(beginner, "Beginner reader", "Reads Markdown pages directly in GitHub or a local clone.")
+  Person(contributor, "Contributor or maintainer", "Authors, reviews, and promotes Markdown content and evidence.")
 
-  System(repo, "GymPrimer repository", "Reviewed source content, schemas, media metadata, audit records, validation tooling, and generated publication artifacts.")
-  System_Ext(future_ui, "Future website/app", "Renders validated generated content. Not defined in this architecture.")
-  System_Ext(future_ai, "Future constrained AI layer", "May retrieve from reviewed generated content later. Not a source of truth.")
+  System(repo, "GymPrimer repository", "Canonical Markdown primer, sources, contribution rules, optional diagrams, checks, and workflow evidence.")
+  System_Ext(mdbook, "mdBook", "Optional local/static HTML renderer. Derived output only.")
+  System_Ext(public_sources, "Public authoritative sources", "External health, fitness, and instructional references cited by pages.")
 
-  Rel(author, repo, "Authors source files and opens review changes")
-  Rel(reviewer, repo, "Reviews content digests and records approval events")
-  Rel(repo, future_ui, "Publishes validated generated content")
-  Rel(beginner, future_ui, "Reads reviewed exercise guidance")
-  Rel(future_ai, repo, "Reads reviewed generated content if later approved")
+  Rel(beginner, repo, "Reads Markdown pages and source links")
+  Rel(contributor, repo, "Authors pages, checks citations, and records evidence")
+  Rel(repo, mdbook, "May generate derived HTML from Markdown")
+  Rel(repo, public_sources, "Links claim-level citations to")

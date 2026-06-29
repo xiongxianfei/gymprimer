@@ -1,4 +1,4 @@
-# GymPrimer System Architecture
+# GymPrimer Markdown-First Architecture
 
 ## Status
 
@@ -6,204 +6,311 @@
 
 ## Related artifacts
 
-- Proposal: `../../proposals/2026-06-26-beginner-fitness-exercise-education-platform.md`
-- Spec: `../../../specs/content-schema.md`
-- Spec review: `../../changes/beginner-fitness-exercise-education-platform/reviews/spec-review-r3.md`
-- Plan: `../../plans/2026-06-26-content-schema-foundation.md`
+- Proposal: `../../proposals/2026-06-27-markdown-first-gym-primer.md`
+- Spec: `../../../specs/markdown-first-primer.md`
+- Spec reviews:
+  - `../../changes/markdown-first-gym-primer/reviews/spec-review-r1.md`
+  - `../../changes/markdown-first-gym-primer/reviews/spec-review-r3.md`
 - ADRs:
-  - `../../adr/2026-06-26-repository-native-reviewed-content.md`
+  - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
+  - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
+  - `../../adr/2026-06-26-repository-native-reviewed-content.md` (superseded)
 
 ## Introduction and Goals
 
-This architecture defines how GymPrimer should store, validate, review, publish, and render the approved content schema for beginner exercise education. It covers the content platform boundary, not a complete end-user application stack.
+This architecture defines how GymPrimer is shaped as a Markdown-first beginner exercise-literacy primer for v0.1. The repository itself is the product surface: readers should be able to open Markdown pages directly, inspect sources, and understand the first five pages without an app, database, generated public JSON package, or hosted website.
 
 Goals:
 
-- Keep reviewed exercise content, taxonomy, policy templates, audit events, and canonical SVG media versioned in the repository.
-- Make publication a validation result, not an author assertion.
-- Preserve English-first launch content with `en-US` as the required v1 English locale and `zh-Hans` as a first-class future locale.
-- Keep reviewed text and SVG step cards as canonical source-of-truth media.
-- Support later UI, search, analytics, and constrained AI layers without making them authoritative.
-
-Stakeholders are beginner readers, content authors, expert reviewers, translators, illustrators, maintainers, and future application engineers.
+- Keep Markdown pages as canonical source.
+- Make citation coverage, disclaimers, scope boundaries, media provenance, and
+  privacy checkable.
+- Allow only necessary v0.1 supporting visuals with deterministic provenance.
+- Keep mdBook optional and derived.
+- Preserve old platform artifacts as historical context without treating them as active implementation guidance.
 
 ## Architecture Constraints
 
-- `CONSTITUTION.md` and `VISION.md` govern scope: GymPrimer is educational, not medical advice, rehab, workout prescription, or AI coaching.
-- `specs/content-schema.md` is the approved behavior contract for content records, lifecycle state, locale keys, taxonomy values, review routing, audit events, and validation outcomes.
-- Public cards must include `locales.en-US`; bare `en` is invalid in v1.
-- Public content must pass schema, taxonomy, locale, review, lifecycle, licensing, safety-language, and media checks before publication.
-- The repository currently has no app stack, package manager, CI, source tree, deployment target, or existing content fixtures; this architecture must not assume a framework.
-- No user accounts, user health profiles, private reviewer contact details, secrets, PHI, or personalized medical data are part of this content architecture.
+- `CONSTITUTION.md`, `VISION.md`, and `specs/markdown-first-primer.md` govern this architecture.
+- The first slice is exactly five English-first pages before broader content expansion.
+- Full Chinese translation, external media assets, formal expert-review
+  lifecycle, generated public JSON, hosted app, CMS, AI assistant, and
+  deployment are out of scope for v0.1.
+- Images are optional in v0.1 and may be used only when necessary for equipment
+  identification or key movement illustration.
+- AI-generated raster illustrations must be project-reviewed support assets
+  with one matching row in `media/PROVENANCE.md`.
+- Safety claims require claim-level citations and page-local sources.
+- Markdown pages must remain readable without generated HTML, JavaScript, a local server, or search index.
+- Existing structured-platform artifacts are historical when they conflict with current governance.
 
 ## Context and Scope
 
-The system boundary is the GymPrimer repository plus generated publication artifacts produced from reviewed source content. Human contributors and agents edit files in the repository. Expert reviewers approve content through review events recorded against content digests. A validator checks source files and produces validation reports plus publication-ready structured output for a later website or app.
+The system boundary is the GymPrimer repository and optional local derived HTML.
+Maintainers and contributors author Markdown content, source indexes,
+contributor rules, optional media, media provenance, and check evidence.
+Beginner readers browse Markdown directly in GitHub or a clone. mdBook, if
+present, reads Markdown and emits derived HTML only.
 
-Out of scope for this architecture:
+Out of scope:
 
-- Frontend page layout, search UI, quizzes, and analytics UI.
-- Runtime hosting provider, CMS SaaS provider, authentication, payments, and AI services.
-- Final Terms of Use, Privacy Policy, legal counsel review, and incident-response process.
+- Public web app, CMS, database, user accounts, analytics, and deployment.
+- Generated public JSON as the product.
+- Formal reviewer routing, review lifecycle state, and audit-event architecture.
+- AI-generated exercise guidance as source of truth.
+- Decorative, stock, screenshot, commercial-machine, anatomy-poster,
+  medical, rehab, or identifying-person media in v0.1.
 
 See [diagrams/context.mmd](diagrams/context.mmd) for the C4 system context view.
 
 ## Solution Strategy
 
-Use repository-native reviewed content as the source of truth:
+Use a small repository-native Markdown corpus before building platform machinery.
 
-- Author canonical records as text files under `content/`.
-- Store schema contracts under `schemas/`.
-- Store canonical SVG step cards and accessible text references under `media/`.
-- Store append-only lifecycle and review audit evidence under `content/audit/`.
-- Run a validator that reads all source content, active taxonomy fixtures, media metadata, lifecycle states, and review events.
-- Emit deterministic validation reports and publication-ready generated content under a generated-output boundary.
+The architecture favors:
 
-This favors diffability, OSS review, licensing clarity, and low launch complexity over CMS convenience. A CMS may be added later as an adapter only if it round-trips to the repository source-of-truth model and preserves content digests, review events, and publication gates.
+- self-contained pages over structured records;
+- page-local sources over global-only bibliography;
+- manual or lightweight checks over schema/lifecycle gates;
+- no image over unnecessary image use;
+- simple original SVG over generated raster when a vector diagram is enough;
+- human-reviewed AI-generated raster only when needed for equipment
+  identification or key movement illustration;
+- centralized media provenance over sidecar-per-image metadata;
+- stable Markdown paths over early website routing;
+- optional mdBook output over a frontend framework.
+
+The main tradeoff is reduced automation and search capability in exchange for
+faster proof that beginners can understand the content. The media tradeoff is
+that centralized provenance is simple and reviewable for v0.1, but it may need
+to be replaced if the asset library grows substantially.
 
 ## Building Block View
 
-Top-level source layout:
+Top-level artifact groups:
 
 | Area | Responsibility |
 | --- | --- |
-| `specs/` | Approved behavioral contracts and future test specifications. |
-| `schemas/` | Machine-readable schema definitions for cards, taxonomy, media metadata, review events, audit events, and validation reports. |
-| `content/cards/` | Versioned exercise, equipment, movement-pattern, training-principle, safety-policy, and glossary records. |
-| `content/taxonomy/` | Active and historical taxonomy fixtures, including v1 controlled enum values and later reviewed extensions. |
-| `content/policies/` | Safety-language templates, disclaimer templates, elevated-risk policy definitions, and review-routing policy records. |
-| `content/audit/` | Immutable lifecycle, review, publication, migration, and takedown events keyed by card/version/locale/content digest. |
-| `media/svg/` | Canonical SVG step cards and metadata for source-of-truth movement media. |
-| `media/supplemental/` | Optional non-canonical media metadata and rights records; video is not required for publication. |
-| `tools/validation/` | Validator CLI and reusable validation rules. Implementation language is deferred to planning. |
-| `generated/` | Deterministic publication output and validation reports; generated content is not the reviewed source of truth. |
+| `README.md` | Product entry point and navigation to active Markdown pages. |
+| `SOURCES.md` | Global index for sources reused across pages. |
+| `CONTRIBUTING.md` | Contribution rules for citations, scope, licensing, and media rights. |
+| `CONTENT_LICENSE.md` | Content and diagram licensing terms. |
+| `01-getting-started/` | Beginner principle pages and primer safety framing. |
+| `02-machines/` | Machine exercise pages. |
+| `03-bodyweight/` | Beginner bodyweight progression pages. |
+| `media/` | Optional supporting media, limited to original SVGs and approved AI-generated raster illustrations for v0.1. |
+| `media/PROVENANCE.md` | Central provenance index for AI-generated raster illustrations, keyed by exact repository-relative `asset_path`. |
+| `media/equipment/` | Optional equipment identification images. |
+| `media/movements/` | Optional key movement illustrations. |
+| `book.toml`, `SUMMARY.md` | Optional minimal mdBook configuration after Markdown pages work directly. |
+| `tools/checks/` | Optional lightweight local checks for sources, disclaimers, scope, media paths, links, and privacy. |
+| `docs/changes/` | Review records, manual proof, and workflow evidence. |
+| Historical platform artifacts | Prior schema, validator, generated output, and ADR evidence; not active v0.1 product surfaces. |
 
 Logical containers:
 
-- **Source content repository**: reviewed text, taxonomy, policy, media metadata, and audit files.
-- **Validation and publication gate**: deterministic checks for schema, taxonomy, locales, lifecycle transitions, review routing, licensing, media, safety language, and migration conflicts.
-- **Generated content package**: normalized public content consumed by future UI/search layers.
-- **Future presentation layer**: website or app that renders only generated, validated content.
-- **Future optional retrieval layer**: constrained AI or Q&A layer that may read generated reviewed content but cannot create source-of-truth exercise guidance.
+- **Markdown corpus**: active source pages plus navigation and source index.
+- **Contribution and license contract**: contributor-facing documentation that governs inbound content and media.
+- **Optional media assets**: original SVGs or approved AI-generated raster
+  illustrations referenced from Markdown by relative path.
+- **Media provenance index**: one row per AI-generated raster asset, with
+  generator, creation notes, license assertion, human review status, media
+  purpose, page references, and exact asset path.
+- **Lightweight validation checks**: local scripts or manual proof records, with no mandatory schema platform for v0.1.
+- **Optional mdBook renderer**: derived static HTML output.
+- **Historical platform evidence**: old structured-platform artifacts retained for traceability.
 
 See [diagrams/container.mmd](diagrams/container.mmd) for the C4 container view.
 
 ## Runtime View
 
-Primary authoring and publication flow:
+Primary reader flow:
 
-1. An author creates or edits a content card, taxonomy fixture, policy template, media metadata, or SVG asset in repository source files.
-2. The validator computes content digests and classifies changed fields against the review-routing matrix.
-3. If required fields, locale keys, taxonomy IDs, media references, or license metadata are invalid, validation fails with card ID, locale, field or rule, and reason.
-4. If review-sensitive fields changed, the validator requires matching review events for the current content digest and required review tiers.
-5. A publish attempt succeeds only when `review_status = approved`, `publication_status` is `unpublished` or `hidden`, all required reviews are complete, licensing and media rights pass, locale requirements pass, and policy gates pass.
-6. Publication emits generated public content and lifecycle audit events; the source content and audit records remain reviewable text.
+1. A reader opens `README.md` in GitHub or a clone.
+2. The reader follows a relative link to one of the five first-slice pages.
+3. The page presents a disclaimer, beginner explanation, safety notes, and sources.
+4. The reader can inspect source links from the same page.
 
-Review-sensitive edit flow:
+Authoring and promotion flow:
 
-1. A published version is never mutated in place for review-sensitive edits.
-2. The edit creates a new unpublished version with `review_status = review_expired` or `draft` when allowed by the spec.
-3. The previous public version remains published until the successor is approved and published, hidden, or superseded.
+1. A contributor drafts a non-canonical spike page.
+2. Maintainers check page shape, disclaimer, claim-level safety citations,
+   page-local sources, excluded scope, media provenance, privacy, and links.
+3. At least one beginner read test records whether the exercise pages communicate purpose, setup, steps, and stop conditions.
+4. A page is promoted only when checks and evidence satisfy the spec.
+
+Optional mdBook flow:
+
+1. Minimal `book.toml` and `SUMMARY.md` are added after Markdown pages work directly.
+2. `mdbook build` reads Markdown and emits derived HTML.
+3. mdBook failure blocks only derived HTML, unless it reveals broken Markdown navigation.
+
+Media validation flow:
+
+1. A Markdown page may reference no media, an original SVG, or an AI-generated
+   raster illustration by relative path.
+2. Before provenance lookup, checks classify every Markdown image reference by
+   resolved repository path and lowercase file extension.
+3. No image reference means the page is text-only and remains valid.
+4. `.svg` files under `media/` are classified as original educational diagrams
+   and do not require AI-raster provenance.
+5. `.png`, `.jpg`, `.jpeg`, and `.webp` files under `media/` are classified as
+   AI-generated raster illustrations.
+6. AI-generated raster illustrations require an approved matching row in
+   `media/PROVENANCE.md`.
+7. Checks normalize the raster Markdown reference to a repository-relative
+   `asset_path`, then find the exact matching row in `media/PROVENANCE.md`.
+8. The row must have required fields, `asset_type = ai_generated_raster`, an
+   allowed `media_purpose`, `review_status = approved`, and `page_refs` that
+   include the referencing Markdown page.
+9. Remote image URLs, image paths outside `media/`, unsupported extensions,
+   missing local media files, missing provenance, incomplete provenance,
+   non-approved provenance, out-of-scope purpose, or mismatched `page_refs`
+   block promotion.
+
+The checker does not use an existing provenance row to decide whether an asset
+is raster media. Provenance lookup occurs only after extension-based
+classification.
 
 Failure paths:
 
-- Bare `locales.en`, missing `locales.en-US`, both `locales.en` and `locales.en-US`, unknown taxonomy values, missing SVG accessible text, `blocked_rehab`, unlicensed public media, and unresolved elevated-risk policy all fail before publication.
-- Generated output is discarded on validation failure; source files remain for correction.
+- Missing disclaimer, missing page-local sources, global-only safety citation,
+  excluded scope, missing or invalid media provenance, private data, or
+  unverified safety wording blocks promotion.
+- Missing local tools are recorded as validation gaps, not passing results.
 
 ## Deployment View
 
-The launch architecture is static-content friendly and repository-centered.
+v0.1 has no hosted deployment.
 
 Environments:
 
-- **Authoring environment**: local clone or pull request environment where contributors edit content and run validation.
-- **Review environment**: pull request or maintainer review where domain approvals and lifecycle events are checked against content digests.
-- **Publication environment**: CI or release job, once created, runs validation and publishes only generated artifacts that pass the content gate.
+- **Repository browsing**: GitHub or local clone is the primary reader environment.
+- **Authoring**: local editor or pull request.
+- **Local checks**: optional scripts and manual inspections run in a contributor environment.
+- **Derived HTML**: local mdBook output if mdBook remains minimal.
 
 Packaging boundaries:
 
-- `content/`, `schemas/`, `media/`, and `specs/` are source packages.
-- `generated/` is reproducible output and may be ignored locally or attached to releases depending on the future deployment plan.
-- The future website/app must consume generated validated content, not raw draft content.
-
-No live deployment target is chosen here. Hosting and framework selection belong to a later architecture update or ADR once UX/search requirements are approved.
+- Markdown, source index, contributor docs, license docs, original SVGs,
+  approved AI-generated raster illustrations, and `media/PROVENANCE.md` are
+  source assets.
+- mdBook output is generated and disposable.
+- Historical generated JSON and validator evidence are not v0.1 release packages.
 
 ## Crosscutting Concepts
 
-Validation:
+Source authority:
 
-- Validation is the central architecture boundary. It must be deterministic for the same inputs and complete under 10 seconds for the 40-60 card pilot set.
-- Validation reports failures by card ID, locale, field, taxonomy type, media reference, review rule, licensing rule, or lifecycle rule.
+- Markdown files are canonical after promotion.
+- Generated HTML and generated validation output are derived evidence or convenience output.
 
-Review and lifecycle:
+Citation and safety:
 
-- `review_status` and `publication_status` remain separate in source records, generated records, validation reports, and audit events.
-- Review approvals are valid only for the content digest, locale, review scope, reviewer tier, and taxonomy/policy version they reviewed.
+- Safety claims need claim-level citations.
+- Every page needs page-local sources.
+- Global `SOURCES.md` supports reuse but does not replace page-local citation.
 
-Localization:
+Scope control:
 
-- `en-US` is required for public cards.
-- `zh-Hans` uses the same locale field shape.
-- Future locales require reviewed taxonomy extension.
-
-Security and privacy:
-
-- Source and generated artifacts must not contain secrets, private paths, private reviewer contacts, user PII, PHI, or user health profiles.
-- Public reviewer identity is limited to the public name or identifier intended for display.
+- Excluded advanced lifting, rehab, diagnosis, pain-treatment, posture-correction, and programming topics are blocked before promotion.
 
 Media:
 
-- Canonical SVG media is reviewed source-of-truth media together with reviewed text.
-- Supplemental media can never override reviewed text/SVG and must pass licensing, accessibility, and equivalence checks.
+- Images are optional; a text-only page can be valid.
+- Allowed v0.1 media purposes are `equipment_identification` and
+  `key_movement_illustration`.
+- Media choice follows this preference order: no image, simple original SVG,
+  then AI-generated raster illustration when SVG is not enough.
+- In v0.1 promoted pages, original educational diagrams are SVG files under
+  `media/`.
+- Any raster image under `media/` with extension `.png`, `.jpg`, `.jpeg`, or
+  `.webp` is treated as an AI-generated raster illustration.
+- AI-generated raster illustrations require one centralized provenance row in
+  `media/PROVENANCE.md`.
+- Provenance matching is exact by normalized repository-relative `asset_path`.
+- Original raster drawings, original photos, third-party licensed raster
+  assets, screenshots, stock assets, and commercial machine images are out of
+  scope unless a later spec revision changes the media contract.
+- External images, screenshots, decorative art, stock-style images,
+  commercial-machine screenshots, anatomy posters, medical or rehab
+  illustrations, and images with identifying people are excluded.
 
-Licensing:
+Privacy:
 
-- Code remains Apache 2.0.
-- Educational content is prepared for CC BY 4.0 attribution metadata.
-- `unlicensed_internal_only` assets are blocked from public cards.
+- Content, examples, generated evidence, and reader-test notes must not contain private health information, private contacts, secrets, or local machine paths.
+
+Observability:
+
+- Local checks and manual proof records identify the page and rule that passed or failed.
+- Media validation findings use stable codes such as
+  `media_provenance_missing`, `media_provenance_incomplete`,
+  `media_provenance_not_approved`, `media_usage_out_of_scope`, and
+  `media_page_refs_mismatch`.
+- Media validation findings also report the extension-based classification
+  result and use stable classification failure codes such as
+  `external_media_reference`, `media_outside_allowed_directory`,
+  `unsupported_media_type`, and `media_asset_missing`.
 
 ## Architecture Decisions
 
-- [ADR 2026-06-26: Repository-native reviewed content](../../adr/2026-06-26-repository-native-reviewed-content.md) - Use repository versioned source files plus deterministic validation and generated publication output as the initial content architecture.
+- [ADR 2026-06-27: Markdown-first citation-based authority](../../adr/2026-06-27-markdown-first-citation-based-authority.md) - Make Markdown the v0.1 source of truth and use citation-based authority.
+- [ADR 2026-06-28: AI-generated raster media provenance](../../adr/2026-06-28-ai-generated-raster-media-provenance.md) - Allow narrow AI-generated raster support assets with centralized provenance.
+- [ADR 2026-06-26: Repository-native reviewed content](../../adr/2026-06-26-repository-native-reviewed-content.md) - Superseded structured-platform decision retained as history.
 
 ## Quality Requirements
 
 | Quality | Scenario | Measure |
 | --- | --- | --- |
-| Reviewability | A reviewer opens a pull request changing an exercise card, taxonomy value, SVG step, or safety template. | The meaningful content, media metadata, review event, and audit changes are visible as text diffs, with SVG source diffable. |
-| Safety | A contributor edits stop rules, contraindications, pain notes, emergency criteria, or elevated-risk content. | Validation identifies every missing required review tier and blocks publication until required current approvals exist. |
-| Localization | A contributor adds `zh-Hans` to an approved `en-US` card. | Validation checks the same locale field shape and accessible media text without changing card ID. |
-| Compatibility | A future locale such as `en-GB` appears before taxonomy approval. | Validation rejects it until an approved taxonomy extension is active. |
-| Performance | A contributor validates the first-release pilot set. | Validation completes in under 10 seconds on a typical developer machine. |
-| Privacy | Generated validation output is published in CI logs. | Output contains no secrets, private reviewer contacts, machine-local paths, PHI, or user private data. |
+| Readability | A beginner opens a first-slice page on GitHub. | The page can be understood without app navigation, generated HTML, or local tooling. |
+| Traceability | A reviewer checks a safety warning. | The claim has a page-local citation and source entry. |
+| Scope safety | A contributor adds rehab, diagnosis, pain treatment, or advanced lifting content. | The page is blocked before promotion. |
+| Media licensing | A page references media. | The media is original or clearly project-licensed and referenced by relative path. |
+| Media provenance | A page references an AI-generated raster image. | The image has one approved `media/PROVENANCE.md` row with exact `asset_path`, valid purpose, required fields, and matching `page_refs`. |
+| Portability | mdBook is removed or unavailable. | README-linked Markdown pages remain usable. |
+| Privacy | Validation evidence or reader-test notes are shared. | No secrets, private contacts, private health information, or local paths appear. |
+| Performance | Local checks run on the v0.1 slice. | Checks complete within 30 seconds excluding network-dependent link checking. |
 
 ## Risks and Technical Debt
 
-- No validator, schemas, content fixtures, package manager, CI, or generated-output convention exists yet.
-- The architecture chooses a repository-native source-of-truth model before a CMS decision. A later CMS adapter must not weaken review digest, audit, or publication gates.
-- Full muscle and equipment taxonomy fixtures are deferred beyond the v1 seed values.
-- Legal documents, final disclaimer owner, incident response, and content-license metadata details need follow-on specs before public beta.
-- The first real implementation must decide a validation toolchain and file serialization format details without changing the approved content contract.
+- Citation quality depends on maintainer judgment until check tooling and source guidance are implemented.
+- GitHub navigation may become weak as the corpus grows.
+- The old structured-platform artifacts may confuse contributors until superseded or archived visibly.
+- mdBook can pull attention toward website work if custom styling or plugins are allowed too early.
+- Beginner read-test evidence is manual and low sample size in v0.1.
+- Exact link checker, Markdown linter, and source-check tooling remain undecided.
+- The centralized media provenance table can become awkward if the media
+  library grows beyond the first slice.
+- AI-generated raster illustrations may look plausible while showing unsafe or
+  misleading setup details; human review remains mandatory.
 
 ## Glossary
 
-- **Canonical source**: Reviewed repository content and SVG media that define public exercise guidance.
-- **Generated content package**: Deterministic output produced from validated source content for a future UI or release.
-- **Publication gate**: The validator rules that decide whether a content version may become public.
-- **Review event**: A recorded approval or change request tied to reviewer tier, scope, content digest, locale, and timestamp.
-- **Audit event**: Immutable lifecycle or publication event with before/after review and publication states.
+- **Canonical Markdown**: The promoted Markdown files that define the product content.
+- **Claim-level citation**: A citation adjacent to the claim it supports.
+- **Derived HTML**: Static HTML produced from Markdown that does not replace Markdown authority.
+- **AI-generated raster illustration**: A bitmap support image generated by an
+  AI image tool and reviewed by a human maintainer before use.
+- **Non-canonical spike**: Draft content used to test the format before promotion.
+- **Historical platform artifact**: Prior schema, validator, generated-output, ADR, or review evidence retained for traceability but not active v0.1 guidance.
+- **Media provenance index**: `media/PROVENANCE.md`, the centralized table that
+  records AI-generated raster asset provenance.
 
 ## Next artifacts
 
-- Plan review.
+- Architecture review for the media provenance amendment.
 
 ## Follow-on artifacts
 
-- Test specification for the approved content schema and this architecture.
-- Safety and governance spec for legal disclaimers, elevated-risk definitions, incident response, and policy ownership.
-- Contribution and licensing spec for CC BY 4.0 attribution, DCO sign-offs, and content provenance.
-- UX/search spec for rendering, discovery, glossary, and comprehension checks.
+- Test specification update for media provenance checks.
+- Plan update for first-slice content, contributor guidance, license
+  clarification, media provenance, and optional mdBook.
+- Archive or supersession record for old platform artifacts.
 
 ## Readiness
 
-This architecture package was approved by `../../changes/beginner-fitness-exercise-education-platform/reviews/architecture-review-r1.md`. It is ready to support planning. It is not implementation-ready or release-ready until plan review, test specification, test-spec review, implementation, code review, final verification, and PR handoff are complete.
+This architecture package is approved after
+`docs/changes/markdown-first-gym-primer/reviews/architecture-review-r3.md`.
+It is ready for downstream test-spec and plan updates for the media provenance
+boundary. It is not implementation-ready, verification-ready, branch-ready, or
+PR-ready until downstream artifacts are updated and reviewed.

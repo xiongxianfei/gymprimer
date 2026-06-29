@@ -2,34 +2,48 @@
 
 ## Pitch
 
-GymPrimer is an open-source educational reference for gym beginners. It gives each common machine and movement a reviewed, plain-language card that explains what the exercise trains, how to set up the equipment, how the movement works phase by phase, what the user should feel, what to avoid, and when to stop. It is the primer a beginner reaches for before any program tells them what to lift, maintained in public under Apache 2.0 so the content can be inspected, forked, translated, and improved.
+GymPrimer is an open-source Markdown primer for gym beginners. It teaches exercise literacy before workout prescription through short, citation-backed pages that explain what an exercise is for, how to set up the equipment, what the movement should feel like, common mistakes, easier options, and when to stop.
+
+The repository is the primary product. A beginner should be able to read a page directly on GitHub, clone the files, or browse optional generated HTML without needing an app, account, database, or coach.
 
 ## What makes this different
 
-Existing fitness resources teach in the wrong order. Short-form videos show the movement but skip equipment setup and beginner cues. Exercise databases list muscles but do not teach a beginner how to set up a machine or what to feel. Workout apps prescribe sets and reps to users who do not yet understand the exercises being prescribed. AI assistants generate fluent answers that are often wrong about safety. Personal trainers are excellent but scarce and expensive.
+Most fitness resources teach in the wrong order. Short videos show motion but often skip setup and safety context. Exercise databases list muscles but do not teach a beginner how to use the machine in front of them. Workout apps prescribe sets and reps before the user understands the exercise. AI assistants can sound confident without being reliably grounded.
 
-GymPrimer is upstream of all of these. It treats exercise literacy as its own category, before workout prescription. Every card is a reviewable artifact rather than a generated answer. The project chooses depth, correctness, and review history over broad coverage: the first release is expected to cover roughly forty to sixty reviewed exercises, not hundreds. It also chooses illustrations as the canonical movement medium because they are reviewable in Git, accessible, language-neutral, and easier to keep consistent than launch-scale video.
+GymPrimer trades breadth and polish for verifiable beginner understanding. It starts with a small Markdown corpus, plain language, conservative scope, prominent disclaimers, and sources a reader can check. Optional mdBook HTML can improve navigation later, but Markdown remains the source of truth.
 
 ## Who it is for
 
-GymPrimer is for adults in their first ninety days of regular gym training, or returning after a year or more away, who feel lost around machines and free weights and want to understand the equipment before committing to a program. The launch audience is English-first, while the content model keeps Chinese as a first-class future locale. GymPrimer is also for the trainers, physical therapists, clinicians, content authors, illustrators, translators, and engineers who maintain the open content library together.
+GymPrimer is for adults in their first ninety days of regular gym training, or returning after a long break, who feel lost around machines, simple dumbbell movements, and basic bodyweight progressions.
+
+It is also for maintainers, authors, translators, illustrators, and reviewers who want to improve beginner exercise education in public. Launch content is English-first. Chinese aliases may help recognition, and full Chinese translation can come later as a separate locale path after the English format is proven.
 
 ## Who it is not for
 
-GymPrimer is not for advanced lifters seeking optimized programming, athletes preparing for sport-specific competition, patients in active rehabilitation, or users who want personalized workout plans. It is not a coach replacement or a substitute for medical advice. The first release will not serve these audiences, and the project will decline contributions that try to make it serve them.
+GymPrimer is not for advanced lifters seeking optimized programming, athletes preparing for sport-specific competition, patients in active rehabilitation, or users who want personalized workout plans.
+
+It is not a coach replacement, medical product, injury-diagnosis tool, posture-correction protocol, or substitute for professional care.
 
 ## What it commits to
 
-GymPrimer commits to a consistent card shape: equipment setup, movement phases, primary and secondary muscles, breathing and bracing cues, common mistakes, regressions, progressions, and safety notes. It commits to English cards at launch and a locale-aware schema from day one, so Chinese translation can become a contribution path without reworking the content model.
+GymPrimer commits to self-contained Markdown pages that are useful when opened directly from a repository URL. Each exercise page should include the purpose, setup, muscles involved, movement breakdown, practical feel cues, common mistakes, easier and harder versions, safety notes, and sources.
 
-Every published card has expert review, a visible reviewer name, a review date, and public review history. Review is tiered by risk: certified trainers or strength coaches clear each card, physical therapists review safety language and pain guidance at the policy level, and sports medicine clinicians advise on disclaimers, emergency criteria, and elevated-risk cards. This keeps clinical judgment focused on guardrails without turning GymPrimer into a rehabilitation product.
+The project uses citation-based authority until named expert reviewers exist. Safety warnings need claim-level sources, and every page needs its own source list. Reused sources belong in a global source index.
 
-GymPrimer commits to illustrated SVG step cards as canonical media, with three to six steps per card and accessible text alternatives. Community video can later supplement a stable card, but the illustration and reviewed text remain the source of truth. Content and code stay Apache 2.0 licensed. Discovery stays anchored to real gym equipment so a beginner can find guidance from the machine they are standing in front of.
+The first content slice stays narrow: beginner training principles, common machines, low-risk bodyweight progressions, simple dumbbell patterns, and basic cardio equipment. Original diagrams can support the text, but unverified third-party media does not become source material.
+
+Code and tooling stay Apache-2.0. Written content and original educational diagrams use CC BY 4.0.
 
 ## What it refuses to be
 
-GymPrimer will not prescribe workouts, generate training plans, diagnose injuries, or replace medical advice. It will not publish AI-generated content or community video as a source of truth. It will not double the launch review burden by requiring bilingual cards before the English schema is stable. It will not trade correctness for breadth. It will not add advanced programming, sport-specific prescription, or active-rehab content until the literacy layer is stable, and possibly never. It will decline contributions that drift toward coaching, personalization, clinical guidance, or media production that cannot be reviewed and maintained in public.
+GymPrimer will not prescribe workouts, generate training plans, diagnose injuries, treat pain, or provide rehabilitation pathways. It will not publish AI-generated exercise guidance as source of truth.
+
+It will not start with barbell lifts, Olympic lifting, kettlebell ballistic lifts, plyometrics, sprint programming, sport-specific programming, or injury-specific advice. It will not depend on a hosted web app, CMS, user accounts, tracking, or formal expert-review promises before reviewers exist.
+
+It will not let mdBook, generated output, or future website work replace the Markdown corpus as the product.
 
 ## What would prove this wrong
 
-The project has failed if a beginner who reads a card cannot, in their own words, explain what the exercise trains, how to set up the equipment, what the first movement phase is, what they should feel, one common mistake, and when to stop. It has also failed if the locale-aware schema cannot support Chinese without a content migration, if the review tiers blur clinical advice into routine coaching, if SVG cards cannot communicate movement clearly enough for beginner comprehension, if the review workflow cannot keep card content current, or if community contributions drift toward the prescriptive workout content that the refusals above forbid. Beginner comprehension testing, review-currency audits, and schema-localization checks are the checks that surface these failures.
+The project has failed if a beginner cannot read one page and explain what the exercise trains, how to set up, what the steps are, what they should feel, one common mistake, and when to stop.
+
+It has also failed if safety claims cannot be traced to public sources, if contributors cannot tell what is in scope, if media rights are unclear, if Markdown pages are not useful without a renderer, or if the project spends more effort on platform machinery than on understandable beginner education.
