@@ -1,0 +1,11 @@
+change_id: repository-layout-normalization
+proposal: docs/proposals/2026-06-29-responsible-breadth.md
+status: spec-review-needed
+current_stage: spec-review
+created_date: 2026-06-29
+notes:
+  - Created after the architecture target shape identified five logical blocks and a future physical migration requirement.
+  - No files have been moved or removed yet.
+  - Physical directory migration remains blocked until spec-review, architecture or ADR review, test-spec, and migration planning complete.
+validation:
+  - pending
