@@ -2,6 +2,17 @@
 
 ## Active
 
+- [Repository Layout Normalization](plans/2026-06-29-repository-layout-normalization.md)
+  - Status: active
+  - Plan lifecycle state: active
+  - Current milestone: M1 dependency inventory and migration manifest
+  - Current milestone state: review-requested
+  - Last reviewed milestone: none
+  - Next stage: code-review
+  - Active context: Spec-review R2, architecture-review R1, and plan-review R2
+    approved direct repository layout normalization. M1 dependency inventory
+    evidence is implemented and awaiting code-review.
+
 - [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
   - Status: active
   - Plan lifecycle state: active

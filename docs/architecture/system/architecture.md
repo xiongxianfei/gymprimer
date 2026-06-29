@@ -8,6 +8,8 @@ This media-purpose amendment was approved by
 `docs/changes/apt-pattern-architecture/reviews/architecture-review-r2.md`. The
 prior layout-view amendment was approved by
 `docs/changes/apt-pattern-architecture/reviews/architecture-review-r1.md`.
+The repository-layout-normalization amendment was approved by
+`docs/changes/repository-layout-normalization/reviews/architecture-review-r1.md`.
 
 Prior approved baselines:
 
@@ -23,15 +25,19 @@ Prior approved baselines:
   `../../proposals/2026-06-29-responsible-breadth.md`
 - Spec: `../../../specs/markdown-first-primer.md`
 - Responsible Breadth spec: `../../../specs/responsible-breadth.md`
+- Repository layout normalization spec:
+  `../../../specs/repository-layout-normalization.md`
 - Spec reviews:
   - `../../changes/markdown-first-gym-primer/reviews/spec-review-r1.md`
   - `../../changes/markdown-first-gym-primer/reviews/spec-review-r3.md`
   - `../../changes/responsible-breadth/reviews/spec-review-r2.md`
   - `../../changes/apt-pattern-architecture/reviews/spec-review-r2.md`
+  - `../../changes/repository-layout-normalization/reviews/spec-review-r2.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
   - `../../adr/2026-06-29-expanded-raster-media-purposes.md`
+  - `../../adr/2026-06-29-direct-repository-layout-normalization.md`
   - `../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md`
   - `../../adr/2026-06-26-repository-native-reviewed-content.md` (superseded)
 
@@ -71,16 +77,18 @@ Goals:
   one pattern page, one condition page, one programming-principle page, and one
   program-example page before broader scaling.
 - Expanded-scope pages are path-classified under `patterns/`,
-  `conditions/`, `principles/`, `programs/`, and `exercises/`, with `about/`
-  holding shared project-level references such as red flags.
+  `conditions/`, `principles/`, `programs/`, and `exercises/`.
+- `RED-FLAGS.md` is the target canonical red-flags reference after repository
+  layout normalization.
 - RigorLoop governance and workflow artifacts remain under `docs/proposals/`,
   `docs/adr/`, `docs/changes/`, `docs/plans/`, and `docs/learn/` per
   `docs/workflows.md`.
 - Physical layout normalization, including moving original v0.1 exercise pages
   into `exercises/`, folding `01-getting-started/` into `principles/`, moving
-  `about/red-flags.md`, or reorganizing media by content slug, requires a
-  spec/ADR migration before implementation because current approved specs and
-  tests name the existing paths.
+  `about/red-flags.md` to `RED-FLAGS.md`, reorganizing media by content slug,
+  and removing old paths directly, requires dependency inventory, spec/ADR
+  coverage, test-spec, and plan review before implementation because current
+  approved specs and tests name existing paths.
 - Full Chinese translation, external media assets, formal expert-review
   lifecycle, generated public JSON, hosted app, CMS, AI assistant, and
   deployment are out of scope for v0.1.
@@ -157,9 +165,9 @@ does not get flattened together with workflow evidence or tooling.
 
 | Block | Current paths | Responsibility |
 | --- | --- | --- |
-| Project references | `README.md`, `CONTRIBUTING.md`, `SOURCES.md`, `CONTENT_LICENSE.md`, `about/red-flags.md` | Project entry, contribution rules, reusable source index, safety routing, and licensing. |
-| Content | `01-getting-started/`, `02-machines/`, `03-bodyweight/`, `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/` | Canonical Markdown product pages. Current v0.1 compatibility keeps numbered exercise-literacy paths; target normalization is one canonical content directory per content type. |
-| Media | `media/`, `media/PROVENANCE.md`, currently `media/equipment/` and `media/movements/` | Optional supporting illustrations referenced by Markdown. Raster assets use provenance purpose values to distinguish equipment, movement, pattern alignment, anatomy context, and exercise previews. Target normalization is subject co-location under `media/<content-type>/<slug>/` after a migration spec. |
+| Project references | `README.md`, `CONTRIBUTING.md`, `SOURCES.md`, `CONTENT_LICENSE.md`, `about/red-flags.md`; target `RED-FLAGS.md` | Project entry, contribution rules, reusable source index, safety routing, and licensing. Repository layout normalization moves red flags to root and removes the old `about/` path directly. |
+| Content | `01-getting-started/`, `02-machines/`, `03-bodyweight/`, `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/` | Canonical Markdown product pages. Current v0.1 compatibility keeps numbered exercise-literacy paths; repository layout normalization folds numbered paths into one canonical content directory per content type and removes old paths directly. |
+| Media | `media/`, `media/PROVENANCE.md`, currently `media/equipment/` and `media/movements/` | Optional supporting illustrations referenced by Markdown. Raster assets use provenance purpose values to distinguish equipment, movement, pattern alignment, anatomy context, and exercise previews. Repository layout normalization moves promoted media to subject co-location under `media/<content-type>/<slug>/` and removes old media-bucket paths directly after references and provenance rows are updated. |
 | Governance | `docs/proposals/`, `docs/adr/`, `docs/architecture/` | Accepted direction, durable decisions, and canonical architecture. These remain under `docs/` per RigorLoop workflow requirements. |
 | Tooling and operations | `tools/`, `specs/`, `docs/changes/`, `docs/plans/`, `docs/learn/`, optional `book.toml` and `SUMMARY.md` | Validation, specs/test specs, plans, proof records, learning records, and optional derived-site configuration. These serve content but are not product content blocks. |
 
@@ -167,13 +175,13 @@ Layout normalization target:
 
 | Target surface | Target path | Migration note |
 | --- | --- | --- |
-| Exercise pages | `exercises/<slug>.md` | Fold `02-machines/` and `03-bodyweight/` into one exercise namespace. Equipment type becomes page metadata, not a folder split. |
-| Beginner principles | `principles/<slug>.md` | Fold `01-getting-started/` into principles or keep only a root orientation file if a later spec chooses that route. |
+| Exercise pages | `exercises/<slug>.md` | Fold `02-machines/` and `03-bodyweight/` into one exercise namespace. Equipment type becomes page metadata, not a folder split. Remove old numbered paths directly. |
+| Beginner principles | `principles/beginner-training-principles.md` | Fold `01-getting-started/beginner-training-principles.md` into principles. Remove old numbered path directly. |
 | Pattern pages | `patterns/<slug>.md` | Already matches the target. |
 | Condition pages | `conditions/<slug>.md` | Already matches the target. |
 | Program examples | `programs/<slug>.md` | Already matches the target. |
-| Red flags | `about/red-flags.md` currently | Root `RED-FLAGS.md` is a possible future simplification, but it requires a spec update because current pages and checks reference `about/red-flags.md`. |
-| Media | `media/<content-type>/<slug>/...` | Replace image-type buckets such as `media/equipment/` and `media/movements/` after link migration and provenance update. |
+| Red flags | `RED-FLAGS.md` | Move `about/red-flags.md` to root. Remove the old `about/red-flags.md` path directly after links and checks are updated. |
+| Media | `media/<content-type>/<slug>/...` | Replace image-type buckets such as `media/equipment/` and `media/movements/` after dependency inventory, link migration, and provenance update. Remove old media-bucket paths directly. |
 | Governance | `docs/proposals/`, `docs/adr/` | Keep these paths; root-level `proposals/` and `adr/` are rejected for this repository because `docs/workflows.md` standardizes RigorLoop artifact locations. |
 
 Logical containers:
@@ -187,8 +195,8 @@ Logical containers:
   `conditions/`, `principles/`, `programs/`, and `exercises/`.
 - **Contribution and license contract**: contributor-facing documentation that
   governs inbound content and media.
-- **Red-flags and sources references**: shared Markdown references under
-  `about/` and root source indexes, linked from safety-relevant pages.
+- **Red-flags and sources references**: shared root `RED-FLAGS.md` and
+  `SOURCES.md` references, linked from safety-relevant pages.
 - **Optional media assets**: original SVGs or approved AI-generated raster
   illustrations referenced from Markdown by relative path.
 - **Media provenance index**: one row per AI-generated raster asset, with
@@ -281,6 +289,30 @@ The checker does not use an existing provenance row to decide whether an asset
 is raster media. Provenance lookup occurs only after extension-based
 classification.
 
+Repository layout normalization flow:
+
+1. The migration inventory identifies active references to every file that will
+   be moved or removed, including Markdown links, README navigation,
+   `SUMMARY.md`, `book.toml`, source references, tests, checkers, proof records,
+   change metadata, and provenance rows.
+2. Dependency references are updated or explicitly removed before the old file
+   path is removed.
+3. Numbered exercise and getting-started Markdown paths are folded into
+   `exercises/` and `principles/`, then the old numbered paths are removed
+   directly without compatibility stubs.
+4. `about/red-flags.md` is moved to root `RED-FLAGS.md`, then the old path is
+   removed directly.
+5. Promoted media is moved to `media/<content-type>/<slug>/`, provenance rows
+   and Markdown references are updated in the same change, and old media-bucket
+   paths are removed directly.
+6. Historical structured-platform artifacts are removed directly when no active
+   approved spec, test, workflow guide, or validation command relies on them.
+   If an active dependency still requires retention, the artifact is labeled
+   historical or archived.
+7. Validation fails if any active reference still points at a removed path, if
+   a compatibility stub remains, or if provenance no longer matches the moved
+   raster asset.
+
 Failure paths:
 
 - Missing disclaimer, missing page-local sources, global-only safety citation,
@@ -293,6 +325,10 @@ Failure paths:
   personalized programming, symptom collection, or injury-specific protocol
   language blocks expanded-page promotion.
 - Missing local tools are recorded as validation gaps, not passing results.
+- Repository layout migration fails if dependency inventory is missing, old
+  paths remain referenced, compatibility stubs remain, moved media lacks
+  updated provenance, or historical artifacts are removed while still actively
+  referenced.
 
 ## Deployment View
 
@@ -318,6 +354,9 @@ Packaging boundaries:
   workflow evidence.
 - mdBook output is generated and disposable.
 - Historical generated JSON and validator evidence are not v0.1 release packages.
+- Repository layout normalization is a source-tree migration only. It does not
+  introduce deployment, hosting, generated HTML authority, CMS, runtime API, or
+  search infrastructure.
 
 ## Crosscutting Concepts
 
@@ -411,6 +450,21 @@ Media:
   commercial-machine screenshots, anatomy posters, medical or rehab
   illustrations, and images with identifying people are excluded.
 
+Repository layout:
+
+- Each content type has one canonical location after migration:
+  `exercises/`, `patterns/`, `conditions/`, `principles/`, and `programs/`.
+- `RED-FLAGS.md` is the canonical root safety-routing reference after
+  migration.
+- Governance and workflow artifacts remain under `docs/`.
+- Old numbered content paths, old media-bucket paths, and the old
+  `about/red-flags.md` path are removed directly; compatibility stubs are not
+  used.
+- Before moving or removing a file, active dependencies must be inventoried and
+  updated or removed.
+- Subject-co-located media paths under `media/<content-type>/<slug>/` are the
+  target for promoted media referenced by content.
+
 Privacy:
 
 - Content, examples, generated evidence, and reader-test notes must not contain private health information, private contacts, secrets, or local machine paths.
@@ -440,6 +494,7 @@ Observability:
 - [ADR 2026-06-27: Markdown-first citation-based authority](../../adr/2026-06-27-markdown-first-citation-based-authority.md) - Make Markdown the v0.1 source of truth and use citation-based authority.
 - [ADR 2026-06-28: AI-generated raster media provenance](../../adr/2026-06-28-ai-generated-raster-media-provenance.md) - Allow narrow AI-generated raster support assets with centralized provenance.
 - [ADR 2026-06-29: Expanded raster media purposes](../../adr/2026-06-29-expanded-raster-media-purposes.md) - Add expanded-page raster purposes for pattern alignment, anatomical region context, and exercise previews.
+- [ADR 2026-06-29: Direct repository layout normalization](../../adr/2026-06-29-direct-repository-layout-normalization.md) - Normalize physical repository paths by direct removal, root red flags, subject-co-located media, and dependency-first migration.
 - [ADR 2026-06-29: Responsible Breadth static content boundaries](../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md) - Add path-classified expanded static content classes with higher-bar proof, red-flag routing, and no runtime personalization.
 - [ADR 2026-06-26: Repository-native reviewed content](../../adr/2026-06-26-repository-native-reviewed-content.md) - Superseded structured-platform decision retained as history.
 
@@ -459,6 +514,10 @@ Observability:
 | Source quality | A condition page cites three weak sources. | The page fails until it has the required institutional, guideline, patient-education, or supporting source mix. |
 | Prescription boundary | A program example adapts to symptoms or goals. | The page fails promotion as personalized programming. |
 | Manual proof | A semantic safety or source-quality claim cannot be automated. | A proof record under the relevant `docs/changes/<change-id>/` directory records the review and outcome. |
+| Layout migration dependency safety | A file is moved or removed. | Active references are inventoried and updated before the old path is removed. |
+| Canonical content paths | A promoted exercise page is referenced. | The page lives under `exercises/`; old numbered content paths are not required and no compatibility stub remains. |
+| Red-flags routing path | A safety-relevant page links red flags. | The link targets root `RED-FLAGS.md`, not `about/red-flags.md`. |
+| Media co-location | A promoted page references moved media. | The asset path lives under `media/<content-type>/<slug>/` and the provenance row uses the exact new path. |
 | Portability | mdBook is removed or unavailable. | README-linked Markdown pages remain usable. |
 | Privacy | Validation evidence or reader-test notes are shared. | No secrets, private contacts, private health information, or local paths appear. |
 | Performance | Local checks run on the v0.1 slice. | Checks complete within 30 seconds excluding network-dependent link checking. |
@@ -486,10 +545,17 @@ Observability:
   must be treated as not current when source changes or review dates lapse.
 - Path-based page classification is simple for the first expanded slice but may
   need front matter if future content types share directories.
-- The current physical tree still mixes three exercise locations and two media
-  buckets. That is acceptable as compatibility debt under the current specs but
-  should be resolved by a future repository-layout spec before more content is
-  scaled.
+- Direct removal of old paths may break external bookmarks because the project
+  intentionally avoids compatibility stubs for this migration.
+- Dependency inventory can miss references in prose, proof records, or tests if
+  validation relies only on simple link parsing.
+- Moving `about/red-flags.md` to `RED-FLAGS.md` improves root visibility but
+  requires every safety-relevant page, checker, and proof record to update links
+  together.
+- Moving media paths and provenance rows in one change creates a larger diff,
+  but avoids split-brain asset references.
+- Historical artifact removal can erase useful context if active dependencies
+  are not distinguished from historical citations.
 
 ## Glossary
 
@@ -506,22 +572,25 @@ Observability:
   `expanded_exercise_page`.
 - **Manual proof record**: Change-local Markdown evidence that records semantic
   review results that cannot be fully automated.
+- **Dependency inventory**: The migration record of active references that must
+  be updated or removed before a path is deleted.
+- **Subject-co-located media**: Media stored under
+  `media/<content-type>/<slug>/` for the content page or content type it
+  supports.
 
 ## Next artifacts
 
-- Test-spec review for the media-purpose validation-boundary amendment.
-- A future spec/ADR migration for physical directory normalization before
-  moving published Markdown paths or media paths.
+- Architecture review for repository layout normalization.
+- Test-spec mapping for repository layout migration after architecture review.
+- Migration execution plan after test-spec review.
 
 ## Follow-on artifacts
 
-- New ADR: `../../adr/2026-06-29-expanded-raster-media-purposes.md`.
-- Physical directory migration still requires a spec amendment,
-  architecture-review approval, test-spec updates, and a migration plan.
+- New ADR: `../../adr/2026-06-29-direct-repository-layout-normalization.md`.
 
 ## Readiness
 
-This architecture package is approved for the expanded media-purpose amendment.
-Validation changes may rely on it after test-spec review maps the proof. It is
-not implementation-ready for physical directory migration until the governing
-specs and ADRs are amended and reviewed for that separate migration.
+This architecture package is ready for architecture-review for the repository
+layout normalization amendment. Physical directory migration is not
+implementation-ready until architecture-review, test-spec, test-spec-review,
+plan, and plan-review are complete.
