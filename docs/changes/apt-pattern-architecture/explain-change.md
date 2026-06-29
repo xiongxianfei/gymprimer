@@ -13,6 +13,8 @@ The first anterior pelvic tilt page was structurally compliant but still too thi
 - Removed the APT-specific SVG illustration from project content and updated older Responsible Breadth proof notes to point to this raster supersession.
 - Updated `docs/templates/pattern-page.md` with the reusable architecture, including the inline exercise annotation contract.
 - Added a regression test proving that the APT exercise links and raster image links resolve to real files.
+- Added RB-T21/RB-T22 checker coverage for the pattern-page reader journey, exercise preview annotations, existing exercise targets, expanded raster `media_purpose` values, and condition anatomy-image safety boundaries.
+- Split pattern-page preview image references from exercise-page sequence image references so provenance can distinguish `exercise_preview_illustration` from `key_movement_illustration`.
 
 ## Safety boundary
 

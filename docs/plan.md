@@ -6,14 +6,14 @@
   - Status: active
   - Plan lifecycle state: active
   - Current milestone: lifecycle closeout
-  - Current milestone state: verified
+  - Current milestone state: follow-up review-requested
   - Last reviewed milestone: final holistic code-review
-  - Next stage: pr
+  - Next stage: code-review
   - Active context: Proposal, spec, architecture, and ADR are approved. The
     plan passed plan-review R1, the test spec passed test-spec-review R2, and
-    M1-M4 plus final holistic code-review are closed. Explain-change is
-    complete and verify passed; PR handoff is next and requires separate
-    authorization.
+    M1-M4 plus final holistic code-review are closed. The APT follow-up
+    amendment implemented RB-T21/RB-T22 proof and is ready for code-review
+    before PR handoff resumes.
 
 - [Markdown-First Gym Primer](plans/2026-06-27-markdown-first-gym-primer.md)
   - Status: active

@@ -32,7 +32,7 @@ Stop using this page as a self-education guide and seek appropriate care if back
 
 Read [the full red-flags reference](../about/red-flags.md) before using any GymPrimer page to think about pain or training decisions.
 
-## Plain-language overview
+## Why beginners come to this page
 
 Beginners usually land here because they notice one of four things:
 
@@ -41,13 +41,15 @@ Beginners usually land here because they notice one of four things:
 - the low back feels stiff or achy and someone named APT as the possible reason
 - squats, hinges, bridges, or planks feel like they turn into low-back arching
 
+## Working definition
+
 Anterior pelvic tilt means the pelvis is tipped forward in the sagittal plane. A practical landmark model is ASIS to PSIS: the front bony points near the hip crease, called the anterior superior iliac spines, sit lower than the rear bony points, called the posterior superior iliac spines. That forward pelvic angle usually pairs with a more visible inward curve in the low back.
 
 Neutral alignment is not a perfectly flat back. A normal spine has curves, and many asymptomatic people stand with some anterior pelvic tilt. In one asymptomatic sample, most participants measured with anterior tilt, which is a useful reminder that visible tilt is common and not automatically a problem. [Herrington 2011][pubmed-herrington-pelvic-tilt]
 
 Beginners often meet APT through Janda's lower-crossed-syndrome model: hip flexors and low-back extensors described as relatively short or overactive, abdominals and glutes described as relatively weak or underused. Treat that model as a simple observation framework, not as proof that a visible posture causes pain. [NASM][local-anterior-pelvic-tilt-nasm] [Lederman 2011][pubmed-lederman-psb-model]
 
-### How to notice this in yourself
+## How to notice this in yourself
 
 These are observations, not diagnoses.
 
@@ -55,7 +57,7 @@ These are observations, not diagnoses.
 - **Wall-stand check:** stand with the head, shoulder blades, and buttocks against a wall, heels a few inches forward, then notice how much space is behind the low back. Mayo Clinic uses this kind of wall test as a posture-awareness check, not as a diagnosis. [Mayo Clinic][mayo-posture-body-alignment]
 - **ASIS-to-PSIS comparison:** with clean hands and no pain pressure, locate the front and back pelvic landmarks and notice whether the front point sits lower than the back point. Clinicians use more reliable tools when the degree of pelvic tilt actually matters. [Herrington 2011][pubmed-herrington-pelvic-tilt]
 
-## What mainstream sources generally agree on
+## The core reason
 
 Mainstream educational and professional sources discuss APT through a few movement contributors. Treat these as descriptive contributors, not as a single cause.
 
@@ -75,7 +77,7 @@ Descriptive pelvic-tilt research also argues for caution. Herrington's asymptoma
 
 Interventions for posture patterns are mixed because the target is not one thing. A person might need more hip-extension range, better trunk control, different lifting technique, more general strength, less fear around posture, or no change at all. Some clinicians still use the lower-crossed-syndrome model because it gives a concrete observation framework. The evidence-backed version is humbler: use the model to notice movement options, not to label a body as broken.
 
-## Commonly recommended self-management themes
+## What commonly helps
 
 Read this as a menu of education options that a coach or clinician may select from, not as a routine or a personal prescription. The pattern journey is:
 
@@ -107,17 +109,17 @@ These exercises train the rib-cage and pelvis relationship without forcing the l
   - *Fix reason:* trains anti-extension control while the arms and legs move.
   - *Used muscles:* rectus abdominis, obliques, and transverse abdominis primary; hip flexors secondary in a controlled range.
   - *Important note:* shorten the arm or leg reach if the low back lifts away from the floor.
-  - ![Dead bug position sequence](../media/movements/dead-bug-sequence.png)
+  - ![Dead bug position preview](../media/movements/dead-bug-preview.png)
 - **[Plank](../exercises/plank.md)**
   - *Fix reason:* trains whole-body trunk stiffness without hanging on the low-back arch.
   - *Used muscles:* rectus abdominis, obliques, transverse abdominis, glutes, and shoulders.
   - *Important note:* keep ribs down and glutes lightly engaged; sagging at the hips reinforces the same arching strategy.
-  - ![Plank position sequence](../media/movements/plank-sequence.png)
+  - ![Plank position preview](../media/movements/plank-preview.png)
 - **[Bird dog](../exercises/bird-dog.md)**
   - *Fix reason:* trains trunk stability while hip extension and shoulder flexion happen together.
   - *Used muscles:* gluteus maximus, lumbar extensors, deep trunk muscles, shoulders, and hamstrings.
   - *Important note:* move slowly and keep the pelvis level instead of letting one hip drop or hike.
-  - ![Bird dog position sequence](../media/movements/bird-dog-sequence.png)
+  - ![Bird dog position preview](../media/movements/bird-dog-preview.png)
 
 ### 4. Strengthen hip extensors
 
@@ -127,12 +129,12 @@ These exercises build glute and hamstring capacity so hip extension does not hav
   - *Fix reason:* trains hip extension with low spinal load.
   - *Used muscles:* gluteus maximus primary; hamstrings and trunk muscles secondary.
   - *Important note:* finish by squeezing the glutes, not by driving the ribs up and over-arching the low back.
-  - ![Glute bridge position sequence](../media/movements/glute-bridge-sequence.png)
+  - ![Glute bridge position preview](../media/movements/glute-bridge-preview.png)
 - **[Hip hinge](../exercises/hip-hinge.md)**
   - *Fix reason:* teaches bending from the hips while keeping the ribs and pelvis organized.
   - *Used muscles:* hamstrings and gluteus maximus primary; spinal erectors and trunk muscles secondary.
   - *Important note:* stop the descent before the low back rounds or over-arches. [Mayo Clinic][mayo-weight-training]
-  - ![Hip hinge position sequence](../media/movements/hip-hinge-sequence.png)
+  - ![Hip hinge position preview](../media/movements/hip-hinge-preview.png)
 
 ### 5. Use hip-flexor mobility as an option, not proof
 
@@ -142,7 +144,7 @@ Stretching can be useful for some people, but a stretch helping does not prove t
   - *Fix reason:* gives the iliopsoas and rectus femoris a simple stretch option while practicing pelvis position.
   - *Used muscles:* stretches iliopsoas and rectus femoris on the rear leg; lightly uses glutes and trunk muscles for position.
   - *Important note:* gently squeeze the rear glute and tuck the pelvis before moving forward; leaning back moves the stretch into the low back.
-  - ![Kneeling hip-flexor stretch position sequence](../media/movements/kneeling-hip-flexor-stretch-sequence.png)
+  - ![Kneeling hip-flexor stretch position preview](../media/movements/kneeling-hip-flexor-stretch-preview.png)
 
 ### 6. Train the body consistently, not specially
 

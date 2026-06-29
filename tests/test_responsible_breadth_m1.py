@@ -93,6 +93,131 @@ def pattern_page(extra: str = "", red_flags_after_self_management: bool = False)
     )
 
 
+def apt_pattern_page(extra_help: str = "") -> str:
+    return (
+        "# Anterior Pelvic Tilt\n\n"
+        "Author: Fixture Maintainer\n"
+        "Created: 2026-06-29\n"
+        "Last reviewed: 2026-06-29\n"
+        "Next review due: 2026-09-27\n"
+        "Review scope: sources, red flags, scope boundary, comprehension\n\n"
+        "## What this page is\n\n"
+        "Static consumer education about an observable pattern. [NHS][nhs-neck]\n\n"
+        "## What this page is not\n\n"
+        "This page does not diagnose you or prescribe treatment. [Mayo Clinic][mayo-back]\n\n"
+        "## Red flags: when to stop reading and seek care\n\n"
+        "See [the red-flags reference](../about/red-flags.md) before exercise options. [Mayo Clinic][mayo-back]\n\n"
+        "## Why beginners come to this page\n\n"
+        "- their low back arches in standing\n"
+        "- planks feel like low-back arching\n"
+        "- squats feel hard to control\n\n"
+        "## Working definition\n\n"
+        "APT is an observable pelvis position, not a diagnosis. [NHS][nhs-neck]\n\n"
+        "## How to notice this in yourself\n\n"
+        "Use observations, not diagnosis. [NHS][nhs-neck]\n\n"
+        "## The core reason\n\n"
+        "**Hip-flexor stiffness.** Hip flexors can influence pelvis position. [NHS][nhs-neck]\n\n"
+        "**Hip-extensor capacity.** Glutes and hamstrings extend the hip. [Mayo Clinic][mayo-back]\n\n"
+        "**Trunk control.** Ribs and pelvis need coordination under movement. [CDC][cdc-adult-activity]\n\n"
+        "## What is uncertain or mixed\n\n"
+        "Posture does not explain every person's pain. [NHS][nhs-neck]\n\n"
+        "## What commonly helps\n\n"
+        "Read this as an educational menu, not a routine.\n\n"
+        "- **[Dead bug](../exercises/dead-bug.md)**\n"
+        "  - *Fix reason:* trains anti-extension trunk control.\n"
+        "  - *Used muscles:* rectus abdominis and obliques.\n"
+        "  - *Important note:* shorten the reach if the low back lifts.\n"
+        f"{extra_help}\n"
+        "## What to avoid\n\n"
+        "Avoid posture-shaming and guaranteed correction promises. [Mayo Clinic][mayo-back]\n\n"
+        "## When to see a professional\n\n"
+        "See a qualified professional for individual assessment. [NHS][nhs-neck]\n\n"
+        "## Where to next in this primer\n\n"
+        "- [Dead bug](../exercises/dead-bug.md)\n\n"
+        f"{rb_sources()}\n"
+        "## Author and review date\n\n"
+        "Fixture Maintainer, 2026-06-29\n"
+    )
+
+
+def write_minimal_exercise(root: Path, slug: str = "dead-bug") -> None:
+    (root / "exercises").mkdir(exist_ok=True)
+    (root / f"exercises/{slug}.md").write_text(
+        textwrap.dedent(
+            f"""\
+            # {slug.replace('-', ' ').title()}
+
+            Author: Fixture Maintainer
+            Created: 2026-06-29
+            Last reviewed: 2026-06-29
+            Next review due: 2027-06-29
+            Review scope: sources, scope boundary, comprehension
+
+            ## Purpose
+
+            General exercise education. [NHS][nhs-neck]
+
+            ## Used muscles
+
+            Primary and secondary muscles.
+
+            ## Equipment and setup
+
+            No equipment.
+
+            ## Movement phases
+
+            Move with control.
+
+            ## Important notes
+
+            Stop for unsafe symptoms. [Mayo Clinic][mayo-back]
+
+            ## Example pictures
+
+            None.
+
+            ## Patterns and conditions where this exercise appears
+
+            - [APT](../patterns/anterior-pelvic-tilt.md)
+
+            {rb_sources()}
+            ## Author and review date
+
+            Fixture Maintainer, 2026-06-29
+            """
+        ),
+        encoding="utf-8",
+    )
+
+
+def write_media_provenance(root: Path, rows: list[dict[str, str]]) -> None:
+    (root / "media").mkdir(exist_ok=True)
+    headers = (
+        "asset_path",
+        "asset_type",
+        "media_purpose",
+        "generator",
+        "prompt_or_creation_notes",
+        "created_date",
+        "human_reviewer",
+        "license_assertion",
+        "source_inputs",
+        "review_status",
+        "page_refs",
+        "notes",
+    )
+    lines = [
+        "# Media Provenance",
+        "",
+        "| " + " | ".join(headers) + " |",
+        "| " + " | ".join("---" for _ in headers) + " |",
+    ]
+    for row in rows:
+        lines.append("| " + " | ".join(row.get(header, "fixture") for header in headers) + " |")
+    (root / "media/PROVENANCE.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def principle_page() -> str:
     return (
         "# How many days a week should I train?\n\n"
@@ -158,11 +283,12 @@ class ResponsibleBreadthM1Test(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_sources(root)
+            write_minimal_exercise(root)
             (root / "patterns").mkdir()
             (root / "principles").mkdir()
             pattern = root / "patterns/forward-head-posture.md"
             principle = root / "principles/how-many-days-a-week.md"
-            pattern.write_text(pattern_page(), encoding="utf-8")
+            pattern.write_text(apt_pattern_page(), encoding="utf-8")
             principle.write_text(principle_page(), encoding="utf-8")
 
             result = run_check_with_root(root, root / "patterns", root / "principles")
@@ -175,7 +301,7 @@ class ResponsibleBreadthM1Test(unittest.TestCase):
             write_sources(root)
             (root / "patterns").mkdir()
             page = root / "patterns/missing-metadata.md"
-            page.write_text(pattern_page().replace("Next review due: 2026-09-27\n", ""), encoding="utf-8")
+            page.write_text(apt_pattern_page().replace("Next review due: 2026-09-27\n", ""), encoding="utf-8")
 
             result = run_check_with_root(root, page)
 
@@ -203,7 +329,7 @@ class ResponsibleBreadthM1Test(unittest.TestCase):
             write_sources(root)
             (root / "patterns").mkdir()
             page = root / "patterns/missing-section.md"
-            page.write_text(pattern_page().replace("## What this page is not\n", "## Boundary\n"), encoding="utf-8")
+            page.write_text(apt_pattern_page().replace("## What this page is not\n", "## Boundary\n"), encoding="utf-8")
 
             result = run_check_with_root(root, page)
 
@@ -230,7 +356,7 @@ class ResponsibleBreadthM1Test(unittest.TestCase):
             write_sources(root)
             (root / "patterns").mkdir()
             page = root / "patterns/too-few-sources.md"
-            text = pattern_page().replace("[CDC][cdc-adult-activity]", "CDC")
+            text = apt_pattern_page().replace("[CDC][cdc-adult-activity]", "CDC")
             text = text.replace("- [ACSM resistance training][acsm-resistance-training]\n", "")
             text = text.replace("[acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/\n", "")
             text = text.replace("- [CDC adult activity][cdc-adult-activity]\n", "")
@@ -374,6 +500,30 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_apt_pattern_page_follows_reader_journey_architecture(self) -> None:
+        page = ROOT / "patterns/anterior-pelvic-tilt.md"
+        text = page.read_text(encoding="utf-8")
+
+        for heading in (
+            "## Why beginners come to this page",
+            "## Working definition",
+            "## How to notice this in yourself",
+            "## The core reason",
+            "## What commonly helps",
+        ):
+            self.assertIn(heading, text)
+
+        result = subprocess.run(
+            [sys.executable, str(CHECK), "SOURCES.md", "patterns/anterior-pelvic-tilt.md", "exercises"],
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_anterior_pelvic_tilt_solution_links_have_real_targets(self) -> None:
         page = ROOT / "patterns/anterior-pelvic-tilt.md"
         text = page.read_text(encoding="utf-8")
@@ -398,6 +548,104 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
             for image_link in image_links:
                 image_path = (exercise_path.parent / image_link).resolve()
                 self.assertTrue(image_path.exists(), image_link)
+
+    def test_pattern_exercise_preview_requires_annotation_and_existing_target(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_minimal_exercise(root)
+            (root / "patterns").mkdir()
+            page = root / "patterns/anterior-pelvic-tilt.md"
+            text = apt_pattern_page().replace("  - *Used muscles:* rectus abdominis and obliques.\n", "")
+            page.write_text(text, encoding="utf-8")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("RB007", result.stdout)
+        self.assertIn("Used muscles", result.stdout)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            (root / "patterns").mkdir()
+            page = root / "patterns/anterior-pelvic-tilt.md"
+            page.write_text(apt_pattern_page(), encoding="utf-8")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("RB007", result.stdout)
+        self.assertIn("missing exercise page", result.stdout)
+
+    def test_pattern_alignment_media_requires_pattern_alignment_purpose(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_minimal_exercise(root)
+            (root / "patterns").mkdir()
+            (root / "media/movements").mkdir(parents=True)
+            (root / "media/movements/apt.png").write_bytes(b"fixture")
+            write_media_provenance(
+                root,
+                [
+                    {
+                        "asset_path": "media/movements/apt.png",
+                        "asset_type": "ai_generated_raster",
+                        "media_purpose": "key_movement_illustration",
+                        "review_status": "approved",
+                        "page_refs": "patterns/anterior-pelvic-tilt.md",
+                    }
+                ],
+            )
+            page = root / "patterns/anterior-pelvic-tilt.md"
+            page.write_text(
+                apt_pattern_page().replace(
+                    "## What this page is not",
+                    "![APT comparison](../media/movements/apt.png)\n\n## What this page is not",
+                ),
+                encoding="utf-8",
+            )
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("media_usage_out_of_scope", result.stdout)
+        self.assertIn("pattern_alignment_illustration", result.stdout)
+
+    def test_condition_anatomy_media_must_not_imply_diagnosis(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            (root / "conditions").mkdir()
+            (root / "media/conditions").mkdir(parents=True)
+            (root / "media/conditions/back.png").write_bytes(b"fixture")
+            write_media_provenance(
+                root,
+                [
+                    {
+                        "asset_path": "media/conditions/back.png",
+                        "asset_type": "ai_generated_raster",
+                        "media_purpose": "anatomical_region_illustration",
+                        "review_status": "approved",
+                        "page_refs": "conditions/back-pain.md",
+                    }
+                ],
+            )
+            page = root / "conditions/back-pain.md"
+            page.write_text(
+                pattern_page().replace(
+                    "## What this page is not",
+                    "![Diagnosis of damaged spine](../media/conditions/back.png)\n\n## What this page is not",
+                ),
+                encoding="utf-8",
+            )
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("media_usage_out_of_scope", result.stdout)
+        self.assertIn("diagnosis", result.stdout)
 
     def test_first_expanded_pages_are_promoted_after_m4_evidence(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")

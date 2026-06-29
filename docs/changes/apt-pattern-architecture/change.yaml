@@ -1,7 +1,7 @@
 change_id: apt-pattern-architecture
 proposal: docs/proposals/2026-06-29-responsible-breadth.md
-status: implementation-ready
-current_stage: implement
+status: code-review-needed
+current_stage: code-review
 created_date: 2026-06-29
 notes:
   - Follow-up to the merged Responsible Breadth proof slice.
@@ -12,12 +12,12 @@ notes:
   - Spec-review R2 approved the media-purpose amendment.
   - Architecture-review R2 approved the expanded raster media-purpose validation boundary after lifecycle status normalization.
   - Test-spec-review R1 approved RB-T21/RB-T22 coverage of pattern-page architecture and expanded media-purpose validation.
-  - Implementation can now add or reconcile RB-T21/RB-T22 proof for this follow-up amendment.
+  - Implemented RB-T21/RB-T22 proof for pattern-page architecture and expanded media-purpose validation.
+  - Ready for code-review of the APT follow-up implementation.
 validation:
-  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 16 tests"
+  - "python3 -m unittest discover -s tests -- passed, 131 tests"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 20 tests"
   - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 51 tests"
   - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md about patterns conditions principles programs exercises -- passed, checked 13 Markdown files"
-  - "python3 tools/checks/check_privacy.py README.md SOURCES.md about patterns conditions principles programs exercises docs/templates docs/changes/apt-pattern-architecture docs/changes/responsible-breadth docs/learn media -- passed, checked 77 files"
-  - "python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/architecture/system/diagrams/container.mmd docs/adr/2026-06-28-ai-generated-raster-media-provenance.md docs/adr/2026-06-29-expanded-raster-media-purposes.md -- passed, checked 4 files"
-  - "python3 tools/checks/check_privacy.py specs/responsible-breadth.test.md docs/architecture/system/architecture.md docs/adr/2026-06-29-expanded-raster-media-purposes.md docs/changes/apt-pattern-architecture/change.yaml docs/changes/apt-pattern-architecture/review-log.md -- passed, checked 5 files"
+  - "python3 tools/checks/check_privacy.py README.md SOURCES.md about patterns conditions principles programs exercises docs/templates docs/changes/apt-pattern-architecture docs/changes/responsible-breadth docs/plans/2026-06-29-responsible-breadth.md docs/plan.md media tools/checks/check_markdown_first.py tests/test_responsible_breadth_m1.py -- passed, checked 90 files"
   - "git diff --check -- passed"

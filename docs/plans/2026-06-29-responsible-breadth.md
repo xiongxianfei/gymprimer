@@ -429,6 +429,10 @@ changes begin.
 - 2026-06-29: Final holistic code-review R1 passed with no material findings.
 - 2026-06-29: Explain-change refreshed the durable rationale for the final
   reviewed diff.
+- 2026-06-29: APT follow-up amendment implemented RB-T21/RB-T22 proof for the
+  pattern-page reader journey, exercise preview annotations, existing exercise
+  targets, and expanded raster media-purpose validation. The follow-up is ready
+  for code-review and does not reopen original M1-M4 scope.
 
 ## Decision log
 
@@ -456,6 +460,11 @@ changes begin.
 - M4 touched `README.md`, RB-MP8, RB-MP9, tests, and routing metadata exactly
   as planned; no `SUMMARY.md`, `book.toml`, generated HTML, or media files were
   added.
+- APT follow-up touched `patterns/anterior-pelvic-tilt.md`,
+  `media/PROVENANCE.md`, generated raster preview assets,
+  `tools/checks/check_markdown_first.py`, Responsible Breadth tests, and
+  change-local proof/rationale. Constitution, vision, proposal, spec,
+  architecture, ADR, and original M1-M4 scope are unaffected.
 
 ## Surprises and discoveries
 
@@ -512,6 +521,17 @@ changes begin.
     passed: checked 47 files.
   - `command -v mdbook || true` passed with no path output; RB-MP9 records
     explicit deferral.
+- 2026-06-29 APT follow-up validation:
+  - `python3 -m unittest discover -s tests` passed: 131 tests.
+  - `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`
+    passed: 20 tests.
+  - `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`
+    passed: 51 tests.
+  - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md about patterns conditions principles programs exercises`
+    passed: checked 13 Markdown files.
+  - `python3 tools/checks/check_privacy.py README.md SOURCES.md about patterns conditions principles programs exercises docs/templates docs/changes/apt-pattern-architecture docs/changes/responsible-breadth docs/plans/2026-06-29-responsible-breadth.md docs/plan.md media tools/checks/check_markdown_first.py tests/test_responsible_breadth_m1.py`
+    passed: checked 90 files.
+  - `git diff --check` passed.
 
 ## Outcome and retrospective
 
