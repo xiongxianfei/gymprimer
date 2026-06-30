@@ -2,7 +2,7 @@
 
 ## Status
 
-draft
+accepted
 
 ## Problem
 
@@ -243,53 +243,52 @@ categories:
   tissues may limit comfortable head, rib-cage, or shoulder positioning for
   some readers.
 
-The exercise menu should be educational rather than prescriptive. Candidate
-internal links, if the files exist or are created in the same reviewed slice,
-include:
+The exercise menu should be educational rather than prescriptive. The first
+complete-loop implementation should give detailed pattern-page annotations for
+the five most relevant options:
 
-- **Seated row**
-  - Fix reason: practices pulling while keeping the neck long and the shoulder
-    blades moving around the rib cage.
-  - Used muscles: latissimus dorsi, rhomboids, middle trapezius, rear deltoids,
-    biceps, and neck stabilizers.
-  - Important note: do not turn the row into a chin poke, neck shrug, or
-    low-back lean.
-- **Lat pulldown**
-  - Fix reason: practices overhead pulling while keeping ribs, neck, and head
-    position organized.
-  - Used muscles: latissimus dorsi, lower trapezius, biceps, forearms, trunk
-    stabilizers, and neck stabilizers.
-  - Important note: pull to the front, not behind the neck, and avoid reaching
-    the chin toward the bar.
-- **A future chin-nod or deep-neck-flexor awareness drill**
+- **Chin-nod or deep-neck-flexor awareness drill**
   - Fix reason: provides a low-load motor-learning option for noticing head and
     upper-neck position.
   - Used muscles: deep neck flexors with light cervical extensor control.
   - Important note: this is an awareness option, not a neck-pain treatment.
-- **A future prone Y/T or band pull-apart page**
+- **Thoracic extension**
+  - Fix reason: provides a low-load motor-learning option for upper-back motion
+    that may reduce how much the neck compensates.
+  - Used muscles: thoracic extensors, lower trapezius, serratus anterior, and
+    rotator cuff depending on the variation.
+  - Important note: this is an option, not proof that posture is broken.
+- **Wall slide**
+  - Fix reason: practices shoulder-blade motion and rib-cage control while the
+    head and neck stay quiet.
+  - Used muscles: serratus anterior, lower trapezius, rotator cuff, thoracic
+    extensors, and trunk stabilizers.
+  - Important note: use an easy range and avoid forcing the neck forward.
+- **Prone Y/T**
   - Fix reason: practices upper-back support for head and neck position without
     turning the pattern page into a routine.
   - Used muscles: middle trapezius, lower trapezius, rhomboids, rear deltoids,
     and rotator cuff.
   - Important note: keep the neck quiet and choose an easy version first.
-- **Plank or dead bug**
-  - Fix reason: practices rib-cage and pelvis control so posture work is not
-    only about the shoulders.
-  - Used muscles: rectus abdominis, obliques, transverse abdominis, serratus
-    anterior, and hip flexors depending on the exercise.
-  - Important note: use a version that does not force neck tension or low-back
-    arching.
-- **A future thoracic-extension or wall-slide drill**
-  - Fix reason: provides a low-load motor-learning option for upper-back motion
-    that may reduce how much the neck compensates.
-  - Used muscles: thoracic extensors, lower trapezius, serratus anterior, and
-    rotator cuff.
-  - Important note: this is an option, not proof that posture is broken.
+- **Band pull-apart**
+  - Fix reason: practices simple upper-back and rear-shoulder work while the
+    neck stays relaxed.
+  - Used muscles: rear deltoids, rhomboids, middle trapezius, rotator cuff, and
+    grip muscles.
+  - Important note: keep the movement light enough that it does not become a
+    shrug or chin poke.
 
-The complete-loop rule is that the page should not name an exercise category
-without either linking an existing exercise page or explicitly creating that
-exercise page in the same reviewed implementation slice. This prevents the
-pattern page from becoming a disconnected list of concepts.
+The pattern page may also list the broader collected exercise set as options
+without detailed exercise-page treatment, such as seated row, lat pulldown,
+plank, dead bug, and other low-risk pulling or trunk-control examples. Those
+broader items should remain clearly secondary until linked exercise pages and
+same-slice annotations exist.
+
+The complete-loop rule is that each detailed exercise option must either link an
+existing exercise page or explicitly create that exercise page in the same
+reviewed implementation slice. This prevents the pattern page from becoming a
+disconnected list of concepts while still allowing a clearly secondary collected
+exercise list.
 
 The visual should be one reviewed generated raster comparison image only for
 the first proof slice. It should have no in-image text and no exercise
@@ -333,6 +332,11 @@ Expected touched surfaces in downstream work:
 - `docs/templates/pattern-page.md`, if the current template needs adjustment
   after the architecture contract is reviewed.
 - `patterns/forward-head-posture.md`
+- `exercises/chin-nod.md`
+- `exercises/thoracic-extension.md`
+- `exercises/wall-slide.md`
+- `exercises/prone-y-t.md`
+- `exercises/band-pull-apart.md`
 - `media/patterns/forward-head-posture/`
 - `media/PROVENANCE.md`
 - `SOURCES.md`, only if source reuse crosses page boundaries
@@ -344,6 +348,14 @@ Expected touched surfaces in downstream work:
 
 No new content class, runtime, database, generated output, public API, or
 repository layout change is expected.
+
+The five same-slice exercise pages must use the existing exercise-page contract
+from `docs/templates/exercise-card.md`. Each page must include page-local
+sources for exercise setup, technique, muscles involved, and safety claims.
+The four-source pattern set supports the pattern page; it does not by itself
+support exercise-instruction claims on the new exercise pages. Exercise-page
+sources may be added to `SOURCES.md` when reused across pages, but every safety
+or technique claim still needs page-local citation support.
 
 ## Testing and Verification Strategy
 
@@ -361,27 +373,38 @@ smoke:
 - The page avoids forbidden diagnostic, treatment, posture-correction, and
   personalized-programming language.
 - Every safety or pain-adjacent claim has page-local citation support.
-- Exercise links point only to existing pages or pages created in the same
-  reviewed slice.
+- Exercise links are checked automatically and point only to existing pages or
+  pages created in the same reviewed slice.
 - Exercise annotations include fix reason, used muscles, and important note.
+- The five same-slice exercise pages satisfy the exercise-page contract:
+  purpose, setup, muscles involved, movement breakdown, feel cues, common
+  mistakes, easier and harder versions, safety notes, and page-local sources.
+- Exercise-instruction and safety claims on the five same-slice exercise pages
+  have page-local source support independent of the pattern page's four-source
+  posture evidence set.
 - The complete-loop rule is checked: every pattern contributor that recommends
   exercise support maps to a corresponding exercise page or same-slice exercise
   page, and each mapped exercise names muscles and a cue/caveat.
-- The generated image has alt text, no in-image text, no diagnosis or cure
-  implication, a matching `media/PROVENANCE.md` row, allowed media purpose, and
-  page reference.
+- The generated image path is checked automatically for existence and has alt
+  text, no in-image text, no diagnosis or cure implication, a matching
+  `media/PROVENANCE.md` row, allowed media purpose, and page reference.
 - Image validation checks the first-slice constraint: one comparison image, no
   exercise thumbnails, no in-image text, neutral visual cues, and no red injury
   marks or diagnostic pain symbols.
+- Same-slice exercise-page validation includes page-contract tests, link
+  checks from `patterns/forward-head-posture.md` to each new exercise page,
+  privacy checks over all new pages, and media/provenance checks for any
+  exercise images introduced by those pages.
 - Local validation should include the Responsible Breadth tests,
   Markdown-first checker over active content/templates, privacy checker over
   touched artifacts, and `git diff --check`.
 
 Do not require separate proof artifacts for this proposal's acceptance path. Use explicit
-checks for required sections, no in-image text, source-set coverage,
-exercise-loop coverage, media provenance, and forbidden-claim language. If a
-later review decides a human visual review record is still needed for generated
-media, that should be introduced by the media/spec stage, not assumed here.
+checks for required sections, exercise-link existence, image-asset existence,
+no in-image text, source-set coverage, exercise-loop coverage, media provenance,
+and forbidden-claim language. If a later review decides a human visual review
+record is still needed for generated media, that should be introduced by the
+media/spec stage, not assumed here.
 
 ## Rollout and Rollback
 
@@ -390,14 +413,15 @@ architecture contract, then applies it to one pattern page with its directly
 required media/provenance/test updates after proposal review, spec, architecture
 assessment, plan, and test-spec review.
 
-The page should not be linked from README as promoted content until it passes
-the reviewed downstream gates. Rounded shoulders should remain a separate
-future pattern that follows the same reviewed architecture after this proof
-slice settles. If review finds the reusable architecture too heavy, rollback is
-to keep the existing template-only pattern contract and omit the architecture
-amendment. If review finds the topic too clinical or the exercise mapping too
-prescriptive, rollback is straightforward: remove the new pattern page, media
-asset, provenance row, and tests, leaving the proposal as historical evidence.
+The page should not be linked from README as promoted content by itself. README
+promotion should wait until the approved pattern set passes the reviewed
+downstream gates. Rounded shoulders should remain a separate future pattern
+that follows the same reviewed architecture after this proof slice settles. If
+review finds the reusable architecture too heavy, rollback is to keep the
+existing template-only pattern contract and omit the architecture amendment. If
+review finds the topic too clinical or the exercise mapping too prescriptive,
+rollback is straightforward: remove the new pattern page, media asset,
+provenance row, and tests, leaving the proposal as historical evidence.
 
 ## Risks and Mitigations
 
@@ -425,17 +449,19 @@ asset, provenance row, and tests, leaving the proposal as historical evidence.
   Mitigation: Treat those as orientation risks for workflow cleanup, but do not
   let them silently change this proposal's scope.
 
-## Open Questions
+## Resolved Decisions
 
-- Should the page title be "Forward Head Posture" or a plainer beginner title
-  such as "Head Sits Forward"?
-- Which corresponding exercise pages are required for the first complete-loop
-  implementation: chin-nod/deep-neck-flexor awareness, thoracic extension,
-  wall-slide, prone Y/T, band pull-apart, or a smaller subset?
-- Should README promotion wait for this page alone, or for a two-pattern set?
-- Which parts of the best-practice standard should be automated in the first
-  slice, and which checks can remain review-only without a separate proof
-  artifact?
+- Use the page title "Forward Head Posture".
+- Generate detailed information for the five most relevant corresponding
+  exercises: chin-nod or deep-neck-flexor awareness, thoracic extension,
+  wall-slide, prone Y/T, and band pull-apart.
+- List the broader collected exercise set in the pattern document, but keep
+  detailed complete-loop treatment to the selected five unless more exercise
+  pages are added in the same reviewed slice.
+- README promotion waits for the full approved pattern set, not this page alone.
+- The first slice must automatically check exercise-link existence and image
+  asset existence. Other semantic checks can stay review-only unless the
+  existing checker can enforce them cleanly without a separate proof artifact.
 
 ## Initial Intent Preservation
 
@@ -460,6 +486,11 @@ asset, provenance row, and tests, leaving the proposal as historical evidence.
 | Highlight important user information in the image without in-image text | in scope | Recommended Direction, Testing and Verification Strategy |
 | Put reusable pattern architecture in spec, architecture, and template | in scope | Recommended Direction, Architecture Impact |
 | Do not require separate proof artifacts; check required sections and no in-image text | in scope | Testing and Verification Strategy |
+| Use "Forward Head Posture" as the page title | in scope | Resolved Decisions, Decision Log |
+| Select five detailed exercises for the complete loop | in scope | Resolved Decisions, Recommended Direction, Scope Budget, Decision Log |
+| List the broader collected exercise set in the pattern document | in scope | Resolved Decisions, Recommended Direction, Scope Budget |
+| Gate README promotion on the full approved pattern set | in scope | Resolved Decisions, Rollout and Rollback, Scope Budget, Decision Log |
+| Automatically check exercise-link existence and image-asset existence | in scope | Resolved Decisions, Testing and Verification Strategy, Scope Budget, Decision Log |
 
 ## Scope Budget
 
@@ -471,10 +502,11 @@ asset, provenance row, and tests, leaving the proposal as historical evidence.
 | Spec and architecture integration | same-slice dependency | The user explicitly wants the pattern standard integrated into architecture before future patterns rely on it. |
 | Final pattern-page content | separate implementation slice | Content requires spec, review, source validation, and tests before implementation. |
 | Generated explanatory visual | first-slice candidate | A preview image was generated, but final project media needs provenance, review, and validation. |
-| Corresponding exercise pages for complete loop | same-slice dependency | The proof slice should not recommend unsupported exercise categories without linked exercise pages. |
-| New exercise pages beyond the minimum loop | separate implementation slice | Additional exercises broaden the content surface and should be explicitly scoped downstream. |
-| Checker/test updates | same-slice dependency | Required for source-set coverage, complete-loop mapping, required sections, no in-image text, one-image constraint, and media provenance. |
-| README promotion | deferable follow-up | Promotion should wait until downstream review and verification pass. |
+| Five corresponding exercise pages for complete loop | same-slice dependency | Create `exercises/chin-nod.md`, `exercises/thoracic-extension.md`, `exercises/wall-slide.md`, `exercises/prone-y-t.md`, and `exercises/band-pull-apart.md` so the detailed pattern annotations have linked exercise pages. |
+| Broader collected exercise list | page content, secondary detail | The pattern document may list all collected options, but only the selected five receive detailed complete-loop treatment in the first slice. |
+| New exercise pages beyond the selected five | separate implementation slice | Additional exercises broaden the content surface and should be explicitly scoped downstream. |
+| Checker/test updates | same-slice dependency | Required for source-set coverage, complete-loop mapping, required sections, exercise-link existence, image-asset existence, no in-image text, one-image constraint, and media provenance. |
+| README promotion | pattern-set follow-up | Promotion should wait until the full approved pattern set passes downstream review and verification. |
 | Workflow-guide or constitution stale-text cleanup | separate proposal | The refreshed project map identifies this risk, but it is not part of the pattern-page direction. |
 
 ## Decision Log
@@ -490,6 +522,10 @@ asset, provenance row, and tests, leaving the proposal as historical evidence.
 | 2026-06-30 | Use one comparison image only for the first proof slice. | Exercise thumbnails belong on exercise pages, and the pattern page should not read like a visual routine. | Comparison image plus exercise thumbnails. |
 | 2026-06-30 | Put reusable pattern architecture in spec, architecture, and template. | Spec owns policy, architecture locates it in the system, and template makes it usable. | Template-only governance. |
 | 2026-06-30 | Prefer automated/checkable validation over separate proof artifacts for this proposal. | Required sections, no in-image text, source coverage, complete loop, and provenance can be directly checked. | Defaulting to separate audit records for this slice. |
+| 2026-06-30 | Use "Forward Head Posture" as the page title. | The user chose the established pattern name over a plainer beginner paraphrase. | "Head Sits Forward" as the page title. |
+| 2026-06-30 | Use five detailed corresponding exercises in the first complete loop. | The selected set covers neck awareness, thoracic motion, shoulder-blade control, upper-back support, and rear-shoulder/upper-back strength without becoming a routine. | Smaller subset or detailed treatment for every collected exercise. |
+| 2026-06-30 | Gate README promotion on the full approved pattern set. | A single pattern page should not be promoted ahead of the reviewed set-level pattern architecture. | Promote README after the forward-head page alone. |
+| 2026-06-30 | Automate exercise-link and image-asset existence checks in the first slice. | Broken links and missing media are deterministic and should not rely on review-only validation. | Review-only link and image existence checks. |
 
 ## Next Artifacts
 
@@ -503,8 +539,8 @@ asset, provenance row, and tests, leaving the proposal as historical evidence.
 - Test-spec or proof-map update for architecture/template assertions,
   pattern-specific assertions, source-set coverage, complete-loop coverage, and
   media proof.
-- Implementation slice for the page, final image asset, provenance row, and
-  directly affected tests.
+- Implementation slice for the pattern page, five same-slice exercise pages,
+  final pattern image asset, provenance row, and directly affected tests.
 
 ## Follow-on Artifacts
 

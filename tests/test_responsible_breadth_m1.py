@@ -12,6 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 CHECK = ROOT / "tools/checks/check_markdown_first.py"
 OLD_MACHINE_DIR = "02" + "-machines"
 OLD_RED_FLAGS = "about/" + "red-flags.md"
+FORWARD_HEAD_EXERCISES = (
+    "chin-nod",
+    "thoracic-extension",
+    "wall-slide",
+    "prone-y-t",
+    "band-pull-apart",
+)
 
 
 def run_check_with_root(root: Path, *paths: Path) -> subprocess.CompletedProcess[str]:
@@ -44,6 +51,19 @@ def write_sources(root: Path) -> None:
     )
 
 
+def write_red_flags(root: Path) -> None:
+    (root / "RED-FLAGS.md").write_text(
+        textwrap.dedent(
+            """\
+            # Red Flags
+
+            General safety routing reference.
+            """
+        ),
+        encoding="utf-8",
+    )
+
+
 def rb_sources() -> str:
     return textwrap.dedent(
         """\
@@ -59,6 +79,76 @@ def rb_sources() -> str:
         [cdc-adult-activity]: https://www.cdc.gov/physical-activity-basics/guidelines/adults.html
         [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
         """
+    )
+
+
+def forward_head_exercise_links() -> str:
+    labels = {
+        "chin-nod": "Chin nod",
+        "thoracic-extension": "Thoracic extension",
+        "wall-slide": "Wall slide",
+        "prone-y-t": "Prone Y/T",
+        "band-pull-apart": "Band pull-apart",
+    }
+    blocks = []
+    for slug in FORWARD_HEAD_EXERCISES:
+        blocks.append(
+            textwrap.dedent(
+                f"""\
+                - **[{labels[slug]}](../exercises/{slug}.md)**
+                  - *Fix reason:* trains a contributor without promising correction.
+                  - *Used muscles:* neck, upper-back, and shoulder support muscles.
+                  - *Important note:* keep this as an option, not a routine.
+                """
+            )
+        )
+    return "\n".join(blocks)
+
+
+def forward_head_pattern_page(extra_help: str = "", image_markdown: str = "") -> str:
+    return (
+        "# Forward Head Posture\n\n"
+        "Author: Fixture Maintainer\n"
+        "Created: 2026-06-30\n"
+        "Last reviewed: 2026-06-30\n"
+        "Next review due: 2026-09-28\n"
+        "Review scope: sources, red flags, scope boundary, comprehension\n\n"
+        "## What this page is\n\n"
+        "Static consumer education about an observable pattern. [NHS][nhs-neck]\n\n"
+        f"{image_markdown}\n"
+        "## What this page is not\n\n"
+        "This page does not diagnose you, prove a posture is harmful, provide individualized care, promise correction, or explain all pain. [Mayo Clinic][mayo-back]\n\n"
+        "## Red flags: when to stop reading and seek care\n\n"
+        "See [the red-flags reference](../RED-FLAGS.md) before exercise options. [Mayo Clinic][mayo-back]\n\n"
+        "## Why beginners come to this page\n\n"
+        "- head looks forward in side-view photos\n"
+        "- neck gets tired at the desk\n"
+        "- shoulders look rounded in mirrors\n\n"
+        "## Working definition\n\n"
+        "Forward head posture is an observable head, neck, upper-back, and rib-cage relationship, not a medical condition. [NHS][nhs-neck]\n\n"
+        "## How to notice this in yourself\n\n"
+        "Use observations, not diagnosis. [NHS][nhs-neck]\n\n"
+        "## The core reason\n\n"
+        "**Daily-position load.** Long static positions can affect what feels normal. [NHS][nhs-neck]\n\n"
+        "**Head-and-neck control.** Gentle neck control can be trained as awareness. [Mayo Clinic][mayo-back]\n\n"
+        "**Scapular support.** Upper-back and shoulder-blade support can change how the position feels. [CDC][cdc-adult-activity]\n\n"
+        "## What is uncertain or mixed\n\n"
+        "Exercise can improve group posture measures, but no page can promise one person's posture correction or pain relief. [NHS][nhs-neck]\n\n"
+        "## What commonly helps\n\n"
+        "Read this as an educational menu, not a routine.\n\n"
+        f"{forward_head_exercise_links()}"
+        f"{extra_help}\n"
+        "## What to avoid\n\n"
+        "Avoid posture-shaming, guaranteed correction promises, and generic routines for pain. [Mayo Clinic][mayo-back]\n\n"
+        "## When to see a professional\n\n"
+        "See a qualified professional for individual assessment. [NHS][nhs-neck]\n\n"
+        "## Where to next in this primer\n\n"
+        "- [Chin nod](../exercises/chin-nod.md)\n"
+        "- [Thoracic extension](../exercises/thoracic-extension.md)\n"
+        "- [Beginner training principles](../principles/how-many-days-a-week.md)\n\n"
+        f"{rb_sources()}\n"
+        "## Author and review date\n\n"
+        "Fixture Maintainer, 2026-06-30\n"
     )
 
 
@@ -193,6 +283,58 @@ def write_minimal_exercise(root: Path, slug: str = "dead-bug") -> None:
     )
 
 
+def write_forward_head_exercises(root: Path, omit_section: str | None = None) -> None:
+    (root / "exercises").mkdir(exist_ok=True)
+    sections = (
+        ("## What this exercise is for", "General exercise education. [NHS][nhs-neck]\n"),
+        ("## Equipment setup", "Use simple equipment or bodyweight setup.\n"),
+        ("## Muscles involved", "Primary and secondary muscles used by the option.\n"),
+        ("## Movement breakdown", "Move with control and avoid forcing range. [Mayo Clinic][mayo-back]\n"),
+        ("## What you should feel", "A mild training effort in the intended area.\n"),
+        ("## Common mistakes", "- Treating it as a required correction.\n"),
+        ("## Easier version", "Use less range or resistance.\n"),
+        ("## Harder version", "Use more control before more load.\n"),
+        ("## Safety notes", "Stop for sharp, worsening, or unsafe symptoms. [Mayo Clinic][mayo-back]\n"),
+    )
+    for slug in FORWARD_HEAD_EXERCISES:
+        body = [
+            f"# {slug.replace('-', ' ').title()}",
+            "",
+            "Author: Fixture Maintainer",
+            "Created: 2026-06-30",
+            "Last reviewed: 2026-06-30",
+            "Next review due: 2027-06-30",
+            "Review scope: sources, scope boundary, comprehension",
+            "",
+            "> Disclaimer: GymPrimer is educational content for general exercise literacy.",
+            "> It is not medical advice and not personalized coaching.",
+            "",
+        ]
+        for heading, text in sections:
+            if heading == omit_section and slug == "wall-slide":
+                continue
+            body.extend([heading, "", text, ""])
+        body.extend(
+            [
+                "## Sources",
+                "",
+                "- [NHS neck pain][nhs-neck]",
+                "- [Mayo Clinic back pain][mayo-back]",
+                "- [CDC adult activity][cdc-adult-activity]",
+                "",
+                "[nhs-neck]: https://www.nhs.uk/conditions/neck-pain/",
+                "[mayo-back]: https://www.mayoclinic.org/diseases-conditions/back-pain/",
+                "[cdc-adult-activity]: https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+                "",
+                "## Author and review date",
+                "",
+                "Fixture Maintainer, 2026-06-30",
+                "",
+            ]
+        )
+        (root / f"exercises/{slug}.md").write_text("\n".join(body), encoding="utf-8")
+
+
 def write_media_provenance(root: Path, rows: list[dict[str, str]]) -> None:
     (root / "media").mkdir(exist_ok=True)
     headers = (
@@ -279,7 +421,7 @@ class ResponsibleBreadthM1Test(unittest.TestCase):
             write_minimal_exercise(root)
             (root / "patterns").mkdir()
             (root / "principles").mkdir()
-            pattern = root / "patterns/forward-head-posture.md"
+            pattern = root / "patterns/anterior-pelvic-tilt.md"
             principle = root / "principles/how-many-days-a-week.md"
             pattern.write_text(apt_pattern_page(), encoding="utf-8")
             principle.write_text(principle_page(), encoding="utf-8")
@@ -386,6 +528,101 @@ class ResponsibleBreadthM1Test(unittest.TestCase):
 
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("MF007", result.stdout)
+
+    def test_forward_head_pattern_requires_exact_title_and_five_exercise_links(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            write_forward_head_exercises(root)
+            (root / "patterns").mkdir()
+            page = root / "patterns/forward-head-posture.md"
+            text = forward_head_pattern_page().replace("# Forward Head Posture", "# Head Sits Forward")
+            text = text.replace("- **[Wall slide](../exercises/wall-slide.md)**", "- **Wall slide**")
+            page.write_text(text, encoding="utf-8")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("RB008", result.stdout)
+        self.assertIn("title must be exactly", result.stdout)
+        self.assertIn("../exercises/wall-slide.md", result.stdout)
+
+    def test_forward_head_pattern_requires_same_slice_exercise_pages(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            write_forward_head_exercises(root)
+            (root / "exercises/wall-slide.md").unlink()
+            (root / "patterns").mkdir()
+            page = root / "patterns/forward-head-posture.md"
+            page.write_text(forward_head_pattern_page(), encoding="utf-8")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("RB007", result.stdout)
+        self.assertIn("missing exercise page", result.stdout)
+        self.assertIn("../exercises/wall-slide.md", result.stdout)
+
+    def test_forward_head_exercise_pages_require_exercise_contract_sections(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            write_forward_head_exercises(root, omit_section="## Safety notes")
+
+            result = run_check_with_root(root, root / "exercises/wall-slide.md")
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("RB010", result.stdout)
+        self.assertIn("Safety notes", result.stdout)
+
+    def test_forward_head_pattern_image_limit_and_text_contract(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            write_forward_head_exercises(root)
+            (root / "patterns").mkdir()
+            (root / "media/patterns/forward-head-posture").mkdir(parents=True)
+            (root / "media/patterns/forward-head-posture/one.png").write_bytes(b"fixture")
+            (root / "media/patterns/forward-head-posture/two.png").write_bytes(b"fixture")
+            write_media_provenance(
+                root,
+                [
+                    {
+                        "asset_path": "media/patterns/forward-head-posture/one.png",
+                        "asset_type": "ai_generated_raster",
+                        "media_purpose": "pattern_alignment_illustration",
+                        "prompt_or_creation_notes": "comparison image with label text",
+                        "review_status": "approved",
+                        "page_refs": "patterns/forward-head-posture.md",
+                    },
+                    {
+                        "asset_path": "media/patterns/forward-head-posture/two.png",
+                        "asset_type": "ai_generated_raster",
+                        "media_purpose": "pattern_alignment_illustration",
+                        "review_status": "approved",
+                        "page_refs": "patterns/forward-head-posture.md",
+                    },
+                ],
+            )
+            image_markdown = (
+                "![Forward head comparison with labels](../media/patterns/forward-head-posture/one.png)\n\n"
+                "![Second comparison](../media/patterns/forward-head-posture/two.png)\n\n"
+            )
+            page = root / "patterns/forward-head-posture.md"
+            page.write_text(forward_head_pattern_page(image_markdown=image_markdown), encoding="utf-8")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("RB009", result.stdout)
+        self.assertIn("no more than one", result.stdout)
+        self.assertIn("media_usage_out_of_scope", result.stdout)
+        self.assertIn("in-image text", result.stdout)
 
 
 class ResponsibleBreadthM2Test(unittest.TestCase):

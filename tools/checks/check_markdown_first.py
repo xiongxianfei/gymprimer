@@ -91,6 +91,33 @@ PROGRAM_EXAMPLE_SECTIONS = (
     "## Example week",
     "## Sources",
 )
+FORWARD_HEAD_PATTERN_PATH = "patterns/forward-head-posture.md"
+FORWARD_HEAD_EXERCISE_LINKS = (
+    "../exercises/chin-nod.md",
+    "../exercises/thoracic-extension.md",
+    "../exercises/wall-slide.md",
+    "../exercises/prone-y-t.md",
+    "../exercises/band-pull-apart.md",
+)
+FORWARD_HEAD_EXERCISE_PATHS = {
+    "exercises/chin-nod.md",
+    "exercises/thoracic-extension.md",
+    "exercises/wall-slide.md",
+    "exercises/prone-y-t.md",
+    "exercises/band-pull-apart.md",
+}
+FORWARD_HEAD_EXERCISE_SECTIONS = (
+    "## What this exercise is for",
+    "## Equipment setup",
+    "## Muscles involved",
+    "## Movement breakdown",
+    "## What you should feel",
+    "## Common mistakes",
+    "## Easier version",
+    "## Harder version",
+    "## Safety notes",
+    "## Sources",
+)
 RESPONSIBLE_BREADTH_FORBIDDEN_PATTERNS = (
     re.compile(r"\byou have\b", re.IGNORECASE),
     re.compile(r"\btreatment plan\b", re.IGNORECASE),
@@ -167,6 +194,10 @@ REQUIRED_PROVENANCE_FIELDS = (
 REFERENCE_LINK_RE = re.compile(r"\[[^\]]+\]\[([A-Za-z0-9_.:-]+)\]")
 REFERENCE_DEF_RE = re.compile(r"^\[([A-Za-z0-9_.:-]+)\]:\s+(\S+)\s*$", re.MULTILINE)
 IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
+PATTERN_ALIGNMENT_FORBIDDEN_MEDIA_TEXT_RE = re.compile(
+    r"\b(label(?:s|ed)?|caption|wording|with text|contains text|bad posture|red (?:pain|injury)|pain mark|cure|before/after|thumbnail)\b",
+    re.IGNORECASE,
+)
 ROOT = Path(os.environ.get("GYMPRIMER_ROOT", Path(__file__).resolve().parents[2]))
 SOURCES_INDEX = ROOT / "SOURCES.md"
 PROVENANCE_INDEX = ROOT / "media/PROVENANCE.md"
@@ -271,6 +302,15 @@ def responsible_breadth_page_class(path: Path, root: Path = ROOT) -> str | None:
         return None
     first_part = relative.split("/", 1)[0]
     return RESPONSIBLE_BREADTH_PAGE_CLASSES.get(first_part)
+
+
+def is_forward_head_pattern(path: Path, root: Path = ROOT) -> bool:
+    return repo_relative_path(path, root) == FORWARD_HEAD_PATTERN_PATH
+
+
+def is_forward_head_exercise(path: Path, root: Path = ROOT) -> bool:
+    relative = repo_relative_path(path, root)
+    return relative in FORWARD_HEAD_EXERCISE_PATHS
 
 
 def normalized_layout_active(root: Path = ROOT) -> bool:
@@ -432,6 +472,16 @@ def image_text_implies_condition_diagnosis(alt_text: str) -> bool:
     return bool(re.search(r"\b(diagnos(?:is|ed)|patholog(?:y|ic)|treat(?:ment)?|damaged|disease)\b", alt_text, re.IGNORECASE))
 
 
+def pattern_alignment_text_contract_violation(alt_text: str, provenance_row: dict[str, str]) -> str | None:
+    fields = (
+        alt_text,
+        provenance_row.get("prompt_or_creation_notes", ""),
+        provenance_row.get("notes", ""),
+    )
+    match = PATTERN_ALIGNMENT_FORBIDDEN_MEDIA_TEXT_RE.search(" ".join(fields))
+    return None if match is None else match.group(0)
+
+
 def validate_raster_provenance(
     page_path: Path,
     asset_path: str,
@@ -488,6 +538,17 @@ def validate_raster_provenance(
                 f"anatomical_region_illustration must not imply diagnosis, pathology, or treatment: {alt_text}",
             )
         ]
+
+    if page_class == "pattern_page" and media_purpose == "pattern_alignment_illustration":
+        violation = pattern_alignment_text_contract_violation(alt_text, row)
+        if violation:
+            return [
+                Finding(
+                    page_path,
+                    "media_usage_out_of_scope",
+                    f"pattern alignment image must not include in-image text, labels, thumbnails, injury marks, or cure implications: {violation}",
+                )
+            ]
 
     if row["review_status"].strip() != "approved":
         return [
@@ -640,6 +701,9 @@ def validate_responsible_breadth_page(
     if page_class == "pattern_page":
         findings.extend(validate_pattern_architecture(path, text))
 
+    if page_class == "expanded_exercise_page" and is_forward_head_exercise(path):
+        findings.extend(validate_forward_head_exercise_contract(path, text))
+
     if len(cited_ids) < 3:
         findings.append(
             Finding(path, "RB005", f"Responsible Breadth pages must cite at least three named sources; found {len(cited_ids)}")
@@ -703,6 +767,58 @@ def validate_pattern_architecture(path: Path, text: str) -> list[Finding]:
         for required in ("Fix reason", "Used muscles", "Important note"):
             if f"*{required}:*" not in block:
                 findings.append(Finding(path, "RB007", f"pattern exercise preview is missing {required}: {link_target}"))
+
+    if is_forward_head_pattern(path):
+        findings.extend(validate_forward_head_pattern_contract(path, text, helps_section))
+
+    return findings
+
+
+def validate_forward_head_pattern_contract(path: Path, text: str, helps_section: str) -> list[Finding]:
+    findings: list[Finding] = []
+
+    first_heading = next((line.strip() for line in text.splitlines() if line.startswith("# ")), "")
+    if first_heading != "# Forward Head Posture":
+        findings.append(Finding(path, "RB008", 'forward-head pattern title must be exactly "Forward Head Posture"'))
+
+    for link_target in FORWARD_HEAD_EXERCISE_LINKS:
+        if f"]({link_target})" not in helps_section:
+            findings.append(Finding(path, "RB008", f"forward-head pattern is missing detailed exercise link: {link_target}"))
+
+    image_matches = list(IMAGE_RE.finditer(text))
+    if len(image_matches) > 1:
+        findings.append(
+            Finding(
+                path,
+                "RB009",
+                f"forward-head pattern page may reference no more than one pattern comparison image; found {len(image_matches)}",
+            )
+        )
+
+    for match in image_matches:
+        alt_text = match.group(1)
+        target = match.group(2)
+        combined = f"{alt_text} {target}"
+        if "../media/exercises/" in target or "thumbnail" in combined.lower():
+            findings.append(Finding(path, "RB009", "forward-head pattern page must not include exercise thumbnails"))
+        if PATTERN_ALIGNMENT_FORBIDDEN_MEDIA_TEXT_RE.search(alt_text):
+            findings.append(
+                Finding(
+                    path,
+                    "RB009",
+                    "forward-head pattern image alt text must not imply in-image text, labels, injury marks, or cure framing",
+                )
+            )
+
+    return findings
+
+
+def validate_forward_head_exercise_contract(path: Path, text: str) -> list[Finding]:
+    findings: list[Finding] = []
+
+    for section in FORWARD_HEAD_EXERCISE_SECTIONS:
+        if heading_position(text, section) == -1:
+            findings.append(Finding(path, "RB010", f"forward-head exercise page section is missing: {section.removeprefix('## ')}"))
 
     return findings
 

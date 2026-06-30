@@ -4,6 +4,10 @@
 
 accepted
 
+Amended on 2026-06-30 by the forward-head-posture pattern architecture work to
+replace separate audit-artifact requirements with recorded review evidence
+under the normal change record.
+
 ## Context
 
 GymPrimer has accepted the Responsible Breadth direction and approved
@@ -13,7 +17,7 @@ education for common patterns, well-studied conditions, programming principles,
 static program examples, and expanded exercise pages.
 
 The change affects repository layout, page classification, source-quality
-validation, safety routing, manual proof records, and promotion boundaries. It
+validation, safety routing, review evidence, and promotion boundaries. It
 must preserve the original Markdown-first five-page contract and must not turn
 GymPrimer into a symptom checker, diagnostic product, treatment planner,
 personalized programming engine, CMS, hosted app, or AI-generated source of
@@ -51,15 +55,12 @@ Validation remains repository-local and Markdown-first:
 - citation checks verify page-local sources and source-index references;
 - source count checks are automated where possible;
 - source quality, non-diagnostic language, non-prescription boundaries, visual
-  necessity, and reader comprehension use manual proof records when semantics
-  cannot be fully automated;
+  necessity, and reader comprehension use recorded review evidence when
+  semantics cannot be fully automated;
 - media provenance continues to use the existing `media/PROVENANCE.md` contract.
 
-Responsible Breadth manual proof records live under:
-
-```text
-docs/changes/responsible-breadth/manual-proof/
-```
+Responsible Breadth review evidence lives under the relevant
+`docs/changes/<change-id>/` record for the reviewed change.
 
 Expanded pages must not be linked as promoted content from active navigation
 until architecture review, test-spec review, planning, implementation review,
@@ -78,7 +79,7 @@ and final verification for the slice are complete.
   the source of truth and there is no runtime product boundary.
 - Require a formal clinician review board: rejected for this slice because the
   accepted trust model is citation discipline, red-flag routing, honest
-  authorship, and reviewable proof records.
+  authorship, and reviewable evidence records.
 
 ## Consequences
 
@@ -94,8 +95,9 @@ Benefits:
 
 Costs and risks:
 
-- Manual proof remains necessary for source quality, non-diagnostic language,
-  non-prescription boundaries, and comprehension outcomes.
+- Review evidence remains necessary for source quality, non-diagnostic
+  language, non-prescription boundaries, and comprehension outcomes when
+  automated checks cannot verify semantics.
 - Top-level directories may create navigation sprawl if promotion gates are not
   enforced.
 - Red-flag and review-cadence requirements introduce ongoing maintenance debt.

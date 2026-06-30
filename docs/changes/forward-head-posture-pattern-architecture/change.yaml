@@ -1,0 +1,69 @@
+change_id: forward-head-posture-pattern-architecture
+status: active
+current_stage: code-review
+created_date: 2026-06-30
+
+proposal: docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md
+proposal_status: accepted
+proposal_review: docs/changes/forward-head-posture-pattern-architecture/reviews/proposal-review-r2.md
+
+current_spec: specs/forward-head-posture-pattern-architecture.md
+current_spec_status: approved
+current_spec_review: docs/changes/forward-head-posture-pattern-architecture/reviews/spec-review-r1.md
+
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r1.md
+
+current_plan: docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md
+current_plan_status: active
+current_plan_review: docs/changes/forward-head-posture-pattern-architecture/reviews/plan-review-r1.md
+plan_index: docs/plan.md
+
+current_milestone: M1
+current_milestone_state: review-requested
+last_reviewed_milestone: none
+
+current_test_spec: specs/forward-head-posture-pattern-architecture.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r2.md
+next_stage: code-review
+
+open_findings: []
+
+notes:
+  - Proposal-review R2 approved the forward-head-posture pattern architecture direction.
+  - Spec-review R1 approved the focused spec with no material findings.
+  - Architecture-review R1 approved the canonical architecture update with no material findings.
+  - Plan created and indexed; plan-review is next.
+  - Plan-review R1 approved the execution plan with no material findings; test-spec is next.
+  - Test spec drafted; test-spec-review is next before implementation.
+  - Test-spec-review R1 requested changes for review-only semantic evidence metadata and validation command ownership; implementation handoff was not allowed.
+  - Test spec revised to use review-only code-review evidence and command ownership metadata; test-spec-review R2 approved implementation handoff.
+  - M1 implemented focused forward-head pattern validation tests and checker rules; code-review is next.
+
+validation:
+  - "python3 tools/checks/check_privacy.py docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md docs/changes/forward-head-posture-pattern-architecture docs/architecture/system/architecture.md specs/forward-head-posture-pattern-architecture.md docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md -- passed, checked 12 files"
+  - "git diff --check -- passed"
+  - "rg -n \"ready for spec-review|ready for architecture-review|awaiting architecture review|Spec review for this draft|Execution plan after spec review|Next stage: test-spec|ready for test-spec|pending: plan authoring validation\" specs/forward-head-posture-pattern-architecture.md docs/architecture/system/architecture.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md docs/changes/forward-head-posture-pattern-architecture --glob '!change.yaml' -- passed with no matches"
+  - "python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plan.md -- passed, checked 9 files"
+  - "git diff --check -- passed"
+  - "rg -n \"PLR-R1|plan-review-r1|current_stage: test-spec|Current stage: test-spec|Plan-review R1 approved|Review status: approved|Immediate next stage: test-spec\" docs/changes/forward-head-posture-pattern-architecture docs/plan.md -- passed"
+  - "python3 tools/checks/check_privacy.py specs/forward-head-posture-pattern-architecture.test.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md docs/changes/forward-head-posture-pattern-architecture -- passed, checked 11 files"
+  - "git diff --check -- passed"
+  - "python3 -c \"from pathlib import Path; text = Path('specs/forward-head-posture-pattern-architecture.test.md').read_text(encoding='utf-8'); missing = [f'{prefix}{i}' for prefix, count in [('R', 32), ('E', 5), ('EC', 10), ('AC', 17)] for i in range(1, count + 1) if f'{prefix}{i}' not in text]; assert not missing, 'missing coverage tokens: ' + ', '.join(missing); print('coverage token check passed')\" -- passed"
+  - "rg -n \"current_stage: test-spec-review|current_test_spec: specs/forward-head-posture-pattern-architecture.test.md|next_stage: test-spec-review|Ready for test-spec-review|manual-proof artifact|manual proof\" specs/forward-head-posture-pattern-architecture.test.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md docs/changes/forward-head-posture-pattern-architecture/change.yaml -- passed"
+  - "python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plan.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md specs/forward-head-posture-pattern-architecture.test.md -- passed, checked 12 files"
+  - "git diff --check -- passed"
+  - "rg -n \"TSR-FHP-1|TSR-FHP-2|test-spec-review-r1|current_stage: test-spec|next_stage: test-spec revision|Current stage: test-spec revision|Implementation handoff: not-allowed|Review status: changes-requested|Closeout status: open\" docs/changes/forward-head-posture-pattern-architecture docs/plan.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md -- passed"
+  - "python3 tools/checks/check_privacy.py specs/forward-head-posture-pattern-architecture.test.md docs/changes/forward-head-posture-pattern-architecture docs/plan.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md -- passed, checked 13 files"
+  - "git diff --check -- passed"
+  - "python3 -c \"from pathlib import Path; text = Path('specs/forward-head-posture-pattern-architecture.test.md').read_text(encoding='utf-8'); missing = [f'{prefix}{i}' for prefix, count in [('R', 32), ('E', 5), ('EC', 10), ('AC', 17), ('FHP-CMD', 13), ('FHP-RO', 3)] for i in range(1, count + 1) if f'{prefix}{i}' not in text]; assert not missing, 'missing coverage tokens: ' + ', '.join(missing); print('coverage token check passed')\" -- passed"
+  - "rg -n \"manual-proof|manual proof|separate manual|standalone manual\" specs/forward-head-posture-pattern-architecture.test.md -- passed with no matches"
+  - "rg -n \"TSR-R2|test-spec-review-r2|current_stage: implement|next_stage: implement|Current stage: implement|Implementation handoff: allowed|Closeout status: closed|open_findings: \\[\\]|Ready for implement\" docs/changes/forward-head-posture-pattern-architecture docs/plan.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md -- passed"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- failed before implementation with expected missing forward-head assertions"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 24 tests"
+  - "python3 -m unittest tests.test_markdown_first_templates -- passed, 2 tests"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed, checked 18 Markdown files"
+  - "python3 tools/checks/check_privacy.py tools tests docs/templates docs/changes/forward-head-posture-pattern-architecture -- passed, checked 70 files"
+  - "git diff --check -- passed"

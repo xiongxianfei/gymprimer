@@ -18,6 +18,9 @@ Prior approved baselines:
 - Markdown-first architecture review:
   `docs/changes/markdown-first-gym-primer/reviews/architecture-review-r3.md`
 
+The forward-head-posture pattern architecture amendment was approved by
+`docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r1.md`.
+
 ## Related artifacts
 
 - Proposal: `../../proposals/2026-06-27-markdown-first-gym-primer.md`
@@ -33,6 +36,11 @@ Prior approved baselines:
   - `../../changes/responsible-breadth/reviews/spec-review-r2.md`
   - `../../changes/apt-pattern-architecture/reviews/spec-review-r2.md`
   - `../../changes/repository-layout-normalization/reviews/spec-review-r2.md`
+  - `../../changes/forward-head-posture-pattern-architecture/reviews/spec-review-r1.md`
+- Forward head posture pattern architecture:
+  - Proposal:
+    `../../proposals/2026-06-30-forward-head-posture-pattern-architecture.md`
+  - Spec: `../../../specs/forward-head-posture-pattern-architecture.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
@@ -64,7 +72,7 @@ Goals:
 - Add expanded static content without introducing diagnosis, treatment,
   individualized programming, symptom collection, or runtime decision support.
 - Make red-flag routing, source quality, page metadata, and review cadence
-  visible in Markdown and proof records.
+  visible in Markdown and review evidence.
 - Preserve old platform artifacts as historical context without treating them as active implementation guidance.
 
 ## Architecture Constraints
@@ -105,12 +113,23 @@ Goals:
 - Safety claims require claim-level citations and page-local sources.
 - Markdown pages must remain readable without generated HTML, JavaScript, a local server, or search index.
 - Existing structured-platform artifacts are historical when they conflict with current governance.
+- The forward-head-posture proof slice is one pattern page plus five
+  same-slice exercise pages:
+  `patterns/forward-head-posture.md`, `exercises/chin-nod.md`,
+  `exercises/thoracic-extension.md`, `exercises/wall-slide.md`,
+  `exercises/prone-y-t.md`, and `exercises/band-pull-apart.md`.
+- The forward-head-posture pattern page may use at most one support raster
+  image under `media/patterns/forward-head-posture/`; the image is not an
+  exercise routine, before/after cure claim, or source of truth for labels,
+  safety claims, or instructions.
+- README promotion for pattern pages remains gated on the approved pattern set,
+  not on the forward-head-posture page alone.
 
 ## Context and Scope
 
 The system boundary is the GymPrimer repository and optional local derived HTML.
 Maintainers and contributors author Markdown content, source indexes,
-contributor rules, optional media, media provenance, manual proof, and check
+contributor rules, optional media, media provenance, review evidence, and check
 evidence.
 Beginner readers browse Markdown directly in GitHub or a clone. mdBook, if
 present, reads Markdown and emits derived HTML only.
@@ -136,7 +155,7 @@ The architecture favors:
 
 - self-contained pages over structured records;
 - page-local sources over global-only bibliography;
-- manual or lightweight checks over schema/lifecycle gates;
+- lightweight checks and recorded review evidence over schema/lifecycle gates;
 - no image over unnecessary image use;
 - high-quality human-reviewed raster over SVG for expanded pages when realistic
   body position, anatomical context, or beginner-readable movement detail is
@@ -147,7 +166,7 @@ The architecture favors:
 - centralized media provenance over sidecar-per-image metadata;
 - path-classified expanded static pages over a database or CMS taxonomy;
 - page-local safety boundaries and review metadata over hidden lifecycle state;
-- manual semantic proof records where source quality and prescription boundaries
+- recorded semantic review evidence where source quality and prescription boundaries
   cannot be fully automated;
 - stable Markdown paths over early website routing;
 - optional mdBook output over a frontend framework.
@@ -169,7 +188,7 @@ does not get flattened together with workflow evidence or tooling.
 | Content | `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/` | Canonical Markdown product pages. Equipment type is page metadata, not a folder split. |
 | Media | `media/<content-type>/<slug>/...`, `media/PROVENANCE.md` | Optional supporting raster illustrations referenced by Markdown. Raster assets use provenance purpose values to distinguish equipment, movement, pattern alignment, anatomy context, and exercise previews. |
 | Governance | `docs/proposals/`, `docs/adr/`, `docs/architecture/` | Accepted direction, durable decisions, and canonical architecture. These remain under `docs/` per RigorLoop workflow requirements. |
-| Tooling and operations | `tools/`, `specs/`, `docs/changes/`, `docs/plans/`, `docs/learn/`, optional `book.toml` and `SUMMARY.md` | Validation, specs/test specs, plans, proof records, learning records, and optional derived-site configuration. These serve content but are not product content blocks. |
+| Tooling and operations | `tools/`, `specs/`, `docs/changes/`, `docs/plans/`, `docs/learn/`, optional `book.toml` and `SUMMARY.md` | Validation, specs/test specs, plans, review evidence, learning records, and optional derived-site configuration. These serve content but are not product content blocks. |
 
 Layout normalization target:
 
@@ -202,12 +221,32 @@ Logical containers:
 - **Media provenance index**: one row per AI-generated raster asset, with
   generator, creation notes, license assertion, human review status, media
   purpose, page references, and exact asset path.
-- **Tooling and operations**: specs, validation scripts, change-local proof,
+- **Tooling and operations**: specs, validation scripts, change-local evidence,
   plans, learning records, and optional mdBook configuration.
-- **Manual proof records**: change-local evidence under `docs/changes/<change-id>/`
-  for semantic source quality, safety boundaries, visual necessity, page review
-  metadata, and reader comprehension.
+- **Review evidence records**: change-local evidence under
+  `docs/changes/<change-id>/` for semantic source quality, safety boundaries,
+  visual necessity, page review metadata, and reader comprehension where those
+  checks cannot be fully automated.
 - **Optional mdBook renderer**: derived static HTML output.
+
+Forward-head-posture proof-slice building blocks:
+
+- **Pattern page**: `patterns/forward-head-posture.md` owns the observable
+  pattern explanation, red-flag routing, uncertainty framing, core reasons,
+  detailed exercise annotations, broader collected exercise list, next links,
+  sources, and author/review metadata.
+- **Same-slice exercise pages**: `exercises/chin-nod.md`,
+  `exercises/thoracic-extension.md`, `exercises/wall-slide.md`,
+  `exercises/prone-y-t.md`, and `exercises/band-pull-apart.md` own setup,
+  muscles involved, movement breakdown, feel cues, common mistakes, variations,
+  safety notes, and exercise-page-local sources.
+- **Optional pattern media**: at most one comparison raster image may live under
+  `media/patterns/forward-head-posture/`, with exact approved provenance in
+  `media/PROVENANCE.md` and no in-image text.
+- **Validation hooks**: tooling checks detailed exercise-link existence from the
+  pattern page, existence of any referenced pattern image asset, page-local
+  sources, media provenance, privacy, and forbidden diagnostic, treatment,
+  rehab, posture-correction, and personalized-programming language.
 
 See [diagrams/container.mmd](diagrams/container.mmd) for the C4 container view.
 
@@ -236,15 +275,15 @@ Expanded static-content authoring and promotion flow:
 2. The page remains draft-only until checks classify the page class and verify
    required sections, review metadata, source count, source-index references,
    red-flag links where required, media path/provenance rules, and privacy.
-3. Maintainers record manual proof under the relevant `docs/changes/<change-id>/`
-   directory for semantic source quality,
+3. Maintainers record review evidence under the relevant
+   `docs/changes/<change-id>/` directory for semantic source quality,
    non-diagnostic/non-prescriptive language, source support for safety claims,
    visual necessity where media exists, review cadence, and comprehension
    outcomes.
 4. A pattern or condition page is promoted only when red-flag routing appears
-   before self-management discussion and the proof record confirms the page
+   before self-management discussion and the review evidence confirms the page
    does not diagnose the reader.
-5. A program-example page is promoted only when the proof record confirms that
+5. A program-example page is promoted only when the review evidence confirms that
    the page is a static illustration and not a personal prescription.
 6. README, SUMMARY, or other active navigation links must not expose
    expanded pages as promoted content until the expanded slice passes
@@ -293,7 +332,7 @@ Repository layout normalization flow:
 
 1. The migration inventory identifies active references to every file that will
    be moved or removed, including Markdown links, README navigation,
-   `SUMMARY.md`, `book.toml`, source references, tests, checkers, proof records,
+   `SUMMARY.md`, `book.toml`, source references, tests, checkers, review records,
    change metadata, and provenance rows.
 2. Dependency references are updated or explicitly removed before the old file
    path is removed.
@@ -320,7 +359,7 @@ Failure paths:
   unverified safety wording blocks promotion.
 - Missing Responsible Breadth page classification, missing page-contract
   sections, missing red-flag routing, weak source quality, missing review
-  metadata, or missing manual semantic proof keeps an expanded page draft-only.
+  metadata, or missing required review evidence keeps an expanded page draft-only.
 - Diagnosis, treatment-plan, rehab-progression, posture-correction promise,
   personalized programming, symptom collection, or injury-specific protocol
   language blocks expanded-page promotion.
@@ -329,6 +368,22 @@ Failure paths:
   paths remain referenced, compatibility stubs remain, moved media lacks
   updated provenance, or historical artifacts are removed while still actively
   referenced.
+
+Forward-head-posture proof-slice authoring flow:
+
+1. A contributor drafts `patterns/forward-head-posture.md` and the five
+   same-slice exercise pages in the same implementation slice.
+2. The pattern page links only detailed exercise annotations to existing
+   same-slice exercise pages and keeps broader collected exercises secondary
+   unless they also have full exercise pages and annotations.
+3. If an image is used, the Markdown references one local asset under
+   `media/patterns/forward-head-posture/` and `media/PROVENANCE.md` carries the
+   exact approved `asset_path`, allowed purpose, and page reference.
+4. Local checks verify required page contracts, detailed exercise-link
+   existence, image-asset existence, source sections, source-index reuse where
+   applicable, media provenance, privacy, and forbidden language.
+5. README, SUMMARY, or other active navigation promotion waits for the full
+   approved pattern set, even when this proof page passes local validation.
 
 ## Deployment View
 
@@ -350,7 +405,7 @@ Packaging boundaries:
   approved AI-generated raster illustrations, and `media/PROVENANCE.md` are
   source assets.
 - Expanded static content pages, red-flags references, shared source
-  indexes, manual proof records, and validation reports are repository source or
+  indexes, review evidence records, and validation reports are repository source or
   workflow evidence.
 - mdBook output is generated and disposable.
 - Historical generated JSON and validator evidence are not v0.1 release packages.
@@ -404,16 +459,23 @@ Expanded static content page contracts:
 - Red-flag routing must appear before self-management discussion on safety-
   relevant expanded pages.
 
-Source quality and proof:
+Source quality and review evidence:
 
 - Source count is necessary but not sufficient. Expanded pages require the
   source-quality mix defined by page class.
 - Source-index validity and page-local source presence remain shared
   Markdown-first checks.
 - Semantic source quality, scope-boundary judgment, and claim support require
-  manual proof when checks cannot verify them.
-- Manual proof records live under the relevant `docs/changes/<change-id>/`
+  recorded review evidence when checks cannot verify them.
+- Review evidence records live under the relevant `docs/changes/<change-id>/`
   directory.
+- Forward-head-posture pattern claims use four source families: red flags and
+  professional routing, posture-pattern evidence and uncertainty,
+  shoulder/scapular and rotator-cuff context, and general resistance-training
+  framing.
+- Same-slice exercise pages require page-local source support for setup,
+  technique, muscle, feel-cue, common-mistake, and safety claims; the pattern
+  page's four-source set does not substitute for exercise-instruction support.
 
 Media:
 
@@ -443,6 +505,8 @@ Media:
 - `exercise_preview_illustration` is limited to compact exercise support images
   referenced from pattern or condition pages; the linked exercise page remains
   the source of truth for setup and movement instructions.
+- The forward-head-posture proof slice uses no exercise thumbnails on the
+  pattern page in its first implementation slice.
 - Original raster drawings, original photos, third-party licensed raster
   assets, screenshots, stock assets, and commercial machine images are out of
   scope unless a later spec revision changes the media contract.
@@ -467,11 +531,11 @@ Repository layout:
 
 Privacy:
 
-- Content, examples, generated evidence, and reader-test notes must not contain private health information, private contacts, secrets, or local machine paths.
+- Content, examples, generated evidence, and reader-test notes must not contain sensitive health information, private contacts, secrets, or local paths.
 
 Observability:
 
-- Local checks and manual proof records identify the page and rule that passed or failed.
+- Local checks and review evidence records identify the page and rule that passed or failed.
 - Media validation findings use stable codes such as
   `media_provenance_missing`, `media_provenance_incomplete`,
   `media_provenance_not_approved`, `media_usage_out_of_scope`, and
@@ -484,10 +548,14 @@ Observability:
   missing metadata, missing red-flag link, source-count failure, source-index
   failure, excluded-scope failure, media-provenance failure, and privacy failure
   with stable messages.
-- Manual proof records identify the page, requirement IDs or acceptance
+- Review evidence records identify the page, requirement IDs or acceptance
   criteria checked, files inspected, reviewer/author role, non-identifying
   reader type when comprehension is tested, observed outcome, and residual
   validation gaps.
+- Forward-head-posture validation reports detailed exercise-link existence,
+  referenced pattern-image existence, missing page-contract sections, missing
+  page-local sources, source-index failures, provenance failures, privacy
+  failures, and forbidden diagnostic or prescriptive language.
 
 ## Architecture Decisions
 
@@ -495,7 +563,7 @@ Observability:
 - [ADR 2026-06-28: AI-generated raster media provenance](../../adr/2026-06-28-ai-generated-raster-media-provenance.md) - Allow narrow AI-generated raster support assets with centralized provenance.
 - [ADR 2026-06-29: Expanded raster media purposes](../../adr/2026-06-29-expanded-raster-media-purposes.md) - Add expanded-page raster purposes for pattern alignment, anatomical region context, and exercise previews.
 - [ADR 2026-06-29: Direct repository layout normalization](../../adr/2026-06-29-direct-repository-layout-normalization.md) - Normalize physical repository paths by direct removal, root red flags, subject-co-located media, and dependency-first migration.
-- [ADR 2026-06-29: Responsible Breadth static content boundaries](../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md) - Add path-classified expanded static content classes with higher-bar proof, red-flag routing, and no runtime personalization.
+- [ADR 2026-06-29: Responsible Breadth static content boundaries](../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md) - Add path-classified expanded static content classes with higher-bar review evidence, red-flag routing, and no runtime personalization.
 - [ADR 2026-06-26: Repository-native reviewed content](../../adr/2026-06-26-repository-native-reviewed-content.md) - Superseded structured-platform decision retained as history.
 
 ## Quality Requirements
@@ -513,13 +581,14 @@ Observability:
 | Red-flag routing | A pattern or condition page discusses self-management themes. | The page links the red-flags reference before self-management discussion. |
 | Source quality | A condition page cites three weak sources. | The page fails until it has the required institutional, guideline, patient-education, or supporting source mix. |
 | Prescription boundary | A program example adapts to symptoms or goals. | The page fails promotion as personalized programming. |
-| Manual proof | A semantic safety or source-quality claim cannot be automated. | A proof record under the relevant `docs/changes/<change-id>/` directory records the review and outcome. |
+| Review evidence | A semantic safety or source-quality claim cannot be automated. | A review evidence record under the relevant `docs/changes/<change-id>/` directory records the review and outcome. |
+| Pattern complete loop | A forward-head-posture detailed exercise annotation links chin nod, thoracic extension, wall slide, prone Y/T, or band pull-apart. | The target same-slice exercise page exists and carries its own page-local source support for instruction and safety claims. |
 | Layout migration dependency safety | A file is moved or removed. | Active references are inventoried and updated before the old path is removed. |
 | Canonical content paths | A promoted exercise page is referenced. | The page lives under `exercises/`; old numbered content paths are not required and no compatibility stub remains. |
 | Red-flags routing path | A safety-relevant page links red flags. | The link targets root `RED-FLAGS.md`, not `about/red-flags.md`. |
 | Media co-location | A promoted page references moved media. | The asset path lives under `media/<content-type>/<slug>/` and the provenance row uses the exact new path. |
 | Portability | mdBook is removed or unavailable. | README-linked Markdown pages remain usable. |
-| Privacy | Validation evidence or reader-test notes are shared. | No secrets, private contacts, private health information, or local paths appear. |
+| Privacy | Validation evidence or reader-test notes are shared. | No secrets, private contacts, sensitive health information, or local paths appear. |
 | Performance | Local checks run on the v0.1 slice. | Checks complete within 30 seconds excluding network-dependent link checking. |
 
 ## Risks and Technical Debt
@@ -537,8 +606,13 @@ Observability:
 - Expanded anatomy and alignment raster images may imply diagnosis or pathology
   if prompted or reviewed poorly; purpose-specific manual visual review remains
   mandatory.
-- Expanded static content source quality and non-prescription boundaries are partly
-  semantic and will depend on disciplined manual proof until tooling matures.
+- Expanded static content source quality and non-prescription boundaries are
+  partly semantic and will depend on disciplined review evidence until tooling
+  matures.
+- The forward-head-posture proof slice increases one pattern implementation to
+  six content pages, so source-support debt can spread from pattern claims into
+  exercise-instruction claims if same-slice exercise pages are treated as mere
+  appendices.
 - Expanded top-level directories may create navigation sprawl if README and
   SUMMARY promotion gates are not kept strict.
 - Red-flag language and review cadence introduce maintenance debt; stale pages
@@ -547,10 +621,10 @@ Observability:
   need front matter if future content types share directories.
 - Direct removal of old paths may break external bookmarks because the project
   intentionally avoids compatibility stubs for this migration.
-- Dependency inventory can miss references in prose, proof records, or tests if
+- Dependency inventory can miss references in prose, review records, or tests if
   validation relies only on simple link parsing.
 - Moving `about/red-flags.md` to `RED-FLAGS.md` improves root visibility but
-  requires every safety-relevant page, checker, and proof record to update links
+  requires every safety-relevant page, checker, and review record to update links
   together.
 - Moving media paths and provenance rows in one change creates a larger diff,
   but avoids split-brain asset references.
@@ -570,8 +644,8 @@ Observability:
 - **Expanded static content page class**: One of `pattern_page`, `condition_page`,
   `programming_principle_page`, `program_example_page`, or
   `expanded_exercise_page`.
-- **Manual proof record**: Change-local Markdown evidence that records semantic
-  review results that cannot be fully automated.
+- **Review evidence record**: Change-local Markdown evidence that records
+  semantic review results that cannot be fully automated.
 - **Dependency inventory**: The migration record of active references that must
   be updated or removed before a path is deleted.
 - **Subject-co-located media**: Media stored under
@@ -580,17 +654,21 @@ Observability:
 
 ## Next artifacts
 
-- Architecture review for repository layout normalization.
-- Test-spec mapping for repository layout migration after architecture review.
-- Migration execution plan after test-spec review.
+- Execution plan and plan review for the forward-head-posture pattern
+  architecture.
+- Test-spec mapping for the forward-head-posture pattern architecture after
+  plan review.
 
 ## Follow-on artifacts
 
 - New ADR: `../../adr/2026-06-29-direct-repository-layout-normalization.md`.
+- Forward-head-posture spec:
+  `../../../specs/forward-head-posture-pattern-architecture.md`.
 
 ## Readiness
 
-This architecture package is ready for architecture-review for the repository
-layout normalization amendment. Physical directory migration is not
-implementation-ready until architecture-review, test-spec, test-spec-review,
-plan, and plan-review are complete.
+This architecture package has completed architecture-review for the
+forward-head-posture pattern architecture amendment. The pattern page, five
+same-slice exercise pages, optional media, provenance, and validation changes
+are not implementation-ready until plan, plan-review, test-spec, and
+test-spec-review are complete.

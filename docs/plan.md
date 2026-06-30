@@ -2,7 +2,11 @@
 
 ## Active
 
-- None.
+- [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
+  - Status: active
+  - Plan lifecycle state: active
+  - Current stage: code-review
+  - Active context: M1 validation-contract implementation is ready for code-review; M2-M4 remain pending after M1 review closes.
 
 ## Blocked
 
