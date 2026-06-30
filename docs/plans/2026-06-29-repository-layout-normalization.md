@@ -53,12 +53,12 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ## Current Handoff Summary
 
-- Current milestone: M1 dependency inventory and migration manifest
-- Current milestone state: review-requested
-- Last reviewed milestone: none
-- Review status: M1 implemented; awaiting code-review
-- Remaining in-scope implementation milestones: M1 dependency inventory, M2 validation tooling/test coverage, M3 content/reference migration, M4 media and historical-artifact cleanup
-- Next stage: code-review
+- Current milestone: M2 validation tooling and regression tests
+- Current milestone state: planned
+- Last reviewed milestone: M1 dependency inventory and migration manifest
+- Review status: M1 code-review R1 clean-with-notes; no material findings
+- Remaining in-scope implementation milestones: M2 validation tooling/test coverage, M3 content/reference migration, M4 media and historical-artifact cleanup
+- Next stage: implement
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: implementation, code review, explain-change, verify, and PR handoff have not happened.
 
@@ -66,7 +66,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ### M1. Dependency inventory and migration manifest
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: create a deterministic inventory of old paths, active dependencies, and intended dispositions before moving files.
 - Requirements: R13-R17, R23, R25, AC4, AC12
 - Files/components likely touched:
@@ -281,6 +281,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-29: Test-spec-review R1 requested revision for TSR-RLN-1 and TSR-RLN-2.
 - 2026-06-29: Test-spec-review R2 approved the revised proof map and allowed implementation handoff.
 - 2026-06-29: M1 implemented dependency inventory evidence without moving or removing files.
+- 2026-06-29: Code-review M1 R1 closed M1 with no material findings and routed the change to M2 implementation.
 
 ## Decision log
 
@@ -309,6 +310,8 @@ The migration is dependency-first. Before any old path is removed, active refere
 - M1 inventory command passed: `rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags|media/equipment|media/movements|media/supplemental|content/|schemas/|generated/" .` returned matches and those dependencies are categorized in `docs/changes/repository-layout-normalization/evidence/dependency-inventory.md`.
 - M1 privacy check passed: `python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization` checked 12 files.
 - M1 diff check passed: `git diff --check`.
+- Code-review M1 R1 reviewer reran `git diff --check`; passed.
+- Code-review M1 R1 reviewer reran `python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md`; checked 14 files, privacy pass.
 
 ## Outcome and retrospective
 
@@ -317,4 +320,4 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M1.
+- Ready for implementation of M2.

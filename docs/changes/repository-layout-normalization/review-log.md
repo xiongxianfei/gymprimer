@@ -9,3 +9,4 @@
 | 2026-06-29 | plan-review R2 | `docs/changes/repository-layout-normalization/reviews/plan-review-r2.md` | approved | none | test-spec |
 | 2026-06-29 | test-spec-review R1 | `docs/changes/repository-layout-normalization/reviews/test-spec-review-r1.md` | changes-requested | TSR-RLN-1, TSR-RLN-2 | test-spec revision |
 | 2026-06-29 | test-spec-review R2 | `docs/changes/repository-layout-normalization/reviews/test-spec-review-r2.md` | approved | none | implement |
+| 2026-06-29 | code-review M1 R1 | `docs/changes/repository-layout-normalization/reviews/code-review-m1-r1.md` | clean-with-notes | none | implement M2 |
