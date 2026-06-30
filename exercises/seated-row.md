@@ -30,7 +30,7 @@ Set the seat so you can hold the handles with your shoulders relaxed and your
 torso steady. If the machine has a chest pad, adjust it so you can reach the
 handles without rounding forward.
 
-![Seated row machine with seat, foot plates, handles, cable path, and weight stack](../media/equipment/seated-row-machine-example.png)
+![Seated row machine with seat, foot plates, handles, cable path, and weight stack](../media/exercises/seated-row/seated-row-machine-example.png)
 
 Use the image only to recognize the main parts of the machine. The exact handle
 shape, pad style, and foot support can vary by gym.

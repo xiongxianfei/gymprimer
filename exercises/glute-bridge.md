@@ -10,7 +10,7 @@ Review scope: sources, scope boundary, comprehension
 
 The glute bridge is a beginner hip-extension exercise. It trains the gluteus maximus while the spine stays supported on the floor, which makes it a simple starting point for pages that discuss anterior pelvic tilt and reduced hip-extensor capacity. [NASM][local-glute-bridge-nasm-apt] [Physiopedia][local-glute-bridge-physiopedia-apt]
 
-![Glute bridge position sequence](../media/movements/glute-bridge-sequence.png)
+![Glute bridge position sequence](../media/exercises/glute-bridge/glute-bridge-sequence.png)
 
 ## Used muscles
 

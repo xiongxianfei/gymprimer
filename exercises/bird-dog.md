@@ -10,7 +10,7 @@ Review scope: sources, scope boundary, comprehension
 
 Bird dog is a beginner coordination exercise. It trains the reader to keep the trunk steady while one hip extends and the opposite shoulder flexes. That makes it a useful bridge between floor-based trunk control and standing hip-hinge patterns. [NASM][local-bird-dog-nasm-apt] [Physiopedia][local-bird-dog-physiopedia-apt]
 
-![Bird dog position sequence](../media/movements/bird-dog-sequence.png)
+![Bird dog position sequence](../media/exercises/bird-dog/bird-dog-sequence.png)
 
 ## Used muscles
 

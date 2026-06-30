@@ -10,7 +10,7 @@ Review scope: sources, scope boundary, comprehension
 
 The hip hinge is a beginner movement pattern for bending at the hips while keeping the ribs, pelvis, and spine organized. It prepares the reader for exercises such as Romanian deadlifts without turning the pattern into a load prescription. [NASM][local-hip-hinge-nasm-apt] [Physiopedia][local-hip-hinge-physiopedia-apt]
 
-![Hip hinge position sequence](../media/movements/hip-hinge-sequence.png)
+![Hip hinge position sequence](../media/exercises/hip-hinge/hip-hinge-sequence.png)
 
 ## Used muscles
 

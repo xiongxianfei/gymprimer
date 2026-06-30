@@ -36,8 +36,7 @@ extension-based:
 
 The repository uses this media architecture:
 
-- `media/equipment/` stores optional equipment identification images.
-- `media/movements/` stores optional key movement illustrations.
+- Repository layout normalization moved promoted raster media to `media/<content-type>/<slug>/...`.
 - `media/PROVENANCE.md` is the centralized provenance index for
   AI-generated raster illustrations.
 - Each AI-generated raster asset has exactly one row in

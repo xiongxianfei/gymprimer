@@ -30,7 +30,7 @@ Set the seat so the handles start near mid-chest height. Choose a light load,
 place your feet flat, and hold the handles with your wrists stacked over your
 hands.
 
-![Chest press machine with upright seat, back pad, pressing handles, and weight stack](../media/equipment/chest-press-machine-example.png)
+![Chest press machine with upright seat, back pad, pressing handles, and weight stack](../media/exercises/chest-press/chest-press-machine-example.png)
 
 Use the image only to recognize the main parts of the machine. The exact handle
 shape, arm path, and adjustment points can vary by gym.

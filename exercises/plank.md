@@ -10,7 +10,7 @@ Review scope: sources, scope boundary, comprehension
 
 The plank is an isometric trunk-control exercise. It teaches the reader to hold the ribs and pelvis together under whole-body load, which is why it can support pattern education around anterior pelvic tilt when framed as general training, not a posture cure. [NASM][local-plank-nasm-apt] [Physiopedia][local-plank-physiopedia-apt]
 
-![Plank position sequence](../media/movements/plank-sequence.png)
+![Plank position sequence](../media/exercises/plank/plank-sequence.png)
 
 ## Used muscles
 

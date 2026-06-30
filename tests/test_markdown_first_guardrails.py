@@ -43,8 +43,7 @@ def write_fixture_repo(root: Path) -> None:
         encoding="utf-8",
     )
     (root / "pages").mkdir()
-    (root / "media/equipment").mkdir(parents=True)
-    (root / "media/movements").mkdir(parents=True)
+    (root / "media/pages/page").mkdir(parents=True)
 
 
 def page_text(image_markdown: str = "") -> str:
@@ -77,7 +76,7 @@ def provenance_table(row: str = "") -> str:
 
 def provenance_row(
     *,
-    asset_path: str = "media/equipment/machine.png",
+    asset_path: str = "media/pages/page/machine.png",
     asset_type: str = "ai_generated_raster",
     media_purpose: str = "equipment_identification",
     generator: str = "fixture generator",
@@ -112,7 +111,18 @@ class MarkdownFirstGuardrailTest(unittest.TestCase):
         self.assertIn("external_media_reference", result.stdout)
 
     def test_relative_image_with_alt_passes(self) -> None:
-        result = run_check(FIXTURES / "relative-image.md")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_fixture_repo(root)
+            (root / "media/pages/page/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
+            (root / "media/PROVENANCE.md").write_text(
+                provenance_table(provenance_row()),
+                encoding="utf-8",
+            )
+            page = write_page(root, "![Simple setup diagram](../media/pages/page/machine.png)")
+
+            result = run_check_with_root(root, page)
+
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_text_only_page_passes_without_provenance(self) -> None:
@@ -129,8 +139,8 @@ class MarkdownFirstGuardrailTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_fixture_repo(root)
-            (root / "media/movements/setup.svg").write_text("<svg></svg>\n", encoding="utf-8")
-            page = write_page(root, "![Setup diagram](../media/movements/setup.svg)")
+            (root / "media/pages/page/setup.svg").write_text("<svg></svg>\n", encoding="utf-8")
+            page = write_page(root, "![Setup diagram](../media/pages/page/setup.svg)")
 
             result = run_check_with_root(root, page)
 
@@ -141,9 +151,9 @@ class MarkdownFirstGuardrailTest(unittest.TestCase):
             with self.subTest(extension=extension), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 write_fixture_repo(root)
-                asset = root / f"media/equipment/machine.{extension}"
+                asset = root / f"media/pages/page/machine.{extension}"
                 asset.write_text("fixture image bytes\n", encoding="utf-8")
-                page = write_page(root, f"![Machine](../media/equipment/machine.{extension})")
+                page = write_page(root, f"![Machine](../media/pages/page/machine.{extension})")
 
                 result = run_check_with_root(root, page)
 
@@ -154,12 +164,12 @@ class MarkdownFirstGuardrailTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_fixture_repo(root)
-            (root / "media/equipment/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
+            (root / "media/pages/page/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
             (root / "media/PROVENANCE.md").write_text(
                 provenance_table(provenance_row()),
                 encoding="utf-8",
             )
-            page = write_page(root, "![Machine](../media/equipment/machine.png)")
+            page = write_page(root, "![Machine](../media/pages/page/machine.png)")
 
             result = run_check_with_root(root, page)
 
@@ -169,12 +179,12 @@ class MarkdownFirstGuardrailTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_fixture_repo(root)
-            (root / "media/equipment/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
+            (root / "media/pages/page/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
             (root / "media/PROVENANCE.md").write_text(
                 provenance_table(provenance_row(review_status="needs_revision")),
                 encoding="utf-8",
             )
-            page = write_page(root, "![Machine](../media/equipment/machine.png)")
+            page = write_page(root, "![Machine](../media/pages/page/machine.png)")
 
             result = run_check_with_root(root, page)
 
@@ -185,12 +195,12 @@ class MarkdownFirstGuardrailTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_fixture_repo(root)
-            (root / "media/equipment/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
+            (root / "media/pages/page/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
             (root / "media/PROVENANCE.md").write_text(
                 provenance_table(provenance_row(generator="")),
                 encoding="utf-8",
             )
-            page = write_page(root, "![Machine](../media/equipment/machine.png)")
+            page = write_page(root, "![Machine](../media/pages/page/machine.png)")
 
             result = run_check_with_root(root, page)
 
@@ -201,12 +211,12 @@ class MarkdownFirstGuardrailTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_fixture_repo(root)
-            (root / "media/equipment/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
+            (root / "media/pages/page/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
             (root / "media/PROVENANCE.md").write_text(
                 provenance_table(provenance_row(media_purpose="decorative")),
                 encoding="utf-8",
             )
-            page = write_page(root, "![Machine](../media/equipment/machine.png)")
+            page = write_page(root, "![Machine](../media/pages/page/machine.png)")
 
             result = run_check_with_root(root, page)
 
@@ -217,12 +227,12 @@ class MarkdownFirstGuardrailTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_fixture_repo(root)
-            (root / "media/equipment/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
+            (root / "media/pages/page/machine.png").write_text("fixture image bytes\n", encoding="utf-8")
             (root / "media/PROVENANCE.md").write_text(
                 provenance_table(provenance_row(page_refs="pages/other.md")),
                 encoding="utf-8",
             )
-            page = write_page(root, "![Machine](../media/equipment/machine.png)")
+            page = write_page(root, "![Machine](../media/pages/page/machine.png)")
 
             result = run_check_with_root(root, page)
 
@@ -257,8 +267,8 @@ class MarkdownFirstGuardrailTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_fixture_repo(root)
-            (root / "media/equipment/demo.gif").write_text("fixture image bytes\n", encoding="utf-8")
-            page = write_page(root, "![Demo](../media/equipment/demo.gif)")
+            (root / "media/pages/page/demo.gif").write_text("fixture image bytes\n", encoding="utf-8")
+            page = write_page(root, "![Demo](../media/pages/page/demo.gif)")
 
             result = run_check_with_root(root, page)
 
@@ -269,7 +279,7 @@ class MarkdownFirstGuardrailTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_fixture_repo(root)
-            page = write_page(root, "![Machine](../media/equipment/missing.png)")
+            page = write_page(root, "![Machine](../media/pages/page/missing.png)")
 
             result = run_check_with_root(root, page)
 

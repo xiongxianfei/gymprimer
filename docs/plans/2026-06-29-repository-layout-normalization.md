@@ -54,13 +54,13 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Current Handoff Summary
 
 - Current milestone: M4 media and historical-artifact cleanup
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M3 content and project-reference migration
-- Review status: M3 code-review R2 clean-with-notes
+- Review status: M4 implemented; awaiting code-review
 - Remaining in-scope implementation milestones: M4 media and historical-artifact cleanup
-- Next stage: implement M4
+- Next stage: code-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M4, final explain-change, verify, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M4 code-review, final explain-change, verify, and PR handoff have not happened.
 
 ## Milestones
 
@@ -202,7 +202,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ### M4. Media and historical-artifact cleanup
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: move promoted media to subject-co-located paths, update provenance, and remove or label historical structured-platform artifacts according to dependency inventory.
 - Requirements: R8-R10, R13-R20, R22-R25, AC6-AC12
 - Files/components likely touched:
@@ -232,10 +232,11 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Validation commands:
   - `python3 -m unittest discover -s tests`
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`
-  - `rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools docs/changes/repository-layout-normalization media/PROVENANCE.md`
+  - `rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md`
   - `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools`
   - `git diff --check`
 - Expected observable result: promoted media is subject-co-located with exact provenance rows, old media buckets are not referenced by promoted content, and historical artifacts are removed or explicitly historical.
+- Implementation result: promoted raster media moved to `media/exercises/<slug>/` and `media/patterns/<slug>/`, Markdown and contributor image links updated, provenance rows updated to exact new paths, old media buckets and SVG examples removed, and superseded structured-platform folders, tools, tests, and fixtures removed from the active tree with M4 disposition evidence recorded.
 - Commit message: `M4: migrate media and historical artifacts`
 - Milestone closeout:
   - validation passed
@@ -293,6 +294,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-30: Code-review M3 R1 requested resolution for CR-RLN-M3-1 because the M1 dependency inventory and validation metadata were rewritten from exact old paths to placeholders during M3 cleanup.
 - 2026-06-30: Review-resolution restored exact M1 inventory proof and narrowed the M3 stale-path scan to active content, tests, and tools so historical proof records can retain exact old paths.
 - 2026-06-30: Code-review M3 R2 closed M3 with no material findings and routed the change to M4 implementation.
+- 2026-06-30: M4 moved promoted media into subject-co-located paths, removed old media buckets and SVG examples, removed the superseded structured-platform folders/tools/tests, and recorded M4 disposition evidence.
 
 ## Decision log
 
@@ -354,6 +356,13 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Code-review M3 R2 reviewer reran `git diff --check`; passed.
 - Code-review M3 R2 reviewer reran `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization specs/repository-layout-normalization.test.md docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md`; checked 36 files, privacy pass.
 - Code-review M3 R2 reviewer reran `find 01-getting-started 02-machines 03-bodyweight about -maxdepth 0 -type d -print 2>/dev/null || true`; returned no paths.
+- M4 full unit suite passed: `python3 -m unittest discover -s tests` ran 79 tests.
+- M4 checker validation passed: `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises` checked 18 Markdown files.
+- M4 active stale media/historical scan passed with no matches: `rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md` returned exit 1 because no stale active paths were found.
+- M4 privacy check passed: `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools` checked 103 files.
+- M4 diff check passed: `git diff --check`.
+- M4 old directory check passed: `find media/equipment media/movements media/supplemental media/svg content schemas generated tools/validation -maxdepth 0 -print 2>/dev/null || true` returned no paths.
+- M4 focused regression tests passed: `python3 -m unittest tests.test_repository_layout_normalization tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1 tests.test_markdown_first_privacy` ran 50 tests.
 
 ## Outcome and retrospective
 
@@ -362,4 +371,4 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M4 implementation.
+- Ready for M4 code-review.

@@ -26,3 +26,11 @@ The checker intentionally gates the strict migration rules on `RED-FLAGS.md` exi
 M3 moves the Markdown content paths into the canonical content block: beginner principles now lives under `principles/`, the former machine and bodyweight exercise pages now live under `exercises/`, and the red-flags reference now lives at root `RED-FLAGS.md`.
 
 Active README, pattern, condition, test, checker, and provenance page references were updated so the old content and red-flags paths are no longer required. Media asset paths remain in the old media buckets because M4 owns media co-location and historical artifact cleanup.
+
+## M4 media and historical cleanup
+
+M4 moves promoted raster media into subject-co-located paths under `media/exercises/<slug>/` and `media/patterns/<slug>/`. Markdown image links, contributor examples, and `media/PROVENANCE.md` were updated to the exact new paths before the old media buckets were removed.
+
+M4 also removes the superseded structured-platform implementation from the active tree: `content/`, `schemas/`, `generated/`, `tools/validation/`, and the tests and fixtures that kept those paths active. The historical record remains in `docs/`, but the old structured content platform is no longer an active product or validation surface.
+
+The disposition evidence lives at `docs/changes/repository-layout-normalization/evidence/m4-media-and-historical-disposition.md`.

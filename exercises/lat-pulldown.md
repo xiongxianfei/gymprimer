@@ -30,7 +30,7 @@ Adjust the thigh pad so your legs are held down without feeling pinned. Choose
 a light load you can move without swinging. Sit tall, hold the bar with both
 hands, and let your arms reach up under control.
 
-![Lat pulldown machine with seat, thigh pad, overhead cable bar, and weight stack](../media/equipment/lat-pulldown-machine-example.png)
+![Lat pulldown machine with seat, thigh pad, overhead cable bar, and weight stack](../media/exercises/lat-pulldown/lat-pulldown-machine-example.png)
 
 Use the image only to recognize the main parts of the machine. The exact shape
 of equipment can vary by gym.
@@ -42,7 +42,7 @@ of the upper arms. Treat this as a practical feel cue, not a body-map test.
 
 ## Movement breakdown
 
-![Front lat pulldown example with the bar pulled toward the upper chest](../media/movements/front-lat-pulldown-example.png)
+![Front lat pulldown example with the bar pulled toward the upper chest](../media/exercises/lat-pulldown/front-lat-pulldown-example.png)
 
 Use the image as a simple front-pulldown example. Keep following the written
 setup and safety notes, because the picture cannot show the right load or

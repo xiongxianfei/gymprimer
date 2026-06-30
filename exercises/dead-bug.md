@@ -10,7 +10,7 @@ Review scope: sources, scope boundary, comprehension
 
 Dead bug is a beginner trunk-control exercise. It teaches the reader to move the arms and legs while keeping the ribs, pelvis, and low back organized. That makes it useful on pages that discuss anterior pelvic tilt as a movement-control pattern, not as a diagnosis. [NASM][local-dead-bug-nasm-apt] [Physiopedia][local-dead-bug-physiopedia-apt]
 
-![Dead bug position sequence](../media/movements/dead-bug-sequence.png)
+![Dead bug position sequence](../media/exercises/dead-bug/dead-bug-sequence.png)
 
 ## Used muscles
 

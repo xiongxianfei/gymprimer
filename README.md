@@ -34,7 +34,7 @@ Security reporting is documented in [SECURITY.md](./SECURITY.md). The security c
 
 GymPrimer is now a Markdown-first primer. The source of truth is the Markdown corpus in this repository, supported by page-local citations, [SOURCES.md](./SOURCES.md), contributor guidance, and templates.
 
-The old structured content-schema platform, generated JSON package, expert-review lifecycle, and validator workflow are superseded historical artifacts. They remain in the repository for traceability, but they are not the v0.1 product route.
+The old structured content-schema platform, generated JSON package, expert-review lifecycle, and validator workflow are superseded. Their historical record remains in `docs/`, but those folders and commands are not the v0.1 product route.
 
 The v0.1 implementation is staged. M1 establishes the active route, contributor contract, templates, and legacy supersession. The first five real Markdown pages are drafted in M3, then promoted only after the required checks and beginner read-test evidence exist.
 
@@ -46,7 +46,7 @@ Current active support files:
 
 - [CONTRIBUTING.md](./CONTRIBUTING.md): contributor contract, citation expectations, scope rules, media rules, privacy rules, and inbound license terms.
 - [SOURCES.md](./SOURCES.md): global source index for sources reused across more than one page.
-- [CONTENT_LICENSE.md](./CONTENT_LICENSE.md): license split for code/tooling and written content/original diagrams.
+- [CONTENT_LICENSE.md](./CONTENT_LICENSE.md): license split for code/tooling, written content, and original diagrams.
 - [docs/templates/exercise-card.md](./docs/templates/exercise-card.md): exercise-page template.
 - [docs/templates/principle-page.md](./docs/templates/principle-page.md): principle-page template.
 - [RED-FLAGS.md](./RED-FLAGS.md): red-flag routing reference for safety-relevant pages.
@@ -77,14 +77,13 @@ These pages must not be described as published, approved, expert-reviewed, or pr
 - `README.md`: repository entry point and product navigation after pages are promoted.
 - `SOURCES.md`: reusable public source index.
 - `CONTRIBUTING.md`: contribution rules for Markdown-first content.
-- `CONTENT_LICENSE.md`: license posture for code/tooling and content/media.
+- `CONTENT_LICENSE.md`: license posture for code/tooling, content, and media.
 - `docs/templates/`: source templates for exercise and principle pages.
 - `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/`: canonical Markdown content directories.
 - `RED-FLAGS.md`: root red-flag routing reference for safety-relevant pages.
 - `media/`: optional original SVG diagrams and approved AI-generated raster
   illustrations with provenance; no third-party screenshots, stock photos, or
   borrowed public web images for v0.1.
-- `content/`, `schemas/`, `generated/`, `tools/validation/`: superseded structured-platform artifacts retained as historical evidence.
 
 ## Validation
 
@@ -93,7 +92,7 @@ No hosted CI workflow is configured yet.
 For M1, run the Markdown-first contract tests and structural checks:
 
 ```sh
-python3 -m unittest tests.test_markdown_first_contract tests.test_markdown_first_templates tests.test_markdown_first_legacy_boundary
+python3 -m unittest tests.test_markdown_first_contract tests.test_markdown_first_templates
 ```
 
 Responsible Breadth validation uses:
@@ -104,7 +103,7 @@ python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md p
 python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/responsible-breadth media
 ```
 
-The old `tools/validation/` commands are historical structured-platform tooling, not active v0.1 product validation.
+The superseded structured-platform validation commands are retained only in historical `docs/` records, not as active v0.1 product validation.
 
 ## Maintainers
 

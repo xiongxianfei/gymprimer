@@ -12,7 +12,7 @@ This page explains anterior pelvic tilt (APT) as an observable pelvis-and-spine 
 
 This page is written by an engineer who reads, not a clinician. Check the cited sources and use a qualified professional for individual assessment.
 
-![Side-view comparison of neutral pelvis and anterior pelvic tilt](../media/movements/anterior-pelvic-tilt-comparison.png)
+![Side-view comparison of neutral pelvis and anterior pelvic tilt](../media/patterns/anterior-pelvic-tilt/anterior-pelvic-tilt-comparison.png)
 
 ## What this page is not
 

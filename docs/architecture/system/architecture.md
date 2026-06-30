@@ -165,9 +165,9 @@ does not get flattened together with workflow evidence or tooling.
 
 | Block | Current paths | Responsibility |
 | --- | --- | --- |
-| Project references | `README.md`, `CONTRIBUTING.md`, `SOURCES.md`, `CONTENT_LICENSE.md`, `about/red-flags.md`; target `RED-FLAGS.md` | Project entry, contribution rules, reusable source index, safety routing, and licensing. Repository layout normalization moves red flags to root and removes the old `about/` path directly. |
-| Content | `01-getting-started/`, `02-machines/`, `03-bodyweight/`, `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/` | Canonical Markdown product pages. Current v0.1 compatibility keeps numbered exercise-literacy paths; repository layout normalization folds numbered paths into one canonical content directory per content type and removes old paths directly. |
-| Media | `media/`, `media/PROVENANCE.md`, currently `media/equipment/` and `media/movements/` | Optional supporting illustrations referenced by Markdown. Raster assets use provenance purpose values to distinguish equipment, movement, pattern alignment, anatomy context, and exercise previews. Repository layout normalization moves promoted media to subject co-location under `media/<content-type>/<slug>/` and removes old media-bucket paths directly after references and provenance rows are updated. |
+| Project references | `README.md`, `CONTRIBUTING.md`, `SOURCES.md`, `CONTENT_LICENSE.md`, `RED-FLAGS.md` | Project entry, contribution rules, reusable source index, safety routing, and licensing. |
+| Content | `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/` | Canonical Markdown product pages. Equipment type is page metadata, not a folder split. |
+| Media | `media/<content-type>/<slug>/...`, `media/PROVENANCE.md` | Optional supporting raster illustrations referenced by Markdown. Raster assets use provenance purpose values to distinguish equipment, movement, pattern alignment, anatomy context, and exercise previews. |
 | Governance | `docs/proposals/`, `docs/adr/`, `docs/architecture/` | Accepted direction, durable decisions, and canonical architecture. These remain under `docs/` per RigorLoop workflow requirements. |
 | Tooling and operations | `tools/`, `specs/`, `docs/changes/`, `docs/plans/`, `docs/learn/`, optional `book.toml` and `SUMMARY.md` | Validation, specs/test specs, plans, proof records, learning records, and optional derived-site configuration. These serve content but are not product content blocks. |
 
@@ -181,7 +181,7 @@ Layout normalization target:
 | Condition pages | `conditions/<slug>.md` | Already matches the target. |
 | Program examples | `programs/<slug>.md` | Already matches the target. |
 | Red flags | `RED-FLAGS.md` | Move `about/red-flags.md` to root. Remove the old `about/red-flags.md` path directly after links and checks are updated. |
-| Media | `media/<content-type>/<slug>/...` | Replace image-type buckets such as `media/equipment/` and `media/movements/` after dependency inventory, link migration, and provenance update. Remove old media-bucket paths directly. |
+| Media | `media/<content-type>/<slug>/...` | Promoted media is subject-co-located by the content page it supports. |
 | Governance | `docs/proposals/`, `docs/adr/` | Keep these paths; root-level `proposals/` and `adr/` are rejected for this repository because `docs/workflows.md` standardizes RigorLoop artifact locations. |
 
 Logical containers:

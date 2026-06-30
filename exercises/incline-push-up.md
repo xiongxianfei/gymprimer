@@ -28,7 +28,7 @@ of the upper arms, and trunk muscles that help keep your body steady.
 
 ## Movement breakdown
 
-![Incline push-up start and finish positions using a stable raised surface](../media/movements/incline-push-up-phases-example.png)
+![Incline push-up start and finish positions using a stable raised surface](../media/exercises/incline-push-up/incline-push-up-phases-example.png)
 
 Use the image as a simple start-and-finish reference. Keep following the written
 setup and safety notes, because a picture cannot show whether a surface is

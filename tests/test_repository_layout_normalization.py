@@ -12,6 +12,8 @@ CHECK = ROOT / "tools/checks/check_markdown_first.py"
 OLD_MACHINE_DIR = "02" + "-machines"
 OLD_BODYWEIGHT_DIR = "03" + "-bodyweight"
 OLD_RED_FLAGS = "about/" + "red-flags.md"
+OLD_MEDIA_MOVEMENTS = "media/" + "movements/"
+HISTORICAL_CONTENT_CARDS = "content" + "/" + "cards"
 
 
 def run_check_with_root(root: Path, *paths: Path) -> subprocess.CompletedProcess[str]:
@@ -150,8 +152,8 @@ class RepositoryLayoutNormalizationTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_root_references(root)
-            write_provenance(root, "media/movements/glute-bridge-sequence.png")
-            page = write_exercise(root, "![Glute bridge sequence](../media/movements/glute-bridge-sequence.png)")
+            write_provenance(root, f"{OLD_MEDIA_MOVEMENTS}glute-bridge-sequence.png")
+            page = write_exercise(root, f"![Glute bridge sequence](../{OLD_MEDIA_MOVEMENTS}glute-bridge-sequence.png)")
 
             result = run_check_with_root(root, page)
 
@@ -165,7 +167,7 @@ class RepositoryLayoutNormalizationTest(unittest.TestCase):
             asset = root / "media/exercises/glute-bridge/sequence.png"
             asset.parent.mkdir(parents=True)
             asset.write_text("fixture image bytes\n", encoding="utf-8")
-            write_provenance(root, "media/movements/glute-bridge-sequence.png")
+            write_provenance(root, f"{OLD_MEDIA_MOVEMENTS}glute-bridge-sequence.png")
             page = write_exercise(root, "![Glute bridge sequence](../media/exercises/glute-bridge/sequence.png)")
 
             result = run_check_with_root(root, page)
@@ -189,8 +191,8 @@ class RepositoryLayoutNormalizationTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_root_references(root)
-            (root / "content/cards").mkdir(parents=True)
-            historical_note = root / "content/cards/legacy.md"
+            (root / HISTORICAL_CONTENT_CARDS).mkdir(parents=True)
+            historical_note = root / HISTORICAL_CONTENT_CARDS / "legacy.md"
             historical_note.write_text("# Legacy\n\nStill active.\n", encoding="utf-8")
 
             result = run_check_with_root(root, historical_note)
@@ -202,8 +204,8 @@ class RepositoryLayoutNormalizationTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_root_references(root)
-            (root / "content/cards").mkdir(parents=True)
-            historical_note = root / "content/cards/legacy.md"
+            (root / HISTORICAL_CONTENT_CARDS).mkdir(parents=True)
+            historical_note = root / HISTORICAL_CONTENT_CARDS / "legacy.md"
             historical_note.write_text("# Legacy\n\nHistorical archive retained for traceability.\n", encoding="utf-8")
 
             result = run_check_with_root(root, historical_note)

@@ -10,7 +10,7 @@ Review scope: sources, scope boundary, comprehension
 
 The kneeling hip-flexor stretch is a beginner mobility exercise for the front of the hip. In anterior pelvic tilt education, it is an option for exploring hip-flexor stiffness or tone, not proof that the hip flexors caused the pattern. [NASM][local-kneeling-hip-flexor-stretch-nasm-apt] [Physiopedia][local-kneeling-hip-flexor-stretch-physiopedia-apt]
 
-![Kneeling hip-flexor stretch position sequence](../media/movements/kneeling-hip-flexor-stretch-sequence.png)
+![Kneeling hip-flexor stretch position sequence](../media/exercises/kneeling-hip-flexor-stretch/kneeling-hip-flexor-stretch-sequence.png)
 
 ## Used muscles
 

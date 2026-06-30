@@ -6,10 +6,10 @@
   - Status: active
   - Plan lifecycle state: active
   - Current milestone: M4 media and historical-artifact cleanup
-  - Current milestone state: planned
+  - Current milestone state: review-requested
   - Last reviewed milestone: M3 content and project-reference migration
-  - Next stage: implement M4
-  - Active context: M3 closed after code-review M3 R2; M4 media and historical-artifact cleanup is next.
+  - Next stage: code-review
+  - Active context: M4 migrated media, removed historical structured-platform artifacts from the active tree, and is ready for code-review.
 
 - [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
   - Status: active

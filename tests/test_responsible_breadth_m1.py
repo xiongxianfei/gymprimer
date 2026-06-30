@@ -545,7 +545,7 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
             self.assertTrue(exercise_path.exists(), relative_path)
 
             exercise_text = exercise_path.read_text(encoding="utf-8")
-            image_links = re.findall(r"!\[[^\]]+\]\((../media/movements/[^)]+\.png)\)", exercise_text)
+            image_links = re.findall(r"!\[[^\]]+\]\((../media/exercises/[^)]+\.png)\)", exercise_text)
             self.assertTrue(image_links, f"{relative_path} needs at least one raster example")
             for image_link in image_links:
                 image_path = (exercise_path.parent / image_link).resolve()
@@ -586,13 +586,13 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
             write_sources(root)
             write_minimal_exercise(root)
             (root / "patterns").mkdir()
-            (root / "media/movements").mkdir(parents=True)
-            (root / "media/movements/apt.png").write_bytes(b"fixture")
+            (root / "media/patterns/anterior-pelvic-tilt").mkdir(parents=True)
+            (root / "media/patterns/anterior-pelvic-tilt/apt.png").write_bytes(b"fixture")
             write_media_provenance(
                 root,
                 [
                     {
-                        "asset_path": "media/movements/apt.png",
+                        "asset_path": "media/patterns/anterior-pelvic-tilt/apt.png",
                         "asset_type": "ai_generated_raster",
                         "media_purpose": "key_movement_illustration",
                         "review_status": "approved",
@@ -604,7 +604,7 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
             page.write_text(
                 apt_pattern_page().replace(
                     "## What this page is not",
-                    "![APT comparison](../media/movements/apt.png)\n\n## What this page is not",
+                    "![APT comparison](../media/patterns/anterior-pelvic-tilt/apt.png)\n\n## What this page is not",
                 ),
                 encoding="utf-8",
             )

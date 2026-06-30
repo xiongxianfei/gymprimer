@@ -120,15 +120,15 @@ OLD_CONTENT_DIRS = {
     "03" + "-bodyweight",
 }
 OLD_MEDIA_BUCKETS = {
-    "media/equipment/",
-    "media/movements/",
-    "media/supplemental/",
+    "media/" + "equipment/",
+    "media/" + "movements/",
+    "media/" + "supplemental/",
 }
 OLD_REFERENCE_PATTERNS = tuple(f"{directory}/" for directory in sorted(OLD_CONTENT_DIRS)) + ("about/" + "red-flags.md",)
 OLD_MEDIA_REFERENCE_PATTERNS = (
-    "media/equipment/",
-    "media/movements/",
-    "media/supplemental/",
+    "media/" + "equipment/",
+    "media/" + "movements/",
+    "media/" + "supplemental/",
 )
 HISTORICAL_ARTIFACT_DIRS = {
     "content",
