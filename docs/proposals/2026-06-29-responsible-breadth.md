@@ -423,7 +423,7 @@ and likely the approved Markdown-first spec before implementation.
 
 ## Testing and Verification Strategy
 
-Likely verification should combine automated checks and documented manual review:
+Likely verification should combine automated checks and bounded audit review:
 
 - Content quality: author verifies each substantive claim against cited sources
   and distinguishes mainstream agreement from mixed evidence.
@@ -432,7 +432,7 @@ Likely verification should combine automated checks and documented manual review
   authoritative enough for the claim being made.
 - Safety routing: automated check confirms each pattern or condition page links
   to the red-flags reference.
-- Scope boundaries: manual proof records confirm that pattern and condition
+- Scope boundaries: audit records confirm that pattern and condition
   pages remain non-diagnostic and that program examples remain static
   illustrations rather than individualized prescriptions.
 - Link integrity: automated internal-link and external-link checks where tooling
@@ -442,13 +442,13 @@ Likely verification should combine automated checks and documented manual review
 - Build smoke test: mdBook or equivalent generated output builds cleanly when
   generation is configured.
 - Comprehension check: after a delay, the author rereads each page against its
-  intended beginner question. Manual proof records should capture page-level
+  intended beginner question. Audit records should capture page-level
   outcomes for purpose, body position or setup where relevant, movement or
   principle steps, stop condition, and source verification. Where possible, one
   or two beginner readers review the first slice before scaling.
 
 If no tooling exists for a check, the implementation plan should record the
-manual verification method and the residual automation gap.
+audit verification method and the residual automation gap.
 
 ## Rollout and Rollback
 
@@ -515,7 +515,7 @@ the project remains static Markdown.
 ## Open Questions
 
 None for proposal acceptance. Downstream specs still need to turn the resolved
-decisions into testable page contracts, validation rules, and manual proof
+decisions into testable page contracts, validation rules, and audit evidence
 records.
 
 ## Decision Log

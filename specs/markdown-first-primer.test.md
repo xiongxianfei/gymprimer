@@ -24,7 +24,7 @@ active
 
 ## Testing strategy
 
-The proof strategy combines automated file-contract checks, integration checks over the real first-slice pages, and manual evidence where automation cannot prove meaning.
+The proof strategy combines automated file-contract checks, integration checks over the real first-slice pages, and bounded audit evidence where automation cannot prove meaning.
 
 - Unit: exercise small checker functions for disclaimer presence, required sections, page-local sources, claim-level safety citations, excluded scope, language scope, deterministic media classification, media provenance table parsing, and privacy scan exit semantics.
 - Integration: run the Markdown-first checker against real repository surfaces: `README.md`, `SOURCES.md`, `CONTRIBUTING.md`, `CONTENT_LICENSE.md`, numbered content directories, optional `media/`, `media/PROVENANCE.md`, and change-local proof records.
@@ -38,7 +38,7 @@ Existing old structured-platform tests under `tests/test_*.py` are historical un
 
 ## Milestone and proof ownership
 
-This test spec is milestone-gated. A test, command, or manual proof record is not required to pass before its owning milestone unless explicitly marked as pre-milestone required.
+This test spec is milestone-gated. A test, command, or bounded audit record is not required to pass before its owning milestone unless explicitly marked as pre-milestone required.
 
 Proof classifications:
 
@@ -46,7 +46,7 @@ Proof classifications:
 | --- | --- |
 | existing | Command, fixture, or proof already exists and must pass now. |
 | planned-for-milestone | Command, fixture, or proof is part of this test contract but may be absent before its owning milestone. |
-| manual-only | Proof is collected by a bounded manual procedure rather than automation. |
+| audit-record | Proof is collected by bounded audit evidence rather than automation. |
 | conditional/external | Proof depends on an optional external tool or explicitly documented deferral path. |
 
 Before a proof's owning milestone, absence is not a failure unless the proof is marked pre-milestone required. At and after the owning milestone, absence, configuration failure, unexpected nonzero exit, missing fixture, or missing evidence artifact is a test-spec failure.
@@ -58,18 +58,18 @@ Before a proof's owning milestone, absence is not a failure unless the proof is 
 | T1 | Active repository guidance and contribution contract | project maintainer | M1 | M1 | planned-for-milestone | `tests/test_markdown_first_contract.py` result or documented structural check transcript |
 | T2 | Card and principle template shape | content maintainer | M1 | M1 | planned-for-milestone | template fixture test output and template files |
 | T3 | Page-local disclaimer and source-section checker | tooling maintainer | M2 | M2 | planned-for-milestone | unit test output for valid and invalid page-structure fixtures |
-| T4 | Claim-level citation and source quality minimum gate | tooling maintainer | M2 | M2 | planned-for-milestone | citation fixture test output plus manual citation-review record when real pages exist |
+| T4 | Claim-level citation and source quality minimum gate | tooling maintainer | M2 | M2 | planned-for-milestone | citation fixture test output plus source-support audit record when real pages exist |
 | T5 | Scope, language, and media guardrails | tooling maintainer | M2 | M2 | planned-for-milestone | guardrail fixture test output |
 | T6 | Negative-match privacy scan | tooling maintainer | M2 | M2 | planned-for-milestone | privacy fixture test output and generated privacy report |
 | T7 | Old platform supersession boundary | project maintainer | M1 | M1 | planned-for-milestone | legacy-boundary test output or structural supersession scan transcript |
 | T8 | Real first-slice page integration | content maintainer | M3 | M3 | planned-for-milestone | integration test output over the five real Markdown pages |
-| T9 | README navigation and direct Markdown browsing smoke test | content maintainer | M3 | M3 | planned-for-milestone | README link/path test output and `MP1-direct-markdown-render.md` |
-| T10 | Beginner read-test and manual citation review | content maintainer / reader-test facilitator | M3 | M3 | manual-only | `MP2-citation-semantic-review.md` and `MP3-beginner-read-test.md` |
-| T11 | Optional mdBook build or durable deferral | release/check maintainer | M4 | M4 | conditional/external | `mdbook build` transcript or `MP4-mdbook-build-or-deferral.md` |
+| T9 | README navigation and direct Markdown browsing smoke test | content maintainer | M3 | M3 | planned-for-milestone | README link/path test output and Markdown browsing audit record |
+| T10 | Beginner read-test and citation review | content maintainer / reader-test facilitator | M3 | M3 | audit-record | comprehension and citation-support evidence |
+| T11 | Optional mdBook build or durable deferral | release/check maintainer | M4 | M4 | conditional/external | `mdbook build` transcript or mdBook deferral record |
 | T12 | Validation observability, command reporting, and performance | release/check maintainer | M4 | M4 | planned-for-milestone | final validation ledger with command output, skipped tools, and timing notes |
-| T13 | Compatibility and migration boundary | release/check maintainer | M4 | M4 | planned-for-milestone | compatibility test output and `MP5-source-of-truth-drift.md` |
+| T13 | Compatibility and migration boundary | release/check maintainer | M4 | M4 | planned-for-milestone | compatibility test output and source-of-truth drift audit |
 | T14 | Deterministic media classification and provenance validation | tooling maintainer | M3A | M3A | planned-for-milestone | media fixture test output and checker transcript |
-| T15 | Optional AI raster visual-safety and provenance review | content maintainer / media reviewer | M3A | M3A when raster media is referenced | manual-only | `MP6-ai-raster-media-review.md` or explicit no-raster note |
+| T15 | Optional AI raster visual-safety and provenance review | content maintainer / media reviewer | M3A | M3A when raster media is referenced | audit-record | raster media validation evidence or explicit no-raster note |
 
 ## Planned validation command ownership
 
@@ -82,34 +82,33 @@ Before a proof's owning milestone, absence is not a failure unless the proof is 
 | CMD5 | `if rg -n "barbell\|deadlift\|bench press\|Olympic\|kettlebell\|plyometric\|sprint\|diagnos\|rehab\|treat pain\|posture correction" 01-getting-started 02-machines 03-bodyweight; then exit 1; else printf "no excluded-scope terms found\n"; fi` | planned-for-milestone | tooling maintainer | M3 | M3 | yes | Before M3, missing real content directories are not failure. From M3, any positive match fails unless reviewed as an allowed out-of-scope explanation and covered by a safer checker rule. | negative-scan transcript |
 | CMD6 | `markdownlint "**/*.md"` | conditional/external | tooling maintainer | M2 | M2 if selected | yes | If selected and installed, lint failures block M2 and later. If unavailable or not selected, record deferral. | lint transcript or deferral note |
 | CMD7 | `command -v mdbook \|\| true` | conditional/external | release/check maintainer | M4 | M4 | yes | The command itself never proves readiness; it only determines whether `mdbook build` can be attempted or deferral is required. | command transcript |
-| CMD8 | `mdbook build` | conditional/external | release/check maintainer | M4 | M4 | yes | From M4, either build succeeds with minimal config or explicit mdBook deferral proof is recorded. | `book/` output transcript or `MP4-mdbook-build-or-deferral.md` |
-| CMD9 | Final local quality gate checklist | manual-only | release/check maintainer | M4 | M4 | yes | From M4, missing current evidence for required M1-M4 checks blocks final local quality gate completion. | `MP5-validation-command-ledger.md` or equivalent validation ledger |
+| CMD8 | `mdbook build` | conditional/external | release/check maintainer | M4 | M4 | yes | From M4, either build succeeds with minimal config or explicit mdBook deferral evidence is recorded. | `book/` output transcript or deferral record |
+| CMD9 | Final local quality gate checklist | audit-record | release/check maintainer | M4 | M4 | yes | From M4, missing current evidence for required M1-M4 checks blocks final local quality gate completion. | validation ledger |
 | CMD10 | `python3 -m unittest tests.test_markdown_first_guardrails` | planned-for-milestone | tooling maintainer | M3A | M3A | yes | Before M3A, missing media-classification fixtures are not failure. From M3A, unexpected nonzero exit or missing required media fixtures fails the milestone. | test runner transcript |
 | CMD11 | `python3 tools/checks/check_markdown_first.py README.md SOURCES.md 01-getting-started 02-machines 03-bodyweight` | planned-for-milestone | tooling maintainer | M3A | M3A | yes | Before M3A, missing M3A media behavior is not failure. From M3A, any referenced raster media without approved provenance fails promotion. | checker transcript or generated report |
 | CMD12 | `python3 tools/checks/check_privacy.py -- README.md SOURCES.md CONTRIBUTING.md CONTENT_LICENSE.md media docs/changes/markdown-first-gym-primer` | planned-for-milestone | tooling maintainer | M3A | M3A | yes | Before M3A, missing `media/PROVENANCE.md` is not failure. From M3A, forbidden findings in media/provenance evidence or execution errors fail the milestone. | privacy report transcript |
 
-## Manual proof ownership
+## Bounded audit record ownership
 
-| Proof ID | Proof name | Classification | Owner | Owning milestone | Required starting | Evidence artifact | Pass condition | Failure condition |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| MP1 | Direct Markdown render inspection | manual-only | content maintainer | M3 | M3 | `docs/changes/markdown-first-gym-primer/manual-proof/MP1-direct-markdown-render.md` | README and all five pages are readable as Markdown without generated HTML. | Any page cannot be reached or understood by direct Markdown inspection. |
-| MP2 | Semantic citation review | manual-only | content maintainer | M3 | M3 | `docs/changes/markdown-first-gym-primer/manual-proof/MP2-citation-semantic-review.md` | Safety and technique claims have local citations that semantically support the claim. | A safety or technique claim is unsupported, global-only, broken, or misleading. |
-| MP3 | Beginner read test | manual-only | reader-test facilitator | M3 | M3 | `docs/changes/markdown-first-gym-primer/manual-proof/MP3-beginner-read-test.md` | At least one beginner can identify purpose, setup, steps, and stop condition for each exercise page. | A beginner cannot explain core setup, execution, or stop condition for any first-slice exercise page. |
-| MP4 | mdBook build-or-deferral proof | conditional/external | release/check maintainer | M4 | M4 | `docs/changes/markdown-first-gym-primer/manual-proof/MP4-mdbook-build-or-deferral.md` | `mdbook build` succeeds with minimal config, or deferral explains unavailable/non-trivial mdBook. | mdBook is claimed without build evidence or deferral, or derived HTML is treated as source. |
-| MP5 | Validation command ledger and source-of-truth drift inspection | manual-only | release/check maintainer | M4 | M4 | `docs/changes/markdown-first-gym-primer/manual-proof/MP5-validation-command-ledger.md` | Required M1-M4 checks are current and no old/generated surface outranks Markdown. | Required evidence is missing, stale, or shows source-of-truth drift. |
-| MP6 | AI raster media visual-safety and provenance review | manual-only | content maintainer / media reviewer | M3A | M3A when raster media is referenced | `docs/changes/markdown-first-gym-primer/manual-proof/MP6-ai-raster-media-review.md` | Every referenced AI-generated raster image is necessary, visually safe, non-decorative, within allowed purpose, and consistent with page text, or the record states no raster media was added. | A raster image is referenced without human visual-safety review, provenance approval, or explicit no-raster note. |
+Separate proof artifact trees are not required by this test spec. Where
+automation cannot fully prove direct Markdown readability, semantic citation
+support, beginner comprehension, mdBook deferral, validation currency, or raster
+visual safety, the owning change MUST record bounded audit or validation
+evidence.
 
-Manual proof records must include owner, owning milestone, automation rationale, required environment, exact steps, evidence artifact, pass condition, failure condition, and re-run trigger.
+Bounded audit records must include owner, owning milestone or change, automation
+rationale, required environment, exact criteria or steps, evidence artifact,
+pass condition, failure condition, and re-run trigger.
 
 ## Milestone closeout proof
 
-| Milestone | Automated proof required | Manual proof required | Closeout rule |
+| Milestone | Automated proof required | Additional evidence required | Closeout rule |
 | --- | --- | --- | --- |
 | M1 | T1, T2, and T7 pass or are structurally satisfied. | None unless direct documentation inspection is used instead of automation. | M1 closes when active route, templates, contributor/license contract, and old-platform supersession are explicit. |
-| M2 | T3, T4, T5, and T6 fixture tests pass; CMD1, CMD2, and CMD6 pass or have documented conditional deferral where applicable. | None unless a fixture requires bounded manual inspection. | M2 closes when checker tooling and deterministic fixture tests prove source, disclaimer, citation, scope, media, language, and privacy rules. |
-| M3A | T14 passes; CMD10, CMD11, and CMD12 pass. | MP6 only when raster media is referenced, or an explicit no-raster note. | M3A closes when media classification and provenance validation are executable, `media/PROVENANCE.md` exists with the required table schema, text-only pages remain valid, SVG pages pass without AI-raster provenance, and raster pages require approved provenance. |
-| M3 | T8 and T9 pass on real first-slice pages; CMD3, CMD4, and CMD5 pass; any referenced media passes M3A. | MP1, MP2, and MP3. | M3 closes when five real pages pass automated checks and human render, citation, beginner comprehension, and media-gate proof exists. |
-| M4 | T11, T12, and T13 pass; CMD7, CMD8 or mdBook deferral, and CMD9 are recorded. | MP4 and MP5. | M4 closes when optional HTML is proven or deferred, source-of-truth drift is checked, and final local evidence is current. |
+| M2 | T3, T4, T5, and T6 fixture tests pass; CMD1, CMD2, and CMD6 pass or have documented conditional deferral where applicable. | None unless a fixture requires bounded audit inspection. | M2 closes when checker tooling and deterministic fixture tests prove source, disclaimer, citation, scope, media, language, and privacy rules. |
+| M3A | T14 passes; CMD10, CMD11, and CMD12 pass. | Raster media validation evidence only when raster media is referenced, or an explicit no-raster note. | M3A closes when media classification and provenance validation are executable, `media/PROVENANCE.md` exists with the required table schema, text-only pages remain valid, SVG pages pass without AI-raster provenance, and raster pages require approved provenance. |
+| M3 | T8 and T9 pass on real first-slice pages; CMD3, CMD4, and CMD5 pass; any referenced media passes M3A. | Markdown browsing, citation-support, and comprehension evidence. | M3 closes when five real pages pass automated checks and render, citation, beginner comprehension, and media-gate evidence exists. |
+| M4 | T11, T12, and T13 pass; CMD7, CMD8 or mdBook deferral, and CMD9 are recorded. | mdBook deferral/build evidence and final validation ledger. | M4 closes when optional HTML is proven or deferred, source-of-truth drift is checked, and final local evidence is current. |
 
 ## TSR1 resolution acceptance criteria
 
@@ -118,11 +117,11 @@ Manual proof records must include owner, owning milestone, automation rationale,
 | TSR1-AC1 | Every T1-T15 test has an owning milestone. |
 | TSR1-AC2 | Every T1-T15 test names an owner role. |
 | TSR1-AC3 | Every T1-T15 test states first meaningful execution. |
-| TSR1-AC4 | Every planned command has a classification: existing, planned-for-milestone, manual-only, or conditional/external. |
+| TSR1-AC4 | Every planned command has a classification: existing, planned-for-milestone, audit-record, or conditional/external. |
 | TSR1-AC5 | Every planned command has an owning milestone. |
 | TSR1-AC6 | Every planned command states whether absence or failure is allowed before its milestone. |
 | TSR1-AC7 | Every command states closeout evidence. |
-| TSR1-AC8 | Every manual proof record has an owner, milestone, evidence artifact, pass condition, and failure condition. |
+| TSR1-AC8 | Every bounded audit record has an owner, milestone or change, evidence artifact, pass condition, and failure condition. |
 | TSR1-AC9 | mdBook proof is assigned to M4 and is allowed to be either successful build evidence or explicit deferral evidence. |
 | TSR1-AC10 | Implementation handoff remains blocked until test-spec-review R2 records approval. |
 
@@ -131,7 +130,7 @@ Manual proof records must include owner, owning milestone, automation rationale,
 | ID | Criterion |
 | --- | --- |
 | M3A-AC1 | M3A has an owning milestone entry before M3 closeout and after M2. |
-| M3A-AC2 | R41-R53 and AC15-AC19 map to T14 and, where human visual judgment is required, T15/MP6. |
+| M3A-AC2 | R41-R53 and AC15-AC19 map to T14 and, where visual judgment is required, T15 audit evidence. |
 | M3A-AC3 | Planned commands identify when media classification/provenance checks become required. |
 | M3A-AC4 | Text-only pages remain valid and are tested. |
 | M3A-AC5 | SVG files under `media/` pass without AI-raster provenance and are tested. |
@@ -139,7 +138,7 @@ Manual proof records must include owner, owning milestone, automation rationale,
 | M3A-AC7 | Remote images, media outside `media/`, unsupported extensions, and missing local media files fail with stable codes. |
 | M3A-AC8 | Missing, incomplete, non-approved, out-of-scope, and page-reference-mismatched provenance rows fail with stable codes. |
 | M3A-AC9 | `media/PROVENANCE.md` creation with the required table schema is part of M3A even when no raster assets exist. |
-| M3A-AC10 | M3 closeout remains blocked on MP3 beginner read-test evidence and any referenced media passing M3A validation. |
+| M3A-AC10 | M3 closeout remains blocked on beginner read-test evidence and any referenced media passing M3A validation. |
 
 ## Requirement coverage map
 
@@ -153,10 +152,10 @@ Manual proof records must include owner, owning milestone, automation rationale,
 | R6 | T2, T3, T8 | unit, integration | Principle template and `beginner-training-principles.md` expose required sections. |
 | R7 | T3, T8 | unit, integration | Safety-relevant pages require prominent top disclaimer. |
 | R8 | T3, T8 | unit, integration | Disclaimer text must include educational, not medical advice, and not personalized coaching meaning. |
-| R9 | T4, T8, T10 | unit, integration, manual | Automated adjacency checks plus manual citation review cover safety warnings. |
-| R10 | T4, T8, T10 | unit, integration, manual | Weekly guidance needs public-health/professional source. |
-| R11 | T4, T10 | unit, manual | Technique citation is checked as a minimum gate and manually reviewed semantically. |
-| R12 | T4, T8, T10 | unit, integration, manual | Feel cues are checked for safety/anatomy citation where needed and manually reviewed. |
+| R9 | T4, T8, T10 | unit, integration, audit | Automated adjacency checks plus citation-support evidence cover safety warnings. |
+| R10 | T4, T8, T10 | unit, integration, audit | Weekly guidance needs public-health/professional source. |
+| R11 | T4, T10 | unit, audit | Technique citation is checked as a minimum gate and semantically reviewed. |
+| R12 | T4, T8, T10 | unit, integration, audit | Feel cues are checked for safety/anatomy citation where needed and reviewed. |
 | R13 | T3, T4, T8 | unit, integration | Every page must contain a `Sources` section. |
 | R14 | T4, T8 | unit, integration | Reused sources are cross-checked against `SOURCES.md`. |
 | R15 | T4 | unit | Fixture with global-only safety citation must fail. |
@@ -167,15 +166,15 @@ Manual proof records must include owner, owning milestone, automation rationale,
 | R20 | T13 | migration | Future separate-locale structure is documented as not active in v0.1. |
 | R21 | T5, T8 | unit, integration | Allowed beginner scope is checked against real pages and fixtures. |
 | R22 | T5, T8 | unit, integration | Excluded lifting, rehab, diagnosis, pain treatment, and programming terms block promotion. |
-| R23 | T5, T14, T15 | unit, manual | Media is absent, original SVG, or human-reviewed AI-generated raster. |
-| R23a | T14, T15 | unit, manual | Images are optional and limited to necessary equipment identification or key movement illustration. |
-| R23b | T14, T15 | unit, manual | Fixtures and manual review preserve the preference order: no image, SVG, then AI raster only when needed. |
+| R23 | T5, T14, T15 | unit, audit | Media is absent, original SVG, or reviewed AI-generated raster. |
+| R23a | T14, T15 | unit, audit | Images are optional and limited to necessary equipment identification or key movement illustration. |
+| R23b | T14, T15 | unit, audit | Fixtures and audit review preserve the preference order: no image, SVG, then AI raster only when needed. |
 | R24 | T5, T14 | unit | Third-party screenshots/photos/web-image fixtures fail as external or unsupported media. |
 | R25 | T5, T14, T8 | unit, integration | Media references must be relative and understandable through alt or adjacent text. |
 | R26 | T1 | contract | Contributor/license docs document Apache-2.0 for code/tooling. |
 | R27 | T1 | contract | Contributor/license docs document CC BY 4.0 for written content and original diagrams. |
 | R28 | T1 | contract | Contributor guidance includes right-to-submit and third-party media terms. |
-| R29 | T1, T8, T10 | contract, integration, manual | Spike labeling and promotion evidence are checked before active links. |
+| R29 | T1, T8, T10 | contract, integration, audit | Spike labeling and promotion evidence are checked before active links. |
 | R30 | T1, T8 | contract, integration | Unpromoted pages must not be described as published, approved, expert-reviewed, or active source of truth. |
 | R31 | T11 | smoke, migration | mdBook config is allowed only after the five Markdown pages exist and render directly. |
 | R32 | T11, T13 | smoke, migration | mdBook output is treated as derived and disposable. |
@@ -184,13 +183,13 @@ Manual proof records must include owner, owning milestone, automation rationale,
 | R35 | T7, T13 | contract, migration | Old artifacts remain traceable. |
 | R36 | T3, T4, T5, T6, T8, T11, T12 | unit, integration, smoke | Local validation covers Markdown shape, sources, citations, disclaimers, scope, media, privacy, and optional mdBook. |
 | R37 | T6 | unit | Privacy check passes only when forbidden patterns are absent. |
-| R38 | T10 | manual | At least one beginner read test is required before promotion. |
-| R39 | T10 | manual | Read-test evidence records purpose, setup, steps, and stop condition comprehension. |
-| R40 | T12 | smoke, manual | Reports exact commands run, unavailable commands, and residual risks; CI is not claimed without observation. |
-| R41 | T14, T15 | unit, manual | Raster fixtures prove provenance is required before promotion; manual review covers human approval. |
+| R38 | T10 | audit | At least one beginner read test is required before promotion. |
+| R39 | T10 | audit | Read-test evidence records purpose, setup, steps, and stop condition comprehension. |
+| R40 | T12 | smoke, audit | Reports exact commands run, unavailable commands, and residual risks; CI is not claimed without observation. |
+| R41 | T14, T15 | unit, audit | Raster fixtures prove provenance is required before promotion; audit review covers approval. |
 | R42 | T14 | unit | Provenance must be parsed from `media/PROVENANCE.md`. |
-| R43 | T14, T15 | unit, manual | Raster media is tested as supporting visual aid only; manual review checks it does not replace Markdown guidance. |
-| R44 | T15 | manual | Unsafe, excluded-scope, medical, identifiable-person, or branding problems require human visual-safety review. |
+| R43 | T14, T15 | unit, audit | Raster media is tested as supporting visual aid only; audit review checks it does not replace Markdown guidance. |
+| R44 | T15 | audit | Unsafe, excluded-scope, medical, identifiable-person, or branding problems require visual-safety review. |
 | R45 | T1, T14 | contract, unit | Contributor guidance and validation failures explain media provenance and rejection behavior. |
 | R46 | T14 | unit | Provenance rows must include all required fields. |
 | R47 | T14 | unit | `asset_path` normalization rejects leading `./`, `/`, or mismatched path values. |
@@ -206,11 +205,11 @@ Manual proof records must include owner, owning milestone, automation rationale,
 | Example | Covered by | Notes |
 | --- | --- | --- |
 | E1 | T8, T9, T10 | Real page integration, README navigation, and beginner read test cover direct machine-page use. |
-| E2 | T4, T8, T10 | Safety-warning citations are checked by tooling and manual source review. |
+| E2 | T4, T8, T10 | Safety-warning citations are checked by tooling and source review. |
 | E3 | T4 | Fixture with only `SOURCES.md` backing a safety claim must fail. |
 | E4 | T5, T8 | Excluded-scope fixtures and real-page scans reject advanced lifting and pain-treatment content. |
 | E5 | T11, T13 | mdBook build-or-defer proof keeps Markdown canonical. |
-| E6 | T14, T15 | AI raster fixture and optional manual review prove relative path, provenance, license assertion, human review, and text-support boundaries. |
+| E6 | T14, T15 | AI raster fixture and optional audit review prove relative path, provenance, license assertion, review status, and text-support boundaries. |
 | E7 | T14 | Text-only fixture proves pages remain valid without media or provenance rows. |
 | E8 | T14 | Missing provenance fixture fails by exact normalized `asset_path`. |
 
@@ -228,12 +227,12 @@ Manual proof records must include owner, owning milestone, automation rationale,
 | EC8 | T14 | unit | `needs_revision` or `rejected` provenance fails with `media_provenance_not_approved`. |
 | EC9 | T14 | unit | Out-of-scope `media_purpose` fails with `media_usage_out_of_scope`. |
 | EC10 | T14 | unit | Missing referencing page in `page_refs` fails with `media_page_refs_mismatch`. |
-| EC11 | T15 | manual | Unsafe or contradictory AI raster illustration is rejected or replaced before promotion. |
+| EC11 | T15 | audit | Unsafe or contradictory AI raster illustration is rejected or replaced before promotion. |
 | EC12 | T11, T13 | smoke, migration | mdBook cannot replace GitHub-readable Markdown navigation. |
-| EC13 | T10 | manual | Reader confusion keeps page unpromoted until revised. |
-| EC14 | T4, T10 | unit, manual | Broken source is replaced, archived acceptably, or recorded as not ready. |
+| EC13 | T10 | audit | Reader confusion keeps page unpromoted until revised. |
+| EC14 | T4, T10 | unit, audit | Broken source is replaced, archived acceptably, or recorded as not ready. |
 | EC15 | T7, T13 | contract, migration | Markdown-first governance outranks old generated JSON. |
-| EC16 | T4, T5, T10 | unit, manual | "Soreness vs pain" wording must avoid diagnosis/treatment and use conservative safety citation. |
+| EC16 | T4, T5, T10 | unit, audit | "Soreness vs pain" wording must avoid diagnosis/treatment and use conservative safety citation. |
 
 ## Test cases
 
@@ -275,7 +274,7 @@ Manual proof records must include owner, owning milestone, automation rationale,
 - Steps: Run citation checker; assert safety stop rules require adjacent/reference-style citation and page-local source entry; assert reused source IDs must appear in `SOURCES.md`; assert global-only safety citation fails; assert broken or placeholder source URLs fail or are recorded as deferred/not ready.
 - Expected result: Valid source-backed claims pass; unsupported safety claims, global-only citations, and missing page-local sources fail.
 - Failure proves: Citation-based authority is not replacing unavailable expert review.
-- Automation location: `tests/test_markdown_first_citations.py`; manual semantic citation review in `docs/changes/markdown-first-gym-primer/manual-proof/`.
+- Automation location: `tests/test_markdown_first_citations.py`; source-support audit evidence in the owning change record.
 
 ### T5. Scope, language, and basic media guardrails
 
@@ -312,7 +311,7 @@ Manual proof records must include owner, owning milestone, automation rationale,
 - Covers: R1-R25, R29-R30, R36, AC1-AC8, AC11, AC13, E1, E2, E4
 - Level: integration
 - Fixture/setup: Real files under `01-getting-started/`, `02-machines/`, `03-bodyweight/`, plus `README.md`, `SOURCES.md`, optional `media/`, and check scripts.
-- Steps: Assert exactly the five required page paths exist; run `tools/checks/check_markdown_first.py README.md SOURCES.md 01-getting-started 02-machines 03-bodyweight`; run privacy checks over content and proof records; run excluded-scope negative scan.
+- Steps: Assert exactly the five required page paths exist; run `tools/checks/check_markdown_first.py README.md SOURCES.md 01-getting-started 02-machines 03-bodyweight`; run privacy checks over content and validation records; run excluded-scope negative scan.
 - Expected result: The real first slice satisfies the page contract, citation/source contract, scope/media guardrails, and privacy contract.
 - Failure proves: The first slice is not promotable as active source content.
 - Automation location: `tests/test_markdown_first_real_pages.py` and integration command in the plan.
@@ -325,17 +324,17 @@ Manual proof records must include owner, owning milestone, automation rationale,
 - Steps: Check README relative links resolve to the five pages; directly inspect pages as plain Markdown; confirm no generated HTML, JavaScript, database, account, app shell, or server is required to read them.
 - Expected result: A reader can browse from README to every first-slice page in the repository.
 - Failure proves: Markdown is not yet a usable primary product surface.
-- Automation location: Link/path assertions in `tests/test_markdown_first_navigation.py`; direct inspection record in `docs/changes/markdown-first-gym-primer/manual-proof/`.
+- Automation location: Link/path assertions in `tests/test_markdown_first_navigation.py`; direct inspection audit in the owning change record.
 
-### T10. Beginner read-test and manual citation review
+### T10. Beginner read-test and citation review
 
 - Covers: R9-R12, R29, R38, R39, AC5, AC12, E1, E2, EC13, EC14, EC16
-- Level: manual
-- Fixture/setup: Non-identifying read-test template and completed records under `docs/changes/markdown-first-gym-primer/manual-proof/`.
-- Steps: Ask at least one beginner reader the required questions for each exercise page: purpose, setup, steps, stop condition, and source they would click for a safety claim; record result without personally identifying details; manually inspect safety and technique citations for semantic support.
+- Level: audit
+- Fixture/setup: Non-identifying read-test template and completed comprehension and citation-support evidence.
+- Steps: Ask at least one beginner reader the required questions for each exercise page: purpose, setup, steps, stop condition, and source they would click for a safety claim; record result without personally identifying details; inspect safety and technique citations for semantic support.
 - Expected result: Each exercise page is either understood by the reader and citation-reviewed, or remains unpromoted with revision notes.
 - Failure proves: Automated checks did not prove beginner comprehension or semantic citation support.
-- Automation location: Manual proof files; optional presence checks in `tests/test_markdown_first_manual_evidence.py`.
+- Automation location: Change-local audit records or equivalent validation checks.
 
 ### T11. Optional mdBook build or durable deferral
 
@@ -345,17 +344,17 @@ Manual proof records must include owner, owning milestone, automation rationale,
 - Steps: Run `command -v mdbook || true`; if mdBook is installed and minimal config is adopted, run `mdbook build`; if missing or non-trivial, assert a deferral record explains the blocker and no generated HTML is treated as source.
 - Expected result: mdBook either builds with minimal/default configuration or is explicitly deferred; Markdown remains canonical.
 - Failure proves: Derived HTML is blocking Markdown proof or drifting into product source authority.
-- Automation location: `tests/test_markdown_first_mdbook.py` plus manual command record.
+- Automation location: `tests/test_markdown_first_mdbook.py` plus command or deferral record.
 
 ### T12. Validation observability, command reporting, and performance
 
 - Covers: R36, R40, AC11, AC13
 - Level: smoke
-- Fixture/setup: Check script output, test command output, manual proof records, and change-local validation notes.
+- Fixture/setup: Check script output, test command output, audit records, and change-local validation notes.
 - Steps: Verify checker failures identify file and rule; record exact commands run and skipped/unavailable commands; ensure local checks for the v0.1 slice complete under 30 seconds excluding network link checks; verify no CI pass is claimed without observed CI evidence.
 - Expected result: Completion evidence is reproducible and honest about gaps.
 - Failure proves: Reviewers cannot trust the validation record.
-- Automation location: `tests/test_markdown_first_observability.py`; manual validation notes in `docs/changes/markdown-first-gym-primer/`.
+- Automation location: `tests/test_markdown_first_observability.py`; validation notes in `docs/changes/markdown-first-gym-primer/`.
 
 ### T13. Compatibility and migration boundary
 
@@ -365,7 +364,7 @@ Manual proof records must include owner, owning milestone, automation rationale,
 - Steps: Confirm future full Chinese translation is not active and no mixed-language full-card sections exist; confirm old generated JSON does not outrank Markdown; if mdBook is removed or deferred, README-linked Markdown remains usable; if `SUMMARY.md` exists, it points to the same Markdown source pages without replacing README navigation.
 - Expected result: Compatibility surfaces are clear and rollback leaves Markdown usable.
 - Failure proves: v0.1 can regress into the old platform or a generated-site source-of-truth model.
-- Automation location: `tests/test_markdown_first_compatibility.py` and manual migration notes.
+- Automation location: `tests/test_markdown_first_compatibility.py` and migration notes.
 
 ### T14. Deterministic media classification and provenance validation
 
@@ -380,12 +379,12 @@ Manual proof records must include owner, owning milestone, automation rationale,
 ### T15. Optional AI raster visual-safety and provenance review
 
 - Covers: R23a, R23b, R41, R43, R44, AC14, AC15, EC11
-- Level: manual
+- Level: audit
 - Fixture/setup: Any optional AI-generated raster assets referenced by first-slice pages, their Markdown page references, and matching `media/PROVENANCE.md` rows. If no raster assets are added, use an explicit no-raster note.
 - Steps: Inspect each referenced raster image and provenance row; confirm the image is necessary, limited to equipment identification or key movement illustration, visually simple, not decorative, not medical or rehab content, not an excluded lift, not identifying a private person, not branded in a misleading way, and not contradictory to the Markdown instructions; record reviewer role and pass/fail result without private data.
-- Expected result: Every referenced AI raster image has human review evidence and approved provenance, or the proof record states that no raster images were added in M3A.
-- Failure proves: Generated raster media can be promoted without the human visual-safety judgment required by the spec.
-- Automation location: `docs/changes/markdown-first-gym-primer/manual-proof/MP6-ai-raster-media-review.md`; optional presence check in `tests/test_markdown_first_manual_evidence.py`.
+- Expected result: Every referenced AI raster image has review evidence and approved provenance, or the validation record states that no raster images were added in M3A.
+- Failure proves: Generated raster media can be promoted without the visual-safety judgment required by the spec.
+- Automation location: Media validation evidence in the owning change record.
 
 ## Fixtures and data
 
@@ -421,15 +420,8 @@ Planned automated fixtures:
 - `tests/fixtures/markdown-first/mdbook/valid-minimal/`
 - `tests/fixtures/markdown-first/mdbook/deferred/`
 
-Manual proof records:
-
-- `docs/changes/markdown-first-gym-primer/manual-proof/README.md`
-- `docs/changes/markdown-first-gym-primer/manual-proof/MP1-direct-markdown-render.md`
-- `docs/changes/markdown-first-gym-primer/manual-proof/MP2-citation-semantic-review.md`
-- `docs/changes/markdown-first-gym-primer/manual-proof/MP3-beginner-read-test.md`
-- `docs/changes/markdown-first-gym-primer/manual-proof/MP4-mdbook-build-or-deferral.md`
-- `docs/changes/markdown-first-gym-primer/manual-proof/MP5-validation-command-ledger.md`
-- `docs/changes/markdown-first-gym-primer/manual-proof/MP6-ai-raster-media-review.md`
+Historical evidence records from completed changes may remain archived, but
+this test spec does not require a separate proof artifact tree for new work.
 
 Reader-test records must avoid names, contact details, private health details, and local machine paths. Use a non-identifying reader description such as "beginner reader, first 90 days of gym training."
 
@@ -437,9 +429,9 @@ Reader-test records must avoid names, contact details, private health details, a
 
 - Do not mock file parsing for integration tests over the real first-slice pages.
 - Unit tests may use temporary directories and fixture files to isolate individual checker rules.
-- Do not call external websites in unit tests. Link health can be manual or optional tool evidence because network behavior is unstable.
+- Do not call external websites in unit tests. Link health can be audit or optional tool evidence because network behavior is unstable.
 - Do not mock mdBook success. If `mdbook build` is claimed, run the real command locally and record the result. If mdBook is unavailable, record deferral.
-- Do not use AI-generated exercise wording as test oracle. Content checks prove structure, source linkage, and boundaries; human review proves meaning.
+- Do not use AI-generated exercise wording as test oracle. Content checks prove structure, source linkage, and boundaries; audit review proves meaning.
 
 ## Migration or compatibility tests
 
@@ -468,7 +460,7 @@ Media validation output must identify:
 - provenance path when relevant;
 - stable failure code.
 
-Manual records must identify:
+Audit or validation records must identify:
 
 - inspected files;
 - questions asked;
@@ -489,7 +481,7 @@ Do not include secrets, private health details, local absolute paths, or persona
 - T15 verifies that optional AI-generated raster illustrations do not include
   private people, misleading branding, medical/rehab content, or unsafe
   contradictory movement details.
-- T8 runs privacy checks over first-slice content and manual proof records.
+- T8 runs privacy checks over first-slice content and validation records.
 - T10 requires non-identifying reader-test records.
 - T12 prevents unobserved CI claims and requires skipped-tool disclosure.
 
@@ -499,7 +491,7 @@ Do not include secrets, private health details, local absolute paths, or persona
 - Record command duration when practical with `time` or the test runner output.
 - Performance failure does not block Markdown readability, but it blocks claiming the local quality gate is ergonomic.
 
-## Manual QA checklist
+## Audit Checklist
 
 - Open `README.md` and confirm navigation reaches the five required pages by relative links.
 - Open each page as Markdown and confirm it is readable without generated HTML.
@@ -544,9 +536,9 @@ None that require returning to spec or architecture before test-spec-review.
 Known validation limitations to preserve in review:
 
 - Automated citation checks can only prove presence and locality of citations, not semantic authority. Manual citation review remains required.
-- Link checking may be manual or optional-tool evidence until the project chooses and installs a link checker.
+- Link checking may use audit or optional-tool evidence until the project chooses and installs a link checker.
 - mdBook is conditional. The required proof is either a real `mdbook build` from minimal config or a durable deferral record.
-- Named maintainer authority for citation/scope acceptance remains an open spec question, but it does not block proof design because manual review evidence can record the reviewer role used for the first slice.
+- Named maintainer authority for citation/scope acceptance remains an open spec question, but it does not block proof design because audit evidence can record the reviewer role used for the first slice.
 
 ## Next artifacts
 

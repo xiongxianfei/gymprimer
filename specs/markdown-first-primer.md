@@ -370,7 +370,7 @@ Expected behavior: reject for v0.1 unless a later media policy explicitly
 allows external third-party media.
 
 EC6. A maintainer adds an AI-generated raster illustration without provenance.
-Expected behavior: fail media validation or manual review until a provenance
+Expected behavior: fail media validation or validation review until a provenance
 record is added.
 
 EC7. A page references an AI-generated raster image whose provenance row has
@@ -456,7 +456,7 @@ AC12. At least one beginner reader can explain purpose, setup, steps, and stop c
 
 AC13. Completion evidence reports exact commands run, commands unavailable, and residual risks.
 
-AC14. Media validation or manual proof confirms that any AI-generated raster
+AC14. Media validation confirms that any AI-generated raster
 illustration is a supporting visual aid, has relative-path usage and alt or
 adjacent explanatory text, has provenance, and does not contradict the page's
 Markdown instructions.

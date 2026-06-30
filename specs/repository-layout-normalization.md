@@ -136,14 +136,14 @@ architecture.
 
 R15. Before moving or removing a file, the migration MUST identify active
 references to that file in Markdown links, README navigation, `SUMMARY.md`,
-`book.toml`, source references, tests, checkers, manual proof, change metadata,
+`book.toml`, source references, tests, checkers, validation evidence, change metadata,
 and provenance rows.
 
 R16. The migration MUST update or remove active references before the referenced
 file is removed from its old location.
 
 R17. The migration MUST update README, navigation, source references, tests,
-checkers, manual proof, and change metadata that reference moved paths.
+checkers, validation evidence, and change metadata that reference moved paths.
 
 R18. The migration MUST include automated tests proving that canonical content
 paths pass validation and that old active paths are not required for promoted
@@ -178,7 +178,7 @@ Inputs:
   folders.
 - Existing media under `media/`.
 - `media/PROVENANCE.md`.
-- README, specs, tests, checkers, docs, manual proof, and change metadata that
+- README, specs, tests, checkers, docs, validation evidence, and change metadata that
   reference moved paths.
 
 Outputs:
@@ -259,7 +259,7 @@ Validation output should identify:
 - dependency that still points at a removed path;
 - historical artifact that is still actively referenced.
 
-Manual proof should record files moved, files removed, active dependency
+Validation evidence should record files moved, files removed, active dependency
 inventory, historical artifact dispositions, and validation commands run.
 
 ## Security and privacy
@@ -333,7 +333,7 @@ it.
 AC2. Architecture review or ADR update approves the physical directory
 migration boundary before planning.
 
-AC3. A test spec maps R1-R25 and EC1-EC9 to automated tests or manual proof.
+AC3. A test spec maps R1-R25 and EC1-EC9 to automated tests or bounded audit evidence.
 
 AC4. A migration plan enumerates every moved path, removed path, historical
 artifact disposition, active dependency discovered for each path, validation

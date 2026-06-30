@@ -260,26 +260,17 @@ def program_page(extra: str = "") -> str:
 
 
 class ResponsibleBreadthM1Test(unittest.TestCase):
-    def test_manual_proof_scaffold_lists_required_records(self) -> None:
-        text = (ROOT / "docs/changes/responsible-breadth/manual-proof/README.md").read_text(encoding="utf-8")
+    def test_evidence_contract_does_not_require_separate_proof_scaffold(self) -> None:
+        text = (ROOT / "specs/responsible-breadth.test.md").read_text(encoding="utf-8")
 
-        for expected in (
-            "RB-MP1-red-flags-review.md",
-            "RB-MP2-pattern-source-scope.md",
-            "RB-MP3-condition-source-scope.md",
-            "RB-MP4-principle-source-review.md",
-            "RB-MP5-program-boundary-review.md",
-            "RB-MP6-comprehension-proof.md",
-            "RB-MP7-visual-media-review.md",
-            "RB-MP8-validation-ledger.md",
-            "RB-MP9-mdbook-build-or-deferral.md",
-            "owner role",
-            "files inspected",
-            "pass/fail result",
-            "re-run trigger",
-            "No identifying reader details",
-        ):
-            self.assertIn(expected, text)
+        self.assertIn("Bounded audit evidence ownership", text)
+        self.assertIn("Separate proof artifact trees are not required", text)
+        self.assertIn("owner role", text)
+        self.assertIn("files inspected", text)
+        self.assertIn("pass/fail", text)
+        self.assertIn("re-run trigger", text)
+        self.assertNotIn("RB-" + "MP", text)
+        self.assertNotIn("manual" + "-proof/", text)
 
     def test_valid_responsible_breadth_paths_pass_without_v0_1_disclaimer(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -677,26 +668,21 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
         ):
             self.assertIn(promoted_link, readme)
 
-        for proof in (
-            "docs/changes/responsible-breadth/manual-proof/RB-MP8-validation-ledger.md",
-            "docs/changes/responsible-breadth/manual-proof/RB-MP9-mdbook-build-or-deferral.md",
-        ):
-            text = (ROOT / proof).read_text(encoding="utf-8")
-            self.assertIn("Pass/fail result: pass", text)
-            self.assertIn("Privacy statement:", text)
+        spec = (ROOT / "specs/responsible-breadth.test.md").read_text(encoding="utf-8")
+        self.assertIn("Final validation ledger and lifecycle sync", spec)
+        self.assertIn("mdBook build or deferral", spec)
 
-    def test_m3_manual_proof_records_exist(self) -> None:
-        for relative_path in (
-            "docs/changes/responsible-breadth/manual-proof/RB-MP2-pattern-source-scope.md",
-            "docs/changes/responsible-breadth/manual-proof/RB-MP3-condition-source-scope.md",
-            "docs/changes/responsible-breadth/manual-proof/RB-MP4-principle-source-review.md",
-            "docs/changes/responsible-breadth/manual-proof/RB-MP5-program-boundary-review.md",
-            "docs/changes/responsible-breadth/manual-proof/RB-MP6-comprehension-proof.md",
-            "docs/changes/responsible-breadth/manual-proof/RB-MP7-visual-media-review.md",
+    def test_m3_audit_evidence_contract_is_documented(self) -> None:
+        text = (ROOT / "specs/responsible-breadth.test.md").read_text(encoding="utf-8")
+        for expected in (
+            "Pattern/condition semantic safety proof",
+            "Programming and program-example semantic boundary proof",
+            "Reader comprehension proof",
+            "Visual necessity and media provenance",
+            "audit-record",
+            "bounded audit",
         ):
-            text = (ROOT / relative_path).read_text(encoding="utf-8")
-            self.assertIn("Pass/fail result: pass", text)
-            self.assertIn("Privacy statement:", text)
+            self.assertIn(expected, text)
 
 
 if __name__ == "__main__":

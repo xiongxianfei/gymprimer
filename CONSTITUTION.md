@@ -20,7 +20,7 @@ When artifacts conflict, agents and reviewers MUST use this order:
 4. Approved specs in `specs/`
 5. Architecture artifacts and ADRs in `docs/architecture/` and `docs/adr/`
 6. Change-local plans and rationale in `docs/changes/<change-id>/`
-7. Tests, fixtures, validation evidence, and manual proof records
+7. Tests, fixtures, validation evidence, and audit records
 8. Markdown content, source files, schemas, configuration, and generated artifacts
 9. Chat messages and issue comments
 
@@ -40,7 +40,7 @@ Formatting-only edits MUST NOT split one existing line into multiple lines, or j
 
 ## Test-Driven Rules
 
-Behavior changes MUST be proven by tests or by an explicit manual verification record when automation is not yet possible. Bug fixes MUST start with a failing regression test or a documented reproduction that fails before the fix.
+Behavior changes MUST be proven by tests or deterministic validation records whenever possible. When automation is not yet possible, the change MUST record a bounded audit record that names the checked files, criteria, result, and residual risk. Bug fixes MUST start with a failing regression test or a documented reproduction that fails before the fix.
 
 Markdown content quality rules SHOULD be automated as soon as structure exists: source sections, claim-level safety citations, disclaimer presence, excluded-scope checks, media path checks, link checks, license/provenance checks, and privacy scans.
 
