@@ -6,10 +6,10 @@
   - Status: active
   - Plan lifecycle state: active
   - Current milestone: M4 media and historical-artifact cleanup
-  - Current milestone state: review-requested
+  - Current milestone state: closed
   - Last reviewed milestone: M4 media and historical-artifact cleanup
-  - Next stage: code-review
-  - Active context: CR-RLN-M4-1 is resolved and M4 is ready for re-review.
+  - Next stage: final closeout
+  - Active context: M1-M4 are closed. Repository layout normalization is ready for final closeout starting with explain-change.
 
 - [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
   - Status: active

@@ -54,13 +54,13 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Current Handoff Summary
 
 - Current milestone: M4 media and historical-artifact cleanup
-- Current milestone state: review-requested
+- Current milestone state: closed
 - Last reviewed milestone: M4 media and historical-artifact cleanup
-- Review status: CR-RLN-M4-1 resolved; awaiting M4 re-review
-- Remaining in-scope implementation milestones: M4 media and historical-artifact cleanup
-- Next stage: code-review
+- Review status: code-review M4 R3 closed M4 with no material findings
+- Remaining in-scope implementation milestones: none
+- Next stage: final closeout
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M4 re-review, final explain-change, verify, and PR handoff have not happened.
+- Reason final closeout is or is not ready: final explain-change, verify, and PR handoff have not happened.
 
 ## Milestones
 
@@ -202,7 +202,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ### M4. Media and historical-artifact cleanup
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: move promoted media to subject-co-located paths, update provenance, and remove or label historical structured-platform artifacts according to dependency inventory.
 - Requirements: R8-R10, R13-R20, R22-R25, AC6-AC12
 - Files/components likely touched:
@@ -245,6 +245,7 @@ The migration is dependency-first. Before any old path is removed, active refere
   - validation notes updated
   - code-review R1 requested resolution for CR-RLN-M4-1 before closeout
   - CR-RLN-M4-1 resolved and M4 returned to code-review
+  - code-review R3 closed M4 with no material findings
   - milestone committed
 - Risks:
   - privacy scan over broad historical fixtures may fail on intentional test data.
@@ -300,6 +301,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-30: Code-review M4 R1 requested resolution for CR-RLN-M4-1 because the historical-disposition evidence exists under a different filename than the approved RLN-T7 proof-map path.
 - 2026-06-30: Code-review M4 R2 found CR-RLN-M4-1 still present because no resolution diff added the approved RLN-T7 evidence path or amended the proof map.
 - 2026-06-30: Review-resolution renamed the M4 disposition evidence to the approved RLN-T7 path and routed M4 back to code-review.
+- 2026-06-30: Code-review M4 R3 closed M4 with no material findings and routed the change to final closeout.
 
 ## Decision log
 
@@ -373,6 +375,11 @@ The migration is dependency-first. Before any old path is removed, active refere
 - CR-RLN-M4-1 resolution active stale media/historical scan passed with no matches: `rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md` returned exit 1 because no stale active paths were found.
 - CR-RLN-M4-1 resolution privacy check passed: `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools` checked 105 files.
 - CR-RLN-M4-1 resolution diff check passed: `git diff --check`.
+- Code-review M4 R3 reviewer reran `python3 -m unittest discover -s tests`; passed, ran 79 tests.
+- Code-review M4 R3 reviewer reran `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`; passed, checked 18 Markdown files.
+- Code-review M4 R3 reviewer reran `rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md`; no matches, exit 1 expected for `rg` no-match.
+- Code-review M4 R3 reviewer reran `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools`; checked 105 files, privacy pass.
+- Code-review M4 R3 reviewer reran `git diff --check`; passed.
 
 ## Outcome and retrospective
 

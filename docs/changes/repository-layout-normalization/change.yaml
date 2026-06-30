@@ -1,7 +1,7 @@
 change_id: repository-layout-normalization
 proposal: docs/proposals/2026-06-29-responsible-breadth.md
-status: code-review-needed
-current_stage: code-review
+status: final-closeout-needed
+current_stage: explain-change
 created_date: 2026-06-29
 notes:
   - Created after the architecture target shape identified five logical blocks and a future physical migration requirement.
@@ -35,6 +35,7 @@ notes:
   - Code-review M4 R1 requested resolution for CR-RLN-M4-1 because the M4 historical-disposition evidence path does not match the approved RLN-T7 proof-map path.
   - Code-review M4 R2 found CR-RLN-M4-1 still present because no resolution diff added the approved evidence path or amended the proof map.
   - Review-resolution for CR-RLN-M4-1 renamed the M4 disposition evidence to the approved RLN-T7 path and routed M4 back to code-review.
+  - Code-review M4 R3 closed M4 with no material findings and routed the change to final closeout.
 validation:
   - git diff --check -- passed
   - python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/adr/2026-06-29-direct-repository-layout-normalization.md specs/repository-layout-normalization.md docs/changes/repository-layout-normalization/change.yaml -- passed, checked 4 files
@@ -92,3 +93,8 @@ validation:
   - rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md -- passed during CR-RLN-M4-1 resolution with no matches, exit 1 expected for rg no-match
   - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools -- passed during CR-RLN-M4-1 resolution, checked 105 files
   - git diff --check -- passed during CR-RLN-M4-1 resolution
+  - python3 -m unittest discover -s tests -- passed during code-review M4 R3, ran 79 tests
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed during code-review M4 R3, checked 18 Markdown files
+  - rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md -- passed during code-review M4 R3 with no matches, exit 1 expected for rg no-match
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools -- passed during code-review M4 R3, checked 105 files
+  - git diff --check -- passed during code-review M4 R3
