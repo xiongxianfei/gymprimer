@@ -16,7 +16,7 @@ The chin nod is a low-load neck-control drill. It helps a beginner practice a sm
 
 ## Equipment setup
 
-Use the floor, a firm mat, or a wall. Keep the setup easy enough that the head can move a small amount while the shoulders stay relaxed. Use controlled movement and a manageable effort, which matches general resistance-training technique guidance. [Mayo Clinic][mayo-weight-training]
+Sit upright with the neck and back straight. Keep the setup easy enough that the head can move a small amount while the shoulders stay relaxed. [Source][local-chin-nod-instruction]
 
 ## Muscles involved
 
@@ -26,11 +26,11 @@ Primary: deep cervical flexors at the front of the neck. Secondary: nearby neck-
 
 ### 1. Set up
 
-Lie on the back or stand against a wall with the eyes looking forward and the jaw relaxed. [Source][local-chin-nod-deep-cervical-flexor]
+Sit straight-backed with the eyes looking forward and the jaw relaxed. [Source][local-chin-nod-instruction]
 
 ### 2. Move
 
-Gently nod as if saying "yes" with a very small range. Think of making the back of the neck long rather than pushing the head hard into the floor or wall. [Source][local-chin-nod-deep-cervical-flexor]
+Gently pull the chin in while keeping the neck and back straight. Do not tip the head forward. [Source][local-chin-nod-instruction]
 
 ### 3. Pause
 
@@ -38,22 +38,20 @@ Pause only while the motion still feels light and controlled.
 
 ### 4. Return
 
-Return to the starting position slowly. Keep the shoulders quiet instead of shrugging.
+Return to the starting position slowly. Keep the shoulders quiet instead of shrugging. [Source][local-chin-nod-instruction]
 
 ## What you should feel
 
-You may feel light effort at the front of the neck. You should not need jaw tension or a hard push to make the movement happen. [Source][local-chin-nod-deep-cervical-flexor]
+You may feel light effort or stretch around the neck. You should not need jaw tension or a hard push to make the movement happen. [Source][local-chin-nod-instruction]
 
 ## Common mistakes
 
-- Pulling the chin down so far that the throat feels compressed.
-- Lifting the head instead of nodding.
-- Clenching the jaw.
-- Turning the drill into repeated hard pressing.
+- Tipping the head forward instead of pulling the chin in. [Source][local-chin-nod-instruction]
+- Turning the drill into repeated hard pressing instead of a small controlled movement.
 
 ## Easier version
 
-Use the wall version and make the nod smaller.
+Make the chin movement smaller and hold for less time.
 
 ## Harder version
 
@@ -68,9 +66,11 @@ Stop the set if the movement feels sharp, worsening, unusual, or unsafe. Use the
 - [NHS - Neck pain and stiff neck][nhs-neck-pain]
 - [Mayo Clinic - Weight training technique guidance][mayo-weight-training]
 - [Deep cervical flexor training with a pressure biofeedback unit][local-chin-nod-deep-cervical-flexor]
+- [Cambridge University Hospitals - Neck exercises and advice][local-chin-nod-instruction]
 - [ACSM - Resistance training guidance][acsm-resistance-training]
 
 [nhs-neck-pain]: https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [local-chin-nod-deep-cervical-flexor]: https://pmc.ncbi.nlm.nih.gov/articles/PMC4668167/
+[local-chin-nod-instruction]: https://www.cuh.nhs.uk/patient-information/neck-exercises-and-advice/
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/

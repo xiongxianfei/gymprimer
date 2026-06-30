@@ -1,6 +1,6 @@
 # Review Resolution: Forward Head Posture Pattern Architecture
 
-Closeout status: pending M2 code-review re-review
+Closeout status: pending M2 code-review R3
 
 ## Findings
 
@@ -11,7 +11,7 @@ Closeout status: pending M2 code-review re-review
 | TSR-FHP-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r1.md` | resolved by `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r2.md` | The test spec now uses review-only semantic evidence IDs recorded in normal code-review records, without a separate proof file. |
 | TSR-FHP-2 | `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r1.md` | resolved by `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r2.md` | The test spec now includes validation command ownership metadata for FHP-CMD1 through FHP-CMD13. |
 | CR-FHP-M1-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m1-r1.md` | superseded by `docs/changes/forward-head-posture-pattern-architecture/reviews/spec-review-r2.md`, confirmed by `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m1-r2.md` | Owner clarified that the required prominent disclaimer belongs in `RED-FLAGS.md`, not on every exercise page; spec-review R2, architecture-review R2, test-spec-review R3, and code-review M1 R2 approved the central-disclaimer amendment path. |
-| CR-FHP-M2-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r1.md` | resolved; pending same-stage code-review re-review | The five M2 exercise pages now use direct page-local source support or softened wording for sampled exercise-specific setup, technique, muscle, feel-cue, common-mistake, and safety claims. |
+| CR-FHP-M2-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r1.md`, `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r2.md` | resolved; pending same-stage code-review R3 | The five M2 exercise pages now separate direct exercise-instruction support from muscle/activity support, and unsupported setup, technique, feel-cue, and common-mistake details were reworded or removed. |
 
 ## Resolution Notes
 
@@ -21,6 +21,20 @@ Closeout status: pending M2 code-review re-review
 - TSR-FHP-2 was addressed by adding `FHP-CMD1` through `FHP-CMD13`, with classification, owner, owning milestone, required starting point, expected failure behavior, and closeout evidence.
 - CR-FHP-M1-1 is no longer the desired implementation outcome after owner clarification. Spec-review R2 approved the contract change to centralize disclaimer validation in `RED-FLAGS.md`; architecture-review R2, test-spec-review R3, and code-review M1 R2 confirmed the amended path.
 - CR-FHP-M2-1 was addressed by replacing broad exercise-library or broad shoulder-context citations with page-local direct sources for the five same-slice exercise pages, removing the no-longer-reused ACE exercise-library entry from `SOURCES.md`, softening unsupported muscle and feel-cue claims, and keeping broad NHS, Mayo, AAOS, and ACSM sources for safety, technique, shoulder-context, and general training framing only.
+- Code-review M2 R2 found CR-FHP-M2-1 failed-remediation. The new sources are stronger for selected muscle/activity claims, but sampled setup and technique details still cite sources that do not directly show those details or could not be inspected during FHP-RO2.
+
+### CR-FHP-M2-1 - Failed semantic source-support remediation
+
+Resolution: addressed by separating exercise-instruction support from muscle/activity support.
+
+Changes:
+- Added direct page-local exercise-instruction sources for setup and technique claims.
+- Kept PubMed/PMC/EMG sources only for muscle or activity claims.
+- Reworded or removed setup, technique, feel-cue, and common-mistake details that lacked direct source support.
+- Replaced the JS/cookie-gated thoracic-extension source with an accessible source.
+- Added an FHP-RO2 remediation table showing sampled claims, source type, and final disposition.
+
+Status: ready for code-review M2 R3.
 
 ## FHP-RO2 Evidence
 
@@ -37,18 +51,28 @@ Closeout status: pending M2 code-review re-review
 | `exercises/band-pull-apart.md` | Band pull-apart setup and movement. | `local-band-pull-apart-study` | Kept with direct band-pull-apart study support. |
 | `exercises/band-pull-apart.md` | Rear shoulder, middle trapezius, rhomboid, and rotator-cuff specifics. | `local-band-pull-apart-study` | Softened to posterior shoulder and upper-back muscles used during band pull-apart variations. |
 
+## FHP-RO2 Remediation Evidence
+
+| Page | Problem claim | Resolution | Source type |
+| --- | --- | --- | --- |
+| `exercises/wall-slide.md` | Wall setup and range-control cues cited only to activity source. | Added `local-wall-slide-instruction` for the forearms-on-wall setup, slide, return, and feel cue; kept `local-wall-slide-serratus` only for serratus anterior activity. | direct instruction + research |
+| `exercises/chin-nod.md` | Wall/back-of-neck cue not directly supported. | Reworded to a seated chin-retraction setup with neck/back straight and no head tipping, cited to `local-chin-nod-instruction`; kept `local-chin-nod-deep-cervical-flexor` for the deep cervical flexor concept. | direct instruction + research |
+| `exercises/prone-y-t.md` | T-shape/thumbs-up wording cited to EMG source. | Added `local-prone-y-t-y-instruction` for the Y setup and `local-prone-y-t-t-instruction` for the T setup; kept `local-prone-y-t-trapezius-emg` only for trapezius activity. | direct instruction + research |
+| `exercises/thoracic-extension.md` | JS/cookie-gated source not reviewable. | Replaced it with `local-thoracic-extension-instruction`, an accessible Physitrack chair-extension instruction source, and narrowed the page to the chair version. | direct instruction |
+| `exercises/band-pull-apart.md` | Setup and feel cues not directly supported. | Added `local-band-pull-apart-instruction` for chest-height setup, arm path, shoulder-position cue, and feel cue; kept `local-band-pull-apart-study` for muscle/activity context. | direct instruction + research |
+
 ## Re-review Requirement
 
 Proposal-review R2 approved the revised proposal with no material findings.
 Test-spec-review R1 requested changes. Re-review is required after substantive test-spec revision.
 Test-spec-review R2 approved the revised active test spec with no material findings.
 Code-review M1 R1 requested changes. The requested implementation fix has been superseded by spec-review R2; architecture-review R2 and test-spec-review R3 approved the amended central-disclaimer boundary, and code-review M1 R2 closed M1.
-Code-review M2 R1 requested changes. Review-resolution has been implemented; same-stage code-review re-review is required before M2 can close.
+Code-review M2 R1 requested changes. Code-review M2 R2 found failed remediation. Review-resolution has been implemented; same-stage code-review R3 is required before M2 can close.
 
 ## Closeout Checklist
 
-- Final dispositions recorded for all material findings: yes, CR-FHP-M2-1 is resolved pending same-stage code-review re-review.
+- Final dispositions recorded for all material findings: yes, CR-FHP-M2-1 is resolved pending same-stage code-review R3.
 - Same-stage re-review exists for changes-requested outcome: yes, `docs/changes/forward-head-posture-pattern-architecture/reviews/proposal-review-r2.md`.
 - Same-stage re-review exists for test-spec-review R1: yes, `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r2.md`.
 - `needs-decision` findings remain: no.
-- Review log has no open findings: no, CR-FHP-M2-1 still needs same-stage code-review re-review before it can close.
+- Review log has no open findings: no, CR-FHP-M2-1 still needs same-stage code-review R3 before it can close.

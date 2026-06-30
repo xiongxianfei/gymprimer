@@ -16,48 +16,46 @@ Thoracic extension is a simple upper-back mobility drill. It gives beginners a w
 
 ## Equipment setup
 
-Use a firm chair back, bench edge, or foam roller. The support should sit around the upper back, not the low back or neck. Keep the feet on the floor and move slowly enough to stay in control. [Source][local-thoracic-extension-instruction]
+Use a sturdy chair with a back rest. Sit upright, slide the hips back in the chair, and keep the feet on the floor. [Source][local-thoracic-extension-instruction]
 
 ## Muscles involved
 
-Primary: upper-back movement at the thoracic spine. Secondary: trunk control that keeps the ribs and pelvis from turning the drill into a low-back hinge. Treat the muscle wording as a movement cue, not a claim that the drill changes posture. [Source][local-thoracic-extension-instruction]
+Primary: upper-back movement at the thoracic spine. Secondary: trunk control that keeps the drill from turning into a low-back hinge. Treat the muscle wording as a movement cue, not a claim that the drill changes posture. [Source][local-thoracic-extension-instruction]
 
 ## Movement breakdown
 
 ### 1. Set up
 
-Sit tall with the upper back against the chair or lie with the upper back over a foam roller. [Source][local-thoracic-extension-instruction]
+Sit upright in the chair and place the hands behind the head or neck. [Source][local-thoracic-extension-instruction]
 
 ### 2. Move
 
-Lean the upper back gently over the support while keeping the lower ribs from flaring hard. [Source][local-thoracic-extension-instruction]
+Gently lean the upper back over the top of the chair. [Source][local-thoracic-extension-instruction]
 
 ### 3. Pause
 
-Pause for a calm breath if the position still feels controlled.
+Pause briefly if the position still feels controlled. [Source][local-thoracic-extension-instruction]
 
 ### 4. Return
 
-Return to the starting position by bringing the ribs and upper back back over the hips.
+Return to the upright starting position with control. [Source][local-thoracic-extension-instruction]
 
 ## What you should feel
 
-You may feel light movement or stretch through the upper back and front of the chest. The neck should stay quiet rather than taking over the motion. [Source][local-thoracic-extension-instruction]
+You may feel light movement or stretch through the upper back. Keep the movement gentle rather than forcing the neck backward. [Source][local-thoracic-extension-instruction]
 
 ## Common mistakes
 
-- Using the low back as the main hinge.
-- Cranking the head backward.
-- Holding the breath.
-- Using a support that feels unstable.
+- Using a chair or support that feels unstable.
+- Forcing the head or neck backward instead of moving gently over the chair. [Source][local-thoracic-extension-instruction]
 
 ## Easier version
 
-Use a chair-back version with a smaller range and hands supporting the head lightly.
+Use a smaller range and a shorter pause.
 
 ## Harder version
 
-Use a foam roller and pause for one controlled breath before returning. Keep this as a mobility option, not a required routine. [ACSM][acsm-resistance-training]
+Pause briefly before returning. Keep this as a mobility option, not a required routine. [ACSM][acsm-resistance-training]
 
 ## Safety notes
 
@@ -67,14 +65,14 @@ Stop if the position feels sharp, worsening, unusual, or unsafe. A static exerci
 
 - [Mayo Clinic - Weight training technique guidance][mayo-weight-training]
 - [Mayo Clinic - Posture and body alignment Q&A][mayo-posture-body-alignment]
-- [Physiopedia - Thoracic extension exercises][local-thoracic-extension-instruction]
+- [Physitrack - Thoracic extension over chair][local-thoracic-extension-instruction]
 - [AAOS - Shoulder impingement and rotator cuff tendinitis][aaos-shoulder-impingement-rotator-cuff-tendinitis]
 - [NHS - Neck pain and stiff neck][nhs-neck-pain]
 - [ACSM - Resistance training guidance][acsm-resistance-training]
 
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [mayo-posture-body-alignment]: https://newsnetwork.mayoclinic.org/discussion/mayo-clinic-q-and-a-proper-posture-and-body-alignment/
-[local-thoracic-extension-instruction]: https://www.physio-pedia.com/Thoracic_Extension_Exercises
+[local-thoracic-extension-instruction]: https://us.physitrack.com/home-exercise-video/thoracic-extension-over-chair
 [aaos-shoulder-impingement-rotator-cuff-tendinitis]: https://orthoinfo.aaos.org/en/diseases--conditions/shoulder-impingementrotator-cuff-tendinitis/
 [nhs-neck-pain]: https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/

@@ -16,21 +16,21 @@ The band pull-apart is a light upper-back and shoulder-blade exercise. It helps 
 
 ## Equipment setup
 
-Use a light loop band or long resistance band. Hold it at about chest height with straight or slightly bent elbows. Start with enough slack that the movement can be smooth instead of forced. [Source][local-band-pull-apart-study]
+Use a light resistance band. Stand tall with the arms extended in front at chest height and a bit of slack in the band. [Source][local-band-pull-apart-instruction]
 
 ## Muscles involved
 
-Primary: posterior shoulder and upper-back muscles used during band pull-apart variations. Secondary: trunk control that helps keep the ribs from flaring during the pull. [Source][local-band-pull-apart-study]
+Primary: posterior shoulder and upper-back muscles used during band pull-apart variations. Secondary: shoulder-girdle muscles that help control the band path. [Source][local-band-pull-apart-study]
 
 ## Movement breakdown
 
 ### 1. Set up
 
-Stand tall with the band held in both hands at chest height. [Source][local-band-pull-apart-study]
+Stand tall with the band held in both hands at chest height. [Source][local-band-pull-apart-instruction]
 
 ### 2. Move
 
-Pull the hands apart until the shoulder blades move gently toward each other. [Source][local-band-pull-apart-study]
+Keep the arms straight as you open them out to the sides. Keep the arms at chest height. [Source][local-band-pull-apart-instruction]
 
 ### 3. Pause
 
@@ -38,18 +38,16 @@ Pause briefly while the neck stays relaxed and the ribs stay quiet.
 
 ### 4. Return
 
-Let the band come back under control instead of snapping the hands together.
+Let the band come back under control. [Source][local-band-pull-apart-instruction]
 
 ## What you should feel
 
-You may feel light work across the upper back and back of the shoulders. The hands, neck, and low back should not be the main drivers of the movement. [Source][local-band-pull-apart-study]
+You may feel the upper-back muscles working and a stretch in the chest. [Source][local-band-pull-apart-instruction]
 
 ## Common mistakes
 
-- Choosing a band that is too heavy.
-- Shrugging the shoulders.
-- Arching the low back to finish the pull.
-- Letting the band snap back quickly.
+- Letting the shoulders lift toward the ears. [Source][local-band-pull-apart-instruction]
+- Dropping the arms below chest height during the pull. [Source][local-band-pull-apart-instruction]
 
 ## Easier version
 
@@ -67,12 +65,14 @@ Stop for sharp, worsening, unusual, or unsafe symptoms. A static exercise page c
 
 - [ACSM - Resistance training guidance][acsm-resistance-training]
 - [Band Pull-Apart Exercise: Effects of Movement Direction and Hand Position on Shoulder Muscle Activity][local-band-pull-apart-study]
+- [Hinge Health - Band pull aparts][local-band-pull-apart-instruction]
 - [AAOS - Shoulder impingement and rotator cuff tendinitis][aaos-shoulder-impingement-rotator-cuff-tendinitis]
 - [Mayo Clinic - Weight training technique guidance][mayo-weight-training]
 - [NHS - Neck pain and stiff neck][nhs-neck-pain]
 
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
 [local-band-pull-apart-study]: https://pmc.ncbi.nlm.nih.gov/articles/PMC8975561/
+[local-band-pull-apart-instruction]: https://www.hingehealth.com/resources/articles/band-pull-aparts/
 [aaos-shoulder-impingement-rotator-cuff-tendinitis]: https://orthoinfo.aaos.org/en/diseases--conditions/shoulder-impingementrotator-cuff-tendinitis/
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [nhs-neck-pain]: https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/

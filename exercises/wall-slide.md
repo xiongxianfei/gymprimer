@@ -12,25 +12,25 @@ Safety routing: see [RED-FLAGS.md](../RED-FLAGS.md) for symptoms or professional
 
 ## What this exercise is for
 
-The wall slide is a shoulder-blade and overhead-reaching awareness drill. It helps beginners practice reaching while keeping the ribs, neck, and shoulder blades organized. Research comparing wall-slide variations reports serratus anterior activity during the exercise, but this page uses that only as general exercise-literacy context. [Source][local-wall-slide-serratus]
+The wall slide is a shoulder-blade and overhead-reaching awareness drill. This page uses the forearms-on-wall version: press the forearms against a wall and slide the arms up and down. [Source][local-wall-slide-instruction]
 
 ## Equipment setup
 
-Use a clear wall. Stand with the feet a short step away, ribs quiet, and the back of the head near the wall if that position is comfortable. Start with light contact rather than forcing every body part flat. [Source][local-wall-slide-serratus]
+Use a clear wall. Place the forearms against the wall and start with a range that lets the arms move smoothly. [Source][local-wall-slide-instruction]
 
 ## Muscles involved
 
-Primary: serratus anterior and other shoulder-blade support muscles used during controlled wall-slide reaching. Secondary: trunk control that helps keep the ribs from flaring. [Source][local-wall-slide-serratus]
+Primary: serratus anterior activity during wall-slide reaching. Secondary: other upper-back, shoulder, and arm muscles used during the forearms-on-wall movement. [Source][local-wall-slide-serratus] [Source][local-wall-slide-instruction]
 
 ## Movement breakdown
 
 ### 1. Set up
 
-Place forearms or the backs of the hands near the wall with elbows bent. [Source][local-wall-slide-serratus]
+Place the forearms against the wall with the elbows bent. [Source][local-wall-slide-instruction]
 
 ### 2. Move
 
-Slide the arms upward only as far as the shoulders, ribs, and neck stay controlled. [Source][local-wall-slide-serratus]
+Slide the forearms upward on the wall, then stay in the range where the movement remains smooth. [Source][local-wall-slide-instruction]
 
 ### 3. Pause
 
@@ -38,18 +38,16 @@ Pause briefly at the highest controlled point.
 
 ### 4. Return
 
-Slide back down slowly without shrugging or arching the low back.
+Slide back down slowly. [Source][local-wall-slide-instruction]
 
 ## What you should feel
 
-You may feel shoulder-blade and upper-back effort with a light stretch across the front of the chest or shoulders. The neck should not do the work. [Source][local-wall-slide-serratus]
+You may feel the shoulders, arms, and upper back working. [Source][local-wall-slide-instruction]
 
 ## Common mistakes
 
-- Forcing the arms higher by arching the low back.
-- Shrugging the shoulders toward the ears.
-- Pushing the head or ribs hard into the wall.
-- Moving through a range that feels uncontrolled.
+- Switching to a different wall-slide variation without changing the setup.
+- Forcing range after the forearms can no longer slide smoothly on the wall. [Source][local-wall-slide-instruction]
 
 ## Easier version
 
@@ -67,10 +65,12 @@ Stop the set for sharp, worsening, unusual, or unsafe symptoms. If shoulder or n
 
 - [AAOS - Shoulder impingement and rotator cuff tendinitis][aaos-shoulder-impingement-rotator-cuff-tendinitis]
 - [PubMed - Serratus anterior activity during wall-slide exercise][local-wall-slide-serratus]
+- [Hinge Health - Wall slides][local-wall-slide-instruction]
 - [ACSM - Resistance training guidance][acsm-resistance-training]
 - [NHS - Neck pain and stiff neck][nhs-neck-pain]
 
 [aaos-shoulder-impingement-rotator-cuff-tendinitis]: https://orthoinfo.aaos.org/en/diseases--conditions/shoulder-impingementrotator-cuff-tendinitis/
 [local-wall-slide-serratus]: https://pubmed.ncbi.nlm.nih.gov/17193867/
+[local-wall-slide-instruction]: https://www.hingehealth.com/resources/articles/wall-slides/
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
 [nhs-neck-pain]: https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/

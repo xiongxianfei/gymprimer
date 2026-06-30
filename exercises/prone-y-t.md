@@ -16,7 +16,7 @@ Prone Y/T is a light shoulder-blade control exercise. It helps beginners notice 
 
 ## Equipment setup
 
-Use the floor, a firm mat, or a bench. Start without weights. Keep the forehead supported or the neck long so the arm movement does not become a neck-extension drill. [Mayo Clinic][mayo-weight-training]
+Use the floor or a firm mat. Start without weights. Use the Y and T versions as separate options rather than blending them into one position. [Source][local-prone-y-t-y-instruction] [Source][local-prone-y-t-t-instruction]
 
 ## Muscles involved
 
@@ -26,34 +26,33 @@ Primary: lower and middle trapezius emphasis during prone arm-raise variations. 
 
 ### 1. Set up
 
-Lie face down with arms in a Y shape or T shape and thumbs pointing upward if comfortable. [Source][local-prone-y-t-trapezius-emg]
+For the Y, lie on the stomach with the arms in a Y above the head and thumbs up. For the T, lie on the stomach with the arms out to the side and thumbs up. [Source][local-prone-y-t-y-instruction] [Source][local-prone-y-t-t-instruction]
 
 ### 2. Move
 
-Lift the arms slightly by moving from the shoulder blades and back of the shoulders. [Source][local-prone-y-t-trapezius-emg]
+Lift the arms slightly. In the Y, start the movement by pulling the shoulder blades down and in; in the T, notice the shoulder blades moving toward the spine. [Source][local-prone-y-t-y-instruction] [Source][local-prone-y-t-t-instruction]
 
 ### 3. Pause
 
-Pause when the shoulder blades feel controlled and the neck stays relaxed.
+Pause when the shoulder blades feel controlled.
 
 ### 4. Return
 
-Lower the arms slowly to the floor or bench.
+Lower the arms slowly to the floor or mat. [Source][local-prone-y-t-t-instruction]
 
 ## What you should feel
 
-You may feel light work between the shoulder blades and at the back of the shoulders. If the neck or low back becomes the main effort, reduce the range. [Source][local-prone-y-t-trapezius-emg]
+You may feel light work around the shoulder blades and upper back. [Source][local-prone-y-t-y-instruction] [Source][local-prone-y-t-t-instruction]
 
 ## Common mistakes
 
-- Lifting the chest and head instead of the arms.
-- Shrugging toward the ears.
-- Using weights before the unweighted version is controlled.
-- Swinging the arms rather than lifting and lowering slowly.
+- Arching the low back during the Y. [Source][local-prone-y-t-y-instruction]
+- Lifting the arms above the plane of the body during the Y. [Source][local-prone-y-t-y-instruction]
+- Losing control while lowering the arms in the T. [Source][local-prone-y-t-t-instruction]
 
 ## Easier version
 
-Do only the T shape, lift one arm at a time, or shorten the range.
+Lift one arm at a time or shorten the range.
 
 ## Harder version
 
@@ -68,11 +67,15 @@ Stop for sharp, worsening, unusual, or unsafe symptoms. This page cannot tell wh
 - [AAOS - Shoulder impingement and rotator cuff tendinitis][aaos-shoulder-impingement-rotator-cuff-tendinitis]
 - [Mayo Clinic - Weight training technique guidance][mayo-weight-training]
 - [PubMed - EMG analysis of trapezius and serratus anterior exercises][local-prone-y-t-trapezius-emg]
+- [Wellen - Lower trapezius Y exercise on mat][local-prone-y-t-y-instruction]
+- [Physitrack - Prone shoulder T with thumbs up][local-prone-y-t-t-instruction]
 - [ACSM - Resistance training guidance][acsm-resistance-training]
 - [NHS - Neck pain and stiff neck][nhs-neck-pain]
 
 [aaos-shoulder-impingement-rotator-cuff-tendinitis]: https://orthoinfo.aaos.org/en/diseases--conditions/shoulder-impingementrotator-cuff-tendinitis/
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [local-prone-y-t-trapezius-emg]: https://pubmed.ncbi.nlm.nih.gov/12774999/
+[local-prone-y-t-y-instruction]: https://www.getwellen.com/exercises/lower-trapezius-y-exercise-on-mat
+[local-prone-y-t-t-instruction]: https://us.physitrack.com/home-exercise-video/prone-scapula-retraction---shoulder--%2522t%2522-with-thumbs-up
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
 [nhs-neck-pain]: https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/

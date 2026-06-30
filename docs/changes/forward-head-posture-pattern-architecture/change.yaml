@@ -52,6 +52,8 @@ notes:
   - M2 added the five same-slice forward-head support exercise pages and page-local source support; code-review is next.
   - Code-review M2 R1 requested source-support changes for the five exercise pages; review-resolution is next.
   - Review-resolution for CR-FHP-M2-1 replaced broad exercise-specific citations with direct page-local support or softened wording and added FHP-RO2 evidence; M2 code-review re-review is next.
+  - Code-review M2 R2 found CR-FHP-M2-1 failed-remediation because sampled setup and technique claims still need direct page-local support; review-resolution is next.
+  - Review-resolution for CR-FHP-M2-1 separated direct instruction sources from muscle/activity sources, replaced the gated thoracic-extension source, and updated FHP-RO2 remediation evidence; M2 code-review R3 is next.
 
 validation:
   - "python3 tools/checks/check_privacy.py docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md docs/changes/forward-head-posture-pattern-architecture docs/architecture/system/architecture.md specs/forward-head-posture-pattern-architecture.md docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md -- passed, checked 12 files"
@@ -116,4 +118,15 @@ validation:
   - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 51 tests"
   - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 25 tests"
   - "python3 tools/checks/check_privacy.py exercises docs/changes/forward-head-posture-pattern-architecture SOURCES.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed, checked 35 files"
+  - "git diff --check -- passed"
+  - "python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises -- passed during code-review M2 R2, checked 17 Markdown files"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed during code-review M2 R2, 25 tests"
+  - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed during code-review M2 R2, 51 tests"
+  - "python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed, checked 20 files"
+  - "rg -n \"CR-M2-R2|failed-remediation|current_stage: review-resolution|current_milestone_state: resolution-needed|next_stage: review-resolution|Closeout status: open\" docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed"
+  - "git diff --check -- passed"
+  - "python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises -- passed, checked 17 Markdown files"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 25 tests"
+  - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 51 tests"
+  - "python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed, checked 20 files"
   - "git diff --check -- passed"

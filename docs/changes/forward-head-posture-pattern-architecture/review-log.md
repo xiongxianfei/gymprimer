@@ -15,3 +15,4 @@
 | TSR-R3 | 2026-06-30 | test-spec-review | `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r3.md` | approved | 0 | central-disclaimer proof map approved; M1 ready for code-review re-review |
 | CR-M1-R2 | 2026-06-30 | code-review | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m1-r2.md` | clean-with-notes | 0 | CR-FHP-M1-1 superseded by approved central-disclaimer contract; M1 closed and ready for M2 |
 | CR-M2-R1 | 2026-06-30 | code-review | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r1.md` | changes-requested | CR-FHP-M2-1 | resolved in review-resolution; M2 code-review re-review required |
+| CR-M2-R2 | 2026-06-30 | code-review | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r2.md` | changes-requested | CR-FHP-M2-1 | resolved in review-resolution; M2 code-review R3 required |

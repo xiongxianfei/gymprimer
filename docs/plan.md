@@ -6,7 +6,7 @@
   - Status: active
   - Plan lifecycle state: active
   - Current stage: code-review
-  - Active context: CR-FHP-M2-1 review-resolution is implemented with FHP-RO2 evidence; M2 code-review re-review is next.
+  - Active context: CR-FHP-M2-1 review-resolution is implemented with direct instruction-source support; M2 code-review R3 is next.
 
 ## Blocked
 
