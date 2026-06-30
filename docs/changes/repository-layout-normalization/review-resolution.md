@@ -100,10 +100,19 @@ Resolution:
 
 ### CR-RLN-M3-1 — M3 rewrote exact dependency-inventory proof into placeholders
 
-Status: open
+Status: resolved
 
 Finding source: `docs/changes/repository-layout-normalization/reviews/code-review-m3-r1.md`
 
 Required outcome: restore or re-establish exact migration proof without making the active stale-path scan depend on erasing historical evidence. M1 inventory and validation metadata must report the actual paths and commands used for the dependency inventory, or a clearly reviewed historical-path allowlist/exclusion must preserve exact historical proof while keeping the M3 stale active-path check deterministic.
 
 Safe resolution path: restore exact M1 inventory command/path rows and exact M1 validation metadata, then adjust the M3 stale-path validation evidence so it distinguishes active content/reference scans from intentional historical proof records. If the validation command scope changes materially, update the plan/test-spec evidence first; otherwise record the narrowed historical-proof handling here, rerun M3 validation, and request M3 code-review again.
+
+Resolution:
+
+- Restored the exact M1 inventory command in `docs/changes/repository-layout-normalization/evidence/dependency-inventory.md`.
+- Restored exact M1 path rows for the old numbered content directories and `about/red-flags.md`.
+- Restored exact M1 validation metadata in `docs/changes/repository-layout-normalization/change.yaml`.
+- Updated RLN-CMD4 in `specs/repository-layout-normalization.test.md` to scan active surfaces only: `README.md`, `SOURCES.md`, `RED-FLAGS.md`, promoted content directories, `tests`, and `tools`.
+- Updated the M3 plan validation command and validation notes to distinguish active stale-reference validation from intentional historical proof records.
+- Reran M3 validation and routed M3 back to code-review.

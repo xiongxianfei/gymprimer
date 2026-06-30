@@ -6,10 +6,10 @@
   - Status: active
   - Plan lifecycle state: active
   - Current milestone: M3 content and project-reference migration
-  - Current milestone state: resolution-needed
+  - Current milestone state: review-requested
   - Last reviewed milestone: M3 content and project-reference migration
-  - Next stage: review-resolution
-  - Active context: Code-review M3 R1 requested resolution for CR-RLN-M3-1 before M3 can close and M4 can start.
+  - Next stage: code-review
+  - Active context: CR-RLN-M3-1 is resolved; M3 is ready for code-review rerun before M4 can start.
 
 - [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
   - Status: active

@@ -54,13 +54,13 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Current Handoff Summary
 
 - Current milestone: M3 content and project-reference migration
-- Current milestone state: resolution-needed
+- Current milestone state: review-requested
 - Last reviewed milestone: M3 content and project-reference migration
-- Review status: M3 code-review R1 changes-requested for CR-RLN-M3-1
+- Review status: CR-RLN-M3-1 resolved; M3 awaiting code-review rerun
 - Remaining in-scope implementation milestones: M3 content/reference migration, M4 media and historical-artifact cleanup
-- Next stage: review-resolution
+- Next stage: code-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 requires review-resolution and re-review before M4, explain-change, verify, and PR handoff can happen.
+- Reason final closeout is or is not ready: M3 requires re-review before M4, explain-change, verify, and PR handoff can happen.
 
 ## Milestones
 
@@ -148,7 +148,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ### M3. Content and project-reference migration
 
-- Milestone state: resolution-needed
+- Milestone state: review-requested
 - Goal: move Markdown content and project references to canonical paths, update active links, and remove old numbered and red-flags paths directly.
 - Requirements: R1-R7, R10-R12, R15-R19, R21-R23, R25, AC5-AC6, AC8-AC9, AC11-AC12
 - Files/components likely touched:
@@ -180,7 +180,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Validation commands:
   - `python3 -m unittest discover -s tests`
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`
-  - `rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools docs/changes/repository-layout-normalization`
+  - `rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools`
   - `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization`
   - `git diff --check`
 - Expected observable result: canonical Markdown content validates from new paths and old content paths are gone without stubs.
@@ -193,6 +193,7 @@ The migration is dependency-first. Before any old path is removed, active refere
   - validation notes updated
   - milestone committed
   - code-review R1 requested resolution for CR-RLN-M3-1 before closeout
+  - CR-RLN-M3-1 resolved and M3 returned to code-review
 - Risks:
   - broad documentation references to old paths may be historical rather than active.
 - Rollback/recovery:
@@ -289,6 +290,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-29: Code-review M2 R1 closed M2 with no material findings and routed the change to M3 implementation.
 - 2026-06-30: M3 moved canonical Markdown content paths and root red flags, updated active references, and left media bucket cleanup to M4.
 - 2026-06-30: Code-review M3 R1 requested resolution for CR-RLN-M3-1 because the M1 dependency inventory and validation metadata were rewritten from exact old paths to placeholders during M3 cleanup.
+- 2026-06-30: Review-resolution restored exact M1 inventory proof and narrowed the M3 stale-path scan to active content, tests, and tools so historical proof records can retain exact old paths.
 
 ## Decision log
 
@@ -329,7 +331,8 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Code-review M2 R1 reviewer reran `git diff --check`; passed.
 - Code-review M2 R1 reviewer reran `python3 tools/checks/check_privacy.py tools/checks/check_markdown_first.py tests/test_repository_layout_normalization.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md`; checked 17 files, privacy pass.
 - M3 checker validation passed: `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises` checked 18 Markdown files.
-- M3 stale content/red-flags scan passed with no matches: `rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools docs/changes/repository-layout-normalization` returned exit 1 because no stale active paths were found.
+- M3 stale content/red-flags scan was superseded during CR-RLN-M3-1 resolution because it incorrectly scanned change-history records that must preserve exact old paths.
+- M3 active-surface stale content/red-flags scan passed with no matches: `rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools` returned exit 1 because no stale active paths were found.
 - M3 full unit suite passed: `python3 -m unittest discover -s tests` ran 141 tests.
 - M3 privacy check passed: `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization` checked 32 files.
 - M3 diff check passed: `git diff --check`.
@@ -338,6 +341,11 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Code-review M3 R1 reviewer reran `python3 -m unittest discover -s tests`; passed, ran 141 tests.
 - Code-review M3 R1 reviewer reran `git diff --check`; passed.
 - Code-review M3 R1 reviewer reran `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization`; checked 32 files, privacy pass.
+- CR-RLN-M3-1 resolution active-surface stale-path scan passed with no matches: `rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools` returned exit 1 because no stale active paths were found.
+- CR-RLN-M3-1 resolution checker validation passed: `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises` checked 18 Markdown files.
+- CR-RLN-M3-1 resolution full unit suite passed: `python3 -m unittest discover -s tests` ran 141 tests.
+- CR-RLN-M3-1 resolution diff check passed: `git diff --check`.
+- CR-RLN-M3-1 resolution privacy check passed: `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization specs/repository-layout-normalization.test.md docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md` checked 36 files.
 
 ## Outcome and retrospective
 
@@ -346,4 +354,4 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for review-resolution of CR-RLN-M3-1, then M3 re-review.
+- Ready for M3 code-review rerun.
