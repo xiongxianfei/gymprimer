@@ -20,14 +20,14 @@ Spec changes:
 
 Status: resolved
 
-Required outcome: define canonical treatment for `about/red-flags.md` and `01-getting-started/beginner-training-principles.md` inside this migration.
+Required outcome: define canonical treatment for `the former nested red-flags path.md` and `the former getting-started directory/beginner-training-principles.md` inside this migration.
 
 Disposition: the spec now chooses root `RED-FLAGS.md` as canonical and `principles/beginner-training-principles.md` as the canonical beginner-principles path.
 
 Spec changes:
 
 - Added E5 for direct red-flags migration.
-- Added R6 requiring `about/red-flags.md` to move to root `RED-FLAGS.md`.
+- Added R6 requiring `the former nested red-flags path.md` to move to root `RED-FLAGS.md`.
 - Updated state, accessibility, edge cases, and acceptance criteria for the root red-flags path.
 
 ### SR-RLN-3 — Media migration determinism

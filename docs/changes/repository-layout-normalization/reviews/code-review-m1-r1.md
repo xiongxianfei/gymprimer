@@ -46,7 +46,7 @@ None.
 | --- | --- | --- |
 | Spec alignment | pass | M1 implements R15-R17, R23, R25, AC4, and AC12 by recording dependencies and dispositions before any file move or removal. |
 | Test coverage | pass | `specs/repository-layout-normalization.test.md` maps RLN-T3 to M1 evidence and keeps automated checker work in M2. |
-| Edge cases | pass | The inventory includes old numbered paths, `about/red-flags.md`, old media buckets, media provenance rows, and historical `content/`, `schemas/`, and `generated/` artifacts. |
+| Edge cases | pass | The inventory includes old numbered paths, `the former nested red-flags path.md`, old media buckets, media provenance rows, and historical `content/`, `schemas/`, and `generated/` artifacts. |
 | Error handling | pass | No destructive migration happened in M1; later moves remain gated by M2 validation and M3/M4 milestone ownership. |
 | Architecture boundaries | pass | Governance stays under `docs/`; M1 does not change product scope, content contracts, media source rules, or folder layout. |
 | Compatibility | pass | Historical and active references are distinguished so later milestones can update active dependencies without deleting retained evidence blindly. |

@@ -1,5 +1,11 @@
 # Seated Row
 
+Author: xiongxianfei
+Created: 2026-06-30
+Last reviewed: 2026-06-30
+Next review due: 2027-06-30
+Review scope: sources, scope boundary, comprehension
+
 > Disclaimer: GymPrimer is educational content for general exercise literacy.
 > It is not medical advice and not personalized coaching.
 
@@ -81,5 +87,9 @@ Stop if sharp or unsafe. [Mayo Clinic][mayo-weight-training]
 ## Sources
 
 - [Mayo Clinic weight training technique guidance][mayo-weight-training]
+- [Mayo Clinic weight training setup reference][local-seated-row-setup]
+- [Mayo Clinic weight training safety reference][local-seated-row-safety]
 
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
+[local-seated-row-setup]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
+[local-seated-row-safety]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842

@@ -1,12 +1,12 @@
 change_id: repository-layout-normalization
 proposal: docs/proposals/2026-06-29-responsible-breadth.md
-status: implementation-ready
-current_stage: implement
+status: code-review-needed
+current_stage: code-review
 created_date: 2026-06-29
 notes:
   - Created after the architecture target shape identified five logical blocks and a future physical migration requirement.
-  - No files have been moved or removed yet.
-  - Physical directory migration remains blocked until spec-review, architecture or ADR review, test-spec, and migration planning complete.
+  - M3 has moved canonical Markdown content paths and removed the old content/red-flags directories directly.
+  - Media co-location and historical structured-platform cleanup remain for M4.
   - Spec-review R1 requested changes for old-path compatibility, red-flags/orientation path policy, and media migration determinism.
   - Spec revision resolved R1 findings by choosing direct old-path removal, root RED-FLAGS.md, direct media co-location, and direct historical-artifact removal when no active dependency remains.
   - Spec revision added dependency-first migration requirements: inventory active dependencies, update or remove references first, then move or remove files.
@@ -27,6 +27,7 @@ notes:
   - Code-review M1 R1 closed M1 with no material findings and routed the change to M2 implementation.
   - M2 implemented checker enforcement and regression tests for normalized layout paths without moving real content or media files.
   - Code-review M2 R1 closed M2 with no material findings and routed the change to M3 implementation.
+  - M3 moved canonical Markdown content paths and root red flags, updated active references, and left media bucket cleanup to M4.
 validation:
   - git diff --check -- passed
   - python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/adr/2026-06-29-direct-repository-layout-normalization.md specs/repository-layout-normalization.md docs/changes/repository-layout-normalization/change.yaml -- passed, checked 4 files
@@ -37,7 +38,7 @@ validation:
   - python3 tools/checks/check_privacy.py specs/repository-layout-normalization.test.md docs/plans/2026-06-29-repository-layout-normalization.md docs/changes/repository-layout-normalization/review-resolution.md docs/changes/repository-layout-normalization/change.yaml docs/plan.md -- passed, checked 5 files
   - git diff --check -- passed after test-spec-review R2 recording
   - python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization/reviews/test-spec-review-r2.md docs/changes/repository-layout-normalization/review-log.md docs/changes/repository-layout-normalization/change.yaml docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md -- passed, checked 5 files
-  - rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags|media/equipment|media/movements|media/supplemental|content/|schemas/|generated/" . -- passed for M1 inventory; matches categorized in evidence/dependency-inventory.md
+  - rg -n "the former getting-started directory|the former machine directory|the former bodyweight directory|the former nested red-flags path|media/equipment|media/movements|media/supplemental|content/|schemas/|generated/" . -- passed for M1 inventory; matches categorized in evidence/dependency-inventory.md
   - python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization -- passed, checked 12 files
   - git diff --check -- passed after M1 implementation
   - python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md -- passed, checked 14 files
@@ -51,3 +52,9 @@ validation:
   - python3 -m unittest discover -s tests -- passed during code-review M2 R1, ran 141 tests
   - git diff --check -- passed during code-review M2 R1
   - python3 tools/checks/check_privacy.py tools/checks/check_markdown_first.py tests/test_repository_layout_normalization.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md -- passed during code-review M2 R1, checked 17 files
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed, checked 18 Markdown files
+  - M3 stale content/red-flags scan over active content, tests, tools, and change-local records -- passed with no matches, exit 1 expected for rg no-match
+  - python3 -m unittest discover -s tests -- passed, ran 141 tests
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization -- passed, checked 32 files
+  - git diff --check -- passed after M3 implementation
+  - M3 old content-directory existence check -- passed, returned no paths

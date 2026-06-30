@@ -7,11 +7,11 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 CHECK = ROOT / "tools/checks/check_markdown_first.py"
 FIRST_SLICE = (
-    "01-getting-started/beginner-training-principles.md",
-    "02-machines/lat-pulldown.md",
-    "02-machines/seated-row.md",
-    "02-machines/chest-press.md",
-    "03-bodyweight/incline-push-up.md",
+    "principles/beginner-training-principles.md",
+    "exercises/lat-pulldown.md",
+    "exercises/seated-row.md",
+    "exercises/chest-press.md",
+    "exercises/incline-push-up.md",
 )
 
 
@@ -28,9 +28,9 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
                 str(CHECK),
                 "README.md",
                 "SOURCES.md",
-                "01-getting-started",
-                "02-machines",
-                "03-bodyweight",
+                "RED-FLAGS.md",
+                "principles",
+                "exercises",
             ],
             cwd=ROOT,
             text=True,
@@ -40,9 +40,8 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
-    def test_readme_links_draft_first_slice_pages(self) -> None:
+    def test_readme_links_first_slice_pages(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("not yet promoted", readme)
         for relative_path in FIRST_SLICE:
             with self.subTest(path=relative_path):
                 self.assertIn(f"]({relative_path})", readme)

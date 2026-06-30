@@ -54,11 +54,11 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Current Handoff Summary
 
 - Current milestone: M3 content and project-reference migration
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2 validation tooling and regression tests
-- Review status: M2 code-review R1 clean-with-notes; no material findings
+- Review status: M3 implemented; awaiting code-review
 - Remaining in-scope implementation milestones: M3 content/reference migration, M4 media and historical-artifact cleanup
-- Next stage: implement
+- Next stage: code-review
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: implementation, code review, explain-change, verify, and PR handoff have not happened.
 
@@ -148,7 +148,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ### M3. Content and project-reference migration
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: move Markdown content and project references to canonical paths, update active links, and remove old numbered and red-flags paths directly.
 - Requirements: R1-R7, R10-R12, R15-R19, R21-R23, R25, AC5-AC6, AC8-AC9, AC11-AC12
 - Files/components likely touched:
@@ -184,6 +184,7 @@ The migration is dependency-first. Before any old path is removed, active refere
   - `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization`
   - `git diff --check`
 - Expected observable result: canonical Markdown content validates from new paths and old content paths are gone without stubs.
+- Implementation result: moved beginner principles to `principles/beginner-training-principles.md`, moved first-slice exercise pages to `exercises/`, moved red flags to `RED-FLAGS.md`, removed old content directories directly, updated active README/content/test/checker/provenance references, and preserved media bucket cleanup for M4.
 - Commit message: `M3: migrate content paths`
 - Milestone closeout:
   - validation passed
@@ -285,6 +286,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-29: Code-review M1 R1 closed M1 with no material findings and routed the change to M2 implementation.
 - 2026-06-29: M2 implemented repository layout normalization regression tests and checker enforcement without moving real content or media files.
 - 2026-06-29: Code-review M2 R1 closed M2 with no material findings and routed the change to M3 implementation.
+- 2026-06-30: M3 moved canonical Markdown content paths and root red flags, updated active references, and left media bucket cleanup to M4.
 
 ## Decision log
 
@@ -324,6 +326,12 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Code-review M2 R1 reviewer reran `python3 -m unittest discover -s tests`; passed, 141 tests.
 - Code-review M2 R1 reviewer reran `git diff --check`; passed.
 - Code-review M2 R1 reviewer reran `python3 tools/checks/check_privacy.py tools/checks/check_markdown_first.py tests/test_repository_layout_normalization.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md`; checked 17 files, privacy pass.
+- M3 checker validation passed: `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises` checked 18 Markdown files.
+- M3 stale content/red-flags scan passed with no matches: `rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools docs/changes/repository-layout-normalization` returned exit 1 because no stale active paths were found.
+- M3 full unit suite passed: `python3 -m unittest discover -s tests` ran 141 tests.
+- M3 privacy check passed: `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization` checked 32 files.
+- M3 diff check passed: `git diff --check`.
+- M3 old directory check passed: `find 01-getting-started 02-machines 03-bodyweight about -maxdepth 0 -type d -print 2>/dev/null || true` returned no paths.
 
 ## Outcome and retrospective
 
@@ -332,4 +340,4 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implementation of M3.
+- Ready for code-review of M3.

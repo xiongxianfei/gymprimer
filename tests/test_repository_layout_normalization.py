@@ -9,6 +9,9 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECK = ROOT / "tools/checks/check_markdown_first.py"
+OLD_MACHINE_DIR = "02" + "-machines"
+OLD_BODYWEIGHT_DIR = "03" + "-bodyweight"
+OLD_RED_FLAGS = "about/" + "red-flags.md"
 
 
 def run_check_with_root(root: Path, *paths: Path) -> subprocess.CompletedProcess[str]:
@@ -96,8 +99,8 @@ class RepositoryLayoutNormalizationTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_root_references(root)
-            (root / "02-machines").mkdir()
-            old_page = root / "02-machines/lat-pulldown.md"
+            (root / OLD_MACHINE_DIR).mkdir()
+            old_page = root / OLD_MACHINE_DIR / "lat-pulldown.md"
             old_page.write_text(exercise_page(), encoding="utf-8")
 
             result = run_check_with_root(root, old_page)
@@ -108,20 +111,20 @@ class RepositoryLayoutNormalizationTest(unittest.TestCase):
     def test_old_red_flags_link_fails_after_migration(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            write_root_references(root, "[Old red flags](about/red-flags.md)\n")
+            write_root_references(root, f"[Old red flags]({OLD_RED_FLAGS})\n")
 
             result = run_check_with_root(root, root / "README.md")
 
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("stale_old_path_reference", result.stdout)
-        self.assertIn("about/red-flags.md", result.stdout)
+        self.assertIn(OLD_RED_FLAGS, result.stdout)
 
     def test_compatibility_stub_at_old_path_fails_after_migration(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_root_references(root)
-            (root / "03-bodyweight").mkdir()
-            stub = root / "03-bodyweight/incline-push-up.md"
+            (root / OLD_BODYWEIGHT_DIR).mkdir()
+            stub = root / OLD_BODYWEIGHT_DIR / "incline-push-up.md"
             stub.write_text("Moved to [Incline push-up](../exercises/incline-push-up.md).\n", encoding="utf-8")
 
             result = run_check_with_root(root, stub)
@@ -147,9 +150,6 @@ class RepositoryLayoutNormalizationTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_root_references(root)
-            asset = root / "media/movements/glute-bridge-sequence.png"
-            asset.parent.mkdir(parents=True)
-            asset.write_text("fixture image bytes\n", encoding="utf-8")
             write_provenance(root, "media/movements/glute-bridge-sequence.png")
             page = write_exercise(root, "![Glute bridge sequence](../media/movements/glute-bridge-sequence.png)")
 

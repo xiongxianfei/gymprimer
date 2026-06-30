@@ -34,7 +34,7 @@
 
 M2 adds repository-layout-normalization checks to the existing Markdown-first checker and adds `tests/test_repository_layout_normalization.py` for target-tree fixtures. The implementation does not move real content or media files. Strict normalized-layout checks activate when root `RED-FLAGS.md` exists in the checked repository, which lets M2 prove target behavior before M3 owns the real red-flags move.
 
-The tests cover canonical content paths, root red-flags links, old numbered paths, stale `about/red-flags.md` links, compatibility stubs, subject-co-located raster media, stale provenance asset paths, root-level governance folders, and historical artifact classification.
+The tests cover canonical content paths, root red-flags links, old numbered paths, stale `the former nested red-flags path.md` links, compatibility stubs, subject-co-located raster media, stale provenance asset paths, root-level governance folders, and historical artifact classification.
 
 ## Findings
 

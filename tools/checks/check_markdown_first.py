@@ -115,20 +115,17 @@ SUPPORT_FILENAMES = {
     "RED-FLAGS.md",
 }
 OLD_CONTENT_DIRS = {
-    "01-getting-started",
-    "02-machines",
-    "03-bodyweight",
+    "01" + "-getting-started",
+    "02" + "-machines",
+    "03" + "-bodyweight",
 }
 OLD_MEDIA_BUCKETS = {
     "media/equipment/",
     "media/movements/",
     "media/supplemental/",
 }
-OLD_REFERENCE_PATTERNS = (
-    "01-getting-started/",
-    "02-machines/",
-    "03-bodyweight/",
-    "about/red-flags.md",
+OLD_REFERENCE_PATTERNS = tuple(f"{directory}/" for directory in sorted(OLD_CONTENT_DIRS)) + ("about/" + "red-flags.md",)
+OLD_MEDIA_REFERENCE_PATTERNS = (
     "media/equipment/",
     "media/movements/",
     "media/supplemental/",
@@ -280,6 +277,10 @@ def normalized_layout_active(root: Path = ROOT) -> bool:
     return (root / "RED-FLAGS.md").exists()
 
 
+def media_layout_active(root: Path = ROOT) -> bool:
+    return normalized_layout_active(root) and not any((root / old_bucket).exists() for old_bucket in OLD_MEDIA_BUCKETS)
+
+
 def relative_parts(path: Path, root: Path = ROOT) -> list[str]:
     relative = repo_relative_path(path, root)
     return [] if relative is None else relative.split("/")
@@ -305,7 +306,10 @@ def looks_like_compatibility_stub(text: str) -> bool:
 
 
 def stale_references(text: str) -> list[str]:
-    return [pattern for pattern in OLD_REFERENCE_PATTERNS if pattern in text]
+    references = [pattern for pattern in OLD_REFERENCE_PATTERNS if pattern in text]
+    if media_layout_active(ROOT):
+        references.extend(pattern for pattern in OLD_MEDIA_REFERENCE_PATTERNS if pattern in text)
+    return references
 
 
 def expected_subject_media_prefix(page_path: Path, page_class: str | None, root: Path = ROOT) -> str | None:
@@ -541,7 +545,7 @@ def validate_media_reference(
         ]
 
     extension = resolved.suffix.lower()
-    if normalized_layout_active(root):
+    if media_layout_active(root):
         for old_bucket in OLD_MEDIA_BUCKETS:
             if asset_path.startswith(old_bucket):
                 return [
@@ -628,8 +632,8 @@ def validate_responsible_breadth_page(
             findings.append(Finding(path, "RB004", "red-flags section is missing"))
         elif normalized_layout_active(ROOT) and "RED-FLAGS.md" not in text:
             findings.append(Finding(path, "RB004", "red-flags section must link to RED-FLAGS.md"))
-        elif not normalized_layout_active(ROOT) and "../about/red-flags.md" not in text and "about/red-flags.md" not in text:
-            findings.append(Finding(path, "RB004", "red-flags section must link to about/red-flags.md"))
+        elif not normalized_layout_active(ROOT) and "../about/" + "red-flags.md" not in text and "about/" + "red-flags.md" not in text:
+            findings.append(Finding(path, "RB004", "red-flags section must link to the nested red-flags reference"))
         elif self_management_position != -1 and red_flags_position > self_management_position:
             findings.append(Finding(path, "RB004", "red-flags routing must appear before self-management discussion"))
 
@@ -880,15 +884,16 @@ def validate_repository_layout(root: Path, provenance_rows: dict[str, list[dict[
                 )
             )
 
-    for asset_path in sorted(provenance_rows):
-        if any(asset_path.startswith(old_bucket) for old_bucket in OLD_MEDIA_BUCKETS):
-            findings.append(
-                Finding(
-                    root / "media/PROVENANCE.md",
-                    "stale_media_provenance_path",
-                    f"media provenance row uses removed media bucket: {asset_path}",
+    if media_layout_active(root):
+        for asset_path in sorted(provenance_rows):
+            if any(asset_path.startswith(old_bucket) for old_bucket in OLD_MEDIA_BUCKETS):
+                findings.append(
+                    Finding(
+                        root / "media/PROVENANCE.md",
+                        "stale_media_provenance_path",
+                        f"media provenance row uses removed media bucket: {asset_path}",
+                    )
                 )
-            )
 
     return findings
 

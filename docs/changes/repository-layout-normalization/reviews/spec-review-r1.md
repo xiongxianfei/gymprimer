@@ -47,9 +47,9 @@
 - Finding ID: SR-RLN-2
 - Severity: major
 - Location: `specs/repository-layout-normalization.md` lines 96-97, 243-247, 292-293; `docs/architecture/system/architecture.md` lines 175-176
-- Evidence: R5 chooses `principles/` for `01-getting-started/` unless spec-review approves a root orientation exception, while open question 2 leaves the canonical red-flags path undecided. The architecture explicitly says root `RED-FLAGS.md` requires a spec update because current pages and checks reference `about/red-flags.md`.
+- Evidence: R5 chooses `principles/` for `the former getting-started directory/` unless spec-review approves a root orientation exception, while open question 2 leaves the canonical red-flags path undecided. The architecture explicitly says root `RED-FLAGS.md` requires a spec update because current pages and checks reference `the former nested red-flags path.md`.
 - Required outcome: The spec must define canonical treatment for root/project-reference safety routing and beginner orientation paths, rather than asking spec-review or a later plan to choose implicitly.
-- Safe resolution path: Keep `about/red-flags.md` as canonical for this migration and state that root `RED-FLAGS.md` is out of scope for this spec unless a later spec changes it. For `01-getting-started/beginner-training-principles.md`, choose `principles/beginner-training-principles.md` as canonical, or explicitly define one root orientation exception in the spec. Remove the "unless spec-review approves" phrasing.
+- Safe resolution path: Keep `the former nested red-flags path.md` as canonical for this migration and state that root `RED-FLAGS.md` is out of scope for this spec unless a later spec changes it. For `the former getting-started directory/beginner-training-principles.md`, choose `principles/beginner-training-principles.md` as canonical, or explicitly define one root orientation exception in the spec. Remove the "unless spec-review approves" phrasing.
 - needs-decision rationale: none
 
 ## Finding SR-RLN-3
@@ -77,13 +77,13 @@ All promoted Markdown content must link to canonical paths after migration.
 Replace R5:
 
 ```md
-R5. The migration MUST fold `01-getting-started/beginner-training-principles.md` into `principles/beginner-training-principles.md`. Root orientation files are out of scope for this migration.
+R5. The migration MUST fold `the former getting-started directory/beginner-training-principles.md` into `principles/beginner-training-principles.md`. Root orientation files are out of scope for this migration.
 ```
 
 Add red-flags treatment:
 
 ```md
-R5a. `about/red-flags.md` remains the canonical red-flags reference for this migration. Moving it to root `RED-FLAGS.md` is out of scope unless a later spec changes the safety-reference path.
+R5a. `the former nested red-flags path.md` remains the canonical red-flags reference for this migration. Moving it to root `RED-FLAGS.md` is out of scope unless a later spec changes the safety-reference path.
 ```
 
 Replace R7:

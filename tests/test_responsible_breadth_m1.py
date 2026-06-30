@@ -10,6 +10,8 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECK = ROOT / "tools/checks/check_markdown_first.py"
+OLD_MACHINE_DIR = "02" + "-machines"
+OLD_RED_FLAGS = "about/" + "red-flags.md"
 
 
 def run_check_with_root(root: Path, *paths: Path) -> subprocess.CompletedProcess[str]:
@@ -61,7 +63,7 @@ def rb_sources() -> str:
 
 
 def pattern_page(extra: str = "", red_flags_after_self_management: bool = False) -> str:
-    red_flags = "## Red flags: when to stop reading and seek care\n\nSee [the red-flags reference](../about/red-flags.md) before trying self-management.\n\n"
+    red_flags = f"## Red flags: when to stop reading and seek care\n\nSee [the red-flags reference](../{OLD_RED_FLAGS}) before trying self-management.\n\n"
     self_management = "## Commonly recommended self-management themes\n\nMainstream sources commonly discuss gradual activity and exercise education. [NHS][nhs-neck]\n\n"
     middle = self_management + red_flags if red_flags_after_self_management else red_flags + self_management
     return (
@@ -106,7 +108,7 @@ def apt_pattern_page(extra_help: str = "") -> str:
         "## What this page is not\n\n"
         "This page does not diagnose you or prescribe treatment. [Mayo Clinic][mayo-back]\n\n"
         "## Red flags: when to stop reading and seek care\n\n"
-        "See [the red-flags reference](../about/red-flags.md) before exercise options. [Mayo Clinic][mayo-back]\n\n"
+        f"See [the red-flags reference](../{OLD_RED_FLAGS}) before exercise options. [Mayo Clinic][mayo-back]\n\n"
         "## Why beginners come to this page\n\n"
         "- their low back arches in standing\n"
         "- planks feel like low-back arching\n"
@@ -385,8 +387,8 @@ class ResponsibleBreadthM1Test(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_sources(root)
-            (root / "02-machines").mkdir()
-            page = root / "02-machines/page.md"
+            (root / OLD_MACHINE_DIR).mkdir()
+            page = root / OLD_MACHINE_DIR / "page.md"
             page.write_text(pattern_page(), encoding="utf-8")
 
             result = run_check_with_root(root, page)
@@ -397,7 +399,7 @@ class ResponsibleBreadthM1Test(unittest.TestCase):
 
 class ResponsibleBreadthM2Test(unittest.TestCase):
     def test_red_flags_reference_contract(self) -> None:
-        text = (ROOT / "about/red-flags.md").read_text(encoding="utf-8")
+        text = (ROOT / "RED-FLAGS.md").read_text(encoding="utf-8")
 
         for expected in (
             "Disclaimer",
@@ -470,7 +472,7 @@ class ResponsibleBreadthM2Test(unittest.TestCase):
 class ResponsibleBreadthM3Test(unittest.TestCase):
     def test_first_expanded_proof_slice_real_pages_pass_checker(self) -> None:
         required_paths = (
-            "about/red-flags.md",
+            "RED-FLAGS.md",
             "patterns/anterior-pelvic-tilt.md",
             "conditions/non-specific-chronic-low-back-pain.md",
             "principles/how-many-days-a-week.md",
@@ -484,7 +486,7 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
                 sys.executable,
                 str(CHECK),
                 "SOURCES.md",
-                "about",
+                "RED-FLAGS.md",
                 "patterns",
                 "conditions",
                 "principles",

@@ -6,10 +6,10 @@
   - Status: active
   - Plan lifecycle state: active
   - Current milestone: M3 content and project-reference migration
-  - Current milestone state: planned
+  - Current milestone state: review-requested
   - Last reviewed milestone: M2 validation tooling and regression tests
-  - Next stage: implement
-  - Active context: M2 code-review R1 closed validation tooling and regression tests with no material findings. M3 content and project-reference migration is next.
+  - Next stage: code-review
+  - Active context: M3 migrated canonical Markdown paths and root red flags; code-review is next.
 
 - [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
   - Status: active

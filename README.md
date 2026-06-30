@@ -49,7 +49,7 @@ Current active support files:
 - [CONTENT_LICENSE.md](./CONTENT_LICENSE.md): license split for code/tooling and written content/original diagrams.
 - [docs/templates/exercise-card.md](./docs/templates/exercise-card.md): exercise-page template.
 - [docs/templates/principle-page.md](./docs/templates/principle-page.md): principle-page template.
-- [about/red-flags.md](./about/red-flags.md): red-flag routing reference for safety-relevant pages.
+- [RED-FLAGS.md](./RED-FLAGS.md): red-flag routing reference for safety-relevant pages.
 - [docs/templates/pattern-page.md](./docs/templates/pattern-page.md): pattern-page template.
 - [docs/templates/condition-page.md](./docs/templates/condition-page.md): condition-page template.
 - [docs/templates/programming-principle-page.md](./docs/templates/programming-principle-page.md): programming-principle template.
@@ -64,11 +64,11 @@ Promoted Responsible Breadth proof-slice pages:
 
 Draft first-slice pages, not yet promoted:
 
-- [Beginner Training Principles](01-getting-started/beginner-training-principles.md)
-- [Lat Pulldown](02-machines/lat-pulldown.md)
-- [Seated Row](02-machines/seated-row.md)
-- [Chest Press](02-machines/chest-press.md)
-- [Incline Push-Up](03-bodyweight/incline-push-up.md)
+- [Beginner Training Principles](principles/beginner-training-principles.md)
+- [Lat Pulldown](exercises/lat-pulldown.md)
+- [Seated Row](exercises/seated-row.md)
+- [Chest Press](exercises/chest-press.md)
+- [Incline Push-Up](exercises/incline-push-up.md)
 
 These pages must not be described as published, approved, expert-reviewed, or promoted source content until the M3 milestone has beginner read-test evidence and review approval.
 
@@ -79,8 +79,8 @@ These pages must not be described as published, approved, expert-reviewed, or pr
 - `CONTRIBUTING.md`: contribution rules for Markdown-first content.
 - `CONTENT_LICENSE.md`: license posture for code/tooling and content/media.
 - `docs/templates/`: source templates for exercise and principle pages.
-- `01-getting-started/`, `02-machines/`, `03-bodyweight/`: planned exercise-literacy Markdown directories.
-- `about/`, `patterns/`, `conditions/`, `principles/`, `programs/`: Responsible Breadth Markdown directories.
+- `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/`: canonical Markdown content directories.
+- `RED-FLAGS.md`: root red-flag routing reference for safety-relevant pages.
 - `media/`: optional original SVG diagrams and approved AI-generated raster
   illustrations with provenance; no third-party screenshots, stock photos, or
   borrowed public web images for v0.1.
@@ -100,8 +100,8 @@ Responsible Breadth validation uses:
 
 ```sh
 python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'
-python3 tools/checks/check_markdown_first.py README.md SOURCES.md about patterns conditions principles programs
-python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md about patterns conditions principles programs docs/changes/responsible-breadth media
+python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises
+python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/responsible-breadth media
 ```
 
 The old `tools/validation/` commands are historical structured-platform tooling, not active v0.1 product validation.

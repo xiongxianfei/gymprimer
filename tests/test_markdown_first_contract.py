@@ -19,9 +19,11 @@ class MarkdownFirstContractTest(unittest.TestCase):
             "SOURCES.md",
             "CONTRIBUTING.md",
             "CONTENT_LICENSE.md",
-            "01-getting-started/",
-            "02-machines/",
-            "03-bodyweight/",
+            "exercises/",
+            "patterns/",
+            "conditions/",
+            "principles/",
+            "programs/",
         ):
             self.assertIn(expected, text)
 

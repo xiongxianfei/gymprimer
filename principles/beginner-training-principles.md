@@ -1,9 +1,23 @@
 # Beginner Training Principles
 
+Author: xiongxianfei
+Created: 2026-06-30
+Last reviewed: 2026-06-30
+Next review due: 2027-06-30
+Review scope: sources, scope boundary, comprehension
+
 > Disclaimer: GymPrimer is educational content for general exercise literacy.
 > It is not medical advice and not personalized coaching.
 
-## Beginner explanation
+## What this page is
+
+This page explains basic beginner training principles for general exercise literacy.
+
+## What this page is not
+
+This page is not an individualized training plan, medical advice, or personalized coaching.
+
+## Plain-language overview
 
 Beginner training is the practice of learning repeatable movement,
 equipment setup, and effort control before chasing complex plans.

@@ -30,7 +30,7 @@ Stop using this page as a self-education guide and seek appropriate care if back
 - wake the reader at night
 - make balance or walking difficult
 
-Read [the full red-flags reference](../about/red-flags.md) before using any GymPrimer page to think about pain or training decisions.
+Read [the full red-flags reference](../RED-FLAGS.md) before using any GymPrimer page to think about pain or training decisions.
 
 ## Why beginners come to this page
 
@@ -89,7 +89,7 @@ Anterior pelvic tilt is common, often asymptomatic, and not automatically a prob
 
 ### 1. Clear red flags first
 
-If any of the red flags above apply, stop here and read [the red-flags reference](../about/red-flags.md). Exercise content is not the right next step when safety flags are present. [Mayo Clinic][mayo-back-pain-when-to-see-doctor] [MedlinePlus][medlineplus-low-back-pain-acute]
+If any of the red flags above apply, stop here and read [the red-flags reference](../RED-FLAGS.md). Exercise content is not the right next step when safety flags are present. [Mayo Clinic][mayo-back-pain-when-to-see-doctor] [MedlinePlus][medlineplus-low-back-pain-acute]
 
 ### 2. Learn pelvis control before loading it
 
@@ -158,7 +158,7 @@ Use a qualified strength coach for technique, exercise selection, and performanc
 
 ## Where to next in this primer
 
-- [Beginner Training Principles](../01-getting-started/beginner-training-principles.md) for the basic training frame.
+- [Beginner Training Principles](../principles/beginner-training-principles.md) for the basic training frame.
 - [How Many Days a Week Should I Train?](../principles/how-many-days-a-week.md) for weekly consistency.
 - [Glute bridge](../exercises/glute-bridge.md) for the hip-extension side of the menu.
 - [Dead bug](../exercises/dead-bug.md) for the trunk-control side of the menu.
