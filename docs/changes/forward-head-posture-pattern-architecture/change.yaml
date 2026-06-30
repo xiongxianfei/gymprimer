@@ -1,6 +1,6 @@
 change_id: forward-head-posture-pattern-architecture
 status: active
-current_stage: code-review
+current_stage: implement
 created_date: 2026-06-30
 
 proposal: docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md
@@ -20,17 +20,16 @@ current_plan_status: active
 current_plan_review: docs/changes/forward-head-posture-pattern-architecture/reviews/plan-review-r1.md
 plan_index: docs/plan.md
 
-current_milestone: M2
-current_milestone_state: review-requested
-last_reviewed_milestone: M1
+current_milestone: M3
+current_milestone_state: planned
+last_reviewed_milestone: M2
 
 current_test_spec: specs/forward-head-posture-pattern-architecture.test.md
 current_test_spec_status: approved
 current_test_spec_review: docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r3.md
-next_stage: code-review
+next_stage: implement
 
-open_findings:
-  - CR-FHP-M2-1
+open_findings: []
 
 notes:
   - Proposal-review R2 approved the forward-head-posture pattern architecture direction.
@@ -54,6 +53,7 @@ notes:
   - Review-resolution for CR-FHP-M2-1 replaced broad exercise-specific citations with direct page-local support or softened wording and added FHP-RO2 evidence; M2 code-review re-review is next.
   - Code-review M2 R2 found CR-FHP-M2-1 failed-remediation because sampled setup and technique claims still need direct page-local support; review-resolution is next.
   - Review-resolution for CR-FHP-M2-1 separated direct instruction sources from muscle/activity sources, replaced the gated thoracic-extension source, and updated FHP-RO2 remediation evidence; M2 code-review R3 is next.
+  - Code-review M2 R3 closed CR-FHP-M2-1 with no material findings; M3 implementation is next.
 
 validation:
   - "python3 tools/checks/check_privacy.py docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md docs/changes/forward-head-posture-pattern-architecture docs/architecture/system/architecture.md specs/forward-head-posture-pattern-architecture.md docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md -- passed, checked 12 files"
@@ -130,3 +130,11 @@ validation:
   - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 51 tests"
   - "python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed, checked 20 files"
   - "git diff --check -- passed"
+  - "python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises -- passed during code-review M2 R3, checked 17 Markdown files"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed during code-review M2 R3, 25 tests"
+  - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed during code-review M2 R3, 51 tests"
+  - "python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed during code-review M2 R3, checked 20 files"
+  - "git diff --check -- passed during code-review M2 R3"
+  - "python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed after recording code-review M2 R3, checked 21 files"
+  - "rg -n \"CR-M2-R3|code-review-m2-r3|current_stage: implement|current_milestone: M3|current_milestone_state: planned|last_reviewed_milestone: M2|open_findings: \\[\\]|Closeout status: closed|Ready for M3 implementation|M2 are closed|M3 implementation is next\" docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed"
+  - "git diff --check -- passed after recording code-review M2 R3"

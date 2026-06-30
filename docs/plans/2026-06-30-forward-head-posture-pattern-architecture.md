@@ -115,24 +115,23 @@ injury marks, and no before/after cure implication.
 
 ## Current Handoff Summary
 
-- Current milestone: M2
-- Current milestone state: review-requested
-- Last reviewed milestone: M1
+- Current milestone: M3
+- Current milestone state: planned
+- Last reviewed milestone: M2
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review
   R2 approved; code-review M1 R1 changes-requested; spec-review R2 approved
   the central-disclaimer amendment; architecture-review R2 approved the
   central-disclaimer architecture; test-spec-review R3 approved the amended
-  proof map; code-review M1 R2 closed M1; code-review M2 R2 found
-  CR-FHP-M2-1 failed-remediation; review-resolution for R3 is implemented
-- Remaining in-scope implementation milestones: M2 review, M3, M4
-- Next stage: code-review M2 R3
+  proof map; code-review M1 R2 closed M1; code-review M2 R3 closed
+  CR-FHP-M2-1
+- Remaining in-scope implementation milestones: M3, M4
+- Next stage: implement M3
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: The central-disclaimer contract
   amendment is spec-approved, architecture-approved, proof-map-approved, and
-  M1 is closed, but M2 source-support review-resolution still needs
-  code-review R3, M3-M4 remain open, and explain-change, verification, and PR
-  handoff remain downstream gates.
+  M1 and M2 are closed, but M3-M4 remain open, and explain-change,
+  verification, and PR handoff remain downstream gates.
 
 ## Milestones
 
@@ -195,7 +194,7 @@ injury marks, and no before/after cure implication.
 
 ### M2. Same-Slice Exercise Pages
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Create the five exercise pages required for the pattern complete loop,
   each with page-local source support and no rehab or treatment framing.
 - Requirements: R12, R14-R17, R19, R28, R30-R31, AC7-AC9, AC14-AC15, AC17
@@ -239,8 +238,12 @@ injury marks, and no before/after cure implication.
   - progress updated
   - decision log unchanged
   - validation notes updated
-  - milestone commit pending until review-resolution handoff commit is created
-  - code-review found CR-FHP-M2-1; R2 found failed remediation and R3 review-resolution is implemented
+  - validation passed
+  - progress updated
+  - decision log unchanged
+  - validation notes updated
+  - milestone committed
+  - code-review found CR-FHP-M2-1; R3 closed the finding and milestone
 - Risks:
   - Exercise pages can accidentally inherit unsupported clinical claims from
     pattern sources.
@@ -469,6 +472,9 @@ injury marks, and no before/after cure implication.
   exercise-instruction sources for setup and technique claims, kept PubMed/PMC
   sources for muscle/activity claims, replaced the gated thoracic-extension
   source, and updated the FHP-RO2 remediation table.
+- 2026-06-30: Code-review M2 R3 closed CR-FHP-M2-1 with no material findings
+  after sampling direct exercise-instruction and muscle/activity source
+  support separately.
 
 ## Decision log
 
@@ -590,6 +596,16 @@ injury marks, and no before/after cure implication.
   `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
   `python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
   and `git diff --check`.
+- 2026-06-30: Code-review M2 R3 validation passed with
+  `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises`,
+  `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`,
+  `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
+  `python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  and `git diff --check`.
+- 2026-06-30: Code-review M2 R3 artifact validation passed with
+  `python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  `rg -n "CR-M2-R3|code-review-m2-r3|current_stage: implement|current_milestone: M3|current_milestone_state: planned|last_reviewed_milestone: M2|open_findings: \\[\\]|Closeout status: closed|Ready for M3 implementation|M2 are closed|M3 implementation is next" docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  and `git diff --check`.
 
 ## Outcome and retrospective
 
@@ -599,6 +615,5 @@ injury marks, and no before/after cure implication.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M2 code-review R3 after final review-resolution validation.
-  Readiness is not Done; M2 re-review, M3-M4, explain-change, verification,
-  and PR handoff remain open.
+- Ready for M3 implementation. Readiness is not Done; M3-M4, explain-change,
+  verification, and PR handoff remain open.

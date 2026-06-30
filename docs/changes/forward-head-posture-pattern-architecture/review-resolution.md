@@ -1,6 +1,6 @@
 # Review Resolution: Forward Head Posture Pattern Architecture
 
-Closeout status: pending M2 code-review R3
+Closeout status: closed
 
 ## Findings
 
@@ -11,7 +11,7 @@ Closeout status: pending M2 code-review R3
 | TSR-FHP-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r1.md` | resolved by `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r2.md` | The test spec now uses review-only semantic evidence IDs recorded in normal code-review records, without a separate proof file. |
 | TSR-FHP-2 | `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r1.md` | resolved by `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r2.md` | The test spec now includes validation command ownership metadata for FHP-CMD1 through FHP-CMD13. |
 | CR-FHP-M1-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m1-r1.md` | superseded by `docs/changes/forward-head-posture-pattern-architecture/reviews/spec-review-r2.md`, confirmed by `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m1-r2.md` | Owner clarified that the required prominent disclaimer belongs in `RED-FLAGS.md`, not on every exercise page; spec-review R2, architecture-review R2, test-spec-review R3, and code-review M1 R2 approved the central-disclaimer amendment path. |
-| CR-FHP-M2-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r1.md`, `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r2.md` | resolved; pending same-stage code-review R3 | The five M2 exercise pages now separate direct exercise-instruction support from muscle/activity support, and unsupported setup, technique, feel-cue, and common-mistake details were reworded or removed. |
+| CR-FHP-M2-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r1.md`, `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r2.md`, `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r3.md` | resolved by `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r3.md` | The five M2 exercise pages now separate direct exercise-instruction support from muscle/activity support, and unsupported setup, technique, feel-cue, and common-mistake details were reworded or removed. |
 
 ## Resolution Notes
 
@@ -35,6 +35,7 @@ Changes:
 - Added an FHP-RO2 remediation table showing sampled claims, source type, and final disposition.
 
 Status: ready for code-review M2 R3.
+- Code-review M2 R3 closed CR-FHP-M2-1 with no material findings. The review sampled direct instruction sources and research sources separately and found FHP-RO2 satisfied for M2.
 
 ## FHP-RO2 Evidence
 
@@ -67,12 +68,12 @@ Proposal-review R2 approved the revised proposal with no material findings.
 Test-spec-review R1 requested changes. Re-review is required after substantive test-spec revision.
 Test-spec-review R2 approved the revised active test spec with no material findings.
 Code-review M1 R1 requested changes. The requested implementation fix has been superseded by spec-review R2; architecture-review R2 and test-spec-review R3 approved the amended central-disclaimer boundary, and code-review M1 R2 closed M1.
-Code-review M2 R1 requested changes. Code-review M2 R2 found failed remediation. Review-resolution has been implemented; same-stage code-review R3 is required before M2 can close.
+Code-review M2 R1 requested changes. Code-review M2 R2 found failed remediation. Code-review M2 R3 approved the review-resolution and closed M2.
 
 ## Closeout Checklist
 
-- Final dispositions recorded for all material findings: yes, CR-FHP-M2-1 is resolved pending same-stage code-review R3.
+- Final dispositions recorded for all material findings: yes.
 - Same-stage re-review exists for changes-requested outcome: yes, `docs/changes/forward-head-posture-pattern-architecture/reviews/proposal-review-r2.md`.
 - Same-stage re-review exists for test-spec-review R1: yes, `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r2.md`.
 - `needs-decision` findings remain: no.
-- Review log has no open findings: no, CR-FHP-M2-1 still needs same-stage code-review R3 before it can close.
+- Review log has no open findings: yes.
