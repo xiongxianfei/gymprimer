@@ -37,7 +37,12 @@ def write_root_references(root: Path, readme_body: str = "") -> None:
         "[mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842\n",
         encoding="utf-8",
     )
-    (root / "RED-FLAGS.md").write_text("# Red Flags\n\nUse qualified care for emergencies.\n", encoding="utf-8")
+    (root / "RED-FLAGS.md").write_text(
+        "# Red Flags\n\n"
+        "> Disclaimer: GymPrimer is educational content. It is not medical advice and not personalized coaching.\n\n"
+        "Use qualified care for emergencies.\n",
+        encoding="utf-8",
+    )
 
 
 def exercise_page(image_markdown: str = "") -> str:

@@ -116,7 +116,7 @@ injury marks, and no before/after cure implication.
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M3
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review
@@ -124,14 +124,14 @@ injury marks, and no before/after cure implication.
   the central-disclaimer amendment; architecture-review R2 approved the
   central-disclaimer architecture; test-spec-review R3 approved the amended
   proof map; code-review M1 R2 closed M1; code-review M2 R3 closed
-  CR-FHP-M2-1; code-review M3 R2 closed CR-FHP-M3-1
+  CR-FHP-M2-1; code-review M3 R2 closed CR-FHP-M3-1; M4 implementation is pending code-review
 - Remaining in-scope implementation milestones: M4
-- Next stage: implement M4
+- Next stage: code-review M4
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: The central-disclaimer contract
   amendment is spec-approved, architecture-approved, proof-map-approved, and
-  M1-M3 are closed, but M4 remains open, and explain-change, verification, and
-  PR handoff remain downstream gates.
+  M1-M3 are closed, but M4 is pending code-review, and explain-change,
+  verification, and PR handoff remain downstream gates.
 
 ## Milestones
 
@@ -318,7 +318,7 @@ injury marks, and no before/after cure implication.
 
 ### M4. Lifecycle Closeout and Promotion Gate Evidence
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Close the implementation loop after content/code review by recording
   rationale, final verification, and PR handoff evidence without promoting the
   page prematurely.
@@ -492,6 +492,12 @@ injury marks, and no before/after cure implication.
 - 2026-06-30: Code-review M3 R2 closed CR-FHP-M3-1 with no material findings
   after FHP-RO1 source-family and contributor sampling passed for the revised
   core-reason section.
+- 2026-06-30: M4 added a focused README non-promotion assertion for
+  `patterns/forward-head-posture.md` and confirmed README contains no link to
+  the single forward-head pattern page.
+- 2026-06-30: M4 aligned a temporary repository-layout test fixture with the
+  current central `RED-FLAGS.md` disclaimer contract so the required full
+  unittest suite can pass.
 
 ## Decision log
 
@@ -505,6 +511,7 @@ injury marks, and no before/after cure implication.
 | 2026-06-30 | Centralize the prominent disclaimer in `RED-FLAGS.md` instead of page templates. | Repeating the same disclaimer on every page adds boilerplate and can drift; pages should route safety context to the canonical red-flags reference when needed. | Require every exercise, pattern, and principle page template to repeat the full disclaimer. |
 | 2026-06-30 | Use one generated raster comparison image for M3. | The approved slice allows one support-only image when provenance, purpose, path, and no embedded writing checks pass. | Add exercise thumbnails, make the page text-only despite the approved media slice, or add more than one pattern image. |
 | 2026-06-30 | Keep NICE and the 2024 posture-pattern review page-local on the pattern page. | They support this page's red-flag routing and uncertainty claims and are not yet reused across pages; AAOS and ACSM already have global source IDs. | Add one-off page sources to `SOURCES.md` prematurely. |
+| 2026-06-30 | Do not edit README for M4 promotion evidence. | R27 requires the forward-head page to remain unpromoted until the full pattern set is ready; the proof is an automated no-match check plus a focused unit assertion. | Add a README link to the single forward-head pattern page or add non-user-facing placeholder text to README. |
 
 ## Surprises and discoveries
 
@@ -541,6 +548,13 @@ injury marks, and no before/after cure implication.
   instruction support: NICE covers red-flag routing, the 2024 BMC/PMC review
   covers posture-pattern uncertainty, AAOS covers shoulder/scapular context,
   and ACSM covers general strength-training framing.
+- M4 full-suite validation exposed that `tests/test_repository_layout_normalization.py`
+  still generated a temporary `RED-FLAGS.md` without the centralized
+  disclaimer. The fixture was updated to match the current checker contract.
+- M4 leaves `docs/changes/forward-head-posture-pattern-architecture/explain-change.md`
+  and `verify-report.md` unchanged with rationale: the plan assigns durable
+  rationale and final verification to downstream `explain-change` and `verify`
+  stages after M4 code-review.
 
 ## Validation notes
 
@@ -665,6 +679,20 @@ injury marks, and no before/after cure implication.
   `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
   `python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md`,
   and `git diff --check`.
+- 2026-06-30: M4 focused promotion-gate proof passed with
+  `python3 -m unittest tests.test_responsible_breadth_m1.ResponsibleBreadthM3Test.test_forward_head_page_is_not_promoted_from_readme_before_pattern_set`
+  and `rg -n "patterns/forward-head-posture.md" README.md` returning no
+  matches.
+- 2026-06-30: M4 first full-suite validation run found a stale fixture:
+  `python3 -m unittest discover -s tests` failed because
+  `tests/test_repository_layout_normalization.py` wrote a temporary
+  `RED-FLAGS.md` without the current central disclaimer.
+- 2026-06-30: M4 validation passed with
+  `python3 -m unittest discover -s tests`,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`,
+  `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/forward-head-posture-pattern-architecture`,
+  `if rg -n "patterns/forward-head-posture.md" README.md; then exit 1; else echo 'README promotion gate passed: no forward-head pattern link'; fi`,
+  and `git diff --check`.
 
 ## Outcome and retrospective
 
@@ -674,5 +702,5 @@ injury marks, and no before/after cure implication.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M4 implementation. Readiness is not Done; M4,
+- Ready for M4 code-review. Readiness is not Done; M4 review,
   explain-change, verification, and PR handoff remain open.

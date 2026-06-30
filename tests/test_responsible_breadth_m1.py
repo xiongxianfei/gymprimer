@@ -924,6 +924,10 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
         self.assertIn("Final validation ledger and lifecycle sync", spec)
         self.assertIn("mdBook build or deferral", spec)
 
+    def test_forward_head_page_is_not_promoted_from_readme_before_pattern_set(self) -> None:
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertNotIn("patterns/forward-head-posture.md", readme)
+
     def test_m3_audit_evidence_contract_is_documented(self) -> None:
         text = (ROOT / "specs/responsible-breadth.test.md").read_text(encoding="utf-8")
         for expected in (

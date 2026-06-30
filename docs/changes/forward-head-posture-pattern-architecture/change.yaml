@@ -1,6 +1,6 @@
 change_id: forward-head-posture-pattern-architecture
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-06-30
 
 proposal: docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md
@@ -21,13 +21,13 @@ current_plan_review: docs/changes/forward-head-posture-pattern-architecture/revi
 plan_index: docs/plan.md
 
 current_milestone: M4
-current_milestone_state: planned
+current_milestone_state: review-requested
 last_reviewed_milestone: M3
 
 current_test_spec: specs/forward-head-posture-pattern-architecture.test.md
 current_test_spec_status: approved
 current_test_spec_review: docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r3.md
-next_stage: implement
+next_stage: code-review
 
 open_findings: []
 
@@ -58,6 +58,7 @@ notes:
   - Code-review M3 R1 requested changes for incomplete R8 contributor projection in the core-reason section; review-resolution is next.
   - Review-resolution for CR-FHP-M3-1 revised the core-reason contributor model to explicitly cover anterior neck/chest tone and posterior upper-back strength; M3 code-review R2 is next.
   - Code-review M3 R2 closed CR-FHP-M3-1 with no material findings; M4 implementation is next.
+  - M4 added a focused README non-promotion assertion, confirmed README has no forward-head pattern link, aligned a stale red-flags test fixture, and is ready for code-review.
 
 validation:
   - "python3 tools/checks/check_privacy.py docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md docs/changes/forward-head-posture-pattern-architecture docs/architecture/system/architecture.md specs/forward-head-posture-pattern-architecture.md docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md -- passed, checked 12 files"
@@ -166,3 +167,11 @@ validation:
   - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed during code-review M3 R2, 51 tests"
   - "python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md -- passed during code-review M3 R2, checked 53 files"
   - "git diff --check -- passed during code-review M3 R2"
+  - "python3 -m unittest tests.test_responsible_breadth_m1.ResponsibleBreadthM3Test.test_forward_head_page_is_not_promoted_from_readme_before_pattern_set -- passed"
+  - "rg -n \"patterns/forward-head-posture.md\" README.md -- passed with no matches"
+  - "python3 -m unittest discover -s tests -- failed before fixture alignment because tests/test_repository_layout_normalization.py temporary RED-FLAGS.md lacked the central disclaimer required by the checker"
+  - "python3 -m unittest discover -s tests -- passed, 88 tests"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed, checked 24 Markdown files"
+  - "python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/forward-head-posture-pattern-architecture -- passed, checked 60 files"
+  - "if rg -n \"patterns/forward-head-posture.md\" README.md; then exit 1; else echo 'README promotion gate passed: no forward-head pattern link'; fi -- passed"
+  - "git diff --check -- passed"
