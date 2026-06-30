@@ -1,7 +1,7 @@
 change_id: repository-layout-normalization
 proposal: docs/proposals/2026-06-29-responsible-breadth.md
-status: pr-needed
-current_stage: pr
+status: completed
+current_stage: done
 created_date: 2026-06-29
 notes:
   - Created after the architecture target shape identified five logical blocks and a future physical migration requirement.
@@ -38,6 +38,7 @@ notes:
   - Code-review M4 R3 closed M4 with no material findings and routed the change to final closeout.
   - Explain-change updated docs/changes/repository-layout-normalization/explain-change.md for the final reviewed implementation and routed the change to verify.
   - Final local verification passed and routed the change to PR handoff.
+  - PR #5 merged the change; lifecycle cleanup marked the plan complete.
 validation:
   - git diff --check -- passed
   - python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/adr/2026-06-29-direct-repository-layout-normalization.md specs/repository-layout-normalization.md docs/changes/repository-layout-normalization/change.yaml -- passed, checked 4 files

@@ -2,9 +2,9 @@
 
 ## Status
 
-- Status: active
-- Plan lifecycle state: active
-- Terminal disposition: not-applicable
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed-by PR #5
 
 ## Purpose / big picture
 
@@ -109,14 +109,14 @@ changes begin.
 ## Current Handoff Summary
 
 - Current milestone: lifecycle closeout
-- Current milestone state: follow-up verified
+- Current milestone state: completed
 - Last reviewed milestone: final holistic code-review
 - Review status: plan-review R1 approved; test-spec-review R1 blocked on
   TSR-RB-1, TSR-RB-1 was resolved by lifecycle/status normalization, and
   test-spec-review R2 approved the proof map
 - Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: branch-ready for PR handoff
+- Next stage: none
+- Final closeout readiness: completed
 - Reason final closeout is or is not ready: The execution plan is approved and
   the test spec is approved, M1 is closed after code-review M1 R1, M2 is
   closed after code-review M2 R1, M3 is closed after code-review M3 R1, M4 is
@@ -125,7 +125,8 @@ changes begin.
   `../changes/responsible-breadth/verify-report.md`. The later APT follow-up
   code-review R2 accepted the CR-APT-1 resolution with no material findings,
   explain-change is refreshed, and verify passed with fresh local evidence in
-  `../changes/apt-pattern-architecture/verify-report.md`. PR handoff is next.
+  `../changes/apt-pattern-architecture/verify-report.md`, and PR #5 merged the
+  change.
 
 ## Milestones
 
@@ -553,10 +554,10 @@ changes begin.
 
 ## Outcome and retrospective
 
-- Pending implementation and final verification.
+- Completed by PR #5 after the Responsible Breadth proof slice, APT follow-up,
+  review-resolution, explain-change, verification, and PR handoff.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Branch-ready for PR handoff based on local verification. Not PR-body-ready,
-  PR-open-ready, or Done until PR handoff completes.
+- Complete. No downstream lifecycle gate remains for this plan.

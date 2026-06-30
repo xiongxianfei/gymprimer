@@ -1,8 +1,8 @@
 ## Status
 
-- Status: active
-- Plan lifecycle state: active
-- Terminal disposition: not-terminal
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed-by PR #5
 
 ## Purpose / big picture
 
@@ -53,14 +53,14 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ## Current Handoff Summary
 
-- Current milestone: M4 media and historical-artifact cleanup
-- Current milestone state: closed
+- Current milestone: lifecycle closeout
+- Current milestone state: completed
 - Last reviewed milestone: M4 media and historical-artifact cleanup
 - Review status: code-review M4 R3 closed M4 with no material findings
 - Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: branch-ready for PR handoff
-- Reason final closeout is or is not ready: local final verification passed; PR handoff has not happened.
+- Next stage: none
+- Final closeout readiness: completed
+- Reason final closeout is or is not ready: local final verification passed and PR #5 merged the change.
 
 ## Milestones
 
@@ -394,9 +394,9 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ## Outcome and retrospective
 
-- Filled after completion.
+- Completed by PR #5 after final local verification and PR handoff.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M4 code-review.
+- Complete. No downstream lifecycle gate remains for this plan.

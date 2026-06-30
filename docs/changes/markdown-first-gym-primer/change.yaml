@@ -1,7 +1,7 @@
 change_id: markdown-first-gym-primer
-status: in-progress
-current_stage: pr
-next_stage: pr
+status: completed
+current_stage: done
+next_stage: none
 
 proposal: docs/proposals/2026-06-27-markdown-first-gym-primer.md
 proposal_status: accepted
@@ -19,7 +19,7 @@ current_media_adr: docs/adr/2026-06-28-ai-generated-raster-media-provenance.md
 current_media_adr_status: accepted
 
 current_plan: docs/plans/2026-06-27-markdown-first-gym-primer.md
-current_plan_status: active
+current_plan_status: completed
 current_plan_review: docs/changes/markdown-first-gym-primer/reviews/plan-review-r3.md
 plan_index: docs/plan.md
 

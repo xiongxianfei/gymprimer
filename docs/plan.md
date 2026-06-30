@@ -2,39 +2,7 @@
 
 ## Active
 
-- [Repository Layout Normalization](plans/2026-06-29-repository-layout-normalization.md)
-  - Status: active
-  - Plan lifecycle state: active
-  - Current milestone: M4 media and historical-artifact cleanup
-  - Current milestone state: closed
-  - Last reviewed milestone: M4 media and historical-artifact cleanup
-  - Next stage: pr
-  - Active context: M1-M4 are closed, explain-change is updated, and final local verification passed. Repository layout normalization is ready for PR handoff.
-
-- [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
-  - Status: active
-  - Plan lifecycle state: active
-  - Current milestone: lifecycle closeout
-  - Current milestone state: follow-up verified
-  - Last reviewed milestone: final holistic code-review
-  - Next stage: pr
-  - Active context: Proposal, spec, architecture, and ADR are approved. The
-    plan passed plan-review R1, the test spec passed test-spec-review R2, and
-    M1-M4 plus final holistic code-review are closed. The APT follow-up
-    amendment implemented RB-T21/RB-T22 proof. Code-review R2 accepted the
-    CR-APT-1 resolution with no material findings; explain-change is refreshed
-    and verify passed with fresh local evidence. PR handoff is next.
-
-- [Markdown-First Gym Primer](plans/2026-06-27-markdown-first-gym-primer.md)
-  - Status: active
-  - Plan lifecycle state: active
-  - Current milestone: M4
-  - Current milestone state: closed
-  - Last reviewed milestone: M4
-  - Next stage: pr
-  - Active context: M3 is closed after code-review M3 R3 resolved CR-M3-1.
-    M4 is closed after code-review M4 R1. All implementation milestones are
-    closed; explain-change and verify are recorded; PR handoff remains.
+- None.
 
 ## Blocked
 
@@ -49,7 +17,23 @@
 
 ## Done (recent)
 
-- None.
+- [Repository Layout Normalization](plans/2026-06-29-repository-layout-normalization.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #5
+  - Active context: M1-M4, explain-change, verification, and PR handoff are complete.
+
+- [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #5
+  - Active context: M1-M4, the APT follow-up, review-resolution, explain-change, verification, and PR handoff are complete.
+
+- [Markdown-First Gym Primer](plans/2026-06-27-markdown-first-gym-primer.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #5
+  - Active context: M1-M4, explain-change, verification, and PR handoff are complete.
 
 ## Notes
 

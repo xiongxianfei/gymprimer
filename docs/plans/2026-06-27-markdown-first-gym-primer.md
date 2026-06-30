@@ -2,9 +2,9 @@
 
 ## Status
 
-- Status: active
-- Plan lifecycle state: active
-- Terminal disposition: not-applicable
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed-by PR #5
 
 ## Purpose / big picture
 
@@ -96,26 +96,26 @@ checks executable.
 
 ## Current Handoff Summary
 
-- Current plan state: branch-ready for PR handoff after local final verification.
-- Current milestone: M4. Optional mdBook and Final Local Quality Gate.
-- Current milestone state: closed.
+- Current plan state: completed by PR #5.
+- Current milestone: lifecycle closeout.
+- Current milestone state: completed.
 - Last reviewed milestone: M4
 - Review status: code-review-m4-r1 clean-with-notes; no review-resolution required
 - Remaining in-scope implementation milestones: none
-- Next stage: pr.
-- Final closeout readiness: branch-ready
+- Next stage: none.
+- Final closeout readiness: completed
 - Reason final closeout is or is not ready: M1-M2 are closed and the M3 draft
   pages pass local checks, and the media provenance architecture/ADR are
   normalized after clean architecture-review R3. M3A is closed after clean
   code-review. CR-M3-1 has been resolved by code-review M3 R3, and M3 is
   closed. M4 deferred mdBook because the binary is unavailable, recorded the
   final local quality gate, and passed clean code-review R1. The implementation
-  milestones are closed. Explain-change and verify are recorded; PR handoff
-  remains.
+  milestones are closed. Explain-change and verify are recorded, and PR #5
+  merged the change.
 
 Implementation sequence:
 
-1. PR handoff - prepare the branch for human review after verification.
+1. Complete - PR #5 merged the reviewed and verified branch.
 
 ## Milestones
 
@@ -563,11 +563,11 @@ Implementation sequence:
 - `docs/project-map.md` is stale and still describes the pre-implementation/pre-pivot repository. It should not be used as active Markdown-first architecture evidence.
 - `docs/plan.md` still listed the old content-schema plan as active before this plan-stage update.
 - The active README still advertised generated public JSON and old validator commands before M1; M1 replaced those with Markdown-first navigation and validation guidance.
-- The first privacy pattern treated the word `secrets` in policy guidance as a finding; M2 narrowed the privacy scan to concrete private paths, secret assignments/keys, PHI assignments, and personal health profiles so repository guidance can be scanned without false positives.
+- The first privacy pattern treated credential-policy wording in guidance as a finding; M2 narrowed the privacy scan to concrete local path forms, credential assignments/keys, PHI assignments, and profile-like learner data so repository guidance can be scanned without false positives.
 - The M3A privacy scan found an existing review phrase, `local private paths`,
   that matched the broad `private[-_ ]?path` pattern even though it was policy
-  language rather than a leaked path. The scan was narrowed to concrete private
-  path forms while preserving `/home/...` and secret/PHI detection.
+  language rather than a leaked path. The scan was narrowed to concrete local
+  path forms while preserving home-directory path and credential/PHI detection.
 
 ## Validation notes
 
@@ -634,12 +634,10 @@ Implementation sequence:
 
 ## Outcome and retrospective
 
-- Pending until all implementation milestones and downstream review/verification gates complete.
+- Completed by PR #5 after implementation milestones, review, explain-change,
+  verification, and PR handoff.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M3A is closed.
-- All implementation milestones are closed. Ready for explain-change. Not ready
-  for final verification, branch handoff, or PR until explain-change and
-  downstream verification complete.
+- Complete. No downstream lifecycle gate remains for this plan.

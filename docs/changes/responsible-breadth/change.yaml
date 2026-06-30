@@ -1,7 +1,7 @@
 change_id: responsible-breadth
 proposal: docs/proposals/2026-06-29-responsible-breadth.md
-status: verified
-current_stage: pr
+status: completed
+current_stage: done
 created_date: 2026-06-29
 autoprogression:
   profile: implementation-through-verify
@@ -43,3 +43,4 @@ notes:
   - Explain-change refreshed the durable rationale for the final reviewed diff; verify is next.
   - Verify passed with fresh local validation evidence in docs/changes/responsible-breadth/verify-report.md; PR is next and requires separate authorization.
   - PR feedback on the anterior-pelvic-tilt page was addressed by expanding the page, adding an original SVG alignment visual, strengthening sources, and rerunning local validation.
+  - PR #5 merged the Responsible Breadth proof slice and APT follow-up; lifecycle cleanup marked the plan complete.
