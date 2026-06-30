@@ -12,7 +12,7 @@ Safety routing: see [RED-FLAGS.md](../RED-FLAGS.md) for symptoms or professional
 
 ## What this exercise is for
 
-Prone Y/T is a light shoulder-blade control exercise. It helps beginners notice how the shoulder blades move during arm lifting without turning that observation into a medical claim. Shoulder education sources describe shoulder motion and rotator-cuff strengthening as part of professional management, but this page stays general and non-personalized. [AAOS][aaos-shoulder-impingement-rotator-cuff-tendinitis]
+Prone Y/T is a light shoulder-blade control exercise. It helps beginners notice how the shoulder blades move during arm lifting without turning that observation into a medical claim. EMG literature on trapezius and serratus anterior exercises supports using prone arm-raise variations as shoulder-blade muscle-control examples. [Source][local-prone-y-t-trapezius-emg]
 
 ## Equipment setup
 
@@ -20,17 +20,17 @@ Use the floor, a firm mat, or a bench. Start without weights. Keep the forehead 
 
 ## Muscles involved
 
-Primary: lower trapezius, middle trapezius, posterior shoulder muscles, and rotator-cuff support muscles. Secondary: upper-back and trunk muscles that help keep the torso quiet. [AAOS][aaos-shoulder-impingement-rotator-cuff-tendinitis]
+Primary: lower and middle trapezius emphasis during prone arm-raise variations. Secondary: nearby shoulder and trunk control that helps keep the torso quiet. [Source][local-prone-y-t-trapezius-emg]
 
 ## Movement breakdown
 
 ### 1. Set up
 
-Lie face down with arms in a Y shape or T shape and thumbs pointing upward if comfortable.
+Lie face down with arms in a Y shape or T shape and thumbs pointing upward if comfortable. [Source][local-prone-y-t-trapezius-emg]
 
 ### 2. Move
 
-Lift the arms slightly by moving from the shoulder blades and back of the shoulders.
+Lift the arms slightly by moving from the shoulder blades and back of the shoulders. [Source][local-prone-y-t-trapezius-emg]
 
 ### 3. Pause
 
@@ -42,7 +42,7 @@ Lower the arms slowly to the floor or bench.
 
 ## What you should feel
 
-You should feel light work between the shoulder blades and at the back of the shoulders. If the neck or low back becomes the main effort, reduce the range. [ACE][ace-exercise-library]
+You may feel light work between the shoulder blades and at the back of the shoulders. If the neck or low back becomes the main effort, reduce the range. [Source][local-prone-y-t-trapezius-emg]
 
 ## Common mistakes
 
@@ -67,12 +67,12 @@ Stop for sharp, worsening, unusual, or unsafe symptoms. This page cannot tell wh
 
 - [AAOS - Shoulder impingement and rotator cuff tendinitis][aaos-shoulder-impingement-rotator-cuff-tendinitis]
 - [Mayo Clinic - Weight training technique guidance][mayo-weight-training]
-- [ACE - Exercise library][ace-exercise-library]
+- [PubMed - EMG analysis of trapezius and serratus anterior exercises][local-prone-y-t-trapezius-emg]
 - [ACSM - Resistance training guidance][acsm-resistance-training]
 - [NHS - Neck pain and stiff neck][nhs-neck-pain]
 
 [aaos-shoulder-impingement-rotator-cuff-tendinitis]: https://orthoinfo.aaos.org/en/diseases--conditions/shoulder-impingementrotator-cuff-tendinitis/
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
-[ace-exercise-library]: https://www.acefitness.org/resources/everyone/exercise-library/
+[local-prone-y-t-trapezius-emg]: https://pubmed.ncbi.nlm.nih.gov/12774999/
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
 [nhs-neck-pain]: https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/

@@ -12,25 +12,25 @@ Safety routing: see [RED-FLAGS.md](../RED-FLAGS.md) for symptoms or professional
 
 ## What this exercise is for
 
-The wall slide is a shoulder-blade and overhead-reaching awareness drill. It helps beginners practice reaching while keeping the ribs, neck, and shoulder blades organized. Shoulder education sources commonly discuss restoring comfortable motion and then strengthening the shoulder region, but this page is only general exercise literacy. [AAOS][aaos-shoulder-impingement-rotator-cuff-tendinitis]
+The wall slide is a shoulder-blade and overhead-reaching awareness drill. It helps beginners practice reaching while keeping the ribs, neck, and shoulder blades organized. Research comparing wall-slide variations reports serratus anterior activity during the exercise, but this page uses that only as general exercise-literacy context. [Source][local-wall-slide-serratus]
 
 ## Equipment setup
 
-Use a clear wall. Stand with the feet a short step away, ribs quiet, and the back of the head near the wall if that position is comfortable. Start with light contact rather than forcing every body part flat. [Mayo Clinic][mayo-posture-body-alignment]
+Use a clear wall. Stand with the feet a short step away, ribs quiet, and the back of the head near the wall if that position is comfortable. Start with light contact rather than forcing every body part flat. [Source][local-wall-slide-serratus]
 
 ## Muscles involved
 
-Primary: lower trapezius, serratus anterior, and rotator-cuff support muscles. Secondary: upper-back muscles and trunk muscles that help keep the ribs from flaring. [AAOS][aaos-shoulder-impingement-rotator-cuff-tendinitis]
+Primary: serratus anterior and other shoulder-blade support muscles used during controlled wall-slide reaching. Secondary: trunk control that helps keep the ribs from flaring. [Source][local-wall-slide-serratus]
 
 ## Movement breakdown
 
 ### 1. Set up
 
-Place forearms or the backs of the hands near the wall with elbows bent.
+Place forearms or the backs of the hands near the wall with elbows bent. [Source][local-wall-slide-serratus]
 
 ### 2. Move
 
-Slide the arms upward only as far as the shoulders, ribs, and neck stay controlled.
+Slide the arms upward only as far as the shoulders, ribs, and neck stay controlled. [Source][local-wall-slide-serratus]
 
 ### 3. Pause
 
@@ -42,7 +42,7 @@ Slide back down slowly without shrugging or arching the low back.
 
 ## What you should feel
 
-You should feel shoulder-blade and upper-back effort with a light stretch across the front of the chest or shoulders. The neck should not do the work. [ACE][ace-exercise-library]
+You may feel shoulder-blade and upper-back effort with a light stretch across the front of the chest or shoulders. The neck should not do the work. [Source][local-wall-slide-serratus]
 
 ## Common mistakes
 
@@ -66,13 +66,11 @@ Stop the set for sharp, worsening, unusual, or unsafe symptoms. If shoulder or n
 ## Sources
 
 - [AAOS - Shoulder impingement and rotator cuff tendinitis][aaos-shoulder-impingement-rotator-cuff-tendinitis]
-- [Mayo Clinic - Posture and body alignment Q&A][mayo-posture-body-alignment]
-- [ACE - Exercise library][ace-exercise-library]
+- [PubMed - Serratus anterior activity during wall-slide exercise][local-wall-slide-serratus]
 - [ACSM - Resistance training guidance][acsm-resistance-training]
 - [NHS - Neck pain and stiff neck][nhs-neck-pain]
 
 [aaos-shoulder-impingement-rotator-cuff-tendinitis]: https://orthoinfo.aaos.org/en/diseases--conditions/shoulder-impingementrotator-cuff-tendinitis/
-[mayo-posture-body-alignment]: https://newsnetwork.mayoclinic.org/discussion/mayo-clinic-q-and-a-proper-posture-and-body-alignment/
-[ace-exercise-library]: https://www.acefitness.org/resources/everyone/exercise-library/
+[local-wall-slide-serratus]: https://pubmed.ncbi.nlm.nih.gov/17193867/
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
 [nhs-neck-pain]: https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/

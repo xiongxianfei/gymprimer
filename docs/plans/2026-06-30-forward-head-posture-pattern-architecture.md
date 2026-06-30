@@ -125,12 +125,13 @@ injury marks, and no before/after cure implication.
   central-disclaimer architecture; test-spec-review R3 approved the amended
   proof map; code-review M1 R2 closed M1
 - Remaining in-scope implementation milestones: M2 review, M3, M4
-- Next stage: code-review M2
+- Next stage: code-review M2 re-review
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: The central-disclaimer contract
   amendment is spec-approved, architecture-approved, proof-map-approved, and
-  M1 is closed and M2 implementation is review-requested, but M2 review,
-  M3-M4, explain-change, verification, and PR handoff remain downstream gates.
+  M1 is closed, but M2 source-support review-resolution still needs
+  code-review re-review, M3-M4 remain open, and explain-change, verification,
+  and PR handoff remain downstream gates.
 
 ## Milestones
 
@@ -237,8 +238,8 @@ injury marks, and no before/after cure implication.
   - progress updated
   - decision log unchanged
   - validation notes updated
-  - milestone commit pending until handoff commit is created
-  - code-review pending
+  - milestone commit pending until review-resolution handoff commit is created
+  - code-review found CR-FHP-M2-1; review-resolution implemented and code-review re-review pending
 - Risks:
   - Exercise pages can accidentally inherit unsupported clinical claims from
     pattern sources.
@@ -452,6 +453,14 @@ injury marks, and no before/after cure implication.
 - 2026-06-30: M2 added a real-page Responsible Breadth assertion that fails
   until all five forward-head exercise pages exist and pass the exercise-page
   contract.
+- 2026-06-30: Code-review M2 R1 requested changes for direct page-local
+  source support on sampled exercise-specific setup, technique, muscle,
+  feel-cue, common-mistake, and safety claims.
+- 2026-06-30: Review-resolution for CR-FHP-M2-1 replaced broad exercise-specific
+  source uses with direct page-local support or softened claims on the five
+  M2 exercise pages, removed the no-longer-reused ACE exercise-library entry
+  from `SOURCES.md`, and added FHP-RO2 evidence in
+  `docs/changes/forward-head-posture-pattern-architecture/review-resolution.md`.
 
 ## Decision log
 
@@ -480,13 +489,16 @@ injury marks, and no before/after cure implication.
   Markdown-first v0.1 contract. Responsible Breadth already treats per-card
   disclaimer scaffolding as a non-goal, so the repository now centralizes the
   disclaimer in `RED-FLAGS.md`.
-- M2 uses the existing exercise-card contract but follows the expanded
-  forward-head checker headings (`Purpose`, `Used muscles`, `Equipment and
-  setup`, `Movement phases`, and related sections), because that is the active
-  validation surface for the five same-slice pages.
+- M2 uses the expanded forward-head exercise contract headings (`What this
+  exercise is for`, `Equipment setup`, `Muscles involved`, `Movement
+  breakdown`, and related sections), because that is the active validation
+  surface for the five same-slice pages.
 - M2 source IDs were added to `SOURCES.md` only when reused across more than
   one exercise page; each exercise page still carries page-local reference
   definitions.
+- M2 review-resolution keeps direct exercise-specific sources page-local when
+  they are used by only one page, which avoids promoting one-off exercise
+  sources into the reusable global source index.
 
 ## Validation notes
 
@@ -541,6 +553,16 @@ injury marks, and no before/after cure implication.
   `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`,
   `python3 tools/checks/check_privacy.py exercises docs/changes/forward-head-posture-pattern-architecture SOURCES.md`,
   and `git diff --check`.
+- 2026-06-30: Code-review M2 R1 artifact validation passed with
+  `python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  `rg -n "CR-M2-R1|CR-FHP-M2-1|code-review-m2-r1|current_stage: review-resolution|current_milestone_state: resolution-needed|next_stage: review-resolution|Ready for M2 review-resolution|Closeout status: open" docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  and `git diff --check`.
+- 2026-06-30: CR-FHP-M2-1 review-resolution validation passed with
+  `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises`,
+  `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`,
+  `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
+  `python3 tools/checks/check_privacy.py exercises docs/changes/forward-head-posture-pattern-architecture SOURCES.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  and `git diff --check`.
 
 ## Outcome and retrospective
 
@@ -550,5 +572,6 @@ injury marks, and no before/after cure implication.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M2 code-review. Readiness is not Done; M2 review, M3-M4,
-  explain-change, verification, and PR handoff remain open.
+- Ready for M2 code-review re-review after final review-resolution validation.
+  Readiness is not Done; M2 re-review, M3-M4, explain-change, verification,
+  and PR handoff remain open.

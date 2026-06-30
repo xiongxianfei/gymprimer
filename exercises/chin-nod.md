@@ -12,7 +12,7 @@ Safety routing: see [RED-FLAGS.md](../RED-FLAGS.md) for symptoms or professional
 
 ## What this exercise is for
 
-The chin nod is a low-load neck-control drill. It helps a beginner practice a small head-and-neck motion without turning it into a posture-correction promise. General neck-pain guidance treats exercise advice as general education and routes concerning symptoms to professional care. [NHS][nhs-neck-pain]
+The chin nod is a low-load neck-control drill. It helps a beginner practice a small head-and-neck motion without turning it into a posture-correction promise. Deep cervical flexor training research uses small craniocervical flexion work as a low-load neck-control exercise context. [Source][local-chin-nod-deep-cervical-flexor]
 
 ## Equipment setup
 
@@ -20,17 +20,17 @@ Use the floor, a firm mat, or a wall. Keep the setup easy enough that the head c
 
 ## Muscles involved
 
-Primary: deep neck flexors at the front of the neck. Secondary: small neck stabilizers and upper-back posture support muscles. Treat this as a beginner orientation cue, not a diagnostic anatomy test. [ACE][ace-exercise-library]
+Primary: deep cervical flexors at the front of the neck. Secondary: nearby neck-control muscles that help keep the motion small. Treat this as a beginner orientation cue, not a diagnostic anatomy test. [Source][local-chin-nod-deep-cervical-flexor]
 
 ## Movement breakdown
 
 ### 1. Set up
 
-Lie on the back or stand against a wall with the eyes looking forward and the jaw relaxed.
+Lie on the back or stand against a wall with the eyes looking forward and the jaw relaxed. [Source][local-chin-nod-deep-cervical-flexor]
 
 ### 2. Move
 
-Gently nod as if saying "yes" with a very small range. Think of making the back of the neck long rather than pushing the head hard into the floor or wall.
+Gently nod as if saying "yes" with a very small range. Think of making the back of the neck long rather than pushing the head hard into the floor or wall. [Source][local-chin-nod-deep-cervical-flexor]
 
 ### 3. Pause
 
@@ -42,7 +42,7 @@ Return to the starting position slowly. Keep the shoulders quiet instead of shru
 
 ## What you should feel
 
-You may feel light effort at the front of the neck and a quieter position through the back of the neck. You should not need jaw tension or a hard push to make the movement happen. [NHS][nhs-neck-pain]
+You may feel light effort at the front of the neck. You should not need jaw tension or a hard push to make the movement happen. [Source][local-chin-nod-deep-cervical-flexor]
 
 ## Common mistakes
 
@@ -67,10 +67,10 @@ Stop the set if the movement feels sharp, worsening, unusual, or unsafe. Use the
 
 - [NHS - Neck pain and stiff neck][nhs-neck-pain]
 - [Mayo Clinic - Weight training technique guidance][mayo-weight-training]
-- [ACE - Exercise library][ace-exercise-library]
+- [Deep cervical flexor training with a pressure biofeedback unit][local-chin-nod-deep-cervical-flexor]
 - [ACSM - Resistance training guidance][acsm-resistance-training]
 
 [nhs-neck-pain]: https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
-[ace-exercise-library]: https://www.acefitness.org/resources/everyone/exercise-library/
+[local-chin-nod-deep-cervical-flexor]: https://pmc.ncbi.nlm.nih.gov/articles/PMC4668167/
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/

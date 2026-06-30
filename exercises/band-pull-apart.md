@@ -12,25 +12,25 @@ Safety routing: see [RED-FLAGS.md](../RED-FLAGS.md) for symptoms or professional
 
 ## What this exercise is for
 
-The band pull-apart is a light upper-back and shoulder-blade exercise. It helps beginners practice pulling the hands apart while keeping the neck and ribs quiet. General resistance-training guidance supports controlled repetitions and consistency over complex programming. [ACSM][acsm-resistance-training]
+The band pull-apart is a light upper-back and shoulder-blade exercise. It helps beginners practice pulling the hands apart while keeping the neck and ribs quiet. A study of band pull-apart variations supports treating this as a defined elastic-band shoulder exercise, while this page keeps it general and non-prescriptive. [Source][local-band-pull-apart-study]
 
 ## Equipment setup
 
-Use a light loop band or long resistance band. Hold it at about chest height with straight or slightly bent elbows. Start with enough slack that the movement can be smooth instead of forced. [ACE][ace-exercise-library]
+Use a light loop band or long resistance band. Hold it at about chest height with straight or slightly bent elbows. Start with enough slack that the movement can be smooth instead of forced. [Source][local-band-pull-apart-study]
 
 ## Muscles involved
 
-Primary: rear shoulder muscles, middle trapezius, rhomboids, and rotator-cuff support muscles. Secondary: trunk muscles that help keep the ribs from flaring during the pull. [AAOS][aaos-shoulder-impingement-rotator-cuff-tendinitis]
+Primary: posterior shoulder and upper-back muscles used during band pull-apart variations. Secondary: trunk control that helps keep the ribs from flaring during the pull. [Source][local-band-pull-apart-study]
 
 ## Movement breakdown
 
 ### 1. Set up
 
-Stand tall with the band held in both hands at chest height.
+Stand tall with the band held in both hands at chest height. [Source][local-band-pull-apart-study]
 
 ### 2. Move
 
-Pull the hands apart until the shoulder blades move gently toward each other.
+Pull the hands apart until the shoulder blades move gently toward each other. [Source][local-band-pull-apart-study]
 
 ### 3. Pause
 
@@ -42,7 +42,7 @@ Let the band come back under control instead of snapping the hands together.
 
 ## What you should feel
 
-You should feel light work across the upper back and back of the shoulders. The hands, neck, and low back should not be the main drivers of the movement. [Mayo Clinic][mayo-weight-training]
+You may feel light work across the upper back and back of the shoulders. The hands, neck, and low back should not be the main drivers of the movement. [Source][local-band-pull-apart-study]
 
 ## Common mistakes
 
@@ -66,13 +66,13 @@ Stop for sharp, worsening, unusual, or unsafe symptoms. A static exercise page c
 ## Sources
 
 - [ACSM - Resistance training guidance][acsm-resistance-training]
-- [ACE - Exercise library][ace-exercise-library]
+- [Band Pull-Apart Exercise: Effects of Movement Direction and Hand Position on Shoulder Muscle Activity][local-band-pull-apart-study]
 - [AAOS - Shoulder impingement and rotator cuff tendinitis][aaos-shoulder-impingement-rotator-cuff-tendinitis]
 - [Mayo Clinic - Weight training technique guidance][mayo-weight-training]
 - [NHS - Neck pain and stiff neck][nhs-neck-pain]
 
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
-[ace-exercise-library]: https://www.acefitness.org/resources/everyone/exercise-library/
+[local-band-pull-apart-study]: https://pmc.ncbi.nlm.nih.gov/articles/PMC8975561/
 [aaos-shoulder-impingement-rotator-cuff-tendinitis]: https://orthoinfo.aaos.org/en/diseases--conditions/shoulder-impingementrotator-cuff-tendinitis/
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [nhs-neck-pain]: https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/

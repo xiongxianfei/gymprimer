@@ -23,7 +23,6 @@ Rules:
 - [Mayo Clinic posture and body alignment Q&A][mayo-posture-body-alignment]
 - [NHS neck pain patient guidance][nhs-neck-pain]
 - [AAOS shoulder impingement and rotator cuff tendinitis][aaos-shoulder-impingement-rotator-cuff-tendinitis]
-- [ACE exercise library][ace-exercise-library]
 - [PubMed: Lederman 2011 postural-structural-biomechanical model][pubmed-lederman-psb-model]
 - [PubMed: Herrington 2011 pelvic tilt in asymptomatic population][pubmed-herrington-pelvic-tilt]
 - [MedlinePlus acute low back pain][medlineplus-low-back-pain-acute]
@@ -44,7 +43,6 @@ Each page still needs its own matching reference definition so the page renders 
 [mayo-posture-body-alignment]: https://newsnetwork.mayoclinic.org/discussion/mayo-clinic-q-and-a-proper-posture-and-body-alignment/
 [nhs-neck-pain]: https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/
 [aaos-shoulder-impingement-rotator-cuff-tendinitis]: https://orthoinfo.aaos.org/en/diseases--conditions/shoulder-impingementrotator-cuff-tendinitis/
-[ace-exercise-library]: https://www.acefitness.org/resources/everyone/exercise-library/
 [pubmed-lederman-psb-model]: https://pubmed.ncbi.nlm.nih.gov/21419349/
 [pubmed-herrington-pelvic-tilt]: https://pubmed.ncbi.nlm.nih.gov/21658988/
 [medlineplus-low-back-pain-acute]: https://medlineplus.gov/ency/article/007425.htm
