@@ -12,3 +12,4 @@
 | 2026-06-29 | code-review M1 R1 | `docs/changes/repository-layout-normalization/reviews/code-review-m1-r1.md` | clean-with-notes | none | implement M2 |
 | 2026-06-29 | code-review M2 R1 | `docs/changes/repository-layout-normalization/reviews/code-review-m2-r1.md` | clean-with-notes | none | implement M3 |
 | 2026-06-30 | code-review M3 R1 | `docs/changes/repository-layout-normalization/reviews/code-review-m3-r1.md` | changes-requested | CR-RLN-M3-1 | review-resolution |
+| 2026-06-30 | code-review M3 R2 | `docs/changes/repository-layout-normalization/reviews/code-review-m3-r2.md` | clean-with-notes | none | implement M4 |
