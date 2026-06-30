@@ -116,7 +116,7 @@ injury marks, and no before/after cure implication.
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review
@@ -124,14 +124,15 @@ injury marks, and no before/after cure implication.
   the central-disclaimer amendment; architecture-review R2 approved the
   central-disclaimer architecture; test-spec-review R3 approved the amended
   proof map; code-review M1 R2 closed M1; code-review M2 R3 closed
-  CR-FHP-M2-1
+  CR-FHP-M2-1; M3 implementation is pending code-review
 - Remaining in-scope implementation milestones: M3, M4
-- Next stage: implement M3
+- Next stage: code-review M3
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: The central-disclaimer contract
-  amendment is spec-approved, architecture-approved, proof-map-approved, and
-  M1 and M2 are closed, but M3-M4 remain open, and explain-change,
-  verification, and PR handoff remain downstream gates.
+  amendment is spec-approved, architecture-approved, proof-map-approved, M1
+  and M2 are closed, and M3 is implemented pending code-review, but M4 remains
+  open, and explain-change, verification, and PR handoff remain downstream
+  gates.
 
 ## Milestones
 
@@ -255,7 +256,7 @@ injury marks, and no before/after cure implication.
 
 ### M3. Forward Head Posture Pattern Page and Optional Media
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Create `patterns/forward-head-posture.md` with the approved pattern
   architecture and optional support image/provenance.
 - Requirements: R1-R14, R18-R30, R32, AC2-AC7, AC10-AC17
@@ -475,6 +476,13 @@ injury marks, and no before/after cure implication.
 - 2026-06-30: Code-review M2 R3 closed CR-FHP-M2-1 with no material findings
   after sampling direct exercise-instruction and muscle/activity source
   support separately.
+- 2026-06-30: M3 added `patterns/forward-head-posture.md`, one generated
+  raster comparison image at
+  `media/patterns/forward-head-posture/forward-head-posture-comparison.png`,
+  the matching `media/PROVENANCE.md` row, and a focused real-page Responsible
+  Breadth assertion.
+- 2026-06-30: M3 keeps the pattern page unpromoted from README; M4 still owns
+  README promotion-gate evidence and lifecycle closeout.
 
 ## Decision log
 
@@ -486,6 +494,8 @@ injury marks, and no before/after cure implication.
 | 2026-06-30 | Leave README promotion to lifecycle evidence, not content implementation. | The approved spec gates README promotion on the full pattern set, not this single page. | Promote the forward-head page immediately after local validation. |
 | 2026-06-30 | Scope the M1 exercise-page contract to the five forward-head exercise paths. | Current exercise pages outside this slice use older headings, while the approved proof-map requires the complete-loop contract for the five selected forward-head pages. | Apply the new exercise-page heading contract globally in M1. |
 | 2026-06-30 | Centralize the prominent disclaimer in `RED-FLAGS.md` instead of page templates. | Repeating the same disclaimer on every page adds boilerplate and can drift; pages should route safety context to the canonical red-flags reference when needed. | Require every exercise, pattern, and principle page template to repeat the full disclaimer. |
+| 2026-06-30 | Use one generated raster comparison image for M3. | The approved slice allows one support-only image when provenance, purpose, path, and no embedded writing checks pass. | Add exercise thumbnails, make the page text-only despite the approved media slice, or add more than one pattern image. |
+| 2026-06-30 | Keep NICE and the 2024 posture-pattern review page-local on the pattern page. | They support this page's red-flag routing and uncertainty claims and are not yet reused across pages; AAOS and ACSM already have global source IDs. | Add one-off page sources to `SOURCES.md` prematurely. |
 
 ## Surprises and discoveries
 
@@ -516,6 +526,12 @@ injury marks, and no before/after cure implication.
 - M2 R3 review-resolution separates source roles explicitly: direct
   exercise-instruction sources carry setup, movement, feel, and common-mistake
   wording, while PubMed/PMC research sources carry muscle/activity context.
+- M3 needed a focused real-page assertion because existing forward-head tests
+  covered fixtures and the real exercise pages but not the actual pattern page.
+- M3 source support separates pattern claim families from exercise
+  instruction support: NICE covers red-flag routing, the 2024 BMC/PMC review
+  covers posture-pattern uncertainty, AAOS covers shoulder/scapular context,
+  and ACSM covers general strength-training framing.
 
 ## Validation notes
 
@@ -606,6 +622,17 @@ injury marks, and no before/after cure implication.
   `python3 tools/checks/check_privacy.py docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
   `rg -n "CR-M2-R3|code-review-m2-r3|current_stage: implement|current_milestone: M3|current_milestone_state: planned|last_reviewed_milestone: M2|open_findings: \\[\\]|Closeout status: closed|Ready for M3 implementation|M2 are closed|M3 implementation is next" docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
   and `git diff --check`.
+- 2026-06-30: M3 tests-first proof ran
+  `python3 -m unittest tests.test_responsible_breadth_m1.ResponsibleBreadthM1Test.test_forward_head_real_pattern_page_passes_contract`
+  before adding the pattern page and failed with the expected missing
+  `patterns/forward-head-posture.md`.
+- 2026-06-30: M3 validation passed with
+  `python3 -m unittest tests.test_responsible_breadth_m1.ResponsibleBreadthM1Test.test_forward_head_real_pattern_page_passes_contract`,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns exercises media/PROVENANCE.md`,
+  `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`,
+  `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
+  `python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md`,
+  and `git diff --check`.
 
 ## Outcome and retrospective
 
@@ -615,5 +642,5 @@ injury marks, and no before/after cure implication.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M3 implementation. Readiness is not Done; M3-M4, explain-change,
-  verification, and PR handoff remain open.
+- Ready for M3 code-review. Readiness is not Done; M3 review, M4,
+  explain-change, verification, and PR handoff remain open.

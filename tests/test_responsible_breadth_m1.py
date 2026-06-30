@@ -566,6 +566,13 @@ class ResponsibleBreadthM1Test(unittest.TestCase):
         self.assertIn("missing exercise page", result.stdout)
         self.assertIn("../exercises/wall-slide.md", result.stdout)
 
+    def test_forward_head_real_pattern_page_passes_contract(self) -> None:
+        page = ROOT / "patterns/forward-head-posture.md"
+        self.assertTrue(page.exists(), "patterns/forward-head-posture.md is required for M3")
+
+        result = run_check_with_root(ROOT, ROOT / "SOURCES.md", ROOT / "RED-FLAGS.md", page)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_forward_head_exercise_pages_require_exercise_contract_sections(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

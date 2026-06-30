@@ -5,8 +5,8 @@
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: implement
-  - Active context: code-review M2 R3 closed CR-FHP-M2-1; M3 forward-head pattern page and optional media implementation is next.
+  - Current stage: code-review
+  - Active context: M3 added the forward-head pattern page, one generated raster comparison image with provenance, and real-page validation; code-review M3 is next.
 
 ## Blocked
 
