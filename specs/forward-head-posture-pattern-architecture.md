@@ -154,9 +154,10 @@ R15. The slice MUST create the same-slice exercise pages
 `exercises/band-pull-apart.md`.
 
 R16. Each same-slice exercise page MUST follow the exercise-page contract from
-`docs/templates/exercise-card.md`: disclaimer, purpose, setup, muscles
-involved, movement breakdown, feel cues, common mistakes, easier version,
-harder version, safety notes, and sources.
+`docs/templates/exercise-card.md`: purpose, setup, muscles involved, movement
+breakdown, feel cues, common mistakes, easier version, harder version, safety
+notes, sources, and safety routing to `../RED-FLAGS.md` when the page mentions
+pain, symptoms, or professional care.
 
 R17. Exercise setup, technique, muscle, feel-cue, common-mistake, and safety
 claims on the five same-slice exercise pages MUST have page-local source
@@ -459,9 +460,12 @@ is defined here.
 
 - Architecture review:
   `docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r1.md`
+- 2026-06-30 central-disclaimer amendment: per-page exercise disclaimers were
+  removed from this proof-slice contract after owner clarification that
+  `RED-FLAGS.md` owns the central disclaimer.
 
 ## Readiness
 
-Ready for plan. The proposal, spec review, architecture amendment, and
-architecture review are approved. Implementation remains blocked until plan,
-plan-review, test-spec, and test-spec-review complete.
+Ready for spec-review of the central-disclaimer amendment. The prior approved
+plan and implementation evidence must not rely on this amendment until
+spec-review closes.

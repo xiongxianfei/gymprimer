@@ -15,15 +15,21 @@ def headings(relative_path: str) -> set[str]:
 
 
 class MarkdownFirstTemplateTest(unittest.TestCase):
+    def test_templates_use_central_red_flags_and_avoid_disclaimer_scaffolding(self) -> None:
+        for template in (ROOT / "docs/templates").glob("*.md"):
+            text = template.read_text(encoding="utf-8")
+            self.assertNotIn("about/red-flags.md", text, str(template))
+            self.assertNotIn("Disclaimer:", text, str(template))
+
     def test_exercise_card_template_has_required_sections(self) -> None:
         template = ROOT / "docs/templates/exercise-card.md"
         self.assertTrue(template.exists(), "exercise-card.md template is missing")
         text = template.read_text(encoding="utf-8")
 
         for expected in (
-            "Disclaimer",
-            "not medical advice",
-            "not personalized coaching",
+            "Safety routing",
+            "../RED-FLAGS.md",
+            "Do not repeat the central disclaimer",
             "What this exercise is for",
             "Equipment setup",
             "Muscles involved",
@@ -43,9 +49,9 @@ class MarkdownFirstTemplateTest(unittest.TestCase):
         text = template.read_text(encoding="utf-8")
 
         for expected in (
-            "Disclaimer",
-            "not medical advice",
-            "not personalized coaching",
+            "Safety routing",
+            "../RED-FLAGS.md",
+            "Do not repeat the central disclaimer",
             "Beginner explanation",
             "Scope boundaries",
             "Safety notes",

@@ -6,7 +6,7 @@
   - Status: active
   - Plan lifecycle state: active
   - Current stage: code-review
-  - Active context: M1 validation-contract implementation is ready for code-review; M2-M4 remain pending after M1 review closes.
+  - Active context: M2 exercise-page implementation is review-requested; code-review M2 is next.
 
 ## Blocked
 

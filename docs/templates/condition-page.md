@@ -16,7 +16,7 @@ This page does not diagnose the reader, choose a care level, or provide a treatm
 
 ## Red flags: when to stop reading and seek care
 
-Link to `../../about/red-flags.md` before self-management themes.
+Link to `../RED-FLAGS.md` before self-management themes.
 
 ## Plain-language overview
 

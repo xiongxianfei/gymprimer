@@ -2,7 +2,7 @@
 
 Also known as:
 
-> Disclaimer: GymPrimer is educational content for general exercise literacy. It is not medical advice and not personalized coaching. Stop if something feels sharp, worsening, unusual, or unsafe, and seek qualified help when needed.
+Safety routing: link to `../RED-FLAGS.md` when this exercise page mentions pain, symptoms, or professional care. Do not repeat the central disclaimer here.
 
 ## What this exercise is for
 

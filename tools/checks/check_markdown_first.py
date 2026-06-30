@@ -233,6 +233,10 @@ def is_support_file(path: Path) -> bool:
     return path.name in SUPPORT_FILENAMES
 
 
+def is_red_flags_file(path: Path, root: Path = ROOT) -> bool:
+    return repo_relative_path(path, root) == "RED-FLAGS.md"
+
+
 def has_prominent_disclaimer(lines: list[str]) -> bool:
     top = "\n".join(lines[:DISCLAIMER_LIMIT]).lower()
     return (
@@ -831,13 +835,23 @@ def check_page(
 ) -> tuple[list[Finding], dict[str, str], set[str]]:
     if is_support_file(path):
         text = path.read_text(encoding="utf-8")
+        lines = text.splitlines()
+        findings: list[Finding] = []
+        if is_red_flags_file(path, root) and not has_prominent_disclaimer(lines):
+            findings.append(
+                Finding(
+                    path,
+                    "MF001",
+                    "central RED-FLAGS.md disclaimer with not medical advice and not personalized coaching is missing or too low",
+                )
+            )
         if normalized_layout_active(root):
-            findings = [
+            findings.extend(
                 Finding(path, "stale_old_path_reference", f"active Markdown references removed path: {reference}")
                 for reference in stale_references(text)
-            ]
+            )
             return findings, {}, set()
-        return [], {}, set()
+        return findings, {}, set()
 
     text = path.read_text(encoding="utf-8")
     lines = text.splitlines()
@@ -866,15 +880,6 @@ def check_page(
     if strict_layout:
         for reference in stale_references(text):
             findings.append(Finding(path, "stale_old_path_reference", f"active Markdown references removed path: {reference}"))
-
-    if rb_page_class is None and not has_prominent_disclaimer(lines):
-        findings.append(
-            Finding(
-                path,
-                "MF001",
-                "prominent disclaimer with not medical advice and not personalized coaching is missing or too low",
-            )
-        )
 
     if "## Sources" not in text:
         findings.append(Finding(path, "MF002", "page-local ## Sources section is missing"))

@@ -20,6 +20,8 @@ Prior approved baselines:
 
 The forward-head-posture pattern architecture amendment was approved by
 `docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r1.md`.
+The central-disclaimer amendment was approved by
+`docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r2.md`.
 
 ## Related artifacts
 
@@ -37,6 +39,7 @@ The forward-head-posture pattern architecture amendment was approved by
   - `../../changes/apt-pattern-architecture/reviews/spec-review-r2.md`
   - `../../changes/repository-layout-normalization/reviews/spec-review-r2.md`
   - `../../changes/forward-head-posture-pattern-architecture/reviews/spec-review-r1.md`
+  - `../../changes/forward-head-posture-pattern-architecture/reviews/spec-review-r2.md`
 - Forward head posture pattern architecture:
   - Proposal:
     `../../proposals/2026-06-30-forward-head-posture-pattern-architecture.md`
@@ -47,6 +50,7 @@ The forward-head-posture pattern architecture amendment was approved by
   - `../../adr/2026-06-29-expanded-raster-media-purposes.md`
   - `../../adr/2026-06-29-direct-repository-layout-normalization.md`
   - `../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md`
+  - `../../adr/2026-06-30-central-red-flags-disclaimer.md`
   - `../../adr/2026-06-26-repository-native-reviewed-content.md` (superseded)
 
 ## Introduction and Goals
@@ -65,8 +69,8 @@ exercise pages.
 Goals:
 
 - Keep Markdown pages as canonical source.
-- Make citation coverage, disclaimers, scope boundaries, media provenance, and
-  privacy checkable.
+- Make citation coverage, the central disclaimer, scope boundaries, media
+  provenance, and privacy checkable.
 - Allow only necessary supporting visuals with deterministic provenance.
 - Keep mdBook optional and derived.
 - Add expanded static content without introducing diagnosis, treatment,
@@ -88,6 +92,9 @@ Goals:
   `conditions/`, `principles/`, `programs/`, and `exercises/`.
 - `RED-FLAGS.md` is the target canonical red-flags reference after repository
   layout normalization.
+- `RED-FLAGS.md` owns the central GymPrimer disclaimer. Page templates route
+  safety context to `RED-FLAGS.md` when needed instead of repeating disclaimer
+  boilerplate on every page.
 - RigorLoop governance and workflow artifacts remain under `docs/proposals/`,
   `docs/adr/`, `docs/changes/`, `docs/plans/`, and `docs/learn/` per
   `docs/workflows.md`.
@@ -164,6 +171,8 @@ The architecture favors:
 - human-reviewed AI-generated raster only when needed for an allowed media
   purpose;
 - centralized media provenance over sidecar-per-image metadata;
+- centralized red-flags and disclaimer language over repeated per-page
+  disclaimer scaffolding;
 - path-classified expanded static pages over a database or CMS taxonomy;
 - page-local safety boundaries and review metadata over hidden lifecycle state;
 - recorded semantic review evidence where source quality and prescription boundaries
@@ -184,7 +193,7 @@ does not get flattened together with workflow evidence or tooling.
 
 | Block | Current paths | Responsibility |
 | --- | --- | --- |
-| Project references | `README.md`, `CONTRIBUTING.md`, `SOURCES.md`, `CONTENT_LICENSE.md`, `RED-FLAGS.md` | Project entry, contribution rules, reusable source index, safety routing, and licensing. |
+| Project references | `README.md`, `CONTRIBUTING.md`, `SOURCES.md`, `CONTENT_LICENSE.md`, `RED-FLAGS.md` | Project entry, contribution rules, reusable source index, central disclaimer, safety routing, and licensing. |
 | Content | `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/` | Canonical Markdown product pages. Equipment type is page metadata, not a folder split. |
 | Media | `media/<content-type>/<slug>/...`, `media/PROVENANCE.md` | Optional supporting raster illustrations referenced by Markdown. Raster assets use provenance purpose values to distinguish equipment, movement, pattern alignment, anatomy context, and exercise previews. |
 | Governance | `docs/proposals/`, `docs/adr/`, `docs/architecture/` | Accepted direction, durable decisions, and canonical architecture. These remain under `docs/` per RigorLoop workflow requirements. |
@@ -205,8 +214,8 @@ Layout normalization target:
 
 Logical containers:
 
-- **Project references**: root entry, contribution, source-index, license, and
-  safety-routing files.
+- **Project references**: root entry, contribution, source-index, license,
+  central-disclaimer, and safety-routing files.
 - **Content corpus**: active source pages, currently split between original
   v0.1 paths and expanded content paths until a migration spec normalizes the
   tree.
@@ -214,8 +223,10 @@ Logical containers:
   `conditions/`, `principles/`, `programs/`, and `exercises/`.
 - **Contribution and license contract**: contributor-facing documentation that
   governs inbound content and media.
-- **Red-flags and sources references**: shared root `RED-FLAGS.md` and
-  `SOURCES.md` references, linked from safety-relevant pages.
+- **Red-flags and sources references**: shared root `RED-FLAGS.md` owns the
+  central disclaimer and red-flag routing; `SOURCES.md` owns reusable source
+  identifiers. Safety-relevant pages link `RED-FLAGS.md` when they mention
+  pain, symptoms, professional care, or self-management themes.
 - **Optional media assets**: original SVGs or approved AI-generated raster
   illustrations referenced from Markdown by relative path.
 - **Media provenance index**: one row per AI-generated raster asset, with
@@ -256,13 +267,13 @@ Primary reader flow:
 
 1. A reader opens `README.md` in GitHub or a clone.
 2. The reader follows a relative link to one of the five first-slice pages.
-3. The page presents a disclaimer, beginner explanation, safety notes, and sources.
+3. The page presents beginner explanation, safety notes, sources, and links to centralized red-flag routing when needed.
 4. The reader can inspect source links from the same page.
 
 Authoring and promotion flow:
 
 1. A contributor drafts a non-canonical spike page.
-2. Maintainers check page shape, disclaimer, claim-level safety citations,
+2. Maintainers check page shape, the central `RED-FLAGS.md` disclaimer, claim-level safety citations,
    page-local sources, excluded scope, media provenance, privacy, and links.
 3. At least one beginner read test records whether the exercise pages communicate purpose, setup, steps, and stop conditions.
 4. A page is promoted only when checks and evidence satisfy the spec.
@@ -274,7 +285,8 @@ Expanded static-content authoring and promotion flow:
    `exercises/`.
 2. The page remains draft-only until checks classify the page class and verify
    required sections, review metadata, source count, source-index references,
-   red-flag links where required, media path/provenance rules, and privacy.
+   red-flag links where required, central-disclaimer availability, media
+   path/provenance rules, and privacy.
 3. Maintainers record review evidence under the relevant
    `docs/changes/<change-id>/` directory for semantic source quality,
    non-diagnostic/non-prescriptive language, source support for safety claims,
@@ -354,7 +366,7 @@ Repository layout normalization flow:
 
 Failure paths:
 
-- Missing disclaimer, missing page-local sources, global-only safety citation,
+- Missing central `RED-FLAGS.md` disclaimer, missing page-local sources, global-only safety citation,
   excluded scope, missing or invalid media provenance, private data, or
   unverified safety wording blocks promotion.
 - Missing Responsible Breadth page classification, missing page-contract
@@ -425,6 +437,9 @@ Citation and safety:
 - Safety claims need claim-level citations.
 - Every page needs page-local sources.
 - Global `SOURCES.md` supports reuse but does not replace page-local citation.
+- `RED-FLAGS.md` owns the central disclaimer and red-flag routing reference.
+  Page templates should link to it when safety context is relevant and should
+  not scaffold repeated disclaimer blocks.
 
 Scope control:
 
@@ -519,7 +534,7 @@ Repository layout:
 - Each content type has one canonical location after migration:
   `exercises/`, `patterns/`, `conditions/`, `principles/`, and `programs/`.
 - `RED-FLAGS.md` is the canonical root safety-routing reference after
-  migration.
+  migration and the central disclaimer owner.
 - Governance and workflow artifacts remain under `docs/`.
 - Old numbered content paths, old media-bucket paths, and the old
   `about/red-flags.md` path are removed directly; compatibility stubs are not
@@ -536,6 +551,9 @@ Privacy:
 Observability:
 
 - Local checks and review evidence records identify the page and rule that passed or failed.
+- Disclaimer validation targets `RED-FLAGS.md`; page-level checks validate
+  routing links and safety/source boundaries rather than repeated disclaimer
+  boilerplate.
 - Media validation findings use stable codes such as
   `media_provenance_missing`, `media_provenance_incomplete`,
   `media_provenance_not_approved`, `media_usage_out_of_scope`, and
@@ -564,6 +582,7 @@ Observability:
 - [ADR 2026-06-29: Expanded raster media purposes](../../adr/2026-06-29-expanded-raster-media-purposes.md) - Add expanded-page raster purposes for pattern alignment, anatomical region context, and exercise previews.
 - [ADR 2026-06-29: Direct repository layout normalization](../../adr/2026-06-29-direct-repository-layout-normalization.md) - Normalize physical repository paths by direct removal, root red flags, subject-co-located media, and dependency-first migration.
 - [ADR 2026-06-29: Responsible Breadth static content boundaries](../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md) - Add path-classified expanded static content classes with higher-bar review evidence, red-flag routing, and no runtime personalization.
+- [ADR 2026-06-30: Central red-flags disclaimer boundary](../../adr/2026-06-30-central-red-flags-disclaimer.md) - Centralize the prominent disclaimer in `RED-FLAGS.md` and keep templates focused on safety routing.
 - [ADR 2026-06-26: Repository-native reviewed content](../../adr/2026-06-26-repository-native-reviewed-content.md) - Superseded structured-platform decision retained as history.
 
 ## Quality Requirements
@@ -579,6 +598,7 @@ Observability:
 | Condition image safety | A condition page references an anatomical-region image. | The image gives region context without implying diagnosis, pathology, or treatment. |
 | Page classification | An expanded static content page is reviewed. | Its path maps to exactly one page class or the page declares one equivalent class before promotion. |
 | Red-flag routing | A pattern or condition page discusses self-management themes. | The page links the red-flags reference before self-management discussion. |
+| Central disclaimer | A page or checker needs the project-level disclaimer. | `RED-FLAGS.md` contains the required disclaimer near the top; page templates route to it instead of repeating it. |
 | Source quality | A condition page cites three weak sources. | The page fails until it has the required institutional, guideline, patient-education, or supporting source mix. |
 | Prescription boundary | A program example adapts to symptoms or goals. | The page fails promotion as personalized programming. |
 | Review evidence | A semantic safety or source-quality claim cannot be automated. | A review evidence record under the relevant `docs/changes/<change-id>/` directory records the review and outcome. |

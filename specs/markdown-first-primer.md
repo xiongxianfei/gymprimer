@@ -13,7 +13,7 @@ approved
 
 ## Goal and context
 
-This spec defines the observable contract for GymPrimer's Markdown-first v0.1 content slice. The product source of truth is self-contained Markdown pages in the repository, with citation-based authority, conservative beginner scope, visible disclaimers, page-local sources, and optional derived mdBook HTML.
+This spec defines the observable contract for GymPrimer's Markdown-first v0.1 content slice. The product source of truth is self-contained Markdown pages in the repository, with citation-based authority, conservative beginner scope, a central disclaimer in `RED-FLAGS.md`, page-local sources, and optional derived mdBook HTML.
 
 The spec replaces the prior structured content-schema direction for this slice. It does not define an app, database, generated public JSON package, formal expert-review lifecycle, CMS workflow, AI assistant, or hosted website.
 
@@ -26,7 +26,7 @@ The spec replaces the prior structured content-schema direction for this slice. 
 - Claim-level citation: A source link placed next to, or in the same paragraph as, the claim it supports.
 - Page-local sources: A `Sources` section in the same Markdown page as the claims.
 - Global source index: `SOURCES.md`, used to list sources reused across pages.
-- Disclaimer: A prominent statement that the content is educational, not medical advice or personalized coaching.
+- Central disclaimer: A prominent statement in `RED-FLAGS.md` that GymPrimer content is educational, not medical advice or personalized coaching.
 - Non-canonical spike: Draft content used to test the format before promotion to active source of truth.
 - Derived HTML: Static HTML generated from Markdown, such as mdBook output, that does not replace Markdown as source.
 - AI-generated raster illustration: A bitmap image generated with an AI image
@@ -46,7 +46,7 @@ The spec replaces the prior structured content-schema direction for this slice. 
 Example E1: a beginner opens a machine page directly
 Given `02-machines/lat-pulldown.md` exists as a Markdown page
 When a reader opens the file on GitHub
-Then the reader can see the disclaimer, purpose, setup, muscles, movement breakdown, feel cues, common mistakes, easier and harder versions, safety notes, and sources without using a separate app.
+Then the reader can see purpose, setup, muscles, movement breakdown, feel cues, common mistakes, easier and harder versions, safety notes, sources, and central safety routing without using a separate app.
 
 Example E2: a safety warning is source-backed
 Given an exercise page warns the reader to stop for sharp or worsening symptoms
@@ -101,11 +101,11 @@ R4. The root `README.md` MUST provide repository navigation to the v0.1 pages on
 
 R5. Each exercise page MUST include these headings or equivalent page-local sections: purpose, equipment setup, muscles involved, movement breakdown, feel cues, common mistakes, easier version, harder version, safety notes, and sources.
 
-R6. Each principle page MUST include a disclaimer, beginner-readable explanation, scope boundaries, safety notes when applicable, and sources.
+R6. Each principle page MUST include beginner-readable explanation, scope boundaries, safety notes when applicable, sources, and safety routing to `RED-FLAGS.md` when the page mentions pain, symptoms, or professional care.
 
-R7. Every safety-relevant page MUST include a prominent disclaimer near the top of the page.
+R7. `RED-FLAGS.md` MUST include the central disclaimer near the top of the page.
 
-R8. The disclaimer MUST state that GymPrimer is educational content, not medical advice and not personalized coaching.
+R8. The central disclaimer MUST state that GymPrimer is educational content, not medical advice and not personalized coaching.
 
 R9. Safety warnings MUST have claim-level citations to public, named sources.
 
@@ -270,7 +270,7 @@ Outputs:
 
 ## Error and boundary behavior
 
-- Missing disclaimer on a safety-relevant page blocks promotion.
+- Missing central disclaimer in `RED-FLAGS.md` blocks promotion.
 - Missing page-local sources block promotion.
 - Global-only citation for a safety claim blocks promotion.
 - Broken source links block promotion unless the source is replaced or the broken link is explicitly recorded as deferred with risk.
@@ -429,7 +429,7 @@ AC1. The first slice contains the five required Markdown pages listed in R2.
 
 AC2. Each first-slice page renders as readable Markdown in GitHub or by direct file inspection.
 
-AC3. Each first-slice page includes a prominent disclaimer.
+AC3. `RED-FLAGS.md` includes the central disclaimer near the top of the page.
 
 AC4. Each exercise page includes the required exercise-page sections from R5.
 
@@ -497,8 +497,12 @@ referencing page in `page_refs`.
 
 ## Follow-on artifacts
 
-None yet
+- 2026-06-30 central-disclaimer amendment: `RED-FLAGS.md` owns the central
+  disclaimer, and page templates should route safety context there instead of
+  requiring repeated per-page disclaimers.
 
 ## Readiness
 
-This spec is ready for spec-review. It is not architecture-ready, plan-ready, implementation-ready, verification-ready, branch-ready, or PR-ready.
+This amended spec is ready for spec-review. It is not architecture-ready,
+plan-ready, implementation-ready, verification-ready, branch-ready, or
+PR-ready.

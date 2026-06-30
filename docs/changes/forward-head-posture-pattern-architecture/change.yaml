@@ -9,24 +9,24 @@ proposal_review: docs/changes/forward-head-posture-pattern-architecture/reviews/
 
 current_spec: specs/forward-head-posture-pattern-architecture.md
 current_spec_status: approved
-current_spec_review: docs/changes/forward-head-posture-pattern-architecture/reviews/spec-review-r1.md
+current_spec_review: docs/changes/forward-head-posture-pattern-architecture/reviews/spec-review-r2.md
 
 current_architecture: docs/architecture/system/architecture.md
 current_architecture_status: approved
-current_architecture_review: docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r1.md
+current_architecture_review: docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r2.md
 
 current_plan: docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md
 current_plan_status: active
 current_plan_review: docs/changes/forward-head-posture-pattern-architecture/reviews/plan-review-r1.md
 plan_index: docs/plan.md
 
-current_milestone: M1
+current_milestone: M2
 current_milestone_state: review-requested
-last_reviewed_milestone: none
+last_reviewed_milestone: M1
 
 current_test_spec: specs/forward-head-posture-pattern-architecture.test.md
-current_test_spec_status: active
-current_test_spec_review: docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r2.md
+current_test_spec_status: approved
+current_test_spec_review: docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r3.md
 next_stage: code-review
 
 open_findings: []
@@ -41,6 +41,14 @@ notes:
   - Test-spec-review R1 requested changes for review-only semantic evidence metadata and validation command ownership; implementation handoff was not allowed.
   - Test spec revised to use review-only code-review evidence and command ownership metadata; test-spec-review R2 approved implementation handoff.
   - M1 implemented focused forward-head pattern validation tests and checker rules; code-review is next.
+  - Code-review M1 R1 requested changes for missing forward-head exercise disclaimer validation.
+  - Owner clarified that the prominent disclaimer should be centralized in RED-FLAGS.md; specs, templates, tests, and checker were amended and need spec-review before M1 re-review.
+  - Spec-review R2 approved the central-disclaimer amendment; architecture-review is next because validation and template boundaries changed.
+  - Architecture package and ADR were amended for the central RED-FLAGS disclaimer boundary; architecture-review is next.
+  - Architecture-review R2 approved the central-disclaimer architecture and ADR with no material findings; test-spec-review is next before M1 re-review.
+  - Test-spec-review R3 approved the central-disclaimer proof map with no material findings; M1 code-review re-review is next.
+  - Code-review M1 R2 closed M1 with no material findings; M2 implementation is next.
+  - M2 added the five same-slice forward-head support exercise pages and page-local source support; code-review is next.
 
 validation:
   - "python3 tools/checks/check_privacy.py docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md docs/changes/forward-head-posture-pattern-architecture docs/architecture/system/architecture.md specs/forward-head-posture-pattern-architecture.md docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md -- passed, checked 12 files"
@@ -66,4 +74,35 @@ validation:
   - "python3 -m unittest tests.test_markdown_first_templates -- passed, 2 tests"
   - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed, checked 18 Markdown files"
   - "python3 tools/checks/check_privacy.py tools tests docs/templates docs/changes/forward-head-posture-pattern-architecture -- passed, checked 70 files"
+  - "git diff --check -- passed"
+  - "reviewer temporary fixture removing the disclaimer from exercises/wall-slide.md while keeping checked sections -- checker unexpectedly passed; see CR-FHP-M1-1"
+  - "python3 -m unittest tests.test_markdown_first_page_structure tests.test_markdown_first_templates -- passed, 8 tests"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 24 tests"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed, checked 18 Markdown files"
+  - "rg -n \"about/red-flags.md|Disclaimer:\" docs/templates specs/forward-head-posture-pattern-architecture.md specs/forward-head-posture-pattern-architecture.test.md specs/markdown-first-primer.md specs/markdown-first-primer.test.md -- passed with no matches"
+  - "python3 tools/checks/check_privacy.py docs/templates specs/markdown-first-primer.md specs/markdown-first-primer.test.md specs/forward-head-posture-pattern-architecture.md specs/forward-head-posture-pattern-architecture.test.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md tests/test_markdown_first_page_structure.py tests/test_markdown_first_templates.py tools/checks/check_markdown_first.py docs/architecture/system/architecture.md -- passed, checked 27 files"
+  - "git diff --check -- passed"
+  - "python3 -m unittest tests.test_markdown_first_page_structure tests.test_markdown_first_templates -- passed, 8 tests"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed, checked 18 Markdown files"
+  - "python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/architecture/system/diagrams/container.mmd docs/adr/2026-06-30-central-red-flags-disclaimer.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed, checked 17 files"
+  - "rg -n \"2026-06-30-central-red-flags-disclaimer|current_stage: architecture-review|current_architecture_status: draft|Central red-flags disclaimer|central disclaimer|RED-FLAGS.md owns\" docs/architecture/system/architecture.md docs/architecture/system/diagrams/container.mmd docs/adr/2026-06-30-central-red-flags-disclaimer.md docs/changes/forward-head-posture-pattern-architecture/change.yaml docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed"
+  - "git diff --check -- passed"
+  - "python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/architecture/system/diagrams/container.mmd docs/adr/2026-06-30-central-red-flags-disclaimer.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed, checked 18 files"
+  - "rg -n \"AR-R2|architecture-review-r2|current_stage: test-spec-review|current_architecture_status: approved|Next stage: test-spec-review|Architecture-review R2 approved|central-disclaimer amendment was approved\" docs/architecture/system/architecture.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed"
+  - "git diff --check -- passed"
+  - "python3 tools/checks/check_privacy.py specs/forward-head-posture-pattern-architecture.test.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed, checked 17 files"
+  - "python3 -c \"from pathlib import Path; text = Path('specs/forward-head-posture-pattern-architecture.test.md').read_text(encoding='utf-8'); missing = [f'{prefix}{i}' for prefix, count in [('R', 32), ('E', 5), ('EC', 10), ('AC', 17), ('FHP-CMD', 13), ('FHP-RO', 3)] for i in range(1, count + 1) if f'{prefix}{i}' not in text]; assert not missing, 'missing coverage tokens: ' + ', '.join(missing); print('coverage token check passed')\" -- passed"
+  - "rg -n \"TSR-R3|test-spec-review-r3|current_stage: code-review|current_test_spec_status: approved|next_stage: code-review|Implementation handoff: allowed|Review status: approved|Approved by test-spec-review R3\" specs/forward-head-posture-pattern-architecture.test.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed"
+  - "git diff --check -- passed"
+  - "python3 -m unittest tests.test_markdown_first_page_structure tests.test_markdown_first_templates -- passed, 8 tests"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 24 tests"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed, checked 18 Markdown files"
+  - "python3 tools/checks/check_privacy.py tools tests docs/templates docs/changes/forward-head-posture-pattern-architecture specs/forward-head-posture-pattern-architecture.md specs/forward-head-posture-pattern-architecture.test.md specs/markdown-first-primer.md specs/markdown-first-primer.test.md docs/architecture/system/architecture.md docs/adr/2026-06-30-central-red-flags-disclaimer.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed, checked 83 files"
+  - "git diff --check -- passed"
+  - "python3 -m unittest tests.test_responsible_breadth_m1.ResponsibleBreadthM1Test.test_forward_head_real_exercise_pages_exist_and_pass_contract -- failed before implementation with expected missing five exercise pages"
+  - "python3 -m unittest tests.test_responsible_breadth_m1.ResponsibleBreadthM1Test.test_forward_head_real_exercise_pages_exist_and_pass_contract -- passed"
+  - "python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises -- passed, checked 17 Markdown files"
+  - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 51 tests"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 25 tests"
+  - "python3 tools/checks/check_privacy.py exercises docs/changes/forward-head-posture-pattern-architecture SOURCES.md -- passed, checked 32 files"
   - "git diff --check -- passed"

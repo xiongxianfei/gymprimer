@@ -579,6 +579,14 @@ class ResponsibleBreadthM1Test(unittest.TestCase):
         self.assertIn("RB010", result.stdout)
         self.assertIn("Safety notes", result.stdout)
 
+    def test_forward_head_real_exercise_pages_exist_and_pass_contract(self) -> None:
+        paths = [ROOT / "exercises" / f"{slug}.md" for slug in FORWARD_HEAD_EXERCISES]
+        missing = [str(path.relative_to(ROOT)) for path in paths if not path.exists()]
+        self.assertEqual(missing, [])
+
+        result = run_check_with_root(ROOT, ROOT / "SOURCES.md", ROOT / "RED-FLAGS.md", *paths)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_forward_head_pattern_image_limit_and_text_contract(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

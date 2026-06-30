@@ -2,17 +2,20 @@
 
 ## Status
 
-active
+approved
 
 ## Related spec and plan
 
 - Spec: `specs/forward-head-posture-pattern-architecture.md`
-- Spec review: `docs/changes/forward-head-posture-pattern-architecture/reviews/spec-review-r1.md`
+- Spec reviews:
+  - `docs/changes/forward-head-posture-pattern-architecture/reviews/spec-review-r1.md`
+  - `docs/changes/forward-head-posture-pattern-architecture/reviews/spec-review-r2.md`
 - Plan: `docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md`
 - Plan review: `docs/changes/forward-head-posture-pattern-architecture/reviews/plan-review-r1.md`
 - Architecture/ADRs:
   - `docs/architecture/system/architecture.md`
   - `docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r1.md`
+  - `docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r2.md`
   - `docs/adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `docs/adr/2026-06-28-ai-generated-raster-media-provenance.md`
   - `docs/adr/2026-06-29-expanded-raster-media-purposes.md`
@@ -188,7 +191,7 @@ Review-only semantic checks do not create separate proof files. They are recorde
 - Level: integration
 - Fixture/setup: Use real pages `exercises/chin-nod.md`, `exercises/thoracic-extension.md`, `exercises/wall-slide.md`, `exercises/prone-y-t.md`, and `exercises/band-pull-apart.md` after M2; add missing-section fixtures if existing tests do not cover expanded exercise pages.
 - Steps: Run `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises` and `python3 -m unittest tests.test_markdown_first_templates`.
-- Expected result: All five pages exist and include disclaimer, purpose, setup, muscles involved, movement breakdown, feel cues, mistakes, easier/harder versions, safety notes, and sources.
+- Expected result: All five pages exist and include purpose, setup, muscles involved, movement breakdown, feel cues, mistakes, easier/harder versions, safety notes, sources, and safety routing to `../RED-FLAGS.md` when the page mentions pain, symptoms, or professional care.
 - Failure proves: The pattern page can link to pages that do not carry complete exercise instruction.
 - Automation location: `tests/test_markdown_first_templates.py`; `tools/checks/check_markdown_first.py`; possible focused Responsible Breadth test.
 
@@ -305,6 +308,14 @@ None. Semantic source quality and pixel-level image semantics cannot be fully pr
 
 Test-spec-review R1 requested changes for review-only semantic evidence and validation command ownership. This revision addresses TSR-FHP-1 and TSR-FHP-2 and requires same-stage re-review before implementation relies on it.
 
+The 2026-06-30 central-disclaimer amendment removes per-page disclaimer
+expectations from the forward-head exercise-page contract and routes
+disclaimer validation to `RED-FLAGS.md`.
+
 ## Readiness
 
-Ready for test-spec-review. The proof map covers R1-R32, E1-E5, EC1-EC10, AC1-AC17, FHP-RO1 through FHP-RO3, FHP-CMD1 through FHP-CMD13, the approved plan milestones, and the existing Markdown-first checker/test conventions.
+Approved by test-spec-review R3 after spec-review R2 and architecture-review
+R2 accepted the central-disclaimer amendment. The proof map covers R1-R32,
+E1-E5, EC1-EC10, AC1-AC17, FHP-RO1 through FHP-RO3, FHP-CMD1 through
+FHP-CMD13, the approved plan milestones, and the existing Markdown-first
+checker/test conventions.

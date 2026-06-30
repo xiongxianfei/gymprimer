@@ -74,11 +74,10 @@ For each linked exercise, use this inline annotation:
   - *Fix reason:* one sentence on why this exercise maps to this pattern's mechanism.
   - *Used muscles:* primary muscles first; secondary muscles second.
   - *Important note:* one key cue, common mistake, or safety caveat.
-  - ![Optional thumbnail alt text](../media/exercises/exercise-slug/exercise-slug-sequence.png)
 ```
 
-Only link exercises that exist as repository files. Omit the thumbnail line
-unless the referenced image exists.
+Only link exercises that exist as repository files. Do not add exercise
+thumbnails to the pattern page.
 
 ## What to avoid
 

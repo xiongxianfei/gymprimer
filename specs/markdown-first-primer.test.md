@@ -2,7 +2,7 @@
 
 ## Status
 
-active
+draft
 
 ## Related spec and plan
 
@@ -26,7 +26,7 @@ active
 
 The proof strategy combines automated file-contract checks, integration checks over the real first-slice pages, and bounded audit evidence where automation cannot prove meaning.
 
-- Unit: exercise small checker functions for disclaimer presence, required sections, page-local sources, claim-level safety citations, excluded scope, language scope, deterministic media classification, media provenance table parsing, and privacy scan exit semantics.
+- Unit: exercise small checker functions for central disclaimer presence, required sections, page-local sources, claim-level safety citations, excluded scope, language scope, deterministic media classification, media provenance table parsing, and privacy scan exit semantics.
 - Integration: run the Markdown-first checker against real repository surfaces: `README.md`, `SOURCES.md`, `CONTRIBUTING.md`, `CONTENT_LICENSE.md`, numbered content directories, optional `media/`, `media/PROVENANCE.md`, and change-local proof records.
 - End-to-end: validate that a reader can start from `README.md`, reach the five pages by relative links, inspect page-local sources, and use the pages without a generated site.
 - Smoke: assert required files exist, required headings are present, old structured-platform surfaces are marked superseded, and optional mdBook either builds or has a durable deferral record.
@@ -57,7 +57,7 @@ Before a proof's owning milestone, absence is not a failure unless the proof is 
 | --- | --- | --- | --- | --- | --- | --- |
 | T1 | Active repository guidance and contribution contract | project maintainer | M1 | M1 | planned-for-milestone | `tests/test_markdown_first_contract.py` result or documented structural check transcript |
 | T2 | Card and principle template shape | content maintainer | M1 | M1 | planned-for-milestone | template fixture test output and template files |
-| T3 | Page-local disclaimer and source-section checker | tooling maintainer | M2 | M2 | planned-for-milestone | unit test output for valid and invalid page-structure fixtures |
+| T3 | Central disclaimer and source-section checker | tooling maintainer | M2 | M2 | planned-for-milestone | unit test output for valid and invalid page-structure fixtures |
 | T4 | Claim-level citation and source quality minimum gate | tooling maintainer | M2 | M2 | planned-for-milestone | citation fixture test output plus source-support audit record when real pages exist |
 | T5 | Scope, language, and media guardrails | tooling maintainer | M2 | M2 | planned-for-milestone | guardrail fixture test output |
 | T6 | Negative-match privacy scan | tooling maintainer | M2 | M2 | planned-for-milestone | privacy fixture test output and generated privacy report |
@@ -105,7 +105,7 @@ pass condition, failure condition, and re-run trigger.
 | Milestone | Automated proof required | Additional evidence required | Closeout rule |
 | --- | --- | --- | --- |
 | M1 | T1, T2, and T7 pass or are structurally satisfied. | None unless direct documentation inspection is used instead of automation. | M1 closes when active route, templates, contributor/license contract, and old-platform supersession are explicit. |
-| M2 | T3, T4, T5, and T6 fixture tests pass; CMD1, CMD2, and CMD6 pass or have documented conditional deferral where applicable. | None unless a fixture requires bounded audit inspection. | M2 closes when checker tooling and deterministic fixture tests prove source, disclaimer, citation, scope, media, language, and privacy rules. |
+| M2 | T3, T4, T5, and T6 fixture tests pass; CMD1, CMD2, and CMD6 pass or have documented conditional deferral where applicable. | None unless a fixture requires bounded audit inspection. | M2 closes when checker tooling and deterministic fixture tests prove source, central disclaimer, citation, scope, media, language, and privacy rules. |
 | M3A | T14 passes; CMD10, CMD11, and CMD12 pass. | Raster media validation evidence only when raster media is referenced, or an explicit no-raster note. | M3A closes when media classification and provenance validation are executable, `media/PROVENANCE.md` exists with the required table schema, text-only pages remain valid, SVG pages pass without AI-raster provenance, and raster pages require approved provenance. |
 | M3 | T8 and T9 pass on real first-slice pages; CMD3, CMD4, and CMD5 pass; any referenced media passes M3A. | Markdown browsing, citation-support, and comprehension evidence. | M3 closes when five real pages pass automated checks and render, citation, beginner comprehension, and media-gate evidence exists. |
 | M4 | T11, T12, and T13 pass; CMD7, CMD8 or mdBook deferral, and CMD9 are recorded. | mdBook deferral/build evidence and final validation ledger. | M4 closes when optional HTML is proven or deferred, source-of-truth drift is checked, and final local evidence is current. |
@@ -150,8 +150,8 @@ pass condition, failure condition, and re-run trigger.
 | R4 | T1, T9 | contract, smoke | README links to promoted first-slice pages. |
 | R5 | T2, T3, T8 | unit, integration | Exercise template and real exercise pages expose required sections. |
 | R6 | T2, T3, T8 | unit, integration | Principle template and `beginner-training-principles.md` expose required sections. |
-| R7 | T3, T8 | unit, integration | Safety-relevant pages require prominent top disclaimer. |
-| R8 | T3, T8 | unit, integration | Disclaimer text must include educational, not medical advice, and not personalized coaching meaning. |
+| R7 | T3, T8 | unit, integration | `RED-FLAGS.md` requires the prominent central disclaimer. |
+| R8 | T3, T8 | unit, integration | The central disclaimer text must include educational, not medical advice, and not personalized coaching meaning. |
 | R9 | T4, T8, T10 | unit, integration, audit | Automated adjacency checks plus citation-support evidence cover safety warnings. |
 | R10 | T4, T8, T10 | unit, integration, audit | Weekly guidance needs public-health/professional source. |
 | R11 | T4, T10 | unit, audit | Technique citation is checked as a minimum gate and semantically reviewed. |
@@ -241,29 +241,29 @@ pass condition, failure condition, and re-run trigger.
 - Covers: R1, R4, R7-R16, R23-R30, AC3, AC6, AC8, AC9, AC13
 - Level: contract
 - Fixture/setup: Real files `README.md`, `CONTRIBUTING.md`, `SOURCES.md`, `CONTENT_LICENSE.md`, `docs/templates/exercise-card.md`, and `docs/templates/principle-page.md`.
-- Steps: Check that README describes Markdown as source of truth and links active pages only after promotion; check contributor and license docs for Apache-2.0, CC BY 4.0, right-to-submit, no undocumented third-party media, citation, disclaimer, scope, and privacy language; check templates for required sections and source guidance.
+- Steps: Check that README describes Markdown as source of truth and links active pages only after promotion; check contributor and license docs for Apache-2.0, CC BY 4.0, right-to-submit, no undocumented third-party media, citation, central disclaimer, scope, and privacy language; check templates for required sections and source guidance.
 - Expected result: Active guidance matches the Markdown-first contract and does not advertise generated public JSON, expert-reviewed pages, or old platform workflow as v0.1 product behavior.
 - Failure proves: Contributors could follow stale or incomplete product, licensing, citation, media, or safety guidance.
 - Automation location: `tests/test_markdown_first_contract.py`; command `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`.
 
 ### T2. Card and principle template shape
 
-- Covers: R5, R6, R7, R8, R13, AC3, AC4
+- Covers: R5, R6, R13, AC4
 - Level: unit
 - Fixture/setup: `docs/templates/exercise-card.md`, `docs/templates/principle-page.md`, and invalid template fixtures in `tests/fixtures/markdown-first/templates/`.
-- Steps: Parse headings and top text; assert exercise template includes purpose, equipment setup, muscles involved, movement breakdown, feel cues, common mistakes, easier version, harder version, safety notes, and sources; assert principle template includes disclaimer, beginner explanation, scope boundaries, safety notes when applicable, and sources.
-- Expected result: Valid templates pass; missing-section, missing-disclaimer, and missing-sources fixtures fail with file and rule identifiers.
+- Steps: Parse headings and template text; assert exercise template includes purpose, equipment setup, muscles involved, movement breakdown, feel cues, common mistakes, easier version, harder version, safety notes, sources, and safety-routing guidance; assert principle template includes beginner explanation, scope boundaries, safety notes when applicable, sources, and safety-routing guidance.
+- Expected result: Valid templates pass; missing-section and missing-sources fixtures fail with file and rule identifiers.
 - Failure proves: First-slice pages may be drafted from incomplete templates.
 - Automation location: `tests/test_markdown_first_templates.py`.
 
-### T3. Page-local disclaimer and source-section checker
+### T3. Central disclaimer and source-section checker
 
 - Covers: R7, R8, R13, R36, AC3, AC5
 - Level: unit
 - Fixture/setup: Valid and invalid Markdown fixtures in `tests/fixtures/markdown-first/pages/`.
-- Steps: Run checker fixtures for missing disclaimer, disclaimer too low on the page, missing `Sources`, malformed heading, and valid page-local source structure.
+- Steps: Run checker fixtures for missing central `RED-FLAGS.md` disclaimer, missing `Sources`, malformed heading, and valid page-local source structure.
 - Expected result: The checker returns nonzero for invalid fixtures and reports the failing file plus rule code.
-- Failure proves: Pages can be promoted without prominent safety framing or page-local sources.
+- Failure proves: The repository can be promoted without central safety framing or page-local sources.
 - Automation location: `tests/test_markdown_first_page_structure.py` and `tools/checks/check_markdown_first.py`.
 
 ### T4. Claim-level citation and source quality minimum gate
@@ -392,7 +392,7 @@ Planned automated fixtures:
 
 - `tests/fixtures/markdown-first/pages/valid-exercise.md`
 - `tests/fixtures/markdown-first/pages/valid-principle.md`
-- `tests/fixtures/markdown-first/pages/invalid-missing-disclaimer.md`
+- `RED-FLAGS.md` central disclaimer fixture
 - `tests/fixtures/markdown-first/pages/invalid-missing-sources.md`
 - `tests/fixtures/markdown-first/pages/invalid-global-only-safety-source.md`
 - `tests/fixtures/markdown-first/pages/invalid-stop-rule-no-citation.md`
@@ -495,7 +495,7 @@ Do not include secrets, private health details, local absolute paths, or persona
 
 - Open `README.md` and confirm navigation reaches the five required pages by relative links.
 - Open each page as Markdown and confirm it is readable without generated HTML.
-- Confirm each page has a near-top disclaimer.
+- Confirm `RED-FLAGS.md` has a near-top central disclaimer.
 - Confirm each exercise page has purpose, setup, muscles, movement breakdown, feel cues, common mistakes, easier version, harder version, safety notes, and sources.
 - Confirm the principle page has beginner explanation, scope boundaries, safety notes where applicable, and sources.
 - Inspect every safety warning for claim-level citation and page-local source entry.

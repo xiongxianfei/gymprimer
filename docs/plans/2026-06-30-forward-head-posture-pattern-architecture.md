@@ -36,6 +36,7 @@ turn the exercise menu into a corrective routine.
   - `../adr/2026-06-29-expanded-raster-media-purposes.md`
   - `../adr/2026-06-29-direct-repository-layout-normalization.md`
   - `../adr/2026-06-29-responsible-breadth-static-content-boundaries.md`
+  - `../adr/2026-06-30-central-red-flags-disclaimer.md`
 - Governing specs:
   - `../../specs/markdown-first-primer.md`
   - `../../specs/responsible-breadth.md`
@@ -114,24 +115,28 @@ injury marks, and no before/after cure implication.
 
 ## Current Handoff Summary
 
-- Current milestone: M1
+- Current milestone: M2
 - Current milestone state: review-requested
-- Last reviewed milestone: none
+- Last reviewed milestone: M1
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review
-  R2 approved
-- Remaining in-scope implementation milestones: M1 review, M2, M3, M4
-- Next stage: code-review
+  R2 approved; code-review M1 R1 changes-requested; spec-review R2 approved
+  the central-disclaimer amendment; architecture-review R2 approved the
+  central-disclaimer architecture; test-spec-review R3 approved the amended
+  proof map; code-review M1 R2 closed M1
+- Remaining in-scope implementation milestones: M2 review, M3, M4
+- Next stage: code-review M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 implementation has local
-  validation evidence and is ready for code-review, but M1 review, M2-M4,
-  explain-change, verification, and PR handoff remain downstream gates.
+- Reason final closeout is or is not ready: The central-disclaimer contract
+  amendment is spec-approved, architecture-approved, proof-map-approved, and
+  M1 is closed and M2 implementation is review-requested, but M2 review,
+  M3-M4, explain-change, verification, and PR handoff remain downstream gates.
 
 ## Milestones
 
 ### M1. Validation Contract for the Forward-Head Slice
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Add or extend deterministic validation for the forward-head proof slice
   before content relies on it.
 - Requirements: R2, R14, R20-R26, R28-R30, R32, AC2, AC4, AC7, AC8, AC11-AC15,
@@ -188,7 +193,7 @@ injury marks, and no before/after cure implication.
 
 ### M2. Same-Slice Exercise Pages
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Create the five exercise pages required for the pattern complete loop,
   each with page-local source support and no rehab or treatment framing.
 - Requirements: R12, R14-R17, R19, R28, R30-R31, AC7-AC9, AC14-AC15, AC17
@@ -230,9 +235,10 @@ injury marks, and no before/after cure implication.
 - Milestone closeout:
   - validation passed
   - progress updated
-  - decision log updated if needed
+  - decision log unchanged
   - validation notes updated
-  - milestone committed
+  - milestone commit pending until handoff commit is created
+  - code-review pending
 - Risks:
   - Exercise pages can accidentally inherit unsupported clinical claims from
     pattern sources.
@@ -423,6 +429,29 @@ injury marks, and no before/after cure implication.
   implementation.
 - 2026-06-30: M1 implemented focused forward-head validation tests and checker
   rules, passed targeted local validation, and is ready for code-review.
+- 2026-06-30: Code-review M1 R1 requested changes for missing deterministic
+  disclaimer validation on the five forward-head exercise pages.
+- 2026-06-30: Owner clarified that the prominent disclaimer belongs only in
+  `RED-FLAGS.md`; specs, templates, checker behavior, and tests were amended
+  to centralize disclaimer validation and now require spec-review.
+- 2026-06-30: Spec-review R2 approved the central-disclaimer amendment with no
+  material findings and routed the change to architecture-review.
+- 2026-06-30: Canonical architecture and ADR
+  `docs/adr/2026-06-30-central-red-flags-disclaimer.md` were updated to assign
+  central disclaimer ownership to `RED-FLAGS.md`.
+- 2026-06-30: Architecture-review R2 approved the central-disclaimer
+  architecture and ADR with no material findings.
+- 2026-06-30: Test-spec-review R3 approved the central-disclaimer proof map
+  with no material findings.
+- 2026-06-30: Code-review M1 R2 closed M1 with no material findings and
+  handed off to M2 implementation.
+- 2026-06-30: M2 added five same-slice exercise pages:
+  `exercises/chin-nod.md`, `exercises/thoracic-extension.md`,
+  `exercises/wall-slide.md`, `exercises/prone-y-t.md`, and
+  `exercises/band-pull-apart.md`.
+- 2026-06-30: M2 added a real-page Responsible Breadth assertion that fails
+  until all five forward-head exercise pages exist and pass the exercise-page
+  contract.
 
 ## Decision log
 
@@ -433,6 +462,7 @@ injury marks, and no before/after cure implication.
 | 2026-06-30 | Keep the optional image in the pattern-page milestone. | The image is support-only and optional; it should not block exercise-page implementation. | Generate media before content structure and source claims are stable. |
 | 2026-06-30 | Leave README promotion to lifecycle evidence, not content implementation. | The approved spec gates README promotion on the full pattern set, not this single page. | Promote the forward-head page immediately after local validation. |
 | 2026-06-30 | Scope the M1 exercise-page contract to the five forward-head exercise paths. | Current exercise pages outside this slice use older headings, while the approved proof-map requires the complete-loop contract for the five selected forward-head pages. | Apply the new exercise-page heading contract globally in M1. |
+| 2026-06-30 | Centralize the prominent disclaimer in `RED-FLAGS.md` instead of page templates. | Repeating the same disclaimer on every page adds boilerplate and can drift; pages should route safety context to the canonical red-flags reference when needed. | Require every exercise, pattern, and principle page template to repeat the full disclaimer. |
 
 ## Surprises and discoveries
 
@@ -446,6 +476,17 @@ injury marks, and no before/after cure implication.
 - Current APT support exercise pages use an older exercise-page shape, so M1
   applies the new complete-loop exercise contract only to the five
   forward-head exercise paths.
+- The M1 code-review finding exposed a stale assumption from the older
+  Markdown-first v0.1 contract. Responsible Breadth already treats per-card
+  disclaimer scaffolding as a non-goal, so the repository now centralizes the
+  disclaimer in `RED-FLAGS.md`.
+- M2 uses the existing exercise-card contract but follows the expanded
+  forward-head checker headings (`Purpose`, `Used muscles`, `Equipment and
+  setup`, `Movement phases`, and related sections), because that is the active
+  validation surface for the five same-slice pages.
+- M2 source IDs were added to `SOURCES.md` only when reused across more than
+  one exercise page; each exercise page still carries page-local reference
+  definitions.
 
 ## Validation notes
 
@@ -456,6 +497,50 @@ injury marks, and no before/after cure implication.
   lifecycle artifacts.
 - 2026-06-30: M1 tests-first run of `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'` failed before implementation with expected missing forward-head title/link, exercise-page contract, and image-contract assertions.
 - 2026-06-30: M1 validation passed with `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`, `python3 -m unittest tests.test_markdown_first_templates`, `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`, `python3 tools/checks/check_privacy.py tools tests docs/templates docs/changes/forward-head-posture-pattern-architecture`, and `git diff --check`.
+- 2026-06-30: Code-review M1 R1 used a temporary fixture that removed the
+  disclaimer from `exercises/wall-slide.md` while keeping checked sections; the
+  checker unexpectedly passed, producing finding CR-FHP-M1-1.
+- 2026-06-30: Central-disclaimer amendment validation passed with
+  `python3 -m unittest tests.test_markdown_first_page_structure tests.test_markdown_first_templates`,
+  `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`,
+  `rg -n "about/red-flags.md|Disclaimer:" docs/templates specs/forward-head-posture-pattern-architecture.md specs/forward-head-posture-pattern-architecture.test.md specs/markdown-first-primer.md specs/markdown-first-primer.test.md`,
+  `python3 tools/checks/check_privacy.py docs/templates specs/markdown-first-primer.md specs/markdown-first-primer.test.md specs/forward-head-posture-pattern-architecture.md specs/forward-head-posture-pattern-architecture.test.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md tests/test_markdown_first_page_structure.py tests/test_markdown_first_templates.py tools/checks/check_markdown_first.py docs/architecture/system/architecture.md`,
+  and `git diff --check`.
+- 2026-06-30: Architecture authoring validation for the central-disclaimer
+  amendment ran privacy, architecture-routing, active Markdown, template, and
+  whitespace checks before architecture-review handoff.
+- 2026-06-30: Architecture authoring validation passed with
+  `python3 -m unittest tests.test_markdown_first_page_structure tests.test_markdown_first_templates`,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`,
+  `python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/architecture/system/diagrams/container.mmd docs/adr/2026-06-30-central-red-flags-disclaimer.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  `rg -n "2026-06-30-central-red-flags-disclaimer|current_stage: architecture-review|current_architecture_status: draft|Central red-flags disclaimer|central disclaimer|RED-FLAGS.md owns" docs/architecture/system/architecture.md docs/architecture/system/diagrams/container.mmd docs/adr/2026-06-30-central-red-flags-disclaimer.md docs/changes/forward-head-posture-pattern-architecture/change.yaml docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  and `git diff --check`.
+- 2026-06-30: Architecture-review R2 lifecycle validation passed with
+  `python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/architecture/system/diagrams/container.mmd docs/adr/2026-06-30-central-red-flags-disclaimer.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  `rg -n "AR-R2|architecture-review-r2|current_stage: test-spec-review|current_architecture_status: approved|Next stage: test-spec-review|Architecture-review R2 approved" docs/architecture/system/architecture.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  and `git diff --check`.
+- 2026-06-30: Test-spec-review R3 lifecycle validation passed with
+  `python3 tools/checks/check_privacy.py specs/forward-head-posture-pattern-architecture.test.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  `python3 -c "from pathlib import Path; text = Path('specs/forward-head-posture-pattern-architecture.test.md').read_text(encoding='utf-8'); missing = [f'{prefix}{i}' for prefix, count in [('R', 32), ('E', 5), ('EC', 10), ('AC', 17), ('FHP-CMD', 13), ('FHP-RO', 3)] for i in range(1, count + 1) if f'{prefix}{i}' not in text]; assert not missing, 'missing coverage tokens: ' + ', '.join(missing); print('coverage token check passed')"`,
+  `rg -n "TSR-R3|test-spec-review-r3|current_stage: code-review|current_test_spec_status: approved|next_stage: code-review|Implementation handoff: allowed|Review status: approved" specs/forward-head-posture-pattern-architecture.test.md docs/changes/forward-head-posture-pattern-architecture docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  and `git diff --check`.
+- 2026-06-30: Code-review M1 R2 validation passed with
+  `python3 -m unittest tests.test_markdown_first_page_structure tests.test_markdown_first_templates`,
+  `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`,
+  `python3 tools/checks/check_privacy.py tools tests docs/templates docs/changes/forward-head-posture-pattern-architecture specs/forward-head-posture-pattern-architecture.md specs/forward-head-posture-pattern-architecture.test.md specs/markdown-first-primer.md specs/markdown-first-primer.test.md docs/architecture/system/architecture.md docs/adr/2026-06-30-central-red-flags-disclaimer.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md`,
+  and `git diff --check`.
+- 2026-06-30: M2 tests-first proof ran
+  `python3 -m unittest tests.test_responsible_breadth_m1.ResponsibleBreadthM1Test.test_forward_head_real_exercise_pages_exist_and_pass_contract`
+  before adding pages and failed with the expected missing five exercise pages.
+- 2026-06-30: M2 validation passed with
+  `python3 -m unittest tests.test_responsible_breadth_m1.ResponsibleBreadthM1Test.test_forward_head_real_exercise_pages_exist_and_pass_contract`,
+  `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises`,
+  `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
+  `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`,
+  `python3 tools/checks/check_privacy.py exercises docs/changes/forward-head-posture-pattern-architecture SOURCES.md`,
+  and `git diff --check`.
 
 ## Outcome and retrospective
 
@@ -465,5 +550,5 @@ injury marks, and no before/after cure implication.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M1. Readiness is not Done; M1 review, M2-M4,
+- Ready for M2 code-review. Readiness is not Done; M2 review, M3-M4,
   explain-change, verification, and PR handoff remain open.
