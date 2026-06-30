@@ -58,9 +58,9 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Last reviewed milestone: M4 media and historical-artifact cleanup
 - Review status: code-review M4 R3 closed M4 with no material findings
 - Remaining in-scope implementation milestones: none
-- Next stage: verify
-- Final closeout readiness: not ready
-- Reason final closeout is or is not ready: verify and PR handoff have not happened.
+- Next stage: pr
+- Final closeout readiness: branch-ready for PR handoff
+- Reason final closeout is or is not ready: local final verification passed; PR handoff has not happened.
 
 ## Milestones
 
@@ -303,6 +303,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-30: Review-resolution renamed the M4 disposition evidence to the approved RLN-T7 path and routed M4 back to code-review.
 - 2026-06-30: Code-review M4 R3 closed M4 with no material findings and routed the change to final closeout.
 - 2026-06-30: Updated `docs/changes/repository-layout-normalization/explain-change.md` for the final reviewed implementation and routed the change to verify.
+- 2026-06-30: Final local verification passed and routed the change to PR handoff.
 
 ## Decision log
 
@@ -383,6 +384,13 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Code-review M4 R3 reviewer reran `git diff --check`; passed.
 - Explain-change privacy check passed: `python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization/explain-change.md docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md docs/changes/repository-layout-normalization/change.yaml` checked 4 files.
 - Explain-change diff check passed: `git diff --check`.
+- Verify full unit suite passed: `python3 -m unittest discover -s tests` ran 79 tests.
+- Verify checker validation passed: `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises` checked 18 Markdown files.
+- Verify active old content/red-flags scan passed with no matches: `rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools` returned exit 1 because no stale active paths were found.
+- Verify active stale media/historical scan passed with no matches: `rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md` returned exit 1 because no stale active paths were found.
+- Verify privacy check passed: `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools` checked 106 files.
+- Verify old-directory check passed: `find 01-getting-started 02-machines 03-bodyweight about media/equipment media/movements media/supplemental media/svg content schemas generated tools/validation -maxdepth 0 -print 2>/dev/null || true` returned no paths.
+- Verify diff check passed: `git diff --check`.
 
 ## Outcome and retrospective
 
