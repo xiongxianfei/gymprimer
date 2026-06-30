@@ -33,6 +33,7 @@ notes:
   - Code-review M3 R2 closed M3 with no material findings and routed the change to M4 implementation.
   - M4 moved promoted media to subject-co-located paths, updated provenance, removed old media buckets and SVG examples, removed superseded structured-platform folders/tools/tests from the active tree, and recorded disposition evidence.
   - Code-review M4 R1 requested resolution for CR-RLN-M4-1 because the M4 historical-disposition evidence path does not match the approved RLN-T7 proof-map path.
+  - Code-review M4 R2 found CR-RLN-M4-1 still present because no resolution diff added the approved evidence path or amended the proof map.
 validation:
   - git diff --check -- passed
   - python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/adr/2026-06-29-direct-repository-layout-normalization.md specs/repository-layout-normalization.md docs/changes/repository-layout-normalization/change.yaml -- passed, checked 4 files

@@ -56,7 +56,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Current milestone: M4 media and historical-artifact cleanup
 - Current milestone state: resolution-needed
 - Last reviewed milestone: M4 media and historical-artifact cleanup
-- Review status: code-review M4 R1 requested resolution for CR-RLN-M4-1
+- Review status: code-review M4 R2 found CR-RLN-M4-1 still present
 - Remaining in-scope implementation milestones: M4 media and historical-artifact cleanup
 - Next stage: review-resolution
 - Final closeout readiness: not ready
@@ -297,6 +297,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-30: Code-review M3 R2 closed M3 with no material findings and routed the change to M4 implementation.
 - 2026-06-30: M4 moved promoted media into subject-co-located paths, removed old media buckets and SVG examples, removed the superseded structured-platform folders/tools/tests, and recorded M4 disposition evidence.
 - 2026-06-30: Code-review M4 R1 requested resolution for CR-RLN-M4-1 because the historical-disposition evidence exists under a different filename than the approved RLN-T7 proof-map path.
+- 2026-06-30: Code-review M4 R2 found CR-RLN-M4-1 still present because no resolution diff added the approved RLN-T7 evidence path or amended the proof map.
 
 ## Decision log
 
