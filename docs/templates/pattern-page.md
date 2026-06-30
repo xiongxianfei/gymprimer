@@ -22,18 +22,24 @@ explain all pain.
 ## Red flags: when to stop reading and seek care
 
 Inline the pattern-relevant red flags, cite them, and link to
-`../about/red-flags.md` before any self-management themes.
+`../RED-FLAGS.md` before any self-management themes.
 
-## Plain-language overview
+## Why beginners come to this page
 
-Start with the reader's pain point: the common observations, search phrases, or
-training questions that bring beginners to this page.
+List three to five common observations, search phrases, or training questions
+that bring beginners to this page.
 
-Then give the working definition, neutral comparison, normal-variation note, and
-two to four "how to notice this in yourself" observations. Label every
-self-observation method as observation, not diagnosis.
+## Working definition
 
-## What mainstream sources generally agree on
+Define the observable pattern, give a neutral comparison, and include a
+normal-variation note so the page does not turn one posture into a diagnosis.
+
+## How to notice this in yourself
+
+Add two to four observation methods. Label every self-observation method as
+observation, not diagnosis.
+
+## The core reason
 
 Name the pattern's likely movement contributors. Use mechanism-level language:
 which muscle groups, what control problem, what daily-position load, and why
@@ -45,7 +51,7 @@ Name contested or uncertain evidence plainly. Include at least one skeptical or
 critical source when available. This section protects the page from turning an
 observable pattern into a body-is-broken story.
 
-## Commonly recommended self-management themes
+## What commonly helps
 
 Describe general themes, not a corrective routine. Use the reader journey:
 

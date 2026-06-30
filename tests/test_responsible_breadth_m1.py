@@ -444,6 +444,24 @@ class ResponsibleBreadthM2Test(unittest.TestCase):
                     self.assertIn(expected, text)
                 self.assertIn("## Sources", text)
 
+        pattern_template = (ROOT / "docs/templates/pattern-page.md").read_text(encoding="utf-8")
+        for expected in (
+            "../RED-FLAGS.md",
+            "## Why beginners come to this page",
+            "## Working definition",
+            "## How to notice this in yourself",
+            "## The core reason",
+            "## What commonly helps",
+        ):
+            self.assertIn(expected, pattern_template)
+        for stale in (
+            "../about/red-flags.md",
+            "## Plain-language overview",
+            "## What mainstream sources generally agree on",
+            "## Commonly recommended self-management themes",
+        ):
+            self.assertNotIn(stale, pattern_template)
+
     def test_sources_and_contributor_guidance_support_responsible_breadth(self) -> None:
         sources = (ROOT / "SOURCES.md").read_text(encoding="utf-8")
         contributing = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")

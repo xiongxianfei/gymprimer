@@ -109,7 +109,7 @@ changes begin.
 ## Current Handoff Summary
 
 - Current milestone: lifecycle closeout
-- Current milestone state: verified
+- Current milestone state: follow-up verified
 - Last reviewed milestone: final holistic code-review
 - Review status: plan-review R1 approved; test-spec-review R1 blocked on
   TSR-RB-1, TSR-RB-1 was resolved by lifecycle/status normalization, and
@@ -122,8 +122,10 @@ changes begin.
   closed after code-review M2 R1, M3 is closed after code-review M3 R1, M4 is
   closed after code-review M4 R1, final holistic code-review R1 is clean,
   explain-change is complete, and verify passed with fresh local evidence in
-  `../changes/responsible-breadth/verify-report.md`. The auto-through profile
-  stops before PR, so PR preparation requires separate authorization.
+  `../changes/responsible-breadth/verify-report.md`. The later APT follow-up
+  code-review R2 accepted the CR-APT-1 resolution with no material findings,
+  explain-change is refreshed, and verify passed with fresh local evidence in
+  `../changes/apt-pattern-architecture/verify-report.md`. PR handoff is next.
 
 ## Milestones
 
@@ -436,6 +438,19 @@ changes begin.
 - 2026-06-29: Removed duplicate pattern-page preview image copies after
   review. The pattern page now links exercise options textually, while exercise
   pages own the sequence images.
+- 2026-06-30: Code-review R1 requested changes for CR-APT-1 because the
+  reusable pattern-page template still used the old red-flags path and old
+  pattern section headings. Review-resolution is required before PR handoff
+  resumes.
+- 2026-06-30: Code-review R2 accepted the CR-APT-1 resolution with no material
+  findings after the pattern template and focused template test were updated.
+  Explain-change is next because the reviewed resolution changed rationale
+  surfaces after the earlier verify report.
+- 2026-06-30: Explain-change refreshed the APT follow-up rationale after
+  CR-APT-1 resolution. Verify is next because the earlier verify report
+  predates the template, focused-test, and review-resolution diff.
+- 2026-06-30: Verify passed with fresh local validation evidence in
+  `../changes/apt-pattern-architecture/verify-report.md`; PR handoff is next.
 
 ## Decision log
 
@@ -543,5 +558,5 @@ changes begin.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for verify only. Not branch-ready, PR-ready, or Done until verify
-  completes.
+- Branch-ready for PR handoff based on local verification. Not PR-body-ready,
+  PR-open-ready, or Done until PR handoff completes.

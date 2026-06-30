@@ -1,7 +1,7 @@
 change_id: apt-pattern-architecture
 proposal: docs/proposals/2026-06-29-responsible-breadth.md
-status: code-review-needed
-current_stage: code-review
+status: verified
+current_stage: pr
 created_date: 2026-06-29
 notes:
   - Follow-up to the merged Responsible Breadth proof slice.
@@ -13,11 +13,14 @@ notes:
   - Architecture-review R2 approved the expanded raster media-purpose validation boundary after lifecycle status normalization.
   - Test-spec-review R1 approved RB-T21/RB-T22 coverage of pattern-page architecture and expanded media-purpose validation.
   - Implemented RB-T21/RB-T22 proof for pattern-page architecture and expanded media-purpose validation.
-  - Ready for code-review of the APT follow-up implementation.
+  - Code-review R1 requested changes for CR-APT-1 because the reusable pattern-page template still uses the old red-flags path and old pattern section headings.
+  - CR-APT-1 was resolved by updating the pattern-page template and focused template test; code-review R2 accepted the resolution with no material findings.
+  - Explain-change refreshed the durable rationale after CR-APT-1 resolution; verify is next.
+  - Verify passed with fresh local validation evidence in docs/changes/apt-pattern-architecture/verify-report.md; PR is next.
 validation:
-  - "python3 -m unittest discover -s tests -- passed, 131 tests"
+  - "python3 -m unittest discover -s tests -- passed, 79 tests"
   - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed, 20 tests"
-  - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 51 tests"
-  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md about patterns conditions principles programs exercises -- passed, checked 13 Markdown files"
-  - "python3 tools/checks/check_privacy.py README.md SOURCES.md about patterns conditions principles programs exercises docs/templates docs/changes/apt-pattern-architecture docs/changes/responsible-breadth docs/plans/2026-06-29-responsible-breadth.md docs/plan.md media tools/checks/check_markdown_first.py tests/test_responsible_breadth_m1.py -- passed, checked 90 files"
+  - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 49 tests"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed, checked 18 Markdown files"
+  - "python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/templates docs/changes/apt-pattern-architecture docs/changes/responsible-breadth docs/plans/2026-06-29-responsible-breadth.md docs/plan.md media tools/checks/check_markdown_first.py tests/test_responsible_breadth_m1.py -- passed, checked 84 files"
   - "git diff --check -- passed"
