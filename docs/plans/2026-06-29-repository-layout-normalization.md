@@ -54,11 +54,11 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Current Handoff Summary
 
 - Current milestone: M2 validation tooling and regression tests
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1 dependency inventory and migration manifest
-- Review status: M1 code-review R1 clean-with-notes; no material findings
+- Review status: M2 implemented; awaiting code-review
 - Remaining in-scope implementation milestones: M2 validation tooling/test coverage, M3 content/reference migration, M4 media and historical-artifact cleanup
-- Next stage: implement
+- Next stage: code-review
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: implementation, code review, explain-change, verify, and PR handoff have not happened.
 
@@ -105,7 +105,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ### M2. Validation tooling and regression tests
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: update checks and tests so canonical paths, root red flags, no compatibility stubs, media co-location, provenance updates, and dependency-first behavior are enforceable.
 - Requirements: R15-R20, R23-R25, EC1-EC9, AC5-AC8, AC11-AC12
 - Files/components likely touched:
@@ -133,6 +133,7 @@ The migration is dependency-first. Before any old path is removed, active refere
   - `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization`
   - `git diff --check`
 - Expected observable result: tests fail for stale old paths and pass for the normalized target tree.
+- Implementation result: `tests/test_repository_layout_normalization.py` adds regression coverage for canonical content paths, root `RED-FLAGS.md`, old numbered paths, old red-flags links, compatibility stubs, subject-co-located media, stale provenance rows, root-level governance folders, and historical artifact classification. `tools/checks/check_markdown_first.py` enforces those rules once the normalized root `RED-FLAGS.md` exists.
 - Commit message: `M2: enforce normalized layout paths`
 - Milestone closeout:
   - validation passed
@@ -282,6 +283,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-29: Test-spec-review R2 approved the revised proof map and allowed implementation handoff.
 - 2026-06-29: M1 implemented dependency inventory evidence without moving or removing files.
 - 2026-06-29: Code-review M1 R1 closed M1 with no material findings and routed the change to M2 implementation.
+- 2026-06-29: M2 implemented repository layout normalization regression tests and checker enforcement without moving real content or media files.
 
 ## Decision log
 
@@ -294,7 +296,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ## Surprises and discoveries
 
-- None yet.
+- M2 validation must not require the real `RED-FLAGS.md` checker command yet because M3 owns the actual red-flags move. The checker therefore activates strict normalized-layout checks when `RED-FLAGS.md` exists in the checked repository, which lets fixture tests prove the target behavior before the real tree migrates.
 
 ## Validation notes
 
@@ -312,6 +314,11 @@ The migration is dependency-first. Before any old path is removed, active refere
 - M1 diff check passed: `git diff --check`.
 - Code-review M1 R1 reviewer reran `git diff --check`; passed.
 - Code-review M1 R1 reviewer reran `python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md`; checked 14 files, privacy pass.
+- M2 focused regression test passed: `python3 -m unittest tests.test_repository_layout_normalization` ran 10 tests.
+- M2 full unit suite passed: `python3 -m unittest discover -s tests` ran 141 tests.
+- M2 diff check passed: `git diff --check`.
+- M2 privacy check passed: `python3 tools/checks/check_privacy.py tools/checks/check_markdown_first.py tests/test_repository_layout_normalization.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md` checked 17 files.
+- M2 did not run `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises` as closeout proof because `specs/repository-layout-normalization.test.md` assigns RLN-CMD3 to M3 and the real `RED-FLAGS.md` move is not in M2 scope.
 
 ## Outcome and retrospective
 
@@ -320,4 +327,4 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implementation of M2.
+- Ready for code-review of M2.

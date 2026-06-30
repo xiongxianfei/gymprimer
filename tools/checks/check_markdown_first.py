@@ -112,6 +112,35 @@ SUPPORT_FILENAMES = {
     "CONTRIBUTING.md",
     "CONTENT_LICENSE.md",
     "PROVENANCE.md",
+    "RED-FLAGS.md",
+}
+OLD_CONTENT_DIRS = {
+    "01-getting-started",
+    "02-machines",
+    "03-bodyweight",
+}
+OLD_MEDIA_BUCKETS = {
+    "media/equipment/",
+    "media/movements/",
+    "media/supplemental/",
+}
+OLD_REFERENCE_PATTERNS = (
+    "01-getting-started/",
+    "02-machines/",
+    "03-bodyweight/",
+    "about/red-flags.md",
+    "media/equipment/",
+    "media/movements/",
+    "media/supplemental/",
+)
+HISTORICAL_ARTIFACT_DIRS = {
+    "content",
+    "schemas",
+    "generated",
+}
+ROOT_GOVERNANCE_DIRS = {
+    "proposals",
+    "adr",
 }
 RASTER_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
 SVG_EXTENSIONS = {".svg"}
@@ -245,6 +274,57 @@ def responsible_breadth_page_class(path: Path, root: Path = ROOT) -> str | None:
         return None
     first_part = relative.split("/", 1)[0]
     return RESPONSIBLE_BREADTH_PAGE_CLASSES.get(first_part)
+
+
+def normalized_layout_active(root: Path = ROOT) -> bool:
+    return (root / "RED-FLAGS.md").exists()
+
+
+def relative_parts(path: Path, root: Path = ROOT) -> list[str]:
+    relative = repo_relative_path(path, root)
+    return [] if relative is None else relative.split("/")
+
+
+def is_old_content_path(path: Path, root: Path = ROOT) -> bool:
+    parts = relative_parts(path, root)
+    return bool(parts and parts[0] in OLD_CONTENT_DIRS)
+
+
+def is_historical_artifact_path(path: Path, root: Path = ROOT) -> bool:
+    parts = relative_parts(path, root)
+    return bool(parts and parts[0] in HISTORICAL_ARTIFACT_DIRS)
+
+
+def has_historical_classification(text: str) -> bool:
+    lower = text.lower()
+    return "historical" in lower or "archive" in lower or "archived" in lower
+
+
+def looks_like_compatibility_stub(text: str) -> bool:
+    return bool(re.search(r"\b(moved|renamed|redirect|see instead)\b", text, re.IGNORECASE))
+
+
+def stale_references(text: str) -> list[str]:
+    return [pattern for pattern in OLD_REFERENCE_PATTERNS if pattern in text]
+
+
+def expected_subject_media_prefix(page_path: Path, page_class: str | None, root: Path = ROOT) -> str | None:
+    if page_class is None:
+        return None
+    relative = repo_relative_path(page_path, root)
+    if relative is None:
+        return None
+    parts = relative.split("/")
+    if len(parts) < 2:
+        return None
+    slug = Path(parts[-1]).stem
+    if page_class == "pattern_page":
+        return f"media/patterns/{slug}/"
+    if page_class == "condition_page":
+        return f"media/conditions/{slug}/"
+    if page_class == "expanded_exercise_page":
+        return f"media/exercises/{slug}/"
+    return None
 
 
 def parse_metadata(lines: list[str]) -> dict[str, str]:
@@ -461,6 +541,26 @@ def validate_media_reference(
         ]
 
     extension = resolved.suffix.lower()
+    if normalized_layout_active(root):
+        for old_bucket in OLD_MEDIA_BUCKETS:
+            if asset_path.startswith(old_bucket):
+                return [
+                    Finding(
+                        page_path,
+                        "old_media_bucket_reference",
+                        f"media reference uses removed media bucket: {asset_path}",
+                    )
+                ]
+        expected_prefix = expected_subject_media_prefix(page_path, page_class, root)
+        if extension in RASTER_EXTENSIONS and expected_prefix is not None and not asset_path.startswith(expected_prefix):
+            return [
+                Finding(
+                    page_path,
+                    "subject_media_path_mismatch",
+                    f"raster media for this page must live under {expected_prefix}: {asset_path}",
+                )
+            ]
+
     if extension in SVG_EXTENSIONS:
         if not resolved.exists():
             return [Finding(page_path, "media_asset_missing", f"local media file is missing: {asset_path}")]
@@ -526,7 +626,9 @@ def validate_responsible_breadth_page(
         self_management_position = heading_position(text, self_management_heading)
         if red_flags_position == -1:
             findings.append(Finding(path, "RB004", "red-flags section is missing"))
-        elif "../about/red-flags.md" not in text and "about/red-flags.md" not in text:
+        elif normalized_layout_active(ROOT) and "RED-FLAGS.md" not in text:
+            findings.append(Finding(path, "RB004", "red-flags section must link to RED-FLAGS.md"))
+        elif not normalized_layout_active(ROOT) and "../about/red-flags.md" not in text and "about/red-flags.md" not in text:
             findings.append(Finding(path, "RB004", "red-flags section must link to about/red-flags.md"))
         elif self_management_position != -1 and red_flags_position > self_management_position:
             findings.append(Finding(path, "RB004", "red-flags routing must appear before self-management discussion"))
@@ -608,6 +710,13 @@ def check_page(
     root: Path = ROOT,
 ) -> tuple[list[Finding], dict[str, str], set[str]]:
     if is_support_file(path):
+        text = path.read_text(encoding="utf-8")
+        if normalized_layout_active(root):
+            findings = [
+                Finding(path, "stale_old_path_reference", f"active Markdown references removed path: {reference}")
+                for reference in stale_references(text)
+            ]
+            return findings, {}, set()
         return [], {}, set()
 
     text = path.read_text(encoding="utf-8")
@@ -617,6 +726,26 @@ def check_page(
     urls = source_urls(text)
     cited_ids = cited_reference_ids(text)
     rb_page_class = responsible_breadth_page_class(path, root)
+    strict_layout = normalized_layout_active(root)
+
+    if strict_layout and is_historical_artifact_path(path, root):
+        if not has_historical_classification(text):
+            findings.append(
+                Finding(
+                    path,
+                    "historical_artifact_unclassified",
+                    "historical structured-platform artifacts must be labeled historical or archived when retained",
+                )
+            )
+        return findings, {}, set()
+
+    if strict_layout and is_old_content_path(path, root):
+        code = "compatibility_stub_forbidden" if looks_like_compatibility_stub(text) else "old_content_path_active"
+        findings.append(Finding(path, code, "old numbered content paths must be removed directly after migration"))
+
+    if strict_layout:
+        for reference in stale_references(text):
+            findings.append(Finding(path, "stale_old_path_reference", f"active Markdown references removed path: {reference}"))
 
     if rb_page_class is None and not has_prominent_disclaimer(lines):
         findings.append(
@@ -735,6 +864,35 @@ def check_cross_page_source_usage(page_sources: dict[str, dict[str, str]], page_
     return findings
 
 
+def validate_repository_layout(root: Path, provenance_rows: dict[str, list[dict[str, str]]]) -> list[Finding]:
+    if not normalized_layout_active(root):
+        return []
+
+    findings: list[Finding] = []
+    for directory in sorted(ROOT_GOVERNANCE_DIRS):
+        path = root / directory
+        if path.exists():
+            findings.append(
+                Finding(
+                    path,
+                    "governance_path_not_under_docs",
+                    f"governance artifacts must remain under docs/: {directory}/",
+                )
+            )
+
+    for asset_path in sorted(provenance_rows):
+        if any(asset_path.startswith(old_bucket) for old_bucket in OLD_MEDIA_BUCKETS):
+            findings.append(
+                Finding(
+                    root / "media/PROVENANCE.md",
+                    "stale_media_provenance_path",
+                    f"media provenance row uses removed media bucket: {asset_path}",
+                )
+            )
+
+    return findings
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Check Markdown-first GymPrimer pages for v0.1 structural, citation, scope, language, and media rules."
@@ -759,6 +917,7 @@ def main(argv: list[str] | None = None) -> int:
     media_provenance = load_media_provenance()
 
     findings: list[Finding] = list(index_findings)
+    findings.extend(validate_repository_layout(ROOT, media_provenance))
     page_sources: dict[str, dict[str, str]] = {}
     page_citations: dict[str, set[str]] = {}
     for path in markdown_paths:
