@@ -5,11 +5,11 @@
 - [Repository Layout Normalization](plans/2026-06-29-repository-layout-normalization.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current milestone: M2 validation tooling and regression tests
-  - Current milestone state: review-requested
-  - Last reviewed milestone: M1 dependency inventory and migration manifest
-  - Next stage: code-review
-  - Active context: M2 implemented repository layout normalization checker rules and regression tests; code-review is next.
+  - Current milestone: M3 content and project-reference migration
+  - Current milestone state: planned
+  - Last reviewed milestone: M2 validation tooling and regression tests
+  - Next stage: implement
+  - Active context: M2 code-review R1 closed validation tooling and regression tests with no material findings. M3 content and project-reference migration is next.
 
 - [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
   - Status: active

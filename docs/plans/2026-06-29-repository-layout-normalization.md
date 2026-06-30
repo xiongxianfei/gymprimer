@@ -53,12 +53,12 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ## Current Handoff Summary
 
-- Current milestone: M2 validation tooling and regression tests
-- Current milestone state: review-requested
-- Last reviewed milestone: M1 dependency inventory and migration manifest
-- Review status: M2 implemented; awaiting code-review
-- Remaining in-scope implementation milestones: M2 validation tooling/test coverage, M3 content/reference migration, M4 media and historical-artifact cleanup
-- Next stage: code-review
+- Current milestone: M3 content and project-reference migration
+- Current milestone state: planned
+- Last reviewed milestone: M2 validation tooling and regression tests
+- Review status: M2 code-review R1 clean-with-notes; no material findings
+- Remaining in-scope implementation milestones: M3 content/reference migration, M4 media and historical-artifact cleanup
+- Next stage: implement
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: implementation, code review, explain-change, verify, and PR handoff have not happened.
 
@@ -105,7 +105,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ### M2. Validation tooling and regression tests
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: update checks and tests so canonical paths, root red flags, no compatibility stubs, media co-location, provenance updates, and dependency-first behavior are enforceable.
 - Requirements: R15-R20, R23-R25, EC1-EC9, AC5-AC8, AC11-AC12
 - Files/components likely touched:
@@ -284,6 +284,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-29: M1 implemented dependency inventory evidence without moving or removing files.
 - 2026-06-29: Code-review M1 R1 closed M1 with no material findings and routed the change to M2 implementation.
 - 2026-06-29: M2 implemented repository layout normalization regression tests and checker enforcement without moving real content or media files.
+- 2026-06-29: Code-review M2 R1 closed M2 with no material findings and routed the change to M3 implementation.
 
 ## Decision log
 
@@ -319,6 +320,10 @@ The migration is dependency-first. Before any old path is removed, active refere
 - M2 diff check passed: `git diff --check`.
 - M2 privacy check passed: `python3 tools/checks/check_privacy.py tools/checks/check_markdown_first.py tests/test_repository_layout_normalization.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md` checked 17 files.
 - M2 did not run `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises` as closeout proof because `specs/repository-layout-normalization.test.md` assigns RLN-CMD3 to M3 and the real `RED-FLAGS.md` move is not in M2 scope.
+- Code-review M2 R1 reviewer reran `python3 -m unittest tests.test_repository_layout_normalization`; passed, 10 tests.
+- Code-review M2 R1 reviewer reran `python3 -m unittest discover -s tests`; passed, 141 tests.
+- Code-review M2 R1 reviewer reran `git diff --check`; passed.
+- Code-review M2 R1 reviewer reran `python3 tools/checks/check_privacy.py tools/checks/check_markdown_first.py tests/test_repository_layout_normalization.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md`; checked 17 files, privacy pass.
 
 ## Outcome and retrospective
 
@@ -327,4 +332,4 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M2.
+- Ready for implementation of M3.
