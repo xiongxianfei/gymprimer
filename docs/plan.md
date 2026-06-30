@@ -2,18 +2,27 @@
 
 ## Active
 
+- [Repository Layout Normalization](plans/2026-06-29-repository-layout-normalization.md)
+  - Status: active
+  - Plan lifecycle state: active
+  - Current milestone: M4 media and historical-artifact cleanup
+  - Current milestone state: closed
+  - Last reviewed milestone: M4 media and historical-artifact cleanup
+  - Next stage: pr
+  - Active context: M1-M4 are closed, explain-change is updated, and final local verification passed. Repository layout normalization is ready for PR handoff.
+
 - [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
   - Status: active
   - Plan lifecycle state: active
   - Current milestone: lifecycle closeout
-  - Current milestone state: verified
+  - Current milestone state: follow-up review-requested
   - Last reviewed milestone: final holistic code-review
-  - Next stage: pr
+  - Next stage: code-review
   - Active context: Proposal, spec, architecture, and ADR are approved. The
     plan passed plan-review R1, the test spec passed test-spec-review R2, and
-    M1-M4 plus final holistic code-review are closed. Explain-change is
-    complete and verify passed; PR handoff is next and requires separate
-    authorization.
+    M1-M4 plus final holistic code-review are closed. The APT follow-up
+    amendment implemented RB-T21/RB-T22 proof and is ready for code-review
+    before PR handoff resumes.
 
 - [Markdown-First Gym Primer](plans/2026-06-27-markdown-first-gym-primer.md)
   - Status: active

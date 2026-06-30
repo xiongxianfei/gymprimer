@@ -4,6 +4,11 @@
 
 accepted
 
+Amended by
+`docs/adr/2026-06-29-expanded-raster-media-purposes.md` for expanded
+Responsible Breadth page media purposes. This ADR remains active for original
+Markdown-first v0.1 media and for the shared centralized provenance mechanism.
+
 ## Context
 
 The Markdown-first v0.1 spec now allows pictures only when they are necessary
@@ -31,8 +36,7 @@ extension-based:
 
 The repository uses this media architecture:
 
-- `media/equipment/` stores optional equipment identification images.
-- `media/movements/` stores optional key movement illustrations.
+- Repository layout normalization moved promoted raster media to `media/<content-type>/<slug>/...`.
 - `media/PROVENANCE.md` is the centralized provenance index for
   AI-generated raster illustrations.
 - Each AI-generated raster asset has exactly one row in

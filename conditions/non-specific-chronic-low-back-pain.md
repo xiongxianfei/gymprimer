@@ -16,7 +16,7 @@ This page does not diagnose the reader, choose a care level, or provide an indiv
 
 ## Red flags: when to stop reading and seek care
 
-Read [the red-flags reference](../about/red-flags.md) before using GymPrimer content for pain-related decisions.
+Read [the red-flags reference](../RED-FLAGS.md) before using GymPrimer content for pain-related decisions.
 
 ## Plain-language overview
 

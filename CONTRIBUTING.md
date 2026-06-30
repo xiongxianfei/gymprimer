@@ -62,14 +62,14 @@ Every media reference must use a relative repository path and include alt text o
 
 Equipment identification example:
 
-![Lat pulldown machine example](./media/equipment/lat-pulldown-machine-example.png)
+![Lat pulldown machine example](./media/exercises/lat-pulldown/lat-pulldown-machine-example.png)
 
 This kind of image helps a beginner recognize the machine. It should not
 replace setup instructions, safety notes, or sources.
 
 Key movement illustration example:
 
-![Incline push-up start and finish example](./media/movements/incline-push-up-phases-example.png)
+![Incline push-up start and finish example](./media/exercises/incline-push-up/incline-push-up-phases-example.png)
 
 This kind of image can show important movement positions. It should not add
 advanced coaching, diagnosis, rehab guidance, or safety claims that are absent

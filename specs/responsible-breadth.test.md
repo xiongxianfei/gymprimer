@@ -9,16 +9,21 @@ draft
 - Spec: `specs/responsible-breadth.md`
 - Spec review:
   - `docs/changes/responsible-breadth/reviews/spec-review-r2.md`
+  - `docs/changes/apt-pattern-architecture/reviews/spec-review-r2.md`
 - Compatibility spec: `specs/markdown-first-primer.md`
 - Plan: `docs/plans/2026-06-29-responsible-breadth.md`
+- Follow-up change metadata:
+  - `docs/changes/apt-pattern-architecture/change.yaml`
 - Plan review:
   - `docs/changes/responsible-breadth/reviews/plan-review-r1.md`
 - Architecture/ADRs:
   - `docs/architecture/system/architecture.md`
   - `docs/changes/responsible-breadth/reviews/architecture-review-r1.md`
+  - `docs/changes/apt-pattern-architecture/reviews/architecture-review-r2.md`
   - `docs/adr/2026-06-29-responsible-breadth-static-content-boundaries.md`
   - `docs/adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `docs/adr/2026-06-28-ai-generated-raster-media-provenance.md`
+  - `docs/adr/2026-06-29-expanded-raster-media-purposes.md`
 
 ## Testing strategy
 
@@ -28,7 +33,8 @@ judgments.
 
 - Unit: checker tests for Responsible Breadth page-class classification,
   required sections, red-flag order, metadata/review cadence, source-count
-  minimums, excluded-scope language, and inherited media/provenance behavior.
+  minimums, excluded-scope language, pattern-page exercise preview contracts,
+  and inherited plus expanded media/provenance behavior.
 - Integration: run the Markdown-first checker against real Responsible Breadth
   surfaces: `SOURCES.md`, `about/`, `patterns/`, `conditions/`, `principles/`,
   `programs/`, optional `media/`, and change-local manual proof records.
@@ -38,7 +44,8 @@ judgments.
 - Smoke: assert the first expanded proof slice exists, paths map to exactly one
   page class, required metadata is present, and final evidence is current.
 - Manual: perform semantic source-quality review, safety/scope-boundary review,
-  visual-necessity review when media exists, and beginner comprehension review.
+  visual-necessity and purpose-specific media review when media exists, and
+  beginner comprehension review.
 - Contract: prove the same-rank compatibility boundary between
   `specs/responsible-breadth.md` and `specs/markdown-first-primer.md`.
 - Migration: prove original numbered v0.1 pages remain governed by the
@@ -89,6 +96,8 @@ closeout record fails the milestone.
 | RB-T18 | mdBook build or deferral | release/check maintainer | M4 | M4 | conditional/external | RB-MP9 or build transcript |
 | RB-T19 | Compatibility with original v0.1 slice | release/check maintainer | M4 | M4 | planned-for-milestone | compatibility regression test output |
 | RB-T20 | Privacy scan over expanded content and proof | tooling maintainer | M2-M4 | M2 | planned-for-milestone | privacy command transcript |
+| RB-T21 | Pattern-page architecture and exercise previews | content/check maintainer | APT amendment | APT amendment | planned-for-milestone | real APT page and fixture integration tests |
+| RB-T22 | Expanded raster media-purpose validation | media/check maintainer | APT amendment | APT amendment | planned-for-milestone | media-purpose fixture tests and visual-media proof |
 
 ## Planned validation command ownership
 
@@ -117,7 +126,7 @@ closeout record fails the milestone.
 | RB-MP4 | Programming-principle source review | content maintainer | M3 | `docs/changes/responsible-breadth/manual-proof/RB-MP4-principle-source-review.md` | Principle page uses cited general ranges and no individualized adaptation. | Page tells the reader what they personally should do. |
 | RB-MP5 | Program-example prescription-boundary review | content maintainer | M3 | `docs/changes/responsible-breadth/manual-proof/RB-MP5-program-boundary-review.md` | Program example is static and explanatory with clear non-prescription framing. | Page adapts to symptoms, goals, equipment, constraints, or training response. |
 | RB-MP6 | Expanded-slice comprehension proof | reader-test facilitator | M3 | `docs/changes/responsible-breadth/manual-proof/RB-MP6-comprehension-proof.md` | Non-identifying reader evidence confirms page purpose, boundaries, stop/red-flag condition, and source-verification understanding. | Reader cannot state the boundary or mistakes a page for diagnosis/prescription. |
-| RB-MP7 | Visual necessity and media proof | media reviewer | M3/M4 when media exists | `docs/changes/responsible-breadth/manual-proof/RB-MP7-visual-media-review.md` | Media is necessary, non-decorative, has alt/adjacent explanation, and inherited provenance where needed. | Media is decorative, unsafe, unprovenanced, or contradicts Markdown. |
+| RB-MP7 | Visual necessity and media proof | media reviewer | M3/M4 when media exists | `docs/changes/responsible-breadth/manual-proof/RB-MP7-visual-media-review.md` | Media is necessary, non-decorative, has alt/adjacent explanation, deterministic `media_purpose`, inherited provenance where needed, and no unsupported diagnosis, pathology, treatment, programming, or technique claim. | Media is decorative, unsafe, unprovenanced, mislabeled by purpose, contradicts Markdown, or becomes source of truth. |
 | RB-MP8 | Final validation ledger and lifecycle sync | release/check maintainer | M4 | `docs/changes/responsible-breadth/manual-proof/RB-MP8-validation-ledger.md` | Required commands and manual proof are current; proposal/spec/architecture/ADR/plan state is synchronized. | Evidence is stale, missing, or claims unobserved CI. |
 | RB-MP9 | mdBook build-or-deferral proof | release/check maintainer | M4 | `docs/changes/responsible-breadth/manual-proof/RB-MP9-mdbook-build-or-deferral.md` | mdBook builds with minimal config, or deferral explains absence and keeps Markdown canonical. | mdBook is claimed without build evidence or deferral, or derived HTML is treated as source. |
 
@@ -135,6 +144,12 @@ are included.
 | M3 | RB-T11 through RB-T15, RB-T20; RB-CMD5, RB-CMD9 | RB-MP2 through RB-MP7 as applicable | M3 closes when the four dependent expanded pages pass checks, remain draft-only, and have source/scope/comprehension proof. |
 | M4 | RB-T16 through RB-T20; RB-CMD6, RB-CMD10, RB-CMD11, RB-CMD12 or deferral | RB-MP8 and RB-MP9 | M4 closes when navigation promotes only fully proven pages and final evidence is current. |
 
+Follow-up APT amendment proof closes when RB-T21 and RB-T22 pass against the
+real APT pattern page, linked exercise pages, generated raster media
+provenance, and change-local manual proof under
+`docs/changes/apt-pattern-architecture/manual-proof/`. This amendment does not
+reopen the original M1-M4 milestone scope.
+
 ## Requirement coverage map
 
 | Requirement ID | Covered by | Level | Notes |
@@ -144,6 +159,7 @@ are included.
 | R3 | RB-T11, RB-T17 | integration, manual | Real-page and ledger checks prove the exact five-category proof slice before scaling. |
 | R4 | RB-T11 | integration | Confirms expected first-slice paths or records reviewed architecture alternative. |
 | R5 | RB-T2, RB-T11 | unit, integration | Pattern/condition required sections are fixture-tested and checked on real pages. |
+| R5a | RB-T2, RB-T11 | unit, integration | Condition pages are fixture-tested against the additional required condition sections. |
 | R6 | RB-T2, RB-T6, RB-T11 | unit, integration | Forbidden diagnosis/treatment/corrective-routine headings fail. |
 | R7 | RB-T3, RB-T11 | unit, integration | Red-flags link must appear before self-management discussion. |
 | R8 | RB-T2, RB-T12, RB-T14 | unit, manual | Non-diagnostic/no-treatment statement is checked structurally and manually. |
@@ -167,13 +183,21 @@ are included.
 | R26 | RB-T4, RB-T17 | unit, manual | Condition, program-example, and red-flags cadence verified. |
 | R27 | RB-T4, RB-T17 | unit, manual | Exercise/principle cadence rules are checked when those page classes exist. |
 | R28 | RB-T4, RB-T17 | unit, manual | Triggered review events are represented in proof/ledger checks. |
-| R29 | RB-T15 | manual | Visual necessity is manual because decorative-vs-useful meaning is semantic. |
+| R29 | RB-T15, RB-T22 | manual, unit | Visual necessity is manual; media path/provenance/purpose behavior is fixture-tested. |
+| R29a | RB-T15, RB-T22 | manual, unit | Expanded pages prefer high-quality human-reviewed raster images when realistic beginner-readable detail is needed. |
+| R29b | RB-T15, RB-T22 | manual, unit | SVG remains allowed only when simple enough and passing visual-necessity review. |
 | R30 | RB-T15 | manual | Machine setup visuals are conditional and manually reviewed when present. |
 | R31 | RB-T15 | manual | Movement visuals are conditional and manually reviewed when present. |
 | R32 | RB-T15 | manual | Overlays/wrong frames/alignment diagrams require material-comprehension rationale. |
 | R33 | RB-T15 | manual | Regression visual change rule is manually checked when such visuals exist. |
 | R34 | RB-T15, Markdown-first media regression tests | manual, unit | Relative path and alt/adjacent explanation use inherited Markdown-first media checks. |
-| R35 | RB-T15, Markdown-first media regression tests | manual, unit | Raster media inherits `media/PROVENANCE.md` contract. |
+| R35 | RB-T15, RB-T22, Markdown-first media regression tests | manual, unit | Raster media inherits `media/PROVENANCE.md` contract. |
+| R35a | RB-T15, RB-T22 | manual, unit | Human-reviewed AI-generated raster images are allowed only as support assets with provenance. |
+| R35b | RB-T15, RB-T22 | manual, unit | Generated raster images cannot become source of truth for anatomy, technique, safety, diagnosis, treatment, or programming. |
+| R35c | RB-T22 | unit | Expanded `media_purpose` enum values are accepted only for expanded Responsible Breadth pages. |
+| R35d | RB-T15, RB-T22 | manual, unit | Pattern alignment images use `pattern_alignment_illustration` only for non-diagnostic visual comparison. |
+| R35e | RB-T15, RB-T22 | manual, unit | Condition anatomy images use `anatomical_region_illustration` only for plain region context. |
+| R35f | RB-T15, RB-T21, RB-T22 | manual, unit, integration | Exercise preview images support pattern/condition pages without replacing exercise instructions. |
 | R36 | RB-T7, RB-T12, RB-T13, RB-T17 | manual, integration | Higher-bar review proof is required for expanded pages. |
 | R37 | RB-T7, RB-T12, RB-T13 | manual | Source traceability, red flags, non-diagnosis, no treatment, no personalization, and scope fit are proof fields. |
 | R38 | RB-T6, RB-T11 | unit, integration | Excluded populations/categories fail automated and real-page checks. |
@@ -195,6 +219,13 @@ are included.
 | R54 | RB-T19 | migration | Responsible Breadth supersedes Markdown-first scope limits only for expanded classes. |
 | R55 | RB-T19, RB-CMD2 | migration, unit | Shared Markdown-first rules continue unless stricter here. |
 | R56 | RB-T19 | migration | Original five-page v0.1 slice remains governed by Markdown-first spec. |
+| R57 | RB-T21 | integration | Pattern pages follow pain point to pattern to core contributors to exercise options. |
+| R58 | RB-T21 | integration | `Why beginners come to this page` includes three to five reader-facing entry points. |
+| R59 | RB-T21 | integration | `The core reason` includes three to five named contributors with citations. |
+| R60 | RB-T6, RB-T12, RB-T21 | unit, manual, integration | `What commonly helps` remains an educational menu, not routine/prescription/guaranteed fix. |
+| R61 | RB-T21 | integration | Each linked exercise preview includes fix reason, used muscles, and one important note. |
+| R62 | RB-T21 | integration | Exercise previews link only to existing exercise pages unless the page is draft-only and marked unavailable. |
+| R63 | RB-T15, RB-T21, RB-T22 | manual, integration, unit | Optional preview images require existing media, alt/adjacent text, and passing provenance. |
 
 ## Example coverage map
 
@@ -210,6 +241,8 @@ are included.
 | E8 | RB-T1, RB-T2, RB-T3, RB-T12 | Responsible Breadth pattern page allowed only under full contract. |
 | E9 | RB-T6, RB-T12 | Condition page that becomes treatment fails. |
 | E10 | RB-T6, RB-T13 | Static program example allowed only without personalization. |
+| E11 | RB-T21 | APT-style pattern page routes reader pain point to pattern explanation, core contributors, and bounded exercise previews. |
+| E12 | RB-T22 | Generated pattern alignment image passes only with `pattern_alignment_illustration` purpose and support-only framing. |
 
 ## Edge case coverage
 
@@ -225,6 +258,11 @@ are included.
 | EC8 | RB-T17 | manual | Source link rot triggers review before page remains current. |
 | EC9 | RB-T6, RB-T11 | unit, integration | Condition page targets pregnancy, post-surgical, pediatric, or other excluded scope. |
 | EC10 | RB-T6, RB-T13 | unit, manual | Program example includes injury-specific substitution. |
+| EC11 | RB-T21 | integration | Pattern page links an exercise preview to a missing exercise page. |
+| EC12 | RB-T21 | integration | Exercise preview omits fix reason, used muscles, or important note. |
+| EC13 | RB-T22 | unit | Generated expanded-page image lacks an approved provenance row. |
+| EC14 | RB-T22 | unit | Pattern alignment image uses `key_movement_illustration` instead of `pattern_alignment_illustration`. |
+| EC15 | RB-T15, RB-T22 | manual, unit | Condition anatomy image implies diagnosis, pathology, or treatment despite provenance. |
 
 ## Test cases
 
@@ -499,6 +537,56 @@ are included.
 - Automation location: `tests/test_responsible_breadth_privacy.py` and
   `tools/checks/check_privacy.py`.
 
+### RB-T21. Pattern-page architecture and exercise previews
+
+- Covers: R35f, R57-R63, AC11, E11, EC11, EC12
+- Level: integration
+- Fixture/setup: Real `patterns/anterior-pelvic-tilt.md`, linked files under
+  `exercises/`, and optional fixture pages under
+  `tests/fixtures/responsible-breadth/pattern-architecture/`.
+- Steps: Assert the pattern page contains the required reader journey:
+  `Why beginners come to this page`, `Working definition`, `How to notice this
+  in yourself`, `The core reason`, `What is uncertain or mixed`, and
+  `What commonly helps`. Assert `Why beginners come to this page` has three to
+  five bullets. Assert `The core reason` has three to five named contributors
+  and each contributor has a citation. Assert every linked exercise preview in
+  `What commonly helps` has `Fix reason`, `Used muscles`, and `Important note`.
+  Resolve each exercise link and fail broken links unless the page is explicitly
+  draft-only and marks the exercise unavailable.
+- Expected result: The pattern page maps user pain point to observable pattern,
+  contributor mechanisms, and bounded exercise options without duplicating full
+  exercise instructions or creating broken links.
+- Failure proves: Pattern pages can be structurally compliant but operationally
+  unhelpful, or can route readers to missing exercise content.
+- Automation location: `tests/test_responsible_breadth_pattern_architecture.py`
+  or the equivalent Responsible Breadth real-page integration test.
+
+### RB-T22. Expanded raster media-purpose validation
+
+- Covers: R29, R29a, R29b, R35, R35a-R35f, AC12, AC13, E12, EC13, EC14,
+  EC15
+- Level: unit plus manual review
+- Fixture/setup: Expanded-page fixtures and `media/PROVENANCE.md` fixtures
+  under `tests/fixtures/responsible-breadth/media-purpose/`, including valid
+  and invalid rows for `pattern_alignment_illustration`,
+  `anatomical_region_illustration`, and `exercise_preview_illustration`.
+- Steps: Run media/provenance checks against fixtures. Assert original v0.1
+  pages still accept only original media purposes. Assert expanded pattern,
+  condition, and exercise-support pages accept the expanded purpose values only
+  in their permitted page contexts. Assert generated raster images require
+  approved provenance and cannot be the source of truth for anatomy, technique,
+  safety, diagnosis, treatment, programming, or exercise instruction. Pair the
+  automated result with RB-MP7 or the change-local visual-media proof for
+  visual meaning that cannot be mechanically inferred.
+- Expected result: Expanded generated raster images are support assets with
+  deterministic purpose labels and human review, while SVG remains allowed only
+  when the manual visual-necessity review accepts it.
+- Failure proves: The media layer can misclassify pattern/condition/exercise
+  support images, silently weaken the original v0.1 media contract, or let
+  generated images carry clinical or instructional authority.
+- Automation location: `tests/test_responsible_breadth_media_purpose.py` or
+  the equivalent media/provenance checker test.
+
 ## Fixtures and data
 
 Planned automated fixtures:
@@ -509,6 +597,8 @@ Planned automated fixtures:
 - `tests/fixtures/responsible-breadth/metadata/`
 - `tests/fixtures/responsible-breadth/sources/`
 - `tests/fixtures/responsible-breadth/guardrails/`
+- `tests/fixtures/responsible-breadth/pattern-architecture/`
+- `tests/fixtures/responsible-breadth/media-purpose/`
 - `tests/fixtures/responsible-breadth/navigation/`
 - `tests/fixtures/responsible-breadth/privacy/`
 
@@ -519,6 +609,8 @@ Planned real pages:
 - `conditions/non-specific-chronic-low-back-pain.md`
 - `principles/how-many-days-a-week.md`
 - `programs/generic-3-day-full-body-example.md`
+- `exercises/*.md` pages referenced by expanded pattern exercise previews
+- `media/PROVENANCE.md` rows for generated raster media when media exists
 
 Manual proof records:
 
@@ -532,6 +624,8 @@ Manual proof records:
 - `docs/changes/responsible-breadth/manual-proof/RB-MP7-visual-media-review.md`
 - `docs/changes/responsible-breadth/manual-proof/RB-MP8-validation-ledger.md`
 - `docs/changes/responsible-breadth/manual-proof/RB-MP9-mdbook-build-or-deferral.md`
+- `docs/changes/apt-pattern-architecture/manual-proof/pattern-source-scope.md`
+- `docs/changes/apt-pattern-architecture/manual-proof/visual-media-review.md`
 
 Reader-test records must avoid names, contact details, private health details,
 symptom histories, and local machine paths. Use a non-identifying reader
@@ -547,6 +641,8 @@ description such as "beginner reader, first 90 days of gym training."
 - Do not mock mdBook success. If `mdbook build` is claimed, run the real
   command and record the result. If unavailable, record deferral.
 - Do not use AI-generated exercise or health guidance as a test oracle.
+- Do not use generated raster images as an oracle for anatomy, technique,
+  diagnosis, treatment, programming, or safety.
 - Do not use reader symptom histories as fixtures.
 
 ## Migration or compatibility tests
@@ -560,6 +656,9 @@ description such as "beginner reader, first 90 days of gym training."
   promotion evidence exists.
 - Inherited Markdown-first media tests prove `media/PROVENANCE.md` semantics
   continue to apply.
+- RB-T22 proves original v0.1 media-purpose values remain valid for original
+  pages while expanded Responsible Breadth pages use the expanded purpose enum
+  only in the permitted page contexts.
 
 ## Observability verification
 
@@ -569,7 +668,8 @@ Checker output should identify:
 - page class;
 - rule ID or stable check name;
 - missing section, missing metadata field, source ID, red-flag link,
-  normalized media path, provenance field, scope term, or privacy category when
+  exercise preview annotation, broken exercise link, normalized media path,
+  provenance field, `media_purpose`, scope term, or privacy category when
   applicable;
 - pass/fail/setup-error status with distinct exit behavior.
 
@@ -594,8 +694,9 @@ personally identifying reader details in validation output.
 - RB-T12 and RB-T13 manually verify that semantic wording does not cross into
   diagnosis, treatment, rehab, correction promises, or prescription.
 - RB-T14 requires non-identifying comprehension evidence.
-- RB-T15 verifies that media does not introduce unsupported anatomy, unsafe
-  setup, medical/rehab imagery, or unprovenanced raster assets.
+- RB-T15 and RB-T22 verify that media does not introduce unsupported anatomy,
+  unsafe setup, diagnosis/pathology/treatment implications, medical/rehab
+  imagery, wrong purpose labels, or unprovenanced raster assets.
 - RB-T20 runs negative-match privacy checks over content and proof records.
 
 ## Performance checks
@@ -623,6 +724,12 @@ personally identifying reader details in validation output.
 - Confirm source-quality mix is documented in manual proof.
 - Confirm uncertainty/mixed-evidence language is present where sources do not
   fully agree.
+- Confirm pattern pages state reader pain points, a working pattern definition,
+  named core contributors, and bounded exercise previews.
+- Confirm every exercise preview has fix reason, used muscles, and one
+  important note, and links to an existing exercise page.
+- Confirm generated raster media has an approved provenance row, deterministic
+  `media_purpose`, alt/adjacent explanation, and support-only framing.
 - Confirm no page asks for symptoms, personal goals, equipment constraints,
   injury status, age, pregnancy status, medical history, or training response to
   choose content.
@@ -646,6 +753,9 @@ personally identifying reader details in validation output.
   or manual evidence.
 - Do not test generated AI content as source of truth because it remains
   prohibited.
+- Do not test whether generated images are medically or biomechanically
+  authoritative; they are support assets and must be checked against Markdown
+  and cited sources instead.
 
 ## Uncovered gaps
 
@@ -664,8 +774,8 @@ Known validation limits to preserve in review:
 ## Next artifacts
 
 - `test-spec-review` for `specs/responsible-breadth.test.md`.
-- After clean test-spec-review, implementation begins with M1 from
-  `docs/plans/2026-06-29-responsible-breadth.md`.
+- After clean test-spec-review, the APT follow-up can implement or reconcile
+  RB-T21/RB-T22 proof without reopening the original M1-M4 milestone scope.
 
 ## Follow-on artifacts
 

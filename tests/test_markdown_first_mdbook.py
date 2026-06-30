@@ -9,11 +9,11 @@ MP4 = (
 )
 README = ROOT / "README.md"
 FIRST_SLICE = (
-    "01-getting-started/beginner-training-principles.md",
-    "02-machines/lat-pulldown.md",
-    "02-machines/seated-row.md",
-    "02-machines/chest-press.md",
-    "03-bodyweight/incline-push-up.md",
+    "principles/beginner-training-principles.md",
+    "exercises/lat-pulldown.md",
+    "exercises/seated-row.md",
+    "exercises/chest-press.md",
+    "exercises/incline-push-up.md",
 )
 
 

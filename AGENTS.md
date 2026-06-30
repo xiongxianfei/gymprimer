@@ -28,4 +28,5 @@ When sources conflict, agents MUST stop and surface the conflict unless the requ
 - Agents MUST NOT claim CI passed unless a CI run was actually observed. Local command results MUST be reported with the exact command.
 - Agents MUST NOT introduce secrets, private data, unlicensed media, generated exercise guidance as source of truth, unsupported safety claims, or medical advice.
 - Agents MUST keep changes focused. Unrelated refactors, broad rewrites, and formatting churn require explicit justification.
+- Agents MUST NOT split one existing line into multiple lines, or join multiple existing lines into one line, merely to make text look better. Preserve existing line breaks unless the substantive edit or an explicit formatter requires otherwise.
 - Agents MUST preserve user changes in the working tree and MUST NOT reset, overwrite, or discard them without explicit instruction.

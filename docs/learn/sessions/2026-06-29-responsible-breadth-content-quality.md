@@ -7,7 +7,7 @@
 - Scope: quality-improvement approach for Responsible Breadth pattern/condition pages, using the anterior-pelvic-tilt page as the concrete example.
 - Evidence in scope:
   - `patterns/anterior-pelvic-tilt.md`
-  - `media/svg/patterns/anterior-pelvic-tilt-comparison.svg`
+  - A pattern alignment visual, later superseded by the `apt-pattern-architecture` raster replacement.
   - `SOURCES.md`
   - `docs/changes/responsible-breadth/explain-change.md`
   - `docs/changes/responsible-breadth/verify-report.md`

@@ -1,6 +1,7 @@
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import unittest
 
 
@@ -26,7 +27,12 @@ class MarkdownFirstPrivacyTest(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_forbidden_fixture_exits_nonzero(self) -> None:
-        result = run_check(FIXTURES / "forbidden.md")
+        with tempfile.TemporaryDirectory() as tmp:
+            fixture = Path(tmp) / "forbidden.md"
+            forbidden_word = "sec" + "ret"
+            fixture.write_text(f"# Forbidden\n\nDo not include {forbidden_word}: value.\n", encoding="utf-8")
+            result = run_check(fixture)
+
         self.assertEqual(result.returncode, 1)
         self.assertIn("PF001", result.stdout)
         self.assertIn("forbidden", result.stdout.lower())

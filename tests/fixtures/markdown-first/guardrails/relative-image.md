@@ -2,7 +2,7 @@
 
 > Disclaimer: GymPrimer is educational content. It is not medical advice and not personalized coaching.
 
-![Simple setup diagram](../../../../media/svg/examples/lat-pulldown-step-1.svg)
+![Simple setup diagram](../../../../media/exercises/lat-pulldown/lat-pulldown-machine-example.png)
 
 The diagram shows where a beginner would sit before starting.
 

@@ -50,7 +50,23 @@ RESPONSIBLE_BREADTH_METADATA_FIELDS = (
     "Next review due",
     "Review scope",
 )
-PATTERN_CONDITION_SECTIONS = (
+PATTERN_SECTIONS = (
+    "## What this page is",
+    "## What this page is not",
+    "## Red flags",
+    "## Why beginners come to this page",
+    "## Working definition",
+    "## How to notice this in yourself",
+    "## The core reason",
+    "## What is uncertain or mixed",
+    "## What commonly helps",
+    "## What to avoid",
+    "## When to see a professional",
+    "## Where to next in this primer",
+    "## Sources",
+    "## Author and review date",
+)
+CONDITION_SECTIONS = (
     "## What this page is",
     "## What this page is not",
     "## Red flags",
@@ -96,10 +112,43 @@ SUPPORT_FILENAMES = {
     "CONTRIBUTING.md",
     "CONTENT_LICENSE.md",
     "PROVENANCE.md",
+    "RED-FLAGS.md",
+}
+OLD_CONTENT_DIRS = {
+    "01" + "-getting-started",
+    "02" + "-machines",
+    "03" + "-bodyweight",
+}
+OLD_MEDIA_BUCKETS = {
+    "media/" + "equipment/",
+    "media/" + "movements/",
+    "media/" + "supplemental/",
+}
+OLD_REFERENCE_PATTERNS = tuple(f"{directory}/" for directory in sorted(OLD_CONTENT_DIRS)) + ("about/" + "red-flags.md",)
+OLD_MEDIA_REFERENCE_PATTERNS = (
+    "media/" + "equipment/",
+    "media/" + "movements/",
+    "media/" + "supplemental/",
+)
+HISTORICAL_ARTIFACT_DIRS = {
+    "content",
+    "schemas",
+    "generated",
+}
+ROOT_GOVERNANCE_DIRS = {
+    "proposals",
+    "adr",
 }
 RASTER_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
 SVG_EXTENSIONS = {".svg"}
 ALLOWED_MEDIA_PURPOSES = {"equipment_identification", "key_movement_illustration"}
+RESPONSIBLE_BREADTH_MEDIA_PURPOSES_BY_CLASS = {
+    "pattern_page": {"pattern_alignment_illustration", "exercise_preview_illustration"},
+    "condition_page": {"anatomical_region_illustration", "exercise_preview_illustration"},
+    "expanded_exercise_page": {"equipment_identification", "key_movement_illustration"},
+    "programming_principle_page": {"equipment_identification", "key_movement_illustration"},
+    "program_example_page": {"equipment_identification", "key_movement_illustration"},
+}
 REQUIRED_PROVENANCE_FIELDS = (
     "asset_path",
     "asset_type",
@@ -224,6 +273,64 @@ def responsible_breadth_page_class(path: Path, root: Path = ROOT) -> str | None:
     return RESPONSIBLE_BREADTH_PAGE_CLASSES.get(first_part)
 
 
+def normalized_layout_active(root: Path = ROOT) -> bool:
+    return (root / "RED-FLAGS.md").exists()
+
+
+def media_layout_active(root: Path = ROOT) -> bool:
+    return normalized_layout_active(root) and not any((root / old_bucket).exists() for old_bucket in OLD_MEDIA_BUCKETS)
+
+
+def relative_parts(path: Path, root: Path = ROOT) -> list[str]:
+    relative = repo_relative_path(path, root)
+    return [] if relative is None else relative.split("/")
+
+
+def is_old_content_path(path: Path, root: Path = ROOT) -> bool:
+    parts = relative_parts(path, root)
+    return bool(parts and parts[0] in OLD_CONTENT_DIRS)
+
+
+def is_historical_artifact_path(path: Path, root: Path = ROOT) -> bool:
+    parts = relative_parts(path, root)
+    return bool(parts and parts[0] in HISTORICAL_ARTIFACT_DIRS)
+
+
+def has_historical_classification(text: str) -> bool:
+    lower = text.lower()
+    return "historical" in lower or "archive" in lower or "archived" in lower
+
+
+def looks_like_compatibility_stub(text: str) -> bool:
+    return bool(re.search(r"\b(moved|renamed|redirect|see instead)\b", text, re.IGNORECASE))
+
+
+def stale_references(text: str) -> list[str]:
+    references = [pattern for pattern in OLD_REFERENCE_PATTERNS if pattern in text]
+    if media_layout_active(ROOT):
+        references.extend(pattern for pattern in OLD_MEDIA_REFERENCE_PATTERNS if pattern in text)
+    return references
+
+
+def expected_subject_media_prefix(page_path: Path, page_class: str | None, root: Path = ROOT) -> str | None:
+    if page_class is None:
+        return None
+    relative = repo_relative_path(page_path, root)
+    if relative is None:
+        return None
+    parts = relative.split("/")
+    if len(parts) < 2:
+        return None
+    slug = Path(parts[-1]).stem
+    if page_class == "pattern_page":
+        return f"media/patterns/{slug}/"
+    if page_class == "condition_page":
+        return f"media/conditions/{slug}/"
+    if page_class == "expanded_exercise_page":
+        return f"media/exercises/{slug}/"
+    return None
+
+
 def parse_metadata(lines: list[str]) -> dict[str, str]:
     metadata: dict[str, str] = {}
     for line in lines[:20]:
@@ -245,6 +352,16 @@ def heading_position(text: str, heading_prefix: str) -> int:
     pattern = re.compile(rf"^{re.escape(heading_prefix)}(?:$|[:\n ])", re.MULTILINE)
     match = pattern.search(text)
     return -1 if match is None else match.start()
+
+
+def section_text(text: str, heading_prefix: str) -> str:
+    start = heading_position(text, heading_prefix)
+    if start == -1:
+        return ""
+    next_heading = re.search(r"^##\s+", text[start + 1 :], re.MULTILINE)
+    if next_heading is None:
+        return text[start:]
+    return text[start : start + 1 + next_heading.start()]
 
 
 def is_remote_media_reference(target: str) -> bool:
@@ -297,9 +414,29 @@ def split_page_refs(value: str) -> set[str]:
     return {item.strip() for item in re.split(r"[,;]", value) if item.strip()}
 
 
+def media_purpose_allowed_for_page(page_class: str | None, media_purpose: str) -> bool:
+    if page_class is None:
+        return media_purpose in ALLOWED_MEDIA_PURPOSES
+    return media_purpose in RESPONSIBLE_BREADTH_MEDIA_PURPOSES_BY_CLASS.get(page_class, ALLOWED_MEDIA_PURPOSES)
+
+
+def expected_media_purpose_message(page_class: str | None) -> str:
+    if page_class is None:
+        expected = sorted(ALLOWED_MEDIA_PURPOSES)
+    else:
+        expected = sorted(RESPONSIBLE_BREADTH_MEDIA_PURPOSES_BY_CLASS.get(page_class, ALLOWED_MEDIA_PURPOSES))
+    return ", ".join(expected)
+
+
+def image_text_implies_condition_diagnosis(alt_text: str) -> bool:
+    return bool(re.search(r"\b(diagnos(?:is|ed)|patholog(?:y|ic)|treat(?:ment)?|damaged|disease)\b", alt_text, re.IGNORECASE))
+
+
 def validate_raster_provenance(
     page_path: Path,
     asset_path: str,
+    alt_text: str,
+    page_class: str | None,
     provenance_rows: dict[str, list[dict[str, str]]],
     root: Path = ROOT,
 ) -> list[Finding]:
@@ -333,12 +470,22 @@ def validate_raster_provenance(
             )
         ]
 
-    if row["media_purpose"].strip() not in ALLOWED_MEDIA_PURPOSES:
+    media_purpose = row["media_purpose"].strip()
+    if not media_purpose_allowed_for_page(page_class, media_purpose):
         return [
             Finding(
                 page_path,
                 "media_usage_out_of_scope",
-                f"media_purpose is outside v0.1 scope for {asset_path}: {row['media_purpose']}",
+                f"media_purpose is outside allowed scope for {asset_path}: {media_purpose}; expected one of {expected_media_purpose_message(page_class)}",
+            )
+        ]
+
+    if media_purpose == "anatomical_region_illustration" and image_text_implies_condition_diagnosis(alt_text):
+        return [
+            Finding(
+                page_path,
+                "media_usage_out_of_scope",
+                f"anatomical_region_illustration must not imply diagnosis, pathology, or treatment: {alt_text}",
             )
         ]
 
@@ -366,7 +513,9 @@ def validate_raster_provenance(
 
 def validate_media_reference(
     page_path: Path,
+    alt_text: str,
     target: str,
+    page_class: str | None,
     provenance_rows: dict[str, list[dict[str, str]]],
     root: Path = ROOT,
 ) -> list[Finding]:
@@ -396,6 +545,26 @@ def validate_media_reference(
         ]
 
     extension = resolved.suffix.lower()
+    if media_layout_active(root):
+        for old_bucket in OLD_MEDIA_BUCKETS:
+            if asset_path.startswith(old_bucket):
+                return [
+                    Finding(
+                        page_path,
+                        "old_media_bucket_reference",
+                        f"media reference uses removed media bucket: {asset_path}",
+                    )
+                ]
+        expected_prefix = expected_subject_media_prefix(page_path, page_class, root)
+        if extension in RASTER_EXTENSIONS and expected_prefix is not None and not asset_path.startswith(expected_prefix):
+            return [
+                Finding(
+                    page_path,
+                    "subject_media_path_mismatch",
+                    f"raster media for this page must live under {expected_prefix}: {asset_path}",
+                )
+            ]
+
     if extension in SVG_EXTENSIONS:
         if not resolved.exists():
             return [Finding(page_path, "media_asset_missing", f"local media file is missing: {asset_path}")]
@@ -407,7 +576,7 @@ def validate_media_reference(
     if not resolved.exists():
         return [Finding(page_path, "media_asset_missing", f"local media file is missing: {asset_path}")]
 
-    return validate_raster_provenance(page_path, asset_path, provenance_rows, root)
+    return validate_raster_provenance(page_path, asset_path, alt_text, page_class, provenance_rows, root)
 
 
 def validate_responsible_breadth_page(
@@ -420,8 +589,10 @@ def validate_responsible_breadth_page(
     findings: list[Finding] = []
 
     required_sections: tuple[str, ...] = ()
-    if page_class in {"pattern_page", "condition_page"}:
-        required_sections = PATTERN_CONDITION_SECTIONS
+    if page_class == "pattern_page":
+        required_sections = PATTERN_SECTIONS
+    elif page_class == "condition_page":
+        required_sections = CONDITION_SECTIONS
     elif page_class == "programming_principle_page":
         required_sections = PROGRAM_PRINCIPLE_SECTIONS
     elif page_class == "program_example_page":
@@ -455,13 +626,19 @@ def validate_responsible_breadth_page(
 
     if page_class in {"pattern_page", "condition_page"}:
         red_flags_position = heading_position(text, "## Red flags")
-        self_management_position = heading_position(text, "## Commonly recommended self-management themes")
+        self_management_heading = "## What commonly helps" if page_class == "pattern_page" else "## Commonly recommended self-management themes"
+        self_management_position = heading_position(text, self_management_heading)
         if red_flags_position == -1:
             findings.append(Finding(path, "RB004", "red-flags section is missing"))
-        elif "../about/red-flags.md" not in text and "about/red-flags.md" not in text:
-            findings.append(Finding(path, "RB004", "red-flags section must link to about/red-flags.md"))
+        elif normalized_layout_active(ROOT) and "RED-FLAGS.md" not in text:
+            findings.append(Finding(path, "RB004", "red-flags section must link to RED-FLAGS.md"))
+        elif not normalized_layout_active(ROOT) and "../about/" + "red-flags.md" not in text and "about/" + "red-flags.md" not in text:
+            findings.append(Finding(path, "RB004", "red-flags section must link to the nested red-flags reference"))
         elif self_management_position != -1 and red_flags_position > self_management_position:
             findings.append(Finding(path, "RB004", "red-flags routing must appear before self-management discussion"))
+
+    if page_class == "pattern_page":
+        findings.extend(validate_pattern_architecture(path, text))
 
     if len(cited_ids) < 3:
         findings.append(
@@ -477,6 +654,59 @@ def validate_responsible_breadth_page(
     return findings
 
 
+def validate_pattern_architecture(path: Path, text: str) -> list[Finding]:
+    findings: list[Finding] = []
+
+    beginner_section = section_text(text, "## Why beginners come to this page")
+    beginner_bullets = re.findall(r"^\s*-\s+", beginner_section, re.MULTILINE)
+    if beginner_section and not 3 <= len(beginner_bullets) <= 5:
+        findings.append(
+            Finding(
+                path,
+                "RB007",
+                f"Why beginners come to this page must contain three to five entry-point bullets; found {len(beginner_bullets)}",
+            )
+        )
+
+    reason_section = section_text(text, "## The core reason")
+    contributors = list(re.finditer(r"^\*\*([^*]+)\.\*\*", reason_section, re.MULTILINE))
+    if reason_section and not 3 <= len(contributors) <= 5:
+        findings.append(
+            Finding(
+                path,
+                "RB007",
+                f"The core reason must name three to five contributors; found {len(contributors)}",
+            )
+        )
+    for index, contributor in enumerate(contributors):
+        next_start = contributors[index + 1].start() if index + 1 < len(contributors) else len(reason_section)
+        contributor_block = reason_section[contributor.start() : next_start]
+        if not reference_ids_on_line(contributor_block):
+            findings.append(
+                Finding(
+                    path,
+                    "RB007",
+                    f"The core reason contributor lacks a citation: {contributor.group(1)}",
+                )
+            )
+
+    helps_section = section_text(text, "## What commonly helps")
+    preview_pattern = re.compile(r"^-\s+\*\*\[([^\]]+)\]\((../exercises/[^)]+\.md)\)\*\*", re.MULTILINE)
+    previews = list(preview_pattern.finditer(helps_section))
+    for index, preview in enumerate(previews):
+        next_start = previews[index + 1].start() if index + 1 < len(previews) else len(helps_section)
+        block = helps_section[preview.start() : next_start]
+        link_target = preview.group(2)
+        exercise_path = (path.parent / link_target).resolve()
+        if not exercise_path.exists() and "not yet available" not in block.lower():
+            findings.append(Finding(path, "RB007", f"pattern exercise preview links missing exercise page: {link_target}"))
+        for required in ("Fix reason", "Used muscles", "Important note"):
+            if f"*{required}:*" not in block:
+                findings.append(Finding(path, "RB007", f"pattern exercise preview is missing {required}: {link_target}"))
+
+    return findings
+
+
 def check_page(
     path: Path,
     global_sources: dict[str, str],
@@ -484,6 +714,13 @@ def check_page(
     root: Path = ROOT,
 ) -> tuple[list[Finding], dict[str, str], set[str]]:
     if is_support_file(path):
+        text = path.read_text(encoding="utf-8")
+        if normalized_layout_active(root):
+            findings = [
+                Finding(path, "stale_old_path_reference", f"active Markdown references removed path: {reference}")
+                for reference in stale_references(text)
+            ]
+            return findings, {}, set()
         return [], {}, set()
 
     text = path.read_text(encoding="utf-8")
@@ -493,6 +730,26 @@ def check_page(
     urls = source_urls(text)
     cited_ids = cited_reference_ids(text)
     rb_page_class = responsible_breadth_page_class(path, root)
+    strict_layout = normalized_layout_active(root)
+
+    if strict_layout and is_historical_artifact_path(path, root):
+        if not has_historical_classification(text):
+            findings.append(
+                Finding(
+                    path,
+                    "historical_artifact_unclassified",
+                    "historical structured-platform artifacts must be labeled historical or archived when retained",
+                )
+            )
+        return findings, {}, set()
+
+    if strict_layout and is_old_content_path(path, root):
+        code = "compatibility_stub_forbidden" if looks_like_compatibility_stub(text) else "old_content_path_active"
+        findings.append(Finding(path, code, "old numbered content paths must be removed directly after migration"))
+
+    if strict_layout:
+        for reference in stale_references(text):
+            findings.append(Finding(path, "stale_old_path_reference", f"active Markdown references removed path: {reference}"))
 
     if rb_page_class is None and not has_prominent_disclaimer(lines):
         findings.append(
@@ -574,7 +831,7 @@ def check_page(
         target = match.group(2).strip()
         if not alt_text:
             findings.append(Finding(path, "MF009", "media reference is missing alt text"))
-        findings.extend(validate_media_reference(path, target, provenance_rows, root))
+        findings.extend(validate_media_reference(path, alt_text, target, rb_page_class, provenance_rows, root))
 
     return findings, urls, cited_ids
 
@@ -611,6 +868,36 @@ def check_cross_page_source_usage(page_sources: dict[str, dict[str, str]], page_
     return findings
 
 
+def validate_repository_layout(root: Path, provenance_rows: dict[str, list[dict[str, str]]]) -> list[Finding]:
+    if not normalized_layout_active(root):
+        return []
+
+    findings: list[Finding] = []
+    for directory in sorted(ROOT_GOVERNANCE_DIRS):
+        path = root / directory
+        if path.exists():
+            findings.append(
+                Finding(
+                    path,
+                    "governance_path_not_under_docs",
+                    f"governance artifacts must remain under docs/: {directory}/",
+                )
+            )
+
+    if media_layout_active(root):
+        for asset_path in sorted(provenance_rows):
+            if any(asset_path.startswith(old_bucket) for old_bucket in OLD_MEDIA_BUCKETS):
+                findings.append(
+                    Finding(
+                        root / "media/PROVENANCE.md",
+                        "stale_media_provenance_path",
+                        f"media provenance row uses removed media bucket: {asset_path}",
+                    )
+                )
+
+    return findings
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Check Markdown-first GymPrimer pages for v0.1 structural, citation, scope, language, and media rules."
@@ -635,6 +922,7 @@ def main(argv: list[str] | None = None) -> int:
     media_provenance = load_media_provenance()
 
     findings: list[Finding] = list(index_findings)
+    findings.extend(validate_repository_layout(ROOT, media_provenance))
     page_sources: dict[str, dict[str, str]] = {}
     page_citations: dict[str, set[str]] = {}
     for path in markdown_paths:

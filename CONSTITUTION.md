@@ -36,6 +36,8 @@ Specs MUST identify requirements with stable IDs and include acceptance criteria
 
 Small editorial fixes, typo fixes, citation formatting fixes, and documentation clarifications MAY proceed without a spec when they do not change scope, commitments, safety meaning, licensing, behavior, schema, or user obligations.
 
+Formatting-only edits MUST NOT split one existing line into multiple lines, or join multiple existing lines into one line, merely to make text look better. Line wrapping is allowed only when required by a substantive content edit, a reviewed generated format, or an explicit repository formatting rule.
+
 ## Test-Driven Rules
 
 Behavior changes MUST be proven by tests or by an explicit manual verification record when automation is not yet possible. Bug fixes MUST start with a failing regression test or a documented reproduction that fails before the fix.
@@ -105,6 +107,8 @@ README content outside managed marker blocks MUST NOT be rewritten as part of ar
 Agents MUST state important assumptions, blockers, source conflicts, and validation gaps. Agents MUST NOT silently broaden scope, invent external facts, fake test results, claim unobserved CI, discard user changes, or perform unrelated refactors.
 
 Agents MUST inspect existing files before editing, prefer repository patterns over new abstractions, keep changes focused, and preserve a dirty working tree unless explicitly instructed otherwise.
+
+Agents MUST preserve existing line breaks when editing nearby text unless changing the line break is necessary for the substantive edit or an explicit formatting rule. Cosmetic wrapping and unwrapping are formatting churn.
 
 Agents MUST use durable artifacts for durable decisions. Chat-only decisions are acceptable for temporary coordination, but project rules, requirements, architecture, verification evidence, and accepted exceptions belong in the repository.
 

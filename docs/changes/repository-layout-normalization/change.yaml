@@ -1,0 +1,111 @@
+change_id: repository-layout-normalization
+proposal: docs/proposals/2026-06-29-responsible-breadth.md
+status: pr-needed
+current_stage: pr
+created_date: 2026-06-29
+notes:
+  - Created after the architecture target shape identified five logical blocks and a future physical migration requirement.
+  - M3 has moved canonical Markdown content paths and removed the old content/red-flags directories directly.
+  - Media co-location and historical structured-platform cleanup remain for M4.
+  - Spec-review R1 requested changes for old-path compatibility, red-flags/orientation path policy, and media migration determinism.
+  - Spec revision resolved R1 findings by choosing direct old-path removal, root RED-FLAGS.md, direct media co-location, and direct historical-artifact removal when no active dependency remains.
+  - Spec revision added dependency-first migration requirements: inventory active dependencies, update or remove references first, then move or remove files.
+  - Spec-review R2 approved the revised migration spec and routed the change to architecture or ADR review.
+  - Architecture update drafted canonical architecture changes and proposed ADR 2026-06-29-direct-repository-layout-normalization.
+  - Architecture-review R1 approved the architecture update and ADR with no material findings; architecture status and ADR status must be normalized before planning relies on them.
+  - Architecture status normalized to approved and ADR 2026-06-29-direct-repository-layout-normalization normalized to accepted.
+  - Plan created at docs/plans/2026-06-29-repository-layout-normalization.md and indexed in docs/plan.md.
+  - Plan-review R1 requested revision for PR-RLN-1: remove test-spec authoring ownership from implementation milestones.
+  - Plan revision resolved PR-RLN-1 by moving AC3/test-spec ownership to the downstream test-spec stage and adding the R1-R25/EC1-EC9 pre-implementation dependency.
+  - Plan-review R2 approved the revised plan and routed the change to test-spec.
+  - Test spec created at specs/repository-layout-normalization.test.md and maps R1-R25 plus EC1-EC9 before M1 starts.
+  - Test-spec-review R1 requested revisions for TSR-RLN-1 and TSR-RLN-2: add proof/command milestone ownership and bounded manual-proof ownership.
+  - TSR-RLN-1 resolved by adding test ownership and planned validation command ownership maps to specs/repository-layout-normalization.test.md.
+  - TSR-RLN-2 resolved by removing manual-proof requirements and replacing them with deterministic evidence records.
+  - Test-spec-review R2 approved the revised proof map and allowed implementation handoff to M1.
+  - M1 implemented dependency inventory evidence at docs/changes/repository-layout-normalization/evidence/dependency-inventory.md without moving or removing files.
+  - Code-review M1 R1 closed M1 with no material findings and routed the change to M2 implementation.
+  - M2 implemented checker enforcement and regression tests for normalized layout paths without moving real content or media files.
+  - Code-review M2 R1 closed M2 with no material findings and routed the change to M3 implementation.
+  - M3 moved canonical Markdown content paths and root red flags, updated active references, and left media bucket cleanup to M4.
+  - Code-review M3 R1 requested resolution for CR-RLN-M3-1 because M3 rewrote exact dependency inventory and validation metadata into placeholders while cleaning stale path strings.
+  - Review-resolution for CR-RLN-M3-1 restored exact M1 inventory evidence and narrowed the M3 stale-path scan to active content, tests, and tools.
+  - Code-review M3 R2 closed M3 with no material findings and routed the change to M4 implementation.
+  - M4 moved promoted media to subject-co-located paths, updated provenance, removed old media buckets and SVG examples, removed superseded structured-platform folders/tools/tests from the active tree, and recorded disposition evidence.
+  - Code-review M4 R1 requested resolution for CR-RLN-M4-1 because the M4 historical-disposition evidence path does not match the approved RLN-T7 proof-map path.
+  - Code-review M4 R2 found CR-RLN-M4-1 still present because no resolution diff added the approved evidence path or amended the proof map.
+  - Review-resolution for CR-RLN-M4-1 renamed the M4 disposition evidence to the approved RLN-T7 path and routed M4 back to code-review.
+  - Code-review M4 R3 closed M4 with no material findings and routed the change to final closeout.
+  - Explain-change updated docs/changes/repository-layout-normalization/explain-change.md for the final reviewed implementation and routed the change to verify.
+  - Final local verification passed and routed the change to PR handoff.
+validation:
+  - git diff --check -- passed
+  - python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/adr/2026-06-29-direct-repository-layout-normalization.md specs/repository-layout-normalization.md docs/changes/repository-layout-normalization/change.yaml -- passed, checked 4 files
+  - python3 tools/checks/check_privacy.py docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md docs/changes/repository-layout-normalization/change.yaml docs/architecture/system/architecture.md docs/adr/2026-06-29-direct-repository-layout-normalization.md specs/repository-layout-normalization.md -- passed, checked 6 files
+  - git diff --check -- passed after test-spec authoring
+  - python3 tools/checks/check_privacy.py specs/repository-layout-normalization.test.md docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md docs/changes/repository-layout-normalization/change.yaml -- passed, checked 4 files
+  - git diff --check -- passed after removing manual-proof requirements
+  - python3 tools/checks/check_privacy.py specs/repository-layout-normalization.test.md docs/plans/2026-06-29-repository-layout-normalization.md docs/changes/repository-layout-normalization/review-resolution.md docs/changes/repository-layout-normalization/change.yaml docs/plan.md -- passed, checked 5 files
+  - git diff --check -- passed after test-spec-review R2 recording
+  - python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization/reviews/test-spec-review-r2.md docs/changes/repository-layout-normalization/review-log.md docs/changes/repository-layout-normalization/change.yaml docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md -- passed, checked 5 files
+  - rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags|media/equipment|media/movements|media/supplemental|content/|schemas/|generated/" . -- passed for M1 inventory; matches categorized in evidence/dependency-inventory.md
+  - python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization -- passed, checked 12 files
+  - git diff --check -- passed after M1 implementation
+  - python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md -- passed, checked 14 files
+  - git diff --check -- passed during code-review M1 R1
+  - python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md -- passed during code-review M1 R1, checked 14 files
+  - python3 -m unittest tests.test_repository_layout_normalization -- passed, ran 10 tests
+  - python3 -m unittest discover -s tests -- passed, ran 141 tests
+  - git diff --check -- passed after M2 implementation
+  - python3 tools/checks/check_privacy.py tools/checks/check_markdown_first.py tests/test_repository_layout_normalization.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md -- passed, checked 17 files
+  - python3 -m unittest tests.test_repository_layout_normalization -- passed during code-review M2 R1, ran 10 tests
+  - python3 -m unittest discover -s tests -- passed during code-review M2 R1, ran 141 tests
+  - git diff --check -- passed during code-review M2 R1
+  - python3 tools/checks/check_privacy.py tools/checks/check_markdown_first.py tests/test_repository_layout_normalization.py docs/changes/repository-layout-normalization docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md -- passed during code-review M2 R1, checked 17 files
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed, checked 18 Markdown files
+  - M3 stale content/red-flags scan over active content, tests, tools, and change-local records -- superseded during CR-RLN-M3-1 resolution because exact historical proof records intentionally retain old path strings
+  - python3 -m unittest discover -s tests -- passed, ran 141 tests
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization -- passed, checked 32 files
+  - git diff --check -- passed after M3 implementation
+  - M3 old content-directory existence check -- passed, returned no paths
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed during code-review M3 R1, checked 18 Markdown files
+  - python3 -m unittest discover -s tests -- passed during code-review M3 R1, ran 141 tests
+  - git diff --check -- passed during code-review M3 R1
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization -- passed during code-review M3 R1, checked 32 files
+  - rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools -- passed during CR-RLN-M3-1 resolution with no matches, exit 1 expected for rg no-match
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed during CR-RLN-M3-1 resolution, checked 18 Markdown files
+  - python3 -m unittest discover -s tests -- passed during CR-RLN-M3-1 resolution, ran 141 tests
+  - git diff --check -- passed during CR-RLN-M3-1 resolution
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization specs/repository-layout-normalization.test.md docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md -- passed during CR-RLN-M3-1 resolution, checked 36 files
+  - rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools -- passed during code-review M3 R2 with no matches, exit 1 expected for rg no-match
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed during code-review M3 R2, checked 18 Markdown files
+  - python3 -m unittest discover -s tests -- passed during code-review M3 R2, ran 141 tests
+  - git diff --check -- passed during code-review M3 R2
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization specs/repository-layout-normalization.test.md docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md -- passed during code-review M3 R2, checked 36 files
+  - find 01-getting-started 02-machines 03-bodyweight about -maxdepth 0 -type d -print 2>/dev/null || true -- passed during code-review M3 R2, returned no paths
+  - python3 -m unittest discover -s tests -- passed after M4 implementation, ran 79 tests
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed after M4 implementation, checked 18 Markdown files
+  - rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md -- passed after M4 implementation with no matches, exit 1 expected for rg no-match
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools -- passed after M4 implementation, checked 103 files
+  - git diff --check -- passed after M4 implementation
+  - find media/equipment media/movements media/supplemental media/svg content schemas generated tools/validation -maxdepth 0 -print 2>/dev/null || true -- passed after M4 implementation, returned no paths
+  - python3 -m unittest tests.test_repository_layout_normalization tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1 tests.test_markdown_first_privacy -- passed after M4 implementation, ran 50 tests
+  - python3 -m unittest discover -s tests -- passed during CR-RLN-M4-1 resolution, ran 79 tests
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed during CR-RLN-M4-1 resolution, checked 18 Markdown files
+  - rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md -- passed during CR-RLN-M4-1 resolution with no matches, exit 1 expected for rg no-match
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools -- passed during CR-RLN-M4-1 resolution, checked 105 files
+  - git diff --check -- passed during CR-RLN-M4-1 resolution
+  - python3 -m unittest discover -s tests -- passed during code-review M4 R3, ran 79 tests
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed during code-review M4 R3, checked 18 Markdown files
+  - rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md -- passed during code-review M4 R3 with no matches, exit 1 expected for rg no-match
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools -- passed during code-review M4 R3, checked 105 files
+  - git diff --check -- passed during code-review M4 R3
+  - python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization/explain-change.md docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md docs/changes/repository-layout-normalization/change.yaml -- passed after explain-change update, checked 4 files
+  - git diff --check -- passed after explain-change update
+  - python3 -m unittest discover -s tests -- passed during final verify, ran 79 tests
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed during final verify, checked 18 Markdown files
+  - rg -n "01-getting-started|02-machines|03-bodyweight|about/red-flags" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools -- passed during final verify with no matches, exit 1 expected for rg no-match
+  - rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md -- passed during final verify with no matches, exit 1 expected for rg no-match
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools -- passed during final verify, checked 106 files
+  - find 01-getting-started 02-machines 03-bodyweight about media/equipment media/movements media/supplemental media/svg content schemas generated tools/validation -maxdepth 0 -print 2>/dev/null || true -- passed during final verify, returned no paths
+  - git diff --check -- passed during final verify

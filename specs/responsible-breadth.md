@@ -4,6 +4,13 @@
 
 approved
 
+Previously approved in
+`docs/changes/responsible-breadth/reviews/spec-review-r2.md`. This amendment
+was approved in
+`docs/changes/apt-pattern-architecture/reviews/spec-review-r2.md` and
+incorporates the approved layout architecture review and the first pattern-page
+refinement.
+
 ## Related proposal
 
 - Proposal: `docs/proposals/2026-06-29-responsible-breadth.md`
@@ -11,6 +18,10 @@ approved
 - Constitution: `CONSTITUTION.md`
 - Vision: `VISION.md`
 - Existing v0.1 spec: `specs/markdown-first-primer.md`
+- Architecture:
+  `docs/architecture/system/architecture.md`
+- Architecture review:
+  `docs/changes/apt-pattern-architecture/reviews/architecture-review-r1.md`
 
 ## Goal and context
 
@@ -23,8 +34,11 @@ personalized coach, symptom checker, diagnostic tool, rehab product, hosted app,
 CMS, account system, or runtime recommendation engine.
 
 The approved Markdown-first v0.1 spec remains active for the original five-page
-slice. This spec governs the Responsible Breadth expansion after review,
-architecture, planning, test-spec, validation, and required downstream updates.
+slice. This spec governs the expanded static-content surface after spec review,
+planning, test-spec, validation, and required downstream updates. The approved
+architecture records the target repository shape as five logical blocks while
+preserving current path contracts until a future migration spec moves published
+paths.
 
 ## Compatibility with `specs/markdown-first-primer.md`
 
@@ -139,6 +153,9 @@ If this spec and `specs/markdown-first-primer.md` conflict:
   professional organization guidance, or supporting source.
 - Static education: General explanation that does not adapt to the reader's
   symptoms, history, goals, body, equipment, or training response.
+- Pattern-page architecture: The reader journey used by pattern pages: user's
+  pain point -> observable pattern -> core contributors -> exercise options
+  with fix reason, used muscles, important notes, and optional example pictures.
 - `pattern_page`: A Responsible Breadth page class for non-diagnostic education
   about common movement or posture patterns.
 - `condition_page`: A Responsible Breadth page class for consumer education
@@ -240,22 +257,31 @@ goals, constraints, or training response and output a personalized program.
 R1. Responsible Breadth source content MUST be canonical Markdown readable
 directly in the repository.
 
-R2. Responsible Breadth MUST use these top-level content directories for new
-published pages: `exercises/`, `patterns/`, `conditions/`, `principles/`,
+R2. Responsible Breadth MUST use these current top-level content directories for
+new expanded pages: `exercises/`, `patterns/`, `conditions/`, `principles/`,
 `programs/`, and `about/`.
 
 R3. The first expanded-scope proof slice MUST include exactly these page
 categories before broader scaling: red-flags reference, one pattern page, one
 condition page, one programming-principle page, and one program-example page.
 
-R4. The first expanded-scope proof slice SHOULD use these paths unless
-architecture review chooses different stable paths: `about/red-flags.md`,
+R4. The first expanded-scope proof slice MUST use these paths unless a later
+approved migration spec changes them: `about/red-flags.md`,
 `patterns/anterior-pelvic-tilt.md`,
 `conditions/non-specific-chronic-low-back-pain.md`,
 `principles/how-many-days-a-week.md`, and
 `programs/generic-3-day-full-body-example.md`.
 
-R5. Pattern and condition pages MUST include page-local sections equivalent to:
+R5. Pattern pages MUST include page-local sections equivalent to:
+`What this page is`, `What this page is not`,
+`Red flags: when to stop reading and seek care`,
+`Why beginners come to this page`, `Working definition`,
+`How to notice this in yourself`, `The core reason`,
+`What is uncertain or mixed`, `What commonly helps`, `What to avoid`,
+`When to see a professional`, `Where to next in this primer`, `Sources`, and
+`Author and review date`.
+
+R5a. Condition pages MUST include page-local sections equivalent to:
 `What this page is`, `What this page is not`,
 `Red flags: when to stop reading and seek care`, `Plain-language overview`,
 `What mainstream sources generally agree on`, `What is uncertain or mixed`,
@@ -339,6 +365,15 @@ treated as current.
 
 R29. Visuals MUST be necessary for beginner comprehension, not decorative.
 
+R29a. Expanded pattern, condition, and exercise pages SHOULD prefer
+high-quality human-reviewed raster illustrations over SVG diagrams when the
+visual needs realistic body position, anatomical context, or beginner-readable
+movement detail.
+
+R29b. SVG diagrams MAY remain valid only when they are simple enough for
+beginner comprehension and pass visual-necessity review; SVG is not the
+preferred first-slice visual format for expanded pattern or exercise teaching.
+
 R30. Machine exercise pages SHOULD include equipment setup visuals when text
 alone is insufficient for identification or setup.
 
@@ -358,6 +393,32 @@ nearby explanatory text.
 
 R35. Raster media under `media/` MUST satisfy the existing provenance contract
 before a page referencing it is promoted.
+
+R35a. Pattern, condition, and exercise visuals MUST be selected for reader
+comprehension. High-quality human-reviewed AI-generated raster illustrations are
+allowed for expanded pages when the image remains a support asset and satisfies
+the provenance contract.
+
+R35b. Generated raster images MUST NOT be treated as evidence for anatomy,
+exercise technique, safety, diagnosis, treatment, or programming claims. The
+Markdown text and cited sources remain the source of truth.
+
+R35c. For expanded Responsible Breadth pages, the allowed
+`media/PROVENANCE.md` `media_purpose` values are:
+`equipment_identification`, `key_movement_illustration`,
+`pattern_alignment_illustration`, `anatomical_region_illustration`, and
+`exercise_preview_illustration`.
+
+R35d. `pattern_alignment_illustration` MUST be used only for non-diagnostic
+visual comparison or alignment education on pattern pages.
+
+R35e. `anatomical_region_illustration` MUST be used only for plain anatomical
+region context on condition pages and MUST NOT imply diagnosis, pathology, or
+treatment.
+
+R35f. `exercise_preview_illustration` MUST be used only for compact exercise
+support images referenced from pattern or condition pages; the linked exercise
+page remains the source of truth for full setup and movement instructions.
 
 R36. Pattern, condition, and program-example PRs MUST receive higher-bar review
 than ordinary exercise-page wording edits.
@@ -438,6 +499,32 @@ R56. The original Markdown-first five-page v0.1 slice MUST remain governed by
 `specs/markdown-first-primer.md` and MUST NOT be required to adopt Responsible
 Breadth page classes or expanded visual standards before v0.1 closeout.
 
+R57. Pattern pages MUST follow the pattern-page architecture: user's pain point
+to observable pattern, observable pattern to core contributors, and core
+contributors to exercise options.
+
+R58. The `Why beginners come to this page` section MUST state three to five
+reader-facing entry points or pain points in plain language.
+
+R59. The `The core reason` section MUST describe three to five named
+contributors or mechanisms, and each named contributor MUST cite at least one
+source.
+
+R60. The `What commonly helps` section MUST be framed as an educational menu,
+not a routine, prescription, or guaranteed fix.
+
+R61. Each linked exercise preview in a pattern page's `What commonly helps`
+section MUST include a fix reason for that pattern, used muscles, and one
+important note. Full exercise instructions remain in the exercise page.
+
+R62. Pattern-page exercise previews MUST link only to existing exercise pages,
+unless the preview explicitly marks the exercise page as not yet available and
+the page remains draft-only.
+
+R63. Pattern pages SHOULD include optional example pictures for exercise
+previews only when the referenced media file exists, has appropriate alt text or
+nearby explanatory text, and passes the applicable media provenance rules.
+
 ## Inputs and outputs
 
 Inputs:
@@ -449,6 +536,8 @@ Inputs:
 - Manual proof records for source quality, scope boundaries, visuals, and reader
   comprehension.
 - Validation commands and reports.
+- Approved architecture and architecture-review records when path, layout, or
+  media organization behavior is in scope.
 
 Outputs:
 
@@ -456,6 +545,8 @@ Outputs:
 - Page-local source lists and reusable source-index entries.
 - Review metadata on each published page.
 - Red-flags reference and professional-routing language.
+- Pattern pages that map reader pain points to core contributors and bounded
+  exercise options.
 - Optional derived mdBook output that does not outrank Markdown.
 - Validation evidence and manual proof records.
 
@@ -490,9 +581,17 @@ Outputs:
 The compatibility contract near the top of this spec controls same-rank
 interaction with `specs/markdown-first-primer.md`.
 
-Existing numbered first-slice directories remain valid for the current v0.1
-proof. New expanded-scope paths become compatibility surfaces only after
-architecture approval and promotion.
+The approved architecture defines five logical blocks: project references,
+content, media, governance, and tooling/operations. Existing numbered
+first-slice directories remain valid for the current v0.1 proof. New
+expanded-scope paths become compatibility surfaces after promotion.
+
+The target normalized layout is one canonical location per content type and
+subject-co-located media under `media/<content-type>/<slug>/`. That target is
+not implemented by this spec amendment. Moving published Markdown paths,
+folding numbered directories, moving `about/red-flags.md`, or reorganizing
+media paths requires a later migration spec or ADR with link and provenance
+validation.
 
 If a promoted expanded-scope page must be narrowed or removed, the project uses
 content rollback: remove the page from active navigation, mark it draft or
@@ -565,6 +664,23 @@ training: fails excluded-scope guardrail.
 EC10. A generic program includes an injury-specific substitution: fails program
 boundary.
 
+EC11. A pattern page lists exercises without explaining the pattern-specific fix
+reason, used muscles, or important note: fails the pattern-page architecture.
+
+EC12. A pattern page links to missing exercise pages as if they exist: fails
+promotion until the exercise pages exist or the pattern page stays draft-only.
+
+EC13. A page replaces a confusing SVG with a generated raster image but omits
+the `media/PROVENANCE.md` row: fails media provenance validation.
+
+EC14. A pattern page uses a generated alignment image with
+`media_purpose = key_movement_illustration`: fails expanded media-purpose
+validation because the deterministic purpose is
+`pattern_alignment_illustration`.
+
+EC15. A condition page uses an anatomical-region image that visually implies a
+specific reader diagnosis or pathology: fails even when provenance exists.
+
 ## Non-goals
 
 - Personalized symptom checking, diagnosis, or treatment routing.
@@ -578,11 +694,13 @@ boundary.
 
 ## Acceptance criteria
 
-AC1. Spec review approves this spec before architecture, planning, test-spec, or
-implementation rely on it.
+AC1. Spec review approves this amended spec before planning, test-spec, or
+implementation rely on the amended requirements.
 
 AC2. Architecture review approves repository layout, content-state boundaries,
-media/provenance impact, and validation boundaries before implementation.
+media/provenance impact, and validation boundaries before implementation; the
+approved architecture record is
+`docs/changes/apt-pattern-architecture/reviews/architecture-review-r1.md`.
 
 AC3. Test-spec maps every requirement to automated or manual proof before
 implementation.
@@ -607,6 +725,20 @@ proof slice.
 
 AC10. README or active navigation does not promote expanded-scope pages until
 the slice passes review and verification.
+
+AC11. The first pattern page demonstrates the pattern-page architecture by
+linking reader pain points, an observable pattern definition, named core
+contributors, and bounded exercise previews with fix reason, used muscles, and
+important notes.
+
+AC12. Any generated raster image used because an SVG is insufficient has an
+approved provenance row and remains subordinate to Markdown text and cited
+sources.
+
+AC13. Expanded-page generated raster images use deterministic media-purpose
+values, including `pattern_alignment_illustration` for pattern alignment,
+`anatomical_region_illustration` for condition anatomy context, and
+`exercise_preview_illustration` for compact exercise support images.
 
 AC-COMP-1. The spec states that `specs/markdown-first-primer.md` remains
 governing for the original five-page v0.1 slice.
@@ -643,24 +775,28 @@ path.
 
 ## Open questions
 
-None for spec review. Architecture and test-spec still need to choose exact
-validation mechanics, file-state markers, and proof artifact paths.
+None for spec review. Test-spec still needs to map the new pattern-page
+architecture requirements and raster-image support checks to automated and
+manual proof.
 
 ## Next artifacts
 
-1. Spec review for `specs/responsible-breadth.md`.
-2. ADR and architecture updates for Responsible Breadth layout, source-of-truth,
-   media, and validation boundaries.
-3. Test-spec update mapping Responsible Breadth requirements to automated and
-   manual proof.
-4. Execution plan for the first expanded-scope proof slice.
+1. Spec review for this amended `specs/responsible-breadth.md`.
+2. Test-spec update mapping amended Responsible Breadth requirements to
+   automated and manual proof.
+3. Execution-plan update for the first expanded-scope proof slice if the
+   amended requirements change milestone validation.
 
 ## Follow-on artifacts
 
-None yet
+- Approved architecture:
+  `docs/architecture/system/architecture.md`
+- Architecture review:
+  `docs/changes/apt-pattern-architecture/reviews/architecture-review-r1.md`
 
 ## Readiness
 
-Ready for spec-review R2 as a draft contract. Not ready for architecture,
-planning, test-spec, implementation, or content publication until spec review is
-recorded and any findings are resolved.
+Ready for spec-review of this draft amendment. The architecture prerequisite is
+satisfied by the approved architecture review. The amended spec is not ready for
+planning, test-spec updates, implementation, or content publication until spec
+review is recorded and any findings are resolved.

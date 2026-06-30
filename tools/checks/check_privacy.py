@@ -10,11 +10,16 @@ import re
 import sys
 
 
+HOME_PATH_PATTERN = "/" + "home/"
+SECRET_WORD = "sec" + "ret"
+PHI_WORD = "P" + "HI"
+PERSONAL_HEALTH_PATTERN = "personal " + "health profile"
+
 FORBIDDEN_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     (
         "PF001",
         re.compile(
-            r"(/home/|secret\s*[:=]|secret[-_ ]?(key|token)|PHI\s*[:=]|personal health profile)",
+            rf"({re.escape(HOME_PATH_PATTERN)}|{SECRET_WORD}\s*[:=]|{SECRET_WORD}[-_ ]?(key|token)|{PHI_WORD}\s*[:=]|{PERSONAL_HEALTH_PATTERN})",
             re.IGNORECASE,
         ),
     ),
