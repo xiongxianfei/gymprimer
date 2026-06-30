@@ -54,13 +54,13 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Current Handoff Summary
 
 - Current milestone: M4 media and historical-artifact cleanup
-- Current milestone state: review-requested
-- Last reviewed milestone: M3 content and project-reference migration
-- Review status: M4 implemented; awaiting code-review
+- Current milestone state: resolution-needed
+- Last reviewed milestone: M4 media and historical-artifact cleanup
+- Review status: code-review M4 R1 requested resolution for CR-RLN-M4-1
 - Remaining in-scope implementation milestones: M4 media and historical-artifact cleanup
-- Next stage: code-review
+- Next stage: review-resolution
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M4 code-review, final explain-change, verify, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M4 review-resolution, M4 re-review, final explain-change, verify, and PR handoff have not happened.
 
 ## Milestones
 
@@ -202,7 +202,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ### M4. Media and historical-artifact cleanup
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: move promoted media to subject-co-located paths, update provenance, and remove or label historical structured-platform artifacts according to dependency inventory.
 - Requirements: R8-R10, R13-R20, R22-R25, AC6-AC12
 - Files/components likely touched:
@@ -243,6 +243,7 @@ The migration is dependency-first. Before any old path is removed, active refere
   - progress updated
   - decision log updated if needed
   - validation notes updated
+  - code-review R1 requested resolution for CR-RLN-M4-1 before closeout
   - milestone committed
 - Risks:
   - privacy scan over broad historical fixtures may fail on intentional test data.
@@ -295,6 +296,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-30: Review-resolution restored exact M1 inventory proof and narrowed the M3 stale-path scan to active content, tests, and tools so historical proof records can retain exact old paths.
 - 2026-06-30: Code-review M3 R2 closed M3 with no material findings and routed the change to M4 implementation.
 - 2026-06-30: M4 moved promoted media into subject-co-located paths, removed old media buckets and SVG examples, removed the superseded structured-platform folders/tools/tests, and recorded M4 disposition evidence.
+- 2026-06-30: Code-review M4 R1 requested resolution for CR-RLN-M4-1 because the historical-disposition evidence exists under a different filename than the approved RLN-T7 proof-map path.
 
 ## Decision log
 

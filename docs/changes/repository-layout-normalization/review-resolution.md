@@ -116,3 +116,15 @@ Resolution:
 - Updated RLN-CMD4 in `specs/repository-layout-normalization.test.md` to scan active surfaces only: `README.md`, `SOURCES.md`, `RED-FLAGS.md`, promoted content directories, `tests`, and `tools`.
 - Updated the M3 plan validation command and validation notes to distinguish active stale-reference validation from intentional historical proof records.
 - Reran M3 validation and routed M3 back to code-review.
+
+## Code-review M4 R1 Findings
+
+### CR-RLN-M4-1 — M4 historical-disposition evidence uses a different path than the approved proof map
+
+Status: pending
+
+Finding source: `docs/changes/repository-layout-normalization/reviews/code-review-m4-r1.md`
+
+Required outcome: align the M4 disposition evidence with the approved RLN-T7 evidence path, or explicitly revise the approved test-spec/plan evidence mapping before relying on the alternate filename.
+
+Safe resolution path: add or rename the M4 disposition evidence to `docs/changes/repository-layout-normalization/evidence/historical-artifact-disposition.md`, update references in plan/change metadata if needed, rerun the M4 validation set plus `git diff --check`, and request M4 re-review. If the team prefers the current combined filename, update `specs/repository-layout-normalization.test.md` and the plan first so RLN-T7 names the chosen path, then rerun validation and re-review.
