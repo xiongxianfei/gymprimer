@@ -1,7 +1,7 @@
 change_id: repository-layout-normalization
 proposal: docs/proposals/2026-06-29-responsible-breadth.md
-status: review-resolution-needed
-current_stage: review-resolution
+status: code-review-needed
+current_stage: code-review
 created_date: 2026-06-29
 notes:
   - Created after the architecture target shape identified five logical blocks and a future physical migration requirement.
@@ -34,6 +34,7 @@ notes:
   - M4 moved promoted media to subject-co-located paths, updated provenance, removed old media buckets and SVG examples, removed superseded structured-platform folders/tools/tests from the active tree, and recorded disposition evidence.
   - Code-review M4 R1 requested resolution for CR-RLN-M4-1 because the M4 historical-disposition evidence path does not match the approved RLN-T7 proof-map path.
   - Code-review M4 R2 found CR-RLN-M4-1 still present because no resolution diff added the approved evidence path or amended the proof map.
+  - Review-resolution for CR-RLN-M4-1 renamed the M4 disposition evidence to the approved RLN-T7 path and routed M4 back to code-review.
 validation:
   - git diff --check -- passed
   - python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/adr/2026-06-29-direct-repository-layout-normalization.md specs/repository-layout-normalization.md docs/changes/repository-layout-normalization/change.yaml -- passed, checked 4 files
@@ -86,3 +87,8 @@ validation:
   - git diff --check -- passed after M4 implementation
   - find media/equipment media/movements media/supplemental media/svg content schemas generated tools/validation -maxdepth 0 -print 2>/dev/null || true -- passed after M4 implementation, returned no paths
   - python3 -m unittest tests.test_repository_layout_normalization tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1 tests.test_markdown_first_privacy -- passed after M4 implementation, ran 50 tests
+  - python3 -m unittest discover -s tests -- passed during CR-RLN-M4-1 resolution, ran 79 tests
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed during CR-RLN-M4-1 resolution, checked 18 Markdown files
+  - rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md -- passed during CR-RLN-M4-1 resolution with no matches, exit 1 expected for rg no-match
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools -- passed during CR-RLN-M4-1 resolution, checked 105 files
+  - git diff --check -- passed during CR-RLN-M4-1 resolution

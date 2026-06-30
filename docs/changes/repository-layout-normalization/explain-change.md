@@ -33,4 +33,4 @@ M4 moves promoted raster media into subject-co-located paths under `media/exerci
 
 M4 also removes the superseded structured-platform implementation from the active tree: `content/`, `schemas/`, `generated/`, `tools/validation/`, and the tests and fixtures that kept those paths active. The historical record remains in `docs/`, but the old structured content platform is no longer an active product or validation surface.
 
-The disposition evidence lives at `docs/changes/repository-layout-normalization/evidence/m4-media-and-historical-disposition.md`.
+The disposition evidence lives at `docs/changes/repository-layout-normalization/evidence/historical-artifact-disposition.md`.

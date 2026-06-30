@@ -54,13 +54,13 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Current Handoff Summary
 
 - Current milestone: M4 media and historical-artifact cleanup
-- Current milestone state: resolution-needed
+- Current milestone state: review-requested
 - Last reviewed milestone: M4 media and historical-artifact cleanup
-- Review status: code-review M4 R2 found CR-RLN-M4-1 still present
+- Review status: CR-RLN-M4-1 resolved; awaiting M4 re-review
 - Remaining in-scope implementation milestones: M4 media and historical-artifact cleanup
-- Next stage: review-resolution
+- Next stage: code-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M4 review-resolution, M4 re-review, final explain-change, verify, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M4 re-review, final explain-change, verify, and PR handoff have not happened.
 
 ## Milestones
 
@@ -202,7 +202,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ### M4. Media and historical-artifact cleanup
 
-- Milestone state: resolution-needed
+- Milestone state: review-requested
 - Goal: move promoted media to subject-co-located paths, update provenance, and remove or label historical structured-platform artifacts according to dependency inventory.
 - Requirements: R8-R10, R13-R20, R22-R25, AC6-AC12
 - Files/components likely touched:
@@ -244,6 +244,7 @@ The migration is dependency-first. Before any old path is removed, active refere
   - decision log updated if needed
   - validation notes updated
   - code-review R1 requested resolution for CR-RLN-M4-1 before closeout
+  - CR-RLN-M4-1 resolved and M4 returned to code-review
   - milestone committed
 - Risks:
   - privacy scan over broad historical fixtures may fail on intentional test data.
@@ -298,6 +299,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-30: M4 moved promoted media into subject-co-located paths, removed old media buckets and SVG examples, removed the superseded structured-platform folders/tools/tests, and recorded M4 disposition evidence.
 - 2026-06-30: Code-review M4 R1 requested resolution for CR-RLN-M4-1 because the historical-disposition evidence exists under a different filename than the approved RLN-T7 proof-map path.
 - 2026-06-30: Code-review M4 R2 found CR-RLN-M4-1 still present because no resolution diff added the approved RLN-T7 evidence path or amended the proof map.
+- 2026-06-30: Review-resolution renamed the M4 disposition evidence to the approved RLN-T7 path and routed M4 back to code-review.
 
 ## Decision log
 
@@ -366,6 +368,11 @@ The migration is dependency-first. Before any old path is removed, active refere
 - M4 diff check passed: `git diff --check`.
 - M4 old directory check passed: `find media/equipment media/movements media/supplemental media/svg content schemas generated tools/validation -maxdepth 0 -print 2>/dev/null || true` returned no paths.
 - M4 focused regression tests passed: `python3 -m unittest tests.test_repository_layout_normalization tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1 tests.test_markdown_first_privacy` ran 50 tests.
+- CR-RLN-M4-1 resolution full unit suite passed: `python3 -m unittest discover -s tests` ran 79 tests.
+- CR-RLN-M4-1 resolution checker validation passed: `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises` checked 18 Markdown files.
+- CR-RLN-M4-1 resolution active stale media/historical scan passed with no matches: `rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md` returned exit 1 because no stale active paths were found.
+- CR-RLN-M4-1 resolution privacy check passed: `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools` checked 105 files.
+- CR-RLN-M4-1 resolution diff check passed: `git diff --check`.
 
 ## Outcome and retrospective
 

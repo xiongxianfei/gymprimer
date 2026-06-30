@@ -121,10 +121,16 @@ Resolution:
 
 ### CR-RLN-M4-1 — M4 historical-disposition evidence uses a different path than the approved proof map
 
-Status: pending
+Status: resolved
 
 Finding source: `docs/changes/repository-layout-normalization/reviews/code-review-m4-r1.md`
 
 Required outcome: align the M4 disposition evidence with the approved RLN-T7 evidence path, or explicitly revise the approved test-spec/plan evidence mapping before relying on the alternate filename.
 
 Safe resolution path: add or rename the M4 disposition evidence to `docs/changes/repository-layout-normalization/evidence/historical-artifact-disposition.md`, update references in plan/change metadata if needed, rerun the M4 validation set plus `git diff --check`, and request M4 re-review. If the team prefers the current combined filename, update `specs/repository-layout-normalization.test.md` and the plan first so RLN-T7 names the chosen path, then rerun validation and re-review.
+
+Resolution:
+
+- Renamed `docs/changes/repository-layout-normalization/evidence/m4-media-and-historical-disposition.md` to `docs/changes/repository-layout-normalization/evidence/historical-artifact-disposition.md`, matching RLN-T7 in `specs/repository-layout-normalization.test.md`.
+- Updated the M4 rationale reference to the approved evidence path.
+- Reran the M4 validation set and routed M4 back to code-review.
