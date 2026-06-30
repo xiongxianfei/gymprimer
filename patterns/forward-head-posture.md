@@ -58,9 +58,9 @@ Forward head posture is usually discussed through a few movement contributors. T
 
 **Upper-back position.** A rounded upper back can make it harder to find comfortable rib-cage, shoulder, and neck positions during rows, presses, planks, and wall drills. Thoracic-extension options give the upper back another movement choice without promising a permanent posture change. [BMC Musculoskeletal Disorders 2024][local-forward-head-posture-upper-crossed-review]
 
-**Shoulder-blade and rotator-cuff context.** AAOS describes shoulder impingement and rotator-cuff tendinitis education around restoring motion, later strengthening the rotator cuff, and addressing posture. GymPrimer uses that only as shoulder/scapular context: wall slides, prone Y/T, and band pull-aparts train shoulder-blade and upper-back options, not a shoulder care pathway. [AAOS][aaos-shoulder-impingement-rotator-cuff-tendinitis]
+**Shoulder-blade support and posterior upper-back strength.** Shoulder-blade position depends partly on the upper-back and shoulder muscles that move and support the scapula. The 2024 review describes strengthening thoracic spine and shoulder muscles as part of exercise approaches for these posture patterns, and AAOS gives shoulder/scapular context by discussing motion, later rotator-cuff strengthening, and posture. [BMC Musculoskeletal Disorders 2024][local-forward-head-posture-upper-crossed-review] [AAOS][aaos-shoulder-impingement-rotator-cuff-tendinitis]
 
-**General strength exposure.** For most beginners, the exercise question is not whether one special corrective menu exists. ACSM's 2026 resistance-training update emphasizes that consistency matters more for most adults than complex programming, so the options below fit best as general strength and movement choices. [ACSM][acsm-resistance-training]
+**Anterior neck and chest tone.** The same review describes upper-crossed-syndrome exercise approaches that stretch shortened neck muscles and pectoralis major while strengthening deep neck, thoracic spine, and shoulder muscles. GymPrimer treats that as a simple contributor idea: the front-of-neck and chest/front-shoulder area may be worth noticing, but it is not proof that those tissues caused a reader's posture. [BMC Musculoskeletal Disorders 2024][local-forward-head-posture-upper-crossed-review]
 
 ## What is uncertain or mixed
 

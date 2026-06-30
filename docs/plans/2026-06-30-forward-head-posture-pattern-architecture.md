@@ -115,24 +115,23 @@ injury marks, and no before/after cure implication.
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: review-requested
-- Last reviewed milestone: M2
+- Current milestone: M4
+- Current milestone state: planned
+- Last reviewed milestone: M3
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review
   R2 approved; code-review M1 R1 changes-requested; spec-review R2 approved
   the central-disclaimer amendment; architecture-review R2 approved the
   central-disclaimer architecture; test-spec-review R3 approved the amended
   proof map; code-review M1 R2 closed M1; code-review M2 R3 closed
-  CR-FHP-M2-1; M3 implementation is pending code-review
-- Remaining in-scope implementation milestones: M3, M4
-- Next stage: code-review M3
+  CR-FHP-M2-1; code-review M3 R2 closed CR-FHP-M3-1
+- Remaining in-scope implementation milestones: M4
+- Next stage: implement M4
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: The central-disclaimer contract
-  amendment is spec-approved, architecture-approved, proof-map-approved, M1
-  and M2 are closed, and M3 is implemented pending code-review, but M4 remains
-  open, and explain-change, verification, and PR handoff remain downstream
-  gates.
+  amendment is spec-approved, architecture-approved, proof-map-approved, and
+  M1-M3 are closed, but M4 remains open, and explain-change, verification, and
+  PR handoff remain downstream gates.
 
 ## Milestones
 
@@ -256,7 +255,7 @@ injury marks, and no before/after cure implication.
 
 ### M3. Forward Head Posture Pattern Page and Optional Media
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Create `patterns/forward-head-posture.md` with the approved pattern
   architecture and optional support image/provenance.
 - Requirements: R1-R14, R18-R30, R32, AC2-AC7, AC10-AC17
@@ -483,6 +482,16 @@ injury marks, and no before/after cure implication.
   Breadth assertion.
 - 2026-06-30: M3 keeps the pattern page unpromoted from README; M4 still owns
   README promotion-gate evidence and lifecycle closeout.
+- 2026-06-30: Code-review M3 R1 requested changes for CR-FHP-M3-1 because the
+  core-reason section does not fully project R8's anterior neck or chest
+  stiffness/tone contributor, and posterior upper-back strength is only
+  indirect.
+- 2026-06-30: Review-resolution for CR-FHP-M3-1 revised the core-reason
+  section to keep five contributor blocks while explicitly covering anterior
+  neck/chest tone and posterior upper-back strength with nearby citations.
+- 2026-06-30: Code-review M3 R2 closed CR-FHP-M3-1 with no material findings
+  after FHP-RO1 source-family and contributor sampling passed for the revised
+  core-reason section.
 
 ## Decision log
 
@@ -633,6 +642,29 @@ injury marks, and no before/after cure implication.
   `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
   `python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md`,
   and `git diff --check`.
+- 2026-06-30: Code-review M3 R1 reran
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns exercises media/PROVENANCE.md`,
+  `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`,
+  `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
+  `python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md`,
+  and `git diff --check`; all passed, but FHP-RO1 semantic review found
+  CR-FHP-M3-1.
+- 2026-06-30: CR-FHP-M3-1 focused review-resolution validation passed with
+  `python3 -m unittest tests.test_responsible_breadth_m1.ResponsibleBreadthM1Test.test_forward_head_real_pattern_page_passes_contract`
+  and
+  `python3 tools/checks/check_markdown_first.py patterns/forward-head-posture.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md`.
+- 2026-06-30: CR-FHP-M3-1 full M3 review-resolution validation passed with
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns exercises media/PROVENANCE.md`,
+  `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`,
+  `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
+  `python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md`,
+  and `git diff --check`.
+- 2026-06-30: Code-review M3 R2 validation passed with
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns exercises media/PROVENANCE.md`,
+  `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`,
+  `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
+  `python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md`,
+  and `git diff --check`.
 
 ## Outcome and retrospective
 
@@ -642,5 +674,5 @@ injury marks, and no before/after cure implication.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M3 code-review. Readiness is not Done; M3 review, M4,
+- Ready for M4 implementation. Readiness is not Done; M4,
   explain-change, verification, and PR handoff remain open.

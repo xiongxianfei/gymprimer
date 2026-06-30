@@ -17,3 +17,5 @@
 | CR-M2-R1 | 2026-06-30 | code-review | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r1.md` | changes-requested | CR-FHP-M2-1 | resolved in review-resolution; M2 code-review re-review required |
 | CR-M2-R2 | 2026-06-30 | code-review | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r2.md` | changes-requested | CR-FHP-M2-1 | resolved in review-resolution; M2 code-review R3 required |
 | CR-M2-R3 | 2026-06-30 | code-review | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r3.md` | clean-with-notes | 0 | CR-FHP-M2-1 resolved; M2 closed and ready for M3 |
+| CR-M3-R1 | 2026-06-30 | code-review | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m3-r1.md` | changes-requested | CR-FHP-M3-1 | resolved in review-resolution; M3 code-review R2 required |
+| CR-M3-R2 | 2026-06-30 | code-review | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m3-r2.md` | clean-with-notes | 0 | CR-FHP-M3-1 resolved; M3 closed and ready for M4 |

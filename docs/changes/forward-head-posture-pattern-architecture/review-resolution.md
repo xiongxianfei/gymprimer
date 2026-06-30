@@ -12,6 +12,7 @@ Closeout status: closed
 | TSR-FHP-2 | `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r1.md` | resolved by `docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r2.md` | The test spec now includes validation command ownership metadata for FHP-CMD1 through FHP-CMD13. |
 | CR-FHP-M1-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m1-r1.md` | superseded by `docs/changes/forward-head-posture-pattern-architecture/reviews/spec-review-r2.md`, confirmed by `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m1-r2.md` | Owner clarified that the required prominent disclaimer belongs in `RED-FLAGS.md`, not on every exercise page; spec-review R2, architecture-review R2, test-spec-review R3, and code-review M1 R2 approved the central-disclaimer amendment path. |
 | CR-FHP-M2-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r1.md`, `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r2.md`, `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r3.md` | resolved by `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m2-r3.md` | The five M2 exercise pages now separate direct exercise-instruction support from muscle/activity support, and unsupported setup, technique, feel-cue, and common-mistake details were reworded or removed. |
+| CR-FHP-M3-1 | `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m3-r1.md`, `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m3-r2.md` | resolved by `docs/changes/forward-head-posture-pattern-architecture/reviews/code-review-m3-r2.md` | The forward-head pattern page's core-reason section now explicitly covers anterior neck/chest tone and posterior upper-back strength with claim-level citations. |
 
 ## Resolution Notes
 
@@ -36,6 +37,25 @@ Changes:
 
 Status: ready for code-review M2 R3.
 - Code-review M2 R3 closed CR-FHP-M2-1 with no material findings. The review sampled direct instruction sources and research sources separately and found FHP-RO2 satisfied for M2.
+- Code-review M3 R1 requested changes for CR-FHP-M3-1. The M3 page passes structural and media checks, and FHP-RO3 image review passed, but FHP-RO1 found the core-reason contributor model incomplete against R8.
+
+### CR-FHP-M3-1 - Incomplete core-reason contributor projection
+
+Resolution: addressed by revising the core-reason contributor model.
+
+Changes:
+- Replaced the broad general-strength contributor block with an explicit anterior neck and chest tone contributor supported by the existing BMC/PMC review.
+- Revised the shoulder-blade contributor into shoulder-blade support and posterior upper-back strength, citing the BMC/PMC review and AAOS shoulder/scapular context.
+- Kept the core-reason section at five contributor blocks so it continues to satisfy the three-to-five contributor contract.
+- Preserved non-diagnostic framing and avoided posture-correction, treatment, routine, or pain-relief promises.
+
+Required outcome:
+- Update `patterns/forward-head-posture.md` so the core-reason section explicitly covers all R8 contributor families, especially anterior neck or chest stiffness/tone and posterior upper-back strength.
+- Keep claim-level citations near each contributor and use page-local sources or existing global source IDs only where they directly support the claim.
+- Preserve non-diagnostic framing and avoid posture-correction, treatment, routine, or pain-relief promises.
+
+Status: ready for code-review M3 R2.
+- Code-review M3 R2 closed CR-FHP-M3-1 with no material findings. FHP-RO1 source-family and contributor sampling passed for the revised core-reason section.
 
 ## FHP-RO2 Evidence
 
@@ -69,6 +89,7 @@ Test-spec-review R1 requested changes. Re-review is required after substantive t
 Test-spec-review R2 approved the revised active test spec with no material findings.
 Code-review M1 R1 requested changes. The requested implementation fix has been superseded by spec-review R2; architecture-review R2 and test-spec-review R3 approved the amended central-disclaimer boundary, and code-review M1 R2 closed M1.
 Code-review M2 R1 requested changes. Code-review M2 R2 found failed remediation. Code-review M2 R3 approved the review-resolution and closed M2.
+Code-review M3 R1 requested changes. Code-review M3 R2 approved the review-resolution and closed M3.
 
 ## Closeout Checklist
 

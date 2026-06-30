@@ -1,6 +1,6 @@
 change_id: forward-head-posture-pattern-architecture
 status: active
-current_stage: code-review
+current_stage: implement
 created_date: 2026-06-30
 
 proposal: docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md
@@ -20,14 +20,14 @@ current_plan_status: active
 current_plan_review: docs/changes/forward-head-posture-pattern-architecture/reviews/plan-review-r1.md
 plan_index: docs/plan.md
 
-current_milestone: M3
-current_milestone_state: review-requested
-last_reviewed_milestone: M2
+current_milestone: M4
+current_milestone_state: planned
+last_reviewed_milestone: M3
 
 current_test_spec: specs/forward-head-posture-pattern-architecture.test.md
 current_test_spec_status: approved
 current_test_spec_review: docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r3.md
-next_stage: code-review
+next_stage: implement
 
 open_findings: []
 
@@ -55,6 +55,9 @@ notes:
   - Review-resolution for CR-FHP-M2-1 separated direct instruction sources from muscle/activity sources, replaced the gated thoracic-extension source, and updated FHP-RO2 remediation evidence; M2 code-review R3 is next.
   - Code-review M2 R3 closed CR-FHP-M2-1 with no material findings; M3 implementation is next.
   - M3 added the forward-head posture pattern page, one approved generated raster comparison image, provenance, and a focused real-page pattern assertion; code-review M3 is next.
+  - Code-review M3 R1 requested changes for incomplete R8 contributor projection in the core-reason section; review-resolution is next.
+  - Review-resolution for CR-FHP-M3-1 revised the core-reason contributor model to explicitly cover anterior neck/chest tone and posterior upper-back strength; M3 code-review R2 is next.
+  - Code-review M3 R2 closed CR-FHP-M3-1 with no material findings; M4 implementation is next.
 
 validation:
   - "python3 tools/checks/check_privacy.py docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md docs/changes/forward-head-posture-pattern-architecture docs/architecture/system/architecture.md specs/forward-head-posture-pattern-architecture.md docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md -- passed, checked 12 files"
@@ -146,3 +149,20 @@ validation:
   - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed, 51 tests"
   - "python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md -- passed, checked 52 files"
   - "git diff --check -- passed"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns exercises media/PROVENANCE.md -- passed during code-review M3 R1, checked 21 Markdown files"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed during code-review M3 R1, 26 tests"
+  - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed during code-review M3 R1, 51 tests"
+  - "python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md -- passed during code-review M3 R1, checked 52 files"
+  - "git diff --check -- passed during code-review M3 R1"
+  - "python3 -m unittest tests.test_responsible_breadth_m1.ResponsibleBreadthM1Test.test_forward_head_real_pattern_page_passes_contract -- passed during CR-FHP-M3-1 review-resolution"
+  - "python3 tools/checks/check_markdown_first.py patterns/forward-head-posture.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md -- passed during CR-FHP-M3-1 review-resolution, checked 4 Markdown files"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns exercises media/PROVENANCE.md -- passed during CR-FHP-M3-1 review-resolution, checked 21 Markdown files"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed during CR-FHP-M3-1 review-resolution, 26 tests"
+  - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed during CR-FHP-M3-1 review-resolution, 51 tests"
+  - "python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md -- passed during CR-FHP-M3-1 review-resolution, checked 53 files"
+  - "git diff --check -- passed during CR-FHP-M3-1 review-resolution"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns exercises media/PROVENANCE.md -- passed during code-review M3 R2, checked 21 Markdown files"
+  - "python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py' -- passed during code-review M3 R2, 26 tests"
+  - "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py' -- passed during code-review M3 R2, 51 tests"
+  - "python3 tools/checks/check_privacy.py patterns exercises media docs/changes/forward-head-posture-pattern-architecture SOURCES.md -- passed during code-review M3 R2, checked 53 files"
+  - "git diff --check -- passed during code-review M3 R2"
