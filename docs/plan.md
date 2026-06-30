@@ -8,8 +8,8 @@
   - Current milestone: M4 media and historical-artifact cleanup
   - Current milestone state: closed
   - Last reviewed milestone: M4 media and historical-artifact cleanup
-  - Next stage: final closeout
-  - Active context: M1-M4 are closed. Repository layout normalization is ready for final closeout starting with explain-change.
+  - Next stage: verify
+  - Active context: M1-M4 are closed and explain-change is updated. Repository layout normalization is ready for final verify.
 
 - [Responsible Breadth Content Expansion](plans/2026-06-29-responsible-breadth.md)
   - Status: active

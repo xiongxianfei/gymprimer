@@ -58,9 +58,9 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Last reviewed milestone: M4 media and historical-artifact cleanup
 - Review status: code-review M4 R3 closed M4 with no material findings
 - Remaining in-scope implementation milestones: none
-- Next stage: final closeout
+- Next stage: verify
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: final explain-change, verify, and PR handoff have not happened.
+- Reason final closeout is or is not ready: verify and PR handoff have not happened.
 
 ## Milestones
 
@@ -302,6 +302,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-30: Code-review M4 R2 found CR-RLN-M4-1 still present because no resolution diff added the approved RLN-T7 evidence path or amended the proof map.
 - 2026-06-30: Review-resolution renamed the M4 disposition evidence to the approved RLN-T7 path and routed M4 back to code-review.
 - 2026-06-30: Code-review M4 R3 closed M4 with no material findings and routed the change to final closeout.
+- 2026-06-30: Updated `docs/changes/repository-layout-normalization/explain-change.md` for the final reviewed implementation and routed the change to verify.
 
 ## Decision log
 
@@ -380,6 +381,8 @@ The migration is dependency-first. Before any old path is removed, active refere
 - Code-review M4 R3 reviewer reran `rg -n "media/equipment|media/movements|media/supplemental|content/|schemas/|generated/|tools/validation" README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises tests tools media/PROVENANCE.md`; no matches, exit 1 expected for `rg` no-match.
 - Code-review M4 R3 reviewer reran `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/repository-layout-normalization tests tools`; checked 105 files, privacy pass.
 - Code-review M4 R3 reviewer reran `git diff --check`; passed.
+- Explain-change privacy check passed: `python3 tools/checks/check_privacy.py docs/changes/repository-layout-normalization/explain-change.md docs/plans/2026-06-29-repository-layout-normalization.md docs/plan.md docs/changes/repository-layout-normalization/change.yaml` checked 4 files.
+- Explain-change diff check passed: `git diff --check`.
 
 ## Outcome and retrospective
 
