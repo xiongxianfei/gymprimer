@@ -1,7 +1,7 @@
 change_id: repository-layout-normalization
 proposal: docs/proposals/2026-06-29-responsible-breadth.md
-status: code-review-needed
-current_stage: code-review
+status: review-resolution-needed
+current_stage: review-resolution
 created_date: 2026-06-29
 notes:
   - Created after the architecture target shape identified five logical blocks and a future physical migration requirement.
@@ -28,6 +28,7 @@ notes:
   - M2 implemented checker enforcement and regression tests for normalized layout paths without moving real content or media files.
   - Code-review M2 R1 closed M2 with no material findings and routed the change to M3 implementation.
   - M3 moved canonical Markdown content paths and root red flags, updated active references, and left media bucket cleanup to M4.
+  - Code-review M3 R1 requested resolution for CR-RLN-M3-1 because M3 rewrote exact dependency inventory and validation metadata into placeholders while cleaning stale path strings.
 validation:
   - git diff --check -- passed
   - python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/adr/2026-06-29-direct-repository-layout-normalization.md specs/repository-layout-normalization.md docs/changes/repository-layout-normalization/change.yaml -- passed, checked 4 files
@@ -58,3 +59,7 @@ validation:
   - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization -- passed, checked 32 files
   - git diff --check -- passed after M3 implementation
   - M3 old content-directory existence check -- passed, returned no paths
+  - python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed during code-review M3 R1, checked 18 Markdown files
+  - python3 -m unittest discover -s tests -- passed during code-review M3 R1, ran 141 tests
+  - git diff --check -- passed during code-review M3 R1
+  - python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization -- passed during code-review M3 R1, checked 32 files

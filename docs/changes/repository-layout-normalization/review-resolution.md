@@ -95,3 +95,15 @@ Resolution:
 - Replaced manual-proof artifact paths with deterministic evidence records under `docs/changes/repository-layout-normalization/evidence/`.
 - Updated test levels and coverage maps so R1-R25 and EC1-EC9 are covered by automated tests, migration checks, smoke checks, contract checks, and evidence records rather than manual proof.
 - Updated the plan to refer to evidence records instead of manual proof.
+
+## Code-review M3 R1 Findings
+
+### CR-RLN-M3-1 — M3 rewrote exact dependency-inventory proof into placeholders
+
+Status: open
+
+Finding source: `docs/changes/repository-layout-normalization/reviews/code-review-m3-r1.md`
+
+Required outcome: restore or re-establish exact migration proof without making the active stale-path scan depend on erasing historical evidence. M1 inventory and validation metadata must report the actual paths and commands used for the dependency inventory, or a clearly reviewed historical-path allowlist/exclusion must preserve exact historical proof while keeping the M3 stale active-path check deterministic.
+
+Safe resolution path: restore exact M1 inventory command/path rows and exact M1 validation metadata, then adjust the M3 stale-path validation evidence so it distinguishes active content/reference scans from intentional historical proof records. If the validation command scope changes materially, update the plan/test-spec evidence first; otherwise record the narrowed historical-proof handling here, rerun M3 validation, and request M3 code-review again.

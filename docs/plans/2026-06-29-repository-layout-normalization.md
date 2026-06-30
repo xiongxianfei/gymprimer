@@ -54,13 +54,13 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Current Handoff Summary
 
 - Current milestone: M3 content and project-reference migration
-- Current milestone state: review-requested
-- Last reviewed milestone: M2 validation tooling and regression tests
-- Review status: M3 implemented; awaiting code-review
+- Current milestone state: resolution-needed
+- Last reviewed milestone: M3 content and project-reference migration
+- Review status: M3 code-review R1 changes-requested for CR-RLN-M3-1
 - Remaining in-scope implementation milestones: M3 content/reference migration, M4 media and historical-artifact cleanup
-- Next stage: code-review
+- Next stage: review-resolution
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: implementation, code review, explain-change, verify, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M3 requires review-resolution and re-review before M4, explain-change, verify, and PR handoff can happen.
 
 ## Milestones
 
@@ -148,7 +148,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 
 ### M3. Content and project-reference migration
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: move Markdown content and project references to canonical paths, update active links, and remove old numbered and red-flags paths directly.
 - Requirements: R1-R7, R10-R12, R15-R19, R21-R23, R25, AC5-AC6, AC8-AC9, AC11-AC12
 - Files/components likely touched:
@@ -192,6 +192,7 @@ The migration is dependency-first. Before any old path is removed, active refere
   - decision log updated if needed
   - validation notes updated
   - milestone committed
+  - code-review R1 requested resolution for CR-RLN-M3-1 before closeout
 - Risks:
   - broad documentation references to old paths may be historical rather than active.
 - Rollback/recovery:
@@ -287,6 +288,7 @@ The migration is dependency-first. Before any old path is removed, active refere
 - 2026-06-29: M2 implemented repository layout normalization regression tests and checker enforcement without moving real content or media files.
 - 2026-06-29: Code-review M2 R1 closed M2 with no material findings and routed the change to M3 implementation.
 - 2026-06-30: M3 moved canonical Markdown content paths and root red flags, updated active references, and left media bucket cleanup to M4.
+- 2026-06-30: Code-review M3 R1 requested resolution for CR-RLN-M3-1 because the M1 dependency inventory and validation metadata were rewritten from exact old paths to placeholders during M3 cleanup.
 
 ## Decision log
 
@@ -332,6 +334,10 @@ The migration is dependency-first. Before any old path is removed, active refere
 - M3 privacy check passed: `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization` checked 32 files.
 - M3 diff check passed: `git diff --check`.
 - M3 old directory check passed: `find 01-getting-started 02-machines 03-bodyweight about -maxdepth 0 -type d -print 2>/dev/null || true` returned no paths.
+- Code-review M3 R1 reviewer reran `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`; passed, checked 18 Markdown files.
+- Code-review M3 R1 reviewer reran `python3 -m unittest discover -s tests`; passed, ran 141 tests.
+- Code-review M3 R1 reviewer reran `git diff --check`; passed.
+- Code-review M3 R1 reviewer reran `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/repository-layout-normalization`; checked 32 files, privacy pass.
 
 ## Outcome and retrospective
 
@@ -340,4 +346,4 @@ The migration is dependency-first. Before any old path is removed, active refere
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M3.
+- Ready for review-resolution of CR-RLN-M3-1, then M3 re-review.
