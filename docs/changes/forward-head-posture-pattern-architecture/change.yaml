@@ -1,6 +1,6 @@
 change_id: forward-head-posture-pattern-architecture
 status: active
-current_stage: verify
+current_stage: pr
 created_date: 2026-06-30
 
 proposal: docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md
@@ -27,7 +27,7 @@ last_reviewed_milestone: M4
 current_test_spec: specs/forward-head-posture-pattern-architecture.test.md
 current_test_spec_status: approved
 current_test_spec_review: docs/changes/forward-head-posture-pattern-architecture/reviews/test-spec-review-r3.md
-next_stage: verify
+next_stage: pr
 
 open_findings: []
 
@@ -61,7 +61,7 @@ notes:
   - M4 added a focused README non-promotion assertion, confirmed README has no forward-head pattern link, aligned a stale red-flags test fixture, and is ready for code-review.
   - Code-review M4 R1 closed M4 with no material findings; final closeout starts with explain-change.
   - Explain-change updated the durable rationale for the reviewed M1-M4 diff; verify is next.
-  - Verify local validation passed, but branch-ready is not claimed until final closeout artifacts are committed.
+  - Verify local validation passed after closeout artifacts were committed; branch-ready evidence is complete for PR handoff.
 
 validation:
   - "python3 tools/checks/check_privacy.py docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md docs/changes/forward-head-posture-pattern-architecture docs/architecture/system/architecture.md specs/forward-head-posture-pattern-architecture.md docs/proposals/2026-06-30-forward-head-posture-pattern-architecture.md -- passed, checked 12 files"
@@ -192,3 +192,9 @@ validation:
   - "if rg -n \"patterns/forward-head-posture.md\" README.md; then exit 1; else echo 'README promotion gate passed: no forward-head pattern link'; fi -- passed during verify"
   - "rg -n \"current_stage: verify|next_stage: verify|Current stage: verify|Next stage: verify|Ready for verify|Closeout status: closed|resolved by TSR-R2|open_findings: \\[\\]\" docs/changes/forward-head-posture-pattern-architecture/change.yaml docs/changes/forward-head-posture-pattern-architecture/review-log.md docs/changes/forward-head-posture-pattern-architecture/review-resolution.md docs/plans/2026-06-30-forward-head-posture-pattern-architecture.md docs/plan.md -- passed during verify"
   - "git diff --check -- passed during verify"
+  - "python3 -m unittest discover -s tests -- passed during post-commit verify, 88 tests"
+  - "python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises -- passed during post-commit verify, checked 24 Markdown files"
+  - "python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/forward-head-posture-pattern-architecture -- passed during post-commit verify, checked 62 files"
+  - "if rg -n \"patterns/forward-head-posture.md\" README.md; then exit 1; else echo 'README promotion gate passed: no forward-head pattern link'; fi -- passed during post-commit verify"
+  - "find .github -maxdepth 3 -type f -print 2>/dev/null | sort -- passed during post-commit verify, no workflow files printed"
+  - "git diff --check -- passed during post-commit verify"

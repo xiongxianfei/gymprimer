@@ -126,12 +126,12 @@ injury marks, and no before/after cure implication.
   proof map; code-review M1 R2 closed M1; code-review M2 R3 closed
   CR-FHP-M2-1; code-review M3 R2 closed CR-FHP-M3-1; code-review M4 R1 closed M4
 - Remaining in-scope implementation milestones: none
-- Next stage: verify
-- Final closeout readiness: ready to start final closeout sequence
+- Next stage: pr
+- Final closeout readiness: ready for PR handoff
 - Reason final closeout is or is not ready: The central-disclaimer contract
   amendment is spec-approved, architecture-approved, proof-map-approved, and
-  M1-M4 are closed with no open findings. Explain-change is complete, but
-  verification and PR handoff remain downstream gates.
+  M1-M4 are closed with no open findings. Explain-change and verification are
+  complete, but PR handoff remains downstream.
 
 ## Milestones
 
@@ -507,6 +507,8 @@ injury marks, and no before/after cure implication.
 - 2026-07-01: Verify local validation passed and recorded
   `docs/changes/forward-head-posture-pattern-architecture/verify-report.md`.
   Branch-ready is not claimed until final closeout artifacts are committed.
+- 2026-07-01: Post-commit verify passed after closeout artifacts were committed.
+  Branch-ready local evidence is complete for PR handoff.
 
 ## Decision log
 
@@ -719,6 +721,13 @@ injury marks, and no before/after cure implication.
   `if rg -n "patterns/forward-head-posture.md" README.md; then exit 1; else echo 'README promotion gate passed: no forward-head pattern link'; fi`,
   lifecycle state-sync `rg`,
   and `git diff --check`.
+- 2026-07-01: Post-commit verify validation passed with
+  `python3 -m unittest discover -s tests`,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`,
+  `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media docs/changes/forward-head-posture-pattern-architecture`,
+  `if rg -n "patterns/forward-head-posture.md" README.md; then exit 1; else echo 'README promotion gate passed: no forward-head pattern link'; fi`,
+  `find .github -maxdepth 3 -type f -print 2>/dev/null | sort`,
+  and `git diff --check`.
 
 ## Outcome and retrospective
 
@@ -728,5 +737,5 @@ injury marks, and no before/after cure implication.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Verify local validation passed. Readiness is not Done; branch-ready and PR
-  handoff remain blocked until final closeout artifacts are committed.
+- Verify passed with branch-ready local evidence. Readiness is not Done;
+  PR handoff remains open.
