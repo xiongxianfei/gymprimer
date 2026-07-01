@@ -5,8 +5,8 @@
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M4 added README non-promotion proof and full-suite validation evidence; code-review M4 is next.
+  - Current stage: verify
+  - Active context: explain-change completed durable rationale after code-review M4 R1; verify is next.
 
 ## Blocked
 
