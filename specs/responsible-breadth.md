@@ -54,7 +54,7 @@ v0.1 spec.
 - media path, media provenance, and AI-raster rules;
 - privacy scanning and no-private-data rules;
 - mdBook as derived output;
-- promotion, read-test, and manual-proof behavior unless this spec gives a
+- promotion, read-test, and validation-evidence behavior unless this spec gives a
   stricter rule.
 
 For Responsible Breadth pages only, this spec supersedes the Markdown-first
@@ -445,14 +445,14 @@ current until spec review, architecture review where required, plan review,
 test-spec review, implementation review, and final verification are complete for
 that slice.
 
-R42. The first expanded-scope proof slice MUST include manual comprehension
-proof for each page's purpose, boundaries, stop or red-flag condition, and source
-verification.
+R42. The first expanded-scope proof slice MUST include bounded comprehension
+evidence for each page's purpose, boundaries, stop or red-flag condition, and
+source verification.
 
-R43. Pattern and condition comprehension proof MUST confirm the reader can state
+R43. Pattern and condition comprehension evidence MUST confirm the reader can state
 that the page does not diagnose them.
 
-R44. Program-example comprehension proof MUST confirm the reader can state that
+R44. Program-example comprehension evidence MUST confirm the reader can state that
 the example is not a personal prescription.
 
 R45. Validation tooling SHOULD fail promoted Responsible Breadth pages that miss
@@ -460,7 +460,7 @@ required page sections, red-flag links, metadata, source-count minimums,
 source-index validity, media provenance, or excluded-scope guardrails.
 
 R46. Where semantic source quality or scope-boundary judgment cannot be fully
-automated, the change MUST record manual proof before promotion.
+automated, the change MUST record bounded audit evidence before promotion.
 
 R47. The red-flags reference MUST distinguish emergency care, prompt medical
 care, and professional assessment in plain language.
@@ -533,7 +533,7 @@ Inputs:
   `principles/`, `programs/`, and `about/`.
 - `SOURCES.md` entries for reusable sources.
 - Media assets under `media/` with provenance where required.
-- Manual proof records for source quality, scope boundaries, visuals, and reader
+- Bounded audit records for source quality, scope boundaries, visuals, and reader
   comprehension.
 - Validation commands and reports.
 - Approved architecture and architecture-review records when path, layout, or
@@ -548,7 +548,7 @@ Outputs:
 - Pattern pages that map reader pain points to core contributors and bounded
   exercise options.
 - Optional derived mdBook output that does not outrank Markdown.
-- Validation evidence and manual proof records.
+- Validation evidence and bounded audit records.
 
 ## State and invariants
 
@@ -600,7 +600,7 @@ withdrawn, and keep correction history in the normal review record.
 ## Observability
 
 - Review records must show when a page passes higher-bar review.
-- Manual proof records must show citation-quality review, scope-boundary review,
+- Bounded audit records must show citation-quality review, scope-boundary review,
   visual-necessity review where media exists, and comprehension outcomes.
 - Validation output should identify missing section, missing metadata, missing
   red-flag link, source-index, source-count, media-provenance, and excluded-scope
@@ -609,7 +609,7 @@ withdrawn, and keep correction history in the normal review record.
 
 ## Security and privacy
 
-- Pages and proof records MUST NOT include secrets, private contact details,
+- Pages and validation records MUST NOT include secrets, private contact details,
   local machine paths, private health information, real user health profiles, or
   identifying reader-test notes.
 - Reader-test evidence MUST be non-identifying.
@@ -702,22 +702,22 @@ media/provenance impact, and validation boundaries before implementation; the
 approved architecture record is
 `docs/changes/apt-pattern-architecture/reviews/architecture-review-r1.md`.
 
-AC3. Test-spec maps every requirement to automated or manual proof before
+AC3. Test-spec maps every requirement to automated checks or bounded audit records before
 implementation.
 
 AC4. The first expanded-scope proof slice contains the required five page
 categories and no broader scaled content.
 
-AC5. Automated checks or manual proof verify required sections, metadata,
+AC5. Automated checks or bounded audit records verify required sections, metadata,
 red-flag links, source counts, source-index validity, excluded-scope guardrails,
 and media provenance.
 
-AC6. Manual proof verifies source quality and semantic support for safety,
+AC6. Validation evidence verifies source quality and semantic support for safety,
 condition, pattern, programming, and program-example claims.
 
-AC7. Manual proof verifies that pattern and condition pages are non-diagnostic.
+AC7. Validation evidence verifies that pattern and condition pages are non-diagnostic.
 
-AC8. Manual proof verifies that program examples are static illustrations rather
+AC8. Validation evidence verifies that program examples are static illustrations rather
 than prescriptions.
 
 AC9. Reader comprehension evidence exists for every page in the first expanded
@@ -776,14 +776,14 @@ path.
 ## Open questions
 
 None for spec review. Test-spec still needs to map the new pattern-page
-architecture requirements and raster-image support checks to automated and
-manual proof.
+architecture requirements and raster-image support checks to automated checks
+and bounded audit records.
 
 ## Next artifacts
 
 1. Spec review for this amended `specs/responsible-breadth.md`.
 2. Test-spec update mapping amended Responsible Breadth requirements to
-   automated and manual proof.
+   automated checks and bounded audit records.
 3. Execution-plan update for the first expanded-scope proof slice if the
    amended requirements change milestone validation.
 

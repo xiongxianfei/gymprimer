@@ -22,7 +22,7 @@ The proof strategy is migration-first: prove dependencies are inventoried, prove
 - Integration: run the repository Markdown/media/privacy checks against real canonical paths after each migration milestone.
 - End-to-end: validate the final repository tree from README/project references through content pages, media assets, provenance rows, and governance artifacts without relying on removed paths.
 - Smoke: assert the expected canonical paths exist, old paths are absent, and validation commands are recorded.
-- Evidence records: record dependency inventory, path move manifest, historical artifact dispositions, and final validation ledger as deterministic change evidence, not as a separate manual-proof requirement.
+- Evidence records: record dependency inventory, path move manifest, historical artifact dispositions, and final validation ledger as deterministic change evidence, not as a separate proof-artifact requirement.
 - Contract: prove the normalized layout preserves Markdown-first source authority, governance under `docs/`, and unchanged safety/content boundaries.
 - Migration: prove old paths are removed directly with no compatibility stubs and that active references are updated before removal.
 
@@ -279,7 +279,7 @@ python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md patterns
 
 Repository-local validation must remain practical for local development and must not require network access. The final proof should include `python3 -m unittest discover -s tests` plus targeted checker commands; no new long-running build or hosted-service dependency is expected.
 
-## Manual QA checklist
+## Audit Checklist
 
 - Confirm `specs/repository-layout-normalization.test.md` maps R1-R25 and EC1-EC9 before M1 starts.
 - Confirm the M1 dependency inventory before any old path is moved or removed.

@@ -4,6 +4,10 @@
 
 accepted
 
+Amended on 2026-06-30 by the forward-head-posture pattern architecture work to
+replace separate audit-artifact requirements with recorded review evidence
+under the normal change record.
+
 ## Context
 
 GymPrimer's approved architecture target is five logical blocks: project
@@ -42,7 +46,7 @@ stubs.
 
 Before a file is removed, the migration must identify active dependencies in
 Markdown links, README navigation, `SUMMARY.md`, `book.toml`, source
-references, tests, checkers, manual proof, change metadata, and provenance
+references, tests, checkers, review evidence, change metadata, and provenance
 rows, then update or remove those dependencies first.
 
 ## Alternatives considered
@@ -83,7 +87,7 @@ Costs and risks:
 
 - External links to old repository paths may break because compatibility stubs
   are intentionally not used.
-- The migration diff will be larger because links, tests, checkers, proof
+- The migration diff will be larger because links, tests, checkers, review
   records, media paths, and provenance rows must change together.
 - A missed dependency can break validation or contributor navigation.
 - Moving red flags to root requires every safety-relevant page and checker to

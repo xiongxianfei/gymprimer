@@ -4,19 +4,16 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
-MP5 = (
-    ROOT
-    / "docs/changes/markdown-first-gym-primer/manual-proof/MP5-validation-command-ledger.md"
-)
+VERIFY_REPORT = ROOT / "docs/changes/markdown-first-gym-primer/verify-report.md"
 
 
 class MarkdownFirstCompatibilityTest(unittest.TestCase):
     def test_generated_book_output_is_not_source_of_truth(self) -> None:
         readme = README.read_text(encoding="utf-8").lower()
-        ledger = MP5.read_text(encoding="utf-8").lower()
+        report = VERIFY_REPORT.read_text(encoding="utf-8").lower()
 
         self.assertIn("markdown remains the source of truth", readme)
-        self.assertIn("markdown remains the source of truth", ledger)
+        self.assertIn("markdown remains canonical", report)
 
     def test_no_mdbook_summary_when_mdbook_is_deferred(self) -> None:
         if (ROOT / "book.toml").is_file():

@@ -2,143 +2,219 @@
 
 ## Map metadata
 
-- Map status: partial
+- Map status: current
 - Scope: repository
-- Baseline: `2c9401f+dirty`
-- Last reviewed: 2026-06-26
-- Coverage: root documentation and governance files: `README.md`, `VISION.md`, `CONSTITUTION.md`, `AGENTS.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `docs/vision/strategic-positioning.md`; repository file inventory excluding `.git/` and `.agents/`
-- Exclusions: `.agents/` skill implementation files, `.git/` internals, external services, uncreated future implementation areas
+- Baseline: `2c0c41a`
+- Last reviewed: 2026-06-30
+- Coverage: root governance and product references; Markdown content directories; media provenance; templates; validation scripts; tests; specs; architecture, ADR, workflow, plan, change, and learning artifact locations.
+- Exclusions: `.git/` internals, `.agents/` skill implementation files, binary media contents beyond path/provenance inventory, Python bytecode caches, historical change-record details not needed for repository orientation, network/hosted services, and uncreated future implementation areas.
 - Parent map: not-applicable
-- Known gaps: no source tree, content schema, exercise cards, architecture docs, specs, tests, package/build config, CI workflows, deployment config, or release process observed
-- Inspected uncommitted paths: `README.md`, `AGENTS.md`, `CONSTITUTION.md`, `VISION.md`, `docs/vision/strategic-positioning.md`
+- Known gaps: no hosted CI workflow, package manifest, deployment configuration, mdBook configuration, CMS integration, database, runtime application, public release process, or formal expert-review board observed.
+- Inspected uncommitted paths: none
 
 ## Purpose and scope
 
-This map orients future work in the repository as it exists now. It records observed documentation, governance, and absent implementation surfaces. It does not approve architecture, define future implementation, or claim readiness to build.
+This map orients future work in the repository as it exists now. It records observed current structure, validation surfaces, workflow artifacts, known gaps, and bounded inferences. It does not approve architecture, define future work, verify branch readiness, or act as a backlog.
 
-The mapped scope is the repository root. No area maps exist because no durable subsystem, package, service, content domain, infrastructure area, or deployable component has been created yet.
+The mapped scope is the repository root. No area maps exist because the current repository is one Markdown-first product corpus with supporting governance, media, and validation tooling rather than multiple deployable services, packages, or independently owned subsystems.
 
 ## System overview
 
-Observed: GymPrimer is currently a documentation-and-governance repository. The project identity is defined by `VISION.md`, which describes an open-source educational reference for gym beginners with reviewed exercise cards, English-first launch content, a locale-aware schema for future Chinese content, tiered expert review, and canonical illustrated SVG step cards.
+Observed: GymPrimer is a Markdown-first beginner primer. `README.md` says the repository is the primary product, Markdown pages are the source of truth, and no app, database, generated HTML, account, local server, or generated JSON package is required to use promoted content.
 
-Observed: `README.md` exposes a managed vision front matter block and states that the repository currently contains only the project vision and supporting strategic-positioning rationale. Its status text still mentions open questions, which is stale relative to the resolved decisions now recorded in `VISION.md`.
+Observed: `CONSTITUTION.md` defines the durable source-of-truth order, requires specs before material Markdown contract, citation, safety, media, validation, licensing, or generated-output changes, and states that Markdown remains canonical while generated HTML and future websites are derived unless a later accepted proposal changes that boundary.
 
-Observed: `CONSTITUTION.md` defines project governance, source-of-truth order, spec/test/architecture/review/verification rules, security and privacy rules, and current gaps. `AGENTS.md` provides a shorter agent-facing operating summary.
+Observed: `VISION.md` defines the product as an open-source Markdown primer for beginners in their first ninety days of regular gym training or returning after a long break. It rejects diagnosis, individualized coaching, rehabilitation pathways, workout planning, video-first source of truth, and platform machinery that outranks the Markdown corpus.
 
-Observed: `docs/vision/strategic-positioning.md` records supporting rationale for the vision, including category, primary user, tradeoffs, compatibility surfaces, refusals, and falsifiability.
+Observed: `docs/architecture/system/architecture.md` is the approved current architecture package. It describes five logical blocks: project references, content, media, governance, and tooling/operations.
 
-Inferred: Future implementation work will likely need a spec, architecture, and test strategy before code because `CONSTITUTION.md` requires durable artifacts before substantive schema, localization, review, safety, accessibility, licensing, public API, configuration, or data-migration changes.
+Observed: `docs/plan.md` has no active work and lists the Markdown-first primer, Responsible Breadth content expansion, and repository layout normalization as completed by PR #5.
+
+Inferred: The next material content expansion should start through proposal/spec workflow rather than direct implementation because the constitution treats Markdown content contracts, safety language, citation policy, media policy, and validation tooling as governed surfaces.
 
 ## Repository layout
 
-- `README.md`: public project entry point with managed vision front matter, license note, and current status text.
-- `VISION.md`: canonical project vision and scope boundary.
-- `CONSTITUTION.md`: highest-level governance for agentic and human workflows.
-- `AGENTS.md`: concise agent operating rules derived from the constitution.
-- `CONTRIBUTING.md`: basic contribution expectations for focused pull requests, rationale, tests or docs, and check reporting.
-- `CODE_OF_CONDUCT.md`: participation behavior and reporting placeholder.
-- `SECURITY.md`: vulnerability reporting instructions with placeholder security contact.
-- `LICENSE`: project license file. It was inventoried but not read in this mapping pass.
-- `docs/vision/strategic-positioning.md`: rationale supporting `VISION.md`.
+- `README.md`: public repository entry point, usage guidance, active content navigation, validation command examples, and license summary.
+- `CONSTITUTION.md`, `VISION.md`, `AGENTS.md`, `docs/workflows.md`: governance, product direction, agent operating rules, and project-local workflow artifact map.
+- `SOURCES.md`, `RED-FLAGS.md`, `CONTENT_LICENSE.md`, `CONTRIBUTING.md`: reusable source index, safety-routing reference, content/media license posture, and contributor contract.
+- `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/`: canonical Markdown content directories named by current architecture and README.
+- `docs/templates/`: page templates for exercise, pattern, condition, principle, programming-principle, and program-example pages.
+- `media/`: approved AI-generated raster assets organized by content type and slug, plus `media/PROVENANCE.md`.
+- `tools/checks/`: local Python checker scripts for Markdown-first content contracts and privacy scanning.
+- `tests/`: Python `unittest` test modules and fixtures for Markdown-first rules, Responsible Breadth rules, media/provenance rules, compatibility, and repository layout normalization.
+- `specs/`: approved specs and test specs for Markdown-first primer, Responsible Breadth, repository layout normalization, and historical content-schema work.
+- `docs/architecture/`, `docs/adr/`: current architecture and durable decision records.
+- `docs/proposals/`, `docs/plans/`, `docs/changes/`, `docs/learn/`: lifecycle artifacts, plans, reviews, proof records, verification reports, and learning records.
 
-Not observed: `src/`, `app/`, `content/`, `schemas/`, `specs/`, `docs/architecture/`, `docs/changes/`, `.github/workflows/`, package manifests, build config, test config, deployment config, or generated output.
+Not observed: active `content/`, `schemas/`, `generated/`, numbered content directories, `about/red-flags.md`, package manifests, `.github/workflows/`, build config, deployment config, or mdBook config.
 
 ## Runtime flow
 
-Not observed in the mapped scope. The repository has no executable source, runtime configuration, package manifest, server entry point, frontend entry point, CLI entry point, or test-demonstrated runtime flow.
+Observed static reader flow:
+
+1. A reader opens `README.md`.
+2. The reader follows relative links to promoted Markdown content in `patterns/`, `conditions/`, `principles/`, or `programs/`, or to draft first-slice exercise/principle pages in `exercises/` and `principles/`.
+3. Safety-relevant pages route to `RED-FLAGS.md`.
+4. Pages include page-local source sections and may reuse source IDs listed in `SOURCES.md`.
+5. Pages may reference approved media under `media/<content-type>/<slug>/`.
+
+Observed local validation flow:
+
+1. Python `unittest` modules call repository files and checker scripts directly.
+2. `tools/checks/check_markdown_first.py` statically scans Markdown paths for content-contract rules, citation/source behavior, Responsible Breadth metadata and headings, stale path references, media/provenance constraints, and excluded scope patterns.
+3. `tools/checks/check_privacy.py` statically scans supplied files or directories for configured forbidden privacy patterns.
+
+Not observed: server runtime, frontend runtime, CLI application runtime, database runtime, deployed static site, hosted search, authentication, analytics, or runtime user input flow.
 
 ## Data flow
 
-Not observed in the mapped scope. The vision and constitution describe intended future content concepts such as locale-aware card fields, review metadata, canonical SVG step media, and equipment-anchored discovery, but no schema, database, file format, fixture, migration, CMS configuration, or content object exists yet.
+Observed content data flow:
+
+- Markdown pages are source files read directly by humans and by local validation scripts.
+- Page-local reference-style links and `SOURCES.md` provide citation traceability.
+- Media references in Markdown point to repository-relative assets under `media/`.
+- `media/PROVENANCE.md` is the central index for AI-generated raster asset metadata, including asset path, media purpose, generator, creation notes, human review, license assertion, source inputs, review status, and page references.
+- Change-local audit and verification records under `docs/changes/<change-id>/` provide lifecycle evidence, but they do not replace Markdown product content.
+
+Observed validation data flow:
+
+- `tests/test_markdown_first_real_pages.py` invokes `tools/checks/check_markdown_first.py` over README, source files, red flags, principles, and exercises.
+- `tests/test_responsible_breadth_m1.py` builds temporary fixtures and invokes the Markdown-first checker with `GYMPRIMER_ROOT` to prove Responsible Breadth constraints.
+- `tests/test_repository_layout_normalization.py` builds temporary fixtures and invokes the Markdown-first checker to prove canonical paths, stale old-path rejection, media provenance, and historical artifact boundary behavior.
+
+Not observed: database schema, migration path, generated public JSON, API payloads, CMS data model, user data collection, analytics events, or production artifact pipeline.
 
 ## External boundaries
 
-Observed: `SECURITY.md` directs vulnerability reports to a private email placeholder rather than public issues.
+Observed external-source boundary: `SOURCES.md` requires public, named, authoritative sources for reused references and says global sources do not replace page-local source sections.
 
-Observed: `CODE_OF_CONDUCT.md` directs conduct reports to a maintainer email placeholder.
+Observed media boundary: `CONTRIBUTING.md`, `CONTENT_LICENSE.md`, `media/README.md`, and `media/PROVENANCE.md` prohibit undocumented third-party media and require approved provenance for AI-generated raster assets.
 
-Observed: `CONSTITUTION.md` treats dependencies, media assets, content sources, licensing, reviewer or user data, and health-adjacent safety language as governed external or risk boundaries.
+Observed privacy/security boundary: `README.md`, `CONSTITUTION.md`, `CONTRIBUTING.md`, and `tools/checks/check_privacy.py` forbid secrets, credentials, private contact details, private local paths, private health information, and real user health profiles.
 
-Not observed: live external integrations, package registries, hosting configuration, analytics, CMS providers, authentication providers, payment systems, AI services, media storage, or deployment targets.
+Observed licensing boundary: `README.md` and `CONTENT_LICENSE.md` state that code/tooling use Apache-2.0 and written educational content, templates, original diagrams, and accepted AI-generated raster illustrations use CC BY 4.0 unless a file states otherwise.
+
+Observed contact boundary: `SECURITY.md` and `CODE_OF_CONDUCT.md` still use placeholder reporting contacts.
+
+Not observed: external package dependencies, hosted services, deployment targets, authentication providers, CMS providers, payment systems, telemetry, or network calls in active tooling.
 
 ## Test map
 
-Configured commands: none observed. No package manifest, test runner config, Makefile, CI workflow, or documented test command exists in the mapped scope.
+Configured commands observed in `README.md`:
 
-Executed commands during mapping:
+- `python3 -m unittest tests.test_markdown_first_contract tests.test_markdown_first_templates`
+- `python3 -m unittest discover -s tests -p 'test_responsible_breadth_*.py'`
+- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises`
+- `python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md patterns conditions principles programs exercises docs/changes/responsible-breadth media`
 
-- `sed -n '1,320p' .agents/skills/project-map/SKILL.md`: exit 0
-- `find .agents/skills/project-map -maxdepth 3 -type f -print`: exit 0
-- `git rev-parse --short HEAD && git status --short`: exit 0
-- `rg --files -g '!/.git/**' -g '!/.agents/**'`: exit 0
-- `sed -n '1,260p' .agents/skills/project-map/assets/project-map-skeleton.md`: exit 0
-- `sed -n '1,220p' AGENTS.md`: exit 0
-- `sed -n '1,260p' CONSTITUTION.md`: exit 0
-- `sed -n '1,180p' CODE_OF_CONDUCT.md`: exit 0
-- `sed -n '1,180p' SECURITY.md`: exit 0
-- `find . -maxdepth 3 -type f -not -path './.git/*' -not -path './.agents/*' -printf '%p\n' | sort`: exit 0
+Observed test surfaces:
 
-No build, test, lint, network, or mutating command was run.
+- Markdown-first tests: `tests/test_markdown_first_*.py`
+- Responsible Breadth tests: `tests/test_responsible_breadth_m1.py`
+- Repository layout tests: `tests/test_repository_layout_normalization.py`
+- Fixture Markdown: `tests/fixtures/markdown-first/`
+- Local checkers: `tools/checks/check_markdown_first.py`, `tools/checks/check_privacy.py`
+
+Executed commands during this mapping session:
+
+- `sed -n '1,260p' .agents/skills/project-map/SKILL.md`: exit 0
+- `sed -n '261,520p' .agents/skills/project-map/SKILL.md`: exit 0
+- `sed -n '1,260p' docs/project-map.md`: exit 0
+- `sed -n '1,140p' docs/workflows.md`: exit 0
+- `git rev-parse --short HEAD && git status --short --branch`: exit 0
+- `rg --files -g '!/.git/**' -g '!/.agents/**' | sort`: exit 0
+- `find .github -maxdepth 3 -type f -print 2>/dev/null | sort`: exit 0, no files printed
+- `find . -maxdepth 2 \( -name 'package.json' -o -name 'pyproject.toml' -o -name 'requirements*.txt' -o -name 'Makefile' -o -name 'tox.ini' -o -name 'pytest.ini' -o -name 'setup.cfg' -o -name 'Cargo.toml' -o -name 'go.mod' \) -print | sort`: exit 0, no files printed
+- `find patterns conditions principles programs exercises media tools tests specs docs/templates -maxdepth 3 -type f -print 2>/dev/null | sort`: exit 0
+- `sed -n '1,220p' README.md`: exit 0
+- `sed -n '1,220p' CONSTITUTION.md`: exit 0
+- `sed -n '1,220p' VISION.md`: exit 0
+- `sed -n '1,220p' docs/architecture/system/architecture.md`: exit 0
+- `sed -n '1,180p' media/README.md && sed -n '1,120p' media/PROVENANCE.md`: exit 0
+- `sed -n '1,220p' tools/checks/check_markdown_first.py`: exit 0
+- `sed -n '1,220p' tools/checks/check_privacy.py`: exit 0
+- `for f in patterns/anterior-pelvic-tilt.md conditions/non-specific-chronic-low-back-pain.md principles/how-many-days-a-week.md programs/generic-3-day-full-body-example.md exercises/lat-pulldown.md exercises/dead-bug.md RED-FLAGS.md SOURCES.md CONTRIBUTING.md CONTENT_LICENSE.md; do printf '\n== %s ==\n' "$f"; sed -n '1,80p' "$f"; done`: exit 0
+- `for f in tests/test_markdown_first_contract.py tests/test_markdown_first_templates.py tests/test_markdown_first_real_pages.py tests/test_responsible_breadth_m1.py tests/test_repository_layout_normalization.py; do printf '\n== %s ==\n' "$f"; sed -n '1,140p' "$f"; done`: exit 0
+
+No build, hosted CI, network, mdBook, full test suite, or mutating validation command was run during this mapping session.
 
 ## CI and release map
 
-Not observed in the mapped scope. No `.github/workflows/` directory, release workflow, package manifest, versioning file, deployment config, or release documentation was observed.
+Not observed in the mapped scope. No `.github/workflows/` files, package manifest scripts, release workflow, deployment configuration, mdBook configuration, or release process file were observed.
 
-`CONSTITUTION.md` states that agents must not claim CI passed unless a CI run was observed and that CI should eventually run the same core checks expected locally.
+Observed: `README.md` explicitly says no hosted CI workflow is configured yet.
+
+Observed: `CONSTITUTION.md` says agents must not claim CI passed unless a CI run was observed and that CI, when present, should run the same core checks expected locally.
 
 ## Architecture rules observed
 
 Observed from `CONSTITUTION.md` and `AGENTS.md`:
 
-- `CONSTITUTION.md` outranks `VISION.md`, which outranks specs, architecture, plans, tests, code/content, and chat.
-- Substantive changes require durable specs before implementation when they affect behavior, schema, exercise-card contracts, localization, review workflow, media policy, safety language, accessibility, licensing, public APIs, configuration, or data migration.
-- Architecture decisions are required before changes affecting multiple components, data ownership, schema shape, localization model, CMS workflow, media storage, review workflow, public interfaces, security boundaries, or deployment.
-- The future content model must preserve locale-aware fields, English launch content, reviewed exercise cards, tiered review metadata, canonical SVG step media, visible reviewer identity and review date, public review history, and equipment-anchored discovery.
-- AI-generated exercise guidance, medical advice, and community video as source-of-truth content are forbidden.
+- Source-of-truth order starts with `CONSTITUTION.md`, then `VISION.md`, accepted proposals, approved specs, architecture/ADRs, plans/rationale, tests/evidence, code/content/configuration/generated artifacts, and chat.
+- Material changes to Markdown page contracts, citation policy, safety language, media policy, localization, licensing, public contribution rules, public URLs, generated output, validation tooling, configuration, or migration require durable specs before implementation.
+- Architecture decisions are required before changes affecting multiple components, source-of-truth boundaries, repository layout, Markdown URL compatibility, localization, media storage, generated output, validation tooling, public interfaces, security boundaries, deployment, or archival of prior artifacts.
+- Markdown source is the primary product; generated HTML, generated validation output, search indexes, and websites are derived unless a later accepted proposal changes that boundary.
+- AI-generated exercise guidance, diagnosis, individualized medical advice, treatment plans, rehabilitation pathways, and user-adaptive programming are forbidden as source-of-truth content.
 
-Observed from `VISION.md`:
+Observed from `docs/architecture/system/architecture.md`:
 
-- GymPrimer is an exercise-literacy reference before workout prescription.
-- Reviewed text and SVG illustrations are canonical; community video can only supplement stable cards later.
-- The first implementation should not require bilingual card content before the English schema stabilizes, but the schema must support Chinese without rework.
+- The durable architecture view has five logical blocks: project references, content, media, governance, and tooling/operations.
+- Active content paths are `exercises/`, `patterns/`, `conditions/`, `principles/`, and `programs/`.
+- `RED-FLAGS.md` is the canonical red-flags reference.
+- `media/<content-type>/<slug>/` and `media/PROVENANCE.md` own optional supporting raster illustrations and provenance.
+- RigorLoop governance and operations artifacts remain under `docs/`.
+
+Observed from active checks:
+
+- The Markdown-first checker rejects stale old content paths, stale `about/red-flags.md` links, old media buckets, excluded-scope terms, missing Responsible Breadth metadata, missing page sections, and unproven or mismatched media provenance.
+- The privacy checker performs a negative-match scan over supplied files or directories for configured sensitive-pattern examples.
 
 ## Risk areas
 
-- README status drift: `README.md` still says to see `VISION.md` for open questions, but `VISION.md` no longer has an open-questions section.
-- No implementation surfaces exist yet, so future code placement cannot rely on current source boundaries.
-- No test framework or CI exists, so future behavior changes need validation infrastructure or explicit manual verification records.
-- No architecture artifact exists for the locale-aware schema, review workflow, media pipeline, CMS workflow, or content storage model.
-- `CODE_OF_CONDUCT.md` and `SECURITY.md` contain placeholder contact values.
-- `LICENSE` was inventoried but not read in this pass; Apache 2.0 posture is stated in `README.md`, `VISION.md`, and `CONSTITUTION.md`, but license-file contents were not verified here.
+- `docs/workflows.md` still has a `Current change` section naming `markdown-first-gym-primer` as branch-ready for `pr`, while `docs/plan.md` and change metadata now show no active work after PR #5. Treat the workflow guide's current-change section as stale until refreshed.
+- `CONSTITUTION.md` still says Responsible Breadth requires ADR/spec/architecture/plan/test/validation updates before relying on expanded content, but those artifacts now exist and PR #5 completed the proof slice. Treat that current-assumptions paragraph as stale relative to the completed lifecycle artifacts unless it is intentionally preserving a broader-scaling warning.
+- `README.md` marks the five original exercise/principle pages as draft first-slice pages, while additional APT-support exercise pages also exist in `exercises/`. Downstream content work should inspect exact page status instead of assuming all `exercises/` pages are promoted or draft.
+- No hosted CI exists, so validation relies on local commands and recorded validation evidence.
+- No package manifest pins Python version or dependencies; active tests use the standard library plus repository scripts.
+- `SECURITY.md` and `CODE_OF_CONDUCT.md` still contain placeholder reporting contacts.
+- `tests/__pycache__/` exists in the working tree filesystem during inspection, but it is generated bytecode cache and not part of the tracked product surface.
 
 ## Open questions
 
-- What implementation stack, package manager, runtime, and hosting model will GymPrimer use?
-- Where will exercise content live: repository files, a CMS, generated static assets, or another storage model?
-- What is the exact locale-aware card schema and migration policy?
-- What validation tooling will enforce schema, accessibility, licensing, review metadata, and media-source rules?
-- Who owns maintainer and security contact addresses before public contribution begins?
-- Should README status text be updated now that the vision open questions have been resolved?
+- Should `docs/workflows.md` be refreshed now that PR #5 has merged and all active plans are closed?
+- Should `CONSTITUTION.md` current-assumptions wording be normalized after the Responsible Breadth proof slice?
+- Which next content slice should be proposed, and should it expand pattern pages, exercise pages, conditions, or programming literacy first?
+- What minimum hosted CI workflow should run the local Python tests and Markdown-first/privacy checks?
+- When should placeholder security and conduct contacts be replaced for public release operations?
+- Should mdBook remain deferred, or should a future proposal add minimal derived HTML output?
 
 ## Downstream recommendation
 
-Next stage: proposal.
+Next stage: workflow.
 
-Rationale: The map records unresolved direction-level questions about implementation stack, content storage, schema shape, validation tooling, and ownership. Those choices affect scope, tradeoffs, and architecture boundaries, so they should be resolved through proposal work before architecture authoring. Architecture should follow once a direction and spec are stable enough to design against.
+Rationale: The repository map is now refreshed, but it identifies stale workflow/governance routing text rather than an implementation-ready feature. Use workflow routing to decide whether to refresh `docs/workflows.md` and `CONSTITUTION.md` current-assumptions text first, or start a new proposal for the next content slice.
 
 ## Evidence trail
 
 | Evidence | Type | Result |
 | --- | --- | --- |
-| `README.md` | source | Public entry point with managed vision block, license note, and status text stating repository contains vision and positioning rationale only. |
-| `VISION.md` | source | Canonical project identity: beginner exercise-literacy reference, English-first locale-aware content, tiered review, canonical SVG step cards, refusals, and falsifiability. |
-| `CONSTITUTION.md` | source | Governance, source-of-truth order, lifecycle gates, security/privacy, compatibility, verification, review, documentation, and current implementation gaps. |
-| `AGENTS.md` | source | Concise agent operating rules and source-order summary. |
-| `CONTRIBUTING.md` | source | Basic PR and issue expectations. |
-| `CODE_OF_CONDUCT.md` | source | Conduct expectations and placeholder reporting contact. |
-| `SECURITY.md` | source | Private vulnerability reporting guidance and placeholder security contact. |
-| `docs/vision/strategic-positioning.md` | source | Supporting strategic-positioning rationale for the vision. |
-| `rg --files -g '!/.git/**' -g '!/.agents/**'` | executed command | Exit 0; found root docs and `docs/vision/strategic-positioning.md`, no source, specs, tests, package manifests, or CI files. |
-| `find . -maxdepth 3 -type f -not -path './.git/*' -not -path './.agents/*' -printf '%p\n' \| sort` | executed command | Exit 0; confirmed mapped file inventory at depth 3. |
-| `git rev-parse --short HEAD && git status --short` | executed command | Exit 0; baseline `2c9401f+dirty`, with modified `README.md` and untracked governance/vision/docs files before this map was added. |
+| `README.md` | source | Observed current Markdown-first product route, active content directories, promoted Responsible Breadth pages, draft first-slice pages, and local validation command examples. |
+| `CONSTITUTION.md` | source | Observed source-of-truth order, spec/test/architecture/review rules, Markdown-first product boundary, privacy/safety rules, and remaining stated assumptions. |
+| `VISION.md` | source | Observed project identity, audience, commitments, refusals, and failure conditions. |
+| `docs/architecture/system/architecture.md` | source | Observed approved architecture status, five logical blocks, active content paths, media/provenance boundary, and optional mdBook boundary. |
+| `docs/workflows.md` | source | Observed artifact location map and stale current-change routing section. |
+| `docs/plan.md` | source | Observed no active plans and three recent completed tracks from PR #5. |
+| `SOURCES.md` | source | Observed reusable source-index rules and public source IDs. |
+| `RED-FLAGS.md` | source | Observed root red-flags reference and page-local sources. |
+| `CONTRIBUTING.md` | source | Observed contributor scope, citation, media, and privacy rules. |
+| `CONTENT_LICENSE.md` | source | Observed Apache-2.0 and CC BY 4.0 split license posture. |
+| `media/README.md`, `media/PROVENANCE.md` | source | Observed media path contract and AI-generated raster provenance rows. |
+| `tools/checks/check_markdown_first.py` | source | Observed Markdown-first structural, citation, Responsible Breadth, old-path, media, and scope checks. |
+| `tools/checks/check_privacy.py` | source | Observed negative-match privacy scanner. |
+| `tests/test_markdown_first_*.py` | source | Observed active Markdown-first unittest coverage. |
+| `tests/test_responsible_breadth_m1.py` | source | Observed Responsible Breadth fixture/checker coverage. |
+| `tests/test_repository_layout_normalization.py` | source | Observed canonical path and layout-normalization fixture/checker coverage. |
+| `rg --files -g '!/.git/**' -g '!/.agents/**' \| sort` | executed command | Exit 0; found current product, governance, specs, tests, media, and lifecycle artifact inventory. |
+| `find .github -maxdepth 3 -type f -print 2>/dev/null \| sort` | executed command | Exit 0; no hosted CI workflow files printed. |
+| `find . -maxdepth 2 \( -name 'package.json' -o -name 'pyproject.toml' -o -name 'requirements*.txt' -o -name 'Makefile' -o -name 'tox.ini' -o -name 'pytest.ini' -o -name 'setup.cfg' -o -name 'Cargo.toml' -o -name 'go.mod' \) -print \| sort` | executed command | Exit 0; no package/build manifest files printed. |
+| `git rev-parse --short HEAD && git status --short --branch` | executed command | Exit 0; baseline `2c0c41a`, branch `main...origin/main`, no uncommitted paths before map edit. |

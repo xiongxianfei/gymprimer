@@ -34,7 +34,7 @@ python3 tools/validation/validate_content.py --source tests/fixtures/invalid --s
 python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --expect-mixed
 python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --expect-mixed
 python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json
-python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI|personal health" -- generated/
+python3 tools/validation/privacy_scan.py --pattern "<sensitive-patterns>" -- generated/
 ```
 
 ## Milestone and command ownership
@@ -47,7 +47,7 @@ Command classifications:
 | --- | --- |
 | existing/configured | Command or tool already exists and is expected to run now. |
 | planned until implemented | Command is part of this test contract but may not exist until its owning milestone. |
-| manual-only | Proof is collected by a bounded manual procedure rather than automation. |
+| audit-record | Proof is collected by bounded audit evidence rather than automation. |
 | release-owned | Command or proof belongs to a later release, CI, or governance slice and is not required for this implementation handoff. |
 
 Unless otherwise stated, planned commands are allowed to be absent before their owning milestone. Once the owning milestone is reached, absence, configuration failure, fixture absence, unexpected nonzero exit, or missing evidence artifact is a test-spec failure.
@@ -58,15 +58,15 @@ Unless otherwise stated, planned commands are allowed to be absent before their 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | CMD1 | `python3 -m unittest discover -s tests` | planned until implemented | implementation milestone maintainer | M1 | M1 | yes; may fail before M1 if tests or harness do not exist | Nonzero means test failure after M1; before M1, absence is recorded as not-yet-owned. | test runner output or `generated/test-results.txt` |
 | CMD2 | `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json` | planned until implemented | implementation milestone maintainer | M1 | M1 | yes; may fail before M1 if validator or source layout does not exist | Nonzero means repository source validation failure after M1; missing validator, schemas, media path, source path, or report after M1 is failure. | `generated/validation-report.json` |
-| CMD3 | `python3 tools/validation/privacy_scan.py --pattern "private\|/home/\|secret\|PHI" -- generated/validation-report.json` | planned until implemented | implementation milestone maintainer | M1 | M1 | yes; may fail before M1 if helper or report does not exist | `0` means clean scan; `1` means forbidden pattern found; `2` or any execution error means scan/setup failure. | `generated/privacy-scan-report.json` or command transcript |
+| CMD3 | `python3 tools/validation/privacy_scan.py --pattern "<sensitive-patterns>" -- generated/validation-report.json` | planned until implemented | implementation milestone maintainer | M1 | M1 | yes; may fail before M1 if helper or report does not exist | `0` means clean scan; `1` means forbidden pattern found; `2` or any execution error means scan/setup failure. | `generated/privacy-scan-report.json` or command transcript |
 | CMD4 | `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --expect-invalid` | planned until implemented | implementation milestone maintainer | M2 | M2 | yes; may fail before M2 if invalid fixtures or content rules do not exist | Nonzero means invalid-fixture expectation failure after M2; missing validator or fixtures after M2 is failure. | test runner output and validation report excerpt |
 | CMD5 | `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --expect-mixed` | planned until implemented | implementation milestone maintainer | M3 | M3 | yes; may fail before M3 if lifecycle fixtures or rules do not exist | Nonzero means lifecycle fixture expectation failure after M3; missing lifecycle fields, reports, or fixtures after M3 is failure. | test runner output and lifecycle validation report excerpt |
 | CMD6 | `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --expect-mixed` | planned until implemented | implementation milestone maintainer | M3 | M3 | yes; may fail before M3 if review-routing fixtures or rules do not exist | Nonzero means review-routing expectation failure after M3; missing review-tier evidence after M3 is failure. | test runner output and review-routing validation report excerpt |
 | CMD7 | `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json` | planned until implemented | implementation milestone maintainer | M4 | M4 | yes; may fail before M4 if generated-output support does not exist | Nonzero means generated-output validation failure after M4; missing public output after M4 is failure. | `generated/validation-report.json` and `generated/public-content.json` |
 | CMD8 | `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out /tmp/gymprimer-validation-report.json --emit-public /tmp/gymprimer-public-content.json` | planned until implemented | implementation milestone maintainer | M4 | M4 | yes; may fail before M4 if generated-output support does not exist | Nonzero means repeat generated-output validation failure after M4. | `/tmp/gymprimer-validation-report.json` and `/tmp/gymprimer-public-content.json` command transcript |
 | CMD9 | `diff -u generated/public-content.json /tmp/gymprimer-public-content.json` | planned until implemented | implementation milestone maintainer | M4 | M4 | yes; may fail before M4 if generated outputs do not exist | Nonzero means deterministic generated output differs after M4. | diff output or `generated/diff-report.txt` |
-| CMD10 | `python3 tools/validation/privacy_scan.py --pattern "private\|/home/\|secret\|PHI\|personal health" -- generated/` | planned until implemented | implementation milestone maintainer | M4 | M4 | yes; may fail before M4 if generated output does not exist | `0` means clean scan; `1` means forbidden pattern found; `2` or any execution error means scan/setup failure. | `generated/privacy-scan-report.json` |
-| CMD11 | `rg -n "Current readiness\|Next valid skill\|Plan lifecycle state\|Status: approved\|accepted" docs/workflows.md docs/plans/2026-06-26-content-schema-foundation.md docs/architecture/system/architecture.md docs/adr/2026-06-26-repository-native-reviewed-content.md specs/content-schema.md` | planned until implemented | implementation milestone maintainer | M4 | M4 | yes; may fail before M4 if lifecycle routing has not reached final handoff | Nonzero means lifecycle state-sync evidence is missing or stale after M4. | command transcript or `generated/manual-proof/MP1-lifecycle-state-sync.md` |
+| CMD10 | `python3 tools/validation/privacy_scan.py --pattern "<sensitive-patterns>" -- generated/` | planned until implemented | implementation milestone maintainer | M4 | M4 | yes; may fail before M4 if generated output does not exist | `0` means clean scan; `1` means forbidden pattern found; `2` or any execution error means scan/setup failure. | `generated/privacy-scan-report.json` |
+| CMD11 | `rg -n "Current readiness\|Next valid skill\|Plan lifecycle state\|Status: approved\|accepted" docs/workflows.md docs/plans/2026-06-26-content-schema-foundation.md docs/architecture/system/architecture.md docs/adr/2026-06-26-repository-native-reviewed-content.md specs/content-schema.md` | planned until implemented | implementation milestone maintainer | M4 | M4 | yes; may fail before M4 if lifecycle routing has not reached final handoff | Nonzero means lifecycle state-sync evidence is missing or stale after M4. | command transcript or lifecycle audit record |
 
 Privacy scans use `privacy_scan.py` rather than plain `rg` because privacy scanning is a negative-match check. A clean scan must exit `0`; a forbidden finding exits `1`; scan/setup errors exit `2`.
 
@@ -93,12 +93,12 @@ Privacy scans use `privacy_scan.py` rather than plain `rg` because privacy scann
 
 ### Milestone proof expectations
 
-| Milestone | Required automated proof | Required manual proof | Handoff rule |
+| Milestone | Required automated proof | Additional evidence required | Handoff rule |
 | --- | --- | --- | --- |
-| M1 | CMD1, CMD2, and CMD3 pass; T1-T2 pass. | MP5 if developer-command documentation exists in this milestone. | M1 is complete only when the harness, report shape, and privacy-scan semantics are demonstrable. |
-| M2 | CMD1, CMD2, CMD4, and relevant M2 tests T3-T9 pass. | MP3 if fixture privacy spot-check remains manual. | M2 is complete only when schema, locale, taxonomy, media, licensing, safety, and migration validation are executable. |
-| M3 | CMD1, CMD2, CMD5, CMD6, and T10-T13 pass. | MP1 if lifecycle state synchronization cannot be fully automated yet. | M3 is complete only when lifecycle, publication eligibility, review routing, and audit-event behavior are validated. |
-| M4 | CMD1, CMD7, CMD8, CMD9, CMD10, CMD11, and T14-T16 pass. | MP2 and MP4. | M4 is complete only when generated output is deterministic, source-bounded, privacy-clean, and scope-compliant. |
+| M1 | CMD1, CMD2, and CMD3 pass; T1-T2 pass. | Developer-command documentation audit if such documentation exists in this milestone. | M1 is complete only when the harness, report shape, and privacy-scan semantics are demonstrable. |
+| M2 | CMD1, CMD2, CMD4, and relevant M2 tests T3-T9 pass. | Fixture privacy audit if privacy spot-checking is not fully automated. | M2 is complete only when schema, locale, taxonomy, media, licensing, safety, and migration validation are executable. |
+| M3 | CMD1, CMD2, CMD5, CMD6, and T10-T13 pass. | Lifecycle-state synchronization audit if not fully automated yet. | M3 is complete only when lifecycle, publication eligibility, review routing, and audit-event behavior are validated. |
+| M4 | CMD1, CMD7, CMD8, CMD9, CMD10, CMD11, and T14-T16 pass. | Generated-output source-boundary and scope audit evidence. | M4 is complete only when generated output is deterministic, source-bounded, privacy-clean, and scope-compliant. |
 
 ## Requirement coverage map
 
@@ -420,106 +420,20 @@ Automated tests must verify:
 - Re-run generated output with the same inputs and compare output for deterministic ordering and serialization.
 - If timing is noisy locally, record the command, machine caveat, and observed time instead of claiming a hard performance pass.
 
-## Manual proof records
+## Bounded audit records
 
-Manual proof is allowed only when the proof target requires human judgment, cross-artifact consistency review, or scope interpretation that is not yet practical to automate. Manual proof records are bounded and must produce evidence artifacts.
+Separate proof artifact trees are not required by this superseded test spec.
+Where automation cannot fully prove lifecycle state synchronization,
+generated-output source boundaries, fixture privacy, scope boundaries, or
+developer-command documentation quality, record bounded audit evidence with the
+checked files, criteria, result, residual risk, and re-run trigger.
 
-### Manual proof index
+## Audit checklist
 
-| Proof ID | Name | Owning milestone | Evidence artifact | Required before milestone handoff? |
-| --- | --- | --- | --- | --- |
-| MP1 | Lifecycle-state synchronization inspection | M3 | `generated/manual-proof/MP1-lifecycle-state-sync.md` | yes, if M3 is in scope |
-| MP2 | Generated-output source-boundary inspection | M4 | `generated/manual-proof/MP2-generated-output-source-boundary.md` | yes, if M4 is in scope |
-| MP3 | Fixture privacy spot-check | M2 | `generated/manual-proof/MP3-fixture-privacy-spot-check.md` | yes, if M2 is in scope |
-| MP4 | Scope and non-goal inspection | M4 | `generated/manual-proof/MP4-scope-non-goal-inspection.md` | yes, if M4 is in scope |
-| MP5 | Developer-command documentation check | M1 | `generated/manual-proof/MP5-developer-command-documentation-check.md` | yes, if M1 documentation exists |
-
-### MP1. Lifecycle-state synchronization inspection
-
-| Field | Value |
-| --- | --- |
-| Manual proof ID | MP1 |
-| Owning milestone | M3 |
-| Owner | implementation milestone maintainer |
-| Automation rationale | Full lifecycle transition validation is automated by T10-T13, but this proof checks that the human-readable spec, validator error messages, and generated report terminology stay synchronized. |
-| Required environment | Local checkout containing `specs/content-schema.md`, `specs/content-schema.test.md`, validator output, and generated validation report. |
-| Exact steps | 1. Open the lifecycle requirements in `specs/content-schema.md`. 2. Open T10-T13 in `specs/content-schema.test.md`. 3. Open `generated/validation-report.json`. 4. Confirm that `review_status`, `publication_status`, lifecycle transition names, approval-event names, and error identifiers use the same terms. 5. Record any mismatch. |
-| Evidence artifact | `generated/manual-proof/MP1-lifecycle-state-sync.md` |
-| Pass condition | All lifecycle and review/publication terms are consistent across spec, test spec, validator output, and generated report. |
-| Failure condition | Any lifecycle term, status value, transition name, or audit-event label differs across artifacts without an explicit migration note. |
-| Re-run trigger | Any change to lifecycle requirements, validator lifecycle output, approval events, or publication eligibility rules. |
-
-### MP2. Generated-output source-boundary inspection
-
-| Field | Value |
-| --- | --- |
-| Manual proof ID | MP2 |
-| Owning milestone | M4 |
-| Owner | implementation milestone maintainer |
-| Automation rationale | T14 validates source-boundary rules mechanically, but a manual inspection is retained to catch accidental narrative claims that generated output came from non-reviewed, external, AI-generated, or private sources. |
-| Required environment | Local checkout after generated output has been produced; access to `content/`, `media/`, `schemas/`, `generated/`, and validation reports. |
-| Exact steps | 1. Open the generated content package and at least three generated card outputs. 2. Trace each generated output back to repository-native source files. 3. Confirm that generated output does not cite private files, local absolute paths, external web sources, AI chat text, or unreviewed reviewer notes. 4. Record inspected files and source paths. |
-| Evidence artifact | `generated/manual-proof/MP2-generated-output-source-boundary.md` |
-| Pass condition | Every inspected generated output traces only to approved repository-native content, schema, media metadata, or reviewed fixture sources. |
-| Failure condition | Any inspected generated output depends on private notes, local absolute paths, external web content, AI-generated source text, or unreviewed source material. |
-| Re-run trigger | Any change to generated-output logic, source-discovery logic, content indexing, or provenance handling. |
-
-### MP3. Fixture privacy spot-check
-
-| Field | Value |
-| --- | --- |
-| Manual proof ID | MP3 |
-| Owning milestone | M2 |
-| Owner | implementation milestone maintainer |
-| Automation rationale | Privacy scans catch configured patterns, but manual review is retained for early fixtures to detect realistic personal data, private reviewer details, or health narratives that do not match configured patterns. |
-| Required environment | Local checkout containing `tests/fixtures/`, `content/`, `media/`, and `generated/validation-report.json`. |
-| Exact steps | 1. Review all positive and negative fixtures added in the milestone. 2. Confirm fixtures use synthetic names, synthetic IDs, and non-personal examples. 3. Confirm fixtures do not contain real contact details, private reviewer identities, real health histories, PHI-like narratives, secrets, or local absolute paths. 4. Record fixture paths inspected. |
-| Evidence artifact | `generated/manual-proof/MP3-fixture-privacy-spot-check.md` |
-| Pass condition | Inspected fixtures contain only synthetic, non-sensitive, repository-safe content. |
-| Failure condition | Any fixture contains realistic personal data, real contact data, secrets, private reviewer details, local private paths, PHI-like narratives, or unexplained sensitive text. |
-| Re-run trigger | Any new or modified fixture containing names, reviewer metadata, safety text, health-related text, provenance fields, or generated-output examples. |
-
-### MP4. Scope and non-goal inspection
-
-| Field | Value |
-| --- | --- |
-| Manual proof ID | MP4 |
-| Owning milestone | M4 |
-| Owner | implementation milestone maintainer |
-| Automation rationale | Scope boundaries such as no UI, no CMS, no AI source-of-truth, no legal-policy implementation, and no rehab protocol are partly semantic and need human review at handoff. |
-| Required environment | Local checkout containing changed files for the implementation slice, test spec, plan, generated output, and validation reports. |
-| Exact steps | 1. Review changed file paths and generated outputs. 2. Confirm the slice remains limited to repository-native content schema, fixtures, validation, lifecycle/review gates, and deterministic generated output. 3. Confirm no UI, CMS, account system, AI assistant, public content library expansion, legal-policy implementation, or rehab/injury-treatment workflow was added. 4. Record any excluded-scope file or behavior. |
-| Evidence artifact | `generated/manual-proof/MP4-scope-non-goal-inspection.md` |
-| Pass condition | The implemented slice stays within the approved content-schema foundation scope and does not introduce deferred or excluded product areas. |
-| Failure condition | Any changed artifact introduces UI, CMS, AI source-of-truth behavior, public content operations, legal-policy machinery, account/user-data features, rehab protocols, or other excluded scope without a new approved plan. |
-| Re-run trigger | Any new directory, generated output class, validator capability, content category, or source boundary that may expand scope. |
-
-### MP5. Developer-command documentation check
-
-| Field | Value |
-| --- | --- |
-| Manual proof ID | MP5 |
-| Owning milestone | M1 |
-| Owner | implementation milestone maintainer |
-| Automation rationale | Commands can be tested automatically, but the usability and accuracy of developer-facing command documentation requires human confirmation before handoff. |
-| Required environment | Local checkout containing `specs/content-schema.test.md`, validation scripts, fixtures, and any developer command documentation used by this slice. |
-| Exact steps | 1. Open the command documentation. 2. Run each command listed for the current milestone exactly as documented. 3. Confirm prerequisites, paths, expected outputs, and failure semantics are stated. 4. Confirm privacy-scan commands explain negative-match semantics. 5. Record command outputs or links to generated artifacts. |
-| Evidence artifact | `generated/manual-proof/MP5-developer-command-documentation-check.md` |
-| Pass condition | A developer can run the milestone validation commands from the documented instructions and obtain the expected artifacts and exit behavior. |
-| Failure condition | Any documented command is missing, stale, path-invalid, has unexplained nonzero behavior, omits required evidence, or misstates privacy-scan semantics. |
-| Re-run trigger | Any change to validation commands, script names, fixture paths, generated output paths, or privacy-scan behavior. |
-
-## Manual QA checklist
-
-Manual QA for this test spec is limited to executing the formal manual proof records MP1-MP5 when their owning milestones are in scope. No additional free-form manual checklist is approved for implementation handoff.
-
-| Checklist item | Manual proof record |
-| --- | --- |
-| Cross-artifact lifecycle state synchronization | MP1 |
-| Generated-output source-boundary inspection | MP2 |
-| Fixture privacy spot-check | MP3 |
-| Scope and non-goal inspection | MP4 |
-| Developer-command documentation check | MP5 |
+Audit evidence is limited to cross-artifact lifecycle state synchronization,
+generated-output source-boundary inspection, fixture privacy spot-checks, scope
+and non-goal inspection, and developer-command documentation checks when their
+owning milestones are in scope.
 
 ## What not to test and why
 
@@ -543,7 +457,7 @@ Manual QA for this test spec is limited to executing the formal manual proof rec
 | ID | Criterion |
 | --- | --- |
 | TSR1-AC1 | Every validation command has a stable command ID. |
-| TSR1-AC2 | Every validation command has a classification: `existing/configured`, `planned until implemented`, `manual-only`, or `release-owned`. |
+| TSR1-AC2 | Every validation command has a classification: `existing/configured`, `planned until implemented`, `audit-record`, or `release-owned`. |
 | TSR1-AC3 | Every planned command names an owner. |
 | TSR1-AC4 | Every planned command names an owning milestone. |
 | TSR1-AC5 | Every planned command states whether it may be absent or fail before its owning milestone. |
@@ -556,15 +470,15 @@ Manual QA for this test spec is limited to executing the formal manual proof rec
 
 | ID | Criterion |
 | --- | --- |
-| TSR2-AC1 | Manual QA bullets are replaced or supplemented by stable manual proof records. |
-| TSR2-AC2 | Every manual proof has a stable proof ID. |
-| TSR2-AC3 | Every manual proof gives an automation rationale. |
-| TSR2-AC4 | Every manual proof provides exact steps. |
-| TSR2-AC5 | Every manual proof names a required environment. |
-| TSR2-AC6 | Every manual proof names an evidence artifact. |
-| TSR2-AC7 | Every manual proof defines pass and failure conditions. |
-| TSR2-AC8 | Every manual proof names an owning milestone or stage. |
-| TSR2-AC9 | Manual proof is bounded to cases where automation is impractical, semantic, or used as a cross-artifact consistency check. |
+| TSR2-AC1 | Audit checklist bullets are replaced or supplemented by stable bounded audit records. |
+| TSR2-AC2 | Every audit record has a stable evidence identifier or change-local path. |
+| TSR2-AC3 | Every audit record gives an automation rationale. |
+| TSR2-AC4 | Every audit record provides exact criteria or steps. |
+| TSR2-AC5 | Every audit record names a required environment where relevant. |
+| TSR2-AC6 | Every audit record names an evidence artifact or validation record. |
+| TSR2-AC7 | Every audit record defines pass and failure conditions. |
+| TSR2-AC8 | Every audit record names an owning milestone or stage. |
+| TSR2-AC9 | Audit evidence is bounded to cases where automation is impractical, semantic, or used as a cross-artifact consistency check. |
 
 ## Next artifacts
 

@@ -1,6 +1,8 @@
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
+import textwrap
 import unittest
 
 
@@ -25,17 +27,50 @@ class MarkdownFirstPageStructureTest(unittest.TestCase):
         result = run_check(FIXTURES / "valid-exercise.md")
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
-    def test_missing_disclaimer_fails_with_rule_and_path(self) -> None:
+    def test_page_local_disclaimer_is_not_required(self) -> None:
         path = FIXTURES / "missing-disclaimer.md"
         result = run_check(path)
-        self.assertNotEqual(result.returncode, 0)
-        self.assertIn("MF001", result.stdout)
-        self.assertIn(str(path), result.stdout)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
-    def test_disclaimer_too_low_fails(self) -> None:
+    def test_low_page_local_disclaimer_is_not_a_structure_error(self) -> None:
         result = run_check(FIXTURES / "disclaimer-too-low.md")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_red_flags_central_disclaimer_is_required(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "SOURCES.md").write_text(
+                "# Sources\n\n[mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842\n",
+                encoding="utf-8",
+            )
+            red_flags = root / "RED-FLAGS.md"
+            red_flags.write_text(
+                textwrap.dedent(
+                    """\
+                    # Red Flags
+
+                    ## Sources
+
+                    - [Mayo Clinic - Weight training][mayo-weight-training]
+
+                    [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
+                    """
+                ),
+                encoding="utf-8",
+            )
+            result = subprocess.run(
+                [sys.executable, str(CHECK), str(red_flags)],
+                cwd=ROOT,
+                env={"GYMPRIMER_ROOT": str(root)},
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("MF001", result.stdout)
+        self.assertIn(str(red_flags), result.stdout)
 
     def test_missing_sources_fails(self) -> None:
         result = run_check(FIXTURES / "missing-sources.md")

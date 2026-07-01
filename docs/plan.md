@@ -2,7 +2,11 @@
 
 ## Active
 
-- None.
+- [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
+  - Status: active
+  - Plan lifecycle state: active
+  - Current stage: pr
+  - Active context: final verify passed with branch-ready local evidence; PR handoff is next.
 
 ## Blocked
 

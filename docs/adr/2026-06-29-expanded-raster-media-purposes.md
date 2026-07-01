@@ -4,6 +4,10 @@
 
 accepted
 
+Amended on 2026-06-30 by the forward-head-posture pattern architecture work to
+replace separate audit-artifact requirements with recorded review evidence
+under the normal change record.
+
 ## Context
 
 The approved Responsible Breadth spec amendment expands GymPrimer's visual
@@ -106,7 +110,7 @@ Compatibility and migration:
 
 - Review this ADR with the architecture amendment.
 - Update the Responsible Breadth test spec to map expanded media-purpose values
-  to automated validation and manual visual-safety proof.
+  to automated validation and recorded visual-safety review evidence.
 - Update validation tooling before promoting pages that rely on
   `pattern_alignment_illustration`, `anatomical_region_illustration`, or
   `exercise_preview_illustration`.

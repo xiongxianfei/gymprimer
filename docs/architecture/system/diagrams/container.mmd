@@ -5,12 +5,12 @@ C4Container
   Person(contributor, "Contributor or maintainer")
 
   System_Boundary(repo, "GymPrimer repository") {
-    Container(refs, "Project references", "Markdown", "README, CONTRIBUTING, SOURCES, content license, and red-flags reference.")
+    Container(refs, "Project references", "Markdown", "README, CONTRIBUTING, SOURCES, content license, central disclaimer, and red-flags reference.")
     Container(content, "Content corpus", "Markdown", "Exercises, patterns, conditions, principles, and static program examples.")
     Container(media, "Media library", "AI raster/SVG assets", "Necessary subject-support visuals referenced by relative path.")
     Container(provenance, "Media provenance index", "Markdown table", "media/PROVENANCE.md rows keyed by exact asset_path and media_purpose for AI-generated raster assets.")
     Container(governance, "Governance", "Markdown", "docs/proposals, docs/adr, and canonical architecture records.")
-    Container(ops, "Tooling and operations", "Scripts/Markdown", "specs, checks, plans, change-local proof, learning records, and optional mdBook config.")
+    Container(ops, "Tooling and operations", "Scripts/Markdown", "specs, checks, plans, change-local evidence, learning records, and optional mdBook config.")
     Container(book, "Optional mdBook output", "Generated static HTML", "Derived convenience output, not source of truth.")
   }
 
@@ -20,7 +20,7 @@ C4Container
   Rel(contributor, content, "Authors and reviews")
   Rel(contributor, governance, "Records decisions in")
   Rel(refs, content, "Navigates to")
-  Rel(content, refs, "Links sources and red flags")
+  Rel(content, refs, "Links sources, red flags, and central safety context")
   Rel(content, media, "References by relative path")
   Rel(ops, provenance, "Validates AI raster provenance")
   Rel(ops, refs, "Checks")

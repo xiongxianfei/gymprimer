@@ -4,6 +4,10 @@
 
 accepted
 
+Amended on 2026-06-30 by the forward-head-posture pattern architecture work to
+replace separate audit-artifact requirements with recorded review evidence
+under the normal change record.
+
 Supersedes: `docs/adr/2026-06-26-repository-native-reviewed-content.md`
 
 ## Context
@@ -65,5 +69,5 @@ Compatibility and migration:
 
 - Review this architecture package.
 - Decide whether old artifacts are marked superseded in place or moved under an archive path.
-- Create first-slice check tooling or manual proof records.
+- Create first-slice check tooling or recorded review evidence.
 - Create the card template and contributor guidance.

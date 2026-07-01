@@ -8,7 +8,7 @@ GymPrimer is a Markdown-first, citation-based beginner primer. The repository Ma
 
 - Keep changes focused and reviewable.
 - Explain why the change is needed.
-- Include tests, structural checks, or manual proof when behavior, content contracts, or safety wording changes.
+- Include tests, structural checks, or bounded validation evidence when behavior, content contracts, or safety wording changes.
 - Run relevant checks and mention the commands in the pull request.
 - Do not describe draft pages as published, approved, expert-reviewed, or active source content before the reviewed milestone promotes them.
 
