@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: code-review
+current_stage: implement
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -22,20 +22,19 @@ current_plan_status: active
 current_plan_review: docs/changes/exercise-image-standard-and-optimization/reviews/plan-review-r1.md
 plan_index: docs/plan.md
 
-current_milestone: M1
-current_milestone_name: Exercise Image Validation Contract
-current_milestone_state: resolution-needed
-last_reviewed_milestone: none
+current_milestone: M2
+current_milestone_name: Authoring Guidance and Review Evidence Surfaces
+current_milestone_state: planned
+last_reviewed_milestone: M1
 
 current_test_spec: specs/exercise-image-standard.test.md
 current_test_spec_status: approved
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r4.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
-current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m1-r1.md
-next_stage: code-review M1 re-review
+current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m1-r2.md
+next_stage: implement M2
 
-open_findings:
-  - CR-EIS-M1-1
+open_findings: []
 
 notes:
   - Proposal-review R1 approved the exercise-image standard direction.
@@ -49,6 +48,7 @@ notes:
   - Test-spec-review R3 requested changes because the plan still listed broad EIS-CMD4 as an implementation-start command.
   - Test-spec revision aligned the plan's general validation section and the test spec's stale next-artifact/readiness wording with EIS-CMD4 lifecycle closeout / verify ownership; test-spec-review is next.
   - Test-spec-review R4 approved the TSR-EIS-2 revision; M1 code-review re-review is next.
+  - Code-review M1 R2 resolved CR-EIS-M1-1 and closed M1; M2 implementation is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard

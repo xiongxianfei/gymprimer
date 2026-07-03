@@ -112,29 +112,27 @@ before any generated image batch is added.
 
 ## Current Handoff Summary
 
-- Current milestone: M1
-- Current milestone state: resolution-needed
-- Last reviewed milestone: none
+- Current milestone: M2
+- Current milestone state: planned
+- Last reviewed milestone: M1
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
   approved; test-spec-review R2 approved after TSR-EIS-1 resolution;
   code-review M1 R1 requested changes for CR-EIS-M1-1; owner directed broad
   privacy validation to move to verify-before-PR; test-spec-review R3
   requested changes for TSR-EIS-2; test-spec-review R4 approved the
-  validation-path amendment
-- Remaining in-scope implementation milestones: M1 resolution, M2-M4, and
-  lifecycle closeout
-- Next stage: code-review M1 re-review
+  validation-path amendment; code-review M1 R2 closed M1
+- Remaining in-scope implementation milestones: M2-M4 and lifecycle closeout
+- Next stage: implement M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 has an unresolved code-review
-  finding, and the plan has not completed later milestones, explain-change,
-  final verification, or PR handoff.
+- Reason final closeout is or is not ready: M2-M4, explain-change, final
+  verification, and PR handoff remain open.
 
 ## Milestones
 
 ### M1. Exercise Image Validation Contract
 
-- Milestone state: resolution-needed
+- Milestone state: closed
 - Goal: update automated validation and tests for the exercise-image media
   contract without changing existing exercise images.
 - Requirements: R1-R11, R15-R27, R32-R38, AC1-AC8, AC10-AC12.
@@ -180,8 +178,9 @@ before any generated image batch is added.
   - scoped current-change privacy scan as needed for review hygiene; broad
     EIS-CMD4 privacy validation is deferred to lifecycle closeout / verify
 - Result: Implemented checker and focused regression coverage for the
-  exercise-image validation contract; code-review M1 R1 requested
-  review-resolution for CR-EIS-M1-1.
+  exercise-image validation contract; code-review M1 R2 closed the milestone
+  after CR-EIS-M1-1 was resolved through the approved validation-path
+  amendment.
 - Risks: checker overreach could fail legacy-compatible exercise images or
   non-exercise page classes.
 - Rollback: revert M1 checker and test changes; leave existing content and
@@ -397,6 +396,8 @@ when generated image batches are added.
   with the amended EIS-CMD4 lifecycle closeout / verify ownership.
 - 2026-07-03: Test-spec-review R4 approved the TSR-EIS-2 revision; M1
   code-review re-review is next.
+- 2026-07-03: Code-review M1 R2 resolved CR-EIS-M1-1 and closed M1; M2
+  implementation is next.
 
 ## Decision log
 
@@ -455,4 +456,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is ready for
-M1 code-review re-review, not final closeout.
+M2 implementation, not final closeout.
