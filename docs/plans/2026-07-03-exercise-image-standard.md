@@ -130,15 +130,17 @@ before any generated image batch is added.
   images; CR-EIS-M3-2 remains open pending non-identifying reader-prompt
   beginner-comprehension evidence; prompt-preservation spec amendment reset
   `specs/exercise-image-standard.md` to draft for exact full prompt-record
-  requirements
+  requirements; spec-review R3 requested changes for SR-EIS-2 because the
+  provenance-to-prompt-record link field or deterministic mapping is undefined
 - Remaining in-scope implementation milestones: M3 resolution, M4, and
   lifecycle closeout
-- Next stage: spec-review for prompt-preservation amendment
+- Next stage: spec revision for SR-EIS-2
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: the prompt-preservation spec
-  amendment needs spec-review and downstream artifact updates; M3 still needs
-  reader-prompt comprehension evidence before returning to code-review; M4,
-  explain-change, final verification, and PR handoff remain open.
+  amendment needs SR-EIS-2 revision and re-review before downstream artifact
+  updates; M3 still needs reader-prompt comprehension evidence before returning
+  to code-review; M4, explain-change, final verification, and PR handoff remain
+  open.
 
 ## Milestones
 
@@ -437,6 +439,10 @@ when generated image batches are added.
   practice. The exercise-image spec was amended back to draft with prompt-record
   requirements; spec-review is next before architecture, test-spec, plan, or
   implementation updates.
+- 2026-07-03: Spec-review R3 requested changes for SR-EIS-2 because the
+  prompt-record amendment requires a link from provenance rows to prompt records
+  but leaves the exact link field or deterministic mapping to downstream
+  artifacts.
 
 ## Decision log
 
@@ -566,4 +572,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is awaiting
-spec-review for the prompt-preservation amendment and is not final closeout.
+spec revision for SR-EIS-2 and is not final closeout.

@@ -9,7 +9,7 @@ proposal_review: docs/changes/exercise-image-standard-and-optimization/reviews/p
 
 current_spec: specs/exercise-image-standard.md
 current_spec_status: draft
-current_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r2.md
+current_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r3.md
 
 current_architecture: docs/architecture/system/architecture.md
 current_architecture_status: approved
@@ -32,9 +32,10 @@ current_test_spec_status: approved
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r4.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3-r1.md
-next_stage: spec-review
+next_stage: spec revision
 
 open_findings:
+  - SR-EIS-2
   - CR-EIS-M3-2
 
 notes:
@@ -57,6 +58,7 @@ notes:
   - M3 review-resolution addressed CR-EIS-M3-1 locally by replacing the wall-slide movement image, replacing the other movement images for clarity, adding one muscle-attention image per target page, updating provenance rows, and refreshing visual-safety evidence.
   - CR-EIS-M3-2 remains open because the revised material image batch still needs non-identifying reader-prompt beginner-comprehension evidence before M3 can return to code-review.
   - Prompt-preservation spec amendment set the exercise-image spec back to draft and added exact full prompt-record requirements; spec-review is next before architecture, test-spec, plan, or implementation updates.
+  - Spec-review R3 requested changes because the prompt-record amendment requires a provenance-to-prompt-record link but leaves the link field name or deterministic mapping undefined.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
