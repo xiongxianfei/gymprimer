@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M3A and M3 are closed after code-review. M4 remaining exercise audit is implemented and code-review is next.
+  - Current stage: explain-change
+  - Active context: M1-M4 are closed after code-review. Explain-change is next before final verification.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

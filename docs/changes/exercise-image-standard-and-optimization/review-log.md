@@ -27,3 +27,4 @@
 | 2026-07-03 | code-review M3A | `docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3a-r1.md` | changes-requested | CR-EIS-M3A-1 | Prompt-record compatibility limitation is not scoped to the recorded pre-amendment M3 assets. |
 | 2026-07-03 | code-review M3A | `docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3a-r2.md` | changes-requested | CR-EIS-M3A-2 | CR-EIS-M3A-1 is resolved, but plan milestone states drifted for M3 and M3A. |
 | 2026-07-03 | code-review M3A | `docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3a-r3.md` | clean-with-notes | none | CR-EIS-M3A-2 resolved; M3A closed and M3 code-review re-review is next. |
+| 2026-07-03 | code-review M4 | `docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m4-r1.md` | clean-with-notes | none | Remaining exercise-image audit closed; final closeout sequence is next. |

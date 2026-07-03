@@ -132,7 +132,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: review-requested
+- Current milestone state: closed
 - Last reviewed milestone: M3
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -178,13 +178,13 @@ must be sequenced before the current M3 image batch returns to code-review.
   owner post-replacement feedback confirmed that the pictures are now clear,
   and code-review M3A R3 resolved CR-EIS-M3A-2 and closed M3A; code-review M3
   R2 resolved CR-EIS-M3-1 and CR-EIS-M3-2 and closed M3; M4 audited all
-  current exercise pages and recorded keep-existing-image routing
-- Remaining in-scope implementation milestones: M4 review and lifecycle
-  closeout
-- Next stage: code-review M4
+  current exercise pages and recorded keep-existing-image routing; code-review
+  M4 R1 closed M4
+- Remaining in-scope implementation milestones: lifecycle closeout
+- Next stage: explain-change
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M4 still needs code-review;
-  explain-change, final verification, and PR handoff remain open.
+- Reason final closeout is or is not ready: explain-change, final
+  verification, and PR handoff remain open.
 
 ## Milestones
 
@@ -417,7 +417,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### M4. Remaining Exercise Audit and Follow-up Routing
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: audit all current `exercises/*.md` pages under the accepted standard
   without forcing existing image migration or a broad all-pages media rewrite.
 - Requirements: R1-R6, R32-R38, AC2-AC6, AC10-AC12.
@@ -448,6 +448,7 @@ must be sequenced before the current M3 image batch returns to code-review.
   reviewed follow-up loops only when a concrete comprehension gap is named.
   `tests/test_exercise_image_standard.py` now checks that every current
   exercise page appears in the audit.
+  Code-review M4 R1 closed the milestone with no material findings.
 - Risks: audit notes could become a hidden backlog without reviewable
   milestones.
 - Rollback: remove or revise audit evidence; keep implemented validation and
@@ -826,6 +827,15 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
   passed, checking 48 files.
 - After M4 audit implementation, `git diff --check` passed.
+- During M4 code-review, `python3 -m unittest tests.test_exercise_image_standard`
+  passed with 13 tests.
+- During M4 code-review,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md`
+  passed, checking 19 Markdown files.
+- During M4 code-review,
+  `python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md tests/test_exercise_image_standard.py docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plans/2026-07-03-exercise-image-standard.md docs/plan.md`
+  passed, checking 5 files.
+- During M4 code-review, `git diff --check HEAD` passed.
 
 ## Outcome and retrospective
 
@@ -834,5 +844,5 @@ explain-change, verification, and PR handoff are complete.
 
 ## Readiness
 
-See Current Handoff Summary for the live next stage. This plan is awaiting M4
-code-review. It is not final closeout.
+See Current Handoff Summary for the live next stage. This plan is awaiting
+explain-change. It is not final closeout.
