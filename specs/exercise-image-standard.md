@@ -2,7 +2,7 @@
 
 ## Status
 
-draft
+approved
 
 ## Related proposal
 
@@ -387,4 +387,4 @@ Downstream artifacts should decide:
 
 ## Readiness
 
-Draft amendment for exact prompt preservation. This spec is ready for spec-review of the prompt-record requirements only. It does not authorize implementation, image generation, checker changes, provenance edits, prompt-record backfill, or exercise-page edits until required downstream architecture, architecture review, planning, test-spec, and test-spec-review artifacts are complete.
+Approved after spec-review R4 for the prompt-record amendment. This spec does not authorize implementation, image generation, checker changes, provenance edits, prompt-record backfill, or exercise-page edits until required downstream architecture, architecture review, planning, test-spec, and test-spec-review artifacts are complete.

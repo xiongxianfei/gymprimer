@@ -133,15 +133,16 @@ before any generated image batch is added.
   requirements; spec-review R3 requested changes for SR-EIS-2 because the
   provenance-to-prompt-record link field or deterministic mapping is undefined;
   SR-EIS-2 was addressed by defining `prompt_record` as the required provenance
-  field for generated raster exercise image prompt-record links
+  field for generated raster exercise image prompt-record links; spec-review R4
+  approved the prompt-record amendment
 - Remaining in-scope implementation milestones: M3 resolution, M4, and
   lifecycle closeout
-- Next stage: spec-review re-review for SR-EIS-2
+- Next stage: architecture or ADR assessment for prompt-record amendment
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: the prompt-preservation spec
-  amendment needs spec-review re-review before downstream artifact updates; M3
-  still needs reader-prompt comprehension evidence before returning to
-  code-review; M4, explain-change, final verification, and PR handoff remain
+  amendment needs architecture or ADR assessment before downstream artifact
+  updates; M3 still needs reader-prompt comprehension evidence before returning
+  to code-review; M4, explain-change, final verification, and PR handoff remain
   open.
 
 ## Milestones
@@ -448,6 +449,8 @@ when generated image batches are added.
 - 2026-07-03: SR-EIS-2 was addressed by defining `prompt_record` as the required
   generated raster exercise image provenance field for prompt-record links,
   with repository-local path semantics and reverse `asset_path` matching.
+- 2026-07-03: Spec-review R4 approved the prompt-record amendment after
+  SR-EIS-2 resolution; architecture or ADR assessment is next.
 
 ## Decision log
 
@@ -577,4 +580,5 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is awaiting
-spec-review re-review for SR-EIS-2 and is not final closeout.
+architecture or ADR assessment for the prompt-record amendment and is not final
+closeout.
