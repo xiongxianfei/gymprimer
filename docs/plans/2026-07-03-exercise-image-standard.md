@@ -112,9 +112,9 @@ before any generated image batch is added.
 
 ## Current Handoff Summary
 
-- Current milestone: M2
-- Current milestone state: review-requested
-- Last reviewed milestone: M1
+- Current milestone: M3
+- Current milestone state: planned
+- Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
   approved; test-spec-review R2 approved after TSR-EIS-1 resolution;
@@ -122,12 +122,12 @@ before any generated image batch is added.
   privacy validation to move to verify-before-PR; test-spec-review R3
   requested changes for TSR-EIS-2; test-spec-review R4 approved the
   validation-path amendment; code-review M1 R2 closed M1; M2 implemented
-  authoring guidance and review evidence templates; code-review M2 pending
-- Remaining in-scope implementation milestones: M2 code-review, M3-M4, and
-  lifecycle closeout
-- Next stage: code-review M2
+  authoring guidance and review evidence templates; code-review M2 R1 closed
+  M2
+- Remaining in-scope implementation milestones: M3-M4 and lifecycle closeout
+- Next stage: implement M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M2-M4, explain-change, final
+- Reason final closeout is or is not ready: M3-M4, explain-change, final
   verification, and PR handoff remain open.
 
 ## Milestones
@@ -190,7 +190,7 @@ before any generated image batch is added.
 
 ### M2. Authoring Guidance and Review Evidence Surfaces
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: add the durable Markdown guidance needed before generated exercise
   images can be reviewed consistently.
 - Requirements: R2-R6, R12-R14, R25-R31, R37-R38, AC9-AC12.
@@ -217,7 +217,8 @@ before any generated image batch is added.
   - `python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization`
 - Result: Implemented optional exercise-image authoring guidance in the
   exercise template plus change-local visual-safety and beginner-comprehension
-  evidence templates. Awaiting code-review M2.
+  evidence templates. Code-review M2 R1 closed the milestone with no material
+  findings.
 - Risks: guidance could accidentally imply images are required or that they
   replace Markdown citations.
 - Rollback: remove the template and evidence-surface additions; keep M1
@@ -405,6 +406,8 @@ when generated image batches are added.
 - 2026-07-03: M2 implemented optional exercise-image authoring guidance,
   visual-safety review evidence, and beginner-comprehension evidence; code-review
   M2 is next.
+- 2026-07-03: Code-review M2 R1 closed M2 with no material findings; M3
+  implementation is next.
 
 ## Decision log
 
@@ -472,6 +475,16 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization`
   passed, checking 23 files.
 - After M2 implementation, `git diff --check` passed.
+- During M2 code-review,
+  `python3 -m unittest tests.test_markdown_first_templates tests.test_exercise_image_standard`
+  passed with 11 tests.
+- During M2 code-review,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md`
+  passed, checking 10 Markdown files.
+- During M2 code-review,
+  `python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization`
+  passed, checking 23 files.
+- During M2 code-review, `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -481,4 +494,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is ready for
-M2 code-review, not final closeout.
+M3 implementation, not final closeout.

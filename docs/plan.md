@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: code-review M2
-  - Active context: M2 added authoring guidance and review evidence templates; code-review M2 is next.
+  - Current stage: implement M3
+  - Active context: code-review M2 closed authoring guidance and review evidence surfaces; M3 first image batch implementation is next.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

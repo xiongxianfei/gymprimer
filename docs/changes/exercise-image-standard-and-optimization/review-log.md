@@ -15,3 +15,4 @@
 | 2026-07-03 | test-spec revision | `specs/exercise-image-standard.test.md` | pending review | TSR-EIS-2 | Plan validation timing and stale test-spec readiness wording were aligned; test-spec-review re-review is next. |
 | 2026-07-03 | test-spec-review | `docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r4.md` | approved | none | TSR-EIS-2 resolved; validation-path amendment is approved and M1 code-review re-review is next. |
 | 2026-07-03 | code-review M1 | `docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m1-r2.md` | clean-with-notes | none | CR-EIS-M1-1 resolved under the approved validation-path amendment; M1 closed and M2 implementation is next. |
+| 2026-07-03 | code-review M2 | `docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m2-r1.md` | clean-with-notes | none | M2 authoring guidance and review evidence surfaces closed; M3 implementation is next. |
