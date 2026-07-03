@@ -132,8 +132,8 @@ must be sequenced before the current M3 image batch returns to code-review.
 ## Current Handoff Summary
 
 - Current milestone: Lifecycle Closeout
-- Current milestone state: branch-ready
-- Last reviewed milestone: M3
+- Current milestone state: pr-opened
+- Last reviewed milestone: M4
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
   approved; test-spec-review R2 approved after TSR-EIS-1 resolution;
@@ -181,12 +181,13 @@ must be sequenced before the current M3 image batch returns to code-review.
   current exercise pages and recorded keep-existing-image routing; code-review
   M4 R1 closed M4; explain-change was refreshed; final local verification
   passed after neutralizing literal scanner-pattern examples in the superseded
-  content-schema plan
-- Remaining in-scope implementation milestones: PR handoff
+  content-schema plan; PR #7 opened against `proposal/pattern-architecture` as
+  a stacked PR for scoped exercise-image review
+- Remaining in-scope implementation milestones: none
 - Next stage: pr
-- Final closeout readiness: branch-ready
+- Final closeout readiness: pr-opened
 - Reason final closeout is or is not ready: local branch-ready verification
-  passed; PR handoff remains open.
+  passed, and PR handoff is complete. Hosted CI has not been observed.
 
 ## Milestones
 
@@ -458,7 +459,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### Lifecycle Closeout
 
-- Milestone state: planned
+- Milestone state: pr-opened
 - Goal: close the plan only after all in-scope implementation milestones are
   closed and downstream rationale, verification, and PR handoff are complete.
 - Requirements: AC1-AC12.
@@ -475,7 +476,7 @@ must be sequenced before the current M3 image batch returns to code-review.
   - Update plan status only after downstream evidence supports the transition.
 - Validation:
   - final validation commands approved by the test spec and verify stage
-- Result: pending
+- Result: PR #7 opened against `proposal/pattern-architecture`.
 - Risks: marking readiness as Done before review, verification, or PR handoff.
 - Rollback: restore active lifecycle state and name the remaining gate.
 
@@ -858,10 +859,11 @@ when generated image batches are added.
 
 ## Outcome and retrospective
 
-Pending. This plan is not complete until all in-scope milestones, reviews,
-explain-change, verification, and PR handoff are complete.
+PR #7 is open for review. All in-scope milestones, reviews, explain-change,
+local verification, and PR handoff are complete; hosted CI has not been
+observed.
 
 ## Readiness
 
 See Current Handoff Summary for the live next stage. Local branch-ready
-verification passed; this plan is awaiting PR handoff and is not final closeout.
+verification passed, and PR #7 is open for review.

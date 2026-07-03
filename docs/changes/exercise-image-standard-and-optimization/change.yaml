@@ -24,7 +24,7 @@ plan_index: docs/plan.md
 
 current_milestone: Lifecycle Closeout
 current_milestone_name: Final Verification and PR Handoff
-current_milestone_state: branch-ready
+current_milestone_state: pr-opened
 last_reviewed_milestone: M4
 
 current_test_spec: specs/exercise-image-standard.test.md
@@ -34,6 +34,7 @@ review_resolution: docs/changes/exercise-image-standard-and-optimization/review-
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m4-r1.md
 verify_report: docs/changes/exercise-image-standard-and-optimization/verify-report.md
 next_stage: pr
+pull_request: https://github.com/xiongxianfei/gymprimer/pull/7
 
 open_findings: []
 
@@ -77,7 +78,8 @@ notes:
   - M4 audited all current exercise pages, recorded keep-existing-image routing, and added regression coverage that every current exercise page appears in the audit; code-review M4 is next.
   - Code-review M4 R1 closed M4 with no material findings. Explain-change is next before final verification.
   - Explain-change was refreshed through M4 closeout. Final verification is next.
-  - Final verification passed locally. Broad privacy validation required one neutralization of literal scanner-pattern examples in the superseded content-schema plan before passing. PR handoff is next.
+  - Final verification passed locally. Broad privacy validation required one neutralization of literal scanner-pattern examples in the superseded content-schema plan before passing.
+  - PR #7 opened against `proposal/pattern-architecture` as a stacked PR for scoped exercise-image review.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
