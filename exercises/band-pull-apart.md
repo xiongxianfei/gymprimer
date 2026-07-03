@@ -22,7 +22,15 @@ Use a light resistance band. Stand tall with the arms extended in front at chest
 
 Primary: posterior shoulder and upper-back muscles used during band pull-apart variations. Secondary: shoulder-girdle muscles that help control the band path. [Source][local-band-pull-apart-study]
 
+![Band pull-apart muscle-attention reference with the upper-back and rear-shoulder region subtly highlighted](../media/exercises/band-pull-apart/muscle-attention.png)
+
+Use the image as a broad attention-region reference. Keep the muscle wording and citations in the Markdown text above.
+
 ## Movement breakdown
+
+![Band pull-apart movement reference with separate chest-height start and open-arm finish positions](../media/exercises/band-pull-apart/movement.png)
+
+Use the image as a simple movement reference. Keep following the written setup and safety notes.
 
 ### 1. Set up
 

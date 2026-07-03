@@ -169,10 +169,16 @@ ROOT_GOVERNANCE_DIRS = {
 RASTER_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
 SVG_EXTENSIONS = {".svg"}
 ALLOWED_MEDIA_PURPOSES = {"equipment_identification", "key_movement_illustration"}
+EXERCISE_IMAGE_MEDIA_PURPOSES = {
+    "exercise_setup_illustration",
+    "exercise_movement_illustration",
+    "exercise_muscle_attention_illustration",
+}
+LEGACY_EXERCISE_IMAGE_MEDIA_PURPOSES = {"equipment_identification", "key_movement_illustration"}
 RESPONSIBLE_BREADTH_MEDIA_PURPOSES_BY_CLASS = {
     "pattern_page": {"pattern_alignment_illustration", "exercise_preview_illustration"},
     "condition_page": {"anatomical_region_illustration", "exercise_preview_illustration"},
-    "expanded_exercise_page": {"equipment_identification", "key_movement_illustration"},
+    "expanded_exercise_page": EXERCISE_IMAGE_MEDIA_PURPOSES | LEGACY_EXERCISE_IMAGE_MEDIA_PURPOSES,
     "programming_principle_page": {"equipment_identification", "key_movement_illustration"},
     "program_example_page": {"equipment_identification", "key_movement_illustration"},
 }
@@ -190,6 +196,20 @@ REQUIRED_PROVENANCE_FIELDS = (
     "page_refs",
     "notes",
 )
+PROMPT_RECORD_COMPATIBILITY_NOTE = "M3 pre-amendment prompt unavailable; compatibility limitation recorded"
+PROMPT_RECORD_COMPATIBILITY_ASSETS = {
+    "media/exercises/chin-nod/muscle-attention.png",
+    "media/exercises/thoracic-extension/muscle-attention.png",
+    "media/exercises/wall-slide/movement.png",
+    "media/exercises/wall-slide/muscle-attention.png",
+    "media/exercises/prone-y-t/muscle-attention.png",
+}
+PROMPT_RECORD_REQUIRED_FIELDS = (
+    "asset_path",
+    "generator",
+    "created_date",
+    "review_status",
+)
 
 REFERENCE_LINK_RE = re.compile(r"\[[^\]]+\]\[([A-Za-z0-9_.:-]+)\]")
 REFERENCE_DEF_RE = re.compile(r"^\[([A-Za-z0-9_.:-]+)\]:\s+(\S+)\s*$", re.MULTILINE)
@@ -198,6 +218,19 @@ PATTERN_ALIGNMENT_FORBIDDEN_MEDIA_TEXT_RE = re.compile(
     r"\b(label(?:s|ed)?|caption|wording|with text|contains text|bad posture|red (?:pain|injury)|pain mark|cure|before/after|thumbnail)\b",
     re.IGNORECASE,
 )
+EXERCISE_IMAGE_FORBIDDEN_MEDIA_TEXT_RE = re.compile(
+    r"\b(diagnos(?:e|is|ed)?|treat(?:ment|ing)?|cure|correct(?:ness)?|wrong|warning badge|red (?:pain|injury)|pain mark|injury symbol|before/after|personalized coaching)\b",
+    re.IGNORECASE,
+)
+GENERIC_IMAGE_ALT_TEXT = {
+    "image",
+    "exercise image",
+    "diagram",
+    "picture",
+    "photo",
+    "illustration",
+}
+AI_REVIEWER_RE = re.compile(r"\b(openai|chatgpt|image generation tool|ai tool|artificial intelligence)\b", re.IGNORECASE)
 ROOT = Path(os.environ.get("GYMPRIMER_ROOT", Path(__file__).resolve().parents[2]))
 SOURCES_INDEX = ROOT / "SOURCES.md"
 PROVENANCE_INDEX = ROOT / "media/PROVENANCE.md"
@@ -306,6 +339,11 @@ def responsible_breadth_page_class(path: Path, root: Path = ROOT) -> str | None:
         return None
     first_part = relative.split("/", 1)[0]
     return RESPONSIBLE_BREADTH_PAGE_CLASSES.get(first_part)
+
+
+def is_template_file(path: Path, root: Path = ROOT) -> bool:
+    relative = repo_relative_path(path, root)
+    return bool(relative and relative.startswith("docs/templates/"))
 
 
 def is_forward_head_pattern(path: Path, root: Path = ROOT) -> bool:
@@ -476,6 +514,131 @@ def image_text_implies_condition_diagnosis(alt_text: str) -> bool:
     return bool(re.search(r"\b(diagnos(?:is|ed)|patholog(?:y|ic)|treat(?:ment)?|damaged|disease)\b", alt_text, re.IGNORECASE))
 
 
+def expected_prompt_record_path(asset_path: str) -> str | None:
+    parts = asset_path.split("/")
+    if len(parts) != 4 or parts[0] != "media" or parts[1] != "exercises":
+        return None
+    return f"media/prompts/exercises/{parts[2]}/{Path(parts[3]).stem}.md"
+
+
+def parse_prompt_record_fields(text: str) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    for line in text.splitlines():
+        match = re.match(r"^\s*([A-Za-z_][A-Za-z0-9_ -]*):\s*(.*)\s*$", line)
+        if match:
+            key = match.group(1).strip().lower().replace(" ", "_").replace("-", "_")
+            fields[key] = match.group(2).strip()
+    return fields
+
+
+def prompt_record_section(text: str, heading: str) -> str:
+    pattern = re.compile(rf"^##\s+{re.escape(heading)}\s*$", re.IGNORECASE | re.MULTILINE)
+    match = pattern.search(text)
+    if match is None:
+        return ""
+    next_heading = re.search(r"^##\s+", text[match.end() :], re.MULTILINE)
+    end = len(text) if next_heading is None else match.end() + next_heading.start()
+    return text[match.end() : end].strip()
+
+
+def has_prompt_record_text_or_redaction(text: str) -> bool:
+    exact_prompt = prompt_record_section(text, "Exact prompt")
+    if exact_prompt:
+        return True
+    return bool(prompt_record_section(text, "Redaction note"))
+
+
+def validate_prompt_record(
+    page_path: Path,
+    asset_path: str,
+    provenance_row: dict[str, str],
+    root: Path = ROOT,
+) -> list[Finding]:
+    prompt_record = provenance_row.get("prompt_record", "").strip()
+    if not prompt_record:
+        if (
+            provenance_row.get("notes", "").strip() == PROMPT_RECORD_COMPATIBILITY_NOTE
+            and asset_path in PROMPT_RECORD_COMPATIBILITY_ASSETS
+        ):
+            return []
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_missing",
+                f"generated raster exercise image provenance lacks prompt_record for {asset_path}",
+            )
+        ]
+
+    expected = expected_prompt_record_path(asset_path)
+    if (
+        is_remote_media_reference(prompt_record)
+        or Path(prompt_record).is_absolute()
+        or "\\" in prompt_record
+        or expected is None
+        or prompt_record != expected
+    ):
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_invalid",
+                f"prompt_record for {asset_path} must be repository-local and match {expected}: {prompt_record}",
+            )
+        ]
+
+    prompt_record_path = (root / prompt_record).resolve()
+    if repo_relative_path(prompt_record_path, root) != prompt_record:
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_invalid",
+                f"prompt_record for {asset_path} must resolve inside the repository: {prompt_record}",
+            )
+        ]
+    if prompt_record_path.suffix.lower() != ".md":
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_invalid",
+                f"prompt_record for {asset_path} must be a Markdown file: {prompt_record}",
+            )
+        ]
+    if not prompt_record_path.exists():
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_missing",
+                f"prompt_record file is missing for {asset_path}: {prompt_record}",
+            )
+        ]
+
+    text = prompt_record_path.read_text(encoding="utf-8")
+    fields = parse_prompt_record_fields(text)
+    missing_fields = [field for field in PROMPT_RECORD_REQUIRED_FIELDS if not fields.get(field, "").strip()]
+    if not fields.get("human_reviewer", "").strip() and not fields.get("review_owner", "").strip():
+        missing_fields.append("human_reviewer_or_review_owner")
+    if missing_fields or not has_prompt_record_text_or_redaction(text):
+        if not has_prompt_record_text_or_redaction(text):
+            missing_fields.append("exact_prompt_or_redaction_note")
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_incomplete",
+                f"prompt_record is incomplete for {asset_path} at {prompt_record}: {', '.join(missing_fields)}",
+            )
+        ]
+
+    if fields["asset_path"].strip() != asset_path:
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_mismatch",
+                f"prompt_record asset_path must match provenance asset_path for {asset_path}: {fields['asset_path']}",
+            )
+        ]
+
+    return []
+
+
 def pattern_alignment_text_contract_violation(alt_text: str, provenance_row: dict[str, str]) -> str | None:
     fields = (
         alt_text,
@@ -484,6 +647,25 @@ def pattern_alignment_text_contract_violation(alt_text: str, provenance_row: dic
     )
     match = PATTERN_ALIGNMENT_FORBIDDEN_MEDIA_TEXT_RE.search(" ".join(fields))
     return None if match is None else match.group(0)
+
+
+def exercise_image_text_contract_violation(alt_text: str, provenance_row: dict[str, str]) -> str | None:
+    fields = (
+        alt_text,
+        provenance_row.get("prompt_or_creation_notes", ""),
+        provenance_row.get("notes", ""),
+    )
+    match = EXERCISE_IMAGE_FORBIDDEN_MEDIA_TEXT_RE.search(" ".join(fields))
+    return None if match is None else match.group(0)
+
+
+def generic_image_alt_text(alt_text: str) -> bool:
+    normalized = re.sub(r"\s+", " ", alt_text.strip().lower()).strip(" .:-_")
+    return normalized in GENERIC_IMAGE_ALT_TEXT
+
+
+def ai_tool_reviewer(value: str) -> bool:
+    return bool(AI_REVIEWER_RE.search(value.strip()))
 
 
 def validate_raster_provenance(
@@ -534,6 +716,15 @@ def validate_raster_provenance(
             )
         ]
 
+    if page_class == "expanded_exercise_page" and ai_tool_reviewer(row["human_reviewer"]):
+        return [
+            Finding(
+                page_path,
+                "media_human_reviewer_invalid",
+                f"AI-generated raster provenance human_reviewer must identify an accountable human for {asset_path}: {row['human_reviewer']}",
+            )
+        ]
+
     if media_purpose == "anatomical_region_illustration" and image_text_implies_condition_diagnosis(alt_text):
         return [
             Finding(
@@ -553,6 +744,20 @@ def validate_raster_provenance(
                     f"pattern alignment image must not include in-image text, labels, thumbnails, injury marks, or cure implications: {violation}",
                 )
             ]
+
+    if page_class == "expanded_exercise_page" and media_purpose in EXERCISE_IMAGE_MEDIA_PURPOSES:
+        violation = exercise_image_text_contract_violation(alt_text, row)
+        if violation:
+            return [
+                Finding(
+                    page_path,
+                    "exercise_image_visual_safety_text",
+                    f"exercise image text, alt text, or provenance notes must not imply diagnosis, treatment, correction, injury, warning badge, cure, or coaching claims: {violation}",
+                )
+            ]
+        prompt_record_findings = validate_prompt_record(page_path, asset_path, row, root)
+        if prompt_record_findings:
+            return prompt_record_findings
 
     if row["review_status"].strip() != "approved":
         return [
@@ -574,6 +779,46 @@ def validate_raster_provenance(
         ]
 
     return []
+
+
+def validate_exercise_image_summary(
+    page_path: Path,
+    image_matches: list[re.Match[str]],
+    provenance_rows: dict[str, list[dict[str, str]]],
+    root: Path = ROOT,
+) -> list[Finding]:
+    findings: list[Finding] = []
+    if len(image_matches) > 3:
+        findings.append(
+            Finding(
+                page_path,
+                "exercise_image_count_exceeded",
+                f"exercise pages may reference no more than three exercise images without an approved exception; found {len(image_matches)}",
+            )
+        )
+
+    muscle_attention_count = 0
+    for match in image_matches:
+        target = match.group(2).strip()
+        if is_remote_media_reference(target) or Path(target).is_absolute() or target.startswith("/"):
+            continue
+        asset_path = repo_relative_path((page_path.parent / target).resolve(), root)
+        if asset_path is None:
+            continue
+        rows = provenance_rows.get(asset_path, [])
+        if len(rows) == 1 and rows[0].get("media_purpose", "").strip() == "exercise_muscle_attention_illustration":
+            muscle_attention_count += 1
+
+    if muscle_attention_count > 1:
+        findings.append(
+            Finding(
+                page_path,
+                "exercise_muscle_attention_limit",
+                f"exercise pages may reference no more than one exercise_muscle_attention_illustration; found {muscle_attention_count}",
+            )
+        )
+
+    return findings
 
 
 def validate_media_reference(
@@ -707,6 +952,9 @@ def validate_responsible_breadth_page(
 
     if page_class == "expanded_exercise_page" and is_forward_head_exercise(path):
         findings.extend(validate_forward_head_exercise_contract(path, text))
+
+    if page_class == "expanded_exercise_page" and re.search(r"(^##\s+Exact prompt\b|^prompt_record:)", text, re.MULTILINE | re.IGNORECASE):
+        findings.append(Finding(path, "media_prompt_record_embedded", "prompt records must not be embedded in reader-facing exercise Markdown"))
 
     if len(cited_ids) < 3:
         findings.append(
@@ -856,6 +1104,15 @@ def check_page(
     text = path.read_text(encoding="utf-8")
     lines = text.splitlines()
     findings: list[Finding] = []
+    if is_template_file(path, root):
+        for match in IMAGE_RE.finditer(text):
+            alt_text = match.group(1).strip()
+            target = match.group(2).strip()
+            if not alt_text:
+                findings.append(Finding(path, "MF009", "media reference is missing alt text"))
+            findings.extend(validate_media_reference(path, alt_text, target, None, provenance_rows, root))
+        return findings, {}, set()
+
     ids = source_ids(text)
     urls = source_urls(text)
     cited_ids = cited_reference_ids(text)
@@ -947,11 +1204,23 @@ def check_page(
     else:
         findings.extend(validate_responsible_breadth_page(path, rb_page_class, text, lines, cited_ids))
 
-    for match in IMAGE_RE.finditer(text):
+    image_matches = list(IMAGE_RE.finditer(text))
+    if rb_page_class == "expanded_exercise_page":
+        findings.extend(validate_exercise_image_summary(path, image_matches, provenance_rows, root))
+
+    for match in image_matches:
         alt_text = match.group(1).strip()
         target = match.group(2).strip()
         if not alt_text:
             findings.append(Finding(path, "MF009", "media reference is missing alt text"))
+        elif rb_page_class == "expanded_exercise_page" and generic_image_alt_text(alt_text):
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_image_alt_text_generic",
+                    f"exercise image alt text must describe the exercise context and teaching purpose: {alt_text}",
+                )
+            )
         findings.extend(validate_media_reference(path, alt_text, target, rb_page_class, provenance_rows, root))
 
     return findings, urls, cited_ids

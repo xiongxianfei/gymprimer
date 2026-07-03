@@ -34,6 +34,19 @@ Frame feel cues as practical beginner orientation. Cite anatomy or safety claims
 
 Keep warnings conservative and source-backed when they affect safety.
 
+## Optional exercise image
+
+Use this block only when an image adds beginner comprehension that text does not
+already provide. Choose one clear teaching purpose: setup, movement, or muscle attention.
+
+Image path placeholder: `../media/exercises/<exercise-slug>/<purpose>.png`
+
+Alt text placeholder: describe the exercise context and the image teaching
+purpose in one sentence.
+
+Keep explanation, cues, safety notes, and citations in Markdown.
+Do not add image labels, warning badges, pain marks, or diagnosis/treatment claims.
+
 ## Easier version
 
 Give one lower-demand option within v0.1 scope.

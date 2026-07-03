@@ -117,7 +117,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - Validation commands:
   - `python3 -m unittest discover -s tests`
   - `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`
-  - `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" -- generated/validation-report.json`
+  - `python3 tools/validation/privacy_scan.py --pattern "<forbidden-pattern-regex>" -- generated/validation-report.json`
 - Expected observable result: A contributor can run one validator command and receive a deterministic validation report even before full content rules are implemented.
 - Commit message: `M1: scaffold content validation foundation`
 - Milestone closeout:
@@ -268,7 +268,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
   - `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json`
   - `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out /tmp/gymprimer-validation-report.json --emit-public /tmp/gymprimer-public-content.json`
   - `diff -u generated/public-content.json /tmp/gymprimer-public-content.json`
-  - `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI|personal health" -- generated/`
+  - `python3 tools/validation/privacy_scan.py --pattern "<forbidden-pattern-regex>" -- generated/`
   - `rg -n "Current readiness|Next valid skill|Plan lifecycle state|Status: approved|accepted" docs/workflows.md docs/plans/2026-06-26-content-schema-foundation.md docs/architecture/system/architecture.md docs/adr/2026-06-26-repository-native-reviewed-content.md specs/content-schema.md`
 - Expected observable result: A reviewer can inspect source fixtures, run validation locally, and see deterministic public generated content only for eligible reviewed content.
 - Commit message: `M4: emit validated content package`
@@ -291,7 +291,7 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`: prove invalid fixtures fail for expected reasons.
 - `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json`: prove generated public output is gated by validation.
 - `diff -u generated/public-content.json /tmp/gymprimer-public-content.json`: prove deterministic generated output when run twice against the same input.
-- `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI|personal health" -- generated/`: check generated validation/public output for obvious forbidden private data leakage; exit `0` means the scan completed and no forbidden pattern was found.
+- `python3 tools/validation/privacy_scan.py --pattern "<forbidden-pattern-regex>" -- generated/`: check generated validation/public output for obvious forbidden data leakage; exit `0` means the scan completed and no forbidden pattern was found.
 - `rg -n "Current readiness|Next valid skill|Plan lifecycle state|Status: approved|accepted" docs/workflows.md docs/plans/2026-06-26-content-schema-foundation.md docs/architecture/system/architecture.md docs/adr/2026-06-26-repository-native-reviewed-content.md specs/content-schema.md`: artifact lifecycle state-sync check before downstream handoff.
 
 ## Risks and recovery
@@ -365,24 +365,24 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M1 red test run: `python3 -m unittest discover -s tests` failed because `tools/validation/validate_content.py` and `tools/validation/privacy_scan.py` did not exist yet.
 - 2026-06-27: M1 validation passed: `python3 -m unittest discover -s tests`.
 - 2026-06-27: M1 validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
-- 2026-06-27: M1 validation passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" -- generated/validation-report.json`.
+- 2026-06-27: M1 validation passed: `python3 tools/validation/privacy_scan.py --pattern "<forbidden-pattern-regex>" -- generated/validation-report.json`.
 - 2026-06-27: MP5 manual proof recorded at `generated/manual-proof/MP5-developer-command-documentation-check.md`.
 - 2026-06-27: M2 red test run: `python3 -m unittest discover -s tests` failed because the M1 validator accepted invalid M2 card fixtures and did not support `--expect-invalid`.
 - 2026-06-27: M2 validation passed: `python3 -m unittest discover -s tests`.
 - 2026-06-27: M2 validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
 - 2026-06-27: M2 validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`.
-- 2026-06-27: M2 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
+- 2026-06-27: M2 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "<forbidden-pattern-regex>" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
 - 2026-06-27: MP3 manual proof recorded at `generated/manual-proof/MP3-fixture-privacy-spot-check.md`.
 - 2026-06-27: M2 review-resolution validation passed: `python3 -m unittest discover -s tests`.
 - 2026-06-27: M2 review-resolution validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
 - 2026-06-27: M2 review-resolution validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`.
-- 2026-06-27: M2 review-resolution privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
+- 2026-06-27: M2 review-resolution privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "<forbidden-pattern-regex>" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
 - 2026-06-27: M3 red test run: `python3 -m unittest tests.test_lifecycle_m3 tests.test_review_routing_m3` failed because the M2 validator ignored lifecycle events, audit events, approval events, publication eligibility, and review-routing requirements.
 - 2026-06-27: M3 validation passed: `python3 -m unittest discover -s tests`.
 - 2026-06-27: M3 validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
 - 2026-06-27: M3 validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --out generated/lifecycle-validation-report.json --expect-mixed`.
 - 2026-06-27: M3 validation passed: `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`.
-- 2026-06-27: M3 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
+- 2026-06-27: M3 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "<forbidden-pattern-regex>" --report generated/privacy-scan-report.json -- generated/validation-report.json`.
 - 2026-06-27: MP1 manual proof recorded at `generated/manual-proof/MP1-lifecycle-state-sync.md`.
 - 2026-06-27: M3 review-resolution validation passed: `python3 -m unittest discover -s tests`.
 - 2026-06-27: M3 review-resolution validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json`.
@@ -393,14 +393,14 @@ Privacy scanning is a negative-match validation check. It passes only when the s
 - 2026-06-27: M4 validation passed: `python3 -m unittest discover -s tests`.
 - 2026-06-27: M4 validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json`.
 - 2026-06-27: M4 deterministic output validation passed: `diff -u generated/public-content.json /tmp/gymprimer-public-content.json`.
-- 2026-06-27: M4 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "private|/home/|secret|PHI|personal health" -- generated/`.
+- 2026-06-27: M4 privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "<forbidden-pattern-regex>" -- generated/`.
 - 2026-06-27: MP2 and MP4 manual proofs recorded under `generated/manual-proof/`.
 - 2026-06-27: M4 review-resolution targeted validation passed: `python3 -m unittest tests.test_generated_output_m4`.
 - 2026-06-27: M4 review-resolution validation passed: `python3 -m unittest discover -s tests`.
 - 2026-06-27: M4 review-resolution validation passed: `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out generated/validation-report.json --emit-public generated/public-content.json`.
 - 2026-06-27: M4 review-resolution deterministic output validation passed: `diff -u generated/public-content.json /tmp/gymprimer-public-content.json`.
 - 2026-06-27: M4 review-resolution invalid/lifecycle/review-routing validation commands passed with refreshed generated reports.
-- 2026-06-27: M4 review-resolution privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern 'private|/home/|secret|PHI|personal health' -- generated/`.
+- 2026-06-27: M4 review-resolution privacy scan passed: `python3 tools/validation/privacy_scan.py --pattern "<forbidden-pattern-regex>" -- generated/`.
 
 ## Outcome and retrospective
 

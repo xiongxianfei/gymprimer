@@ -22,7 +22,15 @@ Sit upright with the neck and back straight. Keep the setup easy enough that the
 
 Primary: deep cervical flexors at the front of the neck. Secondary: nearby neck-control muscles that help keep the motion small. Treat this as a beginner orientation cue, not a diagnostic anatomy test. [Source][local-chin-nod-deep-cervical-flexor]
 
+![Chin nod muscle-attention reference with the front-neck region subtly highlighted](../media/exercises/chin-nod/muscle-attention.png)
+
+Use the image as a broad attention-region reference. Keep the muscle wording and citations in the Markdown text above.
+
 ## Movement breakdown
+
+![Chin nod movement reference with separate start and small chin-in finish positions](../media/exercises/chin-nod/movement.png)
+
+Use the image as a simple movement reference. Keep following the written setup and safety notes.
 
 ### 1. Set up
 
