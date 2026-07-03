@@ -2,12 +2,6 @@
 
 ## Active
 
-- [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
-  - Status: active
-  - Plan lifecycle state: active
-  - Current stage: pr
-  - Active context: M1-M4, explain-change, local final verification, and PR handoff are complete. PR #7 is open against `proposal/pattern-architecture`; hosted CI has not been observed.
-
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
   - Plan lifecycle state: active
@@ -26,6 +20,12 @@
   - Active context: retained only as historical context for the structured-platform implementation path; it is not active execution guidance.
 
 ## Done (recent)
+
+- [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #7
+  - Active context: M1-M4, explain-change, local final verification, and PR handoff are complete; hosted CI was not observed.
 
 - [Repository Layout Normalization](plans/2026-06-29-repository-layout-normalization.md)
   - Status: completed

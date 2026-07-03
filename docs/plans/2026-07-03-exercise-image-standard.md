@@ -2,9 +2,9 @@
 
 ## Status
 
-- Status: active
-- Plan lifecycle state: active
-- Terminal disposition: not-applicable
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed-by PR #7
 
 ## Purpose / big picture
 
@@ -132,7 +132,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 ## Current Handoff Summary
 
 - Current milestone: Lifecycle Closeout
-- Current milestone state: pr-opened
+- Current milestone state: closed
 - Last reviewed milestone: M4
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -182,12 +182,12 @@ must be sequenced before the current M3 image batch returns to code-review.
   M4 R1 closed M4; explain-change was refreshed; final local verification
   passed after neutralizing literal scanner-pattern examples in the superseded
   content-schema plan; PR #7 opened against `proposal/pattern-architecture` as
-  a stacked PR for scoped exercise-image review
+  a stacked PR for scoped exercise-image review and merged on 2026-07-03
 - Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: pr-opened
+- Next stage: none
+- Final closeout readiness: completed
 - Reason final closeout is or is not ready: local branch-ready verification
-  passed, and PR handoff is complete. Hosted CI has not been observed.
+  passed, PR handoff is complete, and PR #7 merged. Hosted CI was not observed.
 
 ## Milestones
 
@@ -459,7 +459,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### Lifecycle Closeout
 
-- Milestone state: pr-opened
+- Milestone state: closed
 - Goal: close the plan only after all in-scope implementation milestones are
   closed and downstream rationale, verification, and PR handoff are complete.
 - Requirements: AC1-AC12.
@@ -476,7 +476,8 @@ must be sequenced before the current M3 image batch returns to code-review.
   - Update plan status only after downstream evidence supports the transition.
 - Validation:
   - final validation commands approved by the test spec and verify stage
-- Result: PR #7 opened against `proposal/pattern-architecture`.
+- Result: PR #7 opened against `proposal/pattern-architecture` and merged on
+  2026-07-03.
 - Risks: marking readiness as Done before review, verification, or PR handoff.
 - Rollback: restore active lifecycle state and name the remaining gate.
 
@@ -859,11 +860,10 @@ when generated image batches are added.
 
 ## Outcome and retrospective
 
-PR #7 is open for review. All in-scope milestones, reviews, explain-change,
-local verification, and PR handoff are complete; hosted CI has not been
-observed.
+PR #7 merged on 2026-07-03. All in-scope milestones, reviews, explain-change,
+local verification, and PR handoff are complete; hosted CI was not observed.
 
 ## Readiness
 
 See Current Handoff Summary for the live next stage. Local branch-ready
-verification passed, and PR #7 is open for review.
+verification passed, and PR #7 merged.
