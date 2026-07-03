@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: code-review
+current_stage: review-resolution
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -24,16 +24,18 @@ plan_index: docs/plan.md
 
 current_milestone: M1
 current_milestone_name: Exercise Image Validation Contract
-current_milestone_state: review-requested
+current_milestone_state: resolution-needed
 last_reviewed_milestone: none
 
 current_test_spec: specs/exercise-image-standard.test.md
 current_test_spec_status: approved
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
-next_stage: code-review M1
+current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m1-r1.md
+next_stage: review-resolution
 
-open_findings: []
+open_findings:
+  - CR-EIS-M1-1
 
 notes:
   - Proposal-review R1 approved the exercise-image standard direction.
@@ -42,6 +44,7 @@ notes:
   - Plan-review R1 approved the execution plan.
   - Test-spec-review R2 approved implementation handoff after TSR-EIS-1 resolution made template-aware checker support an explicit M1/M2 obligation.
   - M1 implemented the checker and focused tests for exercise-image purposes, generated-raster provenance, image-count limits, alt text, legacy compatibility, and template-aware validation; code-review is next.
+  - Code-review M1 R1 requested changes because required EIS-CMD4 privacy validation fails on pre-existing superseded-plan examples; review-resolution is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard

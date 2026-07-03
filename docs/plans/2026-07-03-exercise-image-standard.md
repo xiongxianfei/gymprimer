@@ -113,25 +113,25 @@ before any generated image batch is added.
 ## Current Handoff Summary
 
 - Current milestone: M1
-- Current milestone state: review-requested
+- Current milestone state: resolution-needed
 - Last reviewed milestone: none
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
-  approved; test-spec-review R2 approved after TSR-EIS-1 resolution; M1
-  implementation complete and awaiting code-review
-- Remaining in-scope implementation milestones: M1 code-review, M2-M4, and
+  approved; test-spec-review R2 approved after TSR-EIS-1 resolution;
+  code-review M1 R1 requested changes for CR-EIS-M1-1
+- Remaining in-scope implementation milestones: M1 resolution, M2-M4, and
   lifecycle closeout
-- Next stage: code-review M1
+- Next stage: review-resolution
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 implementation is complete, but
-  the plan has not completed M1 code-review, later milestones,
-  explain-change, final verification, or PR handoff.
+- Reason final closeout is or is not ready: M1 has an unresolved code-review
+  finding, and the plan has not completed later milestones, explain-change,
+  final verification, or PR handoff.
 
 ## Milestones
 
 ### M1. Exercise Image Validation Contract
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: update automated validation and tests for the exercise-image media
   contract without changing existing exercise images.
 - Requirements: R1-R11, R15-R27, R32-R38, AC1-AC8, AC10-AC12.
@@ -176,7 +176,8 @@ before any generated image batch is added.
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
   - `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests`
 - Result: Implemented checker and focused regression coverage for the
-  exercise-image validation contract; awaiting code-review.
+  exercise-image validation contract; code-review M1 R1 requested
+  review-resolution for CR-EIS-M1-1.
 - Risks: checker overreach could fail legacy-compatible exercise images or
   non-exercise page classes.
 - Rollback: revert M1 checker and test changes; leave existing content and
@@ -374,6 +375,9 @@ when generated image batches are added.
   generated-raster provenance checks, image count and muscle-attention limits,
   generic and unsafe alt-text rejection, legacy-purpose compatibility, and
   template-aware checker support; code-review is next.
+- 2026-07-03: Code-review M1 R1 requested review-resolution for CR-EIS-M1-1
+  because the required broad EIS-CMD4 privacy command fails on pre-existing
+  superseded-plan examples.
 
 ## Decision log
 
@@ -430,4 +434,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is ready for
-M1 code-review, not final closeout.
+review-resolution, not final closeout.
