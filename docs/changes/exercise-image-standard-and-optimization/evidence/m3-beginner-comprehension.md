@@ -2,33 +2,45 @@
 
 Review date: 2026-07-03
 
-Reviewer or facilitator role: implementation maintainer using the approved
+Reviewer or facilitator role: implementation maintainer preparing the approved
 beginner-comprehension prompts.
 
-Scope: first generated exercise-image batch for the five forward-head support
-exercise pages.
+Scope: review-resolution pass for the first generated exercise-image batch for
+the five forward-head support exercise pages.
 
-Method: non-identifying maintainer checklist against each page, image, alt text,
-and nearby Markdown. No private reader identity, contact detail, symptom
+Method: non-identifying owner feedback plus maintainer preparation for a later
+reader-prompt check. No private reader identity, contact detail, symptom
 history, or personal training data was collected.
+
+## Current evidence status
+
+The first M3 image batch did not satisfy the clarity bar. Owner feedback on
+2026-07-03 stated that the new pictures were less clear than previous pictures
+and that the movement and muscle use could not be seen clearly.
+
+That feedback was used to revise M3 by replacing the movement images with
+clearer separate-panel references and adding one broad muscle-attention image
+per page. This file does not claim the revised batch has passed beginner
+comprehension review. A non-identifying reader-prompt check is still required
+before M3 can return to code-review.
 
 ## Prompt outcomes
 
 | Exercise page | Purpose | Setup or body position | Movement steps | What to notice or feel | Stop condition | Source verification | Residual confusion |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `exercises/chin-nod.md` | Page states this is low-load neck-control practice. | Image shows seated upright body position; Markdown keeps setup details. | Image shows small chin-in motion; Markdown gives the exact movement and return. | Markdown describes light neck effort or stretch and avoids image-only feel cues. | Safety notes route sharp, worsening, unusual, or unsafe symptoms to stop and red flags. | Sources remain in the page-local source list and image adds no citation claim. | Minimal; image could be mistaken for a larger head move without the written cue. |
-| `exercises/thoracic-extension.md` | Page states this is a simple upper-back mobility drill. | Image shows chair position; Markdown keeps chair setup and stability warning. | Image shows upright start and gentle extension; Markdown gives pause and return. | Markdown describes light upper-back movement or stretch. | Safety notes route sharp, worsening, unusual, or unsafe symptoms to stop and red flags. | Sources remain in the page-local source list and image adds no citation claim. | Chair fit and stability still require written setup. |
-| `exercises/wall-slide.md` | Page states this is shoulder-blade and overhead-reaching awareness. | Image shows wall relationship; Markdown specifies forearms on wall. | Image shows lower and raised arm positions; Markdown gives the slide and return. | Markdown describes shoulders, arms, and upper back working. | Safety notes route sharp, worsening, unusual, or unsafe symptoms to stop and red flags. | Sources remain in the page-local source list and image adds no citation claim. | Forearm contact is simplified, so text remains necessary. |
-| `exercises/prone-y-t.md` | Page states this is light shoulder-blade control. | Image shows prone position on a mat; Markdown separates Y and T setup. | Image shows broad Y and T arm positions; Markdown gives lift, pause, and return. | Markdown describes light work around shoulder blades and upper back. | Safety notes route sharp, worsening, unusual, or unsafe symptoms to stop and red flags. | Sources remain in the page-local source list and image adds no citation claim. | The image does not show every arm-height caveat; text remains necessary. |
-| `exercises/band-pull-apart.md` | Page states this is a light upper-back and shoulder-blade exercise. | Image shows standing chest-height band position; Markdown keeps band setup. | Image shows hands opening at chest height; Markdown gives controlled return. | Markdown describes upper-back work and chest stretch. | Safety notes route sharp, worsening, unusual, or unsafe symptoms to stop and red flags. | Sources remain in the page-local source list and image adds no citation claim. | Loop-style band may differ from a flat band; text remains necessary. |
+| `exercises/chin-nod.md` | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | Revised images added; reader-prompt evidence still required. |
+| `exercises/thoracic-extension.md` | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | Revised images added; reader-prompt evidence still required. |
+| `exercises/wall-slide.md` | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | Revised images added; reader-prompt evidence still required. |
+| `exercises/prone-y-t.md` | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | Revised images added; reader-prompt evidence still required. |
+| `exercises/band-pull-apart.md` | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | pending reader prompt | Revised images added; reader-prompt evidence still required. |
 
 ## Decision
 
-- Batch result: evidence sufficient for M3 code-review.
-- Required page or image changes: none before M3 handoff.
-- Residual confusion: each image remains a support asset, so the written setup,
-  movement steps, feel cues, safety notes, and sources must stay visible and
-  page-local.
+- Batch result: blocked pending reader-prompt comprehension evidence.
+- Required page or image changes: movement images were replaced and
+  muscle-attention images were added in review-resolution.
+- Residual confusion: unknown until the revised batch is checked with the
+  approved non-identifying reader prompts.
 
 ## Privacy note
 

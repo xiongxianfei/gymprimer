@@ -12,11 +12,26 @@ from tools.checks.check_markdown_first import load_media_provenance, split_page_
 ROOT = Path(__file__).resolve().parents[1]
 CHECK = ROOT / "tools/checks/check_markdown_first.py"
 M3_TARGETS = {
-    "chin-nod": "Chin nod movement reference showing the small chin-in motion while the neck stays long",
-    "thoracic-extension": "Thoracic extension movement reference showing an upright start and gentle upper-back extension over a chair",
-    "wall-slide": "Wall slide movement reference showing forearms sliding upward on a clear wall",
-    "prone-y-t": "Prone Y/T movement reference showing the Y and T arm positions on a mat",
-    "band-pull-apart": "Band pull-apart movement reference showing the band opening at chest height",
+    "chin-nod": {
+        "movement": "Chin nod movement reference with separate start and small chin-in finish positions",
+        "muscle": "Chin nod muscle-attention reference with the front-neck region subtly highlighted",
+    },
+    "thoracic-extension": {
+        "movement": "Thoracic extension movement reference with separate upright start and gentle chair-extension finish positions",
+        "muscle": "Thoracic extension muscle-attention reference with the upper-back region subtly highlighted",
+    },
+    "wall-slide": {
+        "movement": "Wall slide movement reference with separate forearms-on-wall start and raised finish positions",
+        "muscle": "Wall slide muscle-attention reference with the shoulder-blade and side-rib region subtly highlighted",
+    },
+    "prone-y-t": {
+        "movement": "Prone Y/T movement reference with separate prone Y and prone T arm positions",
+        "muscle": "Prone Y/T muscle-attention reference with the upper-back and shoulder-blade region subtly highlighted",
+    },
+    "band-pull-apart": {
+        "movement": "Band pull-apart movement reference with separate chest-height start and open-arm finish positions",
+        "muscle": "Band pull-apart muscle-attention reference with the upper-back and rear-shoulder region subtly highlighted",
+    },
 }
 
 
@@ -329,21 +344,27 @@ class ExerciseImageStandardTest(unittest.TestCase):
 
     def test_m3_forward_head_support_batch_has_page_images_and_review_evidence(self) -> None:
         provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
-        for slug, alt_text in M3_TARGETS.items():
+        expected_assets = {
+            "movement": "exercise_movement_illustration",
+            "muscle-attention": "exercise_muscle_attention_illustration",
+        }
+        for slug, alt_texts in M3_TARGETS.items():
             with self.subTest(slug=slug):
                 page_path = ROOT / f"exercises/{slug}.md"
-                asset_path = f"media/exercises/{slug}/movement.png"
                 page_text = page_path.read_text(encoding="utf-8")
 
-                self.assertIn(f"![{alt_text}](../{asset_path})", page_text)
-                self.assertTrue((ROOT / asset_path).exists(), f"{asset_path} is missing")
+                for stem, purpose in expected_assets.items():
+                    asset_path = f"media/exercises/{slug}/{stem}.png"
+                    alt_key = "movement" if stem == "movement" else "muscle"
+                    self.assertIn(f"![{alt_texts[alt_key]}](../{asset_path})", page_text)
+                    self.assertTrue((ROOT / asset_path).exists(), f"{asset_path} is missing")
 
-                rows = provenance.get(asset_path, [])
-                self.assertEqual(len(rows), 1, f"{asset_path} must have exactly one provenance row")
-                self.assertEqual(rows[0].get("asset_type"), "ai_generated_raster")
-                self.assertEqual(rows[0].get("media_purpose"), "exercise_movement_illustration")
-                self.assertEqual(rows[0].get("review_status"), "approved")
-                self.assertIn(f"exercises/{slug}.md", split_page_refs(rows[0].get("page_refs", "")))
+                    rows = provenance.get(asset_path, [])
+                    self.assertEqual(len(rows), 1, f"{asset_path} must have exactly one provenance row")
+                    self.assertEqual(rows[0].get("asset_type"), "ai_generated_raster")
+                    self.assertEqual(rows[0].get("media_purpose"), purpose)
+                    self.assertEqual(rows[0].get("review_status"), "approved")
+                    self.assertIn(f"exercises/{slug}.md", split_page_refs(rows[0].get("page_refs", "")))
 
         evidence_root = ROOT / "docs/changes/exercise-image-standard-and-optimization/evidence"
         self.assertTrue((evidence_root / "m3-visual-safety-review.md").exists())

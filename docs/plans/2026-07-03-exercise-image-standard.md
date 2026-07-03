@@ -124,13 +124,18 @@ before any generated image batch is added.
   validation-path amendment; code-review M1 R2 closed M1; M2 implemented
   authoring guidance and review evidence templates; code-review M2 R1 closed
   M2; M3 added the first generated exercise-image batch and review evidence;
-  code-review M3 R1 requested changes for CR-EIS-M3-1 and CR-EIS-M3-2
+  code-review M3 R1 requested changes for CR-EIS-M3-1 and CR-EIS-M3-2;
+  review-resolution locally addressed CR-EIS-M3-1 by replacing the wall-slide
+  visual and expanding the batch with clearer movement and muscle-attention
+  images; CR-EIS-M3-2 remains open pending non-identifying reader-prompt
+  beginner-comprehension evidence
 - Remaining in-scope implementation milestones: M3 resolution, M4, and
   lifecycle closeout
-- Next stage: review-resolution M3
+- Next stage: blocked on M3 reader-prompt evidence
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 has unresolved review findings;
-  M4, explain-change, final verification, and PR handoff remain open.
+- Reason final closeout is or is not ready: M3 still needs reader-prompt
+  comprehension evidence before returning to code-review; M4, explain-change,
+  final verification, and PR handoff remain open.
 
 ## Milestones
 
@@ -263,10 +268,11 @@ before any generated image batch is added.
   - `python3 -m unittest discover tests`
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
   - `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
-- Result: Implemented one movement image for each target exercise page, exact
-  provenance rows, visual-safety evidence, beginner-comprehension evidence, and
-  focused regression coverage. Code-review M3 R1 requested changes for
-  CR-EIS-M3-1 and CR-EIS-M3-2.
+- Result: Implemented clearer movement images and one muscle-attention image
+  for each target exercise page, exact provenance rows, refreshed visual-safety
+  evidence, and focused regression coverage. CR-EIS-M3-1 is addressed locally
+  pending re-review. CR-EIS-M3-2 remains open because reader-prompt
+  beginner-comprehension evidence is still required for the revised image batch.
 - Risks: generated images may imply unsupported anatomy, correction, treatment,
   brands, or identifiable people.
 - Rollback: remove the Markdown image references, remove unused assets, remove
@@ -419,6 +425,11 @@ when generated image batches are added.
 - 2026-07-03: Code-review M3 R1 requested changes because the wall-slide image
   does not match the forearms-on-wall variation and the beginner-comprehension
   evidence is a maintainer checklist rather than reader-prompt evidence.
+- 2026-07-03: Owner feedback said the first M3 images were not clear enough to
+  show movement or muscle use. Review-resolution replaced the movement assets,
+  added one muscle-attention asset per target page, updated provenance and
+  visual-safety evidence, and left reader-prompt beginner-comprehension evidence
+  as the remaining blocker.
 
 ## Decision log
 
@@ -441,11 +452,13 @@ when generated image batches are added.
 - M2 can use an inline path placeholder in the exercise template instead of a
   Markdown image reference, so the template remains concrete without implying a
   real asset that needs provenance.
-- M3 selected one `exercise_movement_illustration` per target page instead of
-  setup or muscle-attention images because the movement-reference gap was the
-  minimum common comprehension need across the five support exercises.
-- The M3 wall-slide and band pull-apart images are simplified illustrations;
-  nearby Markdown remains authoritative for forearm contact and band choice.
+- M3 initially selected one `exercise_movement_illustration` per target page,
+  but owner feedback showed the batch did not make movement or muscle use clear
+  enough. Review-resolution revised M3 to use one movement image and one
+  `exercise_muscle_attention_illustration` per target page.
+- The M3 wall-slide and band pull-apart images remain simplified support
+  illustrations; nearby Markdown remains authoritative for forearm contact,
+  band choice, muscle wording, and range.
 
 ## Validation notes
 
@@ -526,6 +539,17 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
   passed, checking 39 files.
 - During M3 code-review, `git diff --check` passed.
+- After M3 review-resolution asset, page, provenance, and evidence updates,
+  `python3 -m unittest tests.test_exercise_image_standard` passed with 8 tests.
+- After M3 review-resolution updates, `python3 -m unittest discover tests`
+  passed with 97 tests.
+- After M3 review-resolution updates,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
+  passed, checking 25 Markdown files.
+- After M3 review-resolution updates,
+  `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
+  passed, checking 40 files.
+- After M3 review-resolution updates, `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -534,5 +558,5 @@ explain-change, verification, and PR handoff are complete.
 
 ## Readiness
 
-See Current Handoff Summary for the live next stage. This plan is ready for
-M3 review-resolution, not final closeout.
+See Current Handoff Summary for the live next stage. This plan is blocked on
+M3 reader-prompt beginner-comprehension evidence, not final closeout.

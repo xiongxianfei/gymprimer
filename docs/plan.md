@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: review-resolution M3
-  - Active context: code-review M3 R1 requested changes for wall-slide visual fit and beginner-comprehension evidence; review-resolution is next.
+  - Current stage: blocked on M3 reader-prompt evidence
+  - Active context: review-resolution locally addressed the visual-fit finding with clearer movement and muscle-attention images; non-identifying reader-prompt beginner-comprehension evidence remains required before M3 can return to code-review.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

@@ -22,9 +22,13 @@ Use a clear wall. Place the forearms against the wall and start with a range tha
 
 Primary: serratus anterior activity during wall-slide reaching. Secondary: other upper-back, shoulder, and arm muscles used during the forearms-on-wall movement. [Source][local-wall-slide-serratus] [Source][local-wall-slide-instruction]
 
+![Wall slide muscle-attention reference with the shoulder-blade and side-rib region subtly highlighted](../media/exercises/wall-slide/muscle-attention.png)
+
+Use the image as a broad attention-region reference. Keep the muscle wording and citations in the Markdown text above.
+
 ## Movement breakdown
 
-![Wall slide movement reference showing forearms sliding upward on a clear wall](../media/exercises/wall-slide/movement.png)
+![Wall slide movement reference with separate forearms-on-wall start and raised finish positions](../media/exercises/wall-slide/movement.png)
 
 Use the image as a simple movement reference. Keep following the written setup and safety notes.
 

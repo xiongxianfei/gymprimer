@@ -2,12 +2,14 @@
 
 ## Current milestone
 
-M3 implements the First New Exercise Image Batch milestone. It adds one
-generated movement illustration to each of the five forward-head support
-exercise pages, with provenance rows and change-local review evidence.
+M3 implements the First New Exercise Image Batch milestone. It now adds one
+generated movement illustration and one generated muscle-attention
+illustration to each of the five forward-head support exercise pages, with
+provenance rows and change-local review evidence.
 
 M3 does not change existing exercise images or migrate legacy media purposes.
-It uses new `exercise_movement_illustration` rows only for the new generated
+It uses new `exercise_movement_illustration` and
+`exercise_muscle_attention_illustration` rows only for the new generated
 assets.
 
 M1 remains the implemented checker contract underneath this guidance.
@@ -66,9 +68,9 @@ beginner-comprehension evidence templates exist with the required review
 prompts.
 
 The M3 addition to `tests/test_exercise_image_standard.py` proves that the five
-target pages reference the expected movement images, that each asset exists,
-that each asset has exactly one approved `exercise_movement_illustration`
-provenance row with the referencing page in `page_refs`, and that the M3
+target pages reference the expected movement and muscle-attention images, that
+each asset exists, that each asset has exactly one approved provenance row with
+the expected purpose and referencing page in `page_refs`, and that the M3
 visual-safety and beginner-comprehension evidence files exist.
 
 ## Why the M2 guidance changed
@@ -87,9 +89,11 @@ stop condition, source verification, and residual confusion.
 
 ## Why the M3 image batch changed
 
-M3 adds one movement image per target page instead of multiple images. This
-keeps the first generated batch small while addressing the common beginner
-comprehension gap: seeing the start-to-finish movement shape.
+M3 first added one movement image per target page. Code-review found that the
+wall-slide image did not fit the forearms-on-wall variation, and owner feedback
+said the first batch was not clear enough to show movement or muscle use.
+Review-resolution therefore replaced the movement images with clearer
+separate-panel references and added one muscle-attention image per target page.
 
 Each page keeps the written setup, movement steps, feel cues, safety notes, and
 sources in Markdown. The added sentence near each image tells readers to treat
@@ -103,6 +107,11 @@ The new assets are:
 - `media/exercises/wall-slide/movement.png`
 - `media/exercises/prone-y-t/movement.png`
 - `media/exercises/band-pull-apart/movement.png`
+- `media/exercises/chin-nod/muscle-attention.png`
+- `media/exercises/thoracic-extension/muscle-attention.png`
+- `media/exercises/wall-slide/muscle-attention.png`
+- `media/exercises/prone-y-t/muscle-attention.png`
+- `media/exercises/band-pull-apart/muscle-attention.png`
 
 ## Validation
 
@@ -144,9 +153,20 @@ The new assets are:
 - `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
   passed after M3 implementation.
 - `git diff --check` passed after M3 implementation.
+- `python3 -m unittest tests.test_exercise_image_standard` passed after M3
+  review-resolution asset, page, provenance, and evidence updates.
+- `python3 -m unittest discover tests` passed after M3 review-resolution
+  updates.
+- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
+  passed after M3 review-resolution updates.
+- `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
+  passed after M3 review-resolution updates.
+- `git diff --check` passed after M3 review-resolution updates.
 
 ## Remaining work
 
-M3 is ready for code-review. M4 still owns the remaining exercise audit, and
-lifecycle closeout still owns final explain-change, verification, and PR
-handoff.
+M3 is blocked on non-identifying reader-prompt beginner-comprehension evidence
+for the revised material image batch. CR-EIS-M3-1 is addressed locally pending
+re-review; CR-EIS-M3-2 remains open. M4 still owns the remaining exercise
+audit, and lifecycle closeout still owns final explain-change, verification,
+and PR handoff.

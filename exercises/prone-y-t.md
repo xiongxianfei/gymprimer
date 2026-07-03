@@ -22,9 +22,13 @@ Use the floor or a firm mat. Start without weights. Use the Y and T versions as 
 
 Primary: lower and middle trapezius emphasis during prone arm-raise variations. Secondary: nearby shoulder and trunk control that helps keep the torso quiet. [Source][local-prone-y-t-trapezius-emg]
 
+![Prone Y/T muscle-attention reference with the upper-back and shoulder-blade region subtly highlighted](../media/exercises/prone-y-t/muscle-attention.png)
+
+Use the image as a broad attention-region reference. Keep the muscle wording and citations in the Markdown text above.
+
 ## Movement breakdown
 
-![Prone Y/T movement reference showing the Y and T arm positions on a mat](../media/exercises/prone-y-t/movement.png)
+![Prone Y/T movement reference with separate prone Y and prone T arm positions](../media/exercises/prone-y-t/movement.png)
 
 Use the image as a simple movement reference. Keep following the written setup and safety notes.
 
