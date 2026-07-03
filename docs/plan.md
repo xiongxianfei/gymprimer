@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: review-resolution
-  - Active context: code-review M3A R2 resolved CR-EIS-M3A-1 and requested changes for CR-EIS-M3A-2; M3A review-resolution is next. M3 still remains blocked on non-identifying reader-prompt beginner-comprehension evidence.
+  - Current stage: code-review
+  - Active context: CR-EIS-M3A-2 is addressed pending re-review; M3A code-review re-review is next. M3 still remains blocked on non-identifying reader-prompt beginner-comprehension evidence.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

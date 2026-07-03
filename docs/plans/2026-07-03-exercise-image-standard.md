@@ -132,7 +132,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 ## Current Handoff Summary
 
 - Current milestone: M3A
-- Current milestone state: resolution-needed
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -167,13 +167,15 @@ must be sequenced before the current M3 image batch returns to code-review.
   CR-EIS-M3A-1 by constraining compatibility to the ten recorded M3 assets and
   adding regression coverage; code-review M3A R2 resolved CR-EIS-M3A-1 but
   requested changes for CR-EIS-M3A-2 because plan milestone states drifted for
-  M3 and M3A
-- Remaining in-scope implementation milestones: M3A resolution, M3
-  re-review/resolution, M4, and lifecycle closeout
-- Next stage: review-resolution for CR-EIS-M3A-2
+  M3 and M3A; review-resolution addressed CR-EIS-M3A-2 by keeping M3 in
+  `resolution-needed` while CR-EIS-M3-2 remains open and returning M3A to
+  `review-requested` for code-review re-review
+- Remaining in-scope implementation milestones: M3 re-review/resolution, M4,
+  and lifecycle closeout
+- Next stage: code-review M3A re-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3A has an unresolved lifecycle
-  artifact finding; M3 still needs reader-prompt comprehension evidence before
+- Reason final closeout is or is not ready: M3A still needs code-review
+  re-review; M3 still needs reader-prompt comprehension evidence before
   returning to code-review; M4, explain-change, final verification, and PR
   handoff remain open.
 
@@ -273,7 +275,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### M3. First New Exercise Image Batch
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: add a small reviewed batch for the five forward-head support exercises
   only after M1 and M2 are closed.
 - Requirements: R1-R31, R35-R38, AC1-AC12.
@@ -321,7 +323,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### M3A. Prompt Record Validation and M3 Backfill
 
-- Milestone state: resolution-needed
+- Milestone state: review-requested
 - Goal: implement the approved prompt-record contract and bring the in-flight
   M3 generated raster exercise images into compliance before M3 returns to
   code-review.
@@ -388,7 +390,10 @@ must be sequenced before the current M3 image batch returns to code-review.
   finding by adding a deterministic compatibility asset allowlist and regression
   coverage for non-M3 images that copy the compatibility note. Code-review M3A
   R2 resolved CR-EIS-M3A-1 but requested changes for CR-EIS-M3A-2 because M3
-  and M3A milestone states drifted in the plan.
+  and M3A milestone states drifted in the plan. Review-resolution addressed the
+  lifecycle-state drift by keeping M3 in `resolution-needed` while CR-EIS-M3-2
+  remains open and returning M3A to `review-requested` for code-review
+  re-review.
 - Risks: exact prompts for already-generated M3 images may be unavailable;
   replacement images could reopen visual clarity, provenance, visual-safety,
   and beginner-comprehension review work.
