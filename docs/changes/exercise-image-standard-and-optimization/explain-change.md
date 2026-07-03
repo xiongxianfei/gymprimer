@@ -1,172 +1,130 @@
 # Explain Change: Exercise Image Standard and Optimization
 
-## Current milestone
+## Summary
 
-M3 implements the First New Exercise Image Batch milestone. It now adds one
-generated movement illustration and one generated muscle-attention
-illustration to each of the five forward-head support exercise pages, with
-provenance rows and change-local review evidence.
+This change implements the accepted Exercise Image Standard through four
+reviewed milestones plus the M3A prompt-record amendment. It adds static
+validation for exercise-image purposes, authoring guidance, a reviewed first
+exercise-image batch, exact prompt-record support for generated raster
+exercise images, and a remaining-page audit that avoids migration-only churn.
 
-M3 does not change existing exercise images or migrate legacy media purposes.
-It uses new `exercise_movement_illustration` and
-`exercise_muscle_attention_illustration` rows only for the new generated
-assets.
+The repository remains Markdown-first. Images are support assets; Markdown
+continues to carry setup, movement instructions, muscle wording, safety notes,
+and citations.
 
-M1 remains the implemented checker contract underneath this guidance.
-M2 remains the implemented authoring guidance and evidence surface underneath
-this batch.
+## Problem
 
-## Why the checker changed
+Exercise pages had inconsistent visual support and no durable way to distinguish
+setup, movement, and muscle-attention images. The project also needed a
+traceable provenance and prompt-record contract for generated raster exercise
+images before adding more assets.
 
-The accepted spec adds three exercise-document image purposes:
+## Decision Trail
 
-- `exercise_setup_illustration`
-- `exercise_movement_illustration`
-- `exercise_muscle_attention_illustration`
+The accepted proposal chose one coherent exercise-image standard implemented
+through small loops instead of separate proposals per image type or one broad
+all-page rewrite.
 
-The checker now accepts those purposes for full exercise pages while continuing
-to accept the legacy-compatible `equipment_identification` and
-`key_movement_illustration` purposes. It rejects out-of-context purposes on
-exercise pages so pattern, condition, preview, vague, or unknown media purposes
-do not become exercise-document image metadata.
+The approved spec defines the observable contract:
 
-M1 also adds deterministic checks for the parts of the standard that automation
-can prove:
+- R1-R6 keep images optional and minimum-necessary.
+- R7-R11 define setup, movement, and muscle-attention purposes.
+- R12-R14, R28-R31 preserve visual-safety and beginner-comprehension review.
+- R15-R24 define local paths, provenance, reviewer, and prompt-record rules.
+- R32-R33 preserve existing legacy-compatible images without migration.
+- R37-R38 preserve no-private-data and no-runtime boundaries.
 
-- no more than three exercise images per page;
-- no more than one muscle-attention image per page;
-- non-generic alt text for exercise images;
-- generated raster exercise images live under `media/exercises/<slug>/`;
-- generated raster exercise images have approved provenance rows;
-- provenance `page_refs` include the referencing exercise page;
-- exercise-image provenance uses an accountable human reviewer rather than an
-  AI-tool placeholder;
-- deterministic unsafe wording in exercise-image alt text and provenance notes
-  is rejected.
+Architecture and ADR updates keep generated raster media under the
+Markdown-first media system, with `media/PROVENANCE.md` as the central
+provenance index and repository-local prompt records under
+`media/prompts/exercises/<slug>/<asset-stem>.md`.
 
-## Why template handling changed
+## Diff Rationale
 
-Test-spec review found that planned template validation could not rely on the
-existing product-page checker behavior. M1 therefore adds a template path
-boundary for `docs/templates/`: templates can contain placeholders and
-template-language examples without being treated as promoted product content,
-but image references inside templates still go through media-contract
-validation.
+| Area | Change | Reason | Evidence |
+| --- | --- | --- | --- |
+| Checker | `tools/checks/check_markdown_first.py` now validates exercise image purposes, image counts, muscle-attention limits, alt text, generated-raster provenance, prompt records, and scoped M3 compatibility. | Implements the accepted exercise-image and prompt-record contracts without making images mandatory. | M1, M3A, and focused checker tests. |
+| Tests | `tests/test_exercise_image_standard.py` covers text-only pages, purpose routing, provenance failures, prompt-record failures, M3 batch assets, compatibility scope, and M4 audit coverage. | Proves deterministic behavior and prevents regression in scoped compatibility and audit coverage. | 13 focused tests now pass. |
+| Templates | `docs/templates/exercise-card.md` and evidence templates guide optional image use and review evidence. | Keeps authoring Markdown-first and support-only. | M2 review closed cleanly. |
+| Exercise pages | Five forward-head support exercise pages now reference movement and muscle-attention images. | Adds the first reviewed image batch for beginner comprehension. | M3 visual-safety evidence and code-review R2. |
+| Media assets | New/replaced PNGs live under `media/exercises/<slug>/`. | Keeps exercise media subject-co-located and repository-local. | Markdown checker and provenance rows pass. |
+| Provenance | `media/PROVENANCE.md` includes `prompt_record` and exact rows for generated exercise images. | Makes generated raster assets traceable and reviewable. | M3A prompt-record tests and review. |
+| Prompt records | Five replacement assets have exact full prompt records under `media/prompts/exercises/`. | Preserves prompts for newly generated replacement assets instead of relying on summaries. | Prompt-record validation passes. |
+| Evidence | M3 visual-safety, beginner-comprehension, prompt backfill, and M4 audit evidence are recorded under the change directory. | Covers manual proof that static checks cannot prove. | Code-review M3/M3A/M4 records. |
+| Lifecycle artifacts | Plan, plan index, change metadata, review log, and review-resolution were kept current through each gate. | Prevents workflow drift and preserves source-order traceability. | M3A R3 and M4 R1 closed cleanly. |
 
-This supports the planned M2 template guidance without weakening media checks.
+## Tests Added or Changed
 
-## Tests added
+- `test_text_only_exercise_page_passes_image_specific_checks`: proves images
+  remain optional.
+- Purpose and provenance tests: prove allowed purposes pass and wrong purposes,
+  bad provenance, generic alt text, unsafe wording, bad paths, and excessive
+  image counts fail.
+- Prompt-record tests: prove missing, invalid, mismatched, or incomplete prompt
+  records fail; explicit redaction can pass; M3 compatibility is scoped.
+- M3 batch test: proves target pages reference expected assets with approved
+  provenance and prompt records where required.
+- M4 audit test: proves every current `exercises/*.md` page appears in the
+  audit and migration-only edits remain prohibited.
 
-`tests/test_exercise_image_standard.py` provides isolated temporary-repository
-fixtures for the M1 contract. The tests cover text-only pages, new and rejected
-purposes, provenance failures, count limits, path and alt-text boundaries,
-legacy-purpose compatibility, and template-aware validation.
+## Validation Evidence Before Final Verify
 
-`tests/test_markdown_first_templates.py` now proves that the exercise template
-contains optional exercise-image guidance and that the visual-safety and
-beginner-comprehension evidence templates exist with the required review
-prompts.
+Recent milestone and review validation includes:
 
-The M3 addition to `tests/test_exercise_image_standard.py` proves that the five
-target pages reference the expected movement and muscle-attention images, that
-each asset exists, that each asset has exactly one approved provenance row with
-the expected purpose and referencing page in `page_refs`, and that the M3
-visual-safety and beginner-comprehension evidence files exist.
-
-## Why the M2 guidance changed
-
-The exercise-card template now includes an optional exercise-image block that
-keeps images support-only. It tells authors to use images only when they add
-beginner comprehension, choose one teaching purpose, keep explanation and
-citations in Markdown, and avoid in-image labels, warning badges, pain marks,
-or diagnosis/treatment claims.
-
-The new visual-safety review template records the review scope, reviewer role
-or handle, pass/fail criteria, decision, and residual risk for generated image
-batches. The beginner-comprehension template records non-identifying outcomes
-for purpose, setup or body position, movement steps, what to notice or feel,
-stop condition, source verification, and residual confusion.
-
-## Why the M3 image batch changed
-
-M3 first added one movement image per target page. Code-review found that the
-wall-slide image did not fit the forearms-on-wall variation, and owner feedback
-said the first batch was not clear enough to show movement or muscle use.
-Review-resolution therefore replaced the movement images with clearer
-separate-panel references and added one muscle-attention image per target page.
-
-Each page keeps the written setup, movement steps, feel cues, safety notes, and
-sources in Markdown. The added sentence near each image tells readers to treat
-the image as a simple movement reference and keep following the written setup
-and safety notes.
-
-The new assets are:
-
-- `media/exercises/chin-nod/movement.png`
-- `media/exercises/thoracic-extension/movement.png`
-- `media/exercises/wall-slide/movement.png`
-- `media/exercises/prone-y-t/movement.png`
-- `media/exercises/band-pull-apart/movement.png`
-- `media/exercises/chin-nod/muscle-attention.png`
-- `media/exercises/thoracic-extension/muscle-attention.png`
-- `media/exercises/wall-slide/muscle-attention.png`
-- `media/exercises/prone-y-t/muscle-attention.png`
-- `media/exercises/band-pull-apart/muscle-attention.png`
-
-## Validation
-
-- `python3 -m unittest tests.test_exercise_image_standard` failed before
-  implementation with expected missing M1 behavior.
-- `python3 -m unittest tests.test_exercise_image_standard` passed after
-  implementation.
-- `python3 -m unittest tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1 tests.test_exercise_image_standard`
-  passed after implementation.
+- `python3 -m unittest tests.test_exercise_image_standard` passed with 13
+  tests after M4 and during M4 review.
+- `python3 -m unittest discover tests` passed with 102 tests after M4.
+- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md`
+  passed after M4.
 - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
-  passed after implementation.
-- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md`
-  passed after implementation.
-- `python3 -m unittest discover tests` passed after implementation.
-- `git diff --check` passed after implementation.
-- The broad planned privacy command failed on pre-existing command examples in
-  the superseded content-schema plan; the scoped current-change privacy command
-  passed across the active exercise-image artifacts and code paths.
-- `python3 -m unittest tests.test_markdown_first_templates` failed before M2
-  documentation changes with the expected missing optional exercise-image
-  guidance and evidence templates.
-- `python3 -m unittest tests.test_markdown_first_templates` passed after M2
-  implementation.
-- `python3 -m unittest tests.test_markdown_first_templates tests.test_exercise_image_standard`
-  passed after M2 implementation.
-- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md`
-  passed after M2 implementation.
-- `python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization`
-  passed after M2 implementation.
-- `git diff --check` passed after M2 implementation.
-- `python3 -m unittest tests.test_exercise_image_standard` failed before M3
-  content changes with expected missing target page image references, assets,
-  provenance rows, and evidence files.
-- `python3 -m unittest tests.test_exercise_image_standard` passed after M3
-  implementation.
-- `python3 -m unittest discover tests` passed after M3 implementation.
-- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
-  passed after M3 implementation.
-- `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
-  passed after M3 implementation.
-- `git diff --check` passed after M3 implementation.
-- `python3 -m unittest tests.test_exercise_image_standard` passed after M3
-  review-resolution asset, page, provenance, and evidence updates.
-- `python3 -m unittest discover tests` passed after M3 review-resolution
-  updates.
-- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
-  passed after M3 review-resolution updates.
-- `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
-  passed after M3 review-resolution updates.
-- `git diff --check` passed after M3 review-resolution updates.
+  passed during M3/M3A review.
+- Scoped privacy checks over the current change artifacts passed.
+- `git diff --check` and `git diff --check HEAD` passed in the recorded
+  milestone and review evidence.
 
-## Remaining work
+CI has not been observed, so this artifact does not claim CI passed.
 
-M3 is blocked on non-identifying reader-prompt beginner-comprehension evidence
-for the revised material image batch. CR-EIS-M3-1 is addressed locally pending
-re-review; CR-EIS-M3-2 remains open. M4 still owns the remaining exercise
-audit, and lifecycle closeout still owns final explain-change, verification,
-and PR handoff.
+## Review Resolution Summary
+
+Material findings were resolved and re-reviewed:
+
+- `CR-EIS-M1-1`: broad privacy validation ownership moved to verify after
+  owner direction and test-spec review.
+- `CR-EIS-M3-1`: wall-slide visual mismatch resolved by replacement and
+  visual-safety re-review.
+- `CR-EIS-M3-2`: reader-prompt evidence and post-replacement clarity
+  confirmation recorded; M3 R2 accepted the resolution with scope noted.
+- `CR-EIS-M3A-1`: prompt-record compatibility bypass scoped to recorded M3
+  assets with regression coverage.
+- `CR-EIS-M3A-2`: milestone state drift fixed; M3A R3 closed the milestone.
+
+See `docs/changes/exercise-image-standard-and-optimization/review-resolution.md`
+and `docs/changes/exercise-image-standard-and-optimization/review-log.md`.
+
+## Alternatives Rejected
+
+- Generating all images before validation was rejected because provenance,
+  prompt records, and review rules needed to exist first.
+- Migrating existing `equipment_identification` and
+  `key_movement_illustration` images was rejected as low-value churn.
+- Keeping all exercise pages text-only was rejected by the accepted proposal
+  because images can help beginner comprehension when governed.
+- Creating a new proposal for each small future exercise-image batch was
+  rejected; small batches remain follow-up loops under the accepted standard.
+
+## Scope Control
+
+This change does not add a runtime app, CMS, database, hosted image delivery,
+generated public JSON, user-input flow, video, animation, stock-photo library,
+personalized coaching, clinical diagnosis, treatment plan, or README promotion.
+
+No exercise page was edited solely to migrate a legacy image purpose.
+
+## Risks and Follow-ups
+
+Final verification still needs to run, including the broad privacy command
+owned by lifecycle closeout / verify. PR readiness is not claimed here.
+
+Future exercise-image batches should name a concrete comprehension gap,
+preserve exact prompts, update provenance, and use the same visual-safety and
+reader-evidence process before code review.

@@ -181,10 +181,10 @@ must be sequenced before the current M3 image batch returns to code-review.
   current exercise pages and recorded keep-existing-image routing; code-review
   M4 R1 closed M4
 - Remaining in-scope implementation milestones: lifecycle closeout
-- Next stage: explain-change
+- Next stage: verify
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: explain-change, final
-  verification, and PR handoff remain open.
+- Reason final closeout is or is not ready: final verification and PR handoff
+  remain open.
 
 ## Milestones
 
@@ -836,6 +836,10 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md tests/test_exercise_image_standard.py docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plans/2026-07-03-exercise-image-standard.md docs/plan.md`
   passed, checking 5 files.
 - During M4 code-review, `git diff --check HEAD` passed.
+- After explain-change refresh,
+  `python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/explain-change.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plans/2026-07-03-exercise-image-standard.md docs/plan.md`
+  passed, checking 4 files.
+- After explain-change refresh, `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -845,4 +849,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is awaiting
-explain-change. It is not final closeout.
+final verification. It is not final closeout.

@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: explain-change
+current_stage: verify
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -32,7 +32,7 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r5.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m4-r1.md
-next_stage: explain-change
+next_stage: verify
 
 open_findings: []
 
@@ -75,6 +75,7 @@ notes:
   - Code-review M3 R2 resolved CR-EIS-M3-1 and CR-EIS-M3-2 and closed M3. M4 implementation is next.
   - M4 audited all current exercise pages, recorded keep-existing-image routing, and added regression coverage that every current exercise page appears in the audit; code-review M4 is next.
   - Code-review M4 R1 closed M4 with no material findings. Explain-change is next before final verification.
+  - Explain-change was refreshed through M4 closeout. Final verification is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
@@ -350,3 +351,9 @@ validation:
   - command: git diff --check HEAD
     result: pass
     evidence: diff whitespace check passed during M4 code-review
+  - command: python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/explain-change.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plans/2026-07-03-exercise-image-standard.md docs/plan.md
+    result: pass
+    evidence: scoped explain-change privacy scan passed, checked 4 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after explain-change refresh
