@@ -439,9 +439,10 @@ spec is identical text and does not create a behavioral coverage gap.
 
 ## Next artifacts
 
-1. Test-spec review R2 for this revised proof map.
-2. Implementation M1 only after clean test-spec review.
-3. Code review after each implementation milestone.
+1. Test-spec-review re-review for the TSR-EIS-2 validation-path revision.
+2. M1 code-review re-review only after the test-spec-review approves the
+   amended proof map.
+3. Continue with M2-M4 only after M1 code-review closes.
 
 ## Follow-on artifacts
 
@@ -449,5 +450,6 @@ None yet.
 
 ## Readiness
 
-This test spec is ready for test-spec-review. It does not authorize
-implementation until test-spec-review is approved.
+This test spec is ready for test-spec-review of the TSR-EIS-2 revision. It
+does not authorize M1 code-review re-review or downstream milestones until
+test-spec-review approves the amended proof map.

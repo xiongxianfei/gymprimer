@@ -12,3 +12,4 @@
 | 2026-07-03 | code-review M1 | `docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m1-r1.md` | changes-requested | CR-EIS-M1-1 | M1-required EIS-CMD4 privacy command fails on pre-existing superseded-plan examples; review-resolution is next. |
 | 2026-07-03 | test-spec amendment | `specs/exercise-image-standard.test.md` | pending review | CR-EIS-M1-1 | Owner directed broad privacy validation to verify before PR; test-spec-review is next. |
 | 2026-07-03 | test-spec-review | `docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r3.md` | changes-requested | TSR-EIS-2 | EIS-CMD4 is deferred to verify in the test spec, but the plan still lists it as an expected local command after implementation begins. |
+| 2026-07-03 | test-spec revision | `specs/exercise-image-standard.test.md` | pending review | TSR-EIS-2 | Plan validation timing and stale test-spec readiness wording were aligned; test-spec-review re-review is next. |

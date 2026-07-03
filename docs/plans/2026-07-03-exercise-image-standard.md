@@ -120,10 +120,10 @@ before any generated image batch is added.
   approved; test-spec-review R2 approved after TSR-EIS-1 resolution;
   code-review M1 R1 requested changes for CR-EIS-M1-1; owner directed broad
   privacy validation to move to verify-before-PR; test-spec-review R3
-  requested changes for TSR-EIS-2
+  requested changes for TSR-EIS-2; TSR-EIS-2 revision is ready for re-review
 - Remaining in-scope implementation milestones: M1 resolution, M2-M4, and
   lifecycle closeout
-- Next stage: test-spec revision
+- Next stage: test-spec-review
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: M1 has an unresolved code-review
   finding, and the plan has not completed later milestones, explain-change,
@@ -329,7 +329,11 @@ Expected local command set after implementation begins:
 - `python3 -m unittest tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1`
 - `python3 -m unittest discover tests`
 - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
-- `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests`
+
+Milestone-level privacy validation may use scoped current-change scans when
+review hygiene needs it. The broad EIS-CMD4 privacy sweep is owned by lifecycle
+closeout / verify and must pass before PR handoff, not during M1-M4
+implementation closeout.
 
 Manual evidence is required for visual semantics and beginner comprehension
 when generated image batches are added.
@@ -388,6 +392,8 @@ when generated image batches are added.
 - 2026-07-03: Test-spec-review R3 requested test-spec revision for TSR-EIS-2
   because the plan still lists broad EIS-CMD4 as an implementation-start
   command.
+- 2026-07-03: Test-spec revision aligned the plan's general validation section
+  with the amended EIS-CMD4 lifecycle closeout / verify ownership.
 
 ## Decision log
 
@@ -446,4 +452,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is ready for
-test-spec revision, not final closeout.
+test-spec-review of the TSR-EIS-2 revision, not final closeout.

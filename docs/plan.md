@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: test-spec revision
-  - Active context: test-spec-review R3 requested changes for TSR-EIS-2; align the plan's general validation command timing with the EIS-CMD4 verify-stage amendment.
+  - Current stage: test-spec-review
+  - Active context: TSR-EIS-2 revision aligned plan validation timing and test-spec readiness wording; test-spec-review re-review is next.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
