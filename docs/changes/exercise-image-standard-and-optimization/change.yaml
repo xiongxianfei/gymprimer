@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: review-resolution
+current_stage: spec
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -8,7 +8,7 @@ proposal_status: accepted
 proposal_review: docs/changes/exercise-image-standard-and-optimization/reviews/proposal-review-r1.md
 
 current_spec: specs/exercise-image-standard.md
-current_spec_status: approved
+current_spec_status: draft
 current_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r2.md
 
 current_architecture: docs/architecture/system/architecture.md
@@ -32,7 +32,7 @@ current_test_spec_status: approved
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r4.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3-r1.md
-next_stage: blocked on M3 reader-prompt evidence
+next_stage: spec-review
 
 open_findings:
   - CR-EIS-M3-2
@@ -56,6 +56,7 @@ notes:
   - Code-review M3 R1 requested changes for CR-EIS-M3-1 and CR-EIS-M3-2; review-resolution is next.
   - M3 review-resolution addressed CR-EIS-M3-1 locally by replacing the wall-slide movement image, replacing the other movement images for clarity, adding one muscle-attention image per target page, updating provenance rows, and refreshing visual-safety evidence.
   - CR-EIS-M3-2 remains open because the revised material image batch still needs non-identifying reader-prompt beginner-comprehension evidence before M3 can return to code-review.
+  - Prompt-preservation spec amendment set the exercise-image spec back to draft and added exact full prompt-record requirements; spec-review is next before architecture, test-spec, plan, or implementation updates.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
@@ -163,3 +164,12 @@ validation:
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after M3 review-resolution updates
+  - command: python3 tools/checks/check_markdown_first.py specs/exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: not-applicable
+    evidence: product-page Markdown checker rejects governance/spec terms and source-section expectations on this spec/plan subset; use privacy and diff checks for this spec amendment
+  - command: python3 tools/checks/check_privacy.py -- specs/exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: pass
+    evidence: scoped prompt-preservation spec amendment privacy scan passed, checked 4 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after prompt-preservation spec amendment

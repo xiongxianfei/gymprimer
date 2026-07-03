@@ -2,7 +2,7 @@
 
 ## Status
 
-approved
+draft
 
 ## Related proposal
 
@@ -25,6 +25,8 @@ GymPrimer remains a Markdown-first, citation-backed beginner primer. Exercise im
 - Exercise movement image: An image whose purpose is a start position, end position, key position, or movement path for the exercise.
 - Exercise muscle-attention image: An image whose purpose is a broad body region or muscle region the reader should notice during the movement.
 - Generated raster image: A `.png`, `.jpg`, `.jpeg`, or `.webp` file under `media/` classified by the active media architecture as an AI-generated raster illustration.
+- Prompt record: A repository-local Markdown artifact that preserves the exact full prompt text used to generate or revise one generated raster image.
+- Prompt summary: A concise `media/PROVENANCE.md` `prompt_or_creation_notes` value that summarizes the prompt or creation context without replacing the exact prompt record.
 - Original SVG diagram: A `.svg` file under `media/` classified by the active media architecture as an original educational diagram.
 - Declared image purpose: The purpose value or nearby Markdown explanation that identifies whether the image teaches setup, movement, or muscle attention.
 - Page-local source support: Citations and source list entries in the same exercise document as the claim being supported.
@@ -69,6 +71,19 @@ Given an existing exercise document already references a generated raster image 
 When the page is validated under this spec
 Then the existing image can remain valid without changing its media purpose.
 
+Example E8: exact prompt record is preserved for a generated raster exercise image
+Given `exercises/wall-slide.md` references `../media/exercises/wall-slide/movement.png`
+And `media/PROVENANCE.md` has an approved row for `media/exercises/wall-slide/movement.png`
+When provenance is reviewed
+Then the row links to a repository-local prompt record such as `media/prompts/exercises/wall-slide/movement.md`
+And that prompt record preserves the exact full prompt text used for the accepted image.
+
+Example E9: missing prompt record fails promotion
+Given `media/PROVENANCE.md` has an approved generated raster row for `media/exercises/chin-nod/muscle-attention.png`
+And the row has no repository-local prompt record link
+When generated raster media validation runs after this amendment is implemented
+Then the referencing exercise document fails promotion until the exact prompt record is added and linked.
+
 ## Requirements
 
 R1. Exercise documents MUST remain valid when they contain no images.
@@ -111,6 +126,22 @@ R19. Generated raster exercise images MUST satisfy the active `media/PROVENANCE.
 
 R20. A generated raster exercise image provenance row MUST include non-blank `asset_path`, `asset_type`, `media_purpose`, `generator`, `prompt_or_creation_notes`, `created_date`, `human_reviewer`, `license_assertion`, `source_inputs`, `review_status`, `page_refs`, and `notes`.
 
+R20A. A generated raster exercise image provenance row MUST link to a repository-local prompt record that preserves the exact full prompt text for the accepted image.
+
+R20B. A generated raster exercise image prompt record MUST live under `media/prompts/exercises/<exercise-slug>/<asset-stem>.md` unless a downstream approved spec or architecture amendment defines a more specific generated-raster prompt-record location.
+
+R20C. A generated raster exercise image prompt record MUST identify the generated asset path, generator, created date, human reviewer or review owner, review status, and the exact full prompt text.
+
+R20D. A generated raster exercise image prompt record SHOULD record selected-output notes, rejected-variant notes, or revision notes when they materially explain why the accepted image was chosen.
+
+R20E. The exact full prompt text MUST be preserved verbatim except for required privacy or safety redaction.
+
+R20F. If exact prompt text is redacted, the prompt record MUST mark the redaction explicitly and state the reason without exposing private, secret, or unsafe content.
+
+R20G. Prompt records MUST NOT be embedded in reader-facing exercise Markdown.
+
+R20H. `prompt_or_creation_notes` in `media/PROVENANCE.md` MUST remain a concise prompt summary or creation note and MUST NOT be treated as a substitute for the exact prompt record.
+
 R21. A generated raster exercise image provenance row MUST use `asset_type = ai_generated_raster`.
 
 R22. A generated raster exercise image provenance row MUST use `review_status = approved` before the referencing exercise document is promoted.
@@ -125,7 +156,7 @@ R26. Exercise image alt text MUST NOT be a generic placeholder such as `image`, 
 
 R27. Exercise muscle-attention image alt text MUST describe the broad highlighted region without naming exact anatomy that is not also supported in nearby Markdown.
 
-R28. Exercise image alt text, captions, nearby text, and provenance notes MUST NOT introduce diagnosis, treatment, cure, individualized coaching, or unsupported safety claims.
+R28. Exercise image alt text, captions, nearby text, provenance notes, and prompt records MUST NOT introduce diagnosis, treatment, cure, individualized coaching, or unsupported safety claims.
 
 R29. Exercise images MUST pass visual-safety review before promotion.
 
@@ -139,11 +170,11 @@ R33. This spec MUST NOT require existing generated raster exercise images to mig
 
 R34. `pattern_alignment_illustration`, `anatomical_region_illustration`, and `exercise_preview_illustration` MUST NOT be used as full exercise-document image purposes.
 
-R35. Exercise image validation MUST fail promoted exercise documents for remote image references, image paths outside `media/`, unsupported image extensions, missing local image files, missing required alt text, missing required provenance for generated raster images, incomplete provenance, non-approved provenance, out-of-scope `media_purpose`, or `page_refs` mismatch.
+R35. Exercise image validation MUST fail promoted exercise documents for remote image references, image paths outside `media/`, unsupported image extensions, missing local image files, missing required alt text, missing required provenance for generated raster images, incomplete provenance, non-approved provenance, missing prompt records, prompt-record asset-path mismatches, out-of-scope `media_purpose`, or `page_refs` mismatch.
 
-R36. Exercise image validation SHOULD report stable failure categories for path, extension, alt-text, provenance, purpose, page-reference, image-count, and visual-safety evidence failures.
+R36. Exercise image validation SHOULD report stable failure categories for path, extension, alt-text, provenance, prompt-record, purpose, page-reference, image-count, and visual-safety evidence failures.
 
-R37. Exercise-image changes MUST preserve the repository's no-secrets, no-private-data, and no-private-health-information rules in Markdown, provenance rows, prompts or creation notes, review evidence, and validation output.
+R37. Exercise-image changes MUST preserve the repository's no-secrets, no-private-data, and no-private-health-information rules in Markdown, provenance rows, prompt records, prompts or creation notes, review evidence, and validation output.
 
 R38. Exercise-image changes MUST NOT introduce a hosted app, CMS, database, user account, user-input flow, generated public JSON API, video-first media path, or personalized coaching behavior.
 
@@ -156,6 +187,7 @@ Inputs:
 - Original SVG diagrams under `media/`.
 - Generated raster images under `media/exercises/<exercise-slug>/`.
 - `media/PROVENANCE.md` rows for generated raster images.
+- Prompt records under `media/prompts/exercises/<exercise-slug>/<asset-stem>.md`.
 - Page-local sources and nearby Markdown explanation.
 - Visual-safety review evidence.
 - Beginner comprehension evidence for material image batches.
@@ -165,6 +197,7 @@ Outputs:
 - Exercise pages that remain readable directly in Markdown.
 - Accepted or rejected exercise image references.
 - Approved or rejected generated raster provenance rows.
+- Accepted or rejected generated raster prompt records.
 - Validation failures for path, extension, alt-text, provenance, purpose, page-reference, image-count, or visual-safety evidence problems.
 - Review evidence that records human visual-safety decisions and residual risk.
 
@@ -174,7 +207,9 @@ Outputs:
 - Text-only exercise pages remain valid.
 - Generated raster media is classified before provenance lookup by the active media architecture.
 - `media/PROVENANCE.md` remains the central provenance index for generated raster images.
+- Exact prompt records remain repository-local audit artifacts linked from provenance rows.
 - A generated raster image is promotable only when exactly matched to an approved provenance row by normalized `asset_path`.
+- A generated raster image with a prompt-record obligation is promotable only when the prompt record points back to the same normalized `asset_path`.
 - Exercise image purpose values are compatibility surfaces once used in promoted provenance rows.
 - Exercise images remain subordinate to page-local source support.
 - Existing legacy-compatible `equipment_identification` and `key_movement_illustration` rows remain valid without media-purpose migration.
@@ -184,6 +219,8 @@ Outputs:
 - An exercise page with no image references passes exercise-image-specific media checks.
 - A generated raster image without an approved exact provenance row fails promotion.
 - A generated raster image with `media_purpose = exercise_muscle_attention_illustration` fails when another muscle-attention image is already referenced by the same exercise document.
+- A generated raster image with no linked prompt record fails after prompt-record validation is implemented for its provenance row.
+- A prompt record whose asset path does not match the generated raster asset path fails.
 - A generated raster image with a pattern, condition, preview, vague, or unknown media purpose fails as a full exercise-document image.
 - A fourth exercise image fails unless the downstream approved spec or plan records explicit justification.
 - A remote image URL fails.
@@ -199,11 +236,14 @@ Existing text-only exercise pages remain valid. Existing original SVG diagrams r
 
 The new exercise-specific purpose values are additive for new full exercise-document images. They do not remove the Responsible Breadth purposes for pattern, condition, or compact exercise-preview contexts. They do not require migration of existing exercise images.
 
+Prompt-record requirements are additive for generated raster exercise images governed by this spec amendment. Downstream migration planning MUST decide whether and how to backfill exact prompt records for generated raster exercise images that predate this amendment. If exact prompt text is unavailable for an older generated raster image, downstream artifacts MUST either record that limitation explicitly or leave the older image under the pre-amendment provenance compatibility path until a replacement image is generated.
+
 Rollback for a failed image is additive: remove the Markdown image reference, remove the asset when unused, remove or revise the provenance row, keep the text-only page, and rerun validation.
 
 ## Observability
 
 - Validation output SHOULD identify the affected Markdown page, normalized asset path, failure category, and relevant provenance field when an exercise image check fails.
+- Prompt-record validation output SHOULD identify the affected asset path, prompt-record path, failure category, and mismatched or missing field when prompt-record checks fail.
 - Visual-safety review evidence MUST identify the reviewed image path, referencing page, review criteria, pass or fail result, reviewer role or handle, and residual risk.
 - Beginner comprehension evidence for material image batches MUST identify the exercise pages checked, comprehension prompts or criteria, outcome, and residual confusion without storing private health information.
 - Local validation reports MUST name exact commands run and outcomes before completion claims.
@@ -212,7 +252,7 @@ Rollback for a failed image is additive: remove the Markdown image reference, re
 
 Exercise-image work MUST NOT commit secrets, private reviewer data, private reader data, private machine paths, private health information, or identifiable images of private people.
 
-Generated image prompts, creation notes, provenance rows, review records, and beginner comprehension evidence MUST avoid private or health-identifying information. Review evidence may identify an accountable maintainer or GitHub handle for image approval.
+Generated image prompts, prompt records, creation notes, provenance rows, review records, and beginner comprehension evidence MUST avoid private or health-identifying information. Review evidence may identify an accountable maintainer or GitHub handle for image approval.
 
 Exercise images MUST NOT imply diagnosis, individualized medical advice, treatment, rehabilitation protocols, posture-correction promises, or personalized coaching.
 
@@ -243,6 +283,14 @@ EC6. An exercise page references two muscle-attention images.
 EC7. A generated raster exercise image has no provenance row.
 
 EC8. A generated raster exercise image has a provenance row with missing required fields.
+
+EC8A. A generated raster exercise image has a provenance row but no linked prompt record.
+
+EC8B. A prompt record exists but points to a different `asset_path`.
+
+EC8C. A prompt record exists but omits exact full prompt text.
+
+EC8D. An older generated raster exercise image predates the prompt-record amendment and exact prompt text is unavailable.
 
 EC9. A generated raster exercise image has `review_status = needs_revision` or `review_status = rejected`.
 
@@ -291,6 +339,8 @@ AC4. The spec limits muscle-attention images to one per exercise page.
 
 AC5. The spec defines provenance requirements for generated raster exercise images through `media/PROVENANCE.md`.
 
+AC5A. The spec defines exact full prompt preservation requirements for generated raster exercise images through linked repository-local prompt records.
+
 AC6. The spec preserves legacy-compatible `equipment_identification` and `key_movement_illustration` behavior for existing exercise images without requiring media-purpose migration.
 
 AC7. The spec rejects pattern, condition, preview, vague, unknown, or out-of-scope media purposes for full exercise-document images.
@@ -315,21 +365,23 @@ Downstream artifacts should decide:
 - exact test fixture filenames;
 - whether architecture and ADR updates are amendments or confirmations;
 - exact Markdown template wording for optional exercise image blocks;
+- exact prompt-record link field name in `media/PROVENANCE.md`;
 - exact first-batch prompt language and reviewer handle format.
 
 ## Next artifacts
 
-1. Spec review for this exercise-image standard.
-2. Architecture or ADR assessment to confirm or amend media-purpose classification and exercise-image placement.
-3. Test spec mapping requirements to automated checks, manual visual-safety review, and beginner comprehension evidence.
-4. Execution plan for small implementation loops after spec review and architecture assessment.
+1. Spec review for this exact-prompt preservation amendment.
+2. Architecture or ADR assessment to confirm or amend prompt-record placement, provenance linking, and generated-raster validation flow.
+3. Test spec amendment mapping prompt-record requirements to automated checks and migration fixtures.
+4. Execution plan amendment for prompt-record backfill and checker support after spec review and architecture assessment.
 
 ## Follow-on artifacts
 
 - Spec review R1: `docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r1.md`
 - Spec review R2: `docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r2.md`
 - Review resolution: `docs/changes/exercise-image-standard-and-optimization/review-resolution.md`
+- Prompt-record amendment review: none yet.
 
 ## Readiness
 
-Approved after spec review R2. This spec does not authorize implementation, image generation, checker changes, provenance edits, or exercise-page edits until required downstream architecture, architecture review, planning, test-spec, and test-spec-review artifacts are complete.
+Draft amendment for exact prompt preservation. This spec is ready for spec-review of the prompt-record requirements only. It does not authorize implementation, image generation, checker changes, provenance edits, prompt-record backfill, or exercise-page edits until required downstream architecture, architecture review, planning, test-spec, and test-spec-review artifacts are complete.

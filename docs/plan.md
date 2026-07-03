@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: blocked on M3 reader-prompt evidence
-  - Active context: review-resolution locally addressed the visual-fit finding with clearer movement and muscle-attention images; non-identifying reader-prompt beginner-comprehension evidence remains required before M3 can return to code-review.
+  - Current stage: spec-review
+  - Active context: exact full prompt preservation amendment reset the exercise-image spec to draft; spec-review is next. M3 still remains blocked on non-identifying reader-prompt beginner-comprehension evidence before returning to code-review.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

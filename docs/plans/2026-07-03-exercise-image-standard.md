@@ -128,14 +128,17 @@ before any generated image batch is added.
   review-resolution locally addressed CR-EIS-M3-1 by replacing the wall-slide
   visual and expanding the batch with clearer movement and muscle-attention
   images; CR-EIS-M3-2 remains open pending non-identifying reader-prompt
-  beginner-comprehension evidence
+  beginner-comprehension evidence; prompt-preservation spec amendment reset
+  `specs/exercise-image-standard.md` to draft for exact full prompt-record
+  requirements
 - Remaining in-scope implementation milestones: M3 resolution, M4, and
   lifecycle closeout
-- Next stage: blocked on M3 reader-prompt evidence
+- Next stage: spec-review for prompt-preservation amendment
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 still needs reader-prompt
-  comprehension evidence before returning to code-review; M4, explain-change,
-  final verification, and PR handoff remain open.
+- Reason final closeout is or is not ready: the prompt-preservation spec
+  amendment needs spec-review and downstream artifact updates; M3 still needs
+  reader-prompt comprehension evidence before returning to code-review; M4,
+  explain-change, final verification, and PR handoff remain open.
 
 ## Milestones
 
@@ -430,6 +433,10 @@ when generated image batches are added.
   added one muscle-attention asset per target page, updated provenance and
   visual-safety evidence, and left reader-prompt beginner-comprehension evidence
   as the remaining blocker.
+- 2026-07-03: Exact full prompt preservation was requested as a repository best
+  practice. The exercise-image spec was amended back to draft with prompt-record
+  requirements; spec-review is next before architecture, test-spec, plan, or
+  implementation updates.
 
 ## Decision log
 
@@ -558,5 +565,5 @@ explain-change, verification, and PR handoff are complete.
 
 ## Readiness
 
-See Current Handoff Summary for the live next stage. This plan is blocked on
-M3 reader-prompt beginner-comprehension evidence, not final closeout.
+See Current Handoff Summary for the live next stage. This plan is awaiting
+spec-review for the prompt-preservation amendment and is not final closeout.
