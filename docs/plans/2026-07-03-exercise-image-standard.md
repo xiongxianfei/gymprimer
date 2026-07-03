@@ -132,7 +132,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 ## Current Handoff Summary
 
 - Current milestone: M3A
-- Current milestone state: resolution-needed
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -163,15 +163,17 @@ must be sequenced before the current M3 image batch returns to code-review.
   explicit compatibility limitation for in-flight M3 images whose exact prompts
   were not recoverable from durable evidence; code-review M3A R1 requested
   changes for CR-EIS-M3A-1 because the compatibility limitation bypass is not
-  scoped to the recorded pre-amendment M3 assets
-- Remaining in-scope implementation milestones: M3A resolution, M3
-  re-review/resolution, M4, and lifecycle closeout
-- Next stage: review-resolution for CR-EIS-M3A-1
+  scoped to the recorded pre-amendment M3 assets; review-resolution addressed
+  CR-EIS-M3A-1 by constraining compatibility to the ten recorded M3 assets and
+  adding regression coverage
+- Remaining in-scope implementation milestones: M3 re-review/resolution, M4,
+  and lifecycle closeout
+- Next stage: code-review M3A re-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3A has an unresolved material
-  finding; M3 still needs reader-prompt comprehension evidence before returning
-  to code-review; M4, explain-change, final verification, and PR handoff remain
-  open.
+- Reason final closeout is or is not ready: M3A still needs code-review
+  re-review; M3 still needs reader-prompt comprehension evidence before
+  returning to code-review; M4, explain-change, final verification, and PR
+  handoff remain open.
 
 ## Milestones
 
@@ -269,7 +271,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### M3. First New Exercise Image Batch
 
-- Milestone state: resolution-needed
+- Milestone state: review-requested
 - Goal: add a small reviewed batch for the five forward-head support exercises
   only after M1 and M2 are closed.
 - Requirements: R1-R31, R35-R38, AC1-AC12.
@@ -380,7 +382,9 @@ must be sequenced before the current M3 image batch returns to code-review.
   and the affected provenance rows instead of inventing prompt text.
   Code-review M3A R1 requested changes because the checker accepts the
   compatibility limitation note for any generated raster exercise image instead
-  of only the recorded pre-amendment M3 assets.
+  of only the recorded pre-amendment M3 assets. Review-resolution addressed the
+  finding by adding a deterministic compatibility asset allowlist and regression
+  coverage for non-M3 images that copy the compatibility note.
 - Risks: exact prompts for already-generated M3 images may be unavailable;
   replacement images could reopen visual clarity, provenance, visual-safety,
   and beginner-comprehension review work.

@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: review-resolution
+current_stage: code-review
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -24,7 +24,7 @@ plan_index: docs/plan.md
 
 current_milestone: M3A
 current_milestone_name: Prompt Record Validation and M3 Backfill
-current_milestone_state: resolution-needed
+current_milestone_state: review-requested
 last_reviewed_milestone: M2
 
 current_test_spec: specs/exercise-image-standard.test.md
@@ -32,11 +32,10 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r5.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3a-r1.md
-next_stage: review-resolution
+next_stage: code-review
 
 open_findings:
   - CR-EIS-M3-2
-  - CR-EIS-M3A-1
 
 notes:
   - Proposal-review R1 approved the exercise-image standard direction.
@@ -69,6 +68,7 @@ notes:
   - Test-spec-review R5 approved the M3A prompt-record proof map; implementation handoff is allowed for M3A.
   - M3A implemented prompt-record checker support, focused tests, the `prompt_record` provenance column, and explicit compatibility-limitation evidence for in-flight M3 images whose exact prompts were not recoverable from durable repository evidence; code-review is next.
   - Code-review M3A R1 requested changes for CR-EIS-M3A-1 because the compatibility limitation bypass is not scoped to the recorded pre-amendment M3 assets; review-resolution is next.
+  - Review-resolution addressed CR-EIS-M3A-1 by constraining the compatibility limitation to the ten recorded M3 assets and adding regression coverage; M3A code-review re-review is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
@@ -239,3 +239,21 @@ validation:
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after M3A implementation
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: fail-before-resolution
+    evidence: new CR-EIS-M3A-1 regression failed because a non-M3 image with the compatibility note and blank prompt_record passed before the scoped predicate fix
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 12 focused exercise-image tests passed after CR-EIS-M3A-1 resolution
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 101 repository tests passed after CR-EIS-M3A-1 resolution
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after CR-EIS-M3A-1 resolution
+  - command: python3 tools/checks/check_privacy.py -- tools/checks/check_markdown_first.py tests/test_exercise_image_standard.py docs/changes/exercise-image-standard-and-optimization/review-resolution.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: pass
+    evidence: scoped CR-EIS-M3A-1 resolution privacy scan passed, checked 6 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after CR-EIS-M3A-1 resolution

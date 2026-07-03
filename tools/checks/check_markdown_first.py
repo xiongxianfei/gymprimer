@@ -197,6 +197,18 @@ REQUIRED_PROVENANCE_FIELDS = (
     "notes",
 )
 PROMPT_RECORD_COMPATIBILITY_NOTE = "M3 pre-amendment prompt unavailable; compatibility limitation recorded"
+PROMPT_RECORD_COMPATIBILITY_ASSETS = {
+    "media/exercises/chin-nod/movement.png",
+    "media/exercises/chin-nod/muscle-attention.png",
+    "media/exercises/thoracic-extension/movement.png",
+    "media/exercises/thoracic-extension/muscle-attention.png",
+    "media/exercises/wall-slide/movement.png",
+    "media/exercises/wall-slide/muscle-attention.png",
+    "media/exercises/prone-y-t/movement.png",
+    "media/exercises/prone-y-t/muscle-attention.png",
+    "media/exercises/band-pull-apart/movement.png",
+    "media/exercises/band-pull-apart/muscle-attention.png",
+}
 PROMPT_RECORD_REQUIRED_FIELDS = (
     "asset_path",
     "generator",
@@ -549,7 +561,10 @@ def validate_prompt_record(
 ) -> list[Finding]:
     prompt_record = provenance_row.get("prompt_record", "").strip()
     if not prompt_record:
-        if provenance_row.get("notes", "").strip() == PROMPT_RECORD_COMPATIBILITY_NOTE:
+        if (
+            provenance_row.get("notes", "").strip() == PROMPT_RECORD_COMPATIBILITY_NOTE
+            and asset_path in PROMPT_RECORD_COMPATIBILITY_ASSETS
+        ):
             return []
         return [
             Finding(

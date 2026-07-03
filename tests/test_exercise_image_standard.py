@@ -419,6 +419,31 @@ class ExerciseImageStandardTest(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_prompt_record_compatibility_limitation_is_scoped_to_m3_assets(self) -> None:
+        compatibility_note = "M3 pre-amendment prompt unavailable; compatibility limitation recorded"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            write_asset(root)
+            write_provenance(root, [{"prompt_record": "", "notes": compatibility_note}], create_prompt_records=False)
+            page = write_exercise_page(root, "![Fixture exercise setup image](../media/exercises/fixture-exercise/setup.png)")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("media_prompt_record_missing", result.stdout)
+
+        provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
+        for slug in M3_TARGETS:
+            for stem in ("movement", "muscle-attention"):
+                asset_path = f"media/exercises/{slug}/{stem}.png"
+                rows = provenance.get(asset_path, [])
+                with self.subTest(asset_path=asset_path):
+                    self.assertEqual(len(rows), 1)
+                    self.assertEqual(rows[0].get("prompt_record", ""), "")
+                    self.assertEqual(rows[0].get("notes"), compatibility_note)
+
     def test_template_context_validates_placeholders_without_promoting_product_content(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
