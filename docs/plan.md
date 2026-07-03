@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M3A is closed after code-review R3. CR-EIS-M3-2 owner reader-prompt evidence, replacement prompt records, and post-replacement clarity confirmation are recorded; M3 code-review re-review is next.
+  - Current stage: implement
+  - Active context: M3A and M3 are closed after code-review. M4 remaining exercise audit implementation is next.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

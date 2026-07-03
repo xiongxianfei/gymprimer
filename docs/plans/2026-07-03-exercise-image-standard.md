@@ -131,9 +131,9 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: review-requested
-- Last reviewed milestone: M3A
+- Current milestone: M4
+- Current milestone state: planned
+- Last reviewed milestone: M3
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
   approved; test-spec-review R2 approved after TSR-EIS-1 resolution;
@@ -176,14 +176,13 @@ must be sequenced before the current M3 image batch returns to code-review.
   for CR-EIS-M3-2 was recorded after that state cleanup, unclear or
   inconsistent affected images were replaced with prompt-record-backed assets,
   owner post-replacement feedback confirmed that the pictures are now clear,
-  and code-review M3A R3 resolved CR-EIS-M3A-2 and closed M3A
-- Remaining in-scope implementation milestones: M3 re-review/resolution, M4,
-  and lifecycle closeout
-- Next stage: code-review M3 re-review
+  and code-review M3A R3 resolved CR-EIS-M3A-2 and closed M3A; code-review M3
+  R2 resolved CR-EIS-M3-1 and CR-EIS-M3-2 and closed M3
+- Remaining in-scope implementation milestones: M4 and lifecycle closeout
+- Next stage: implement M4
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 still needs code-review
-  re-review; M4, explain-change, final verification, and PR handoff remain
-  open.
+- Reason final closeout is or is not ready: M4, explain-change, final
+  verification, and PR handoff remain open.
 
 ## Milestones
 
@@ -281,7 +280,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### M3. First New Exercise Image Batch
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: add a small reviewed batch for the five forward-head support exercises
   only after M1 and M2 are closed.
 - Requirements: R1-R31, R35-R38, AC1-AC12.
@@ -322,8 +321,8 @@ must be sequenced before the current M3 image batch returns to code-review.
   pending re-review. Owner reader-prompt evidence for CR-EIS-M3-2 is recorded;
   the unclear or inconsistent affected images were replaced with
   prompt-record-backed assets, and owner post-replacement feedback confirms the
-  pictures are now clear. CR-EIS-M3-2 is addressed pending code-review
-  re-review.
+  pictures are now clear. Code-review M3 R2 resolved CR-EIS-M3-1 and
+  CR-EIS-M3-2 and closed M3.
 - Risks: generated images may imply unsupported anatomy, correction, treatment,
   brands, or identifiable people.
 - Rollback: remove the Markdown image references, remove unused assets, remove
@@ -796,6 +795,17 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization media/PROVENANCE.md media/prompts tools/checks/check_markdown_first.py tests/test_exercise_image_standard.py exercises`
   passed, checking 54 files.
 - During M3A R3 code-review, `git diff --check HEAD` passed.
+- During M3 R2 code-review, `python3 -m unittest tests.test_exercise_image_standard`
+  passed with 12 tests.
+- During M3 R2 code-review, `python3 -m unittest discover tests` passed with
+  101 tests.
+- During M3 R2 code-review,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
+  passed, checking 25 Markdown files.
+- During M3 R2 code-review,
+  `python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/evidence exercises media/PROVENANCE.md media/prompts`
+  passed, checking 26 files.
+- During M3 R2 code-review, `git diff --check HEAD` passed.
 
 ## Outcome and retrospective
 
@@ -804,5 +814,5 @@ explain-change, verification, and PR handoff are complete.
 
 ## Readiness
 
-See Current Handoff Summary for the live next stage. This plan is awaiting M3
-code-review re-review. It is not final closeout.
+See Current Handoff Summary for the live next stage. This plan is awaiting M4
+implementation. It is not final closeout.
