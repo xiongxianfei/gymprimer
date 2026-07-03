@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: architecture
+current_stage: architecture-review
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -13,7 +13,7 @@ current_spec_review: docs/changes/exercise-image-standard-and-optimization/revie
 
 current_architecture: docs/architecture/system/architecture.md
 current_architecture_status: draft
-current_architecture_review: docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r1.md
+current_architecture_review: docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r2.md
 current_adr: docs/adr/2026-07-03-generated-raster-prompt-records.md
 current_adr_status: accepted
 
@@ -32,7 +32,7 @@ current_test_spec_status: approved
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r4.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3-r1.md
-next_stage: architecture-review
+next_stage: architecture
 
 open_findings:
   - CR-EIS-M3-2
@@ -61,6 +61,7 @@ notes:
   - SR-EIS-2 was addressed by defining `prompt_record` as the required provenance field for generated raster exercise image prompt-record links; spec-review re-review is next.
   - Spec-review R4 approved the prompt-record amendment after SR-EIS-2 resolution; architecture or ADR assessment is next.
   - Architecture amendment added prompt-record validation flow, `prompt_record` provenance linking, prompt-record packaging, and ADR 2026-07-03 generated raster prompt records; architecture-review is next.
+  - Architecture-review R2 approved the prompt-record canonical architecture amendment and ADR; architecture status normalization is next before plan or test-spec amendments rely on it.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
