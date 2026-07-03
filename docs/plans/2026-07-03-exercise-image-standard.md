@@ -132,7 +132,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 ## Current Handoff Summary
 
 - Current milestone: M3A
-- Current milestone state: review-requested
+- Current milestone state: resolution-needed
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -161,14 +161,16 @@ must be sequenced before the current M3 image batch returns to code-review.
   amendment; test-spec-review R5 approved the M3A prompt-record proof map;
   M3A implemented prompt-record validation, provenance table support, and an
   explicit compatibility limitation for in-flight M3 images whose exact prompts
-  were not recoverable from durable evidence
-- Remaining in-scope implementation milestones: M3 re-review/resolution, M4,
-  and lifecycle closeout
-- Next stage: code-review M3A
+  were not recoverable from durable evidence; code-review M3A R1 requested
+  changes for CR-EIS-M3A-1 because the compatibility limitation bypass is not
+  scoped to the recorded pre-amendment M3 assets
+- Remaining in-scope implementation milestones: M3A resolution, M3
+  re-review/resolution, M4, and lifecycle closeout
+- Next stage: review-resolution for CR-EIS-M3A-1
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3A code-review is still open; M3
-  still needs reader-prompt comprehension evidence before returning to
-  code-review; M4, explain-change, final verification, and PR handoff remain
+- Reason final closeout is or is not ready: M3A has an unresolved material
+  finding; M3 still needs reader-prompt comprehension evidence before returning
+  to code-review; M4, explain-change, final verification, and PR handoff remain
   open.
 
 ## Milestones
@@ -315,7 +317,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### M3A. Prompt Record Validation and M3 Backfill
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: implement the approved prompt-record contract and bring the in-flight
   M3 generated raster exercise images into compliance before M3 returns to
   code-review.
@@ -376,6 +378,9 @@ must be sequenced before the current M3 image batch returns to code-review.
   so M3A records an explicit compatibility limitation in
   `docs/changes/exercise-image-standard-and-optimization/evidence/m3a-prompt-record-backfill.md`
   and the affected provenance rows instead of inventing prompt text.
+  Code-review M3A R1 requested changes because the checker accepts the
+  compatibility limitation note for any generated raster exercise image instead
+  of only the recorded pre-amendment M3 assets.
 - Risks: exact prompts for already-generated M3 images may be unavailable;
   replacement images could reopen visual clarity, provenance, visual-safety,
   and beginner-comprehension review work.
