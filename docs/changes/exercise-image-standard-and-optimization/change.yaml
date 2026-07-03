@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: code-review
+current_stage: review-resolution
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -24,18 +24,19 @@ plan_index: docs/plan.md
 
 current_milestone: M3A
 current_milestone_name: Prompt Record Validation and M3 Backfill
-current_milestone_state: review-requested
+current_milestone_state: resolution-needed
 last_reviewed_milestone: M2
 
 current_test_spec: specs/exercise-image-standard.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r5.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
-current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3a-r1.md
-next_stage: code-review
+current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3a-r2.md
+next_stage: review-resolution
 
 open_findings:
   - CR-EIS-M3-2
+  - CR-EIS-M3A-2
 
 notes:
   - Proposal-review R1 approved the exercise-image standard direction.
@@ -69,6 +70,7 @@ notes:
   - M3A implemented prompt-record checker support, focused tests, the `prompt_record` provenance column, and explicit compatibility-limitation evidence for in-flight M3 images whose exact prompts were not recoverable from durable repository evidence; code-review is next.
   - Code-review M3A R1 requested changes for CR-EIS-M3A-1 because the compatibility limitation bypass is not scoped to the recorded pre-amendment M3 assets; review-resolution is next.
   - Review-resolution addressed CR-EIS-M3A-1 by constraining the compatibility limitation to the ten recorded M3 assets and adding regression coverage; M3A code-review re-review is next.
+  - Code-review M3A R2 resolved CR-EIS-M3A-1 but requested changes for CR-EIS-M3A-2 because plan milestone states drifted for M3 and M3A; review-resolution is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard

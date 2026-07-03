@@ -132,7 +132,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 ## Current Handoff Summary
 
 - Current milestone: M3A
-- Current milestone state: review-requested
+- Current milestone state: resolution-needed
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -165,13 +165,15 @@ must be sequenced before the current M3 image batch returns to code-review.
   changes for CR-EIS-M3A-1 because the compatibility limitation bypass is not
   scoped to the recorded pre-amendment M3 assets; review-resolution addressed
   CR-EIS-M3A-1 by constraining compatibility to the ten recorded M3 assets and
-  adding regression coverage
-- Remaining in-scope implementation milestones: M3 re-review/resolution, M4,
-  and lifecycle closeout
-- Next stage: code-review M3A re-review
+  adding regression coverage; code-review M3A R2 resolved CR-EIS-M3A-1 but
+  requested changes for CR-EIS-M3A-2 because plan milestone states drifted for
+  M3 and M3A
+- Remaining in-scope implementation milestones: M3A resolution, M3
+  re-review/resolution, M4, and lifecycle closeout
+- Next stage: review-resolution for CR-EIS-M3A-2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3A still needs code-review
-  re-review; M3 still needs reader-prompt comprehension evidence before
+- Reason final closeout is or is not ready: M3A has an unresolved lifecycle
+  artifact finding; M3 still needs reader-prompt comprehension evidence before
   returning to code-review; M4, explain-change, final verification, and PR
   handoff remain open.
 
@@ -384,7 +386,9 @@ must be sequenced before the current M3 image batch returns to code-review.
   compatibility limitation note for any generated raster exercise image instead
   of only the recorded pre-amendment M3 assets. Review-resolution addressed the
   finding by adding a deterministic compatibility asset allowlist and regression
-  coverage for non-M3 images that copy the compatibility note.
+  coverage for non-M3 images that copy the compatibility note. Code-review M3A
+  R2 resolved CR-EIS-M3A-1 but requested changes for CR-EIS-M3A-2 because M3
+  and M3A milestone states drifted in the plan.
 - Risks: exact prompts for already-generated M3 images may be unavailable;
   replacement images could reopen visual clarity, provenance, visual-safety,
   and beginner-comprehension review work.
