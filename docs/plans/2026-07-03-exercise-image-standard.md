@@ -113,7 +113,7 @@ before any generated image batch is added.
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: review-requested
+- Current milestone state: resolution-needed
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -123,13 +123,14 @@ before any generated image batch is added.
   requested changes for TSR-EIS-2; test-spec-review R4 approved the
   validation-path amendment; code-review M1 R2 closed M1; M2 implemented
   authoring guidance and review evidence templates; code-review M2 R1 closed
-  M2; M3 added the first generated exercise-image batch and review evidence
-- Remaining in-scope implementation milestones: M3 code-review, M4, and
+  M2; M3 added the first generated exercise-image batch and review evidence;
+  code-review M3 R1 requested changes for CR-EIS-M3-1 and CR-EIS-M3-2
+- Remaining in-scope implementation milestones: M3 resolution, M4, and
   lifecycle closeout
-- Next stage: code-review M3
+- Next stage: review-resolution M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 code-review, M4, explain-change, final
-  verification, and PR handoff remain open.
+- Reason final closeout is or is not ready: M3 has unresolved review findings;
+  M4, explain-change, final verification, and PR handoff remain open.
 
 ## Milestones
 
@@ -227,7 +228,7 @@ before any generated image batch is added.
 
 ### M3. First New Exercise Image Batch
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: add a small reviewed batch for the five forward-head support exercises
   only after M1 and M2 are closed.
 - Requirements: R1-R31, R35-R38, AC1-AC12.
@@ -264,7 +265,8 @@ before any generated image batch is added.
   - `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
 - Result: Implemented one movement image for each target exercise page, exact
   provenance rows, visual-safety evidence, beginner-comprehension evidence, and
-  focused regression coverage. Awaiting code-review M3.
+  focused regression coverage. Code-review M3 R1 requested changes for
+  CR-EIS-M3-1 and CR-EIS-M3-2.
 - Risks: generated images may imply unsupported anatomy, correction, treatment,
   brands, or identifiable people.
 - Rollback: remove the Markdown image references, remove unused assets, remove
@@ -414,6 +416,9 @@ when generated image batches are added.
 - 2026-07-03: M3 implemented one movement image each for `chin-nod`,
   `thoracic-extension`, `wall-slide`, `prone-y-t`, and `band-pull-apart`,
   with provenance rows and review evidence; code-review M3 is next.
+- 2026-07-03: Code-review M3 R1 requested changes because the wall-slide image
+  does not match the forearms-on-wall variation and the beginner-comprehension
+  evidence is a maintainer checklist rather than reader-prompt evidence.
 
 ## Decision log
 
@@ -510,6 +515,17 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
   passed, checking 39 files.
 - After M3 implementation, `git diff --check` passed.
+- During M3 code-review, `python3 -m unittest tests.test_exercise_image_standard`
+  passed with 8 tests.
+- During M3 code-review, `python3 -m unittest discover tests` passed with 97
+  tests.
+- During M3 code-review,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
+  passed, checking 25 Markdown files.
+- During M3 code-review,
+  `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
+  passed, checking 39 files.
+- During M3 code-review, `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -519,4 +535,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is ready for
-M3 code-review, not final closeout.
+M3 review-resolution, not final closeout.
