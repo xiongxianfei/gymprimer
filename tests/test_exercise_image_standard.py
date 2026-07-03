@@ -6,9 +6,18 @@ import tempfile
 import textwrap
 import unittest
 
+from tools.checks.check_markdown_first import load_media_provenance, split_page_refs
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECK = ROOT / "tools/checks/check_markdown_first.py"
+M3_TARGETS = {
+    "chin-nod": "Chin nod movement reference showing the small chin-in motion while the neck stays long",
+    "thoracic-extension": "Thoracic extension movement reference showing an upright start and gentle upper-back extension over a chair",
+    "wall-slide": "Wall slide movement reference showing forearms sliding upward on a clear wall",
+    "prone-y-t": "Prone Y/T movement reference showing the Y and T arm positions on a mat",
+    "band-pull-apart": "Band pull-apart movement reference showing the band opening at chest height",
+}
 
 
 def run_check_with_root(root: Path, *paths: Path) -> subprocess.CompletedProcess[str]:
@@ -317,6 +326,28 @@ class ExerciseImageStandardTest(unittest.TestCase):
 
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("external_media_reference", result.stdout)
+
+    def test_m3_forward_head_support_batch_has_page_images_and_review_evidence(self) -> None:
+        provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
+        for slug, alt_text in M3_TARGETS.items():
+            with self.subTest(slug=slug):
+                page_path = ROOT / f"exercises/{slug}.md"
+                asset_path = f"media/exercises/{slug}/movement.png"
+                page_text = page_path.read_text(encoding="utf-8")
+
+                self.assertIn(f"![{alt_text}](../{asset_path})", page_text)
+                self.assertTrue((ROOT / asset_path).exists(), f"{asset_path} is missing")
+
+                rows = provenance.get(asset_path, [])
+                self.assertEqual(len(rows), 1, f"{asset_path} must have exactly one provenance row")
+                self.assertEqual(rows[0].get("asset_type"), "ai_generated_raster")
+                self.assertEqual(rows[0].get("media_purpose"), "exercise_movement_illustration")
+                self.assertEqual(rows[0].get("review_status"), "approved")
+                self.assertIn(f"exercises/{slug}.md", split_page_refs(rows[0].get("page_refs", "")))
+
+        evidence_root = ROOT / "docs/changes/exercise-image-standard-and-optimization/evidence"
+        self.assertTrue((evidence_root / "m3-visual-safety-review.md").exists())
+        self.assertTrue((evidence_root / "m3-beginner-comprehension.md").exists())
 
 
 if __name__ == "__main__":

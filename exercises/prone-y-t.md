@@ -24,6 +24,10 @@ Primary: lower and middle trapezius emphasis during prone arm-raise variations. 
 
 ## Movement breakdown
 
+![Prone Y/T movement reference showing the Y and T arm positions on a mat](../media/exercises/prone-y-t/movement.png)
+
+Use the image as a simple movement reference. Keep following the written setup and safety notes.
+
 ### 1. Set up
 
 For the Y, lie on the stomach with the arms in a Y above the head and thumbs up. For the T, lie on the stomach with the arms out to the side and thumbs up. [Source][local-prone-y-t-y-instruction] [Source][local-prone-y-t-t-instruction]

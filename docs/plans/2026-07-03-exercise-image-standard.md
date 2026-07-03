@@ -113,7 +113,7 @@ before any generated image batch is added.
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -123,11 +123,12 @@ before any generated image batch is added.
   requested changes for TSR-EIS-2; test-spec-review R4 approved the
   validation-path amendment; code-review M1 R2 closed M1; M2 implemented
   authoring guidance and review evidence templates; code-review M2 R1 closed
-  M2
-- Remaining in-scope implementation milestones: M3-M4 and lifecycle closeout
-- Next stage: implement M3
+  M2; M3 added the first generated exercise-image batch and review evidence
+- Remaining in-scope implementation milestones: M3 code-review, M4, and
+  lifecycle closeout
+- Next stage: code-review M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3-M4, explain-change, final
+- Reason final closeout is or is not ready: M3 code-review, M4, explain-change, final
   verification, and PR handoff remain open.
 
 ## Milestones
@@ -226,7 +227,7 @@ before any generated image batch is added.
 
 ### M3. First New Exercise Image Batch
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: add a small reviewed batch for the five forward-head support exercises
   only after M1 and M2 are closed.
 - Requirements: R1-R31, R35-R38, AC1-AC12.
@@ -261,7 +262,9 @@ before any generated image batch is added.
   - `python3 -m unittest discover tests`
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
   - `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
-- Result: pending
+- Result: Implemented one movement image for each target exercise page, exact
+  provenance rows, visual-safety evidence, beginner-comprehension evidence, and
+  focused regression coverage. Awaiting code-review M3.
 - Risks: generated images may imply unsupported anatomy, correction, treatment,
   brands, or identifiable people.
 - Rollback: remove the Markdown image references, remove unused assets, remove
@@ -408,6 +411,9 @@ when generated image batches are added.
   M2 is next.
 - 2026-07-03: Code-review M2 R1 closed M2 with no material findings; M3
   implementation is next.
+- 2026-07-03: M3 implemented one movement image each for `chin-nod`,
+  `thoracic-extension`, `wall-slide`, `prone-y-t`, and `band-pull-apart`,
+  with provenance rows and review evidence; code-review M3 is next.
 
 ## Decision log
 
@@ -430,6 +436,11 @@ when generated image batches are added.
 - M2 can use an inline path placeholder in the exercise template instead of a
   Markdown image reference, so the template remains concrete without implying a
   real asset that needs provenance.
+- M3 selected one `exercise_movement_illustration` per target page instead of
+  setup or muscle-attention images because the movement-reference gap was the
+  minimum common comprehension need across the five support exercises.
+- The M3 wall-slide and band pull-apart images are simplified illustrations;
+  nearby Markdown remains authoritative for forearm contact and band choice.
 
 ## Validation notes
 
@@ -485,6 +496,20 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization`
   passed, checking 23 files.
 - During M2 code-review, `git diff --check` passed.
+- Before M3 content changes, `python3 -m unittest tests.test_exercise_image_standard`
+  failed with the expected missing target page image references, asset files,
+  provenance rows, and evidence files.
+- After M3 implementation, `python3 -m unittest tests.test_exercise_image_standard`
+  passed with 8 tests.
+- After M3 implementation, `python3 -m unittest discover tests` passed with 97
+  tests.
+- After M3 implementation,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
+  passed, checking 25 Markdown files.
+- After M3 implementation,
+  `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
+  passed, checking 39 files.
+- After M3 implementation, `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -494,4 +519,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is ready for
-M3 implementation, not final closeout.
+M3 code-review, not final closeout.

@@ -24,6 +24,10 @@ Primary: deep cervical flexors at the front of the neck. Secondary: nearby neck-
 
 ## Movement breakdown
 
+![Chin nod movement reference showing the small chin-in motion while the neck stays long](../media/exercises/chin-nod/movement.png)
+
+Use the image as a simple movement reference. Keep following the written setup and safety notes.
+
 ### 1. Set up
 
 Sit straight-backed with the eyes looking forward and the jaw relaxed. [Source][local-chin-nod-instruction]

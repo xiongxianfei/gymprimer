@@ -24,6 +24,10 @@ Primary: upper-back movement at the thoracic spine. Secondary: trunk control tha
 
 ## Movement breakdown
 
+![Thoracic extension movement reference showing an upright start and gentle upper-back extension over a chair](../media/exercises/thoracic-extension/movement.png)
+
+Use the image as a simple movement reference. Keep following the written setup and safety notes.
+
 ### 1. Set up
 
 Sit upright in the chair and place the hands behind the head or neck. [Source][local-thoracic-extension-instruction]

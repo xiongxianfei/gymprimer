@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -24,7 +24,7 @@ plan_index: docs/plan.md
 
 current_milestone: M3
 current_milestone_name: First New Exercise Image Batch
-current_milestone_state: planned
+current_milestone_state: review-requested
 last_reviewed_milestone: M2
 
 current_test_spec: specs/exercise-image-standard.test.md
@@ -32,7 +32,7 @@ current_test_spec_status: approved
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r4.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m2-r1.md
-next_stage: implement M3
+next_stage: code-review M3
 
 open_findings: []
 
@@ -51,6 +51,7 @@ notes:
   - Code-review M1 R2 resolved CR-EIS-M1-1 and closed M1; M2 implementation is next.
   - M2 added optional exercise-image template guidance plus visual-safety and beginner-comprehension evidence templates; code-review M2 is next.
   - Code-review M2 R1 closed M2 with no material findings; M3 implementation is next.
+  - M3 added one movement image for each forward-head support exercise, exact provenance rows, visual-safety evidence, and beginner-comprehension evidence; code-review M3 is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
@@ -110,3 +111,21 @@ validation:
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed during M2 code-review
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: fail-before-implementation
+    evidence: focused M3 batch test failed until target pages, assets, provenance rows, and evidence files were added
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 8 focused exercise-image tests passed after M3 implementation
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 97 repository tests passed after M3 implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after M3 implementation
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md
+    result: pass
+    evidence: scoped M3 privacy scan passed, checked 39 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M3 implementation

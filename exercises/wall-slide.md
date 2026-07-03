@@ -24,6 +24,10 @@ Primary: serratus anterior activity during wall-slide reaching. Secondary: other
 
 ## Movement breakdown
 
+![Wall slide movement reference showing forearms sliding upward on a clear wall](../media/exercises/wall-slide/movement.png)
+
+Use the image as a simple movement reference. Keep following the written setup and safety notes.
+
 ### 1. Set up
 
 Place the forearms against the wall with the elbows bent. [Source][local-wall-slide-instruction]

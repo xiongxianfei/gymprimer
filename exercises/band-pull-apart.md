@@ -24,6 +24,10 @@ Primary: posterior shoulder and upper-back muscles used during band pull-apart v
 
 ## Movement breakdown
 
+![Band pull-apart movement reference showing the band opening at chest height](../media/exercises/band-pull-apart/movement.png)
+
+Use the image as a simple movement reference. Keep following the written setup and safety notes.
+
 ### 1. Set up
 
 Stand tall with the band held in both hands at chest height. [Source][local-band-pull-apart-instruction]
