@@ -2,7 +2,7 @@
 
 ## Status
 
-- approved
+- draft
 
 This media-purpose amendment was approved by
 `docs/changes/apt-pattern-architecture/reviews/architecture-review-r2.md`. The
@@ -24,6 +24,7 @@ The central-disclaimer amendment was approved by
 `docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r2.md`.
 The exercise-image-standard amendment was approved by
 `docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r1.md`.
+The prompt-record amendment is pending architecture review.
 
 ## Related artifacts
 
@@ -52,11 +53,14 @@ The exercise-image-standard amendment was approved by
   - Spec: `../../../specs/exercise-image-standard.md`
   - Spec review:
     `../../changes/exercise-image-standard-and-optimization/reviews/spec-review-r2.md`
+  - Prompt-record spec review:
+    `../../changes/exercise-image-standard-and-optimization/reviews/spec-review-r4.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
   - `../../adr/2026-06-29-expanded-raster-media-purposes.md`
   - `../../adr/2026-07-03-exercise-document-image-purposes.md`
+  - `../../adr/2026-07-03-generated-raster-prompt-records.md`
   - `../../adr/2026-06-29-direct-repository-layout-normalization.md`
   - `../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md`
   - `../../adr/2026-06-30-central-red-flags-disclaimer.md`
@@ -129,7 +133,9 @@ Goals:
   `equipment_identification` or `key_movement_illustration` remain valid
   without media-purpose migration.
 - AI-generated raster illustrations must be project-reviewed support assets
-  with one matching row in `media/PROVENANCE.md`.
+  with one matching row in `media/PROVENANCE.md`. Generated raster exercise
+  images governed by the prompt-record amendment also require a repository-local
+  prompt record linked by the provenance row's `prompt_record` field.
 - Safety claims require claim-level citations and page-local sources.
 - Markdown pages must remain readable without generated HTML, JavaScript, a local server, or search index.
 - Existing structured-platform artifacts are historical when they conflict with current governance.
@@ -183,7 +189,9 @@ The architecture favors:
 - simple original SVG only when it is sufficient for beginner comprehension;
 - human-reviewed AI-generated raster only when needed for an allowed media
   purpose;
-- centralized media provenance over sidecar-per-image metadata;
+- centralized media provenance over full sidecar-per-image provenance metadata,
+  while exact prompts for generated raster exercise images live in linked
+  prompt records;
 - centralized red-flags and disclaimer language over repeated per-page
   disclaimer scaffolding;
 - path-classified expanded static pages over a database or CMS taxonomy;
@@ -208,7 +216,7 @@ does not get flattened together with workflow evidence or tooling.
 | --- | --- | --- |
 | Project references | `README.md`, `CONTRIBUTING.md`, `SOURCES.md`, `CONTENT_LICENSE.md`, `RED-FLAGS.md` | Project entry, contribution rules, reusable source index, central disclaimer, safety routing, and licensing. |
 | Content | `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/` | Canonical Markdown product pages. Equipment type is page metadata, not a folder split. |
-| Media | `media/<content-type>/<slug>/...`, `media/PROVENANCE.md` | Optional supporting raster illustrations referenced by Markdown. Raster assets use provenance purpose values to distinguish legacy equipment/movement images, exercise setup/movement/muscle-attention images, pattern alignment, anatomy context, and exercise previews. |
+| Media | `media/<content-type>/<slug>/...`, `media/PROVENANCE.md`, `media/prompts/exercises/<slug>/...` | Optional supporting raster illustrations referenced by Markdown. Raster assets use provenance purpose values to distinguish legacy equipment/movement images, exercise setup/movement/muscle-attention images, pattern alignment, anatomy context, and exercise previews. Generated raster exercise images also preserve exact prompts in linked repository-local prompt records. |
 | Governance | `docs/proposals/`, `docs/adr/`, `docs/architecture/` | Accepted direction, durable decisions, and canonical architecture. These remain under `docs/` per RigorLoop workflow requirements. |
 | Tooling and operations | `tools/`, `specs/`, `docs/changes/`, `docs/plans/`, `docs/learn/`, optional `book.toml` and `SUMMARY.md` | Validation, specs/test specs, plans, review evidence, learning records, and optional derived-site configuration. These serve content but are not product content blocks. |
 
@@ -244,7 +252,12 @@ Logical containers:
   illustrations referenced from Markdown by relative path.
 - **Media provenance index**: one row per AI-generated raster asset, with
   generator, creation notes, license assertion, human review status, media
-  purpose, page references, and exact asset path.
+  purpose, page references, exact asset path, and, for generated raster
+  exercise images governed by the prompt-record amendment, a `prompt_record`
+  path.
+- **Generated raster prompt records**: Markdown records under
+  `media/prompts/exercises/<exercise-slug>/<asset-stem>.md` that preserve the
+  exact full prompt text and point back to the same normalized `asset_path`.
 - **Tooling and operations**: specs, validation scripts, change-local evidence,
   plans, learning records, and optional mdBook configuration.
 - **Review evidence records**: change-local evidence under
@@ -357,10 +370,19 @@ Media validation flow:
    one-concept teaching purpose, Markdown consistency, no in-image text,
    no identifying person or misleading brand mark, no clinical framing,
    no unsupported claims, and color-accessibility.
-15. Remote image URLs, image paths outside `media/`, unsupported extensions,
+15. New generated raster exercise images governed by the prompt-record
+   amendment require a non-blank `prompt_record` value in the matching
+   provenance row.
+16. The `prompt_record` value must resolve to a repository-local Markdown file
+   under `media/prompts/exercises/<exercise-slug>/<asset-stem>.md`.
+17. The prompt record must identify the same normalized `asset_path` as the
+   raster image provenance row and preserve the exact full prompt text, subject
+   only to explicit privacy or safety redaction.
+18. Remote image URLs, image paths outside `media/`, unsupported extensions,
    missing local media files, missing provenance, incomplete provenance,
-   non-approved provenance, out-of-scope purpose, or mismatched `page_refs`
-   block promotion.
+   non-approved provenance, out-of-scope purpose, missing or invalid
+   `prompt_record`, prompt-record `asset_path` mismatch, or mismatched
+   `page_refs` block promotion.
 
 The checker does not use an existing provenance row to decide whether an asset
 is raster media. Provenance lookup occurs only after extension-based
@@ -440,8 +462,8 @@ Environments:
 Packaging boundaries:
 
 - Markdown, source index, contributor docs, license docs, original SVGs,
-  approved AI-generated raster illustrations, and `media/PROVENANCE.md` are
-  source assets.
+  approved AI-generated raster illustrations, `media/PROVENANCE.md`, and
+  repository-local prompt records are source assets.
 - Expanded static content pages, red-flags references, shared source
   indexes, review evidence records, and validation reports are repository source or
   workflow evidence.
@@ -543,6 +565,12 @@ Media:
 - AI-generated raster illustrations require one centralized provenance row in
   `media/PROVENANCE.md`.
 - Provenance matching is exact by normalized repository-relative `asset_path`.
+- Generated raster exercise image provenance rows governed by the prompt-record
+  amendment require `prompt_record`, a repository-local Markdown path under
+  `media/prompts/exercises/<exercise-slug>/<asset-stem>.md`.
+- Prompt-record validation resolves `prompt_record`, reads the prompt record,
+  and checks that the record points back to the same normalized `asset_path` and
+  preserves exact full prompt text or an explicit redaction note.
 - `pattern_alignment_illustration` is limited to non-diagnostic visual
   comparison or alignment education on pattern pages.
 - `anatomical_region_illustration` is limited to plain anatomical region
@@ -599,6 +627,9 @@ Observability:
   `media_provenance_missing`, `media_provenance_incomplete`,
   `media_provenance_not_approved`, `media_usage_out_of_scope`, and
   `media_page_refs_mismatch`.
+- Prompt-record validation findings identify missing `prompt_record`, invalid
+  prompt-record path, missing prompt-record file, prompt-record asset-path
+  mismatch, and missing exact prompt text or required redaction note.
 - Media validation findings also report the extension-based classification
   result and use stable classification failure codes such as
   `external_media_reference`, `media_outside_allowed_directory`,
@@ -625,6 +656,7 @@ Observability:
 - [ADR 2026-06-28: AI-generated raster media provenance](../../adr/2026-06-28-ai-generated-raster-media-provenance.md) - Allow narrow AI-generated raster support assets with centralized provenance.
 - [ADR 2026-06-29: Expanded raster media purposes](../../adr/2026-06-29-expanded-raster-media-purposes.md) - Add expanded-page raster purposes for pattern alignment, anatomical region context, and exercise previews.
 - [ADR 2026-07-03: Exercise document image purposes](../../adr/2026-07-03-exercise-document-image-purposes.md) - Add setup, movement, and muscle-attention purposes for new generated raster images on full exercise documents while preserving existing exercise image purposes.
+- [ADR 2026-07-03: Generated raster prompt records](../../adr/2026-07-03-generated-raster-prompt-records.md) - Preserve exact full prompts for generated raster exercise images through `prompt_record` links from centralized provenance rows.
 - [ADR 2026-06-29: Direct repository layout normalization](../../adr/2026-06-29-direct-repository-layout-normalization.md) - Normalize physical repository paths by direct removal, root red flags, subject-co-located media, and dependency-first migration.
 - [ADR 2026-06-29: Responsible Breadth static content boundaries](../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md) - Add path-classified expanded static content classes with higher-bar review evidence, red-flag routing, and no runtime personalization.
 - [ADR 2026-06-30: Central red-flags disclaimer boundary](../../adr/2026-06-30-central-red-flags-disclaimer.md) - Centralize the prominent disclaimer in `RED-FLAGS.md` and keep templates focused on safety routing.
@@ -639,6 +671,7 @@ Observability:
 | Scope safety | A contributor adds rehab, diagnosis, pain treatment, or advanced lifting content. | The page is blocked before promotion. |
 | Media licensing | A page references media. | The media is original or clearly project-licensed and referenced by relative path. |
 | Media provenance | A page references an AI-generated raster image. | The image has one approved `media/PROVENANCE.md` row with exact `asset_path`, valid purpose, required fields, and matching `page_refs`. |
+| Prompt traceability | A generated raster exercise image governed by the prompt-record amendment is referenced. | The provenance row has non-blank `prompt_record`, the path is repository-local, the prompt-record file exists, and the prompt record points back to the same normalized `asset_path` while preserving the exact full prompt text or an explicit redaction note. |
 | Expanded media purpose | A pattern page references an alignment image. | The provenance row uses `pattern_alignment_illustration`, not a generic movement purpose. |
 | Condition image safety | A condition page references an anatomical-region image. | The image gives region context without implying diagnosis, pathology, or treatment. |
 | Exercise image purpose | A new generated raster image is referenced from a full exercise document. | The provenance row uses `exercise_setup_illustration`, `exercise_movement_illustration`, or `exercise_muscle_attention_illustration` according to the teaching purpose. |
@@ -670,6 +703,9 @@ Observability:
 - Exact link checker, Markdown linter, and source-check tooling remain undecided.
 - The centralized media provenance table can become awkward if the media
   library grows beyond the first slice.
+- Prompt records add a second repository-local artifact per generated raster
+  exercise image; this improves auditability but increases reviewer and checker
+  work and may expose prompt mistakes unless privacy redaction is disciplined.
 - AI-generated raster illustrations may look plausible while showing unsafe or
   misleading setup details; human review remains mandatory.
 - Expanded anatomy and alignment raster images may imply diagnosis or pathology
@@ -716,6 +752,10 @@ Observability:
 - **Non-canonical spike**: Draft content used to test the format before promotion.
 - **Media provenance index**: `media/PROVENANCE.md`, the centralized table that
   records AI-generated raster asset provenance.
+- **Prompt record**: A repository-local Markdown audit record linked by
+  `prompt_record` from `media/PROVENANCE.md`, preserving the exact full prompt
+  text for a generated raster exercise image and pointing back to the same
+  `asset_path`.
 - **Expanded static content page class**: One of `pattern_page`, `condition_page`,
   `programming_principle_page`, `program_example_page`, or
   `expanded_exercise_page`.
@@ -735,9 +775,9 @@ Observability:
 
 ## Next artifacts
 
-- Execution plan and plan review for exercise-image-standard implementation
-  loops.
-- Test-spec mapping for the exercise-image standard after plan review.
+- Architecture review for the prompt-record amendment.
+- Test-spec and plan amendments for prompt-record validation and backfill after
+  architecture review.
 
 ## Follow-on artifacts
 
@@ -750,12 +790,15 @@ Observability:
   `../../changes/exercise-image-standard-and-optimization/reviews/architecture-review-r1.md`.
 - Exercise document image purposes ADR:
   `../../adr/2026-07-03-exercise-document-image-purposes.md`.
+- Generated raster prompt records ADR:
+  `../../adr/2026-07-03-generated-raster-prompt-records.md`.
 
 ## Readiness
 
 This architecture package has completed architecture-review for earlier
 Markdown-first, Responsible Breadth, layout, media, forward-head-posture, and
 central-disclaimer amendments. The exercise-image-standard amendment has also
-completed architecture review. Exercise image standard implementation is not
-implementation-ready until plan, plan-review, test-spec, and test-spec-review
-are complete.
+completed architecture review. The prompt-record amendment is ready for
+architecture review. Exercise image standard implementation is not
+implementation-ready until architecture review, plan, plan-review, test-spec,
+and test-spec-review are complete for the prompt-record amendment.

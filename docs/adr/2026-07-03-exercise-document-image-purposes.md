@@ -4,6 +4,9 @@
 
 accepted
 
+Amended by `docs/adr/2026-07-03-generated-raster-prompt-records.md` for exact
+prompt-record links on generated raster exercise images.
+
 ## Context
 
 The accepted Exercise Image Standard proposal and approved Exercise Image
