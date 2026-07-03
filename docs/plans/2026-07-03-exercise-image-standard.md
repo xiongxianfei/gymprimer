@@ -118,10 +118,12 @@ before any generated image batch is added.
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
   approved; test-spec-review R2 approved after TSR-EIS-1 resolution;
-  code-review M1 R1 requested changes for CR-EIS-M1-1
+  code-review M1 R1 requested changes for CR-EIS-M1-1; owner directed broad
+  privacy validation to move to verify-before-PR, so test-spec-review is next
+  for the validation-path amendment
 - Remaining in-scope implementation milestones: M1 resolution, M2-M4, and
   lifecycle closeout
-- Next stage: review-resolution
+- Next stage: test-spec-review
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: M1 has an unresolved code-review
   finding, and the plan has not completed later milestones, explain-change,
@@ -174,7 +176,8 @@ before any generated image batch is added.
   - `python3 -m unittest tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1`
   - `python3 -m unittest discover tests`
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
-  - `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests`
+  - scoped current-change privacy scan as needed for review hygiene; broad
+    EIS-CMD4 privacy validation is deferred to lifecycle closeout / verify
 - Result: Implemented checker and focused regression coverage for the
   exercise-image validation contract; code-review M1 R1 requested
   review-resolution for CR-EIS-M1-1.
@@ -378,6 +381,10 @@ when generated image batches are added.
 - 2026-07-03: Code-review M1 R1 requested review-resolution for CR-EIS-M1-1
   because the required broad EIS-CMD4 privacy command fails on pre-existing
   superseded-plan examples.
+- 2026-07-03: Owner directed broad privacy validation to happen during verify
+  before PR rather than blocking M1. The test spec and plan were revised to
+  move EIS-CMD4 to lifecycle closeout / verify and need test-spec-review before
+  M1 code-review re-review.
 
 ## Decision log
 
@@ -418,10 +425,12 @@ when generated image batches are added.
 - After implementation, `python3 -m unittest discover tests` passed with 95
   tests.
 - After implementation, `git diff --check` passed.
-- The broad planned privacy command
+- Before the validation-path amendment, the broad planned privacy command
   `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests`
   failed on pre-existing forbidden-pattern examples in the superseded
   `docs/plans/2026-06-26-content-schema-foundation.md` plan.
+- Owner subsequently directed this broad privacy sweep to move to final verify
+  before PR instead of M1 closeout.
 - The scoped current-change privacy command
   `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans/2026-07-03-exercise-image-standard.md media exercises tools tests`
   passed, checking 113 files.
@@ -434,4 +443,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is ready for
-review-resolution, not final closeout.
+test-spec-review of the validation-path amendment, not final closeout.
