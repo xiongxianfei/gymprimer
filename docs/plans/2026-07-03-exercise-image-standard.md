@@ -131,8 +131,8 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ## Current Handoff Summary
 
-- Current milestone: M4
-- Current milestone state: closed
+- Current milestone: Lifecycle Closeout
+- Current milestone state: branch-ready
 - Last reviewed milestone: M3
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -179,12 +179,14 @@ must be sequenced before the current M3 image batch returns to code-review.
   and code-review M3A R3 resolved CR-EIS-M3A-2 and closed M3A; code-review M3
   R2 resolved CR-EIS-M3-1 and CR-EIS-M3-2 and closed M3; M4 audited all
   current exercise pages and recorded keep-existing-image routing; code-review
-  M4 R1 closed M4
-- Remaining in-scope implementation milestones: lifecycle closeout
-- Next stage: verify
-- Final closeout readiness: not ready
-- Reason final closeout is or is not ready: final verification and PR handoff
-  remain open.
+  M4 R1 closed M4; explain-change was refreshed; final local verification
+  passed after neutralizing literal scanner-pattern examples in the superseded
+  content-schema plan
+- Remaining in-scope implementation milestones: PR handoff
+- Next stage: pr
+- Final closeout readiness: branch-ready
+- Reason final closeout is or is not ready: local branch-ready verification
+  passed; PR handoff remains open.
 
 ## Milestones
 
@@ -840,6 +842,19 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/explain-change.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plans/2026-07-03-exercise-image-standard.md docs/plan.md`
   passed, checking 4 files.
 - After explain-change refresh, `git diff --check` passed.
+- During final verification, `python3 -m unittest tests.test_exercise_image_standard`
+  passed with 13 tests.
+- During final verification, `python3 -m unittest discover tests` passed with
+  102 tests.
+- During final verification,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
+  passed, checking 25 Markdown files.
+- During final verification, the broad privacy command first failed on literal
+  scanner-pattern examples in the superseded content-schema plan. After those
+  examples were replaced with `<forbidden-pattern-regex>`,
+  `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests`
+  passed, checking 157 files.
+- During final verification, `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -848,5 +863,5 @@ explain-change, verification, and PR handoff are complete.
 
 ## Readiness
 
-See Current Handoff Summary for the live next stage. This plan is awaiting
-final verification. It is not final closeout.
+See Current Handoff Summary for the live next stage. Local branch-ready
+verification passed; this plan is awaiting PR handoff and is not final closeout.

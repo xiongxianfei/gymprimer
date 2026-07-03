@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: verify
+current_stage: pr
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -22,9 +22,9 @@ current_plan_status: active
 current_plan_review: docs/changes/exercise-image-standard-and-optimization/reviews/plan-review-r2.md
 plan_index: docs/plan.md
 
-current_milestone: M4
-current_milestone_name: Remaining Exercise Audit and Follow-up Routing
-current_milestone_state: closed
+current_milestone: Lifecycle Closeout
+current_milestone_name: Final Verification and PR Handoff
+current_milestone_state: branch-ready
 last_reviewed_milestone: M4
 
 current_test_spec: specs/exercise-image-standard.test.md
@@ -32,7 +32,8 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r5.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m4-r1.md
-next_stage: verify
+verify_report: docs/changes/exercise-image-standard-and-optimization/verify-report.md
+next_stage: pr
 
 open_findings: []
 
@@ -76,6 +77,7 @@ notes:
   - M4 audited all current exercise pages, recorded keep-existing-image routing, and added regression coverage that every current exercise page appears in the audit; code-review M4 is next.
   - Code-review M4 R1 closed M4 with no material findings. Explain-change is next before final verification.
   - Explain-change was refreshed through M4 closeout. Final verification is next.
+  - Final verification passed locally. Broad privacy validation required one neutralization of literal scanner-pattern examples in the superseded content-schema plan before passing. PR handoff is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
@@ -357,3 +359,21 @@ validation:
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after explain-change refresh
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 13 focused exercise-image tests passed during final verification
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 102 repository tests passed during final verification
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files during final verification
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests
+    result: fail-before-cleanup
+    evidence: broad privacy scan failed on literal scanner-pattern examples in superseded docs/plans/2026-06-26-content-schema-foundation.md
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests
+    result: pass
+    evidence: broad privacy scan passed after neutralizing superseded-plan scanner-pattern examples, checked 157 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed during final verification
