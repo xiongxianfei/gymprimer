@@ -10,15 +10,20 @@ draft
 - Spec reviews:
   - `docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r1.md`
   - `docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r2.md`
+  - `docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r3.md`
+  - `docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r4.md`
 - Review resolution:
   - `docs/changes/exercise-image-standard-and-optimization/review-resolution.md`
 - Plan: `docs/plans/2026-07-03-exercise-image-standard.md`
 - Plan review:
   - `docs/changes/exercise-image-standard-and-optimization/reviews/plan-review-r1.md`
+  - `docs/changes/exercise-image-standard-and-optimization/reviews/plan-review-r2.md`
 - Architecture/ADRs:
   - `docs/architecture/system/architecture.md`
   - `docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r1.md`
+  - `docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r2.md`
   - `docs/adr/2026-07-03-exercise-document-image-purposes.md`
+  - `docs/adr/2026-07-03-generated-raster-prompt-records.md`
 
 ## Testing strategy
 
@@ -29,7 +34,8 @@ evidence where image semantics cannot be proven mechanically.
 - Unit: extend `tests/test_markdown_first_guardrails.py` or add
   `tests/test_exercise_image_standard.py` for generated raster provenance,
   media-purpose, alt-text, image-count, reviewer-field, template-context, and
-  path failures.
+  path failures. M3A extends this coverage for prompt-record path, file,
+  reverse-match, exact-prompt, redaction, and compatibility failures.
 - Integration: run `tools/checks/check_markdown_first.py` against fixture
   exercise pages, real `exercises/`, `media/PROVENANCE.md`, and the shared
   source/disclaimer surfaces.
@@ -46,7 +52,9 @@ evidence where image semantics cannot be proven mechanically.
   and AC1-AC12 acceptance criterion to automated tests or manual review.
 - Migration: prove existing `equipment_identification` and
   `key_movement_illustration` exercise images remain valid without changing
-  their media purpose.
+  their media purpose. M3A also proves older generated raster exercise images
+  can remain under the pre-amendment compatibility path only when downstream
+  scope explicitly treats them as pre-amendment assets.
 
 The source spec contains an identical duplicate `R24` line. This test spec
 treats it as one behavioral requirement because the repeated text is identical.
@@ -74,7 +82,15 @@ treats it as one behavioral requirement because the repeated text is identical.
 | R17 | EIS-T6 | unit, integration | New generated raster exercise images outside `media/exercises/<slug>/` fail. |
 | R18 | EIS-T10, EIS-T13 | manual | Filename descriptiveness is reviewed in batch and audit evidence. |
 | R19 | EIS-T3 | unit, integration | Generated raster images require exact approved provenance. |
-| R20 | EIS-T3 | unit, integration | Required non-blank provenance fields are checked. |
+| R20 | EIS-T3, EIS-T19 | unit, integration | Required non-blank provenance fields are checked, including `prompt_record` for governed generated raster exercise images. |
+| R20A | EIS-T19 | unit, integration | Provenance `prompt_record` must be repository-local and point to a prompt record preserving the exact prompt. |
+| R20B | EIS-T19 | unit, integration | Prompt records must live under `media/prompts/exercises/<exercise-slug>/<asset-stem>.md`. |
+| R20C | EIS-T20 | unit, integration | Prompt records must identify generated asset path, generator, created date, reviewer or owner, review status, and exact prompt text. |
+| R20D | EIS-T20, EIS-T21 | manual, migration | Selected-output, rejected-variant, and revision notes are checked when they materially explain M3 backfill or replacement choices. |
+| R20E | EIS-T20 | unit, manual | Exact prompt text must be preserved verbatim except required redaction. |
+| R20F | EIS-T20 | unit, manual | Redactions must be explicit and reasoned without exposing unsafe or private content. |
+| R20G | EIS-T19 | integration | Prompt records are not embedded in reader-facing exercise Markdown. |
+| R20H | EIS-T19, EIS-T20 | unit, integration | `prompt_or_creation_notes` remains a summary and cannot substitute for the prompt record. |
 | R21 | EIS-T3 | unit, integration | Generated raster exercise rows must use `asset_type = ai_generated_raster`. |
 | R22 | EIS-T3 | unit, integration | Non-approved review status fails. |
 | R23 | EIS-T3 | unit, integration | `page_refs` must include the referencing exercise page. |
@@ -89,9 +105,9 @@ treats it as one behavioral requirement because the repeated text is identical.
 | R32 | EIS-T14 | migration | Existing legacy-compatible exercise images remain valid. |
 | R33 | EIS-T14 | migration | Existing exercise image purposes are not migrated. |
 | R34 | EIS-T2 | unit, integration | Pattern, condition, preview, vague, and unknown purposes fail on full exercise pages. |
-| R35 | EIS-T3, EIS-T4, EIS-T6, EIS-T7, EIS-T8 | unit, integration | Required validation failure cases are fixture-tested. |
-| R36 | EIS-T15 | contract | Failure output includes stable categories for the expected failure classes. |
-| R37 | EIS-T16 | smoke | Privacy checker covers Markdown, provenance, prompts, review evidence, and validation output. |
+| R35 | EIS-T3, EIS-T4, EIS-T6, EIS-T7, EIS-T8, EIS-T19, EIS-T20 | unit, integration | Required validation failure cases are fixture-tested, including prompt-record failures. |
+| R36 | EIS-T15, EIS-T19, EIS-T20 | contract | Failure output includes stable categories for the expected failure classes, including prompt-record failures. |
+| R37 | EIS-T16, EIS-T20 | smoke | Privacy checker covers Markdown, provenance, prompt records, prompts or creation notes, review evidence, and validation output. |
 | R38 | EIS-T17 | smoke, migration | Repository diff and smoke checks prove no hosted app, CMS, database, input flow, JSON API, video-first path, or coaching behavior. |
 
 ## Example coverage map
@@ -105,6 +121,8 @@ treats it as one behavioral requirement because the repeated text is identical.
 | E5 | EIS-T4 | Four image references fail unless an explicit approved exception is represented. |
 | E6 | EIS-T2 | `pattern_alignment_illustration` fails as a full exercise-document purpose. |
 | E7 | EIS-T14 | Existing `equipment_identification` and `key_movement_illustration` exercise images pass without migration. |
+| E8 | EIS-T19, EIS-T20 | A generated raster exercise image with a valid `prompt_record` link and reverse `asset_path` match passes prompt-record validation. |
+| E9 | EIS-T19 | A generated raster exercise image with no non-blank `prompt_record` value fails prompt-record validation. |
 
 ## Edge case coverage
 
@@ -118,6 +136,11 @@ treats it as one behavioral requirement because the repeated text is identical.
 | EC6 | EIS-T5 | unit | Two muscle-attention images fail. |
 | EC7 | EIS-T3 | unit | Missing provenance row fails. |
 | EC8 | EIS-T3 | unit | Missing required provenance fields fail. |
+| EC8A | EIS-T19 | unit | Provenance row with no non-blank `prompt_record` fails for governed generated raster exercise images. |
+| EC8B | EIS-T19 | unit | `prompt_record` outside the repository or outside the required path shape fails. |
+| EC8C | EIS-T20 | unit | Prompt record whose internal `asset_path` differs from the generated raster asset path fails. |
+| EC8D | EIS-T20 | unit | Prompt record missing exact full prompt text and lacking an explicit redaction note fails. |
+| EC8E | EIS-T21 | migration | Older generated raster exercise image with unavailable exact prompt is routed to explicit compatibility limitation or replacement. |
 | EC9 | EIS-T3 | unit | `needs_revision` or `rejected` fails. |
 | EC10 | EIS-T3 | unit | Missing referencing exercise in `page_refs` fails. |
 | EC11 | EIS-T2 | unit | Pattern, condition, or preview purposes fail on full exercise documents. |
@@ -136,13 +159,14 @@ treats it as one behavioral requirement because the repeated text is identical.
 | Command ID | Command | Classification | Owner | Owning milestone | Required starting | Expected failure behavior | Closeout evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | EIS-CMD1 | `python3 -m unittest tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1` | existing and extended | tooling maintainer | M1 | M1 | Any unexpected nonzero exit fails M1. | M1 validation notes and code-review record. |
-| EIS-CMD2 | `python3 -m unittest discover tests` | existing and extended | tooling maintainer | M1-M4 | M1 | Any unexpected nonzero exit fails the active milestone. | Milestone validation notes. |
-| EIS-CMD3 | `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md` | existing and extended | tooling maintainer | M1-M4 | M1 | Any unexpected nonzero exit fails the active milestone. | Milestone validation notes and verify report. |
-| EIS-CMD4 | `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests` | existing and configured | content/check maintainer | lifecycle closeout / verify | verify | Forbidden findings or setup errors fail final verification before PR handoff. M1-M4 may run narrower current-change privacy scans for review hygiene, but the broad repository privacy sweep is not an implementation-milestone closeout gate. | Verify report and PR handoff notes. |
+| EIS-CMD2 | `python3 -m unittest discover tests` | existing and extended | tooling maintainer | M1-M4 and M3A | M1 | Any unexpected nonzero exit fails the active milestone. | Milestone validation notes. |
+| EIS-CMD3 | `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md` | existing and extended | tooling maintainer | M1-M4 and M3A | M1 | Any unexpected nonzero exit fails the active milestone. | Milestone validation notes and verify report. |
+| EIS-CMD4 | `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests` | existing and configured | content/check maintainer | lifecycle closeout / verify | verify | Forbidden findings or setup errors fail final verification before PR handoff. M1-M4 and M3A may run narrower current-change privacy scans for review hygiene, but the broad repository privacy sweep is not an implementation-milestone closeout gate. | Verify report and PR handoff notes. |
 | EIS-CMD5 | `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md` | planned for implementation | documentation/check maintainer | M1-M2 | M2 | From M2, any unexpected nonzero exit fails authoring-guidance closeout. M1 must add tests proving template context is not treated as promoted product content. | M1 template-context test evidence and M2 validation notes. |
 | EIS-CMD6 | `python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization` | existing and configured | documentation/check maintainer | M2 | M2 | Forbidden findings or setup errors fail M2. | M2 validation notes. |
-| EIS-CMD7 | `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md` | existing and extended | content/check maintainer | M3-M4 | M3 | Unexpected nonzero exit fails image-batch or audit closeout. | M3/M4 validation notes. |
-| EIS-CMD8 | `git diff --check` | existing and configured | release/check maintainer | M1-M4 | now | Any whitespace error fails the active milestone. | Milestone validation notes. |
+| EIS-CMD7 | `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md` | existing and extended | content/check maintainer | M3-M4 and M3A | M3 | Unexpected nonzero exit fails image-batch, prompt-record, or audit closeout. | M3/M3A/M4 validation notes. |
+| EIS-CMD8 | `git diff --check` | existing and configured | release/check maintainer | M1-M4 and M3A | now | Any whitespace error fails the active milestone. | Milestone validation notes. |
+| EIS-CMD9 | `python3 -m unittest tests.test_exercise_image_standard` | existing and extended | tooling maintainer | M3A | M3A | Any unexpected nonzero exit fails prompt-record implementation closeout. | M3A validation notes and code-review record. |
 
 ## Review-only semantic evidence
 
@@ -335,6 +359,36 @@ treats it as one behavioral requirement because the repeated text is identical.
 - Failure proves: Template authoring guidance cannot be validated without false positives or without missing real media-guidance regressions.
 - Automation location: `tests/test_exercise_image_standard.py` or `tests/test_markdown_first_guardrails.py`; `tools/checks/check_markdown_first.py`.
 
+### EIS-T19. Prompt-record provenance link contract
+
+- Covers: R20, R20A, R20B, R20G, R20H, R35, R36, E8, E9, EC8A, EC8B, AC5, AC5A, AC10
+- Level: integration
+- Fixture/setup: Temporary exercise page references a generated raster asset under `media/exercises/fixture-exercise/setup.png`; provenance variants include valid `prompt_record`, blank `prompt_record`, remote or absolute `prompt_record`, path traversal, wrong prompt-record directory, wrong extension, missing prompt-record file, and an exercise page that embeds the prompt record as reader-facing Markdown.
+- Steps: Run `check_markdown_first.py` over each fixture through `run_check_with_root`.
+- Expected result: The valid prompt-record link passes; blank, non-repository-local, wrong-shape, non-Markdown, missing-file, and embedded-prompt variants fail with stable prompt-record failure categories.
+- Failure proves: Generated raster exercise images can be promoted without durable repository-local exact prompt evidence or can expose prompt records as reader-facing content.
+- Automation location: `tests/test_exercise_image_standard.py`; `tools/checks/check_markdown_first.py`.
+
+### EIS-T20. Prompt-record content and reverse asset-path match
+
+- Covers: R20C, R20D, R20E, R20F, R20H, R28, R35, R36, R37, E8, EC8C, EC8D, AC5A, AC10
+- Level: unit
+- Fixture/setup: Prompt-record Markdown fixtures with required fields, exact full prompt text, explicit redaction notes, missing `asset_path`, mismatched `asset_path`, missing generator/date/reviewer/status fields, missing exact prompt text, summary-only `prompt_or_creation_notes`, and unsafe or private redaction examples.
+- Steps: Run prompt-record validation through `check_markdown_first.py` using generated raster exercise provenance rows that reference each prompt record.
+- Expected result: Prompt records pass only when they identify the same normalized `asset_path`, include required audit fields, preserve exact full prompt text or an explicit redaction reason, and do not rely on the provenance summary as a substitute.
+- Failure proves: Prompt records can drift from assets, omit exact prompts, or hide unsafe/private prompt material without deterministic review evidence.
+- Automation location: `tests/test_exercise_image_standard.py`; `tools/checks/check_markdown_first.py`; scoped privacy checks for prompt-record files.
+
+### EIS-T21. Prompt-record migration and M3 backfill guard
+
+- Covers: R20D, EC8E, compatibility and migration, M3A
+- Level: migration
+- Fixture/setup: Real M3 generated raster exercise images and provenance rows, plus legacy-compatible generated raster exercise fixtures that predate the prompt-record amendment.
+- Steps: During M3A implementation and code review, inspect whether exact prompts are recoverable for each M3 image. Add prompt records and `prompt_record` links when recoverable. If unavailable, require either an explicit compatibility limitation for a pre-amendment asset or replacement with a newly generated asset that has a prompt record and fresh review evidence.
+- Expected result: No governed M3 generated raster exercise image is accepted without a valid prompt record; older legacy-compatible images are not forced into prompt-record migration without an approved scope decision.
+- Failure proves: The repository can invent prompt evidence, silently accept missing prompts, or accidentally migrate old images outside the approved compatibility boundary.
+- Automation location: `tests/test_exercise_image_standard.py` for deterministic prompt-record fixtures; M3A code-review record for real M3 backfill decisions.
+
 ## Fixtures and data
 
 - Temporary repositories should use the existing `run_check_with_root` pattern
@@ -345,9 +399,14 @@ treats it as one behavioral requirement because the repeated text is identical.
   not promoted product pages.
 - Valid generated raster fixture rows should include all required provenance
   fields: `asset_path`, `asset_type`, `media_purpose`, `generator`,
+  `prompt_record` for governed generated raster exercise images,
   `prompt_or_creation_notes`, `created_date`, `human_reviewer`,
   `license_assertion`, `source_inputs`, `review_status`, `page_refs`, and
   `notes`.
+- Prompt-record fixtures should live under
+  `media/prompts/exercises/<exercise-slug>/<asset-stem>.md`, include a
+  repository-relative `asset_path`, and include exact full prompt text or an
+  explicit redaction note.
 - Fixture image files may contain placeholder bytes; tests do not inspect
   raster pixels.
 - Manual visual review uses final generated assets, not placeholder fixture
@@ -370,10 +429,18 @@ remain valid without migration, and code review must confirm no existing
 exercise media reference, asset, or provenance purpose was changed solely for
 migration.
 
+EIS-T21 is mandatory for M3A. It must prove governed M3 generated raster
+exercise images have prompt records or are replaced, while older
+legacy-compatible generated raster exercise images are not silently forced into
+prompt-record migration.
+
 ## Observability verification
 
 EIS-T15 verifies automated failure observability for page path, normalized asset
 path when applicable, failure category, and relevant provenance field.
+EIS-T19 and EIS-T20 add prompt-record observability for affected asset path,
+`prompt_record` path, missing or invalid prompt-record file, reverse
+`asset_path` mismatch, missing exact prompt text, and redaction-note failures.
 EIS-RO1 through EIS-RO4 verify manual observability for visual-safety,
 beginner-comprehension, and source-support evidence.
 
@@ -383,6 +450,8 @@ EIS-T16 runs privacy checks over Markdown, provenance, prompts or creation
 notes, review evidence, tests, and validation output. Manual review also checks
 that generated images do not depict identifiable private people and that
 beginner comprehension evidence contains no private health information.
+M3A scoped privacy checks must include prompt-record files because they preserve
+exact prompt text.
 
 ## Performance checks
 
@@ -416,6 +485,11 @@ or image-inspection dependencies.
   evidence with per-page outcomes.
 - Confirm existing exercise images were not changed solely for media-purpose
   migration.
+- Confirm every governed generated raster exercise image has a `prompt_record`
+  provenance value, a repository-local prompt-record file, a reverse
+  `asset_path` match, and exact full prompt text or an explicit redaction note.
+- Confirm exact prompts were not invented for images whose prompts cannot be
+  recovered.
 
 ## What not to test and why
 
@@ -429,27 +503,31 @@ or image-inspection dependencies.
   approved spec explicitly preserves legacy-compatible purposes.
 - Do not treat template placeholder source IDs, placeholder URLs, or
   instruction-only excluded-scope examples as promoted product content.
+- Do not test image-generation model behavior from prompt text; test only that
+  exact prompts are preserved as repository evidence for accepted assets.
 - Do not test medical effectiveness, diagnosis, treatment, rehabilitation, or
   programming outcomes; GymPrimer does not make those claims.
 
 ## Uncovered gaps
 
-None blocking after TSR-EIS-1 revision. The duplicate `R24` line in the source
-spec is identical text and does not create a behavioral coverage gap.
+None blocking for prompt-record test-spec-review. The duplicate `R24` line in
+the source spec is identical text and does not create a behavioral coverage
+gap.
 
 ## Next artifacts
 
-1. Test-spec-review re-review for the TSR-EIS-2 validation-path revision.
-2. M1 code-review re-review only after the test-spec-review approves the
-   amended proof map.
-3. Continue with M2-M4 only after M1 code-review closes.
+1. Test-spec-review for the M3A prompt-record proof-map amendment.
+2. M3A implementation only after test-spec-review approves the amended proof
+   map.
+3. M3 code-review re-review only after M3A closes or an approved review path
+   explicitly supersedes the M3A dependency.
 
 ## Follow-on artifacts
 
-None yet.
+- Plan review R2: `docs/changes/exercise-image-standard-and-optimization/reviews/plan-review-r2.md`
 
 ## Readiness
 
-This test spec is ready for test-spec-review of the TSR-EIS-2 revision. It
-does not authorize M1 code-review re-review or downstream milestones until
-test-spec-review approves the amended proof map.
+This test spec is ready for test-spec-review of the M3A prompt-record proof-map
+amendment. It does not authorize M3A implementation or M3 code-review re-review
+until test-spec-review approves the amended proof map.

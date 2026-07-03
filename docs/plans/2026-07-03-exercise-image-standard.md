@@ -157,14 +157,14 @@ must be sequenced before the current M3 image batch returns to code-review.
   prompt records were approved by architecture-review R2; architecture status
   was normalized to approved; M3A is now planned for prompt-record checker
   support, test coverage, and M3 prompt-record backfill or replacement
-  decisions before M3 returns to code-review
+  decisions before M3 returns to code-review; plan-review R2 approved the M3A
+  amendment; the test spec now maps M3A prompt-record proof obligations
 - Remaining in-scope implementation milestones: M3A, M3 re-review/resolution,
   M4, and lifecycle closeout
-- Next stage: plan-review for the prompt-record plan amendment
+- Next stage: test-spec-review for the prompt-record proof-map amendment
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: the prompt-record plan changes need
-  plan-review before test-spec amendment; test-spec amendment and
-  test-spec-review must complete before M3A implementation; M3 still needs
+- Reason final closeout is or is not ready: test-spec-review must approve the
+  prompt-record proof-map amendment before M3A implementation; M3 still needs
   reader-prompt comprehension evidence before returning to code-review; M4,
   explain-change, final verification, and PR handoff remain open.
 
@@ -562,6 +562,11 @@ when generated image batches are added.
   architecture-review R2. The plan was revised to add M3A for prompt-record
   checker support, tests, and M3 image prompt-record backfill or replacement
   decisions; plan-review is next.
+- 2026-07-03: Plan-review R2 approved the M3A prompt-record validation and M3
+  backfill plan amendment; test-spec amendment is next.
+- 2026-07-03: Test spec was amended with M3A prompt-record requirements,
+  examples, edge cases, commands, fixtures, observability, migration, and
+  readiness; test-spec-review is next.
 
 ## Decision log
 
@@ -703,4 +708,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is awaiting
-plan-review for the prompt-record amendment and is not final closeout.
+test-spec-review for the prompt-record amendment and is not final closeout.
