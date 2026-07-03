@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -24,7 +24,7 @@ plan_index: docs/plan.md
 
 current_milestone: M2
 current_milestone_name: Authoring Guidance and Review Evidence Surfaces
-current_milestone_state: planned
+current_milestone_state: review-requested
 last_reviewed_milestone: M1
 
 current_test_spec: specs/exercise-image-standard.test.md
@@ -32,7 +32,7 @@ current_test_spec_status: approved
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r4.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m1-r2.md
-next_stage: implement M2
+next_stage: code-review M2
 
 open_findings: []
 
@@ -49,6 +49,7 @@ notes:
   - Test-spec revision aligned the plan's general validation section and the test spec's stale next-artifact/readiness wording with EIS-CMD4 lifecycle closeout / verify ownership; test-spec-review is next.
   - Test-spec-review R4 approved the TSR-EIS-2 revision; M1 code-review re-review is next.
   - Code-review M1 R2 resolved CR-EIS-M1-1 and closed M1; M2 implementation is next.
+  - M2 added optional exercise-image template guidance plus visual-safety and beginner-comprehension evidence templates; code-review M2 is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
@@ -78,3 +79,21 @@ validation:
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after implementation
+  - command: python3 -m unittest tests.test_markdown_first_templates
+    result: fail-before-implementation
+    evidence: focused M2 template tests failed until the optional exercise-image guidance and evidence templates were added
+  - command: python3 -m unittest tests.test_markdown_first_templates
+    result: pass
+    evidence: 4 template tests passed after M2 implementation
+  - command: python3 -m unittest tests.test_markdown_first_templates tests.test_exercise_image_standard
+    result: pass
+    evidence: 11 template and exercise-image validation tests passed after M2 implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md
+    result: pass
+    evidence: checked 10 Markdown files, including templates, after M2 implementation
+  - command: python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization
+    result: pass
+    evidence: scoped M2 privacy scan passed, checked 23 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M2 implementation

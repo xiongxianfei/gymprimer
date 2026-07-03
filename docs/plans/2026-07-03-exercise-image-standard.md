@@ -113,7 +113,7 @@ before any generated image batch is added.
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -121,9 +121,11 @@ before any generated image batch is added.
   code-review M1 R1 requested changes for CR-EIS-M1-1; owner directed broad
   privacy validation to move to verify-before-PR; test-spec-review R3
   requested changes for TSR-EIS-2; test-spec-review R4 approved the
-  validation-path amendment; code-review M1 R2 closed M1
-- Remaining in-scope implementation milestones: M2-M4 and lifecycle closeout
-- Next stage: implement M2
+  validation-path amendment; code-review M1 R2 closed M1; M2 implemented
+  authoring guidance and review evidence templates; code-review M2 pending
+- Remaining in-scope implementation milestones: M2 code-review, M3-M4, and
+  lifecycle closeout
+- Next stage: code-review M2
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: M2-M4, explain-change, final
   verification, and PR handoff remain open.
@@ -188,7 +190,7 @@ before any generated image batch is added.
 
 ### M2. Authoring Guidance and Review Evidence Surfaces
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: add the durable Markdown guidance needed before generated exercise
   images can be reviewed consistently.
 - Requirements: R2-R6, R12-R14, R25-R31, R37-R38, AC9-AC12.
@@ -213,7 +215,9 @@ before any generated image batch is added.
 - Validation:
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md`
   - `python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization`
-- Result: pending
+- Result: Implemented optional exercise-image authoring guidance in the
+  exercise template plus change-local visual-safety and beginner-comprehension
+  evidence templates. Awaiting code-review M2.
 - Risks: guidance could accidentally imply images are required or that they
   replace Markdown citations.
 - Rollback: remove the template and evidence-surface additions; keep M1
@@ -398,6 +402,9 @@ when generated image batches are added.
   code-review re-review is next.
 - 2026-07-03: Code-review M1 R2 resolved CR-EIS-M1-1 and closed M1; M2
   implementation is next.
+- 2026-07-03: M2 implemented optional exercise-image authoring guidance,
+  visual-safety review evidence, and beginner-comprehension evidence; code-review
+  M2 is next.
 
 ## Decision log
 
@@ -417,6 +424,9 @@ when generated image batches are added.
 - Template validation needed a path-context boundary: template files should not
   be treated as promoted product pages, but their image references still need
   normal media-contract validation.
+- M2 can use an inline path placeholder in the exercise template instead of a
+  Markdown image reference, so the template remains concrete without implying a
+  real asset that needs provenance.
 
 ## Validation notes
 
@@ -447,6 +457,21 @@ when generated image batches are added.
 - The scoped current-change privacy command
   `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans/2026-07-03-exercise-image-standard.md media exercises tools tests`
   passed, checking 113 files.
+- Before M2 documentation changes, `python3 -m unittest tests.test_markdown_first_templates`
+  failed with the expected missing optional exercise-image guidance and evidence
+  templates.
+- After M2 implementation, `python3 -m unittest tests.test_markdown_first_templates`
+  passed with 4 tests.
+- After M2 implementation,
+  `python3 -m unittest tests.test_markdown_first_templates tests.test_exercise_image_standard`
+  passed with 11 tests.
+- After M2 implementation,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md`
+  passed, checking 10 Markdown files.
+- After M2 implementation,
+  `python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization`
+  passed, checking 23 files.
+- After M2 implementation, `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -456,4 +481,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is ready for
-M2 implementation, not final closeout.
+M2 code-review, not final closeout.

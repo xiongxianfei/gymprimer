@@ -38,10 +38,48 @@ class MarkdownFirstTemplateTest(unittest.TestCase):
             "Common mistakes",
             "Easier version",
             "Harder version",
+            "Optional exercise image",
+            "setup, movement, or muscle attention",
+            "Keep explanation, cues, safety notes, and citations in Markdown",
+            "Do not add image labels, warning badges, pain marks, or diagnosis/treatment claims",
             "Safety notes",
             "Sources",
         ):
             self.assertIn(expected, text)
+
+    def test_exercise_image_review_evidence_templates_exist(self) -> None:
+        evidence_root = ROOT / "docs/changes/exercise-image-standard-and-optimization/evidence"
+        visual = evidence_root / "visual-safety-review-template.md"
+        comprehension = evidence_root / "beginner-comprehension-template.md"
+
+        self.assertTrue(visual.exists(), "visual-safety review template is missing")
+        self.assertTrue(comprehension.exists(), "beginner comprehension template is missing")
+
+        visual_text = visual.read_text(encoding="utf-8")
+        for expected in (
+            "Image teaches one concept",
+            "Matches nearby Markdown",
+            "No in-image text",
+            "No identifying person",
+            "Avoids clinical framing",
+            "Avoids unsupported claims",
+            "Color is not the only communication method",
+            "Residual risk",
+        ):
+            self.assertIn(expected, visual_text)
+
+        comprehension_text = comprehension.read_text(encoding="utf-8")
+        for expected in (
+            "Purpose",
+            "Setup or body position",
+            "Movement steps",
+            "What to notice or feel",
+            "Stop condition",
+            "Source verification",
+            "Residual confusion",
+            "No private health information",
+        ):
+            self.assertIn(expected, comprehension_text)
 
     def test_principle_page_template_has_required_sections(self) -> None:
         template = ROOT / "docs/templates/principle-page.md"
