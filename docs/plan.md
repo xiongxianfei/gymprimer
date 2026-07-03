@@ -6,7 +6,7 @@
   - Status: active
   - Plan lifecycle state: active
   - Current stage: code-review
-  - Active context: CR-EIS-M3A-2 is addressed pending re-review; M3A code-review re-review is next. CR-EIS-M3-2 owner reader-prompt evidence, replacement prompt records, and post-replacement clarity confirmation are recorded; M3 can return to code-review after M3A re-review closes.
+  - Active context: M3A is closed after code-review R3. CR-EIS-M3-2 owner reader-prompt evidence, replacement prompt records, and post-replacement clarity confirmation are recorded; M3 code-review re-review is next.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

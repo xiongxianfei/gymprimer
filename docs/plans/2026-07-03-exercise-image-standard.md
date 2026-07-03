@@ -131,9 +131,9 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ## Current Handoff Summary
 
-- Current milestone: M3A
+- Current milestone: M3
 - Current milestone state: review-requested
-- Last reviewed milestone: M2
+- Last reviewed milestone: M3A
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
   approved; test-spec-review R2 approved after TSR-EIS-1 resolution;
@@ -175,15 +175,15 @@ must be sequenced before the current M3 image batch returns to code-review.
   `review-requested` for code-review re-review; owner reader-prompt evidence
   for CR-EIS-M3-2 was recorded after that state cleanup, unclear or
   inconsistent affected images were replaced with prompt-record-backed assets,
-  and owner post-replacement feedback confirmed that the pictures are now clear
+  owner post-replacement feedback confirmed that the pictures are now clear,
+  and code-review M3A R3 resolved CR-EIS-M3A-2 and closed M3A
 - Remaining in-scope implementation milestones: M3 re-review/resolution, M4,
   and lifecycle closeout
-- Next stage: code-review M3A re-review; M3 is ready to return to code-review
-  after M3A re-review closes
+- Next stage: code-review M3 re-review
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3A still needs code-review
-  re-review; M3 still needs code-review re-review; M4, explain-change, final
-  verification, and PR handoff remain open.
+- Reason final closeout is or is not ready: M3 still needs code-review
+  re-review; M4, explain-change, final verification, and PR handoff remain
+  open.
 
 ## Milestones
 
@@ -281,7 +281,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### M3. First New Exercise Image Batch
 
-- Milestone state: resolution-needed
+- Milestone state: review-requested
 - Goal: add a small reviewed batch for the five forward-head support exercises
   only after M1 and M2 are closed.
 - Requirements: R1-R31, R35-R38, AC1-AC12.
@@ -332,7 +332,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### M3A. Prompt Record Validation and M3 Backfill
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: implement the approved prompt-record contract and bring the in-flight
   M3 generated raster exercise images into compliance before M3 returns to
   code-review.
@@ -405,7 +405,8 @@ must be sequenced before the current M3 image batch returns to code-review.
   re-review. CR-EIS-M3-2 replacement work later moved five M3 assets off the
   compatibility path by replacing them with exact prompt-record-backed assets;
   the deterministic compatibility allowlist now applies only to the five
-  unreplaced M3 compatibility assets.
+  unreplaced M3 compatibility assets. Code-review M3A R3 resolved
+  CR-EIS-M3A-2 and closed M3A.
 - Risks: exact prompts for already-generated M3 images may be unavailable;
   replacement images could reopen visual clarity, provenance, visual-safety,
   and beginner-comprehension review work.
@@ -786,6 +787,15 @@ when generated image batches are added.
   passed, checking 31 files.
 - After CR-EIS-M3-2 post-replacement owner clarity confirmation,
   `git diff --check` passed.
+- During M3A R3 code-review, `python3 -m unittest tests.test_exercise_image_standard`
+  passed with 12 tests.
+- During M3A R3 code-review,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
+  passed, checking 25 Markdown files.
+- During M3A R3 code-review,
+  `python3 tools/checks/check_privacy.py -- docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization media/PROVENANCE.md media/prompts tools/checks/check_markdown_first.py tests/test_exercise_image_standard.py exercises`
+  passed, checking 54 files.
+- During M3A R3 code-review, `git diff --check HEAD` passed.
 
 ## Outcome and retrospective
 
@@ -794,6 +804,5 @@ explain-change, verification, and PR handoff are complete.
 
 ## Readiness
 
-See Current Handoff Summary for the live next stage. This plan is awaiting
-M3A code-review re-review; after that closes, M3 can return to code-review.
-It is not final closeout.
+See Current Handoff Summary for the live next stage. This plan is awaiting M3
+code-review re-review. It is not final closeout.
