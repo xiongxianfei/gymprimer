@@ -196,6 +196,13 @@ REQUIRED_PROVENANCE_FIELDS = (
     "page_refs",
     "notes",
 )
+PROMPT_RECORD_COMPATIBILITY_NOTE = "M3 pre-amendment prompt unavailable; compatibility limitation recorded"
+PROMPT_RECORD_REQUIRED_FIELDS = (
+    "asset_path",
+    "generator",
+    "created_date",
+    "review_status",
+)
 
 REFERENCE_LINK_RE = re.compile(r"\[[^\]]+\]\[([A-Za-z0-9_.:-]+)\]")
 REFERENCE_DEF_RE = re.compile(r"^\[([A-Za-z0-9_.:-]+)\]:\s+(\S+)\s*$", re.MULTILINE)
@@ -500,6 +507,128 @@ def image_text_implies_condition_diagnosis(alt_text: str) -> bool:
     return bool(re.search(r"\b(diagnos(?:is|ed)|patholog(?:y|ic)|treat(?:ment)?|damaged|disease)\b", alt_text, re.IGNORECASE))
 
 
+def expected_prompt_record_path(asset_path: str) -> str | None:
+    parts = asset_path.split("/")
+    if len(parts) != 4 or parts[0] != "media" or parts[1] != "exercises":
+        return None
+    return f"media/prompts/exercises/{parts[2]}/{Path(parts[3]).stem}.md"
+
+
+def parse_prompt_record_fields(text: str) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    for line in text.splitlines():
+        match = re.match(r"^\s*([A-Za-z_][A-Za-z0-9_ -]*):\s*(.*)\s*$", line)
+        if match:
+            key = match.group(1).strip().lower().replace(" ", "_").replace("-", "_")
+            fields[key] = match.group(2).strip()
+    return fields
+
+
+def prompt_record_section(text: str, heading: str) -> str:
+    pattern = re.compile(rf"^##\s+{re.escape(heading)}\s*$", re.IGNORECASE | re.MULTILINE)
+    match = pattern.search(text)
+    if match is None:
+        return ""
+    next_heading = re.search(r"^##\s+", text[match.end() :], re.MULTILINE)
+    end = len(text) if next_heading is None else match.end() + next_heading.start()
+    return text[match.end() : end].strip()
+
+
+def has_prompt_record_text_or_redaction(text: str) -> bool:
+    exact_prompt = prompt_record_section(text, "Exact prompt")
+    if exact_prompt:
+        return True
+    return bool(prompt_record_section(text, "Redaction note"))
+
+
+def validate_prompt_record(
+    page_path: Path,
+    asset_path: str,
+    provenance_row: dict[str, str],
+    root: Path = ROOT,
+) -> list[Finding]:
+    prompt_record = provenance_row.get("prompt_record", "").strip()
+    if not prompt_record:
+        if provenance_row.get("notes", "").strip() == PROMPT_RECORD_COMPATIBILITY_NOTE:
+            return []
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_missing",
+                f"generated raster exercise image provenance lacks prompt_record for {asset_path}",
+            )
+        ]
+
+    expected = expected_prompt_record_path(asset_path)
+    if (
+        is_remote_media_reference(prompt_record)
+        or Path(prompt_record).is_absolute()
+        or "\\" in prompt_record
+        or expected is None
+        or prompt_record != expected
+    ):
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_invalid",
+                f"prompt_record for {asset_path} must be repository-local and match {expected}: {prompt_record}",
+            )
+        ]
+
+    prompt_record_path = (root / prompt_record).resolve()
+    if repo_relative_path(prompt_record_path, root) != prompt_record:
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_invalid",
+                f"prompt_record for {asset_path} must resolve inside the repository: {prompt_record}",
+            )
+        ]
+    if prompt_record_path.suffix.lower() != ".md":
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_invalid",
+                f"prompt_record for {asset_path} must be a Markdown file: {prompt_record}",
+            )
+        ]
+    if not prompt_record_path.exists():
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_missing",
+                f"prompt_record file is missing for {asset_path}: {prompt_record}",
+            )
+        ]
+
+    text = prompt_record_path.read_text(encoding="utf-8")
+    fields = parse_prompt_record_fields(text)
+    missing_fields = [field for field in PROMPT_RECORD_REQUIRED_FIELDS if not fields.get(field, "").strip()]
+    if not fields.get("human_reviewer", "").strip() and not fields.get("review_owner", "").strip():
+        missing_fields.append("human_reviewer_or_review_owner")
+    if missing_fields or not has_prompt_record_text_or_redaction(text):
+        if not has_prompt_record_text_or_redaction(text):
+            missing_fields.append("exact_prompt_or_redaction_note")
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_incomplete",
+                f"prompt_record is incomplete for {asset_path} at {prompt_record}: {', '.join(missing_fields)}",
+            )
+        ]
+
+    if fields["asset_path"].strip() != asset_path:
+        return [
+            Finding(
+                page_path,
+                "media_prompt_record_mismatch",
+                f"prompt_record asset_path must match provenance asset_path for {asset_path}: {fields['asset_path']}",
+            )
+        ]
+
+    return []
+
+
 def pattern_alignment_text_contract_violation(alt_text: str, provenance_row: dict[str, str]) -> str | None:
     fields = (
         alt_text,
@@ -616,6 +745,9 @@ def validate_raster_provenance(
                     f"exercise image text, alt text, or provenance notes must not imply diagnosis, treatment, correction, injury, warning badge, cure, or coaching claims: {violation}",
                 )
             ]
+        prompt_record_findings = validate_prompt_record(page_path, asset_path, row, root)
+        if prompt_record_findings:
+            return prompt_record_findings
 
     if row["review_status"].strip() != "approved":
         return [
@@ -810,6 +942,9 @@ def validate_responsible_breadth_page(
 
     if page_class == "expanded_exercise_page" and is_forward_head_exercise(path):
         findings.extend(validate_forward_head_exercise_contract(path, text))
+
+    if page_class == "expanded_exercise_page" and re.search(r"(^##\s+Exact prompt\b|^prompt_record:)", text, re.MULTILINE | re.IGNORECASE):
+        findings.append(Finding(path, "media_prompt_record_embedded", "prompt records must not be embedded in reader-facing exercise Markdown"))
 
     if len(cited_ids) < 3:
         findings.append(

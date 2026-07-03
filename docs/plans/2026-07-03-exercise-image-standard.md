@@ -42,7 +42,7 @@ or convert GymPrimer into a hosted, visual-first, clinical, or coaching product.
   - `../../specs/markdown-first-primer.md`
   - `../../specs/responsible-breadth.md`
 - Test spec: `../../specs/exercise-image-standard.test.md`; prompt-record
-  amendment update pending after plan review
+  proof map approved by test-spec-review R5
 
 ## Context and orientation
 
@@ -132,7 +132,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 ## Current Handoff Summary
 
 - Current milestone: M3A
-- Current milestone state: implementing
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -158,15 +158,18 @@ must be sequenced before the current M3 image batch returns to code-review.
   was normalized to approved; M3A is now planned for prompt-record checker
   support, test coverage, and M3 prompt-record backfill or replacement
   decisions before M3 returns to code-review; plan-review R2 approved the M3A
-  amendment; test-spec-review R5 approved the M3A prompt-record proof map
-- Remaining in-scope implementation milestones: M3A, M3 re-review/resolution,
-  M4, and lifecycle closeout
-- Next stage: implement M3A
+  amendment; test-spec-review R5 approved the M3A prompt-record proof map;
+  M3A implemented prompt-record validation, provenance table support, and an
+  explicit compatibility limitation for in-flight M3 images whose exact prompts
+  were not recoverable from durable evidence
+- Remaining in-scope implementation milestones: M3 re-review/resolution, M4,
+  and lifecycle closeout
+- Next stage: code-review M3A
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3A implementation and code-review
-  are still open; M3 still needs reader-prompt comprehension evidence before
-  returning to code-review; M4, explain-change, final verification, and PR
-  handoff remain open.
+- Reason final closeout is or is not ready: M3A code-review is still open; M3
+  still needs reader-prompt comprehension evidence before returning to
+  code-review; M4, explain-change, final verification, and PR handoff remain
+  open.
 
 ## Milestones
 
@@ -312,7 +315,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### M3A. Prompt Record Validation and M3 Backfill
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: implement the approved prompt-record contract and bring the in-flight
   M3 generated raster exercise images into compliance before M3 returns to
   code-review.
@@ -364,7 +367,15 @@ must be sequenced before the current M3 image batch returns to code-review.
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
   - scoped current-change privacy scan over prompt records and M3 evidence;
     broad EIS-CMD4 privacy validation remains lifecycle closeout / verify
-- Result: pending
+- Result: Implemented prompt-record validation for governed generated raster
+  exercise images, including missing/invalid `prompt_record` paths, missing
+  prompt-record files, reverse `asset_path` mismatch, missing exact prompt or
+  redaction evidence, and reader-facing prompt-record embedding checks.
+  `media/PROVENANCE.md` now has a `prompt_record` column. Exact prompts for
+  the in-flight M3 images were not recoverable from repository-local evidence,
+  so M3A records an explicit compatibility limitation in
+  `docs/changes/exercise-image-standard-and-optimization/evidence/m3a-prompt-record-backfill.md`
+  and the affected provenance rows instead of inventing prompt text.
 - Risks: exact prompts for already-generated M3 images may be unavailable;
   replacement images could reopen visual clarity, provenance, visual-safety,
   and beginner-comprehension review work.
@@ -603,6 +614,10 @@ when generated image batches are added.
   current `media/PROVENANCE.md` rows do not have a `prompt_record` column.
   M3A must backfill exact prompts only when they are recoverable; otherwise it
   must replace affected images or record an explicit compatibility limitation.
+- M3A searched repository-local evidence for exact full M3 prompts and found
+  only concise prompt summaries and review notes. The implementation therefore
+  used the approved explicit compatibility-limitation path for the in-flight M3
+  assets and did not generate replacement images.
 
 ## Validation notes
 
@@ -648,6 +663,20 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization`
   passed, checking 23 files.
 - After M2 implementation, `git diff --check` passed.
+- Before M3A implementation, `python3 -m unittest tests.test_exercise_image_standard`
+  failed with expected missing `prompt_record` validation behavior and missing
+  M3A prompt-record/backfill evidence.
+- After M3A implementation, `python3 -m unittest tests.test_exercise_image_standard`
+  passed with 11 focused exercise-image tests.
+- After M3A implementation, `python3 -m unittest discover tests` passed with
+  100 tests.
+- After M3A implementation,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
+  passed, checking 25 Markdown files.
+- After M3A implementation,
+  `python3 tools/checks/check_privacy.py -- docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/changes/exercise-image-standard-and-optimization/evidence/m3a-prompt-record-backfill.md media/PROVENANCE.md tests/test_exercise_image_standard.py tools/checks/check_markdown_first.py`
+  passed, checking 7 files.
+- After M3A implementation, `git diff --check` passed.
 - During M2 code-review,
   `python3 -m unittest tests.test_markdown_first_templates tests.test_exercise_image_standard`
   passed with 11 tests.

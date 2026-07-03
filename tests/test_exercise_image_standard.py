@@ -71,12 +71,51 @@ def write_red_flags(root: Path) -> None:
     )
 
 
-def write_provenance(root: Path, rows: list[dict[str, str]]) -> None:
+def write_prompt_record(
+    root: Path,
+    prompt_record: str = "media/prompts/exercises/fixture-exercise/setup.md",
+    asset_path: str = "media/exercises/fixture-exercise/setup.png",
+    exact_prompt: str = "Fixture exact full prompt text for the accepted image.",
+    extra_fields: dict[str, str] | None = None,
+) -> None:
+    record_path = root / prompt_record
+    record_path.parent.mkdir(parents=True, exist_ok=True)
+    fields = {
+        "asset_path": asset_path,
+        "generator": "fixture generator",
+        "created_date": "2026-07-03",
+        "human_reviewer": "@fixture-maintainer",
+        "review_status": "approved",
+    }
+    if extra_fields:
+        fields |= extra_fields
+    record_path.write_text(
+        textwrap.dedent(
+            f"""\
+            # Prompt Record
+
+            asset_path: {fields.get("asset_path", "")}
+            generator: {fields.get("generator", "")}
+            created_date: {fields.get("created_date", "")}
+            human_reviewer: {fields.get("human_reviewer", "")}
+            review_status: {fields.get("review_status", "")}
+
+            ## Exact prompt
+
+            {exact_prompt}
+            """
+        ),
+        encoding="utf-8",
+    )
+
+
+def write_provenance(root: Path, rows: list[dict[str, str]], create_prompt_records: bool = True) -> None:
     (root / "media").mkdir(exist_ok=True)
     headers = (
         "asset_path",
         "asset_type",
         "media_purpose",
+        "prompt_record",
         "generator",
         "prompt_or_creation_notes",
         "created_date",
@@ -97,6 +136,7 @@ def write_provenance(root: Path, rows: list[dict[str, str]]) -> None:
         "asset_path": "media/exercises/fixture-exercise/setup.png",
         "asset_type": "ai_generated_raster",
         "media_purpose": "exercise_setup_illustration",
+        "prompt_record": "media/prompts/exercises/fixture-exercise/setup.md",
         "generator": "fixture generator",
         "prompt_or_creation_notes": "fixture prompt",
         "created_date": "2026-07-03",
@@ -109,6 +149,8 @@ def write_provenance(root: Path, rows: list[dict[str, str]]) -> None:
     }
     for row in rows:
         merged = defaults | row
+        if create_prompt_records and merged.get("prompt_record") and merged["media_purpose"].startswith("exercise_"):
+            write_prompt_record(root, merged["prompt_record"], merged["asset_path"])
         lines.append("| " + " | ".join(merged.get(header, "") for header in headers) + " |")
     (root / "media/PROVENANCE.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -295,6 +337,88 @@ class ExerciseImageStandardTest(unittest.TestCase):
 
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_prompt_record_contract_fails_invalid_links_and_files(self) -> None:
+        variants = (
+            ({"prompt_record": ""}, True, "media_prompt_record_missing"),
+            ({"prompt_record": "https://example.com/prompt.md"}, True, "media_prompt_record_invalid"),
+            ({"prompt_record": "../prompt.md"}, True, "media_prompt_record_invalid"),
+            ({"prompt_record": "media/prompts/exercises/fixture-exercise/setup.txt"}, True, "media_prompt_record_invalid"),
+            ({"prompt_record": "media/prompts/fixture-exercise/setup.md"}, True, "media_prompt_record_invalid"),
+            ({"prompt_record": "media/prompts/exercises/other-exercise/setup.md"}, True, "media_prompt_record_invalid"),
+            ({"prompt_record": "media/prompts/exercises/fixture-exercise/other.md"}, True, "media_prompt_record_invalid"),
+            ({}, False, "media_prompt_record_missing"),
+        )
+        for row, create_prompt_records, expected_code in variants:
+            with self.subTest(expected_code=expected_code, row=row), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                write_sources(root)
+                write_red_flags(root)
+                write_asset(root)
+                write_provenance(root, [row], create_prompt_records=create_prompt_records)
+                page = write_exercise_page(root, "![Fixture exercise setup image](../media/exercises/fixture-exercise/setup.png)")
+
+                result = run_check_with_root(root, page)
+
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn(expected_code, result.stdout)
+
+    def test_prompt_record_contract_fails_invalid_content(self) -> None:
+        variants = (
+            (
+                {"asset_path": "media/exercises/fixture-exercise/other.png"},
+                "Fixture exact full prompt text for the accepted image.",
+                "media_prompt_record_mismatch",
+            ),
+            (
+                {},
+                "",
+                "media_prompt_record_incomplete",
+            ),
+            (
+                {"human_reviewer": ""},
+                "Fixture exact full prompt text for the accepted image.",
+                "media_prompt_record_incomplete",
+            ),
+        )
+        for extra_fields, exact_prompt, expected_code in variants:
+            with self.subTest(expected_code=expected_code), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                write_sources(root)
+                write_red_flags(root)
+                write_asset(root)
+                write_provenance(root, [{}], create_prompt_records=False)
+                write_prompt_record(root, extra_fields=extra_fields, exact_prompt=exact_prompt)
+                page = write_exercise_page(root, "![Fixture exercise setup image](../media/exercises/fixture-exercise/setup.png)")
+
+                result = run_check_with_root(root, page)
+
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn(expected_code, result.stdout)
+
+    def test_prompt_record_contract_accepts_explicit_redaction_note(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            write_asset(root)
+            write_provenance(root, [{}], create_prompt_records=False)
+            write_prompt_record(
+                root,
+                exact_prompt="",
+                extra_fields={"review_status": "approved"},
+            )
+            prompt_record = root / "media/prompts/exercises/fixture-exercise/setup.md"
+            prompt_record.write_text(
+                prompt_record.read_text(encoding="utf-8")
+                + "\n## Redaction note\n\nPrompt text redacted because it contained private source material.\n",
+                encoding="utf-8",
+            )
+            page = write_exercise_page(root, "![Fixture exercise setup image](../media/exercises/fixture-exercise/setup.png)")
+
+            result = run_check_with_root(root, page)
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_template_context_validates_placeholders_without_promoting_product_content(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -365,10 +489,15 @@ class ExerciseImageStandardTest(unittest.TestCase):
                     self.assertEqual(rows[0].get("media_purpose"), purpose)
                     self.assertEqual(rows[0].get("review_status"), "approved")
                     self.assertIn(f"exercises/{slug}.md", split_page_refs(rows[0].get("page_refs", "")))
+                    if rows[0].get("notes") != "M3 pre-amendment prompt unavailable; compatibility limitation recorded":
+                        prompt_record = rows[0].get("prompt_record", "")
+                        self.assertEqual(prompt_record, f"media/prompts/exercises/{slug}/{stem}.md")
+                        self.assertTrue((ROOT / prompt_record).exists(), f"{prompt_record} is missing")
 
         evidence_root = ROOT / "docs/changes/exercise-image-standard-and-optimization/evidence"
         self.assertTrue((evidence_root / "m3-visual-safety-review.md").exists())
         self.assertTrue((evidence_root / "m3-beginner-comprehension.md").exists())
+        self.assertTrue((evidence_root / "m3a-prompt-record-backfill.md").exists())
 
 
 if __name__ == "__main__":
