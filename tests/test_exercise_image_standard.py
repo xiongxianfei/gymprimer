@@ -33,6 +33,20 @@ M3_TARGETS = {
         "muscle": "Band pull-apart muscle-attention reference with the upper-back and rear-shoulder region subtly highlighted",
     },
 }
+M3_PROMPT_RECORD_REPLACEMENTS = {
+    "media/exercises/chin-nod/movement.png",
+    "media/exercises/thoracic-extension/movement.png",
+    "media/exercises/prone-y-t/movement.png",
+    "media/exercises/band-pull-apart/movement.png",
+    "media/exercises/band-pull-apart/muscle-attention.png",
+}
+M3_PROMPT_RECORD_COMPATIBILITY_ASSETS = {
+    "media/exercises/chin-nod/muscle-attention.png",
+    "media/exercises/thoracic-extension/muscle-attention.png",
+    "media/exercises/wall-slide/movement.png",
+    "media/exercises/wall-slide/muscle-attention.png",
+    "media/exercises/prone-y-t/muscle-attention.png",
+}
 
 
 def run_check_with_root(root: Path, *paths: Path) -> subprocess.CompletedProcess[str]:
@@ -435,14 +449,21 @@ class ExerciseImageStandardTest(unittest.TestCase):
         self.assertIn("media_prompt_record_missing", result.stdout)
 
         provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
-        for slug in M3_TARGETS:
-            for stem in ("movement", "muscle-attention"):
-                asset_path = f"media/exercises/{slug}/{stem}.png"
-                rows = provenance.get(asset_path, [])
-                with self.subTest(asset_path=asset_path):
-                    self.assertEqual(len(rows), 1)
-                    self.assertEqual(rows[0].get("prompt_record", ""), "")
-                    self.assertEqual(rows[0].get("notes"), compatibility_note)
+        for asset_path in M3_PROMPT_RECORD_COMPATIBILITY_ASSETS:
+            rows = provenance.get(asset_path, [])
+            with self.subTest(asset_path=asset_path):
+                self.assertEqual(len(rows), 1)
+                self.assertEqual(rows[0].get("prompt_record", ""), "")
+                self.assertEqual(rows[0].get("notes"), compatibility_note)
+
+        for asset_path in M3_PROMPT_RECORD_REPLACEMENTS:
+            rows = provenance.get(asset_path, [])
+            slug = asset_path.split("/")[2]
+            stem = Path(asset_path).stem
+            with self.subTest(asset_path=asset_path):
+                self.assertEqual(len(rows), 1)
+                self.assertEqual(rows[0].get("prompt_record", ""), f"media/prompts/exercises/{slug}/{stem}.md")
+                self.assertNotEqual(rows[0].get("notes"), compatibility_note)
 
     def test_template_context_validates_placeholders_without_promoting_product_content(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

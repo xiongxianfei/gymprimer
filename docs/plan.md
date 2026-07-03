@@ -6,7 +6,7 @@
   - Status: active
   - Plan lifecycle state: active
   - Current stage: code-review
-  - Active context: CR-EIS-M3A-2 is addressed pending re-review; M3A code-review re-review is next. M3 still remains blocked on non-identifying reader-prompt beginner-comprehension evidence.
+  - Active context: CR-EIS-M3A-2 is addressed pending re-review; M3A code-review re-review is next. CR-EIS-M3-2 owner reader-prompt evidence and replacement prompt records are recorded, but M3 still remains blocked on post-replacement reader-prompt beginner-comprehension evidence.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

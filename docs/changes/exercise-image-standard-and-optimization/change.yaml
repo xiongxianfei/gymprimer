@@ -68,9 +68,10 @@ notes:
   - Test-spec-review R5 approved the M3A prompt-record proof map; implementation handoff is allowed for M3A.
   - M3A implemented prompt-record checker support, focused tests, the `prompt_record` provenance column, and explicit compatibility-limitation evidence for in-flight M3 images whose exact prompts were not recoverable from durable repository evidence; code-review is next.
   - Code-review M3A R1 requested changes for CR-EIS-M3A-1 because the compatibility limitation bypass is not scoped to the recorded pre-amendment M3 assets; review-resolution is next.
-  - Review-resolution addressed CR-EIS-M3A-1 by constraining the compatibility limitation to the ten recorded M3 assets and adding regression coverage; M3A code-review re-review is next.
+  - Review-resolution addressed CR-EIS-M3A-1 by constraining the compatibility limitation to the recorded M3 assets and adding regression coverage; after CR-EIS-M3-2 replacements, that compatibility path now applies only to the five unreplaced assets.
   - Code-review M3A R2 resolved CR-EIS-M3A-1 but requested changes for CR-EIS-M3A-2 because plan milestone states drifted for M3 and M3A; review-resolution is next.
   - Review-resolution addressed CR-EIS-M3A-2 by restoring M3 to resolution-needed while CR-EIS-M3-2 remains open and returning M3A to review-requested for code-review re-review.
+  - Owner reader-prompt evidence for CR-EIS-M3-2 is recorded. The unclear or inconsistent affected images were replaced with prompt-record-backed assets, and CR-EIS-M3-2 remains open pending post-replacement reader-prompt evidence.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
@@ -259,3 +260,21 @@ validation:
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after CR-EIS-M3A-1 resolution
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after CR-EIS-M3A-2 state resolution
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 12 focused exercise-image tests passed after CR-EIS-M3-2 reader-prompt evidence, replacement assets, prompt records, provenance rows, and compatibility-scope updates
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 101 repository tests passed after CR-EIS-M3-2 replacement updates
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after CR-EIS-M3-2 replacement updates
+  - command: python3 tools/checks/check_privacy.py -- docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization media/PROVENANCE.md media/prompts tools/checks/check_markdown_first.py tests/test_exercise_image_standard.py exercises
+    result: pass
+    evidence: scoped CR-EIS-M3-2 replacement privacy scan passed, checked 54 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after CR-EIS-M3-2 replacement updates

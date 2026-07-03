@@ -23,32 +23,47 @@ Exact full generation prompts for these already-generated M3 images were not pre
 
 Because exact prompts were not recoverable from durable evidence, M3A did not invent prompt text and did not create synthetic prompt records for these assets.
 
+After CR-EIS-M3-2 owner clarity feedback, five assets were replaced with newly
+generated images whose exact prompts are preserved in repository-local prompt
+records. Those replacement assets are no longer on the pre-amendment
+compatibility path.
+
 ## Available prompt summaries
 
 These are the repository-local prompt summaries already preserved in `media/PROVENANCE.md`. They are useful review context, but they are not exact full prompt records and do not satisfy the future `prompt_record` requirement.
 
 | Asset | Available prompt summary |
 |---|---|
-| `media/exercises/chin-nod/movement.png` | Two-panel neutral movement reference for chin nod, showing upright seated start and small chin-in finish with no embedded writing, logos, or identifying features |
+| `media/exercises/chin-nod/movement.png` | Superseded by CR-EIS-M3-2 replacement; exact prompt now recorded at `media/prompts/exercises/chin-nod/movement.md`. |
 | `media/exercises/chin-nod/muscle-attention.png` | Neutral front-neck attention reference for chin nod with subtle blue broad-region highlight and no embedded writing, logos, or identifying features |
-| `media/exercises/thoracic-extension/movement.png` | Two-panel neutral movement reference for thoracic extension over a chair, showing upright start and gentle upper-back extension with no embedded writing, logos, or identifying features |
+| `media/exercises/thoracic-extension/movement.png` | Superseded by CR-EIS-M3-2 replacement; exact prompt now recorded at `media/prompts/exercises/thoracic-extension/movement.md`. |
 | `media/exercises/thoracic-extension/muscle-attention.png` | Neutral upper-back attention reference for thoracic extension with subtle blue broad-region highlight and no embedded writing, logos, or identifying features |
 | `media/exercises/wall-slide/movement.png` | Two-panel neutral movement reference for forearms-on-wall wall slide, showing lower and raised arm positions against a plain wall with no embedded writing, logos, or identifying features |
 | `media/exercises/wall-slide/muscle-attention.png` | Neutral shoulder-blade and side-rib attention reference for wall slide with subtle blue broad-region highlight and no embedded writing, logos, or identifying features |
-| `media/exercises/prone-y-t/movement.png` | Two-panel movement reference for prone Y and T arm positions on a mat with no embedded writing, logos, or identifying features |
+| `media/exercises/prone-y-t/movement.png` | Superseded by CR-EIS-M3-2 replacement; exact prompt now recorded at `media/prompts/exercises/prone-y-t/movement.md`. |
 | `media/exercises/prone-y-t/muscle-attention.png` | Neutral upper-back and shoulder-blade attention reference for prone Y and T with subtle blue broad-region highlight and no embedded writing, logos, or identifying features |
-| `media/exercises/band-pull-apart/movement.png` | Two-panel movement reference for band pull-apart, showing chest-height start and open-arm finish with a light resistance band and no embedded writing, logos, or identifying features |
-| `media/exercises/band-pull-apart/muscle-attention.png` | Neutral upper-back and rear-shoulder attention reference for band pull-apart with subtle blue broad-region highlight and no embedded writing, logos, or identifying features |
+| `media/exercises/band-pull-apart/movement.png` | Superseded by CR-EIS-M3-2 replacement; exact prompt now recorded at `media/prompts/exercises/band-pull-apart/movement.md`. |
+| `media/exercises/band-pull-apart/muscle-attention.png` | Superseded by CR-EIS-M3-2 replacement; exact prompt now recorded at `media/prompts/exercises/band-pull-apart/muscle-attention.md`. |
 
 ## Compatibility decision
 
-Each affected M3 row in `media/PROVENANCE.md` keeps a blank `prompt_record` value and records this exact limitation in `notes`:
+The five unreplaced M3 rows in `media/PROVENANCE.md` keep a blank
+`prompt_record` value and record this exact limitation in `notes`:
 
 ```text
 M3 pre-amendment prompt unavailable; compatibility limitation recorded
 ```
 
-This is the explicit pre-amendment compatibility path allowed by the approved M3A plan and proof map. It is not a precedent for future generated raster exercise images.
+This is the explicit pre-amendment compatibility path allowed by the approved M3A plan and proof map. It is not a precedent for future generated raster exercise images. The compatibility path currently applies only to:
+
+- `media/exercises/chin-nod/muscle-attention.png`
+- `media/exercises/thoracic-extension/muscle-attention.png`
+- `media/exercises/wall-slide/movement.png`
+- `media/exercises/wall-slide/muscle-attention.png`
+- `media/exercises/prone-y-t/muscle-attention.png`
+
+The CR-EIS-M3-2 replacement assets must satisfy normal prompt-record
+validation.
 
 ## Future requirement
 

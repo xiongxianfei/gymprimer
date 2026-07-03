@@ -164,20 +164,27 @@ must be sequenced before the current M3 image batch returns to code-review.
   were not recoverable from durable evidence; code-review M3A R1 requested
   changes for CR-EIS-M3A-1 because the compatibility limitation bypass is not
   scoped to the recorded pre-amendment M3 assets; review-resolution addressed
-  CR-EIS-M3A-1 by constraining compatibility to the ten recorded M3 assets and
-  adding regression coverage; code-review M3A R2 resolved CR-EIS-M3A-1 but
+  CR-EIS-M3A-1 by constraining compatibility to the recorded M3 assets and
+  adding regression coverage; after CR-EIS-M3-2 replacements, the
+  compatibility path now applies only to the five unreplaced assets;
+  code-review M3A R2 resolved CR-EIS-M3A-1 but
   requested changes for CR-EIS-M3A-2 because plan milestone states drifted for
   M3 and M3A; review-resolution addressed CR-EIS-M3A-2 by keeping M3 in
   `resolution-needed` while CR-EIS-M3-2 remains open and returning M3A to
-  `review-requested` for code-review re-review
+  `review-requested` for code-review re-review; owner reader-prompt evidence
+  for CR-EIS-M3-2 was recorded after that state cleanup, unclear or
+  inconsistent affected images were replaced with prompt-record-backed assets,
+  and M3 remains `resolution-needed` pending post-replacement reader-prompt
+  evidence
 - Remaining in-scope implementation milestones: M3 re-review/resolution, M4,
   and lifecycle closeout
-- Next stage: code-review M3A re-review
+- Next stage: code-review M3A re-review, with M3 post-replacement
+  reader-prompt evidence still required before M3 can return to code-review
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: M3A still needs code-review
-  re-review; M3 still needs reader-prompt comprehension evidence before
-  returning to code-review; M4, explain-change, final verification, and PR
-  handoff remain open.
+  re-review; M3 still needs post-replacement reader-prompt comprehension
+  evidence before returning to code-review; M4, explain-change, final
+  verification, and PR handoff remain open.
 
 ## Milestones
 
@@ -313,8 +320,11 @@ must be sequenced before the current M3 image batch returns to code-review.
 - Result: Implemented clearer movement images and one muscle-attention image
   for each target exercise page, exact provenance rows, refreshed visual-safety
   evidence, and focused regression coverage. CR-EIS-M3-1 is addressed locally
-  pending re-review. CR-EIS-M3-2 remains open because reader-prompt
-  beginner-comprehension evidence is still required for the revised image batch.
+  pending re-review. Owner reader-prompt evidence for CR-EIS-M3-2 is recorded;
+  the unclear or inconsistent affected images were replaced with
+  prompt-record-backed assets. CR-EIS-M3-2 remains open because
+  post-replacement reader-prompt beginner-comprehension evidence is still
+  required for the replacement image batch.
 - Risks: generated images may imply unsupported anatomy, correction, treatment,
   brands, or identifiable people.
 - Rollback: remove the Markdown image references, remove unused assets, remove
@@ -393,7 +403,10 @@ must be sequenced before the current M3 image batch returns to code-review.
   and M3A milestone states drifted in the plan. Review-resolution addressed the
   lifecycle-state drift by keeping M3 in `resolution-needed` while CR-EIS-M3-2
   remains open and returning M3A to `review-requested` for code-review
-  re-review.
+  re-review. CR-EIS-M3-2 replacement work later moved five M3 assets off the
+  compatibility path by replacing them with exact prompt-record-backed assets;
+  the deterministic compatibility allowlist now applies only to the five
+  unreplaced M3 compatibility assets.
 - Risks: exact prompts for already-generated M3 images may be unavailable;
   replacement images could reopen visual clarity, provenance, visual-safety,
   and beginner-comprehension review work.
@@ -748,6 +761,19 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- docs/architecture/system/architecture.md docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/change.yaml`
   passed, checking 4 files.
 - During prompt-record plan amendment, `git diff --check` passed.
+- After CR-EIS-M3-2 reader-prompt evidence, replacement assets, prompt
+  records, provenance rows, and compatibility-scope updates,
+  `python3 -m unittest tests.test_exercise_image_standard` passed with 12
+  focused exercise-image tests.
+- After CR-EIS-M3-2 replacement updates, `python3 -m unittest discover tests`
+  passed with 101 tests.
+- After CR-EIS-M3-2 replacement updates,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
+  passed, checking 25 Markdown files.
+- After CR-EIS-M3-2 replacement updates,
+  `python3 tools/checks/check_privacy.py -- docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization media/PROVENANCE.md media/prompts tools/checks/check_markdown_first.py tests/test_exercise_image_standard.py exercises`
+  passed, checking 54 files.
+- After CR-EIS-M3-2 replacement updates, `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -757,4 +783,5 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is awaiting
-M3A implementation for the prompt-record amendment and is not final closeout.
+M3A code-review re-review and post-replacement CR-EIS-M3-2 reader-prompt
+evidence; it is not final closeout.
