@@ -169,10 +169,16 @@ ROOT_GOVERNANCE_DIRS = {
 RASTER_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
 SVG_EXTENSIONS = {".svg"}
 ALLOWED_MEDIA_PURPOSES = {"equipment_identification", "key_movement_illustration"}
+EXERCISE_IMAGE_MEDIA_PURPOSES = {
+    "exercise_setup_illustration",
+    "exercise_movement_illustration",
+    "exercise_muscle_attention_illustration",
+}
+LEGACY_EXERCISE_IMAGE_MEDIA_PURPOSES = {"equipment_identification", "key_movement_illustration"}
 RESPONSIBLE_BREADTH_MEDIA_PURPOSES_BY_CLASS = {
     "pattern_page": {"pattern_alignment_illustration", "exercise_preview_illustration"},
     "condition_page": {"anatomical_region_illustration", "exercise_preview_illustration"},
-    "expanded_exercise_page": {"equipment_identification", "key_movement_illustration"},
+    "expanded_exercise_page": EXERCISE_IMAGE_MEDIA_PURPOSES | LEGACY_EXERCISE_IMAGE_MEDIA_PURPOSES,
     "programming_principle_page": {"equipment_identification", "key_movement_illustration"},
     "program_example_page": {"equipment_identification", "key_movement_illustration"},
 }
@@ -198,6 +204,19 @@ PATTERN_ALIGNMENT_FORBIDDEN_MEDIA_TEXT_RE = re.compile(
     r"\b(label(?:s|ed)?|caption|wording|with text|contains text|bad posture|red (?:pain|injury)|pain mark|cure|before/after|thumbnail)\b",
     re.IGNORECASE,
 )
+EXERCISE_IMAGE_FORBIDDEN_MEDIA_TEXT_RE = re.compile(
+    r"\b(diagnos(?:e|is|ed)?|treat(?:ment|ing)?|cure|correct(?:ness)?|wrong|warning badge|red (?:pain|injury)|pain mark|injury symbol|before/after|personalized coaching)\b",
+    re.IGNORECASE,
+)
+GENERIC_IMAGE_ALT_TEXT = {
+    "image",
+    "exercise image",
+    "diagram",
+    "picture",
+    "photo",
+    "illustration",
+}
+AI_REVIEWER_RE = re.compile(r"\b(openai|chatgpt|image generation tool|ai tool|artificial intelligence)\b", re.IGNORECASE)
 ROOT = Path(os.environ.get("GYMPRIMER_ROOT", Path(__file__).resolve().parents[2]))
 SOURCES_INDEX = ROOT / "SOURCES.md"
 PROVENANCE_INDEX = ROOT / "media/PROVENANCE.md"
@@ -306,6 +325,11 @@ def responsible_breadth_page_class(path: Path, root: Path = ROOT) -> str | None:
         return None
     first_part = relative.split("/", 1)[0]
     return RESPONSIBLE_BREADTH_PAGE_CLASSES.get(first_part)
+
+
+def is_template_file(path: Path, root: Path = ROOT) -> bool:
+    relative = repo_relative_path(path, root)
+    return bool(relative and relative.startswith("docs/templates/"))
 
 
 def is_forward_head_pattern(path: Path, root: Path = ROOT) -> bool:
@@ -486,6 +510,25 @@ def pattern_alignment_text_contract_violation(alt_text: str, provenance_row: dic
     return None if match is None else match.group(0)
 
 
+def exercise_image_text_contract_violation(alt_text: str, provenance_row: dict[str, str]) -> str | None:
+    fields = (
+        alt_text,
+        provenance_row.get("prompt_or_creation_notes", ""),
+        provenance_row.get("notes", ""),
+    )
+    match = EXERCISE_IMAGE_FORBIDDEN_MEDIA_TEXT_RE.search(" ".join(fields))
+    return None if match is None else match.group(0)
+
+
+def generic_image_alt_text(alt_text: str) -> bool:
+    normalized = re.sub(r"\s+", " ", alt_text.strip().lower()).strip(" .:-_")
+    return normalized in GENERIC_IMAGE_ALT_TEXT
+
+
+def ai_tool_reviewer(value: str) -> bool:
+    return bool(AI_REVIEWER_RE.search(value.strip()))
+
+
 def validate_raster_provenance(
     page_path: Path,
     asset_path: str,
@@ -534,6 +577,15 @@ def validate_raster_provenance(
             )
         ]
 
+    if page_class == "expanded_exercise_page" and ai_tool_reviewer(row["human_reviewer"]):
+        return [
+            Finding(
+                page_path,
+                "media_human_reviewer_invalid",
+                f"AI-generated raster provenance human_reviewer must identify an accountable human for {asset_path}: {row['human_reviewer']}",
+            )
+        ]
+
     if media_purpose == "anatomical_region_illustration" and image_text_implies_condition_diagnosis(alt_text):
         return [
             Finding(
@@ -551,6 +603,17 @@ def validate_raster_provenance(
                     page_path,
                     "media_usage_out_of_scope",
                     f"pattern alignment image must not include in-image text, labels, thumbnails, injury marks, or cure implications: {violation}",
+                )
+            ]
+
+    if page_class == "expanded_exercise_page" and media_purpose in EXERCISE_IMAGE_MEDIA_PURPOSES:
+        violation = exercise_image_text_contract_violation(alt_text, row)
+        if violation:
+            return [
+                Finding(
+                    page_path,
+                    "exercise_image_visual_safety_text",
+                    f"exercise image text, alt text, or provenance notes must not imply diagnosis, treatment, correction, injury, warning badge, cure, or coaching claims: {violation}",
                 )
             ]
 
@@ -574,6 +637,46 @@ def validate_raster_provenance(
         ]
 
     return []
+
+
+def validate_exercise_image_summary(
+    page_path: Path,
+    image_matches: list[re.Match[str]],
+    provenance_rows: dict[str, list[dict[str, str]]],
+    root: Path = ROOT,
+) -> list[Finding]:
+    findings: list[Finding] = []
+    if len(image_matches) > 3:
+        findings.append(
+            Finding(
+                page_path,
+                "exercise_image_count_exceeded",
+                f"exercise pages may reference no more than three exercise images without an approved exception; found {len(image_matches)}",
+            )
+        )
+
+    muscle_attention_count = 0
+    for match in image_matches:
+        target = match.group(2).strip()
+        if is_remote_media_reference(target) or Path(target).is_absolute() or target.startswith("/"):
+            continue
+        asset_path = repo_relative_path((page_path.parent / target).resolve(), root)
+        if asset_path is None:
+            continue
+        rows = provenance_rows.get(asset_path, [])
+        if len(rows) == 1 and rows[0].get("media_purpose", "").strip() == "exercise_muscle_attention_illustration":
+            muscle_attention_count += 1
+
+    if muscle_attention_count > 1:
+        findings.append(
+            Finding(
+                page_path,
+                "exercise_muscle_attention_limit",
+                f"exercise pages may reference no more than one exercise_muscle_attention_illustration; found {muscle_attention_count}",
+            )
+        )
+
+    return findings
 
 
 def validate_media_reference(
@@ -856,6 +959,15 @@ def check_page(
     text = path.read_text(encoding="utf-8")
     lines = text.splitlines()
     findings: list[Finding] = []
+    if is_template_file(path, root):
+        for match in IMAGE_RE.finditer(text):
+            alt_text = match.group(1).strip()
+            target = match.group(2).strip()
+            if not alt_text:
+                findings.append(Finding(path, "MF009", "media reference is missing alt text"))
+            findings.extend(validate_media_reference(path, alt_text, target, None, provenance_rows, root))
+        return findings, {}, set()
+
     ids = source_ids(text)
     urls = source_urls(text)
     cited_ids = cited_reference_ids(text)
@@ -947,11 +1059,23 @@ def check_page(
     else:
         findings.extend(validate_responsible_breadth_page(path, rb_page_class, text, lines, cited_ids))
 
-    for match in IMAGE_RE.finditer(text):
+    image_matches = list(IMAGE_RE.finditer(text))
+    if rb_page_class == "expanded_exercise_page":
+        findings.extend(validate_exercise_image_summary(path, image_matches, provenance_rows, root))
+
+    for match in image_matches:
         alt_text = match.group(1).strip()
         target = match.group(2).strip()
         if not alt_text:
             findings.append(Finding(path, "MF009", "media reference is missing alt text"))
+        elif rb_page_class == "expanded_exercise_page" and generic_image_alt_text(alt_text):
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_image_alt_text_generic",
+                    f"exercise image alt text must describe the exercise context and teaching purpose: {alt_text}",
+                )
+            )
         findings.extend(validate_media_reference(path, alt_text, target, rb_page_class, provenance_rows, root))
 
     return findings, urls, cited_ids

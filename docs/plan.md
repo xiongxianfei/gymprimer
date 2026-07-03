@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
+  - Status: active
+  - Plan lifecycle state: active
+  - Current stage: code-review M1
+  - Active context: M1 implemented checker/test support for the exercise-image validation contract; code-review is next.
+
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
   - Plan lifecycle state: active

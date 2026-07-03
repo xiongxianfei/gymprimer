@@ -1,0 +1,73 @@
+change_id: exercise-image-standard-and-optimization
+status: active
+current_stage: code-review
+created_date: 2026-07-01
+
+proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
+proposal_status: accepted
+proposal_review: docs/changes/exercise-image-standard-and-optimization/reviews/proposal-review-r1.md
+
+current_spec: specs/exercise-image-standard.md
+current_spec_status: approved
+current_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r2.md
+
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r1.md
+current_adr: docs/adr/2026-07-03-exercise-document-image-purposes.md
+current_adr_status: accepted
+
+current_plan: docs/plans/2026-07-03-exercise-image-standard.md
+current_plan_status: active
+current_plan_review: docs/changes/exercise-image-standard-and-optimization/reviews/plan-review-r1.md
+plan_index: docs/plan.md
+
+current_milestone: M1
+current_milestone_name: Exercise Image Validation Contract
+current_milestone_state: review-requested
+last_reviewed_milestone: none
+
+current_test_spec: specs/exercise-image-standard.test.md
+current_test_spec_status: approved
+current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r2.md
+review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
+next_stage: code-review M1
+
+open_findings: []
+
+notes:
+  - Proposal-review R1 approved the exercise-image standard direction.
+  - Spec-review R2 approved the spec after SR-EIS-1 resolution.
+  - Architecture-review R1 approved the canonical architecture amendment and ADR.
+  - Plan-review R1 approved the execution plan.
+  - Test-spec-review R2 approved implementation handoff after TSR-EIS-1 resolution made template-aware checker support an explicit M1/M2 obligation.
+  - M1 implemented the checker and focused tests for exercise-image purposes, generated-raster provenance, image-count limits, alt text, legacy compatibility, and template-aware validation; code-review is next.
+
+validation:
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: fail-before-implementation
+    evidence: focused M1 tests failed with expected missing behavior before checker changes
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 7 focused M1 tests passed after implementation
+  - command: python3 -m unittest tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1 tests.test_exercise_image_standard
+    result: pass
+    evidence: 51 checker and Responsible Breadth tests passed after implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md
+    result: pass
+    evidence: checked 10 Markdown files, including templates, after implementation
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 95 repository tests passed after implementation
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests
+    result: fail
+    evidence: broad planned command failed on pre-existing forbidden-pattern command examples in superseded docs/plans/2026-06-26-content-schema-foundation.md
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans/2026-07-03-exercise-image-standard.md media exercises tools tests
+    result: pass
+    evidence: scoped current-change privacy scan passed, checked 113 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after implementation
