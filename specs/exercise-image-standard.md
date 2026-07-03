@@ -75,12 +75,12 @@ Example E8: exact prompt record is preserved for a generated raster exercise ima
 Given `exercises/wall-slide.md` references `../media/exercises/wall-slide/movement.png`
 And `media/PROVENANCE.md` has an approved row for `media/exercises/wall-slide/movement.png`
 When provenance is reviewed
-Then the row links to a repository-local prompt record such as `media/prompts/exercises/wall-slide/movement.md`
+Then the row's `prompt_record` field is a repository-local prompt-record path such as `media/prompts/exercises/wall-slide/movement.md`
 And that prompt record preserves the exact full prompt text used for the accepted image.
 
 Example E9: missing prompt record fails promotion
 Given `media/PROVENANCE.md` has an approved generated raster row for `media/exercises/chin-nod/muscle-attention.png`
-And the row has no repository-local prompt record link
+And the row has no non-blank `prompt_record` value
 When generated raster media validation runs after this amendment is implemented
 Then the referencing exercise document fails promotion until the exact prompt record is added and linked.
 
@@ -124,9 +124,9 @@ R18. New generated raster exercise image filenames SHOULD describe the image pur
 
 R19. Generated raster exercise images MUST satisfy the active `media/PROVENANCE.md` contract before the referencing exercise document is promoted.
 
-R20. A generated raster exercise image provenance row MUST include non-blank `asset_path`, `asset_type`, `media_purpose`, `generator`, `prompt_or_creation_notes`, `created_date`, `human_reviewer`, `license_assertion`, `source_inputs`, `review_status`, `page_refs`, and `notes`.
+R20. A generated raster exercise image provenance row MUST include non-blank `asset_path`, `asset_type`, `media_purpose`, `prompt_record`, `generator`, `prompt_or_creation_notes`, `created_date`, `human_reviewer`, `license_assertion`, `source_inputs`, `review_status`, `page_refs`, and `notes`.
 
-R20A. A generated raster exercise image provenance row MUST link to a repository-local prompt record that preserves the exact full prompt text for the accepted image.
+R20A. A generated raster exercise image provenance row's `prompt_record` value MUST be a repository-local Markdown path to the prompt record that preserves the exact full prompt text for the accepted image.
 
 R20B. A generated raster exercise image prompt record MUST live under `media/prompts/exercises/<exercise-slug>/<asset-stem>.md` unless a downstream approved spec or architecture amendment defines a more specific generated-raster prompt-record location.
 
@@ -209,7 +209,7 @@ Outputs:
 - `media/PROVENANCE.md` remains the central provenance index for generated raster images.
 - Exact prompt records remain repository-local audit artifacts linked from provenance rows.
 - A generated raster image is promotable only when exactly matched to an approved provenance row by normalized `asset_path`.
-- A generated raster image with a prompt-record obligation is promotable only when the prompt record points back to the same normalized `asset_path`.
+- A generated raster image with a prompt-record obligation is promotable only when the provenance row's `prompt_record` path exists, is repository-local, and the prompt record points back to the same normalized `asset_path`.
 - Exercise image purpose values are compatibility surfaces once used in promoted provenance rows.
 - Exercise images remain subordinate to page-local source support.
 - Existing legacy-compatible `equipment_identification` and `key_movement_illustration` rows remain valid without media-purpose migration.
@@ -219,7 +219,8 @@ Outputs:
 - An exercise page with no image references passes exercise-image-specific media checks.
 - A generated raster image without an approved exact provenance row fails promotion.
 - A generated raster image with `media_purpose = exercise_muscle_attention_illustration` fails when another muscle-attention image is already referenced by the same exercise document.
-- A generated raster image with no linked prompt record fails after prompt-record validation is implemented for its provenance row.
+- A generated raster image with no non-blank `prompt_record` provenance value fails after prompt-record validation is implemented for its provenance row.
+- A generated raster image with a `prompt_record` value outside the repository or outside the required prompt-record path shape fails.
 - A prompt record whose asset path does not match the generated raster asset path fails.
 - A generated raster image with a pattern, condition, preview, vague, or unknown media purpose fails as a full exercise-document image.
 - A fourth exercise image fails unless the downstream approved spec or plan records explicit justification.
@@ -243,7 +244,7 @@ Rollback for a failed image is additive: remove the Markdown image reference, re
 ## Observability
 
 - Validation output SHOULD identify the affected Markdown page, normalized asset path, failure category, and relevant provenance field when an exercise image check fails.
-- Prompt-record validation output SHOULD identify the affected asset path, prompt-record path, failure category, and mismatched or missing field when prompt-record checks fail.
+- Prompt-record validation output SHOULD identify the affected asset path, `prompt_record` path, failure category, and mismatched or missing field when prompt-record checks fail.
 - Visual-safety review evidence MUST identify the reviewed image path, referencing page, review criteria, pass or fail result, reviewer role or handle, and residual risk.
 - Beginner comprehension evidence for material image batches MUST identify the exercise pages checked, comprehension prompts or criteria, outcome, and residual confusion without storing private health information.
 - Local validation reports MUST name exact commands run and outcomes before completion claims.
@@ -284,13 +285,15 @@ EC7. A generated raster exercise image has no provenance row.
 
 EC8. A generated raster exercise image has a provenance row with missing required fields.
 
-EC8A. A generated raster exercise image has a provenance row but no linked prompt record.
+EC8A. A generated raster exercise image has a provenance row but no non-blank `prompt_record` value.
 
-EC8B. A prompt record exists but points to a different `asset_path`.
+EC8B. A generated raster exercise image has a `prompt_record` value that points outside the repository or outside the required prompt-record path shape.
 
-EC8C. A prompt record exists but omits exact full prompt text.
+EC8C. A prompt record exists but points to a different `asset_path`.
 
-EC8D. An older generated raster exercise image predates the prompt-record amendment and exact prompt text is unavailable.
+EC8D. A prompt record exists but omits exact full prompt text.
+
+EC8E. An older generated raster exercise image predates the prompt-record amendment and exact prompt text is unavailable.
 
 EC9. A generated raster exercise image has `review_status = needs_revision` or `review_status = rejected`.
 
@@ -365,7 +368,6 @@ Downstream artifacts should decide:
 - exact test fixture filenames;
 - whether architecture and ADR updates are amendments or confirmations;
 - exact Markdown template wording for optional exercise image blocks;
-- exact prompt-record link field name in `media/PROVENANCE.md`;
 - exact first-batch prompt language and reviewer handle format.
 
 ## Next artifacts
@@ -379,8 +381,9 @@ Downstream artifacts should decide:
 
 - Spec review R1: `docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r1.md`
 - Spec review R2: `docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r2.md`
+- Spec review R3: `docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r3.md`
 - Review resolution: `docs/changes/exercise-image-standard-and-optimization/review-resolution.md`
-- Prompt-record amendment review: none yet.
+- Prompt-record amendment review: `docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r3.md`
 
 ## Readiness
 

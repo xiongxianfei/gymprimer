@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: spec revision
-  - Active context: spec-review R3 requested changes for the exact prompt preservation amendment because the provenance-to-prompt-record link contract is not observable yet. M3 still remains blocked on non-identifying reader-prompt beginner-comprehension evidence before returning to code-review.
+  - Current stage: spec-review
+  - Active context: SR-EIS-2 was addressed by defining `prompt_record` as the required provenance field for generated raster exercise image prompt-record links; spec-review re-review is next. M3 still remains blocked on non-identifying reader-prompt beginner-comprehension evidence before returning to code-review.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
