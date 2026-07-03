@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: architecture-review
+current_stage: plan
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -12,7 +12,7 @@ current_spec_status: approved
 current_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r4.md
 
 current_architecture: docs/architecture/system/architecture.md
-current_architecture_status: draft
+current_architecture_status: approved
 current_architecture_review: docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r2.md
 current_adr: docs/adr/2026-07-03-generated-raster-prompt-records.md
 current_adr_status: accepted
@@ -22,9 +22,9 @@ current_plan_status: active
 current_plan_review: docs/changes/exercise-image-standard-and-optimization/reviews/plan-review-r1.md
 plan_index: docs/plan.md
 
-current_milestone: M3
-current_milestone_name: First New Exercise Image Batch
-current_milestone_state: resolution-needed
+current_milestone: M3A
+current_milestone_name: Prompt Record Validation and M3 Backfill
+current_milestone_state: planned
 last_reviewed_milestone: M2
 
 current_test_spec: specs/exercise-image-standard.test.md
@@ -32,7 +32,7 @@ current_test_spec_status: approved
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r4.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3-r1.md
-next_stage: architecture
+next_stage: plan-review
 
 open_findings:
   - CR-EIS-M3-2
@@ -60,8 +60,9 @@ notes:
   - Spec-review R3 requested changes because the prompt-record amendment requires a provenance-to-prompt-record link but leaves the link field name or deterministic mapping undefined.
   - SR-EIS-2 was addressed by defining `prompt_record` as the required provenance field for generated raster exercise image prompt-record links; spec-review re-review is next.
   - Spec-review R4 approved the prompt-record amendment after SR-EIS-2 resolution; architecture or ADR assessment is next.
-  - Architecture amendment added prompt-record validation flow, `prompt_record` provenance linking, prompt-record packaging, and ADR 2026-07-03 generated raster prompt records; architecture-review is next.
+  - Architecture amendment added prompt-record validation flow, `prompt_record` provenance linking, prompt-record packaging, and ADR 2026-07-03 generated raster prompt records; architecture-review R2 followed.
   - Architecture-review R2 approved the prompt-record canonical architecture amendment and ADR; architecture status normalization is next before plan or test-spec amendments rely on it.
+  - Architecture status was normalized to approved. The plan now adds M3A for prompt-record checker support, test coverage, and M3 prompt-record backfill or replacement decisions; plan-review is next before test-spec amendment.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
@@ -196,3 +197,9 @@ validation:
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after prompt-record architecture amendment
+  - command: python3 tools/checks/check_privacy.py -- docs/architecture/system/architecture.md docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/change.yaml
+    result: pass
+    evidence: scoped prompt-record plan amendment privacy scan passed, checked 4 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after prompt-record plan amendment

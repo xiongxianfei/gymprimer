@@ -27,17 +27,22 @@ or convert GymPrimer into a hosted, visual-first, clinical, or coaching product.
 - Spec review:
   - `../changes/exercise-image-standard-and-optimization/reviews/spec-review-r1.md`
   - `../changes/exercise-image-standard-and-optimization/reviews/spec-review-r2.md`
+  - `../changes/exercise-image-standard-and-optimization/reviews/spec-review-r3.md`
+  - `../changes/exercise-image-standard-and-optimization/reviews/spec-review-r4.md`
 - Review resolution:
   - `../changes/exercise-image-standard-and-optimization/review-resolution.md`
 - Architecture: `../architecture/system/architecture.md`
 - Architecture review:
   - `../changes/exercise-image-standard-and-optimization/reviews/architecture-review-r1.md`
+  - `../changes/exercise-image-standard-and-optimization/reviews/architecture-review-r2.md`
 - ADR:
   - `../adr/2026-07-03-exercise-document-image-purposes.md`
+  - `../adr/2026-07-03-generated-raster-prompt-records.md`
 - Governing specs:
   - `../../specs/markdown-first-primer.md`
   - `../../specs/responsible-breadth.md`
-- Test spec: pending after plan review
+- Test spec: `../../specs/exercise-image-standard.test.md`; prompt-record
+  amendment update pending after plan review
 
 ## Context and orientation
 
@@ -67,6 +72,14 @@ full exercise-document images:
 The first implementation work should prove validation behavior with fixtures
 before any generated image batch is added.
 
+The prompt-record amendment adds a required `prompt_record` field for generated
+raster exercise images governed by the amendment. The field points from
+`media/PROVENANCE.md` to a repository-local Markdown prompt record under
+`media/prompts/exercises/<exercise-slug>/<asset-stem>.md`, and that prompt
+record must point back to the same normalized `asset_path`. The current checker
+and provenance table do not yet implement that contract, so prompt-record work
+must be sequenced before the current M3 image batch returns to code-review.
+
 ## Non-goals
 
 - Do not change existing exercise image assets, Markdown image references, or
@@ -93,10 +106,15 @@ before any generated image batch is added.
 - R12-R14 and R28-R31: M2 defines review evidence and authoring surfaces for
   visual safety, support-only semantics, beginner comprehension checks, and
   manual criteria that cannot be fully automated.
-- R15-R24: M1 validates repository-local image paths, `media/exercises/<slug>/`
-  placement for new generated raster exercise images, provenance fields,
-  approved review status, page-reference matching, and accountable human
-  reviewer behavior where deterministic checks are feasible.
+- R15-R20 and R21-R24: M1 validates repository-local image paths,
+  `media/exercises/<slug>/` placement for new generated raster exercise
+  images, baseline provenance fields, approved review status, page-reference
+  matching, and accountable human reviewer behavior where deterministic checks
+  are feasible.
+- R20A-R20H and AC5A: M3A validates `prompt_record` provenance links,
+  repository-local prompt-record path shape, reverse `asset_path` matching,
+  exact full prompt text or explicit redaction notes, and no reader-facing
+  prompt embedding.
 - R25-R27: M1 validates required non-generic alt text and muscle-attention alt
   text boundaries where deterministic checks are feasible.
 - R32-R33 and AC6: M1 preserves existing `equipment_identification` and
@@ -104,16 +122,17 @@ before any generated image batch is added.
 - R35-R36: M1 provides stable automated failure categories for path, extension,
   alt-text, provenance, purpose, page-reference, image-count, and
   visual-safety-evidence checks.
-- R37-R38: M1-M4 preserve no-secret, no-private-data, no-private-health-
-  information, no-runtime, no-CMS, no-user-input, and no-personalized-coaching
-  boundaries.
-- AC1-AC12: M1-M4 provide acceptance evidence after plan review, test-spec
-  review, implementation, code review, explain-change, and final verification.
+- R37-R38: M1-M4 and M3A preserve no-secret, no-private-data,
+  no-private-health-information, no-runtime, no-CMS, no-user-input, and
+  no-personalized-coaching boundaries.
+- AC1-AC12: M1-M4 plus M3A provide acceptance evidence after plan review,
+  test-spec review, implementation, code review, explain-change, and final
+  verification.
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: resolution-needed
+- Current milestone: M3A
+- Current milestone state: planned
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -135,16 +154,19 @@ before any generated image batch is added.
   SR-EIS-2 was addressed by defining `prompt_record` as the required provenance
   field for generated raster exercise image prompt-record links; spec-review R4
   approved the prompt-record amendment; architecture amendment and ADR for
-  prompt records are drafted
-- Remaining in-scope implementation milestones: M3 resolution, M4, and
-  lifecycle closeout
-- Next stage: architecture-review for prompt-record amendment
+  prompt records were approved by architecture-review R2; architecture status
+  was normalized to approved; M3A is now planned for prompt-record checker
+  support, test coverage, and M3 prompt-record backfill or replacement
+  decisions before M3 returns to code-review
+- Remaining in-scope implementation milestones: M3A, M3 re-review/resolution,
+  M4, and lifecycle closeout
+- Next stage: plan-review for the prompt-record plan amendment
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: the prompt-preservation
-  architecture amendment needs architecture-review before downstream artifact
-  updates; M3 still needs reader-prompt comprehension evidence before returning
-  to code-review; M4, explain-change, final verification, and PR handoff remain
-  open.
+- Reason final closeout is or is not ready: the prompt-record plan changes need
+  plan-review before test-spec amendment; test-spec amendment and
+  test-spec-review must complete before M3A implementation; M3 still needs
+  reader-prompt comprehension evidence before returning to code-review; M4,
+  explain-change, final verification, and PR handoff remain open.
 
 ## Milestones
 
@@ -288,6 +310,68 @@ before any generated image batch is added.
   or revise provenance rows, retain the text-only exercise pages, and rerun M3
   validation.
 
+### M3A. Prompt Record Validation and M3 Backfill
+
+- Milestone state: planned
+- Goal: implement the approved prompt-record contract and bring the in-flight
+  M3 generated raster exercise images into compliance before M3 returns to
+  code-review.
+- Requirements: R20-R20H, R28, R35-R38, AC5, AC5A, AC10-AC12.
+- Likely files:
+  - `tools/checks/check_markdown_first.py`
+  - `tests/test_exercise_image_standard.py`
+  - `media/PROVENANCE.md`
+  - prompt records under `media/prompts/exercises/<exercise-slug>/`
+  - M3 target assets under `media/exercises/<exercise-slug>/` only if exact
+    prompts cannot be recovered and replacement images are required
+  - change-local visual-safety and beginner-comprehension evidence only if
+    any replacement image is generated
+- Tests:
+  - a generated raster exercise image governed by the amendment passes only
+    when its provenance row has non-blank `prompt_record`;
+  - a `prompt_record` path outside the repository, outside
+    `media/prompts/exercises/<exercise-slug>/<asset-stem>.md`, or with a
+    non-Markdown extension fails;
+  - a missing prompt-record file fails;
+  - a prompt record whose internal `asset_path` does not exactly match the
+    provenance row's normalized `asset_path` fails;
+  - a prompt record that omits exact full prompt text and lacks an explicit
+    redaction note fails;
+  - prompt records are not treated as reader-facing exercise Markdown and are
+    not embedded into exercise pages;
+  - legacy-compatible generated raster exercise images that predate the
+    prompt-record amendment remain valid when downstream scope explicitly keeps
+    them under the pre-amendment compatibility path.
+- Steps:
+  - Add focused failing tests for missing `prompt_record`, invalid
+    prompt-record path shape, missing prompt record, reverse `asset_path`
+    mismatch, missing exact prompt text, and legacy compatibility.
+  - Extend provenance parsing and validation to accept the new
+    `prompt_record` column while preserving existing required-field behavior.
+  - Add repository-local prompt-record resolution and validation helpers.
+  - Add exact prompt records for the current M3 generated raster exercise
+    images when exact prompts are recoverable.
+  - If exact prompts are unavailable for any current M3 image, either record
+    the limitation and leave that asset under an explicitly allowed
+    pre-amendment compatibility path or replace the image with a newly
+    generated asset that has a full prompt record and fresh review evidence.
+  - Update `media/PROVENANCE.md` rows for governed M3 images with
+    `prompt_record` values.
+  - Rerun M3 and prompt-record validation before returning M3 to code-review.
+- Validation:
+  - `python3 -m unittest tests.test_exercise_image_standard`
+  - `python3 -m unittest discover tests`
+  - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
+  - scoped current-change privacy scan over prompt records and M3 evidence;
+    broad EIS-CMD4 privacy validation remains lifecycle closeout / verify
+- Result: pending
+- Risks: exact prompts for already-generated M3 images may be unavailable;
+  replacement images could reopen visual clarity, provenance, visual-safety,
+  and beginner-comprehension review work.
+- Rollback: remove M3A checker changes, tests, prompt-record files, and
+  `prompt_record` provenance fields; keep the approved spec and architecture
+  amendments as unimplemented until a new plan slice is approved.
+
 ### M4. Remaining Exercise Audit and Follow-up Routing
 
 - Milestone state: planned
@@ -351,14 +435,20 @@ commands.
 
 Expected local command set after implementation begins:
 
+- `python3 -m unittest tests.test_exercise_image_standard`
 - `python3 -m unittest tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1`
 - `python3 -m unittest discover tests`
 - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md`
 
+Prompt-record validation must be added to the test spec before M3A
+implementation. M3A validation should include missing `prompt_record`, invalid
+path shape, missing prompt-record file, reverse `asset_path` mismatch, missing
+exact prompt text or redaction note, and legacy compatibility fixtures.
+
 Milestone-level privacy validation may use scoped current-change scans when
 review hygiene needs it. The broad EIS-CMD4 privacy sweep is owned by lifecycle
 closeout / verify and must pass before PR handoff, not during M1-M4
-implementation closeout.
+or M3A implementation closeout.
 
 Manual evidence is required for visual semantics and beginner comprehension
 when generated image batches are added.
@@ -373,6 +463,11 @@ when generated image batches are added.
   static checks cannot prove all visual semantics.
 - Provenance drift: validate exact `asset_path`, required fields,
   `review_status`, and `page_refs`.
+- Prompt-record drift: validate `prompt_record` path shape, file existence,
+  reverse `asset_path` matching, and exact prompt text or explicit redaction
+  notes.
+- Missing exact prompts: replace affected generated raster images or record an
+  explicit compatibility limitation before promotion; do not invent prompts.
 - Large content PR risk: keep generated image batches small and reviewable.
 - Source-support drift near images: keep claims in Markdown and use page-local
   sources; images cannot introduce new claims.
@@ -382,6 +477,12 @@ when generated image batches are added.
 - Plan-review must approve this plan before test-spec authoring.
 - Test-spec and test-spec-review must complete before implementation.
 - M3 depends on M1 and M2 closure.
+- M3A depends on prompt-record architecture-review R2 approval, this plan
+  amendment, plan-review, and a prompt-record test-spec amendment with
+  test-spec-review approval.
+- M3 cannot return to code-review until M3A is implemented and reviewed, or
+  plan-review/test-spec-review explicitly choose a different safe sequencing
+  path.
 - M4 depends on M1 closure and should run after at least one validated image
   batch unless owner direction changes.
 - Generated image batches require an accountable human reviewer identity for
@@ -454,7 +555,13 @@ when generated image batches are added.
   SR-EIS-2 resolution; architecture or ADR assessment is next.
 - 2026-07-03: Architecture amendment added prompt-record validation flow,
   `prompt_record` provenance linking, prompt-record packaging, and ADR
-  2026-07-03 generated raster prompt records; architecture-review is next.
+  2026-07-03 generated raster prompt records; architecture-review R2 followed.
+- 2026-07-03: Architecture-review R2 approved the prompt-record canonical
+  architecture amendment and ADR with no material findings.
+- 2026-07-03: Architecture status was normalized to approved after
+  architecture-review R2. The plan was revised to add M3A for prompt-record
+  checker support, tests, and M3 image prompt-record backfill or replacement
+  decisions; plan-review is next.
 
 ## Decision log
 
@@ -463,6 +570,7 @@ when generated image batches are added.
 | 2026-07-03 | Put validation before generated image batches. | The spec changes media-purpose and provenance behavior, so fixtures should prove the contract before content changes. | Generate images first; mix checker changes and image batch in one PR. |
 | 2026-07-03 | Preserve existing exercise images without migration. | The approved spec says existing `equipment_identification` and `key_movement_illustration` exercise images remain valid. | Rename old purposes opportunistically; require migration when pages are touched. |
 | 2026-07-03 | Use one plan with small implementation milestones. | The accepted proposal keeps one coherent product decision while avoiding broad implementation PRs. | One large all-exercise optimization PR; separate proposals for small batches. |
+| 2026-07-03 | Add M3A for prompt-record validation and M3 backfill before M3 re-review. | The prompt-record amendment changes generated-raster provenance validation after M3 was already in review-resolution, so the new contract needs its own testable slice before the image batch can be accepted. | Hide prompt-record work inside M3 re-review; postpone prompt records to M4; treat chat or tool history as durable prompt evidence. |
 
 ## Surprises and discoveries
 
@@ -484,6 +592,10 @@ when generated image batches are added.
 - The M3 wall-slide and band pull-apart images remain simplified support
   illustrations; nearby Markdown remains authoritative for forearm contact,
   band choice, muscle wording, and range.
+- The prompt-record amendment happened after M3 image generation began, and
+  current `media/PROVENANCE.md` rows do not have a `prompt_record` column.
+  M3A must backfill exact prompts only when they are recoverable; otherwise it
+  must replace affected images or record an explicit compatibility limitation.
 
 ## Validation notes
 
@@ -575,6 +687,13 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
   passed, checking 40 files.
 - After M3 review-resolution updates, `git diff --check` passed.
+- During prompt-record architecture review,
+  `python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r2.md docs/changes/exercise-image-standard-and-optimization/review-log.md docs/changes/exercise-image-standard-and-optimization/change.yaml`
+  passed, checking 3 files.
+- During prompt-record plan amendment,
+  `python3 tools/checks/check_privacy.py -- docs/architecture/system/architecture.md docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/change.yaml`
+  passed, checking 4 files.
+- During prompt-record plan amendment, `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -584,4 +703,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is awaiting
-architecture-review for the prompt-record amendment and is not final closeout.
+plan-review for the prompt-record amendment and is not final closeout.

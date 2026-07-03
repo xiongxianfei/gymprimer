@@ -2,7 +2,7 @@
 
 ## Status
 
-- draft
+- approved
 
 This media-purpose amendment was approved by
 `docs/changes/apt-pattern-architecture/reviews/architecture-review-r2.md`. The
@@ -24,7 +24,8 @@ The central-disclaimer amendment was approved by
 `docs/changes/forward-head-posture-pattern-architecture/reviews/architecture-review-r2.md`.
 The exercise-image-standard amendment was approved by
 `docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r1.md`.
-The prompt-record amendment is pending architecture review.
+The prompt-record amendment was approved by
+`docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r2.md`.
 
 ## Related artifacts
 
@@ -775,9 +776,9 @@ Observability:
 
 ## Next artifacts
 
-- Architecture review for the prompt-record amendment.
-- Test-spec and plan amendments for prompt-record validation and backfill after
-  architecture review.
+- Plan review for the prompt-record plan amendment.
+- Test-spec amendment for prompt-record validation and backfill after plan
+  review.
 
 ## Follow-on artifacts
 
@@ -788,6 +789,8 @@ Observability:
   `../../../specs/exercise-image-standard.md`.
 - Exercise image standard architecture review:
   `../../changes/exercise-image-standard-and-optimization/reviews/architecture-review-r1.md`.
+- Prompt-record architecture review:
+  `../../changes/exercise-image-standard-and-optimization/reviews/architecture-review-r2.md`.
 - Exercise document image purposes ADR:
   `../../adr/2026-07-03-exercise-document-image-purposes.md`.
 - Generated raster prompt records ADR:
@@ -798,7 +801,7 @@ Observability:
 This architecture package has completed architecture-review for earlier
 Markdown-first, Responsible Breadth, layout, media, forward-head-posture, and
 central-disclaimer amendments. The exercise-image-standard amendment has also
-completed architecture review. The prompt-record amendment is ready for
+completed architecture review. The prompt-record amendment has completed
 architecture review. Exercise image standard implementation is not
-implementation-ready until architecture review, plan, plan-review, test-spec,
-and test-spec-review are complete for the prompt-record amendment.
+implementation-ready until plan, plan-review, test-spec, and test-spec-review
+are complete for the prompt-record amendment.

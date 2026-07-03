@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: architecture-review
-  - Active context: prompt-record architecture amendment and ADR are drafted; architecture-review is next. M3 still remains blocked on non-identifying reader-prompt beginner-comprehension evidence before returning to code-review.
+  - Current stage: plan-review
+  - Active context: prompt-record architecture-review R2 approved the amendment and the plan now routes prompt-record validation/backfill through M3A before M3 returns to code-review. M3 still remains blocked on non-identifying reader-prompt beginner-comprehension evidence.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
