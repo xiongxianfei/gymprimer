@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -24,7 +24,7 @@ plan_index: docs/plan.md
 
 current_milestone: M4
 current_milestone_name: Remaining Exercise Audit and Follow-up Routing
-current_milestone_state: planned
+current_milestone_state: review-requested
 last_reviewed_milestone: M3
 
 current_test_spec: specs/exercise-image-standard.test.md
@@ -32,7 +32,7 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r5.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m3-r2.md
-next_stage: implement
+next_stage: code-review
 
 open_findings: []
 
@@ -73,6 +73,7 @@ notes:
   - Owner reader-prompt evidence and post-replacement clarity confirmation for CR-EIS-M3-2 are recorded. The unclear or inconsistent affected images were replaced with prompt-record-backed assets, and CR-EIS-M3-2 is addressed pending code-review re-review.
   - Code-review M3A R3 resolved CR-EIS-M3A-2 and closed M3A. M3 code-review re-review is next.
   - Code-review M3 R2 resolved CR-EIS-M3-1 and CR-EIS-M3-2 and closed M3. M4 implementation is next.
+  - M4 audited all current exercise pages, recorded keep-existing-image routing, and added regression coverage that every current exercise page appears in the audit; code-review M4 is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard
@@ -321,3 +322,18 @@ validation:
   - command: git diff --check HEAD
     result: pass
     evidence: diff whitespace check passed during M3 R2 code-review
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 13 focused exercise-image tests passed after M4 audit implementation
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 102 repository tests passed after M4 audit implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 19 Markdown files after M4 audit implementation
+  - command: python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md
+    result: pass
+    evidence: scoped M4 privacy scan passed, checked 48 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M4 audit implementation

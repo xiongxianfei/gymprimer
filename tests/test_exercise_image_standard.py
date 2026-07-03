@@ -545,6 +545,17 @@ class ExerciseImageStandardTest(unittest.TestCase):
         self.assertTrue((evidence_root / "m3-beginner-comprehension.md").exists())
         self.assertTrue((evidence_root / "m3a-prompt-record-backfill.md").exists())
 
+    def test_m4_exercise_audit_covers_current_exercise_pages(self) -> None:
+        audit_path = ROOT / "docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md"
+        audit_text = audit_path.read_text(encoding="utf-8")
+        exercise_pages = sorted(path.relative_to(ROOT).as_posix() for path in (ROOT / "exercises").glob("*.md"))
+
+        for page in exercise_pages:
+            with self.subTest(page=page):
+                self.assertIn(f"`{page}`", audit_text)
+
+        self.assertIn("Do not edit an exercise page solely to migrate", audit_text)
+
 
 if __name__ == "__main__":
     unittest.main()

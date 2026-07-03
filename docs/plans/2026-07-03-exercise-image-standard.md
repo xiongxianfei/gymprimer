@@ -132,7 +132,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M3
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -177,12 +177,14 @@ must be sequenced before the current M3 image batch returns to code-review.
   inconsistent affected images were replaced with prompt-record-backed assets,
   owner post-replacement feedback confirmed that the pictures are now clear,
   and code-review M3A R3 resolved CR-EIS-M3A-2 and closed M3A; code-review M3
-  R2 resolved CR-EIS-M3-1 and CR-EIS-M3-2 and closed M3
-- Remaining in-scope implementation milestones: M4 and lifecycle closeout
-- Next stage: implement M4
+  R2 resolved CR-EIS-M3-1 and CR-EIS-M3-2 and closed M3; M4 audited all
+  current exercise pages and recorded keep-existing-image routing
+- Remaining in-scope implementation milestones: M4 review and lifecycle
+  closeout
+- Next stage: code-review M4
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M4, explain-change, final
-  verification, and PR handoff remain open.
+- Reason final closeout is or is not ready: M4 still needs code-review;
+  explain-change, final verification, and PR handoff remain open.
 
 ## Milestones
 
@@ -415,7 +417,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 
 ### M4. Remaining Exercise Audit and Follow-up Routing
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: audit all current `exercises/*.md` pages under the accepted standard
   without forcing existing image migration or a broad all-pages media rewrite.
 - Requirements: R1-R6, R32-R38, AC2-AC6, AC10-AC12.
@@ -438,7 +440,14 @@ must be sequenced before the current M3 image batch returns to code-review.
 - Validation:
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md`
   - `python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
-- Result: pending
+- Result: Implemented M4 audit evidence in
+  `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`.
+  The audit covers all current `exercises/*.md` pages, records
+  `keep existing image` for each page, preserves legacy-compatible image
+  purposes without migration-only edits, and routes future image work to small
+  reviewed follow-up loops only when a concrete comprehension gap is named.
+  `tests/test_exercise_image_standard.py` now checks that every current
+  exercise page appears in the audit.
 - Risks: audit notes could become a hidden backlog without reviewable
   milestones.
 - Rollback: remove or revise audit evidence; keep implemented validation and
@@ -806,6 +815,17 @@ when generated image batches are added.
   `python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/evidence exercises media/PROVENANCE.md media/prompts`
   passed, checking 26 files.
 - During M3 R2 code-review, `git diff --check HEAD` passed.
+- After M4 audit implementation, `python3 -m unittest tests.test_exercise_image_standard`
+  passed with 13 tests.
+- After M4 audit implementation, `python3 -m unittest discover tests` passed
+  with 102 tests.
+- After M4 audit implementation,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md`
+  passed, checking 19 Markdown files.
+- After M4 audit implementation,
+  `python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md`
+  passed, checking 48 files.
+- After M4 audit implementation, `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -815,4 +835,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is awaiting M4
-implementation. It is not final closeout.
+code-review. It is not final closeout.
