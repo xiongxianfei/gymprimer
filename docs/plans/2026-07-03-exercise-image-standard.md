@@ -132,7 +132,7 @@ must be sequenced before the current M3 image batch returns to code-review.
 ## Current Handoff Summary
 
 - Current milestone: M3A
-- Current milestone state: planned
+- Current milestone state: implementing
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R2 approved after
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
@@ -158,15 +158,15 @@ must be sequenced before the current M3 image batch returns to code-review.
   was normalized to approved; M3A is now planned for prompt-record checker
   support, test coverage, and M3 prompt-record backfill or replacement
   decisions before M3 returns to code-review; plan-review R2 approved the M3A
-  amendment; the test spec now maps M3A prompt-record proof obligations
+  amendment; test-spec-review R5 approved the M3A prompt-record proof map
 - Remaining in-scope implementation milestones: M3A, M3 re-review/resolution,
   M4, and lifecycle closeout
-- Next stage: test-spec-review for the prompt-record proof-map amendment
+- Next stage: implement M3A
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: test-spec-review must approve the
-  prompt-record proof-map amendment before M3A implementation; M3 still needs
-  reader-prompt comprehension evidence before returning to code-review; M4,
-  explain-change, final verification, and PR handoff remain open.
+- Reason final closeout is or is not ready: M3A implementation and code-review
+  are still open; M3 still needs reader-prompt comprehension evidence before
+  returning to code-review; M4, explain-change, final verification, and PR
+  handoff remain open.
 
 ## Milestones
 
@@ -566,7 +566,9 @@ when generated image batches are added.
   backfill plan amendment; test-spec amendment is next.
 - 2026-07-03: Test spec was amended with M3A prompt-record requirements,
   examples, edge cases, commands, fixtures, observability, migration, and
-  readiness; test-spec-review is next.
+  readiness; test-spec-review R5 followed.
+- 2026-07-03: Test-spec-review R5 approved the M3A prompt-record proof map;
+  M3A implementation is next.
 
 ## Decision log
 
@@ -708,4 +710,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is awaiting
-test-spec-review for the prompt-record amendment and is not final closeout.
+M3A implementation for the prompt-record amendment and is not final closeout.

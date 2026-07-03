@@ -2,7 +2,7 @@
 
 ## Status
 
-draft
+active
 
 ## Related spec and plan
 
@@ -516,18 +516,18 @@ gap.
 
 ## Next artifacts
 
-1. Test-spec-review for the M3A prompt-record proof-map amendment.
-2. M3A implementation only after test-spec-review approves the amended proof
-   map.
+1. M3A implementation under the approved prompt-record proof map.
+2. M3A code-review after implementation and validation evidence.
 3. M3 code-review re-review only after M3A closes or an approved review path
    explicitly supersedes the M3A dependency.
 
 ## Follow-on artifacts
 
 - Plan review R2: `docs/changes/exercise-image-standard-and-optimization/reviews/plan-review-r2.md`
+- Test-spec review R5: `docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r5.md`
 
 ## Readiness
 
-This test spec is ready for test-spec-review of the M3A prompt-record proof-map
-amendment. It does not authorize M3A implementation or M3 code-review re-review
-until test-spec-review approves the amended proof map.
+This test spec is active after test-spec-review R5. It authorizes M3A
+implementation under the approved proof map, but it does not authorize M3
+code-review re-review, final verification, PR handoff, or final closeout.

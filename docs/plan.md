@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: test-spec-review
-  - Active context: plan-review R2 approved M3A prompt-record validation/backfill, and the test spec now maps prompt-record checks before M3A implementation. M3 still remains blocked on non-identifying reader-prompt beginner-comprehension evidence.
+  - Current stage: implement
+  - Active context: test-spec-review R5 approved M3A prompt-record validation/backfill proof map; M3A implementation is next. M3 still remains blocked on non-identifying reader-prompt beginner-comprehension evidence.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
