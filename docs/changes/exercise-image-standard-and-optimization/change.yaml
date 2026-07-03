@@ -1,6 +1,6 @@
 change_id: exercise-image-standard-and-optimization
 status: active
-current_stage: test-spec-review
+current_stage: test-spec revision
 created_date: 2026-07-01
 
 proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
@@ -29,13 +29,14 @@ last_reviewed_milestone: none
 
 current_test_spec: specs/exercise-image-standard.test.md
 current_test_spec_status: approved
-current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r2.md
+current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r3.md
 review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
 current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m1-r1.md
-next_stage: test-spec-review
+next_stage: test-spec revision
 
 open_findings:
   - CR-EIS-M1-1
+  - TSR-EIS-2
 
 notes:
   - Proposal-review R1 approved the exercise-image standard direction.
@@ -46,6 +47,7 @@ notes:
   - M1 implemented the checker and focused tests for exercise-image purposes, generated-raster provenance, image-count limits, alt text, legacy compatibility, and template-aware validation; code-review is next.
   - Code-review M1 R1 requested changes because required EIS-CMD4 privacy validation failed on pre-existing superseded-plan examples.
   - Owner directed broad privacy validation to move to verify before PR. The test spec and plan now defer EIS-CMD4 to lifecycle closeout / verify, pending test-spec-review before M1 code-review re-review.
+  - Test-spec-review R3 requested changes because the plan still lists broad EIS-CMD4 as an implementation-start command; test-spec revision is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_image_standard

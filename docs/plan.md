@@ -5,8 +5,8 @@
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: test-spec-review
-  - Active context: owner directed broad privacy validation to verify before PR; the validation-path amendment needs test-spec-review before M1 code-review re-review.
+  - Current stage: test-spec revision
+  - Active context: test-spec-review R3 requested changes for TSR-EIS-2; align the plan's general validation command timing with the EIS-CMD4 verify-stage amendment.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

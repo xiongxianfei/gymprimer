@@ -119,11 +119,11 @@ before any generated image batch is added.
   SR-EIS-1 resolution; architecture-review R1 approved; plan-review R1
   approved; test-spec-review R2 approved after TSR-EIS-1 resolution;
   code-review M1 R1 requested changes for CR-EIS-M1-1; owner directed broad
-  privacy validation to move to verify-before-PR, so test-spec-review is next
-  for the validation-path amendment
+  privacy validation to move to verify-before-PR; test-spec-review R3
+  requested changes for TSR-EIS-2
 - Remaining in-scope implementation milestones: M1 resolution, M2-M4, and
   lifecycle closeout
-- Next stage: test-spec-review
+- Next stage: test-spec revision
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: M1 has an unresolved code-review
   finding, and the plan has not completed later milestones, explain-change,
@@ -385,6 +385,9 @@ when generated image batches are added.
   before PR rather than blocking M1. The test spec and plan were revised to
   move EIS-CMD4 to lifecycle closeout / verify and need test-spec-review before
   M1 code-review re-review.
+- 2026-07-03: Test-spec-review R3 requested test-spec revision for TSR-EIS-2
+  because the plan still lists broad EIS-CMD4 as an implementation-start
+  command.
 
 ## Decision log
 
@@ -443,4 +446,4 @@ explain-change, verification, and PR handoff are complete.
 ## Readiness
 
 See Current Handoff Summary for the live next stage. This plan is ready for
-test-spec-review of the validation-path amendment, not final closeout.
+test-spec revision, not final closeout.
