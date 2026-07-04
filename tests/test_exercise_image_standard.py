@@ -433,6 +433,57 @@ class ExerciseImageStandardTest(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_media_prompt_records_are_not_checked_as_content_pages(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            exercise = root / "exercises/fixture-exercise.md"
+            exercise.parent.mkdir(parents=True, exist_ok=True)
+            exercise.write_text(
+                textwrap.dedent(
+                    """\
+                    # Fixture Exercise
+
+                    Author: fixture
+                    Created: 2026-07-04
+                    Last reviewed: 2026-07-04
+                    Next review due: 2027-07-04
+                    Review scope: fixture prompt-record skip
+
+                    > Disclaimer: GymPrimer is educational content for general exercise literacy.
+                    > It is not medical advice and not personalized coaching.
+
+                    ## What this is for
+
+                    A fixture exercise. [Fixture][fixture-training]
+
+                    ## How to do it
+
+                    Move with control. [Fixture][fixture-movement]
+
+                    ## Sources
+
+                    - [Fixture][fixture-training]
+                    - [Fixture][fixture-movement]
+                    - [Fixture][fixture-setup]
+
+                    [fixture-training]: https://example.org/fixture-training
+                    [fixture-movement]: https://example.org/fixture-movement
+                    [fixture-setup]: https://example.org/fixture-setup
+                    """
+                ),
+                encoding="utf-8",
+            )
+            write_prompt_record(
+                root,
+                exact_prompt="Fixture prompt text may mention no diagnosis symbols in the generated image.",
+            )
+
+            result = run_check_with_root(root, root / "exercises", root / "media")
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_prompt_record_compatibility_limitation_is_scoped_to_m3_assets(self) -> None:
         compatibility_note = "M3 pre-amendment prompt unavailable; compatibility limitation recorded"
         with tempfile.TemporaryDirectory() as tmp:

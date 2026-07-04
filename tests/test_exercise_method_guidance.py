@@ -29,8 +29,8 @@ def method_page(method_section: str) -> str:
     )
 
 
-def finding_codes(text: str) -> list[str]:
-    path = ROOT / "exercises/fixture-exercise.md"
+def finding_codes(text: str, relative_path: str = "exercises/fixture-exercise.md") -> list[str]:
+    path = ROOT / relative_path
     return [finding.code for finding in validate_exercise_method_guidance(path, text)]
 
 
@@ -107,7 +107,7 @@ class ExerciseMethodGuidanceTest(unittest.TestCase):
         self.assertIn("exercise_method_empty_label", codes)
 
     def test_unknown_and_deferred_method_types_fail(self) -> None:
-        for method_type in ("loaded_carry", "basic_cardio_equipment", "unknown_type"):
+        for method_type in ("loaded_carry", "unknown_type"):
             with self.subTest(method_type=method_type):
                 text = method_page(
                     f"""\
@@ -124,6 +124,39 @@ class ExerciseMethodGuidanceTest(unittest.TestCase):
                 )
 
                 self.assertIn("exercise_method_inactive_type", finding_codes(text))
+
+    def test_basic_cardio_equipment_passes_only_for_rowing_machine_scope(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do
+
+            Method type: basic_cardio_equipment
+
+            Beginner starting point: Start with 3-5 minutes of easy rowing.
+            Effort: Keep the effort easy or moderate.
+            Rest/reset: Take a break to walk, breathe, or reset technique.
+            Progression: Make the stroke smoother, then add time.
+            Stop condition: Stop when technique gets painful, jerky, or uncontrolled.
+            """
+        )
+
+        self.assertEqual(finding_codes(text, "exercises/rowing-machine.md"), [])
+        self.assertIn("exercise_method_inactive_type", finding_codes(text, "exercises/fixture-exercise.md"))
+
+    def test_basic_cardio_equipment_still_requires_visible_labels(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do
+
+            Method type: basic_cardio_equipment
+
+            Beginner starting point: Start with 3-5 minutes of easy rowing.
+            Effort: Keep the effort easy or moderate.
+            Progression: Make the stroke smoother, then add time.
+            """
+        )
+
+        self.assertIn("exercise_method_missing_label", finding_codes(text, "exercises/rowing-machine.md"))
 
     def test_hidden_only_method_metadata_fails_but_visible_markdown_remains_authoritative(self) -> None:
         hidden_only = textwrap.dedent(

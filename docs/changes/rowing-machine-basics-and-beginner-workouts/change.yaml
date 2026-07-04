@@ -1,0 +1,476 @@
+change_id: rowing-machine-basics-and-beginner-workouts
+status: active
+current_stage: pr
+created_date: 2026-07-04
+
+proposal: docs/proposals/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
+proposal_status: accepted
+proposal_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/proposal-review-r1.md
+
+current_spec: specs/rowing-machine-basics-and-beginner-workouts.md
+current_spec_status: approved
+current_spec_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/spec-review-r1.md
+
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md
+
+current_plan: docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
+current_plan_status: active
+current_plan_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/plan-review-r2.md
+plan_index: docs/plan.md
+
+current_milestone: M5
+current_milestone_name: Follow-up Rowing Media Enhancement
+current_milestone_state: closed
+last_reviewed_milestone: M5
+
+current_test_spec: specs/rowing-machine-basics-and-beginner-workouts.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r2.md
+review_resolution: docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md
+current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m5-r1.md
+verify_report: docs/changes/rowing-machine-basics-and-beginner-workouts/verify-report.md
+next_stage: pr
+pull_request: https://github.com/xiongxianfei/gymprimer/pull/10
+merge_commit: null
+
+open_findings: []
+
+notes:
+  - Proposal-review R1 approved the rowing-machine basics direction.
+  - Spec-review R1 approved the focused rowing-machine basics spec.
+  - Architecture-review R1 approved the canonical architecture update.
+  - Plan created with M1-M4 implementation milestones and next stage plan-review.
+  - Plan-review R1 requested changes for PR-RMB-1; the plan is paused for revision before test-spec.
+  - PR-RMB-1 was addressed in the plan and is ready for plan-review R2.
+  - Plan-review R2 approved the corrected plan and closed PR-RMB-1; test-spec is next.
+  - Test spec drafted and routed to test-spec-review.
+  - Test-spec-review R1 requested changes for TSR-RMB-1; implementation handoff is not allowed.
+  - TSR-RMB-1 was addressed in the test spec and approved by test-spec-review R2.
+  - Test-spec-review R2 approved the proof map and allowed implementation handoff for M1.
+  - M1 implementation started.
+  - M1 implemented scoped cardio method validation and is ready for code-review.
+  - Code-review M1 R1 returned clean-with-notes and closed M1; M2 implementation is next.
+  - M2 implementation started.
+  - M2 added the rowing-machine page, source-index entries, real-page tests, and is ready for code-review.
+  - Code-review M2 R1 requested CR-RMB-M2-1; M2 is paused for review-resolution.
+  - CR-RMB-M2-1 was addressed and M2 is ready for code-review rerun.
+  - Code-review M2 R2 returned clean-with-notes and closed M2; M3 implementation is next.
+  - M3 recorded manual proof and text-only media decision, fixed prompt-record scan handling, and is ready for code-review.
+  - Code-review M3 R1 returned clean-with-notes and closed M3; M4 implementation is next.
+  - M4 recorded the validation ledger and is ready for code-review.
+  - Code-review M4 R1 returned clean-with-notes and closed M4 before the M5 follow-up media request.
+  - M5 follow-up media enhancement added setup, muscle-attention, and movement images for code-review.
+  - Code-review M5 R1 returned clean-with-notes and closed M5; no implementation milestones remain.
+  - Explain-change is complete.
+  - Final local verification passed with branch-ready evidence; PR handoff is next.
+  - PR #10 opened from `proposal/rowing-machine-basics` to `main`.
+  - GitHub Actions reported `Validation checks` passed for PR #10.
+
+validation:
+  - command: python tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/architecture/system/architecture.md
+    result: pass
+    evidence: privacy check passed before plan creation
+  - command: python3 tools/checks/check_privacy.py docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/architecture/system/architecture.md
+    result: pass
+    evidence: checked 4 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed
+  - command: rg -n "^- draft amendment|is pending architecture review|is ready for architecture review" docs/architecture/system/architecture.md docs/plan.md
+    result: pass
+    evidence: no stale architecture-review status wording found
+  - command: python3 tools/checks/check_privacy.py docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plan.md
+    result: pass
+    evidence: checked 4 file(s): privacy pass after PR-RMB-1 revision
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after PR-RMB-1 revision
+  - command: python3 tools/checks/check_privacy.py specs/rowing-machine-basics-and-beginner-workouts.test.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plan.md
+    result: pass
+    evidence: checked 4 file(s): privacy pass after test-spec authoring
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after test-spec authoring
+  - command: coverage scan for R1-R40, E1-E5, and EC1-EC10 in specs/rowing-machine-basics-and-beginner-workouts.test.md
+    result: pass
+    evidence: all requirement, example, and edge-case IDs found
+  - command: python3 tools/checks/check_privacy.py specs/rowing-machine-basics-and-beginner-workouts.test.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plan.md
+    result: pass
+    evidence: checked 4 file(s): privacy pass after TSR-RMB-1 revision
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after TSR-RMB-1 revision
+  - command: manual-proof metadata scan for RMB-M1 through RMB-M5 in specs/rowing-machine-basics-and-beginner-workouts.test.md
+    result: pass
+    evidence: every manual proof includes automation rationale, required environment, evidence artifact, pass condition, failure condition, owning stage, and re-run trigger
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r2.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plan.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md specs/rowing-machine-basics-and-beginner-workouts.test.md
+    result: pass
+    evidence: checked 7 file(s): privacy pass after test-spec-review R2 recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after test-spec-review R2 recording
+  - command: python3 -c 'from pathlib import Path; terms=["ready for test-"+"spec-review","pending"+" test-spec-review","Implementation remains blocked","Next stage: test-"+"spec-review","current_stage: test-"+"spec-review","current_test_spec_status: draft","TSR-RMB-1"+" ready for rereview"]; files=[Path("docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md"),Path("docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml"),Path("docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md"),Path("docs/plan.md"),Path("specs/rowing-machine-basics-and-beginner-workouts.test.md")]; hits=[]; [hits.append(f"{p}:{i}:{line}") for p in files for i,line in enumerate(p.read_text().splitlines(),1) if not line.lstrip().startswith("- command:") and any(t in line for t in terms)]; print("\\n".join(hits)); raise SystemExit(1 if hits else 0)'
+    result: pass
+    evidence: no stale test-spec-review handoff wording found
+  - command: manual-proof metadata scan for RMB-M1 through RMB-M5 in specs/rowing-machine-basics-and-beginner-workouts.test.md
+    result: pass
+    evidence: every manual proof still includes automation rationale, required environment, evidence artifact, pass condition, failure condition, owning stage, and re-run trigger after R2 recording
+  - command: python3 -m unittest tests.test_exercise_method_guidance
+    result: fail
+    evidence: failed before checker implementation because basic_cardio_equipment was inactive for exercises/rowing-machine.md and Rest/reset plus Stop condition aliases were missing
+  - command: python3 -m unittest tests.test_exercise_method_guidance
+    result: pass
+    evidence: 13 tests passed after scoped checker update
+  - command: python3 -m unittest tests.test_markdown_first_real_pages
+    result: pass
+    evidence: 3 tests passed after scoped checker update
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: 52 tests passed after scoped checker update
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises patterns principles
+    result: pass
+    evidence: checked 22 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py tools tests docs/templates specs docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 91 file(s): privacy pass
+  - command: python3 -m unittest tests.test_exercise_method_guidance
+    result: pass
+    evidence: 13 tests passed after M1 handoff metadata updates
+  - command: python3 -m unittest tests.test_markdown_first_real_pages
+    result: pass
+    evidence: 3 tests passed after M1 handoff metadata updates
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: 52 tests passed after M1 handoff metadata updates
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises patterns principles
+    result: pass
+    evidence: checked 22 Markdown file(s): pass after M1 handoff metadata updates
+  - command: python3 tools/checks/check_privacy.py tools tests docs/templates specs docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 92 file(s): privacy pass after M1 handoff metadata updates
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M1 handoff metadata updates
+  - command: python3 tools/checks/check_privacy.py tools tests docs/templates specs docs/changes/rowing-machine-basics-and-beginner-workouts docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 94 file(s): privacy pass during M1 state-sync check
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed during M1 state-sync check
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, and docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml
+    result: pass
+    evidence: plan index, plan body, and change metadata all point to code-review for M1
+  - command: python3 -m unittest tests.test_exercise_method_guidance
+    result: pass
+    evidence: reviewer rerun passed with 13 tests during code-review M1 R1
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m1-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 5 file(s): privacy pass after code-review M1 R1 recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after code-review M1 R1 recording
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, and docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml
+    result: pass
+    evidence: plan index, plan body, and change metadata all point to implement M2 after M1 closeout
+  - command: python3 -m unittest tests.test_markdown_first_real_pages
+    result: fail
+    evidence: failed before page drafting because exercises/rowing-machine.md did not exist
+  - command: python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages
+    result: pass
+    evidence: 19 tests passed after M2 page and source-index updates
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns
+    result: pass
+    evidence: checked 23 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 30 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M2 page and source-index updates
+  - command: python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages
+    result: pass
+    evidence: 19 tests passed after M2 handoff metadata updates
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns
+    result: pass
+    evidence: checked 23 Markdown file(s): pass after M2 handoff metadata updates
+  - command: python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 30 file(s): privacy pass after M2 handoff metadata updates
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M2 handoff metadata updates
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, and docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml
+    result: pass
+    evidence: plan index, plan body, and change metadata all point to code-review for M2
+  - command: python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages
+    result: pass
+    evidence: reviewer rerun passed with 19 tests during code-review M2 R1
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 6 file(s): privacy pass after code-review M2 R1 recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after code-review M2 R1 recording
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and review-resolution.md
+    result: pass
+    evidence: lifecycle metadata all point to review-resolution for CR-RMB-M2-1
+  - command: python3 -m unittest tests.test_markdown_first_real_pages
+    result: fail
+    evidence: failed before content fix because nhs-back-pain and mayo-weight-training page-local safety source definitions were absent
+  - command: python3 -m unittest tests.test_markdown_first_real_pages
+    result: fail
+    evidence: first content fix failed because claim-level safety references were not on the same lines and local-exercise-pain did not match the local-rowing-machine source ID convention
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns
+    result: fail
+    evidence: first content fix failed for the same claim-level safety reference and local source ID convention issues
+  - command: python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages
+    result: pass
+    evidence: 19 tests passed after CR-RMB-M2-1 resolution
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns
+    result: pass
+    evidence: checked 23 Markdown file(s): pass after CR-RMB-M2-1 resolution
+  - command: python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 31 file(s): privacy pass after CR-RMB-M2-1 resolution
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after CR-RMB-M2-1 resolution
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and review-resolution.md
+    result: pass
+    evidence: lifecycle metadata all point to code-review rerun for M2
+  - command: python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages
+    result: pass
+    evidence: reviewer rerun passed with 19 tests during code-review M2 R2
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns
+    result: pass
+    evidence: checked 23 Markdown file(s): pass during code-review M2 R2
+  - command: python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 31 file(s): privacy pass during code-review M2 R2
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed during code-review M2 R2
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r2.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 6 file(s): privacy pass after code-review M2 R2 recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after code-review M2 R2 recording
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and review-resolution.md
+    result: pass
+    evidence: lifecycle metadata all point to implement M3 after M2 closeout
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media
+    result: fail
+    evidence: failed before checker update because existing media prompt records were treated as reader-facing content pages
+  - command: python3 -m unittest discover -s tests -p 'test_*image*.py'
+    result: fail
+    evidence: failed before audit update because exercises/rowing-machine.md was absent from the exercise-image M4 audit inventory
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media
+    result: pass
+    evidence: checked 20 Markdown file(s): pass after M3 proof and checker updates
+  - command: python3 tools/checks/check_privacy.py exercises media docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 63 file(s): privacy pass after M3 proof and checker updates
+  - command: python3 -m unittest discover -s tests -p 'test_*image*.py'
+    result: pass
+    evidence: 14 tests passed after M3 proof and checker updates
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: 55 tests passed after prompt-record scan handling update
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M3 proof and checker updates
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, and docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml
+    result: pass
+    evidence: lifecycle metadata all point to code-review for M3
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media
+    result: pass
+    evidence: reviewer rerun checked 20 Markdown file(s) during code-review M3 R1
+  - command: python3 tools/checks/check_privacy.py exercises media docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: reviewer rerun checked 63 file(s) during code-review M3 R1
+  - command: python3 -m unittest discover -s tests -p 'test_*image*.py'
+    result: pass
+    evidence: reviewer rerun passed 14 tests during code-review M3 R1
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: reviewer rerun passed 55 tests during code-review M3 R1
+  - command: git diff --check
+    result: pass
+    evidence: reviewer rerun passed during code-review M3 R1
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m3-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 5 file(s): privacy pass after code-review M3 R1 recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after code-review M3 R1 recording
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and review-log.md
+    result: pass
+    evidence: lifecycle metadata all point to implement M4 after M3 closeout
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: ran 120 tests during M4 implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media
+    result: pass
+    evidence: checked 27 Markdown file(s): pass during M4 implementation
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
+    result: pass
+    evidence: checked 75 file(s): privacy pass during M4 implementation
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed during M4 implementation
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 5 file(s): privacy pass after M4 handoff metadata updates
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M4 handoff metadata updates
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and validation-ledger.md
+    result: pass
+    evidence: lifecycle metadata all point to code-review for M4
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: reviewer rerun passed 120 tests during code-review M4 R1
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media
+    result: pass
+    evidence: reviewer rerun checked 27 Markdown file(s) during code-review M4 R1
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
+    result: pass
+    evidence: reviewer rerun checked 76 file(s) during code-review M4 R1
+  - command: git diff --check
+    result: pass
+    evidence: reviewer rerun passed during code-review M4 R1
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m4-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 5 file(s): privacy pass after code-review M4 R1 recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after code-review M4 R1 recording
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, review-log.md, and code-review-m4-r1.md
+    result: pass
+    evidence: lifecycle metadata all point to explain-change after M4 closeout
+  - command: python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_media_is_local_prompt_backed_and_reviewed
+    result: fail
+    evidence: failed before media wiring because the rowing page had no setup or movement image references
+  - command: python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_media_is_local_prompt_backed_and_reviewed
+    result: pass
+    evidence: passed after adding rowing media references, provenance rows, and prompt records
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media
+    result: pass
+    evidence: checked 20 Markdown file(s): pass after M5 media enhancement
+  - command: python3 -m unittest discover -s tests -p 'test_*image*.py'
+    result: pass
+    evidence: 14 tests passed after M5 media enhancement
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: 121 tests passed after M5 media enhancement
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media
+    result: pass
+    evidence: checked 27 Markdown file(s): pass after M5 media enhancement
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
+    result: pass
+    evidence: checked 84 file(s): privacy pass after M5 media enhancement
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M5 media enhancement
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof media/prompts/exercises/rowing-machine
+    result: pass
+    evidence: checked 12 file(s): privacy pass after M5 handoff metadata updates
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M5 handoff metadata updates
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and validation-ledger.md
+    result: pass
+    evidence: lifecycle metadata all point to code-review for M5
+  - command: python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_media_is_local_prompt_backed_and_reviewed
+    result: pass
+    evidence: reviewer rerun passed 1 test during code-review M5 R1
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media
+    result: pass
+    evidence: reviewer rerun checked 20 Markdown file(s) during code-review M5 R1
+  - command: python3 -m unittest discover -s tests -p 'test_*image*.py'
+    result: pass
+    evidence: reviewer rerun passed 14 tests during code-review M5 R1
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: reviewer rerun passed 121 tests during code-review M5 R1
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media
+    result: pass
+    evidence: reviewer rerun checked 27 Markdown file(s) during code-review M5 R1
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
+    result: pass
+    evidence: reviewer rerun checked 84 file(s) during code-review M5 R1
+  - command: git diff --check
+    result: pass
+    evidence: reviewer rerun passed during code-review M5 R1
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m5-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md
+    result: pass
+    evidence: checked 6 file(s): privacy pass after code-review M5 R1 recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after code-review M5 R1 recording
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, review-log.md, and validation-ledger.md
+    result: pass
+    evidence: lifecycle metadata all point to explain-change after M5 closeout
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 4 file(s): privacy pass after explain-change completion
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after explain-change completion
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and explain-change.md
+    result: pass
+    evidence: lifecycle metadata all point to verify after explain-change completion
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: final verify ran 121 tests; result OK
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md principles exercises patterns
+    result: pass
+    evidence: final verify checked 24 Markdown file(s); result pass
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md docs specs tools tests principles exercises patterns
+    result: pass
+    evidence: final verify checked 364 file(s); privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: final verify found no whitespace errors
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media
+    result: pass
+    evidence: final verify checked 27 Markdown file(s); result pass
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md specs/rowing-machine-basics-and-beginner-workouts.test.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
+    result: pass
+    evidence: final verify checked 86 file(s); privacy pass
+  - command: python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages
+    result: pass
+    evidence: final verify ran 20 focused tests; result OK
+  - command: python3 -m unittest discover -s tests -p 'test_*image*.py'
+    result: pass
+    evidence: final verify ran 14 image tests; result OK
+  - command: coverage scan for R1-R40, E1-E5, and EC1-EC10 in specs/rowing-machine-basics-and-beginner-workouts.test.md
+    result: pass
+    evidence: all requirement, example, and edge-case IDs found during final verify
+  - command: manual-proof metadata scan for RMB-M1 through RMB-M5 in specs/rowing-machine-basics-and-beginner-workouts.test.md
+    result: pass
+    evidence: every manual proof includes the required metadata fields during final verify
+  - command: review closeout scan for docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md and review-log.md
+    result: pass
+    evidence: review-resolution is closed and no open finding terms were found during final verify
+  - command: lifecycle state-sync check before verify report
+    result: pass
+    evidence: active plan and change metadata were ready for verify before verify-report recording
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/verify-report.md docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 5 file(s): privacy pass after verify-report recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after verify-report recording
+  - command: lifecycle state-sync check after verify-report recording
+    result: pass
+    evidence: plan index, active plan, change metadata, verify report, and explain-change all route to pr
+  - command: stale verify-stage wording scan
+    result: pass
+    evidence: no stale verify next-stage or pre-verify readiness wording found
+  - command: gh pr checks 10 --watch --interval 10
+    result: pass
+    evidence: GitHub Actions reported Validation checks passed for PR #10
