@@ -5,8 +5,8 @@
 - [Exercise Method Guidance](plans/2026-07-04-exercise-method-guidance.md)
   - Status: draft
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M4 implementation recorded manual source audit, beginner-comprehension proof, validation ledger, deferred-method guardrail, and broad-rollout gate evidence; M4 is review-requested for code-review.
+  - Current stage: explain-change
+  - Active context: M4 code-review R1 closed all implementation milestones; Lifecycle Closeout is next, starting with durable explain-change before final verification and PR handoff.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

@@ -3,8 +3,8 @@
 ## Status
 
 - Open findings: none
-- Current owner stage: implement
-- Next review stage: code-review after M4 implementation
+- Current owner stage: lifecycle closeout
+- Next review stage: not applicable unless final verification or downstream review finds an issue
 
 ## Findings
 

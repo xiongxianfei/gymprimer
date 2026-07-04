@@ -93,17 +93,18 @@ The first proof slice is exactly:
 
 ## Current Handoff Summary
 
-- Current milestone: M4
-- Current milestone state: review-requested
-- Last reviewed milestone: M3
+- Current milestone: Lifecycle Closeout
+- Current milestone state: planned
+- Last reviewed milestone: M4
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review R2
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
-- Remaining in-scope implementation milestones: M4, Lifecycle Closeout
-- Next stage: code-review M4
+- Remaining in-scope implementation milestones: none
+- Remaining lifecycle milestones: Lifecycle Closeout
+- Next stage: explain-change
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1, M2, and M3 are closed and M4
-  is awaiting code-review; explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M1, M2, M3, and M4 are closed;
+  explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -263,7 +264,7 @@ The first proof slice is exactly:
 
 ### M4. Manual Evidence and Broad-Rollout Gate
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: record the semantic proof that automation cannot provide before any
   broad rollout is considered.
 - Requirements: R11-R13, R33-R40, AC6-AC10.
@@ -437,6 +438,8 @@ The first proof slice is exactly:
 - 2026-07-04: M4 recorded the source audit, beginner-comprehension proof,
   validation ledger, deferred-method guardrail, and broad-rollout gate evidence.
   M4 is review-requested.
+- 2026-07-04: Code-review M4 R1 confirmed the manual proof records, found no
+  material issues, and closed M4. Lifecycle Closeout is next.
 
 ## Decision log
 
@@ -533,5 +536,5 @@ The first proof slice is exactly:
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M4 code-review. Final closeout is not ready until M4,
-  code-review loops, explain-change, verify, and PR handoff complete.
+- Ready for explain-change. Final closeout is not ready until explain-change,
+  verify, and PR handoff complete.
