@@ -70,13 +70,13 @@ The first proof slice should choose representative pages from the spec's allowed
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
 - Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; code-review M1 R2 clean-with-notes
 - Remaining in-scope implementation milestones: M2, M3
-- Next stage: implement M2
+- Next stage: code-review M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 is closed, but M2, M3, final verification, and PR handoff have not started.
+- Reason final closeout is or is not ready: M1 is closed and M2 is awaiting code-review, but M3, final verification, and PR handoff have not started.
 
 ## Milestones
 
@@ -125,7 +125,7 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ### M2. Representative Proof-Slice Exercise Pages
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: apply the muscle guidance contract to a representative set of exercise pages without broad all-page migration.
 - Requirements: R1-R31, R38-R40, AC2-AC5.
 - Files/components likely touched:
@@ -248,6 +248,10 @@ The first proof slice should choose representative pages from the spec's allowed
 - 2026-07-04: Code-review M1 R1 requested changes for CR-XMG-M1-1, missing deterministic XMG-T8 source-surface proof.
 - 2026-07-04: Resolved CR-XMG-M1-1 with focused XMG-T8 source-surface tests and minimal checker behavior; M1 is ready for code-review rerun.
 - 2026-07-04: Code-review M1 R2 accepted the resolution and closed M1. M2 proof-slice implementation is next.
+- 2026-07-04: Started M2 implementation for the selected proof slice: rowing machine, chest press, plank, chin nod, thoracic extension, and band pull-apart.
+- 2026-07-04: Added M2 real-page tests for proof-slice category coverage, role or phase muscle guidance, soft feel cues, page-local source-surface citations, and untouched legacy compatibility outside the selected slice.
+- 2026-07-04: Migrated the selected proof-slice pages to role- or phase-based `## Muscles involved` guidance paired with `## What you should feel`.
+- 2026-07-04: M2 validation passed locally; M2 is ready for code-review.
 
 ## Decision log
 
@@ -257,6 +261,22 @@ The first proof slice should choose representative pages from the spec's allowed
 | 2026-07-04 | Keep all-exercise migration behind a broad-rollout gate. | Existing `## Used muscles` pages remain legacy-compatible until touched, and source review needs batching. | Immediate repository-wide migration. |
 | 2026-07-04 | Reuse the exercise-image standard for muscle-attention images. | Avoids duplicating provenance, alt-text, and visual-safety rules. | New image governance inside this plan. |
 | 2026-07-04 | Scope M1 checker enforcement to adopted visible muscle guidance while preserving untouched legacy pages. | M1 proves authoring and deterministic validation without converting existing exercise pages before the proof-slice milestone. | Fail every current `## Used muscles` page or rewrite real pages in M1. |
+| 2026-07-04 | Select rowing machine, chest press, plank, chin nod, thoracic extension, and band pull-apart for M2. | This covers the six required proof-slice categories while limiting migration to one page per category. | Rewrite every exercise page; select two pages from one category before all required categories are represented. |
+
+## M2 validation notes
+
+- 2026-07-04 M2 expected failing test before content migration: `python3 -m unittest tests.test_markdown_first_real_pages` failed with six proof-slice category failures for missing role or phase structure and the legacy plank heading.
+- 2026-07-04 M2 focused validation passed: `python3 -m unittest tests.test_exercise_muscle_guidance tests.test_markdown_first_real_pages`.
+- 2026-07-04 M2 content validation passed: `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md`.
+- 2026-07-04 M2 regression validation passed: `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`.
+- 2026-07-04 M2 privacy validation passed: `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises media docs/changes/exercise-muscle-guidance-standard`.
+- 2026-07-04 M2 diff hygiene passed: `git diff --check`.
+
+## M2 aligned-surface audit
+
+- M2 updated only the selected proof-slice pages, `tests/test_markdown_first_real_pages.py`, the active plan, change metadata, and the durable change explanation.
+- `SOURCES.md` is unaffected because the proof-slice pages already had page-local source definitions for the reused citations.
+- Media files, prompt records, and provenance are unaffected because M2 did not add, remove, regenerate, or relabel muscle-attention images.
 
 ## Surprises and discoveries
 
@@ -280,9 +300,9 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ## Outcome and retrospective
 
-- Pending implementation and downstream verification.
+- M2 implementation is pending code-review. Final outcome remains pending downstream verification.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M2 implementation. Final closeout is not allowed until all implementation milestones, code review, and verification are complete.
+- Ready for M2 code-review. Final closeout is not allowed until all implementation milestones, code review, and verification are complete.

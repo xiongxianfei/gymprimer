@@ -20,7 +20,11 @@ Use a light resistance band. Stand tall with the arms extended in front at chest
 
 ## Muscles involved
 
-Primary: posterior shoulder and upper-back muscles used during band pull-apart variations. Secondary: shoulder-girdle muscles that help control the band path. [Source][local-band-pull-apart-study]
+| Role | Muscle region | What it helps do |
+|---|---|---|
+| Main driver | Upper back and rear shoulders | Help pull the band apart while the arms open to the sides. [Source][local-band-pull-apart-study] |
+| Support | Shoulder-girdle and arms | Help keep the band path near chest height. [Source][local-band-pull-apart-instruction] |
+| Posture / control | Neck, ribs, and trunk | Help keep the movement from turning into shoulder shrugging or rib flaring. [Source][local-band-pull-apart-instruction] |
 
 ![Band pull-apart muscle-attention reference with the upper-back and rear-shoulder region subtly highlighted](../media/exercises/band-pull-apart/muscle-attention.png)
 
@@ -50,7 +54,7 @@ Let the band come back under control. [Source][local-band-pull-apart-instruction
 
 ## What you should feel
 
-You may feel the upper-back muscles working and a stretch in the chest. [Source][local-band-pull-apart-instruction]
+You may feel the upper-back and rear-shoulder region working, with a light stretch across the chest. Try to keep the neck relaxed, ribs quiet, and arms near chest height. [Source][local-band-pull-apart-instruction]
 
 ## Common mistakes
 
