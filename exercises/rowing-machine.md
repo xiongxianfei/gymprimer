@@ -4,7 +4,7 @@ Author: xiongxianfei
 Created: 2026-07-04
 Last reviewed: 2026-07-04
 Next review due: 2027-07-04
-Review scope: sources, scope boundary, comprehension
+Review scope: sources, scope boundary, comprehension, media
 
 > Disclaimer: GymPrimer is educational content for general exercise literacy.
 > It is not medical advice and not personalized coaching.
@@ -49,6 +49,8 @@ The handle should travel in a straight path toward and away from the flywheel.
 Keep the recovery controlled instead of rushing back to the front.
 [Concept2][concept2-rowing-technique]
 
+![Rowing machine setup reference with foot strap, seat, handle, and catch position](../media/exercises/rowing-machine/setup.png)
+
 ## Muscles involved
 
 The drive should start with the legs and glutes. The trunk helps keep posture
@@ -68,6 +70,8 @@ Recovery: arms -> body -> legs
 Concept2 describes the drive as leg press first, then body swing, then arm
 pull. The recovery reverses that by sending the arms away, hinging from the
 hips, and then bending the knees. [Concept2][concept2-rowing-technique]
+
+![Rowing machine stroke sequence reference showing catch, drive, finish, and recovery](../media/exercises/rowing-machine/movement.png)
 
 ### 1. Catch
 

@@ -100,8 +100,8 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ## Current Handoff Summary
 
-- Current milestone: M4
-- Current milestone state: closed
+- Current milestone: M5
+- Current milestone state: review-requested
 - Last reviewed milestone: M4
 - Review status: proposal-review R1 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 requested PR-RMB-1; PR-RMB-1
@@ -109,13 +109,14 @@ shows that setup or stroke-sequence comprehension needs visual support.
   map; code-review M2 R1 requested CR-RMB-M2-1; CR-RMB-M2-1 resolved pending
   M2 code-review rerun; code-review M2 R2 closed M2; code-review M3 R1 closed
   M3; code-review M4 R1 closed M4
-- Remaining in-scope implementation milestones: none
-- Remaining lifecycle milestones: explain-change, verify, PR handoff
-- Next stage: explain-change
+- Remaining in-scope implementation milestones: M5
+- Remaining lifecycle milestones: code-review, explain-change, verify, PR
+  handoff
+- Next stage: code-review M5
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1 and M2 are closed by code-review;
-  M3 and M4 are closed by code-review; durable rationale, final verification,
-  and PR handoff remain before closeout.
+  M3 and M4 are closed by code-review; M5 is implemented pending code-review;
+  durable rationale, final verification, and PR handoff remain before closeout.
 
 ## Milestones
 
@@ -339,6 +340,64 @@ shows that setup or stroke-sequence comprehension needs visual support.
   - Keep the page as unlinked draft content, remove premature navigation, and
     record the blocking validation or proof gap before re-planning.
 
+### M5. Follow-up Rowing Media Enhancement
+
+- Milestone state: review-requested
+- Goal: add the smallest useful set of rowing-machine images after a follow-up
+  readability request while preserving Markdown as the source of truth.
+- Requirements: R31-R36, AC6-AC7.
+- Files/components touched:
+  - `exercises/rowing-machine.md`
+  - `media/exercises/rowing-machine/setup.png`
+  - `media/exercises/rowing-machine/movement.png`
+  - `media/PROVENANCE.md`
+  - `media/prompts/exercises/rowing-machine/setup.md`
+  - `media/prompts/exercises/rowing-machine/movement.md`
+  - `docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof/media-decision.md`
+  - `docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof/visual-safety-review.md`
+  - `docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md`
+  - `tests/test_markdown_first_real_pages.py`
+- Dependencies:
+  - M1-M4 are closed by code-review.
+  - The approved spec already allows setup and movement media when they remain
+    local, support-only, provenance-backed, prompt-record-backed, and visually
+    reviewed.
+- Tests added/updated:
+  - real-page regression for local rowing media references, image files,
+    provenance rows, page refs, approved status, and prompt records.
+- Implementation steps:
+  - Generate two support images: setup and movement sequence.
+  - Copy accepted images into `media/exercises/rowing-machine/`.
+  - Add prompt records, provenance rows, page references, and alt text.
+  - Re-run the media decision and record visual-safety review.
+  - Update validation ledger and lifecycle routing.
+- Validation commands:
+  - `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_media_is_local_prompt_backed_and_reviewed`
+  - `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media`
+  - `python3 -m unittest discover -s tests -p 'test_*image*.py'`
+  - `python3 -m unittest discover -s tests`
+  - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media`
+  - `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md`
+  - `git diff --check`
+- Expected observable result: the rowing-machine page references two local
+  support images with approved provenance, exact prompt records, and visual
+  safety evidence.
+- Commit message: `M5: add rowing media support`
+- Milestone closeout:
+  - targeted media test passed
+  - image/media checks passed
+  - broad validation passed
+  - visual-safety proof recorded
+  - milestone committed
+- Risks:
+  - Images could be mistaken for source-of-truth technique instruction.
+  - Generated images could contain unsupported labels, brand marks, or visual
+    safety meaning.
+- Rollback/recovery:
+  - Remove image references, assets, provenance rows, prompt records, and
+    visual-safety evidence; restore media-decision and validation ledger to
+    text-only state.
+
 ## Validation plan
 
 - `python3 -m unittest tests.test_exercise_method_guidance`: prove the scoped
@@ -435,6 +494,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 | 2026-07-04 | Make method-boundary validation M1 before page drafting. | The rowing page depends on `basic_cardio_equipment`, and the existing exercise-method spec previously deferred that value. | Draft the page first and discover checker/source-index failures late. |
 | 2026-07-04 | Start text-first and make media evidence-triggered. | The spec allows text-only when comprehension is sufficient, while generated media adds provenance, prompt-record, and visual-safety obligations. | Add images by default; prohibit images even if comprehension evidence shows a visual gap. |
 | 2026-07-04 | Gate promotion/navigation behind manual proof. | The page should not be surfaced as ready until source audit and beginner comprehension evidence pass. | Add README navigation immediately after drafting; defer all promotion decisions to chat. |
+| 2026-07-04 | Add two follow-up support images after readability request. | The user requested necessary images, and the accepted spec allows setup and movement images when they remain local, support-only, provenance-backed, prompt-record-backed, and visually reviewed. | Keep text-only despite the follow-up request; add more than setup and movement images. |
 
 ## Surprises and discoveries
 
@@ -464,6 +524,9 @@ shows that setup or stroke-sequence comprehension needs visual support.
   required a text-only row there even though no rowing image was added.
 - M4 did not change README navigation because the approved plan makes README
   edits conditional and no required navigation update exists before code-review.
+- M5 adds setup and movement support images after a follow-up readability
+  request. The images are generated raster assets, so they require provenance,
+  prompt records, page references, and visual-safety evidence.
 
 ## Validation notes
 
@@ -624,6 +687,26 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m4-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md`,
   `git diff --check`, and state-sync check passed after code-review M4 R1
   recording.
+- 2026-07-04: M5 `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_media_is_local_prompt_backed_and_reviewed`
+  failed before media wiring because the rowing page had no setup or movement
+  image references.
+- 2026-07-04: M5 `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_media_is_local_prompt_backed_and_reviewed`
+  passed after adding rowing media references, provenance rows, and prompt
+  records.
+- 2026-07-04: M5 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media`
+  passed with 20 Markdown files checked.
+- 2026-07-04: M5 `python3 -m unittest discover -s tests -p 'test_*image*.py'`
+  passed with 14 tests.
+- 2026-07-04: M5 `python3 -m unittest discover -s tests` passed with 121
+  tests.
+- 2026-07-04: M5 `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media`
+  passed with 27 Markdown files checked.
+- 2026-07-04: M5 `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md`
+  passed with 82 files checked.
+- 2026-07-04: M5 `git diff --check` passed.
+- 2026-07-04: `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof media/prompts/exercises/rowing-machine`,
+  `git diff --check`, and state-sync check passed after M5 handoff metadata
+  updates.
 
 ## Outcome and retrospective
 
@@ -632,11 +715,12 @@ shows that setup or stroke-sequence comprehension needs visual support.
   after CR-RMB-M2-1 review-resolution and clean code-review R2. M3 recorded
   manual proof, comprehension evidence, and the text-only media decision, then
   closed after clean code-review R1. M4 recorded integration validation
-  evidence, then closed after clean code-review R1.
+  evidence, then closed after clean code-review R1. M5 added follow-up setup
+  and movement images and is pending code-review.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for explain-change/final closeout.
+- Ready for code-review of M5.
 - Not ready for final verification, PR handoff, or Done until the remaining
   lifecycle gates complete.

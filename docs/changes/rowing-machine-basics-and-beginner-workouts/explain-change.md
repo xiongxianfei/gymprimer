@@ -132,8 +132,8 @@ whether rowing needs images before promotion.
   records a non-identifying reviewer simulation for the required beginner read
   questions.
 - `docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof/media-decision.md`
-  accepts text-only guidance and records that no rowing media, provenance row,
-  prompt record, or visual-safety review is required in M3.
+  originally accepted text-only guidance in M3; M5 later re-runs the decision
+  after the follow-up readability request.
 - `exercises/rowing-machine.md` now cites a page-local Concept2 muscles-used
   source for the broad muscles section.
 - `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`
@@ -186,6 +186,44 @@ implementation state before code-review handoff.
 
 ### Validation
 
+- `python3 -m unittest discover -s tests` passed.
+- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media` passed.
+- `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md` passed.
+- `git diff --check` passed.
+
+## M5. Follow-up Rowing Media Enhancement
+
+M5 adds two support images after a follow-up request to make the rowing-machine
+page more readable and understandable.
+
+### What changed
+
+- `exercises/rowing-machine.md` now references a setup image and a stroke
+  sequence image.
+- `media/exercises/rowing-machine/setup.png` shows the rower setup with foot
+  strap, seat, handle, and catch position.
+- `media/exercises/rowing-machine/movement.png` shows the catch, drive,
+  finish, and recovery positions.
+- `media/PROVENANCE.md` records approved generated-raster provenance rows for
+  both assets.
+- `media/prompts/exercises/rowing-machine/setup.md` and
+  `media/prompts/exercises/rowing-machine/movement.md` preserve the exact
+  prompts.
+- The media decision was re-run, and
+  `manual-proof/visual-safety-review.md` records the visual-safety decision.
+
+### Why it changed
+
+The approved rowing-machine spec allows local setup and movement images when
+they materially support comprehension and remain subordinate to Markdown. The
+follow-up user request created a concrete readability need, so the smallest
+media set is one setup image and one stroke-sequence image.
+
+### Validation
+
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_media_is_local_prompt_backed_and_reviewed` failed before media wiring and passed after the page, provenance, and prompt records were updated.
+- `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media` passed.
+- `python3 -m unittest discover -s tests -p 'test_*image*.py'` passed.
 - `python3 -m unittest discover -s tests` passed.
 - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media` passed.
 - `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md` passed.

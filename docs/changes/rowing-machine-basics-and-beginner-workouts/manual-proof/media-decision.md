@@ -2,7 +2,7 @@
 
 ## Status
 
-text-only accepted
+media added after follow-up readability request
 
 ## Scope
 
@@ -17,7 +17,9 @@ text-only accepted
 
 ## Decision
 
-Do not add rowing-machine images in this slice.
+Original M3 decision: keep the first implementation text-only because the
+source audit and beginner comprehension proof passed without an unresolved
+visual comprehension gap.
 
 The source audit passes after adding the page-local Concept2 muscles source, and
 the beginner comprehension proof passes for rower purpose, foot strap position,
@@ -25,14 +27,26 @@ drive sequence, recovery sequence, beginner first step, stop condition, and
 technique-source verification. No unresolved comprehension gap requires a setup
 or stroke-sequence image.
 
+Follow-up decision on 2026-07-04: add two support images after the user asked
+for necessary images to make the document more readable and understandable.
+The images are limited to the two concepts already identified by the proposal
+and image guidance:
+
+- setup reference for foot strap, seat, handle, and catch position;
+- movement sequence reference for catch, drive, finish, and recovery.
+
+The images support Markdown comprehension. They do not replace the written
+setup, source citations, sequence, method guidance, or safety routing.
+
 ## Media Compliance Impact
 
-- No files are added under `media/exercises/rowing-machine/`.
-- No generated raster image is added.
-- No `media/PROVENANCE.md` row is required.
-- No prompt record under `media/prompts/exercises/rowing-machine/` is required.
-- No rowing visual-safety review file is required for M3 because no media is
-  referenced.
+- Added `media/exercises/rowing-machine/setup.png`.
+- Added `media/exercises/rowing-machine/movement.png`.
+- Added `media/PROVENANCE.md` rows for both generated raster images.
+- Added prompt records under `media/prompts/exercises/rowing-machine/`.
+- Added `docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof/visual-safety-review.md`.
+- Updated `exercises/rowing-machine.md` with local image references and
+  meaningful alt text.
 
 ## Re-Run Trigger
 
