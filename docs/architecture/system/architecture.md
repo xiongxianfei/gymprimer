@@ -30,6 +30,8 @@ The exercise-method guidance amendment was approved by
 `docs/changes/exercise-method-guidance/reviews/architecture-review-r1.md`.
 The rowing-machine basics and beginner workout guidance amendment was approved by
 `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md`.
+The exercise-muscle-guidance amendment was approved by
+`docs/changes/exercise-muscle-guidance-standard/reviews/architecture-review-r1.md`.
 
 ## Related artifacts
 
@@ -72,6 +74,12 @@ The rowing-machine basics and beginner workout guidance amendment was approved b
   - Spec: `../../../specs/rowing-machine-basics-and-beginner-workouts.md`
   - Spec review:
     `../../changes/rowing-machine-basics-and-beginner-workouts/reviews/spec-review-r1.md`
+- Exercise muscle guidance:
+  - Proposal:
+    `../../proposals/2026-07-04-exercise-muscle-guidance-standard.md`
+  - Spec: `../../../specs/exercise-muscle-guidance.md`
+  - Spec review:
+    `../../changes/exercise-muscle-guidance-standard/reviews/spec-review-r1.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
@@ -111,6 +119,9 @@ Goals:
   generated data, user input, or personalized programming.
 - Add a first cardio-equipment exercise page while keeping cardio method
   guidance static, source-backed, and technique-first.
+- Add page-local role-based exercise muscle guidance without introducing an
+  anatomy atlas, exact activation source of truth, clinical cueing, generated
+  data, or personalized coaching.
 - Preserve old platform artifacts as historical context without treating them as active implementation guidance.
 
 ## Architecture Constraints
@@ -184,6 +195,16 @@ Goals:
 - `loaded_carry` remains deferred. `basic_cardio_equipment` is active only for
   `exercises/rowing-machine.md` and later cardio-equipment pages governed by
   approved downstream specs or amendments.
+- Exercise muscle guidance is visible Markdown inside exercise pages, using
+  `## Muscles involved` as the durable heading for new and migrated exercise
+  pages and pairing it with `## What you should feel`.
+- Existing exercise pages that still use `## Used muscles` remain
+  legacy-compatible until touched for muscle-guidance migration,
+  exercise-page template adoption, proof-slice content, image-adjacent muscle
+  guidance, or broad exercise-page contract migration.
+- Muscle roles, feel cues, compensation cues, caveats, and source support stay
+  in Markdown. Optional muscle-attention images remain support assets governed
+  by the exercise-image standard.
 
 ## Context and Scope
 
@@ -310,6 +331,14 @@ Logical containers:
   governed cardio-equipment exercise page. It uses the same visible method
   section contract while adding cardio-specific time, effort, reset,
   progression, and stop-condition wording.
+- **Exercise muscle guidance**: visible Markdown sections inside exercise pages
+  headed `## Muscles involved`, paired with `## What you should feel`. The
+  exercise page owns broad muscle regions, movement roles, phase-linked roles
+  where useful, feel cues, compensation caveats, and page-local source support.
+- **Exercise muscle proof evidence**: change-local evidence under
+  `docs/changes/<change-id>/` records semantic source-audit samples, beginner
+  comprehension outcomes, and optional muscle-attention image alignment that
+  static checks cannot fully prove.
 - **Optional mdBook renderer**: derived static HTML output.
 
 Forward-head-posture proof-slice building blocks:
@@ -528,6 +557,29 @@ Basic cardio equipment authoring flow:
    image and generated raster prompt-record architecture governs path,
    purpose, provenance, prompt records, alt text, and visual-safety evidence.
 
+Exercise muscle guidance authoring flow:
+
+1. A contributor updates an exercise page selected for the muscle-guidance
+   proof slice or migration scope.
+2. The page uses `## Muscles involved` and keeps or adds `## What you should
+   feel` as the paired beginner body-awareness section.
+3. The muscle section describes broad regions by role or phase, such as main
+   driver, support, posture / transfer, finish / control, stabilizer, or
+   mobility focus.
+4. Muscle and feel wording stays soft and non-diagnostic unless stronger
+   wording has direct page-local source support.
+5. Local checks can validate section presence, legacy heading misuse in migrated
+   pages, deterministic forbidden wording, image-purpose limits, and generic
+   alt text where practical.
+6. Review evidence records semantic source support for sampled muscle, feel,
+   compensation, setup, movement, and safety claims because static checks cannot
+   prove source adequacy.
+7. If an optional muscle-attention image is used, the existing exercise-image
+   and generated raster prompt-record architecture governs path, purpose,
+   provenance, prompt records, alt text, and visual-safety evidence while
+   Markdown remains authoritative for muscle names, cues, caveats, and
+   citations.
+
 ## Deployment View
 
 v0.1 has no hosted deployment.
@@ -562,6 +614,10 @@ Packaging boundaries:
   deployment, runtime, CMS, API, search index, user-input flow, account system,
   analytics, hidden metadata package, generated public data package, workout
   tracker, or calculator.
+- Exercise muscle guidance is Markdown-only. It introduces no deployment,
+  runtime, CMS, API, search index, user-input flow, account system, analytics,
+  hidden metadata package, generated public data package, anatomy database, EMG
+  data model, cueing engine, or personalized coaching flow.
 
 ## Crosscutting Concepts
 
@@ -618,6 +674,16 @@ Scope control:
 - Cardio-equipment examples remain static examples. They must not become
   personalized conditioning plans, race plans, heart-rate-zone prescriptions,
   workout trackers, calculators, or adaptive programming.
+- Exercise muscle guidance may teach broad muscle roles, movement phases, feel
+  cues, and compensation cues. It must not become diagnosis, treatment,
+  rehabilitation, posture-correction promise, individualized cueing, exact
+  activation instruction, or an anatomy atlas.
+- Exercise muscle guidance uses visible Markdown as source of truth. New and
+  migrated exercise pages use `## Muscles involved`; legacy `## Used muscles`
+  pages remain compatible only until touched for the approved migration scope.
+- `## What you should feel` translates muscle roles into beginner body
+  awareness and must not imply that a reader is wrong because they do not feel
+  one exact muscle.
 
 Expanded static content page contracts:
 
@@ -650,6 +716,11 @@ Source quality and review evidence:
 - Same-slice exercise pages require page-local source support for setup,
   technique, muscle, feel-cue, common-mistake, and safety claims; the pattern
   page's four-source set does not substitute for exercise-instruction support.
+- Exercise muscle guidance requires page-local source support for broad role
+  claims, specific muscle claims, exact setup or movement cues, feel cues,
+  compensation cues, and safety stop conditions at the level claimed.
+- Global `SOURCES.md` entries support reused sources but do not replace
+  page-local support for exercise muscle claims.
 
 Media:
 
@@ -767,6 +838,16 @@ Observability:
 - Exercise method manual evidence records source-audit samples for active
   method types and beginner-comprehension outcomes for starting point, effort,
   stop condition, and non-prescription understanding.
+- Exercise muscle validation reports missing `## Muscles involved`, legacy
+  `## Used muscles` misuse in migrated pages, missing `## What you should
+  feel`, deterministic forbidden activation or diagnosis/treatment/correction
+  wording, multiple muscle-attention images, generic alt text, and image-purpose
+  failures where practical.
+- Exercise muscle manual evidence records source-audit samples for main-driver,
+  support or stabilizer, feel, compensation, safety, and optional image
+  alignment claims, plus non-identifying beginner-comprehension outcomes for
+  region, role, feel, overuse avoidance, stop condition, and source
+  verification.
 - Basic cardio equipment validation accepts `basic_cardio_equipment` only where
   the governing rowing-machine or later cardio-equipment spec allows it,
   continues to reject `loaded_carry`, and reports inactive method type failures
@@ -788,12 +869,12 @@ Observability:
 - [ADR 2026-06-30: Central red-flags disclaimer boundary](../../adr/2026-06-30-central-red-flags-disclaimer.md) - Centralize the prominent disclaimer in `RED-FLAGS.md` and keep templates focused on safety routing.
 - [ADR 2026-06-26: Repository-native reviewed content](../../adr/2026-06-26-repository-native-reviewed-content.md) - Superseded structured-platform decision retained as history.
 
-No new ADR is required for exercise method guidance or rowing-machine
-`basic_cardio_equipment`. These changes extend the accepted Markdown-first and
-Responsible Breadth architecture by adding visible Markdown sections and
-repository-local validation/review evidence. They do not introduce a new
-source-of-truth mechanism, runtime boundary, generated package, taxonomy store,
-or deployment architecture.
+No new ADR is required for exercise method guidance, rowing-machine
+`basic_cardio_equipment`, or exercise muscle guidance. These changes extend the
+accepted Markdown-first and Responsible Breadth architecture by adding visible
+Markdown sections and repository-local validation/review evidence. They do not
+introduce a new source-of-truth mechanism, runtime boundary, generated package,
+taxonomy store, anatomy database, cueing engine, or deployment architecture.
 
 ## Quality Requirements
 
@@ -828,6 +909,11 @@ or deployment architecture.
 | Exercise method source support | A method section gives a concrete amount, effort, progression, or safety claim. | The claim has page-local source support or recorded review evidence identifies the source gap before promotion. |
 | Exercise method comprehension | A proof-slice exercise page is reviewed with a beginner reader. | Evidence records whether the reader can state the starting point, effort, stop condition, and that the page is not a personal program. |
 | Pattern preview alignment | A pattern page summarizes a linked exercise's starter range. | The preview does not contradict the linked exercise page's method type or range shape. |
+| Exercise muscle source of truth | An exercise page is updated under the exercise-muscle-guidance spec. | The page has visible `## Muscles involved` and paired `## What you should feel`; Markdown owns roles, feel cues, caveats, and citations. |
+| Exercise muscle legacy compatibility | A legacy exercise page still uses `## Used muscles`. | The page remains compatible until touched for muscle-guidance migration, proof-slice work, image-adjacent guidance, or broad exercise-page contract migration. |
+| Exercise muscle source support | A page gives a broad role, specific muscle, feel, compensation, setup, movement, or safety claim. | The claim has page-local source support or is softened/removed before promotion; source-audit evidence samples the claim categories. |
+| Exercise muscle image alignment | A page references `exercise_muscle_attention_illustration`. | Nearby Markdown carries the muscle names, cues, caveats, and citations; the image remains broad, unlabeled, support-only, and has meaningful alt text. |
+| Exercise muscle comprehension | A proof-slice exercise page is reviewed with a beginner reader. | Evidence records whether the reader can state the muscle region, what it helps do, what they may feel, what not to overuse, when to stop, and which source verifies the claim. |
 | Layout migration dependency safety | A file is moved or removed. | Active references are inventoried and updated before the old path is removed. |
 | Canonical content paths | A promoted exercise page is referenced. | The page lives under `exercises/`; old numbered content paths are not required and no compatibility stub remains. |
 | Red-flags routing path | A safety-relevant page links red flags. | The link targets root `RED-FLAGS.md`, not `about/red-flags.md`. |
@@ -886,6 +972,14 @@ or deployment architecture.
   programming. Static examples, source audit, forbidden-language checks, and
   beginner comprehension evidence mitigate but do not eliminate this semantic
   risk.
+- Exercise muscle guidance can drift into overprecise anatomy, EMG instruction,
+  posture-correction promises, or individualized cueing if authors overstate
+  what a beginner should feel. Role-based wording, soft feel cues, page-local
+  source review, and comprehension evidence mitigate but do not eliminate this
+  semantic risk.
+- Legacy `## Used muscles` pages can remain inconsistent during migration.
+  Touched-page migration and proof-slice batching reduce churn while keeping
+  reviewer scope manageable.
 - Expanded top-level directories may create navigation sprawl if README and
   SUMMARY promotion gates are not kept strict.
 - Red-flag language and review cadence introduce maintenance debt; stale pages
@@ -941,10 +1035,17 @@ or deployment architecture.
 - **Basic cardio equipment**: A visible exercise method type for approved
   cardio-equipment pages that use static beginner guidance for time, effort,
   reset/rest, progression, and stop conditions.
+- **Exercise muscle guidance**: The visible `## Muscles involved` section on an
+  exercise page, paired with `## What you should feel`.
+- **Role-based muscle guidance**: Muscle wording organized by movement
+  contribution, such as main driver, support, posture / transfer, finish /
+  control, stabilizer, or mobility focus.
+- **Legacy muscle heading**: The older `## Used muscles` heading that remains
+  compatible only until a page is touched for the approved migration scope.
 
 ## Next artifacts
 
-- Execution plan for the rowing-machine page.
+- Execution plan for exercise muscle guidance.
 
 ## Follow-on artifacts
 
@@ -970,6 +1071,9 @@ or deployment architecture.
   `../../changes/rowing-machine-basics-and-beginner-workouts/reviews/spec-review-r1.md`.
 - Rowing-machine basics architecture review:
   `../../changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md`.
+- Exercise muscle guidance spec: `../../../specs/exercise-muscle-guidance.md`.
+- Exercise muscle guidance spec review:
+  `../../changes/exercise-muscle-guidance-standard/reviews/spec-review-r1.md`.
 
 ## Readiness
 
@@ -979,7 +1083,8 @@ central-disclaimer amendments. The exercise-image-standard amendment has also
 completed architecture review. The prompt-record amendment has completed
 architecture review. The exercise-method guidance amendment has completed
 architecture review. The rowing-machine basics and beginner workout guidance
+amendment has completed architecture review. The exercise-muscle-guidance
 amendment has completed architecture review.
 
-Rowing-machine implementation is not implementation-ready until planning,
-test-spec, and required downstream reviews are complete.
+Exercise-muscle-guidance implementation is not implementation-ready until
+planning, test-spec, and required downstream reviews are complete.

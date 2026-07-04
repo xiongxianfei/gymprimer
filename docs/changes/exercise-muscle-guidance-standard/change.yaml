@@ -1,0 +1,48 @@
+change_id: exercise-muscle-guidance-standard
+status: m1-review-requested
+current_stage: code-review
+created_date: 2026-07-04
+
+proposal: docs/proposals/2026-07-04-exercise-muscle-guidance-standard.md
+proposal_status: accepted
+proposal_review: docs/changes/exercise-muscle-guidance-standard/reviews/proposal-review-r1.md
+
+current_spec: specs/exercise-muscle-guidance.md
+current_spec_status: approved
+current_spec_review: docs/changes/exercise-muscle-guidance-standard/reviews/spec-review-r1.md
+
+architecture_assessment: architecture-required
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/exercise-muscle-guidance-standard/reviews/architecture-review-r1.md
+
+current_plan: docs/plans/2026-07-04-exercise-muscle-guidance.md
+current_plan_status: reviewed
+current_plan_review: docs/changes/exercise-muscle-guidance-standard/reviews/plan-review-r1.md
+plan_index: docs/plan.md
+
+current_test_spec: specs/exercise-muscle-guidance.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/exercise-muscle-guidance-standard/reviews/test-spec-review-r1.md
+
+current_milestone: M1
+current_milestone_state: review-requested
+last_reviewed_milestone: none
+
+next_stage: code-review
+
+open_findings: []
+
+notes:
+  - Proposal-review R1 approved the exercise muscle guidance standard direction.
+  - Owner authorization via `$workflow auto: test-spec-review` normalized the proposal to accepted for downstream reliance.
+  - Spec-review R1 approved the focused exercise-muscle-guidance spec.
+  - Architecture assessment recorded `architecture-required` because the change affects the exercise-page contract, templates, validation tooling, media alignment, and manual-proof boundaries.
+  - Architecture-review R1 approved the canonical architecture amendment.
+  - Drafted the execution plan with M1 contract/template/checker support, M2 proof-slice exercise pages, and M3 manual proof plus broad rollout gate.
+  - Plan-review R1 approved the execution plan.
+  - Drafted the active test spec mapping deterministic tests, manual proof, validation commands, and milestone gates.
+  - Test-spec-review R1 approved the proof map and allowed implementation handoff for M1.
+  - M1 implemented exercise muscle guidance template prompts, focused checker validation, and unit coverage without forcing untouched legacy `## Used muscles` pages to migrate.
+  - M1 validation passed locally and is ready for code-review.
+  - No final completion claim is authorized until implementation, code review, explain-change when useful, verification, and PR handoff gates are complete for the relevant scope.

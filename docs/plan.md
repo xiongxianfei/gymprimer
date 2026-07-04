@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Exercise Muscle Guidance](plans/2026-07-04-exercise-muscle-guidance.md)
+  - Status: reviewed
+  - Plan lifecycle state: active
+  - Current stage: code-review
+  - Active context: M1 implementation is review-requested after local validation; code-review is next before M2.
+
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
   - Plan lifecycle state: active
