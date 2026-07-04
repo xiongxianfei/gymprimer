@@ -110,12 +110,13 @@ shows that setup or stroke-sequence comprehension needs visual support.
   M2 code-review rerun; code-review M2 R2 closed M2; code-review M3 R1 closed
   M3; code-review M4 R1 closed M4; code-review M5 R1 closed M5
 - Remaining in-scope implementation milestones: none
-- Remaining lifecycle milestones: PR handoff
+- Remaining lifecycle milestones: PR review, CI observation, and merge/closeout
 - Next stage: pr
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1 and M2 are closed by code-review;
   M3, M4, and M5 are closed by code-review; durable rationale is complete;
-  final local verification is complete; PR handoff remains before closeout.
+  final local verification is complete; PR #10 is open; PR review, CI
+  observation, and merge/closeout remain.
 
 ## Milestones
 
@@ -736,6 +737,8 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: Post-verify-report checks passed:
   privacy scan over the verify report and lifecycle metadata, `git diff --check`,
   state-sync check, and stale verify-stage wording scan.
+- 2026-07-04: PR #10 opened from `proposal/rowing-machine-basics` to `main`:
+  `https://github.com/xiongxianfei/gymprimer/pull/10`.
 
 ## Outcome and retrospective
 
@@ -750,5 +753,5 @@ shows that setup or stroke-sequence comprehension needs visual support.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for PR handoff.
-- Not Done until the remaining lifecycle gate completes.
+- PR #10 is open for review.
+- Not Done until PR review, CI observation, and merge/closeout complete.

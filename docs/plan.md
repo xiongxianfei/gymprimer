@@ -6,7 +6,7 @@
   - Status: active
   - Plan lifecycle state: active
   - Current stage: pr
-  - Active context: final local verification passed with branch-ready evidence; PR handoff is next.
+  - Active context: PR #10 is open; review, CI observation, and merge/closeout remain.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

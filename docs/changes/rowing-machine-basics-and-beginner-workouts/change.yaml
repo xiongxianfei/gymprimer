@@ -32,7 +32,7 @@ review_resolution: docs/changes/rowing-machine-basics-and-beginner-workouts/revi
 current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m5-r1.md
 verify_report: docs/changes/rowing-machine-basics-and-beginner-workouts/verify-report.md
 next_stage: pr
-pull_request: null
+pull_request: https://github.com/xiongxianfei/gymprimer/pull/10
 merge_commit: null
 
 open_findings: []
@@ -65,6 +65,7 @@ notes:
   - Code-review M5 R1 returned clean-with-notes and closed M5; no implementation milestones remain.
   - Explain-change is complete.
   - Final local verification passed with branch-ready evidence; PR handoff is next.
+  - PR #10 opened from `proposal/rowing-machine-basics` to `main`; hosted CI is pending or unobserved.
 
 validation:
   - command: python tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/architecture/system/architecture.md
