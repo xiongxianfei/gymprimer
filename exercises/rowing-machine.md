@@ -54,7 +54,7 @@ Keep the recovery controlled instead of rushing back to the front.
 The drive should start with the legs and glutes. The trunk helps keep posture
 and transfer force through the stroke. The upper back, lats, and arms help
 finish the handle pull near the ribs. Treat this as broad exercise literacy,
-not a precise muscle-activation test.
+not a precise muscle-activation test. [Concept2][local-rowing-machine-muscles]
 
 ## Movement breakdown
 
@@ -173,6 +173,7 @@ Stop the round if technique becomes painful or the movement turns jerky or uncon
 - [Concept2 RowErg foot position guidance][concept2-foot-position]
 - [Concept2 damper setting guidance][concept2-damper-setting]
 - [Concept2 getting started workouts][concept2-getting-started-workouts]
+- [Concept2 muscles used while rowing][local-rowing-machine-muscles]
 - [CDC adult activity guidance][cdc-adult-activity]
 - [WHO physical activity guidance][who-physical-activity]
 - [Mayo Clinic heart attack symptoms reference][local-rowing-machine-safety]
@@ -184,6 +185,7 @@ Stop the round if technique becomes painful or the movement turns jerky or uncon
 [concept2-foot-position]: https://concept2.com/blog/find-your-optimal-foot-position-on-the-rowerg
 [concept2-damper-setting]: https://concept2.com/blog/what-is-the-best-damper-setting-for-me
 [concept2-getting-started-workouts]: https://concept2.com/blog/getting-started-try-these-workouts
+[local-rowing-machine-muscles]: https://concept2.com/training/articles/rowing-muscles-used
 [cdc-adult-activity]: https://www.cdc.gov/physical-activity-basics/guidelines/adults.html
 [who-physical-activity]: https://www.who.int/initiatives/behealthy/physical-activity
 [local-rowing-machine-safety]: https://www.mayoclinic.org/diseases-conditions/heart-attack/in-depth/heart-attack-symptoms/art-20047744

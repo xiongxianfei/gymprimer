@@ -33,6 +33,7 @@ or page review identifies a concrete beginner comprehension gap.
 | `exercises/lat-pulldown.md` | 2 | `equipment_identification`, `key_movement_illustration` | keep existing image | Keep legacy-compatible equipment and movement images; no migration-only edit. |
 | `exercises/plank.md` | 1 | `key_movement_illustration` | keep existing image | Keep legacy-compatible sequence image; no migration-only edit. |
 | `exercises/prone-y-t.md` | 2 | `exercise_muscle_attention_illustration`, `exercise_movement_illustration` | keep existing image | No additional image needed now; keep M3 images. |
+| `exercises/rowing-machine.md` | 0 | none | text-only accepted | Rowing-machine M3 proof found no unresolved visual comprehension gap; no image batch needed now. |
 | `exercises/seated-row.md` | 1 | `equipment_identification` | keep existing image | Keep legacy-compatible machine image; future setup/movement work needs a reviewed batch. |
 | `exercises/thoracic-extension.md` | 2 | `exercise_muscle_attention_illustration`, `exercise_movement_illustration` | keep existing image | No additional image needed now; keep M3 images. |
 | `exercises/wall-slide.md` | 2 | `exercise_muscle_attention_illustration`, `exercise_movement_illustration` | keep existing image | No additional image needed now; keep M3 images. |

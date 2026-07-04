@@ -101,7 +101,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 requested PR-RMB-1; PR-RMB-1
@@ -109,12 +109,12 @@ shows that setup or stroke-sequence comprehension needs visual support.
   map; code-review M2 R1 requested CR-RMB-M2-1; CR-RMB-M2-1 resolved pending
   M2 code-review rerun; code-review M2 R2 closed M2
 - Remaining in-scope implementation milestones: M3, M4
-- Remaining lifecycle milestones: implementation, code-review, explain-change,
+- Remaining lifecycle milestones: code-review, implementation, explain-change,
   verify, PR handoff
-- Next stage: implement M3
+- Next stage: code-review M3
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1 and M2 are closed by code-review;
-  M3-M4, downstream review, durable rationale, and final
+  M3 is implemented pending code-review; M4, downstream review, durable rationale, and final
   verification remain before closeout.
 
 ## Milestones
@@ -231,7 +231,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ### M3. Manual Proof, Comprehension, and Optional Media Decision
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: record bounded manual evidence and decide whether text-only guidance is
   sufficient or whether setup or stroke-sequence images are needed.
 - Requirements: R28-R36, AC5-AC7.
@@ -423,6 +423,10 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: Review-resolution split `## Safety notes` into source-supported
   groups and moved M2 back to review-requested for code-review.
 - 2026-07-04: Code-review M2 R2 returned clean-with-notes and closed M2.
+- 2026-07-04: M3 implementation recorded the source audit, beginner
+  comprehension proof, and text-only media decision; added a page-local muscles
+  source; updated image audit inventory for the new text-only rowing page; and
+  moved M3 to review-requested for code-review.
 
 ## Decision log
 
@@ -446,6 +450,18 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - Review-resolution for CR-RMB-M2-1 reused already indexed `nhs-back-pain` and
   `mayo-weight-training` sources, and added a page-local
   `local-rowing-machine-exercise-pain` source for sharp or worsening pain.
+- M3 source audit found that the muscles section needed a nearby page-local
+  source for glutes and lats, so `local-rowing-machine-muscles` was added from
+  Concept2's rowing muscles-used article.
+- M3 accepted text-only rowing guidance because the beginner comprehension proof
+  passed without a visual comprehension gap.
+- `media/prompts/` Markdown prompt records are data/support artifacts, not
+  reader-facing content pages. The Markdown-first checker now skips them during
+  directory scans while the exercise-image prompt-record tests continue to
+  validate their own contract.
+- The exercise-image M4 audit is a current exercise inventory checked by
+  `tests/test_exercise_image_standard.py`; adding `exercises/rowing-machine.md`
+  required a text-only row there even though no rowing image was added.
 
 ## Validation notes
 
@@ -560,17 +576,37 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r2.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md`,
   `git diff --check`, and state-sync check passed after code-review M2 R2
   recording.
+- 2026-07-04: Initial M3 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media`
+  failed because existing `media/prompts/...` prompt records were treated as
+  reader-facing content pages. Added regression coverage and skipped
+  `media/prompts/` from page checks.
+- 2026-07-04: Initial M3 `python3 -m unittest discover -s tests -p 'test_*image*.py'`
+  failed because the exercise-image M4 audit did not yet list the new
+  `exercises/rowing-machine.md` page. Added a text-only audit row.
+- 2026-07-04: `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media`
+  passed after M3 proof and checker updates.
+- 2026-07-04: `python3 tools/checks/check_privacy.py exercises media docs/changes/rowing-machine-basics-and-beginner-workouts`
+  passed after M3 proof and checker updates.
+- 2026-07-04: `python3 -m unittest discover -s tests -p 'test_*image*.py'`
+  passed after M3 proof and checker updates.
+- 2026-07-04: `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`
+  passed after the prompt-record scan handling update.
+- 2026-07-04: `git diff --check` passed after M3 proof and checker updates.
+- 2026-07-04: State-sync check passed for `docs/plan.md`,
+  `docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md`, and
+  `docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml` before
+  M3 handoff.
 
 ## Outcome and retrospective
 
 - M1 implemented scoped cardio method validation and closed after clean
   code-review. M2 implemented the rowing page and source index, then closed
-  after CR-RMB-M2-1 review-resolution and clean code-review R2. M3-M4 are not
-  started.
+  after CR-RMB-M2-1 review-resolution and clean code-review R2. M3 is
+  implemented and pending code-review. M4 is not started.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implementation M3.
+- Ready for code-review of M3.
 - Not ready for final verification, PR handoff, or Done until the remaining
   lifecycle gates complete.

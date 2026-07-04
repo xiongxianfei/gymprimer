@@ -117,3 +117,49 @@ page-local source for sharp or worsening exercise pain.
 - `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns` passed.
 - `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts` passed.
 - `git diff --check` passed.
+
+## M3. Manual Proof and Media Decision
+
+M3 records the semantic proof that static checks cannot provide and decides
+whether rowing needs images before promotion.
+
+### What changed
+
+- `docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof/source-audit.md`
+  records source support for setup, stroke sequence, damper, muscles, method
+  examples, weekly activity, stop conditions, and source-index discipline.
+- `docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof/beginner-comprehension.md`
+  records a non-identifying reviewer simulation for the required beginner read
+  questions.
+- `docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof/media-decision.md`
+  accepts text-only guidance and records that no rowing media, provenance row,
+  prompt record, or visual-safety review is required in M3.
+- `exercises/rowing-machine.md` now cites a page-local Concept2 muscles-used
+  source for the broad muscles section.
+- `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`
+  now lists `exercises/rowing-machine.md` as a current text-only exercise page.
+- `tools/checks/check_markdown_first.py` skips `media/prompts/` Markdown prompt
+  records during reader-facing page scans; `tests/test_exercise_image_standard.py`
+  has regression coverage for that behavior.
+
+### Why it changed
+
+The approved M3 plan requires manual source audit, beginner comprehension proof,
+and a media decision before promotion. During validation, the image-standard
+audit and prompt-record scan behavior also needed same-slice alignment because
+the new rowing page changed the exercise inventory and the M3 validation command
+scans `media`.
+
+### Validation
+
+- Initial `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media`
+  failed before the checker update because existing `media/prompts/...` prompt
+  records were treated as reader-facing content pages.
+- Initial `python3 -m unittest discover -s tests -p 'test_*image*.py'` failed
+  before the audit update because `exercises/rowing-machine.md` was missing
+  from the exercise-image M4 audit inventory.
+- `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media` passed.
+- `python3 tools/checks/check_privacy.py exercises media docs/changes/rowing-machine-basics-and-beginner-workouts` passed.
+- `python3 -m unittest discover -s tests -p 'test_*image*.py'` passed.
+- `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed.
+- `git diff --check` passed.

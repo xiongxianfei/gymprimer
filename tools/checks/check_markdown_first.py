@@ -301,11 +301,19 @@ def iter_markdown_paths(paths: list[Path]) -> tuple[list[Path], list[str]]:
             errors.append(f"setup: missing path: {path}")
             continue
         if path.is_dir():
-            markdown_paths.extend(sorted(p for p in path.rglob("*.md") if p.is_file()))
+            markdown_paths.extend(
+                sorted(p for p in path.rglob("*.md") if p.is_file() and not is_media_prompt_record(p))
+            )
         elif path.suffix.lower() == ".md":
-            markdown_paths.append(path)
+            if not is_media_prompt_record(path):
+                markdown_paths.append(path)
 
     return markdown_paths, errors
+
+
+def is_media_prompt_record(path: Path, root: Path = ROOT) -> bool:
+    relative_path = repo_relative_path(path, root)
+    return relative_path.startswith("media/prompts/")
 
 
 def is_support_file(path: Path) -> bool:
