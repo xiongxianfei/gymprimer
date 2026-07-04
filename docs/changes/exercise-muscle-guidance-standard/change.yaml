@@ -1,6 +1,6 @@
 change_id: exercise-muscle-guidance-standard
-status: m1-rereview-requested
-current_stage: code-review
+status: m2-ready
+current_stage: implement
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-muscle-guidance-standard.md
@@ -25,11 +25,11 @@ current_test_spec: specs/exercise-muscle-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-muscle-guidance-standard/reviews/test-spec-review-r1.md
 
-current_milestone: M1
-current_milestone_state: review-requested
-last_reviewed_milestone: none
+current_milestone: M2
+current_milestone_state: planned
+last_reviewed_milestone: M1
 
-next_stage: code-review
+next_stage: implement
 
 open_findings: []
 
@@ -47,4 +47,5 @@ notes:
   - M1 validation passed locally and is ready for code-review.
   - Code-review M1 R1 requested changes for missing XMG-T8 source-surface proof.
   - Review-resolution addressed CR-XMG-M1-1 with focused source-surface tests and minimal structural checker behavior; M1 is ready for code-review rerun.
+  - Code-review M1 R2 accepted the resolution and closed M1.
   - No final completion claim is authorized until implementation, code review, explain-change when useful, verification, and PR handoff gates are complete for the relevant scope.

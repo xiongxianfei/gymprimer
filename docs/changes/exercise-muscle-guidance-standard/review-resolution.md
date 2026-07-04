@@ -2,18 +2,19 @@
 
 ## Status
 
-resolved-pending-rereview
+closed
 
 ## Findings
 
 | Finding ID | Review | Severity | Required outcome | Status |
 | --- | --- | --- | --- | --- |
-| CR-XMG-M1-1 | `docs/changes/exercise-muscle-guidance-standard/reviews/code-review-m1-r1.md` | major | Add deterministic XMG-T8 source-surface coverage for adopted muscle guidance without broad migration. | resolved-pending-rereview |
+| CR-XMG-M1-1 | `docs/changes/exercise-muscle-guidance-standard/reviews/code-review-m1-r1.md` | major | Add deterministic XMG-T8 source-surface coverage for adopted muscle guidance without broad migration. | resolved |
 
 ## Resolution Notes
 
 - 2026-07-04: Opened CR-XMG-M1-1 from code-review M1 R1. M1 implemented heading, role, legacy, and wording checks, but omitted the required source-support surface fixture/check from XMG-T8.
 - 2026-07-04: Addressed CR-XMG-M1-1 by adding focused source-surface tests and minimal structural checker behavior. Re-review is required before M1 can close.
+- 2026-07-04: Code-review M1 R2 accepted the resolution and closed M1.
 
 ## CR-XMG-M1-1 - Missing XMG-T8 Source-Surface Proof
 
