@@ -27,12 +27,13 @@ drive sequence, recovery sequence, beginner first step, stop condition, and
 technique-source verification. No unresolved comprehension gap requires a setup
 or stroke-sequence image.
 
-Follow-up decision on 2026-07-04: add two support images after the user asked
-for necessary images to make the document more readable and understandable.
-The images are limited to the two concepts already identified by the proposal
-and image guidance:
+Follow-up decision on 2026-07-04: add three support images after the user asked
+for necessary images to make the document more readable and understandable,
+then clarified that users need muscle engagement and targeting cues. The images
+are limited to concepts already identified by the proposal and image guidance:
 
 - setup reference for foot strap, seat, handle, and catch position;
+- muscle-attention reference for broad muscles engaged during rowing;
 - movement sequence reference for catch, drive, finish, and recovery.
 
 The images support Markdown comprehension. They do not replace the written
@@ -42,6 +43,7 @@ setup, source citations, sequence, method guidance, or safety routing.
 
 - Added `media/exercises/rowing-machine/setup.png`.
 - Added `media/exercises/rowing-machine/movement.png`.
+- Added `media/exercises/rowing-machine/muscle-attention.png`.
 - Added `media/PROVENANCE.md` rows for both generated raster images.
 - Added prompt records under `media/prompts/exercises/rowing-machine/`.
 - Added `docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof/visual-safety-review.md`.

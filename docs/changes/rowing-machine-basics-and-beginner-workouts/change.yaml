@@ -61,7 +61,7 @@ notes:
   - Code-review M3 R1 returned clean-with-notes and closed M3; M4 implementation is next.
   - M4 recorded the validation ledger and is ready for code-review.
   - Code-review M4 R1 returned clean-with-notes and closed M4 before the M5 follow-up media request.
-  - M5 follow-up media enhancement added setup and movement images and is ready for code-review.
+  - M5 follow-up media enhancement added setup, muscle-attention, and movement images and is ready for code-review.
 
 validation:
   - command: python tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/architecture/system/architecture.md
@@ -366,13 +366,13 @@ validation:
     evidence: checked 27 Markdown file(s): pass after M5 media enhancement
   - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
     result: pass
-    evidence: checked 82 file(s): privacy pass after M5 media enhancement
+    evidence: checked 84 file(s): privacy pass after M5 media enhancement
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after M5 media enhancement
   - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof media/prompts/exercises/rowing-machine
     result: pass
-    evidence: checked 11 file(s): privacy pass after M5 handoff metadata updates
+    evidence: checked 12 file(s): privacy pass after M5 handoff metadata updates
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after M5 handoff metadata updates

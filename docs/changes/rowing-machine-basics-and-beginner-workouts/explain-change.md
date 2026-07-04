@@ -193,20 +193,23 @@ implementation state before code-review handoff.
 
 ## M5. Follow-up Rowing Media Enhancement
 
-M5 adds two support images after a follow-up request to make the rowing-machine
-page more readable and understandable.
+M5 adds three support images after follow-up requests to make the rowing-machine
+page more readable and understandable, including clearer muscle-engagement cues.
 
 ### What changed
 
-- `exercises/rowing-machine.md` now references a setup image and a stroke
-  sequence image.
+- `exercises/rowing-machine.md` now references setup, muscle-attention, and
+  stroke-sequence images.
 - `media/exercises/rowing-machine/setup.png` shows the rower setup with foot
   strap, seat, handle, and catch position.
+- `media/exercises/rowing-machine/muscle-attention.png` shows broad highlighted
+  regions for the muscles named in Markdown.
 - `media/exercises/rowing-machine/movement.png` shows the catch, drive,
   finish, and recovery positions.
 - `media/PROVENANCE.md` records approved generated-raster provenance rows for
-  both assets.
-- `media/prompts/exercises/rowing-machine/setup.md` and
+  all three assets.
+- `media/prompts/exercises/rowing-machine/setup.md`,
+  `media/prompts/exercises/rowing-machine/muscle-attention.md`, and
   `media/prompts/exercises/rowing-machine/movement.md` preserve the exact
   prompts.
 - The media decision was re-run, and
@@ -214,10 +217,11 @@ page more readable and understandable.
 
 ### Why it changed
 
-The approved rowing-machine spec allows local setup and movement images when
-they materially support comprehension and remain subordinate to Markdown. The
-follow-up user request created a concrete readability need, so the smallest
-media set is one setup image and one stroke-sequence image.
+The approved rowing-machine spec allows local setup, muscle-attention, and
+movement images when they materially support comprehension and remain
+subordinate to Markdown. The follow-up user requests created concrete
+readability and muscle-engagement needs, so the smallest media set is one setup
+image, one muscle-attention image, and one stroke-sequence image.
 
 ### Validation
 

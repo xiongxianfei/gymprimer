@@ -343,30 +343,35 @@ shows that setup or stroke-sequence comprehension needs visual support.
 ### M5. Follow-up Rowing Media Enhancement
 
 - Milestone state: review-requested
-- Goal: add the smallest useful set of rowing-machine images after a follow-up
-  readability request while preserving Markdown as the source of truth.
+- Goal: add the smallest useful set of rowing-machine images after follow-up
+  readability and muscle-engagement requests while preserving Markdown as the
+  source of truth.
 - Requirements: R31-R36, AC6-AC7.
 - Files/components touched:
   - `exercises/rowing-machine.md`
   - `media/exercises/rowing-machine/setup.png`
   - `media/exercises/rowing-machine/movement.png`
+  - `media/exercises/rowing-machine/muscle-attention.png`
   - `media/PROVENANCE.md`
   - `media/prompts/exercises/rowing-machine/setup.md`
   - `media/prompts/exercises/rowing-machine/movement.md`
+  - `media/prompts/exercises/rowing-machine/muscle-attention.md`
   - `docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof/media-decision.md`
   - `docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof/visual-safety-review.md`
   - `docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md`
   - `tests/test_markdown_first_real_pages.py`
 - Dependencies:
   - M1-M4 are closed by code-review.
-  - The approved spec already allows setup and movement media when they remain
-    local, support-only, provenance-backed, prompt-record-backed, and visually
-    reviewed.
+  - The approved spec already allows setup, movement, and muscle-attention media
+    when they remain local, support-only, provenance-backed,
+    prompt-record-backed, and visually reviewed.
 - Tests added/updated:
-  - real-page regression for local rowing media references, image files,
-    provenance rows, page refs, approved status, and prompt records.
+  - real-page regression for local rowing setup, movement, and muscle-attention
+    media references, image files, provenance rows, page refs, approved status,
+    and prompt records.
 - Implementation steps:
-  - Generate two support images: setup and movement sequence.
+  - Generate three support images: setup, muscle attention, and movement
+    sequence.
   - Copy accepted images into `media/exercises/rowing-machine/`.
   - Add prompt records, provenance rows, page references, and alt text.
   - Re-run the media decision and record visual-safety review.
@@ -379,7 +384,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media`
   - `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md`
   - `git diff --check`
-- Expected observable result: the rowing-machine page references two local
+- Expected observable result: the rowing-machine page references three local
   support images with approved provenance, exact prompt records, and visual
   safety evidence.
 - Commit message: `M5: add rowing media support`
@@ -494,7 +499,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 | 2026-07-04 | Make method-boundary validation M1 before page drafting. | The rowing page depends on `basic_cardio_equipment`, and the existing exercise-method spec previously deferred that value. | Draft the page first and discover checker/source-index failures late. |
 | 2026-07-04 | Start text-first and make media evidence-triggered. | The spec allows text-only when comprehension is sufficient, while generated media adds provenance, prompt-record, and visual-safety obligations. | Add images by default; prohibit images even if comprehension evidence shows a visual gap. |
 | 2026-07-04 | Gate promotion/navigation behind manual proof. | The page should not be surfaced as ready until source audit and beginner comprehension evidence pass. | Add README navigation immediately after drafting; defer all promotion decisions to chat. |
-| 2026-07-04 | Add two follow-up support images after readability request. | The user requested necessary images, and the accepted spec allows setup and movement images when they remain local, support-only, provenance-backed, prompt-record-backed, and visually reviewed. | Keep text-only despite the follow-up request; add more than setup and movement images. |
+| 2026-07-04 | Add three follow-up support images after readability and muscle-engagement requests. | The user requested necessary images and then clarified that users need muscle engagement and targeting cues. The accepted spec allows setup, movement, and muscle-attention images when they remain local, support-only, provenance-backed, prompt-record-backed, and visually reviewed. | Keep text-only despite the follow-up request; add labels or source-of-truth instructions inside images. |
 
 ## Surprises and discoveries
 
@@ -524,9 +529,10 @@ shows that setup or stroke-sequence comprehension needs visual support.
   required a text-only row there even though no rowing image was added.
 - M4 did not change README navigation because the approved plan makes README
   edits conditional and no required navigation update exists before code-review.
-- M5 adds setup and movement support images after a follow-up readability
-  request. The images are generated raster assets, so they require provenance,
-  prompt records, page references, and visual-safety evidence.
+- M5 adds setup, muscle-attention, and movement support images after follow-up
+  readability and muscle-engagement requests. The images are generated raster
+  assets, so they require provenance, prompt records, page references, and
+  visual-safety evidence.
 
 ## Validation notes
 
@@ -702,7 +708,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: M5 `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media`
   passed with 27 Markdown files checked.
 - 2026-07-04: M5 `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md`
-  passed with 82 files checked.
+  passed with 84 files checked.
 - 2026-07-04: M5 `git diff --check` passed.
 - 2026-07-04: `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof media/prompts/exercises/rowing-machine`,
   `git diff --check`, and state-sync check passed after M5 handoff metadata
@@ -715,8 +721,8 @@ shows that setup or stroke-sequence comprehension needs visual support.
   after CR-RMB-M2-1 review-resolution and clean code-review R2. M3 recorded
   manual proof, comprehension evidence, and the text-only media decision, then
   closed after clean code-review R1. M4 recorded integration validation
-  evidence, then closed after clean code-review R1. M5 added follow-up setup
-  and movement images and is pending code-review.
+  evidence, then closed after clean code-review R1. M5 added follow-up setup,
+  muscle-attention, and movement images and is pending code-review.
 
 ## Readiness
 

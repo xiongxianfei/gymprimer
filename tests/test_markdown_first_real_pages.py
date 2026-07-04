@@ -124,6 +124,10 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
                 "exercise_movement_illustration",
                 "Rowing machine stroke sequence reference showing catch, drive, finish, and recovery",
             ),
+            "media/exercises/rowing-machine/muscle-attention.png": (
+                "exercise_muscle_attention_illustration",
+                "Rowing machine muscle attention reference with broad highlights on legs, glutes, trunk, upper back, lats, and arms",
+            ),
         }
 
         for asset_path, (purpose, alt_text) in expected.items():

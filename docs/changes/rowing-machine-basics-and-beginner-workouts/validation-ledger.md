@@ -21,8 +21,9 @@ M5 media enhancement review-requested
   code-review.
 - The M3 media decision was re-run after the user requested necessary images
   for readability.
-- Rowing-machine setup and movement images now have local page references,
-  `media/PROVENANCE.md` rows, exact prompt records, and visual-safety review.
+- Rowing-machine setup, muscle-attention, and movement images now have local
+  page references, `media/PROVENANCE.md` rows, exact prompt records, and
+  visual-safety review.
 
 ## Commands
 
@@ -33,16 +34,16 @@ M5 media enhancement review-requested
 | `python3 -m unittest discover -s tests -p 'test_*image*.py'` | pass | Ran 14 tests; result `OK`. |
 | `python3 -m unittest discover -s tests` | pass | Ran 121 tests; result `OK`. |
 | `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media` | pass | Checked 27 Markdown files; result `pass`. |
-| `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md` | pass | Checked 82 files; result `privacy pass`. |
+| `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md` | pass | Checked 84 files; result `privacy pass`. |
 | `git diff --check` | pass | No whitespace errors reported. |
 
 ## Promotion and Navigation Decision
 
 No README or navigation edit is included in M5. The approved plan lists
 `README.md` as conditional: update it only if the approved promotion path
-requires navigation. The rowing-machine page now has local setup and movement
-images, but promotion/navigation remains gated by code-review and later final
-verification.
+requires navigation. The rowing-machine page now has local setup,
+muscle-attention, and movement images, but promotion/navigation remains gated
+by code-review and later final verification.
 
 ## Residual Risk
 
@@ -50,7 +51,7 @@ verification.
 - M5 code-review, durable cross-milestone review, final verification, and PR
   handoff remain downstream gates.
 - The generated images are static support assets; Markdown remains the source
-  of truth for setup, sequence, safety, and method guidance.
+  of truth for setup, muscle engagement, sequence, safety, and method guidance.
 
 ## No Premature Claims
 

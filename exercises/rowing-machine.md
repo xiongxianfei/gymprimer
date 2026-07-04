@@ -58,6 +58,8 @@ and transfer force through the stroke. The upper back, lats, and arms help
 finish the handle pull near the ribs. Treat this as broad exercise literacy,
 not a precise muscle-activation test. [Concept2][local-rowing-machine-muscles]
 
+![Rowing machine muscle attention reference with broad highlights on legs, glutes, trunk, upper back, lats, and arms](../media/exercises/rowing-machine/muscle-attention.png)
+
 ## Movement breakdown
 
 Core sequence:

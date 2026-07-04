@@ -20,11 +20,12 @@ pass
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `media/exercises/rowing-machine/setup.png` | `exercises/rowing-machine.md` | `exercise_setup_illustration` | pass | pass | pass | pass | pass | pass | pass | pass | pass | approved | Shows setup at the catch with the strap, seat, handle, rail, and flywheel visible; Markdown remains authoritative for exact setup wording. |
 | `media/exercises/rowing-machine/movement.png` | `exercises/rowing-machine.md` | `exercise_movement_illustration` | pass | pass | pass | pass | pass | pass | pass | pass | pass | approved | Shows four stroke positions without labels; Markdown remains authoritative for drive/recovery order and phase details. |
+| `media/exercises/rowing-machine/muscle-attention.png` | `exercises/rowing-machine.md` | `exercise_muscle_attention_illustration` | pass | pass | pass | pass | pass | pass | pass | pass | pass | approved | Shows broad blue attention regions for the muscles named in Markdown; contains no labels, and Markdown remains authoritative for exact muscle wording. |
 
 ## Batch Decision
 
-- Review result: visual-safety pass for the rowing-machine setup and movement
-  images.
+- Review result: visual-safety pass for the rowing-machine setup, movement, and
+  muscle-attention images.
 - Required change or removal: none from this visual-safety pass.
 - Residual risk: static visual review cannot prove every reader will interpret
   the sequence perfectly; the page keeps all instructions in Markdown.
