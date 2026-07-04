@@ -1,6 +1,6 @@
 change_id: exercise-method-guidance
 status: active
-current_stage: code-review
+current_stage: review-resolution
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-method-guidance.md
@@ -22,16 +22,18 @@ plan_index: docs/plan.md
 
 current_milestone: M1
 current_milestone_name: Method Contract Validation and Template
-current_milestone_state: review-requested
+current_milestone_state: resolution-needed
 last_reviewed_milestone: none
 
 current_test_spec: specs/exercise-method-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-method-guidance/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/exercise-method-guidance/review-resolution.md
-next_stage: code-review
+next_stage: review-resolution
 
-open_findings: []
+open_findings:
+  - CR-EMG-M1-1
+  - CR-EMG-M1-2
 
 notes:
   - Proposal-review R2 approved the exercise-method guidance direction.
@@ -42,6 +44,7 @@ notes:
   - Test-spec-review R2 approved the revised active proof map and allowed M1 implementation handoff.
   - M1 added the exercise template method section, visible-Markdown checker validation, focused tests, and compatibility notes.
   - M1 targeted validation passed and the milestone is review-requested for code-review.
+  - Code-review M1 R1 requested changes for exact method-heading validation and non-empty required label content.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_method_guidance

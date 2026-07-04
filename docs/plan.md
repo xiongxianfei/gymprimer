@@ -5,8 +5,8 @@
 - [Exercise Method Guidance](plans/2026-07-04-exercise-method-guidance.md)
   - Status: draft
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M1 implementation is review-requested after adding method template guidance, visible-Markdown validation, focused tests, compatibility notes, and local validation evidence.
+  - Current stage: review-resolution
+  - Active context: code-review M1 R1 requested changes for exact method-heading validation and non-empty required label content; M1 remains active.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

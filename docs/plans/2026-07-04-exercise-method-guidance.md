@@ -94,22 +94,23 @@ The first proof slice is exactly:
 ## Current Handoff Summary
 
 - Current milestone: M1
-- Current milestone state: review-requested
+- Current milestone state: resolution-needed
 - Last reviewed milestone: none
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review R2
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
 - Remaining in-scope implementation milestones: M1, M2, M3, M4, Lifecycle Closeout
-- Next stage: code-review M1
+- Next stage: review-resolution
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 implementation is awaiting
-  code-review; later milestones, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M1 code-review R1 requested
+  review-resolution for validator gaps; later milestones, explain-change,
+  verify, and PR handoff remain.
 
 ## Milestones
 
 ### M1. Method Contract Validation and Template
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: make the exercise-method contract authorable and checkable before
   proof-slice content changes.
 - Requirements: R1-R6, R7-R13, R26-R27, R33-R38, R42, AC1, AC3, AC6, AC8-AC10.
@@ -412,6 +413,8 @@ The first proof slice is exactly:
 - 2026-07-04: M1 added the exercise template method section, visible-Markdown
   method validation, focused method-guidance tests, compatibility-note coverage,
   and required M1 validation evidence. M1 is review-requested.
+- 2026-07-04: Code-review M1 R1 requested changes for CR-EMG-M1-1 and
+  CR-EMG-M1-2. M1 remains active and moves to review-resolution.
 
 ## Decision log
 
@@ -455,5 +458,5 @@ The first proof slice is exactly:
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M1 code-review. Final closeout is not ready until M1-M4,
+- Ready for M1 review-resolution. Final closeout is not ready until M1-M4,
   code-review loops, explain-change, verify, and PR handoff complete.
