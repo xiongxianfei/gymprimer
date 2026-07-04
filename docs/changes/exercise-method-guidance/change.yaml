@@ -22,14 +22,14 @@ plan_index: docs/plan.md
 
 current_milestone: Lifecycle Closeout
 current_milestone_name: Lifecycle Closeout
-current_milestone_state: pr-handoff-ready
+current_milestone_state: pr-open
 last_reviewed_milestone: M4
 
 current_test_spec: specs/exercise-method-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-method-guidance/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/exercise-method-guidance/review-resolution.md
-next_stage: pr
+next_stage: PR review
 
 open_findings: []
 
@@ -57,6 +57,7 @@ notes:
   - Code-review M4 R1 confirmed the manual proof records and closed all implementation milestones; Lifecycle Closeout is next.
   - Explain-change recorded durable rationale for the proposal-to-diff trail; final verification is next.
   - Final local verification passed after narrow historical privacy cleanup; branch is ready for PR handoff.
+  - PR #9 opened from `feature/exercise-method-guidance` to `main`; hosted CI remains unobserved.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_method_guidance

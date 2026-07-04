@@ -4,7 +4,7 @@
 
 - Status: draft
 - Plan lifecycle state: active
-- Terminal disposition: not-terminal
+- Terminal disposition: PR #9 open; not merged
 
 ## Purpose / big picture
 
@@ -94,17 +94,17 @@ The first proof slice is exactly:
 ## Current Handoff Summary
 
 - Current milestone: Lifecycle Closeout
-- Current milestone state: pr-handoff-ready
+- Current milestone state: pr-open
 - Last reviewed milestone: M4
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review R2
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
 - Remaining in-scope implementation milestones: none
 - Remaining lifecycle milestones: Lifecycle Closeout
-- Next stage: pr
+- Next stage: PR review
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1, M2, M3, and M4 are closed;
-  final local verification passed; PR handoff remains.
+  final local verification passed; PR #9 is open and merge/review remains.
 
 ## Milestones
 
@@ -447,6 +447,8 @@ The first proof slice is exactly:
   older change records were neutralized so the broad privacy command can scan
   the full required docs set. Branch is ready for PR handoff; PR readiness is
   not claimed until the `pr` stage records it.
+- 2026-07-04: PR #9 opened from `feature/exercise-method-guidance` to `main`
+  with local validation evidence and hosted CI marked unobserved.
 
 ## Decision log
 
@@ -538,9 +540,11 @@ The first proof slice is exactly:
 
 ## Outcome and retrospective
 
-- Pending until implementation, review, verification, and PR handoff complete.
+- PR #9 is open. Implementation, code review, explain-change, final local
+  verification, and PR handoff are complete; hosted CI was not observed.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for PR handoff. Final closeout is not ready until PR handoff complete.
+- PR #9 is open for review. Final closeout remains active until PR review and
+  merge disposition are complete.
