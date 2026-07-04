@@ -6,6 +6,34 @@ from tools.checks.check_markdown_first import validate_exercise_muscle_guidance
 
 
 ROOT = Path(__file__).resolve().parents[1]
+MANUAL_PROOF_ROOT = ROOT / "docs/changes/exercise-muscle-guidance-standard/manual-proof"
+VALIDATION_LEDGER = ROOT / "docs/changes/exercise-muscle-guidance-standard/validation-ledger.md"
+PROOF_SLICE_PAGES = (
+    "exercises/rowing-machine.md",
+    "exercises/chest-press.md",
+    "exercises/plank.md",
+    "exercises/chin-nod.md",
+    "exercises/thoracic-extension.md",
+    "exercises/band-pull-apart.md",
+)
+REMAINING_ROLLOUT_PAGES = (
+    "exercises/bird-dog.md",
+    "exercises/dead-bug.md",
+    "exercises/glute-bridge.md",
+    "exercises/hip-hinge.md",
+    "exercises/incline-push-up.md",
+    "exercises/kneeling-hip-flexor-stretch.md",
+    "exercises/lat-pulldown.md",
+    "exercises/prone-y-t.md",
+    "exercises/seated-row.md",
+    "exercises/wall-slide.md",
+)
+PROOF_SLICE_MUSCLE_IMAGES = (
+    "media/exercises/rowing-machine/muscle-attention.png",
+    "media/exercises/chin-nod/muscle-attention.png",
+    "media/exercises/thoracic-extension/muscle-attention.png",
+    "media/exercises/band-pull-apart/muscle-attention.png",
+)
 
 
 def exercise_page(*sections: str) -> str:
@@ -222,6 +250,107 @@ class ExerciseMuscleGuidanceTest(unittest.TestCase):
         for finding in findings:
             self.assertEqual(finding.path, path)
             self.assertRegex(finding.code, r"^exercise_muscle_")
+
+    def test_m3_manual_source_audit_records_required_claim_samples(self) -> None:
+        path = MANUAL_PROOF_ROOT / "source-audit.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for heading in (
+            "# Source Audit",
+            "## Scope",
+            "## Claim Samples",
+            "## Disposition",
+            "## Residual Risk",
+        ):
+            with self.subTest(heading=heading):
+                self.assertIn(heading, text)
+
+        for claim_type in ("main-driver", "support-stabilizer", "feel-cue", "compensation-cue", "safety-cue"):
+            with self.subTest(claim_type=claim_type):
+                self.assertIn(claim_type, text)
+
+        for token in ("page_path", "claim_type", "supporting_source", "disposition", "residual_risk"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_m3_beginner_comprehension_proof_records_required_prompts(self) -> None:
+        path = MANUAL_PROOF_ROOT / "beginner-comprehension.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for page in PROOF_SLICE_PAGES:
+            with self.subTest(page=page):
+                self.assertIn(page, text)
+
+        for prompt in (
+            "muscle region to notice",
+            "what it helps do",
+            "what they may feel",
+            "what not to overuse",
+            "when to stop",
+            "source they would click",
+            "non-identifying",
+            "residual confusion",
+        ):
+            with self.subTest(prompt=prompt):
+                self.assertIn(prompt, text)
+
+    def test_m3_muscle_image_alignment_records_each_proof_slice_image(self) -> None:
+        path = MANUAL_PROOF_ROOT / "muscle-image-alignment.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for image_path in PROOF_SLICE_MUSCLE_IMAGES:
+            with self.subTest(image_path=image_path):
+                self.assertIn(image_path, text)
+
+        for requirement in (
+            "nearby Markdown",
+            "alt text",
+            "provenance",
+            "broad region",
+            "no in-image labels",
+            "no red pain marks",
+            "no wrong/correct framing",
+            "no precise anatomy",
+            "no diagnosis or treatment",
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, text)
+
+    def test_m3_broad_rollout_gate_classifies_remaining_exercise_pages(self) -> None:
+        path = MANUAL_PROOF_ROOT / "broad-rollout-gate.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for page in REMAINING_ROLLOUT_PAGES:
+            with self.subTest(page=page):
+                self.assertIn(page, text)
+
+        for category in (
+            "keep as-is for now",
+            "rename only",
+            "rewrite role guidance",
+            "revise `## What you should feel`",
+            "source-audit needed",
+            "future image candidate",
+        ):
+            with self.subTest(category=category):
+                self.assertIn(category, text)
+
+    def test_m3_validation_ledger_records_required_commands(self) -> None:
+        self.assertTrue(VALIDATION_LEDGER.is_file())
+        text = VALIDATION_LEDGER.read_text(encoding="utf-8")
+
+        for command in (
+            "python3 tools/checks/check_privacy.py docs/changes/exercise-muscle-guidance-standard",
+            "python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md",
+            "python3 -m unittest tests.test_exercise_muscle_guidance",
+            "git diff --check",
+        ):
+            with self.subTest(command=command):
+                self.assertIn(command, text)
 
 
 if __name__ == "__main__":

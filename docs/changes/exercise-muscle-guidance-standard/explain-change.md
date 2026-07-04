@@ -50,6 +50,31 @@ M2 leaves nonselected legacy pages with `## Used muscles` untouched and explicit
 - `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises media docs/changes/exercise-muscle-guidance-standard` passed.
 - `git diff --check` passed.
 
+## M3 scope
+
+M3 records the manual proof and future rollout gate required after the proof-slice page migration. It does not rewrite additional exercise pages, escalate checker enforcement, add or regenerate images, or claim final verification.
+
+## M3 changes
+
+- `tests/test_exercise_muscle_guidance.py` now asserts that M3 manual proof files exist and contain the required source-audit claim types, beginner-comprehension prompts, muscle-image alignment checks, remaining-page rollout classifications, and validation-ledger commands.
+- `docs/changes/exercise-muscle-guidance-standard/manual-proof/source-audit.md` records sampled main-driver, support/stabilizer, feel-cue, compensation-cue, and safety-cue source support.
+- `docs/changes/exercise-muscle-guidance-standard/manual-proof/beginner-comprehension.md` records non-identifying proof-slice comprehension outcomes for the required prompts.
+- `docs/changes/exercise-muscle-guidance-standard/manual-proof/muscle-image-alignment.md` records support-only alignment for the proof-slice muscle-attention images.
+- `docs/changes/exercise-muscle-guidance-standard/manual-proof/broad-rollout-gate.md` classifies remaining exercise pages for future batches without authorizing broad migration.
+- `docs/changes/exercise-muscle-guidance-standard/validation-ledger.md` records the M3 validation commands and outcomes.
+
+## M3 compatibility decision
+
+M3 leaves exercise Markdown, media assets, media prompt records, provenance rows, and `SOURCES.md` unchanged. The manual proof records residual risk and future-batch decisions instead of making broad content edits inside the proof milestone.
+
+## M3 validation
+
+- `python3 -m unittest tests.test_exercise_muscle_guidance` failed before evidence creation with five expected missing-file failures.
+- `python3 -m unittest tests.test_exercise_muscle_guidance` passed.
+- `python3 tools/checks/check_privacy.py docs/changes/exercise-muscle-guidance-standard` passed.
+- `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md` passed.
+- `git diff --check` passed.
+
 ## Next stage
 
-M2 is ready for code-review. M3 manual proof and broad-rollout gating remain blocked until M2 review closes.
+M3 is ready for code-review. Final verification and PR handoff remain blocked until M3 review closes.

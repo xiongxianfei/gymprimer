@@ -70,13 +70,13 @@ The first proof slice should choose representative pages from the spec's allowed
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes
 - Remaining in-scope implementation milestones: M3
-- Next stage: implement M3
+- Next stage: code-review M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 and M2 are closed, but M3, final verification, and PR handoff have not started.
+- Reason final closeout is or is not ready: M1 and M2 are closed and M3 is awaiting code-review, but final verification and PR handoff have not started.
 
 ## Milestones
 
@@ -168,7 +168,7 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ### M3. Manual Proof and Broad Rollout Gate
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: record semantic source-support proof, beginner comprehension outcomes, optional image alignment evidence, and a broad-rollout gate before future batches.
 - Requirements: R24-R28, R32-R36, R38-R44, AC3-AC5.
 - Files/components likely touched:
@@ -253,6 +253,10 @@ The first proof slice should choose representative pages from the spec's allowed
 - 2026-07-04: Migrated the selected proof-slice pages to role- or phase-based `## Muscles involved` guidance paired with `## What you should feel`.
 - 2026-07-04: M2 validation passed locally; M2 is ready for code-review.
 - 2026-07-04: Code-review M2 R1 accepted the proof-slice implementation with no material findings. M2 is closed and M3 manual proof is next.
+- 2026-07-04: Started M3 implementation for manual source audit, beginner comprehension proof, muscle-image alignment proof, broad rollout gate, and validation ledger.
+- 2026-07-04: Added M3 tests for required manual proof files, source-audit claim types, beginner-comprehension prompts, muscle-attention image alignment records, remaining-page rollout classifications, and validation-ledger commands.
+- 2026-07-04: Recorded M3 manual proof artifacts under `docs/changes/exercise-muscle-guidance-standard/manual-proof/` and `validation-ledger.md`.
+- 2026-07-04: M3 validation passed locally; M3 is ready for code-review.
 
 ## Decision log
 
@@ -280,6 +284,20 @@ The first proof slice should choose representative pages from the spec's allowed
 - `SOURCES.md` is unaffected because the proof-slice pages already had page-local source definitions for the reused citations.
 - Media files, prompt records, and provenance are unaffected because M2 did not add, remove, regenerate, or relabel muscle-attention images.
 
+## M3 validation notes
+
+- 2026-07-04 M3 expected failing test before evidence creation: `python3 -m unittest tests.test_exercise_muscle_guidance` failed with five missing-file failures for `source-audit.md`, `beginner-comprehension.md`, `muscle-image-alignment.md`, `broad-rollout-gate.md`, and `validation-ledger.md`.
+- 2026-07-04 M3 focused validation passed: `python3 -m unittest tests.test_exercise_muscle_guidance`.
+- 2026-07-04 M3 privacy validation passed: `python3 tools/checks/check_privacy.py docs/changes/exercise-muscle-guidance-standard`.
+- 2026-07-04 M3 content validation passed: `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md`.
+- 2026-07-04 M3 diff hygiene passed: `git diff --check`.
+
+## M3 aligned-surface audit
+
+- M3 adds manual proof records for source audit, beginner comprehension, muscle-image alignment, broad rollout gating, and validation evidence.
+- Exercise pages, media files, media prompt records, and `SOURCES.md` are unaffected; M3 found no required page or media edits during the bounded proof.
+- Broad rollout remains gated for future batches. M3 does not authorize all-page migration or checker escalation.
+
 ## Surprises and discoveries
 
 - Initial checker wording was too broad and flagged existing benign phrases such as "Treat this as..." plus non-role paragraph guidance on current pages. M1 narrowed deterministic enforcement to stable adopted-page categories so `docs/templates` and current `exercises/` pass without a proof-slice rewrite.
@@ -302,9 +320,9 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ## Outcome and retrospective
 
-- M2 implementation is closed after clean code-review. Final outcome remains pending M3 and downstream verification.
+- M3 implementation is pending code-review. Final outcome remains pending downstream verification.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M3 implementation. Final closeout is not allowed until all implementation milestones, code review, and verification are complete.
+- Ready for M3 code-review. Final closeout is not allowed until all implementation milestones, code review, and verification are complete.
