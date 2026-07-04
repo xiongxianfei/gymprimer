@@ -65,7 +65,8 @@ notes:
   - Code-review M5 R1 returned clean-with-notes and closed M5; no implementation milestones remain.
   - Explain-change is complete.
   - Final local verification passed with branch-ready evidence; PR handoff is next.
-  - PR #10 opened from `proposal/rowing-machine-basics` to `main`; hosted CI is pending or unobserved.
+  - PR #10 opened from `proposal/rowing-machine-basics` to `main`.
+  - GitHub Actions reported `Validation checks` passed for PR #10.
 
 validation:
   - command: python tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/architecture/system/architecture.md
@@ -470,3 +471,6 @@ validation:
   - command: stale verify-stage wording scan
     result: pass
     evidence: no stale verify next-stage or pre-verify readiness wording found
+  - command: gh pr checks 10 --watch --interval 10
+    result: pass
+    evidence: GitHub Actions reported Validation checks passed for PR #10
