@@ -1,6 +1,6 @@
 change_id: exercise-method-guidance
 status: active
-current_stage: code-review
+current_stage: implement
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-method-guidance.md
@@ -20,16 +20,16 @@ current_plan_status: draft
 current_plan_review: docs/changes/exercise-method-guidance/reviews/plan-review-r1.md
 plan_index: docs/plan.md
 
-current_milestone: M2
-current_milestone_name: Sets, Reps, Holds, Rest, and Progression Principle Page
-current_milestone_state: review-requested
-last_reviewed_milestone: M1
+current_milestone: M3
+current_milestone_name: Six Proof-Slice Exercise Pages
+current_milestone_state: planned
+last_reviewed_milestone: M2
 
 current_test_spec: specs/exercise-method-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-method-guidance/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/exercise-method-guidance/review-resolution.md
-next_stage: code-review
+next_stage: implement
 
 open_findings: []
 
@@ -47,6 +47,7 @@ notes:
   - Code-review M1 R2 confirmed the review-resolution fixes, closed M1, and handed off to M2 implementation.
   - M2 added the shared principle page, focused assertions, source-index support, and bounded source-audit evidence.
   - M2 targeted validation passed and the milestone is review-requested for code-review.
+  - Code-review M2 R1 confirmed the principle page slice and closed M2; M3 implementation is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_method_guidance
