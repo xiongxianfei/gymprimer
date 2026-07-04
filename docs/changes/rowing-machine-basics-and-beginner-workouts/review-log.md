@@ -9,3 +9,4 @@
 | 2026-07-04 | plan-review | [plan-review-r2](reviews/plan-review-r2.md) | approved | none | PR-RMB-1 resolved; next lifecycle stage is test-spec. |
 | 2026-07-04 | test-spec-review | [test-spec-review-r1](reviews/test-spec-review-r1.md) | changes-requested | TSR-RMB-1 | Manual proof cases need full required metadata before implementation handoff. |
 | 2026-07-04 | test-spec-review | [test-spec-review-r2](reviews/test-spec-review-r2.md) | approved | none | TSR-RMB-1 resolved; implementation handoff is allowed for M1. |
+| 2026-07-04 | code-review | [code-review-m1-r1](reviews/code-review-m1-r1.md) | clean-with-notes | none | M1 scoped cardio method validation closed; next lifecycle stage is implementation M2. |

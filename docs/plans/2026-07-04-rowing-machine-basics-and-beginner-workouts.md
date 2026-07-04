@@ -100,27 +100,27 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ## Current Handoff Summary
 
-- Current milestone: M1
-- Current milestone state: review-requested
-- Last reviewed milestone: none
+- Current milestone: M2
+- Current milestone state: planned
+- Last reviewed milestone: M1
 - Review status: proposal-review R1 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 requested PR-RMB-1; PR-RMB-1
   revision approved by plan-review R2; test-spec-review R2 approved the proof
   map
-- Remaining in-scope implementation milestones: M1, M2, M3, M4
-- Remaining lifecycle milestones: code-review, implementation, explain-change,
+- Remaining in-scope implementation milestones: M2, M3, M4
+- Remaining lifecycle milestones: implementation, code-review, explain-change,
   verify, PR handoff
-- Next stage: code-review M1
+- Next stage: implement M2
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 is implemented and awaiting
-  code-review; M2-M4, downstream review, durable rationale, and final
+- Reason final closeout is or is not ready: M1 is closed by code-review;
+  M2-M4, downstream review, durable rationale, and final
   verification remain before closeout.
 
 ## Milestones
 
 ### M1. Cardio Method Boundary and Validation
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: make the scoped `basic_cardio_equipment` boundary checkable before the
   rowing page relies on it.
 - Requirements: R15-R17, R37-R40, AC2, AC4-AC5, AC8-AC9.
@@ -413,6 +413,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: M1 implementation added tests first, then scoped
   `basic_cardio_equipment` validation to `exercises/rowing-machine.md`.
 - 2026-07-04: M1 moved to review-requested for code-review.
+- 2026-07-04: Code-review M1 R1 returned clean-with-notes and closed M1.
 
 ## Decision log
 
@@ -493,15 +494,20 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: `python3 tools/checks/check_privacy.py tools tests docs/templates specs docs/changes/rowing-machine-basics-and-beginner-workouts docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md`,
   `git diff --check`, and the plan/change state-sync check passed before M1
   handoff commit.
+- 2026-07-04: Code-review M1 R1 independently reran
+  `python3 -m unittest tests.test_exercise_method_guidance`, which passed.
+- 2026-07-04: `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m1-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md`,
+  `git diff --check`, and the plan/change state-sync check passed after
+  code-review M1 R1 recording.
 
 ## Outcome and retrospective
 
-- M1 implemented scoped cardio method validation and is waiting for code-review.
-  M2-M4 are not started.
+- M1 implemented scoped cardio method validation and closed after clean
+  code-review. M2-M4 are not started.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M1.
-- Not ready for M2, final verification, PR handoff, or Done until the remaining
+- Ready for implementation M2.
+- Not ready for final verification, PR handoff, or Done until the remaining
   lifecycle gates complete.
