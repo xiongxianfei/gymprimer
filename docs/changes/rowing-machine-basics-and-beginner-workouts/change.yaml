@@ -1,6 +1,6 @@
 change_id: rowing-machine-basics-and-beginner-workouts
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
@@ -22,7 +22,7 @@ plan_index: docs/plan.md
 
 current_milestone: M2
 current_milestone_name: Rowing Page and Source Index
-current_milestone_state: planned
+current_milestone_state: review-requested
 last_reviewed_milestone: M1
 
 current_test_spec: specs/rowing-machine-basics-and-beginner-workouts.test.md
@@ -31,7 +31,7 @@ current_test_spec_review: docs/changes/rowing-machine-basics-and-beginner-workou
 review_resolution: docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md
 current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m1-r1.md
 verify_report: null
-next_stage: implement
+next_stage: code-review
 pull_request: null
 merge_commit: null
 
@@ -52,6 +52,8 @@ notes:
   - M1 implementation started.
   - M1 implemented scoped cardio method validation and is ready for code-review.
   - Code-review M1 R1 returned clean-with-notes and closed M1; M2 implementation is next.
+  - M2 implementation started.
+  - M2 added the rowing-machine page, source-index entries, real-page tests, and is ready for code-review.
 
 validation:
   - command: python tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/architecture/system/architecture.md
@@ -159,3 +161,33 @@ validation:
   - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, and docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml
     result: pass
     evidence: plan index, plan body, and change metadata all point to implement M2 after M1 closeout
+  - command: python3 -m unittest tests.test_markdown_first_real_pages
+    result: fail
+    evidence: failed before page drafting because exercises/rowing-machine.md did not exist
+  - command: python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages
+    result: pass
+    evidence: 19 tests passed after M2 page and source-index updates
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns
+    result: pass
+    evidence: checked 23 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 30 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M2 page and source-index updates
+  - command: python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages
+    result: pass
+    evidence: 19 tests passed after M2 handoff metadata updates
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns
+    result: pass
+    evidence: checked 23 Markdown file(s): pass after M2 handoff metadata updates
+  - command: python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 30 file(s): privacy pass after M2 handoff metadata updates
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M2 handoff metadata updates
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, and docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml
+    result: pass
+    evidence: plan index, plan body, and change metadata all point to code-review for M2

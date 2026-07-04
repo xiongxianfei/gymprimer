@@ -101,19 +101,19 @@ shows that setup or stroke-sequence comprehension needs visual support.
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
 - Review status: proposal-review R1 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 requested PR-RMB-1; PR-RMB-1
   revision approved by plan-review R2; test-spec-review R2 approved the proof
   map
 - Remaining in-scope implementation milestones: M2, M3, M4
-- Remaining lifecycle milestones: implementation, code-review, explain-change,
+- Remaining lifecycle milestones: code-review, implementation, explain-change,
   verify, PR handoff
-- Next stage: implement M2
+- Next stage: code-review M2
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 is closed by code-review;
-  M2-M4, downstream review, durable rationale, and final
+- Reason final closeout is or is not ready: M1 is closed by code-review and M2
+  is implemented pending code-review; M3-M4, downstream review, durable rationale, and final
   verification remain before closeout.
 
 ## Milestones
@@ -176,7 +176,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ### M2. Rowing Page and Source Index
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: draft the text-first rowing-machine page with page-local citations,
   global source-index support where required, and no optional media yet.
 - Requirements: R1-R14, R18-R30, R37-R38, AC3-AC9.
@@ -414,6 +414,9 @@ shows that setup or stroke-sequence comprehension needs visual support.
   `basic_cardio_equipment` validation to `exercises/rowing-machine.md`.
 - 2026-07-04: M1 moved to review-requested for code-review.
 - 2026-07-04: Code-review M1 R1 returned clean-with-notes and closed M1.
+- 2026-07-04: M2 implementation added real-page tests first, drafted
+  `exercises/rowing-machine.md`, updated `SOURCES.md`, and moved M2 to
+  review-requested for code-review.
 
 ## Decision log
 
@@ -430,6 +433,10 @@ shows that setup or stroke-sequence comprehension needs visual support.
   guardrail rather than a broad enum expansion.
 - The existing `## How much to do` checker could support cardio guidance with
   label aliases, so `docs/templates/exercise-card.md` was unaffected for M1.
+- M2 did not need a `RED-FLAGS.md` change because `../RED-FLAGS.md` resolves
+  from `exercises/rowing-machine.md`.
+- M2 did not add media or README navigation; both remain gated by later manual
+  proof and promotion decisions.
 
 ## Validation notes
 
@@ -499,15 +506,32 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m1-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md`,
   `git diff --check`, and the plan/change state-sync check passed after
   code-review M1 R1 recording.
+- 2026-07-04: Added failing M2 real-page tests first. Initial
+  `python3 -m unittest tests.test_markdown_first_real_pages` failed because
+  `exercises/rowing-machine.md` did not exist.
+- 2026-07-04: `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages`
+  passed after adding the rowing page and source-index entries.
+- 2026-07-04: `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns`
+  passed after adding the rowing page and source-index entries.
+- 2026-07-04: `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts`
+  passed after adding the rowing page and source-index entries.
+- 2026-07-04: `git diff --check` passed after adding the rowing page and
+  source-index entries.
+- 2026-07-04: Re-ran M2 validation after handoff metadata updates:
+  `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages`,
+  `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns`,
+  `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts`,
+  `git diff --check`, and the plan/change state-sync check all passed.
 
 ## Outcome and retrospective
 
 - M1 implemented scoped cardio method validation and closed after clean
-  code-review. M2-M4 are not started.
+  code-review. M2 is implemented and waiting for code-review. M3-M4 are not
+  started.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implementation M2.
+- Ready for code-review of M2.
 - Not ready for final verification, PR handoff, or Done until the remaining
   lifecycle gates complete.

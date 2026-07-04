@@ -30,6 +30,10 @@ Rules:
 - [NICE low back pain and sciatica guideline][nice-low-back-pain-sciatica]
 - [American College of Physicians low back pain guideline][acp-low-back-pain-guideline]
 - [The Fitness Wiki basic beginner routine][rfitness-basic-beginner-routine]
+- [Concept2 indoor rowing technique][concept2-rowing-technique]
+- [Concept2 RowErg foot position guidance][concept2-foot-position]
+- [Concept2 damper setting guidance][concept2-damper-setting]
+- [Concept2 getting started workouts][concept2-getting-started-workouts]
 
 Each page still needs its own matching reference definition so the page renders as standalone Markdown.
 
@@ -51,3 +55,7 @@ Each page still needs its own matching reference definition so the page renders 
 [nice-low-back-pain-sciatica]: https://www.nice.org.uk/guidance/ng59
 [acp-low-back-pain-guideline]: https://www.acpjournals.org/doi/10.7326/M16-2367
 [rfitness-basic-beginner-routine]: https://thefitness.wiki/routines/r-fitness-basic-beginner-routine/
+[concept2-rowing-technique]: https://concept2.com/training/rowing-technique
+[concept2-foot-position]: https://concept2.com/blog/find-your-optimal-foot-position-on-the-rowerg
+[concept2-damper-setting]: https://concept2.com/blog/what-is-the-best-damper-setting-for-me
+[concept2-getting-started-workouts]: https://concept2.com/blog/getting-started-try-these-workouts

@@ -47,3 +47,47 @@ activation rule instead of broadening the global active-method enum.
 - `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed.
 - `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises patterns principles` passed.
 - `python3 tools/checks/check_privacy.py tools tests docs/templates specs docs/changes/rowing-machine-basics-and-beginner-workouts` passed.
+
+## M2. Rowing Page and Source Index
+
+M2 adds the text-first rowing-machine page and source-index support required by
+the approved spec.
+
+### What changed
+
+- `exercises/rowing-machine.md` now exists as a Markdown page with setup,
+  muscles, movement breakdown, beginner method guidance, easier/harder
+  versions, safety notes, and page-local sources.
+- `SOURCES.md` now includes reusable Concept2 rowing source IDs for technique,
+  foot position, damper setting, and getting-started workouts.
+- `tests/test_markdown_first_real_pages.py` now checks the rowing page shape,
+  stroke sequence, setup and damper wording, `basic_cardio_equipment` labels,
+  stop conditions, central safety link, required source IDs, and forbidden
+  product/clinical/programming scope.
+
+### Why it changed
+
+The approved spec requires `exercises/rowing-machine.md` to teach rowing as
+skill-based cardio equipment, with the drive sequence `legs -> body -> arms`,
+the recovery sequence `arms -> body -> legs`, beginner-safe method guidance,
+page-local citations, central safety routing, and no runtime product surface.
+
+### Scope boundaries
+
+- No media was added in M2; the page is text-first pending M3 comprehension and
+  media-decision evidence.
+- No README navigation was added because promotion remains gated by M3 manual
+  proof and M4 lifecycle evidence.
+- No `RED-FLAGS.md` change was needed because the existing central reference
+  path works.
+- No hosted app, tracker, calculator, user-input flow, hidden metadata source
+  of truth, race plan, or broad cardio-equipment rollout was added.
+
+### Validation
+
+- Initial `python3 -m unittest tests.test_markdown_first_real_pages` failed
+  before the page existed.
+- `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages` passed.
+- `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns` passed.
+- `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts` passed.
+- `git diff --check` passed.
