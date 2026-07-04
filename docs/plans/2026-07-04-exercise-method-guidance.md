@@ -94,16 +94,16 @@ The first proof slice is exactly:
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review R2
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
 - Remaining in-scope implementation milestones: M2, M3, M4, Lifecycle Closeout
-- Next stage: implement M2
+- Next stage: code-review M2
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 is closed; M2, M3, M4,
-  explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M1 is closed and M2 is awaiting
+  code-review; M3, M4, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -163,7 +163,7 @@ The first proof slice is exactly:
 
 ### M2. Sets, Reps, Holds, Rest, and Progression Principle Page
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: add the same-slice principle page that explains shared method concepts
   once so exercise pages can stay concise.
 - Requirements: R30-R32, R7-R13, AC5, AC7, AC9-AC10.
@@ -420,6 +420,9 @@ The first proof slice is exactly:
   code-review re-review.
 - 2026-07-04: Code-review M1 R2 confirmed CR-EMG-M1-1 and CR-EMG-M1-2 are
   resolved. M1 is closed and M2 implementation is next.
+- 2026-07-04: M2 added the shared method principle page, focused page-content
+  assertions, reusable source-index support, and a bounded principle-page
+  source audit. M2 is review-requested.
 
 ## Decision log
 
@@ -430,7 +433,9 @@ The first proof slice is exactly:
 
 ## Surprises and discoveries
 
-- None yet.
+- M2 checker validation treated stop-condition wording on the principle page as
+  a safety claim. The page now cites those stop and safety-routing lines
+  directly.
 
 ## Validation notes
 
@@ -465,6 +470,19 @@ The first proof slice is exactly:
   - `tests/test_exercise_method_guidance.py` added focused tests for valid sections, missing fields, deferred types, hidden-only metadata, forbidden wording, and compatibility notes.
   - `tests/test_markdown_first_templates.py` updated to assert template method guidance.
   - `specs/markdown-first-primer.md` and `specs/responsible-breadth.md` updated with pointer-only compatibility notes to `specs/exercise-method-guidance.md`.
+- M2 fail-before-implementation:
+  - `python3 -m unittest tests.test_responsible_breadth_m1` failed before the
+    principle page existed, as expected.
+- M2 targeted validation:
+  - `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md principles` passed, checked 5 Markdown files.
+  - `python3 -m unittest tests.test_responsible_breadth_m1` passed, 28 tests.
+  - `python3 tools/checks/check_privacy.py principles SOURCES.md docs/changes/exercise-method-guidance` passed, checked 17 files.
+  - `git diff --check` passed.
+- M2 aligned-surface audit:
+  - `principles/sets-reps-holds-rest-and-progression.md` created with required Responsible Breadth principle sections, page-local sources, shared method concepts, one-variable progression, and non-prescriptive starter-range framing.
+  - `SOURCES.md` added the reusable Mayo Clinic stretching source used by the principle page.
+  - `tests/test_responsible_breadth_m1.py` now asserts the M2 principle page exists and explains sets, repetitions, timed holds, easy/moderate/hard effort, rest, one-variable progression, and non-prescription framing.
+  - `docs/changes/exercise-method-guidance/manual-proof/principle-page-source-audit.md` records bounded source-support review for the M2 principle page.
 
 ## Outcome and retrospective
 
@@ -473,5 +491,5 @@ The first proof slice is exactly:
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M2 implementation. Final closeout is not ready until M2-M4,
+- Ready for M2 code-review. Final closeout is not ready until M2-M4,
   code-review loops, explain-change, verify, and PR handoff complete.

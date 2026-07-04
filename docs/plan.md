@@ -5,8 +5,8 @@
 - [Exercise Method Guidance](plans/2026-07-04-exercise-method-guidance.md)
   - Status: draft
   - Plan lifecycle state: active
-  - Current stage: implement
-  - Active context: M1 code-review R2 closed method-contract validation and template work; M2 implementation is next for the sets, reps, holds, rest, and progression principle page.
+  - Current stage: code-review
+  - Active context: M2 implementation added the sets, reps, holds, rest, and progression principle page with focused tests and source-audit evidence; M2 is review-requested for code-review.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

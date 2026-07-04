@@ -1,6 +1,6 @@
 change_id: exercise-method-guidance
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-method-guidance.md
@@ -22,14 +22,14 @@ plan_index: docs/plan.md
 
 current_milestone: M2
 current_milestone_name: Sets, Reps, Holds, Rest, and Progression Principle Page
-current_milestone_state: planned
+current_milestone_state: review-requested
 last_reviewed_milestone: M1
 
 current_test_spec: specs/exercise-method-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-method-guidance/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/exercise-method-guidance/review-resolution.md
-next_stage: implement
+next_stage: code-review
 
 open_findings: []
 
@@ -45,6 +45,8 @@ notes:
   - Code-review M1 R1 requested changes for exact method-heading validation and non-empty required label content.
   - Review-resolution addressed CR-EMG-M1-1 and CR-EMG-M1-2 with focused regression tests and checker fixes before M1 R2.
   - Code-review M1 R2 confirmed the review-resolution fixes, closed M1, and handed off to M2 implementation.
+  - M2 added the shared principle page, focused assertions, source-index support, and bounded source-audit evidence.
+  - M2 targeted validation passed and the milestone is review-requested for code-review.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_method_guidance
@@ -98,3 +100,18 @@ validation:
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after review-resolution fixes
+  - command: python3 -m unittest tests.test_responsible_breadth_m1
+    result: fail-before-implementation
+    evidence: focused M2 test failed because principles/sets-reps-holds-rest-and-progression.md did not exist before implementation
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md principles
+    result: pass
+    evidence: checked 5 Markdown files after M2 implementation
+  - command: python3 -m unittest tests.test_responsible_breadth_m1
+    result: pass
+    evidence: 28 Responsible Breadth tests passed after M2 implementation
+  - command: python3 tools/checks/check_privacy.py principles SOURCES.md docs/changes/exercise-method-guidance
+    result: pass
+    evidence: checked 17 files after M2 implementation
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M2 implementation

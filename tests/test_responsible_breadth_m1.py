@@ -926,6 +926,36 @@ class ResponsibleBreadthM3Test(unittest.TestCase):
         self.assertIn("Final validation ledger and lifecycle sync", spec)
         self.assertIn("mdBook build or deferral", spec)
 
+    def test_exercise_method_principle_page_explains_shared_method_terms(self) -> None:
+        page = ROOT / "principles/sets-reps-holds-rest-and-progression.md"
+        text = page.read_text(encoding="utf-8")
+        lower = text.lower()
+
+        for required in (
+            "## What this page is",
+            "## What this page is not",
+            "## Plain-language overview",
+            "## Sources",
+        ):
+            self.assertIn(required, text)
+
+        for concept in (
+            "sets",
+            "repetitions",
+            "timed holds",
+            "easy effort",
+            "moderate effort",
+            "hard effort",
+            "rest",
+            "one variable",
+            "not a personal prescription",
+        ):
+            self.assertIn(concept, lower)
+
+        self.assertIn("[cdc-adult-activity]", text)
+        self.assertIn("[mayo-weight-training]", text)
+        self.assertIn("[acsm-resistance-training]", text)
+
     def test_forward_head_page_is_not_promoted_from_readme_before_pattern_set(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertNotIn("patterns/forward-head-posture.md", readme)
