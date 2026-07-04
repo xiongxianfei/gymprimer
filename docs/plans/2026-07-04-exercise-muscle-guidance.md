@@ -69,14 +69,14 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ## Current Handoff Summary
 
-- Current milestone: M2
-- Current milestone state: review-requested
-- Last reviewed milestone: M1
-- Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; code-review M1 R2 clean-with-notes
-- Remaining in-scope implementation milestones: M2, M3
-- Next stage: code-review M2
+- Current milestone: M3
+- Current milestone state: planned
+- Last reviewed milestone: M2
+- Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes
+- Remaining in-scope implementation milestones: M3
+- Next stage: implement M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 is closed and M2 is awaiting code-review, but M3, final verification, and PR handoff have not started.
+- Reason final closeout is or is not ready: M1 and M2 are closed, but M3, final verification, and PR handoff have not started.
 
 ## Milestones
 
@@ -125,7 +125,7 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ### M2. Representative Proof-Slice Exercise Pages
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: apply the muscle guidance contract to a representative set of exercise pages without broad all-page migration.
 - Requirements: R1-R31, R38-R40, AC2-AC5.
 - Files/components likely touched:
@@ -252,6 +252,7 @@ The first proof slice should choose representative pages from the spec's allowed
 - 2026-07-04: Added M2 real-page tests for proof-slice category coverage, role or phase muscle guidance, soft feel cues, page-local source-surface citations, and untouched legacy compatibility outside the selected slice.
 - 2026-07-04: Migrated the selected proof-slice pages to role- or phase-based `## Muscles involved` guidance paired with `## What you should feel`.
 - 2026-07-04: M2 validation passed locally; M2 is ready for code-review.
+- 2026-07-04: Code-review M2 R1 accepted the proof-slice implementation with no material findings. M2 is closed and M3 manual proof is next.
 
 ## Decision log
 
@@ -271,6 +272,7 @@ The first proof slice should choose representative pages from the spec's allowed
 - 2026-07-04 M2 regression validation passed: `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`.
 - 2026-07-04 M2 privacy validation passed: `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises media docs/changes/exercise-muscle-guidance-standard`.
 - 2026-07-04 M2 diff hygiene passed: `git diff --check`.
+- 2026-07-04 code-review M2 R1 reviewer validation passed: `python3 -m unittest tests.test_exercise_muscle_guidance tests.test_markdown_first_real_pages`; `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md`; `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`; `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises media docs/changes/exercise-muscle-guidance-standard`; `git diff --check`.
 
 ## M2 aligned-surface audit
 
@@ -300,9 +302,9 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ## Outcome and retrospective
 
-- M2 implementation is pending code-review. Final outcome remains pending downstream verification.
+- M2 implementation is closed after clean code-review. Final outcome remains pending M3 and downstream verification.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M2 code-review. Final closeout is not allowed until all implementation milestones, code review, and verification are complete.
+- Ready for M3 implementation. Final closeout is not allowed until all implementation milestones, code review, and verification are complete.

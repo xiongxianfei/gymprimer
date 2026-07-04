@@ -1,6 +1,6 @@
 change_id: exercise-muscle-guidance-standard
-status: m2-review-requested
-current_stage: code-review
+status: m3-ready
+current_stage: implement
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-muscle-guidance-standard.md
@@ -25,11 +25,11 @@ current_test_spec: specs/exercise-muscle-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-muscle-guidance-standard/reviews/test-spec-review-r1.md
 
-current_milestone: M2
-current_milestone_state: review-requested
-last_reviewed_milestone: M1
+current_milestone: M3
+current_milestone_state: planned
+last_reviewed_milestone: M2
 
-next_stage: code-review
+next_stage: implement
 
 open_findings: []
 
@@ -50,4 +50,5 @@ notes:
   - Code-review M1 R2 accepted the resolution and closed M1.
   - M2 migrated the representative proof-slice pages: rowing machine, chest press, plank, chin nod, thoracic extension, and band pull-apart.
   - M2 validation passed locally and is ready for code-review.
+  - Code-review M2 R1 accepted the proof-slice implementation and closed M2.
   - No final completion claim is authorized until implementation, code review, explain-change when useful, verification, and PR handoff gates are complete for the relevant scope.

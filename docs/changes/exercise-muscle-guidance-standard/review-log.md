@@ -9,3 +9,4 @@
 | 2026-07-04 | test-spec-review | [test-spec-review-r1](reviews/test-spec-review-r1.md) | approved | none | Clean R1 review for `specs/exercise-muscle-guidance.test.md`; implementation handoff is allowed for M1. |
 | 2026-07-04 | code-review M1 | [code-review-m1-r1](reviews/code-review-m1-r1.md) | changes-requested | CR-XMG-M1-1 | M1 is missing required XMG-T8 source-surface proof; review-resolution is required before M1 can close. |
 | 2026-07-04 | code-review M1 | [code-review-m1-r2](reviews/code-review-m1-r2.md) | clean-with-notes | none | CR-XMG-M1-1 is resolved; M1 is closed and the next stage is M2 implementation. |
+| 2026-07-04 | code-review M2 | [code-review-m2-r1](reviews/code-review-m2-r1.md) | clean-with-notes | none | M2 proof-slice migration is accepted; M2 is closed and the next stage is M3 implementation. |
