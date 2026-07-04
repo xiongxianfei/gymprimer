@@ -5,8 +5,8 @@
 - [Exercise Muscle Guidance](plans/2026-07-04-exercise-muscle-guidance.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: explain-change
-  - Active context: M1, M2, and M3 are closed after code review; final closeout starts with explain-change before final verification and PR handoff.
+  - Current stage: verify
+  - Active context: M1, M2, M3, and explain-change are complete; final verification is next before PR handoff.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
