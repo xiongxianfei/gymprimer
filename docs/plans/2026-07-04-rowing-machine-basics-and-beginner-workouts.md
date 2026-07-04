@@ -110,12 +110,12 @@ shows that setup or stroke-sequence comprehension needs visual support.
   M2 code-review rerun; code-review M2 R2 closed M2; code-review M3 R1 closed
   M3; code-review M4 R1 closed M4; code-review M5 R1 closed M5
 - Remaining in-scope implementation milestones: none
-- Remaining lifecycle milestones: explain-change, verify, PR handoff
-- Next stage: explain-change
+- Remaining lifecycle milestones: verify, PR handoff
+- Next stage: verify
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1 and M2 are closed by code-review;
-  M3, M4, and M5 are closed by code-review; durable rationale, final
-  verification, and PR handoff remain before closeout.
+  M3, M4, and M5 are closed by code-review; durable rationale is complete;
+  final verification and PR handoff remain before closeout.
 
 ## Milestones
 
@@ -724,6 +724,12 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: Post-review recording checks passed:
   `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m5-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md`,
   `git diff --check`, and state-sync check.
+- 2026-07-04: Explain-change completed in
+  `docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md`
+  and routed the change to final verification.
+- 2026-07-04: Post-explain-change checks passed:
+  `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md`,
+  `git diff --check`, and state-sync check.
 
 ## Outcome and retrospective
 
@@ -738,6 +744,6 @@ shows that setup or stroke-sequence comprehension needs visual support.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for explain-change/final closeout.
-- Not ready for final verification, PR handoff, or Done until the remaining
-  lifecycle gates complete.
+- Ready for final verification.
+- Not ready for PR handoff or Done until the remaining lifecycle gates
+  complete.
