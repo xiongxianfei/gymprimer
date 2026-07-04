@@ -1,6 +1,6 @@
 change_id: exercise-muscle-guidance-standard
-status: ready-for-verify
-current_stage: verify
+status: branch-ready
+current_stage: pr
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-muscle-guidance-standard.md
@@ -26,10 +26,10 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-muscle-guidance-standard/reviews/test-spec-review-r1.md
 
 current_milestone: Lifecycle Closeout
-current_milestone_state: explain-change-complete
+current_milestone_state: verify-complete
 last_reviewed_milestone: M3
 
-next_stage: verify
+next_stage: pr
 
 open_findings: []
 
@@ -55,5 +55,6 @@ notes:
   - M3 validation passed locally and is ready for code-review.
   - Code-review M3 R1 accepted the manual proof and broad rollout gate, closed M3, and left no remaining implementation milestones.
   - Explain-change refreshed the durable rationale artifact and routed the change to final verification.
-  - Next lifecycle stage is verify, followed by PR handoff if verification passes.
+  - Final local verification passed and recorded branch-ready evidence in `docs/changes/exercise-muscle-guidance-standard/verify-report.md`.
+  - Next lifecycle stage is PR handoff.
   - No final completion claim is authorized until implementation, code review, explain-change when useful, verification, and PR handoff gates are complete for the relevant scope.

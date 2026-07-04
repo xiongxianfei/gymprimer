@@ -70,13 +70,13 @@ The first proof slice should choose representative pages from the spec's allowed
 ## Current Handoff Summary
 
 - Current milestone: Lifecycle Closeout
-- Current milestone state: explain-change-complete
+- Current milestone state: verify-complete
 - Last reviewed milestone: M3
 - Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes; code-review M3 R1 clean-with-notes
 - Remaining in-scope implementation milestones: none
-- Next stage: verify
-- Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1, M2, and M3 are closed by code review and explain-change is complete, but final verification and PR handoff have not started.
+- Next stage: pr
+- Final closeout readiness: branch-ready for PR handoff
+- Reason final closeout is or is not ready: M1, M2, M3, explain-change, and final local verification are complete, but PR handoff and downstream merge/closeout have not happened.
 
 ## Milestones
 
@@ -259,6 +259,7 @@ The first proof slice should choose representative pages from the spec's allowed
 - 2026-07-04: M3 validation passed locally; M3 is ready for code-review.
 - 2026-07-04: Code-review M3 R1 accepted the manual proof and broad rollout gate with no material findings. M3 is closed and no implementation milestones remain.
 - 2026-07-04: Refreshed `docs/changes/exercise-muscle-guidance-standard/explain-change.md` from the final reviewed diff. The next lifecycle stage is verify.
+- 2026-07-04: Final local verification passed and recorded `docs/changes/exercise-muscle-guidance-standard/verify-report.md`. The branch is ready for PR handoff; hosted CI has not been observed.
 
 ## Decision log
 
