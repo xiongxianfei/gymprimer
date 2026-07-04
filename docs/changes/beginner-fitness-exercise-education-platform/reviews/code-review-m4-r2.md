@@ -34,7 +34,7 @@
   - `python3 -m unittest tests.test_generated_output_m4`
   - `python3 -m unittest discover -s tests`
   - `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out /tmp/review-m4r2-validation-report.json --emit-public /tmp/review-m4r2-public-content.json && diff -u generated/public-content.json /tmp/review-m4r2-public-content.json`
-  - `python3 tools/validation/privacy_scan.py --pattern 'private|/home/|secret|PHI|personal health' -- generated/`
+  - `python3 tools/validation/privacy_scan.py --pattern '<privacy-pattern>' -- generated/`
 
 ## Diff Summary
 
@@ -54,7 +54,7 @@ No blocking or required-change findings.
 
 | Finding | Re-review result | Evidence |
 | --- | --- | --- |
-| CR-M4-1 | resolved | [tests/test_generated_output_m4.py](/home/xiongxianfei/data/20260626-gymprimer/tests/test_generated_output_m4.py:88) now creates a generated-output boundary matrix with a public-ready control plus isolated unpublished, hidden, superseded, internal-only license, review-expired, and blocked-rehab variants. [tests/test_generated_output_m4.py](/home/xiongxianfei/data/20260626-gymprimer/tests/test_generated_output_m4.py:107) asserts the mixed fixture fails validation as expected, and [tests/test_generated_output_m4.py](/home/xiongxianfei/data/20260626-gymprimer/tests/test_generated_output_m4.py:108) through [tests/test_generated_output_m4.py](/home/xiongxianfei/data/20260626-gymprimer/tests/test_generated_output_m4.py:115) assert only the public control card appears in the generated public package. |
+| CR-M4-1 | resolved | `tests/test_generated_output_m4.py:88` now creates a generated-output boundary matrix with a public-ready control plus isolated unpublished, hidden, superseded, internal-only license, review-expired, and blocked-rehab variants. `tests/test_generated_output_m4.py:107` asserts the mixed fixture fails validation as expected, and `tests/test_generated_output_m4.py:108` through `tests/test_generated_output_m4.py:115` assert only the public control card appears in the generated public package. |
 
 ## Checklist Coverage
 

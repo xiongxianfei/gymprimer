@@ -1,6 +1,6 @@
 change_id: exercise-method-guidance
 status: active
-current_stage: verify
+current_stage: pr
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-method-guidance.md
@@ -22,14 +22,14 @@ plan_index: docs/plan.md
 
 current_milestone: Lifecycle Closeout
 current_milestone_name: Lifecycle Closeout
-current_milestone_state: planned
+current_milestone_state: pr-handoff-ready
 last_reviewed_milestone: M4
 
 current_test_spec: specs/exercise-method-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-method-guidance/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/exercise-method-guidance/review-resolution.md
-next_stage: verify
+next_stage: pr
 
 open_findings: []
 
@@ -56,6 +56,7 @@ notes:
   - M4 targeted validation passed and the milestone is review-requested for code-review.
   - Code-review M4 R1 confirmed the manual proof records and closed all implementation milestones; Lifecycle Closeout is next.
   - Explain-change recorded durable rationale for the proposal-to-diff trail; final verification is next.
+  - Final local verification passed after narrow historical privacy cleanup; branch is ready for PR handoff.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_method_guidance
@@ -157,3 +158,15 @@ validation:
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after M4 proof-record implementation
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: 114 repository tests passed during final verification
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md principles exercises patterns
+    result: pass
+    evidence: checked 23 Markdown files during final verification
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md docs specs tools tests principles exercises patterns
+    result: pass
+    evidence: checked 337 files during final verification after historical privacy literal cleanup
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed during final verification

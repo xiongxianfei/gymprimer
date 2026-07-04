@@ -196,6 +196,6 @@ Validation passed:
 - `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`
 - `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --out generated/lifecycle-validation-report.json --expect-mixed`
 - `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`
-- `python3 tools/validation/privacy_scan.py --pattern 'private|/home/|secret|PHI|personal health' -- generated/`
+- `python3 tools/validation/privacy_scan.py --pattern '<privacy-pattern>' -- generated/`
 
 Status: resolved in code-review M4 R2 with no material findings. M4 is closed and no implementation milestones remain open.

@@ -20,9 +20,9 @@
 - Finding ID: PR1
 - Severity: major
 - Location: `docs/plans/2026-06-26-content-schema-foundation.md` M1 validation commands, M4 validation commands, and Validation plan
-- Evidence: M1 lists `rg -n "private|/home/|secret|PHI" generated/validation-report.json`; M4 and the global validation plan list `rg -n "private|/home/|secret|PHI|personal health" generated/`. Plain `rg` exits with status 1 when it finds no matches. For privacy scans, no matches are the desired passing state, so the plan's validation command would fail when the output is clean and pass when it finds forbidden strings.
+- Evidence: M1 lists a raw negative-match privacy `rg` command against `generated/validation-report.json`; M4 and the global validation plan list the same shape against `generated/`. Plain `rg` exits with status 1 when it finds no matches. For privacy scans, no matches are the desired passing state, so the plan's validation command would fail when the output is clean and pass when it finds forbidden strings.
 - Required outcome: The plan must make negative-match privacy scans executable with correct pass/fail semantics.
-- Safe resolution path: Replace those validation commands with shell-negated commands such as `! rg -n "private|/home/|secret|PHI" generated/validation-report.json` and `! rg -n "private|/home/|secret|PHI|personal health" generated/`, or use a small validation helper that exits 0 only when forbidden patterns are absent.
+- Safe resolution path: Replace those validation commands with shell-negated commands or use a small validation helper that exits 0 only when forbidden patterns are absent.
 
 ## Review Dimensions
 
@@ -42,8 +42,8 @@
 
 ## Exact Suggested Changes
 
-- In M1, change the privacy scan command to `! rg -n "private|/home/|secret|PHI" generated/validation-report.json`.
-- In M4, change the privacy scan command to `! rg -n "private|/home/|secret|PHI|personal health" generated/`.
+- In M1, change the privacy scan command to a shell-negated negative-match command.
+- In M4, change the privacy scan command to the same shell-negated negative-match shape.
 - In the global Validation plan, make the same negative-match command change and describe that exit 0 means no forbidden patterns were found.
 
 ## Readiness

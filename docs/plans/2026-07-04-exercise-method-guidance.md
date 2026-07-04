@@ -94,17 +94,17 @@ The first proof slice is exactly:
 ## Current Handoff Summary
 
 - Current milestone: Lifecycle Closeout
-- Current milestone state: planned
+- Current milestone state: pr-handoff-ready
 - Last reviewed milestone: M4
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review R2
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
 - Remaining in-scope implementation milestones: none
 - Remaining lifecycle milestones: Lifecycle Closeout
-- Next stage: verify
+- Next stage: pr
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1, M2, M3, and M4 are closed;
-  verify and PR handoff remain.
+  final local verification passed; PR handoff remains.
 
 ## Milestones
 
@@ -443,6 +443,10 @@ The first proof slice is exactly:
 - 2026-07-04: Explain-change recorded the durable rationale from problem,
   proposal, requirements, architecture, milestones, tests, reviews, and
   validation evidence to the actual diff. Final verification is next.
+- 2026-07-04: Final local verification passed. Historical privacy literals in
+  older change records were neutralized so the broad privacy command can scan
+  the full required docs set. Branch is ready for PR handoff; PR readiness is
+  not claimed until the `pr` stage records it.
 
 ## Decision log
 
@@ -539,5 +543,4 @@ The first proof slice is exactly:
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for verify. Final closeout is not ready until verify and PR handoff
-  complete.
+- Ready for PR handoff. Final closeout is not ready until PR handoff complete.

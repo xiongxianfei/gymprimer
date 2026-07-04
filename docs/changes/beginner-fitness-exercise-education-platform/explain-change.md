@@ -72,7 +72,7 @@ Local validation evidence recorded in the plan and generated files:
 - `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid`
 - `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --out generated/lifecycle-validation-report.json --expect-mixed`
 - `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed`
-- `python3 tools/validation/privacy_scan.py --pattern 'private|/home/|secret|PHI|personal health' -- generated/`
+- `python3 tools/validation/privacy_scan.py --pattern '<privacy-pattern>' -- generated/`
 - State-sync `rg` command across workflow, plan, architecture, ADR, and spec artifacts.
 
 Latest recorded local test evidence: `generated/test-results.txt` shows 60 tests passing. Latest generated privacy evidence: `generated/privacy-scan-report.json` reports pass with no findings. CI is not configured and no hosted CI run is claimed.
