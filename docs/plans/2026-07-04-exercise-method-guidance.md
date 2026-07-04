@@ -93,17 +93,17 @@ The first proof slice is exactly:
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: review-requested
-- Last reviewed milestone: M2
+- Current milestone: M4
+- Current milestone state: planned
+- Last reviewed milestone: M3
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review R2
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
-- Remaining in-scope implementation milestones: M3, M4, Lifecycle Closeout
-- Next stage: code-review M3
+- Remaining in-scope implementation milestones: M4, Lifecycle Closeout
+- Next stage: implement M4
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 and M2 are closed and M3 is
-  awaiting code-review; M4, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M1, M2, and M3 are closed; M4,
+  explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -209,7 +209,7 @@ The first proof slice is exactly:
 
 ### M3. Six Proof-Slice Exercise Pages
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: add source-supported method guidance to the six approved proof-slice
   exercise pages and keep pattern previews aligned.
 - Requirements: R1-R29, R32-R35, R41, AC2, AC4, AC8-AC10.
@@ -428,6 +428,8 @@ The first proof slice is exactly:
 - 2026-07-04: M3 added method sections to the six proof-slice exercise pages,
   linked the method principle page, aligned the hip-flexor pattern preview, and
   added real-page method mapping tests. M3 is review-requested.
+- 2026-07-04: Code-review M3 R1 confirmed the six proof-slice exercise pages,
+  found no material issues, and closed M3. M4 implementation is next.
 
 ## Decision log
 
@@ -515,5 +517,5 @@ The first proof slice is exactly:
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M3 code-review. Final closeout is not ready until M3-M4,
+- Ready for M4 implementation. Final closeout is not ready until M4,
   code-review loops, explain-change, verify, and PR handoff complete.

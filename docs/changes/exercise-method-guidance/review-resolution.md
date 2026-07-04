@@ -4,7 +4,7 @@
 
 - Open findings: none
 - Current owner stage: implement
-- Next review stage: code-review after M3 implementation
+- Next review stage: code-review after M4 implementation
 
 ## Findings
 
