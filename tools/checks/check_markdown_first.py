@@ -133,6 +133,47 @@ RESPONSIBLE_BREADTH_FORBIDDEN_PATTERNS = (
     re.compile(r"\bpediatric\b", re.IGNORECASE),
     re.compile(r"\boncology\b", re.IGNORECASE),
 )
+EXERCISE_METHOD_ACTIVE_TYPES = {
+    "dynamic_resistance",
+    "bodyweight_progression",
+    "low_load_control_drill",
+    "isometric_hold",
+    "mobility_drill",
+    "stretch_hold",
+}
+EXERCISE_METHOD_DEFERRED_TYPES = {
+    "loaded_carry",
+    "basic_cardio_equipment",
+}
+EXERCISE_METHOD_REQUIRED_LABELS = (
+    "Beginner starting point:",
+    "Effort:",
+    "Rest:",
+    "Progression:",
+    "Stop if:",
+)
+EXERCISE_METHOD_METADATA_RE = re.compile(r"(?m)^method_type\s*:\s*[A-Za-z0-9_-]+\s*$", re.IGNORECASE)
+EXERCISE_METHOD_TYPE_RE = re.compile(r"(?m)^Method type:\s*([A-Za-z0-9_-]+)\s*$")
+EXERCISE_METHOD_ADAPTIVE_PATTERNS = (
+    re.compile(
+        r"\b(?:if|when)\b.{0,80}\b(?:pain|hurt|hurts|symptom|goal|equipment|medical history|body measurement|training response)\b.{0,80}\b(?:switch|change|add|reduce|increase|rest|set|rep|load|progress)",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\bbased on (?:your )?(?:pain|symptoms|goals|equipment|medical history|body measurements|training response)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"\bevery (?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b", re.IGNORECASE),
+)
+EXERCISE_METHOD_FORBIDDEN_PATTERNS = (
+    re.compile(r"\bdiagnos(?:e|is|ed|tic)\b", re.IGNORECASE),
+    re.compile(r"\btreat(?:ment|ing)?\b", re.IGNORECASE),
+    re.compile(r"\brehab(?:ilitation)?(?: progression| protocol| routine)?\b", re.IGNORECASE),
+    re.compile(r"\breturn-to-training\b", re.IGNORECASE),
+    re.compile(r"\bposture correction\b", re.IGNORECASE),
+    re.compile(r"\bguarantee(?:d|s)? (?:a )?(?:fix|result|correction)\b", re.IGNORECASE),
+    re.compile(r"\bfix (?:your|this|it)\b", re.IGNORECASE),
+)
 SUPPORT_FILENAMES = {
     "README.md",
     "SOURCES.md",
@@ -955,6 +996,9 @@ def validate_responsible_breadth_page(
     if page_class == "expanded_exercise_page" and is_forward_head_exercise(path):
         findings.extend(validate_forward_head_exercise_contract(path, text))
 
+    if page_class == "expanded_exercise_page":
+        findings.extend(validate_exercise_method_guidance(path, text))
+
     if page_class == "expanded_exercise_page" and re.search(r"(^##\s+Exact prompt\b|^prompt_record:)", text, re.MULTILINE | re.IGNORECASE):
         findings.append(Finding(path, "media_prompt_record_embedded", "prompt records must not be embedded in reader-facing exercise Markdown"))
 
@@ -1073,6 +1117,68 @@ def validate_forward_head_exercise_contract(path: Path, text: str) -> list[Findi
     for section in FORWARD_HEAD_EXERCISE_SECTIONS:
         if heading_position(text, section) == -1:
             findings.append(Finding(path, "RB010", f"forward-head exercise page section is missing: {section.removeprefix('## ')}"))
+
+    return findings
+
+
+def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
+    findings: list[Finding] = []
+    method_section = section_text(text, "## How much to do")
+    hidden_metadata = bool(EXERCISE_METHOD_METADATA_RE.search(text))
+
+    if not method_section:
+        if hidden_metadata:
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_method_hidden_only_metadata",
+                    "hidden method metadata cannot replace visible ## How much to do and Method type text",
+                )
+            )
+        return findings
+
+    type_match = EXERCISE_METHOD_TYPE_RE.search(method_section)
+    if type_match is None:
+        findings.append(Finding(path, "exercise_method_missing_type", "method section is missing visible Method type line"))
+    else:
+        method_type = type_match.group(1)
+        if method_type not in EXERCISE_METHOD_ACTIVE_TYPES:
+            status = "deferred" if method_type in EXERCISE_METHOD_DEFERRED_TYPES else "unknown"
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_method_inactive_type",
+                    f"method type is not active for this slice ({status}): {method_type}",
+                )
+            )
+
+    for label in EXERCISE_METHOD_REQUIRED_LABELS:
+        if label not in method_section:
+            findings.append(Finding(path, "exercise_method_missing_label", f"method section is missing label: {label}"))
+
+    for pattern in EXERCISE_METHOD_ADAPTIVE_PATTERNS:
+        match = pattern.search(method_section)
+        if match:
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_method_adaptive_programming",
+                    f"method guidance must not adapt to reader context: {match.group(0)}",
+                )
+            )
+            break
+
+    for pattern in EXERCISE_METHOD_FORBIDDEN_PATTERNS:
+        match = pattern.search(method_section)
+        if match:
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_method_forbidden_scope",
+                    f"method guidance contains diagnosis, treatment, rehab, correction, return-to-training, guarantee, or fix language: {match.group(0)}",
+                )
+            )
+            break
 
     return findings
 
