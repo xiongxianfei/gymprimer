@@ -152,6 +152,8 @@ EXERCISE_METHOD_REQUIRED_LABELS = (
     "Progression:",
     "Stop if:",
 )
+EXERCISE_METHOD_EXACT_HEADING_RE = re.compile(r"(?m)^## How much to do$")
+EXERCISE_METHOD_HEADING_PREFIX_RE = re.compile(r"(?m)^##\s+How much to do\b.*$")
 EXERCISE_METHOD_METADATA_RE = re.compile(r"(?m)^method_type\s*:\s*[A-Za-z0-9_-]+\s*$", re.IGNORECASE)
 EXERCISE_METHOD_TYPE_RE = re.compile(r"(?m)^Method type:\s*([A-Za-z0-9_-]+)\s*$")
 EXERCISE_METHOD_ADAPTIVE_PATTERNS = (
@@ -1121,9 +1123,26 @@ def validate_forward_head_exercise_contract(path: Path, text: str) -> list[Findi
     return findings
 
 
+def exact_method_section_text(text: str) -> str:
+    match = EXERCISE_METHOD_EXACT_HEADING_RE.search(text)
+    if match is None:
+        return ""
+    next_heading = re.search(r"^##\s+", text[match.end() :], re.MULTILINE)
+    end = len(text) if next_heading is None else match.end() + next_heading.start()
+    return text[match.start() : end]
+
+
+def method_label_content(section: str, label: str) -> str | None:
+    for line in section.splitlines():
+        stripped = line.strip()
+        if stripped.startswith(label):
+            return stripped.removeprefix(label).strip()
+    return None
+
+
 def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
     findings: list[Finding] = []
-    method_section = section_text(text, "## How much to do")
+    method_section = exact_method_section_text(text)
     hidden_metadata = bool(EXERCISE_METHOD_METADATA_RE.search(text))
 
     if not method_section:
@@ -1133,6 +1152,14 @@ def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
                     path,
                     "exercise_method_hidden_only_metadata",
                     "hidden method metadata cannot replace visible ## How much to do and Method type text",
+                )
+            )
+        elif EXERCISE_METHOD_HEADING_PREFIX_RE.search(text):
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_method_missing_section",
+                    "method guidance heading must be exactly ## How much to do",
                 )
             )
         return findings
@@ -1153,8 +1180,11 @@ def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
             )
 
     for label in EXERCISE_METHOD_REQUIRED_LABELS:
-        if label not in method_section:
+        content = method_label_content(method_section, label)
+        if content is None:
             findings.append(Finding(path, "exercise_method_missing_label", f"method section is missing label: {label}"))
+        elif not content:
+            findings.append(Finding(path, "exercise_method_empty_label", f"method section label has no content: {label}"))
 
     for pattern in EXERCISE_METHOD_ADAPTIVE_PATTERNS:
         match = pattern.search(method_section)

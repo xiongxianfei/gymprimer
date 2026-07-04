@@ -94,23 +94,23 @@ The first proof slice is exactly:
 ## Current Handoff Summary
 
 - Current milestone: M1
-- Current milestone state: resolution-needed
+- Current milestone state: review-requested
 - Last reviewed milestone: none
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review R2
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
 - Remaining in-scope implementation milestones: M1, M2, M3, M4, Lifecycle Closeout
-- Next stage: review-resolution
+- Next stage: code-review M1 re-review
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 code-review R1 requested
-  review-resolution for validator gaps; later milestones, explain-change,
+- Reason final closeout is or is not ready: M1 review-resolution fixes are
+  complete and awaiting code-review re-review; later milestones, explain-change,
   verify, and PR handoff remain.
 
 ## Milestones
 
 ### M1. Method Contract Validation and Template
 
-- Milestone state: resolution-needed
+- Milestone state: review-requested
 - Goal: make the exercise-method contract authorable and checkable before
   proof-slice content changes.
 - Requirements: R1-R6, R7-R13, R26-R27, R33-R38, R42, AC1, AC3, AC6, AC8-AC10.
@@ -415,6 +415,10 @@ The first proof slice is exactly:
   and required M1 validation evidence. M1 is review-requested.
 - 2026-07-04: Code-review M1 R1 requested changes for CR-EMG-M1-1 and
   CR-EMG-M1-2. M1 remains active and moves to review-resolution.
+- 2026-07-04: Review-resolution addressed CR-EMG-M1-1 and CR-EMG-M1-2 with
+  exact method-heading validation, non-empty required-label validation, focused
+  regression tests, and rerun M1 validation. M1 is review-requested for
+  code-review re-review.
 
 ## Decision log
 
@@ -444,6 +448,16 @@ The first proof slice is exactly:
   - `git diff --check` passed.
 - M1 additional smoke:
   - `python3 -m unittest discover -s tests` passed, 109 tests.
+- M1 review-resolution:
+  - `python3 -m unittest tests.test_exercise_method_guidance` failed before the
+    checker fix for CR-EMG-M1-1 and CR-EMG-M1-2 as expected.
+  - `python3 -m unittest tests.test_exercise_method_guidance` passed, 9 tests.
+  - `python3 -m unittest tests.test_markdown_first_templates tests.test_markdown_first_real_pages` passed, 7 tests.
+  - `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed, 52 tests.
+  - `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises patterns principles` passed, checked 21 Markdown files.
+  - `python3 tools/checks/check_privacy.py docs/templates specs tools tests docs/changes/exercise-method-guidance` passed, checked 90 files.
+  - `python3 -m unittest discover -s tests` passed, 111 tests.
+  - `git diff --check` passed.
 - M1 aligned-surface audit:
   - `docs/templates/exercise-card.md` updated with the method section and required labels.
   - `tools/checks/check_markdown_first.py` updated with slice-aware method validation for visible Markdown sections and hidden-only metadata rejection.
@@ -458,5 +472,5 @@ The first proof slice is exactly:
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M1 review-resolution. Final closeout is not ready until M1-M4,
+- Ready for M1 code-review re-review. Final closeout is not ready until M1-M4,
   code-review loops, explain-change, verify, and PR handoff complete.

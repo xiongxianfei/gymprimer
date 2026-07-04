@@ -2,9 +2,9 @@
 
 ## Status
 
-- Open findings: CR-EMG-M1-1, CR-EMG-M1-2
-- Current owner stage: review-resolution
-- Next review stage: code-review M1 re-review after accepted fixes
+- Open findings: none pending M1 re-review
+- Current owner stage: code-review
+- Next review stage: code-review M1 re-review
 
 ## Findings
 
@@ -27,15 +27,15 @@
 ### CR-EMG-M1-1 - Method heading validation accepts non-exact headings
 
 - Source review: `docs/changes/exercise-method-guidance/reviews/code-review-m1-r1.md`
-- Status: open
+- Status: resolved pending re-review
 - Required outcome: The method validator must reject non-exact method headings and require the exact visible heading `## How much to do`.
-- Resolution notes: pending
+- Resolution notes: Added an exact method-section extractor in `tools/checks/check_markdown_first.py` and a focused test that rejects `## How much to do wrong` with `exercise_method_missing_section`.
 - Review outcome: pending
 
 ### CR-EMG-M1-2 - Required method labels can be empty
 
 - Source review: `docs/changes/exercise-method-guidance/reviews/code-review-m1-r1.md`
-- Status: open
+- Status: resolved pending re-review
 - Required outcome: The method validator must require each mandatory label line to carry non-empty content, or otherwise prove equivalent plain-language content is present.
-- Resolution notes: pending
+- Resolution notes: Added required-label line parsing in `tools/checks/check_markdown_first.py` and a focused test that rejects empty `Beginner starting point:`, `Effort:`, `Rest:`, `Progression:`, and `Stop if:` labels with `exercise_method_empty_label`.
 - Review outcome: pending

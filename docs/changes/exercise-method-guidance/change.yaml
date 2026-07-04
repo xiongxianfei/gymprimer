@@ -1,6 +1,6 @@
 change_id: exercise-method-guidance
 status: active
-current_stage: review-resolution
+current_stage: code-review
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-method-guidance.md
@@ -22,18 +22,16 @@ plan_index: docs/plan.md
 
 current_milestone: M1
 current_milestone_name: Method Contract Validation and Template
-current_milestone_state: resolution-needed
+current_milestone_state: review-requested
 last_reviewed_milestone: none
 
 current_test_spec: specs/exercise-method-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-method-guidance/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/exercise-method-guidance/review-resolution.md
-next_stage: review-resolution
+next_stage: code-review
 
-open_findings:
-  - CR-EMG-M1-1
-  - CR-EMG-M1-2
+open_findings: []
 
 notes:
   - Proposal-review R2 approved the exercise-method guidance direction.
@@ -45,6 +43,7 @@ notes:
   - M1 added the exercise template method section, visible-Markdown checker validation, focused tests, and compatibility notes.
   - M1 targeted validation passed and the milestone is review-requested for code-review.
   - Code-review M1 R1 requested changes for exact method-heading validation and non-empty required label content.
+  - Review-resolution addressed CR-EMG-M1-1 and CR-EMG-M1-2 with focused regression tests and checker fixes; M1 is review-requested for code-review re-review.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_method_guidance
@@ -74,3 +73,27 @@ validation:
   - command: git diff --check
     result: pass
     evidence: diff whitespace check passed after M1 implementation
+  - command: python3 -m unittest tests.test_exercise_method_guidance
+    result: fail-before-resolution
+    evidence: new tests failed for CR-EMG-M1-1 and CR-EMG-M1-2 before checker fixes
+  - command: python3 -m unittest tests.test_exercise_method_guidance
+    result: pass
+    evidence: 9 focused exercise-method tests passed after review-resolution fixes
+  - command: python3 -m unittest tests.test_markdown_first_templates tests.test_markdown_first_real_pages
+    result: pass
+    evidence: 7 tests passed after review-resolution fixes
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: 52 Markdown-first tests passed after review-resolution fixes
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises patterns principles
+    result: pass
+    evidence: checked 21 Markdown files after review-resolution fixes
+  - command: python3 tools/checks/check_privacy.py docs/templates specs tools tests docs/changes/exercise-method-guidance
+    result: pass
+    evidence: checked 90 files after review-resolution fixes
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: 111 repository tests passed as additional smoke after review-resolution fixes
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after review-resolution fixes

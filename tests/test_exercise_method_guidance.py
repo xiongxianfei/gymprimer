@@ -63,6 +63,41 @@ class ExerciseMethodGuidanceTest(unittest.TestCase):
         self.assertIn("exercise_method_missing_type", codes)
         self.assertIn("exercise_method_missing_label", codes)
 
+    def test_method_section_heading_must_be_exact(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do wrong
+
+            Method type: dynamic_resistance
+
+            Beginner starting point: Try a small amount.
+            Effort: Keep it easy.
+            Rest: Rest as needed.
+            Progression: Add repetitions first.
+            Stop if: Stop when form breaks.
+            """
+        )
+
+        self.assertIn("exercise_method_missing_section", finding_codes(text))
+
+    def test_required_method_labels_must_have_content(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do
+
+            Method type: dynamic_resistance
+
+            Beginner starting point:
+            Effort:
+            Rest:
+            Progression:
+            Stop if:
+            """
+        )
+
+        codes = finding_codes(text)
+        self.assertIn("exercise_method_empty_label", codes)
+
     def test_unknown_and_deferred_method_types_fail(self) -> None:
         for method_type in ("loaded_carry", "basic_cardio_equipment", "unknown_type"):
             with self.subTest(method_type=method_type):
