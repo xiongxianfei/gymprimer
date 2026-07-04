@@ -303,6 +303,11 @@ Outputs:
   programming, rehabilitation protocols, unsafe media, private data, and
   AI-generated source-of-truth content remain active unless a later
   higher-ranked artifact explicitly changes them.
+- Exercise method guidance for pages selected under that focused contract is
+  governed by `specs/exercise-method-guidance.md`. This spec continues to own
+  the baseline Markdown-first exercise-page, citation, media, privacy, and
+  source-of-truth rules; the focused exercise-method spec owns the `## How much
+  to do` section and visible `Method type:` contract.
 - Existing structured-platform artifacts remain in the repository as historical context until a superseding ADR or archive decision changes their status.
 - Existing generated output and validator artifacts are not v0.1 product surfaces for the Markdown-first primer.
 - Stable Markdown paths and headings become compatibility surfaces once linked from `README.md` or `SUMMARY.md`.

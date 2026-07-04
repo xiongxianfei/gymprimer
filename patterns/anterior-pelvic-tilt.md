@@ -135,7 +135,7 @@ Stretching can be useful for some people, but a stretch helping does not prove t
 - **[Kneeling hip-flexor stretch](../exercises/kneeling-hip-flexor-stretch.md)**
   - *Fix reason:* gives the iliopsoas and rectus femoris a simple stretch option while practicing pelvis position.
   - *Used muscles:* stretches iliopsoas and rectus femoris on the rear leg; lightly uses glutes and trunk muscles for position.
-  - *Starter range:* 1-2 holds of 20-40 seconds per side; breathe normally between sides.
+  - *Starter range:* 1-2 holds of about 20-30 seconds per side; breathe normally between sides.
   - *Important note:* gently squeeze the rear glute and tuck the pelvis before moving forward; leaning back moves the stretch into the low back.
 
 ### 6. Train the body consistently, not specially

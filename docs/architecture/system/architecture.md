@@ -26,6 +26,8 @@ The exercise-image-standard amendment was approved by
 `docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r1.md`.
 The prompt-record amendment was approved by
 `docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r2.md`.
+The exercise-method guidance amendment was approved by
+`docs/changes/exercise-method-guidance/reviews/architecture-review-r1.md`.
 
 ## Related artifacts
 
@@ -56,6 +58,12 @@ The prompt-record amendment was approved by
     `../../changes/exercise-image-standard-and-optimization/reviews/spec-review-r2.md`
   - Prompt-record spec review:
     `../../changes/exercise-image-standard-and-optimization/reviews/spec-review-r4.md`
+- Exercise method guidance:
+  - Proposal:
+    `../../proposals/2026-07-04-exercise-method-guidance.md`
+  - Spec: `../../../specs/exercise-method-guidance.md`
+  - Spec review:
+    `../../changes/exercise-method-guidance/reviews/spec-review-r1.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
@@ -91,6 +99,8 @@ Goals:
   individualized programming, symptom collection, or runtime decision support.
 - Make red-flag routing, source quality, page metadata, and review cadence
   visible in Markdown and review evidence.
+- Add page-local exercise method guidance without introducing hidden metadata,
+  generated data, user input, or personalized programming.
 - Preserve old platform artifacts as historical context without treating them as active implementation guidance.
 
 ## Architecture Constraints
@@ -151,6 +161,18 @@ Goals:
   safety claims, or instructions.
 - README promotion for pattern pages remains gated on the approved pattern set,
   not on the forward-head-posture page alone.
+- Exercise method guidance is visible Markdown inside exercise pages, using
+  `## How much to do` and `Method type:` as the source of truth.
+- Active exercise method type values are limited to `dynamic_resistance`,
+  `bodyweight_progression`, `low_load_control_drill`, `isometric_hold`,
+  `mobility_drill`, and `stretch_hold` until a later approved spec expands
+  them.
+- Hidden metadata, YAML front matter, shared taxonomy files, generated indexes,
+  and generated data packages are not part of the first exercise-method source
+  of truth.
+- `loaded_carry` and `basic_cardio_equipment` remain deferred method types until
+  carry or cardio-equipment pages are in scope through a later approved spec or
+  amendment.
 
 ## Context and Scope
 
@@ -199,6 +221,7 @@ The architecture favors:
 - page-local safety boundaries and review metadata over hidden lifecycle state;
 - recorded semantic review evidence where source quality and prescription boundaries
   cannot be fully automated;
+- visible method guidance over hidden exercise-method metadata;
 - stable Markdown paths over early website routing;
 - optional mdBook output over a frontend framework.
 
@@ -265,6 +288,13 @@ Logical containers:
   `docs/changes/<change-id>/` for semantic source quality, safety boundaries,
   visual necessity, page review metadata, and reader comprehension where those
   checks cannot be fully automated.
+- **Exercise method guidance**: visible Markdown sections inside exercise pages
+  headed `## How much to do`, with `Method type:`, beginner starting point,
+  effort, rest, progression, and stop guidance. The section belongs to the
+  exercise page, not to front matter, generated indexes, or hidden metadata.
+- **Exercise method principle page**:
+  `principles/sets-reps-holds-rest-and-progression.md` explains shared beginner
+  concepts so exercise pages can stay concise.
 - **Optional mdBook renderer**: derived static HTML output.
 
 Forward-head-posture proof-slice building blocks:
@@ -446,6 +476,25 @@ Forward-head-posture proof-slice authoring flow:
 5. README, SUMMARY, or other active navigation promotion waits for the full
    approved pattern set, even when this proof page passes local validation.
 
+Exercise method guidance authoring flow:
+
+1. A contributor updates an exercise page selected for an exercise-method slice.
+2. The page keeps its existing exercise-page sections and adds a visible
+   `## How much to do` section.
+3. The method section declares one active `Method type:` value and visible
+   beginner starting point, effort, rest, progression, and stop guidance.
+4. The method section links broader concept explanation to
+   `principles/sets-reps-holds-rest-and-progression.md` where useful instead of
+   repeating long programming explanations on every exercise page.
+5. Local checks can validate section presence, allowed method type values,
+   required visible labels, hidden-only metadata rejection, forbidden
+   personalization language, and deterministic pattern-preview alignment.
+6. Review evidence records semantic source support, non-prescriptive wording,
+   and beginner comprehension where checks cannot fully automate judgment.
+7. Pattern-page exercise previews remain compact and must not contradict the
+   linked exercise page's method type or range shape when both pages are
+   promoted in the same slice.
+
 ## Deployment View
 
 v0.1 has no hosted deployment.
@@ -473,6 +522,9 @@ Packaging boundaries:
 - Repository layout normalization is a source-tree migration only. It does not
   introduce deployment, hosting, generated HTML authority, CMS, runtime API, or
   search infrastructure.
+- Exercise method guidance is Markdown-only. It introduces no deployment,
+  runtime, CMS, API, search index, user-input flow, account system, analytics,
+  hidden metadata package, or generated public data package.
 
 ## Crosscutting Concepts
 
@@ -508,6 +560,21 @@ Scope control:
   they must not present treatment plans or help readers self-diagnose.
 - Program-example pages may show static worked examples; they must not adapt to
   symptoms, goals, equipment, constraints, or training response.
+- Exercise method guidance may give static beginner starter ranges for amount,
+  effort, rest, and progression. It must not adapt those ranges to reader
+  symptoms, goals, equipment, medical history, body measurements, or training
+  response.
+- Exercise method guidance uses visible Markdown as source of truth. The first
+  version rejects hidden-only method metadata, YAML front matter, shared
+  taxonomy files, generated indexes, and generated public data packages.
+- Exercise pages updated under `specs/exercise-method-guidance.md` use
+  `## How much to do`, one active `Method type:`, and concise lines for
+  beginner starting point, effort, rest, progression, and stop condition.
+- Exercise method values are authoring and validation labels, not user-facing
+  personalization logic.
+- Full exercise pages remain the source of truth for exercise method guidance;
+  pattern-page exercise previews are compact summaries and must not contradict
+  their linked exercise pages.
 
 Expanded static content page contracts:
 
@@ -650,6 +717,13 @@ Observability:
   referenced pattern-image existence, missing page-contract sections, missing
   page-local sources, source-index failures, provenance failures, privacy
   failures, and forbidden diagnostic or prescriptive language.
+- Exercise method validation reports missing `## How much to do`, missing or
+  inactive `Method type:`, missing visible method labels, hidden-only metadata,
+  forbidden personalized-programming or treatment language, and deterministic
+  pattern-preview contradictions where practical.
+- Exercise method manual evidence records source-audit samples for active
+  method types and beginner-comprehension outcomes for starting point, effort,
+  stop condition, and non-prescription understanding.
 
 ## Architecture Decisions
 
@@ -662,6 +736,12 @@ Observability:
 - [ADR 2026-06-29: Responsible Breadth static content boundaries](../../adr/2026-06-29-responsible-breadth-static-content-boundaries.md) - Add path-classified expanded static content classes with higher-bar review evidence, red-flag routing, and no runtime personalization.
 - [ADR 2026-06-30: Central red-flags disclaimer boundary](../../adr/2026-06-30-central-red-flags-disclaimer.md) - Centralize the prominent disclaimer in `RED-FLAGS.md` and keep templates focused on safety routing.
 - [ADR 2026-06-26: Repository-native reviewed content](../../adr/2026-06-26-repository-native-reviewed-content.md) - Superseded structured-platform decision retained as history.
+
+No new ADR is required for exercise method guidance. The change extends the
+accepted Markdown-first and Responsible Breadth architecture by adding a visible
+Markdown section and repository-local validation/review evidence. It does not
+introduce a new source-of-truth mechanism, runtime boundary, generated package,
+taxonomy store, or deployment architecture.
 
 ## Quality Requirements
 
@@ -686,6 +766,12 @@ Observability:
 | Prescription boundary | A program example adapts to symptoms or goals. | The page fails promotion as personalized programming. |
 | Review evidence | A semantic safety or source-quality claim cannot be automated. | A review evidence record under the relevant `docs/changes/<change-id>/` directory records the review and outcome. |
 | Pattern complete loop | A forward-head-posture detailed exercise annotation links chin nod, thoracic extension, wall slide, prone Y/T, or band pull-apart. | The target same-slice exercise page exists and carries its own page-local source support for instruction and safety claims. |
+| Exercise method source of truth | An exercise page is updated under the exercise-method spec. | The page has visible `## How much to do` and `Method type:` text; hidden metadata is not required or authoritative. |
+| Exercise method enum | A page declares an exercise method type. | The value is one of the active method types in `specs/exercise-method-guidance.md`. |
+| Exercise method boundary | A method section changes sets, reps, rest, load, or progression based on reader symptoms, goals, equipment, history, body measurements, or training response. | The page fails as adaptive programming. |
+| Exercise method source support | A method section gives a concrete amount, effort, progression, or safety claim. | The claim has page-local source support or recorded review evidence identifies the source gap before promotion. |
+| Exercise method comprehension | A proof-slice exercise page is reviewed with a beginner reader. | Evidence records whether the reader can state the starting point, effort, stop condition, and that the page is not a personal program. |
+| Pattern preview alignment | A pattern page summarizes a linked exercise's starter range. | The preview does not contradict the linked exercise page's method type or range shape. |
 | Layout migration dependency safety | A file is moved or removed. | Active references are inventoried and updated before the old path is removed. |
 | Canonical content paths | A promoted exercise page is referenced. | The page lives under `exercises/`; old numbered content paths are not required and no compatibility stub remains. |
 | Red-flags routing path | A safety-relevant page links red flags. | The link targets root `RED-FLAGS.md`, not `about/red-flags.md`. |
@@ -725,6 +811,17 @@ Observability:
   six content pages, so source-support debt can spread from pattern claims into
   exercise-instruction claims if same-slice exercise pages are treated as mere
   appendices.
+- Exercise method guidance can drift into personalized programming if authors
+  treat starter ranges as commands or adapt them to individual reader context.
+  The visible method section, forbidden-language checks, source review, and
+  comprehension evidence mitigate but do not eliminate this semantic risk.
+- Exercise method labels add validation surface area without a separate metadata
+  store. This keeps Markdown authoritative, but parser rules must be kept simple
+  and visible-text based.
+- Pattern-page previews can become inconsistent with linked exercise pages if
+  preview updates and exercise-page method updates are reviewed separately.
+  Cross-page alignment checks or manual audit remain required for promoted
+  slices.
 - Expanded top-level directories may create navigation sprawl if README and
   SUMMARY promotion gates are not kept strict.
 - Red-flag language and review cadence introduce maintenance debt; stale pages
@@ -773,12 +870,14 @@ Observability:
   start position, end position, key position, or movement path.
 - **Exercise muscle-attention image**: A full exercise-document image that
   highlights one broad body or muscle region to notice.
+- **Exercise method guidance**: The visible `## How much to do` section on an
+  exercise page.
+- **Method type**: A visible label such as `dynamic_resistance` or
+  `stretch_hold` that selects the starter-range shape for one exercise page.
 
 ## Next artifacts
 
-- Plan review for the prompt-record plan amendment.
-- Test-spec amendment for prompt-record validation and backfill after plan
-  review.
+- Execution plan for the exercise-method guidance amendment.
 
 ## Follow-on artifacts
 
@@ -795,6 +894,9 @@ Observability:
   `../../adr/2026-07-03-exercise-document-image-purposes.md`.
 - Generated raster prompt records ADR:
   `../../adr/2026-07-03-generated-raster-prompt-records.md`.
+- Exercise method guidance spec: `../../../specs/exercise-method-guidance.md`.
+- Exercise method guidance spec review:
+  `../../changes/exercise-method-guidance/reviews/spec-review-r1.md`.
 
 ## Readiness
 
@@ -802,6 +904,6 @@ This architecture package has completed architecture-review for earlier
 Markdown-first, Responsible Breadth, layout, media, forward-head-posture, and
 central-disclaimer amendments. The exercise-image-standard amendment has also
 completed architecture review. The prompt-record amendment has completed
-architecture review. Exercise image standard implementation is not
-implementation-ready until plan, plan-review, test-spec, and test-spec-review
-are complete for the prompt-record amendment.
+architecture review. The exercise-method guidance amendment has completed
+architecture review. Exercise-method implementation is not implementation-ready
+until planning, test-spec, and required downstream reviews are complete.

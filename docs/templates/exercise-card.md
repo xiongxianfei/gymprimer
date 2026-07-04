@@ -26,6 +26,16 @@ Name the main muscles in beginner-readable language.
 
 ### 4. Return
 
+## How much to do
+
+Method type: dynamic_resistance
+
+Beginner starting point: Use a source-supported general starting amount for this exercise.
+Effort: Describe easy, moderate, or controlled effort without adapting to the reader.
+Rest: Give source-supported general rest guidance, or say rest as needed when the exercise type supports that.
+Progression: Progress one variable at a time without creating a personal routine.
+Stop if: Use concise form, breathing, control, or pain backoff language and link broader safety concerns to `../RED-FLAGS.md` when needed.
+
 ## What you should feel
 
 Frame feel cues as practical beginner orientation. Cite anatomy or safety claims.

@@ -27,6 +27,18 @@ Use the floor or a firm exercise mat. Set elbows under the shoulders and extend 
 3. Hold without letting the hips sag or the ribs flare.
 4. Lower before form changes.
 
+## How much to do
+
+Method type: isometric_hold
+
+For the terms in this section, see [Sets, Reps, Holds, Rest, and Progression](../principles/sets-reps-holds-rest-and-progression.md).
+
+Beginner starting point: Try 2-3 holds of 10-30 seconds. Use a knee plank or shorter hold if the full version changes shape. [Mayo Clinic][mayo-weight-training]
+Effort: Keep breathing normal and the hold steady rather than maxing out. [Mayo Clinic][mayo-weight-training]
+Rest: Rest 45-60 seconds between holds. [Mayo Clinic][mayo-weight-training]
+Progression: Add a few seconds before choosing a harder variation. [Mayo Clinic][mayo-weight-training]
+Stop if: Stop the hold when the hips sag, the ribs flare, breathing gets stuck, or the position feels sharp or unsafe. [Mayo Clinic][mayo-weight-training]
+
 ## Important notes
 
 Use a shorter hold or a knee plank when the hips sag. The useful version is the one the reader can control. General strength-exercise guidance applies: move and hold with control, use a repeatable difficulty, and stop for sharp, worsening, unusual, or unsafe symptoms. [Mayo Clinic][mayo-weight-training]

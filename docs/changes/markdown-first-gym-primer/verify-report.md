@@ -59,7 +59,7 @@ tests, manual proof records, and local validation evidence.
 ## Commands Run
 
 Working directory for all commands:
-`/home/xiongxianfei/data/20260626-gymprimer`
+`<repo-root>`
 
 | Command | Result | Important output |
 | --- | --- | --- |

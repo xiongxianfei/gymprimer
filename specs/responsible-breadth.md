@@ -102,6 +102,7 @@ prerequisite for recognizing the original v0.1 contract.
 | Media provenance and image validation | `specs/markdown-first-primer.md`, plus Responsible Breadth visual-purpose rules | Provenance and path rules continue to apply; Responsible Breadth may require page-type-specific visual proof. |
 | Privacy and no user-data collection | `specs/markdown-first-primer.md`, plus Responsible Breadth condition-page privacy rules | Stricter privacy rule applies. No symptom collection, reader identification, or personal inference. |
 | Red-flags reference | `specs/responsible-breadth.md` | Required for pattern, condition, and other safety-relevant expanded pages. |
+| Exercise method guidance | `specs/exercise-method-guidance.md` | The focused exercise-method spec owns `## How much to do`, visible `Method type:`, starter-range shapes, and proof-slice rollout. Responsible Breadth pattern previews must not contradict linked exercise pages. |
 | mdBook / generated HTML | `specs/markdown-first-primer.md` | Remains derived output only. |
 
 ### Treatment of prior v0.1 exclusions

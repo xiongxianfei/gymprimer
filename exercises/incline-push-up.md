@@ -73,6 +73,18 @@ Use a higher surface so less of your body weight is involved.
 
 Use a slightly lower stable surface while keeping the same controlled movement.
 
+## How much to do
+
+Method type: bodyweight_progression
+
+For the terms in this section, see [Sets, Reps, Holds, Rest, and Progression](../principles/sets-reps-holds-rest-and-progression.md).
+
+Beginner starting point: Try 1-3 easy sets of 5-12 controlled repetitions from a surface high enough that the body line stays steady. [Mayo Clinic][mayo-weight-training]
+Effort: Choose a height that feels controlled rather than a low surface that makes the hips sag. [Mayo Clinic][mayo-weight-training]
+Rest: Rest about 60 seconds between sets. [ACSM][acsm-resistance-training]
+Progression: Lower the hand surface a little only after the current height is repeatable with clean control. [ACSM][acsm-resistance-training]
+Stop if: Stop the set when the surface shifts, the hips sag, or the press back up is no longer controlled. [Mayo Clinic][mayo-weight-training]
+
 ## Safety notes
 
 Stop if sharp or unsafe. [Mayo Clinic][mayo-weight-training]
@@ -82,7 +94,9 @@ Stop if sharp or unsafe. [Mayo Clinic][mayo-weight-training]
 - [Mayo Clinic weight training technique guidance][mayo-weight-training]
 - [Mayo Clinic weight training setup reference][local-incline-push-up-setup]
 - [Mayo Clinic weight training safety reference][local-incline-push-up-safety]
+- [ACSM resistance training guidance][acsm-resistance-training]
 
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [local-incline-push-up-setup]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [local-incline-push-up-safety]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
+[acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/

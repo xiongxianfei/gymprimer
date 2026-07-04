@@ -49,7 +49,7 @@ Hosted CI is not configured, so no CI pass is claimed.
 
 ## Commands Run
 
-Working directory: `/home/xiongxianfei/data/20260626-gymprimer`
+Working directory: `<repo-root>`
 
 | Command | Result | Evidence |
 | --- | --- | --- |
@@ -60,7 +60,7 @@ Working directory: `/home/xiongxianfei/data/20260626-gymprimer`
 | `python3 tools/validation/validate_content.py --source tests/fixtures/invalid --schemas schemas --media media --out generated/invalid-fixture-report.json --expect-invalid` | pass | `generated/invalid-fixture-report.json`. |
 | `python3 tools/validation/validate_content.py --source tests/fixtures/lifecycle --schemas schemas --media media --out generated/lifecycle-validation-report.json --expect-mixed` | pass | `generated/lifecycle-validation-report.json`. |
 | `python3 tools/validation/validate_content.py --source tests/fixtures/review-routing --schemas schemas --media media --out generated/review-routing-validation-report.json --expect-mixed` | pass | `generated/review-routing-validation-report.json`. |
-| `python3 tools/validation/privacy_scan.py --pattern 'private\|/home/\|secret\|PHI\|personal health' -- generated/` | pass | `generated/privacy-scan-report.json` reports no findings. |
+| `python3 tools/validation/privacy_scan.py --pattern '<privacy-pattern>' -- generated/` | pass | `generated/privacy-scan-report.json` reports no findings. |
 | `rg -n 'Current readiness\|Next valid skill\|Plan lifecycle state\|Status: approved\|accepted\|Current milestone state\|Review status\|Remaining in-scope implementation milestones\|Next stage\|Final closeout readiness' docs/workflows.md docs/plans/2026-06-26-content-schema-foundation.md docs/architecture/system/architecture.md docs/adr/2026-06-26-repository-native-reviewed-content.md specs/content-schema.md` | pass | Output confirmed approved/accepted upstream artifacts, closed M4 state, no remaining implementation milestones, and workflow routing updated to `pr`. |
 
 ## CI Status

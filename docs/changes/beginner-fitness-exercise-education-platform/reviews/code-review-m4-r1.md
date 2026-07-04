@@ -33,7 +33,7 @@
 - Reviewer-side checks:
   - `python3 -m unittest tests.test_generated_output_m4`
   - `python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out /tmp/review-m4-validation-report.json --emit-public /tmp/review-m4-public-content.json && diff -u generated/public-content.json /tmp/review-m4-public-content.json`
-  - `python3 tools/validation/privacy_scan.py --pattern 'private|/home/|secret|PHI|personal health' -- generated/`
+  - `python3 tools/validation/privacy_scan.py --pattern '<privacy-pattern>' -- generated/`
   - `python3 -m unittest discover -s tests`
 
 ## Diff Summary
@@ -48,11 +48,11 @@ Severity: material
 
 Evidence:
 
-- [tests/test_generated_output_m4.py](/home/xiongxianfei/data/20260626-gymprimer/tests/test_generated_output_m4.py:58) creates the M4 generated-output exclusion test.
-- [tests/test_generated_output_m4.py](/home/xiongxianfei/data/20260626-gymprimer/tests/test_generated_output_m4.py:60) covers an unpublished draft.
-- [tests/test_generated_output_m4.py](/home/xiongxianfei/data/20260626-gymprimer/tests/test_generated_output_m4.py:61) covers a hidden card.
-- [tests/test_generated_output_m4.py](/home/xiongxianfei/data/20260626-gymprimer/tests/test_generated_output_m4.py:62) covers a superseded card.
-- [tests/test_generated_output_m4.py](/home/xiongxianfei/data/20260626-gymprimer/tests/test_generated_output_m4.py:63) changes a card to `license_kind = unlicensed_internal_only`, but also leaves it `publication_status = unpublished`, so the record is excluded even if the license/publication-rights filter is broken.
+- `tests/test_generated_output_m4.py:58` creates the M4 generated-output exclusion test.
+- `tests/test_generated_output_m4.py:60` covers an unpublished draft.
+- `tests/test_generated_output_m4.py:61` covers a hidden card.
+- `tests/test_generated_output_m4.py:62` covers a superseded card.
+- `tests/test_generated_output_m4.py:63` changes a card to `license_kind = unlicensed_internal_only`, but also leaves it `publication_status = unpublished`, so the record is excluded even if the license/publication-rights filter is broken.
 - The test does not include a generated-output fixture or assertion for `review_status = review_expired`.
 - The test does not include a generated-output fixture or assertion for `safety_category = blocked_rehab` or another blocked safety category.
 
@@ -89,7 +89,7 @@ Commands run:
 ```sh
 python3 -m unittest tests.test_generated_output_m4
 python3 tools/validation/validate_content.py --source content --schemas schemas --media media --out /tmp/review-m4-validation-report.json --emit-public /tmp/review-m4-public-content.json && diff -u generated/public-content.json /tmp/review-m4-public-content.json
-python3 tools/validation/privacy_scan.py --pattern 'private|/home/|secret|PHI|personal health' -- generated/
+python3 tools/validation/privacy_scan.py --pattern '<privacy-pattern>' -- generated/
 python3 -m unittest discover -s tests
 ```
 

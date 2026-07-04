@@ -15,6 +15,7 @@ Rules:
 - [CDC adult activity guidance][cdc-adult-activity]
 - [WHO physical activity guidance][who-physical-activity]
 - [Mayo Clinic weight training technique guidance][mayo-weight-training]
+- [Mayo Clinic stretching basics][mayo-stretching]
 - [ACSM resistance training guidance][acsm-resistance-training]
 - [CDC plain-language communication resources][cdc-plain-language]
 - [NHS back pain patient guidance][nhs-back-pain]
@@ -35,6 +36,7 @@ Each page still needs its own matching reference definition so the page renders 
 [cdc-adult-activity]: https://www.cdc.gov/physical-activity-basics/guidelines/adults.html
 [who-physical-activity]: https://www.who.int/initiatives/behealthy/physical-activity
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
+[mayo-stretching]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/stretching/art-20546848
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
 [cdc-plain-language]: https://www.cdc.gov/health-literacy/php/develop-materials/plain-language.html
 [nhs-back-pain]: https://www.nhs.uk/conditions/back-pain/
