@@ -3,8 +3,9 @@
 ## Status
 
 - Status: active
-- Plan lifecycle state: active
-- Terminal disposition: not-applicable
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed-by PR #10
 
 ## Purpose / big picture
 
@@ -100,7 +101,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ## Current Handoff Summary
 
-- Current milestone: M5
+- Current milestone: Lifecycle Closeout
 - Current milestone state: closed
 - Last reviewed milestone: M5
 - Review status: proposal-review R1 approved; spec-review R1 approved;
@@ -110,13 +111,12 @@ shows that setup or stroke-sequence comprehension needs visual support.
   M2 code-review rerun; code-review M2 R2 closed M2; code-review M3 R1 closed
   M3; code-review M4 R1 closed M4; code-review M5 R1 closed M5
 - Remaining in-scope implementation milestones: none
-- Remaining lifecycle milestones: PR review and merge/closeout
-- Next stage: pr
-- Final closeout readiness: not-ready
+- Remaining lifecycle milestones: none
+- Next stage: none
+- Final closeout readiness: complete
 - Reason final closeout is or is not ready: M1 and M2 are closed by code-review;
-  M3, M4, and M5 are closed by code-review; durable rationale is complete;
-  final local verification is complete; PR #10 is open; GitHub Actions passed;
-  PR review and merge/closeout remain.
+  M3, M4, and M5 are closed by code-review; durable rationale, final local
+  verification, PR handoff, CI validation, and merge/closeout are complete.
 
 ## Milestones
 
@@ -740,6 +740,9 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: PR #10 opened from `proposal/rowing-machine-basics` to `main`:
   `https://github.com/xiongxianfei/gymprimer/pull/10`.
 - 2026-07-04: GitHub Actions reported `Validation checks` passed for PR #10.
+- 2026-07-04: PR #10 merged with merge commit
+  `738ee6a1ba1ef0a50516f17c736b095a80e6f42d`; lifecycle cleanup marked this
+  plan complete.
 
 ## Outcome and retrospective
 
@@ -754,5 +757,5 @@ shows that setup or stroke-sequence comprehension needs visual support.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- PR #10 is open for review.
-- Not Done until PR review and merge/closeout complete.
+- Completed by PR #10.
+- Done.

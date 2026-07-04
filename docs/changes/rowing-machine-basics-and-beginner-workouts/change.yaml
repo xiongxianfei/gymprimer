@@ -1,6 +1,6 @@
 change_id: rowing-machine-basics-and-beginner-workouts
-status: active
-current_stage: pr
+status: completed
+current_stage: done
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
@@ -16,12 +16,12 @@ current_architecture_status: approved
 current_architecture_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md
 
 current_plan: docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
-current_plan_status: active
+current_plan_status: completed
 current_plan_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/plan-review-r2.md
 plan_index: docs/plan.md
 
-current_milestone: M5
-current_milestone_name: Follow-up Rowing Media Enhancement
+current_milestone: Lifecycle Closeout
+current_milestone_name: Lifecycle Closeout
 current_milestone_state: closed
 last_reviewed_milestone: M5
 
@@ -31,9 +31,9 @@ current_test_spec_review: docs/changes/rowing-machine-basics-and-beginner-workou
 review_resolution: docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md
 current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m5-r1.md
 verify_report: docs/changes/rowing-machine-basics-and-beginner-workouts/verify-report.md
-next_stage: pr
+next_stage: none
 pull_request: https://github.com/xiongxianfei/gymprimer/pull/10
-merge_commit: null
+merge_commit: 738ee6a1ba1ef0a50516f17c736b095a80e6f42d
 
 open_findings: []
 
@@ -67,6 +67,7 @@ notes:
   - Final local verification passed with branch-ready evidence; PR handoff is next.
   - PR #10 opened from `proposal/rowing-machine-basics` to `main`.
   - GitHub Actions reported `Validation checks` passed for PR #10.
+  - PR #10 merged on 2026-07-04 with merge commit 738ee6a1ba1ef0a50516f17c736b095a80e6f42d; lifecycle cleanup marked the plan complete.
 
 validation:
   - command: python tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/architecture/system/architecture.md
@@ -474,3 +475,6 @@ validation:
   - command: gh pr checks 10 --watch --interval 10
     result: pass
     evidence: GitHub Actions reported Validation checks passed for PR #10
+  - command: gh pr view 10 --json number,url,state,mergedAt,mergeCommit,title,baseRefName,headRefName,statusCheckRollup
+    result: pass
+    evidence: PR #10 is merged, merge commit 738ee6a1ba1ef0a50516f17c736b095a80e6f42d, latest Validation checks conclusion SUCCESS

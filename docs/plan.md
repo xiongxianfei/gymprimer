@@ -2,12 +2,6 @@
 
 ## Active
 
-- [Rowing Machine Basics and Beginner Workout Guidance](plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md)
-  - Status: active
-  - Plan lifecycle state: active
-  - Current stage: pr
-  - Active context: PR #10 is open and CI passed; review and merge/closeout remain.
-
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
   - Plan lifecycle state: active
@@ -26,6 +20,12 @@
   - Active context: retained only as historical context for the structured-platform implementation path; it is not active execution guidance.
 
 ## Done (recent)
+
+- [Rowing Machine Basics and Beginner Workout Guidance](plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #10
+  - Active context: M1-M5, explain-change, final local verification, CI validation, PR handoff, and merge/closeout are complete.
 
 - [Exercise Method Guidance](plans/2026-07-04-exercise-method-guidance.md)
   - Status: completed
