@@ -6,7 +6,7 @@
   - Status: reviewed
   - Plan lifecycle state: active
   - Current stage: pr
-  - Active context: final local verification passed with branch-ready evidence; PR handoff is next.
+  - Active context: PR #11 is open; final local verification passed and GitHub Actions `Validation checks` is pending.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
