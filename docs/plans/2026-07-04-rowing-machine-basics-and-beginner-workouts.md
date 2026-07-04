@@ -101,19 +101,19 @@ shows that setup or stroke-sequence comprehension needs visual support.
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: review-requested
+- Current milestone state: resolution-needed
 - Last reviewed milestone: M1
 - Review status: proposal-review R1 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 requested PR-RMB-1; PR-RMB-1
   revision approved by plan-review R2; test-spec-review R2 approved the proof
-  map
+  map; code-review M2 R1 requested CR-RMB-M2-1
 - Remaining in-scope implementation milestones: M2, M3, M4
-- Remaining lifecycle milestones: code-review, implementation, explain-change,
+- Remaining lifecycle milestones: review-resolution, implementation, code-review, explain-change,
   verify, PR handoff
-- Next stage: code-review M2
+- Next stage: review-resolution for CR-RMB-M2-1
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1 is closed by code-review and M2
-  is implemented pending code-review; M3-M4, downstream review, durable rationale, and final
+  needs review-resolution for CR-RMB-M2-1; M3-M4, downstream review, durable rationale, and final
   verification remain before closeout.
 
 ## Milestones
@@ -176,7 +176,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ### M2. Rowing Page and Source Index
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: draft the text-first rowing-machine page with page-local citations,
   global source-index support where required, and no optional media yet.
 - Requirements: R1-R14, R18-R30, R37-R38, AC3-AC9.
@@ -417,6 +417,8 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: M2 implementation added real-page tests first, drafted
   `exercises/rowing-machine.md`, updated `SOURCES.md`, and moved M2 to
   review-requested for code-review.
+- 2026-07-04: Code-review M2 R1 requested CR-RMB-M2-1 for incomplete
+  page-local source support on the safety stop-condition sentence.
 
 ## Decision log
 
@@ -522,16 +524,22 @@ shows that setup or stroke-sequence comprehension needs visual support.
   `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns`,
   `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts`,
   `git diff --check`, and the plan/change state-sync check all passed.
+- 2026-07-04: Code-review M2 R1 independently reran
+  `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages`,
+  which passed, but found CR-RMB-M2-1 during semantic source review.
+- 2026-07-04: `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md`,
+  `git diff --check`, and state-sync check passed after code-review M2 R1
+  recording.
 
 ## Outcome and retrospective
 
 - M1 implemented scoped cardio method validation and closed after clean
-  code-review. M2 is implemented and waiting for code-review. M3-M4 are not
-  started.
+  code-review. M2 is implemented but needs review-resolution for CR-RMB-M2-1.
+  M3-M4 are not started.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M2.
+- Ready for review-resolution of CR-RMB-M2-1.
 - Not ready for final verification, PR handoff, or Done until the remaining
   lifecycle gates complete.

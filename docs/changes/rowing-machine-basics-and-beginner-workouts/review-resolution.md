@@ -2,7 +2,7 @@
 
 ## Status
 
-closed
+open
 
 ## Open findings
 
@@ -10,6 +10,7 @@ closed
 | --- | --- | --- | --- |
 | PR-RMB-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/plan-review-r1.md` | resolved by `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/plan-review-r2.md` | Plan references were revised from the incorrect prompt-record directory to the approved `media/prompts/exercises/rowing-machine/<asset-stem>.md` path shape, and plan-review R2 approved the resolution. |
 | TSR-RMB-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r1.md` | resolved by `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r2.md` | `RMB-M1` through `RMB-M5` now include explicit automation rationale, required environment, evidence artifact, pass condition, failure condition, owning stage, and re-run trigger; test-spec-review R2 approved the resolution. |
+| CR-RMB-M2-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r1.md` | open | Resolve the unsupported safety stop-condition citation in `exercises/rowing-machine.md` by adding direct page-local source support or narrowing unsupported claims while preserving R26. |
 
 ## Resolution notes
 
@@ -29,3 +30,6 @@ closed
   `RMB-M1` through `RMB-M5`; test-spec-review R2 approved the resolution.
 - 2026-07-04: Test-spec-review R2 approved the TSR-RMB-1 resolution and closed
   the test-spec-review finding.
+- 2026-07-04: Opened CR-RMB-M2-1 from code-review M2 R1. M2 is paused for
+  review-resolution until safety stop-condition source support is corrected
+  and M2 is returned to code-review.
