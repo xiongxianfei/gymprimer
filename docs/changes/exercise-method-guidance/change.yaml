@@ -1,6 +1,6 @@
 change_id: exercise-method-guidance
-status: active
-current_stage: pr
+status: completed
+current_stage: done
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-method-guidance.md
@@ -16,20 +16,24 @@ current_architecture_status: approved
 current_architecture_review: docs/changes/exercise-method-guidance/reviews/architecture-review-r1.md
 
 current_plan: docs/plans/2026-07-04-exercise-method-guidance.md
-current_plan_status: draft
+current_plan_status: completed
 current_plan_review: docs/changes/exercise-method-guidance/reviews/plan-review-r1.md
 plan_index: docs/plan.md
 
 current_milestone: Lifecycle Closeout
 current_milestone_name: Lifecycle Closeout
-current_milestone_state: pr-open
+current_milestone_state: closed
 last_reviewed_milestone: M4
 
 current_test_spec: specs/exercise-method-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-method-guidance/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/exercise-method-guidance/review-resolution.md
-next_stage: PR review
+current_code_review: docs/changes/exercise-method-guidance/reviews/code-review-m4-r1.md
+verify_report: docs/changes/exercise-method-guidance/verify-report.md
+next_stage: none
+pull_request: https://github.com/xiongxianfei/gymprimer/pull/9
+merge_commit: fa43289585fcace7f8cf2f7c71604f14347fdde6
 
 open_findings: []
 
@@ -58,6 +62,8 @@ notes:
   - Explain-change recorded durable rationale for the proposal-to-diff trail; final verification is next.
   - Final local verification passed after narrow historical privacy cleanup; branch is ready for PR handoff.
   - PR #9 opened from `feature/exercise-method-guidance` to `main`; hosted CI remains unobserved.
+  - CI maintenance added `.github/workflows/ci.yml`; GitHub reported `Validation checks` passed for PR #9.
+  - PR #9 merged on 2026-07-04; lifecycle cleanup marked the plan complete.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_method_guidance

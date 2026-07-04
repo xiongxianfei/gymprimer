@@ -2,9 +2,9 @@
 
 ## Status
 
-- Status: draft
-- Plan lifecycle state: active
-- Terminal disposition: PR #9 open; not merged
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed-by PR #9
 
 ## Purpose / big picture
 
@@ -94,17 +94,18 @@ The first proof slice is exactly:
 ## Current Handoff Summary
 
 - Current milestone: Lifecycle Closeout
-- Current milestone state: pr-open
+- Current milestone state: closed
 - Last reviewed milestone: M4
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review R2
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
 - Remaining in-scope implementation milestones: none
-- Remaining lifecycle milestones: Lifecycle Closeout
-- Next stage: PR review
-- Final closeout readiness: not-ready
+- Remaining lifecycle milestones: none
+- Next stage: none
+- Final closeout readiness: complete
 - Reason final closeout is or is not ready: M1, M2, M3, and M4 are closed;
-  final local verification passed; PR #9 is open and merge/review remains.
+  final local verification passed; hosted CI validation passed after CI
+  maintenance; PR #9 merged.
 
 ## Milestones
 
@@ -449,6 +450,11 @@ The first proof slice is exactly:
   not claimed until the `pr` stage records it.
 - 2026-07-04: PR #9 opened from `feature/exercise-method-guidance` to `main`
   with local validation evidence and hosted CI marked unobserved.
+- 2026-07-04: CI maintenance added `.github/workflows/ci.yml`; GitHub
+  reported `Validation checks` passed for PR #9.
+- 2026-07-04: PR #9 merged to `main` with merge commit
+  `fa43289585fcace7f8cf2f7c71604f14347fdde6`; lifecycle cleanup marked this
+  plan complete.
 
 ## Decision log
 
@@ -540,11 +546,10 @@ The first proof slice is exactly:
 
 ## Outcome and retrospective
 
-- PR #9 is open. Implementation, code review, explain-change, final local
-  verification, and PR handoff are complete; hosted CI was not observed.
+- Completed by PR #9 after implementation, code review, explain-change, final
+  local verification, CI validation, and PR handoff.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- PR #9 is open for review. Final closeout remains active until PR review and
-  merge disposition are complete.
+- Completed by PR #9.

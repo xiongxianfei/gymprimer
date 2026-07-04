@@ -2,12 +2,6 @@
 
 ## Active
 
-- [Exercise Method Guidance](plans/2026-07-04-exercise-method-guidance.md)
-  - Status: draft
-  - Plan lifecycle state: active
-  - Current stage: pr
-  - Active context: PR #9 is open with local branch-ready evidence; hosted CI was not observed.
-
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
   - Plan lifecycle state: active
@@ -26,6 +20,12 @@
   - Active context: retained only as historical context for the structured-platform implementation path; it is not active execution guidance.
 
 ## Done (recent)
+
+- [Exercise Method Guidance](plans/2026-07-04-exercise-method-guidance.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #9
+  - Active context: M1-M4, explain-change, final local verification, CI validation, and PR handoff are complete.
 
 - [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
   - Status: completed
