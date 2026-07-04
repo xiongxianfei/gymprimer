@@ -163,3 +163,30 @@ scans `media`.
 - `python3 -m unittest discover -s tests -p 'test_*image*.py'` passed.
 - `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed.
 - `git diff --check` passed.
+
+## M4. Integration and Validation Ledger
+
+M4 records the integration validation evidence and routes the change to
+code-review without claiming downstream readiness.
+
+### What changed
+
+- `docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md`
+  records the exact M4 validation commands, outcomes, CI observation status,
+  residual risks, and navigation decision.
+- The active plan and change metadata now route M4 to code-review.
+- README navigation is unchanged because the approved plan makes README edits
+  conditional, and no required navigation change exists for this milestone.
+
+### Why it changed
+
+The approved test spec requires a durable M4 ledger that ties exact local
+commands, outcomes, residual risks, and promotion/navigation decisions to the
+implementation state before code-review handoff.
+
+### Validation
+
+- `python3 -m unittest discover -s tests` passed.
+- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media` passed.
+- `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md` passed.
+- `git diff --check` passed.
