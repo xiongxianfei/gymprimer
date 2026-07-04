@@ -151,6 +151,10 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
             "concept2-getting-started-workouts",
             "cdc-adult-activity",
             "who-physical-activity",
+            "local-rowing-machine-safety",
+            "local-rowing-machine-exercise-pain",
+            "nhs-back-pain",
+            "mayo-weight-training",
         ):
             with self.subTest(source_id=source_id):
                 self.assertIn(f"[{source_id}]:", text)

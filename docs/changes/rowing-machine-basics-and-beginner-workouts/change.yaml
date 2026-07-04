@@ -1,6 +1,6 @@
 change_id: rowing-machine-basics-and-beginner-workouts
 status: active
-current_stage: review-resolution
+current_stage: code-review
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
@@ -22,7 +22,7 @@ plan_index: docs/plan.md
 
 current_milestone: M2
 current_milestone_name: Rowing Page and Source Index
-current_milestone_state: resolution-needed
+current_milestone_state: review-requested
 last_reviewed_milestone: M1
 
 current_test_spec: specs/rowing-machine-basics-and-beginner-workouts.test.md
@@ -31,12 +31,11 @@ current_test_spec_review: docs/changes/rowing-machine-basics-and-beginner-workou
 review_resolution: docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md
 current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r1.md
 verify_report: null
-next_stage: review-resolution
+next_stage: code-review
 pull_request: null
 merge_commit: null
 
-open_findings:
-  - CR-RMB-M2-1
+open_findings: []
 
 notes:
   - Proposal-review R1 approved the rowing-machine basics direction.
@@ -56,6 +55,7 @@ notes:
   - M2 implementation started.
   - M2 added the rowing-machine page, source-index entries, real-page tests, and is ready for code-review.
   - Code-review M2 R1 requested CR-RMB-M2-1; M2 is paused for review-resolution.
+  - CR-RMB-M2-1 was addressed and M2 is ready for code-review rerun.
 
 validation:
   - command: python tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/architecture/system/architecture.md
@@ -205,3 +205,27 @@ validation:
   - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and review-resolution.md
     result: pass
     evidence: lifecycle metadata all point to review-resolution for CR-RMB-M2-1
+  - command: python3 -m unittest tests.test_markdown_first_real_pages
+    result: fail
+    evidence: failed before content fix because nhs-back-pain and mayo-weight-training page-local safety source definitions were absent
+  - command: python3 -m unittest tests.test_markdown_first_real_pages
+    result: fail
+    evidence: first content fix failed because claim-level safety references were not on the same lines and local-exercise-pain did not match the local-rowing-machine source ID convention
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns
+    result: fail
+    evidence: first content fix failed for the same claim-level safety reference and local source ID convention issues
+  - command: python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages
+    result: pass
+    evidence: 19 tests passed after CR-RMB-M2-1 resolution
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns
+    result: pass
+    evidence: checked 23 Markdown file(s): pass after CR-RMB-M2-1 resolution
+  - command: python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 31 file(s): privacy pass after CR-RMB-M2-1 resolution
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after CR-RMB-M2-1 resolution
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and review-resolution.md
+    result: pass
+    evidence: lifecycle metadata all point to code-review rerun for M2

@@ -161,7 +161,11 @@ Only after that, use moderate effort while keeping the same sequence.
 
 ## Safety notes
 
-Stop rowing and use the central [Red Flags](../RED-FLAGS.md) page if you notice chest pain, dizziness, fainting, unusual shortness of breath, sharp pain, numbness, symptoms that worsen, painful technique, or movement that turns jerky or uncontrolled. [Mayo Clinic][local-rowing-machine-safety]
+Stop rowing and use the central [Red Flags](../RED-FLAGS.md) page if you notice chest pain, dizziness, fainting, or unusual shortness of breath. [Mayo Clinic][local-rowing-machine-safety]
+
+Stop for sharp pain, symptoms that worsen, or numbness. Use the Red Flags page instead of trying to row through those symptoms. [Mayo Clinic][local-rowing-machine-exercise-pain] [NHS][nhs-back-pain]
+
+Stop the round if technique becomes painful or the movement turns jerky or uncontrolled. Proper technique should stay controlled, and exercise that causes pain should stop. [Mayo Clinic][mayo-weight-training]
 
 ## Sources
 
@@ -172,6 +176,9 @@ Stop rowing and use the central [Red Flags](../RED-FLAGS.md) page if you notice 
 - [CDC adult activity guidance][cdc-adult-activity]
 - [WHO physical activity guidance][who-physical-activity]
 - [Mayo Clinic heart attack symptoms reference][local-rowing-machine-safety]
+- [Mayo Clinic exercise and arthritis pain guidance][local-rowing-machine-exercise-pain]
+- [NHS back pain patient guidance][nhs-back-pain]
+- [Mayo Clinic weight training technique guidance][mayo-weight-training]
 
 [concept2-rowing-technique]: https://concept2.com/training/rowing-technique
 [concept2-foot-position]: https://concept2.com/blog/find-your-optimal-foot-position-on-the-rowerg
@@ -180,3 +187,6 @@ Stop rowing and use the central [Red Flags](../RED-FLAGS.md) page if you notice 
 [cdc-adult-activity]: https://www.cdc.gov/physical-activity-basics/guidelines/adults.html
 [who-physical-activity]: https://www.who.int/initiatives/behealthy/physical-activity
 [local-rowing-machine-safety]: https://www.mayoclinic.org/diseases-conditions/heart-attack/in-depth/heart-attack-symptoms/art-20047744
+[local-rowing-machine-exercise-pain]: https://www.mayoclinic.org/diseases-conditions/arthritis/in-depth/arthritis/art-20047971
+[nhs-back-pain]: https://www.nhs.uk/conditions/back-pain/
+[mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842

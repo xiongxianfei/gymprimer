@@ -2,7 +2,7 @@
 
 ## Status
 
-open
+pending code-review
 
 ## Open findings
 
@@ -10,7 +10,7 @@ open
 | --- | --- | --- | --- |
 | PR-RMB-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/plan-review-r1.md` | resolved by `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/plan-review-r2.md` | Plan references were revised from the incorrect prompt-record directory to the approved `media/prompts/exercises/rowing-machine/<asset-stem>.md` path shape, and plan-review R2 approved the resolution. |
 | TSR-RMB-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r1.md` | resolved by `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r2.md` | `RMB-M1` through `RMB-M5` now include explicit automation rationale, required environment, evidence artifact, pass condition, failure condition, owning stage, and re-run trigger; test-spec-review R2 approved the resolution. |
-| CR-RMB-M2-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r1.md` | open | Resolve the unsupported safety stop-condition citation in `exercises/rowing-machine.md` by adding direct page-local source support or narrowing unsupported claims while preserving R26. |
+| CR-RMB-M2-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r1.md` | resolved pending M2 code-review | Safety notes were split into source-supported groups in `exercises/rowing-machine.md`; real-page tests now require the page-local safety source IDs, and M2 validation passed. |
 
 ## Resolution notes
 
@@ -33,3 +33,7 @@ open
 - 2026-07-04: Opened CR-RMB-M2-1 from code-review M2 R1. M2 is paused for
   review-resolution until safety stop-condition source support is corrected
   and M2 is returned to code-review.
+- 2026-07-04: Addressed CR-RMB-M2-1 by splitting `## Safety notes` into
+  cardiopulmonary, pain/worsening/numbness, and painful/uncontrolled technique
+  groups with nearby page-local citations. Added test coverage for the safety
+  source IDs and reran M2 validation. M2 is ready for code-review rerun.

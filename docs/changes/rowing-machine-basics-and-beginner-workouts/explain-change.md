@@ -91,3 +91,29 @@ page-local citations, central safety routing, and no runtime product surface.
 - `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns` passed.
 - `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts` passed.
 - `git diff --check` passed.
+
+## M2 Review Resolution. Safety Source Support
+
+Code-review M2 R1 found that the safety note cited one heart-attack symptoms
+source for the full stop-condition list. The resolution splits the safety note
+into narrower groups:
+
+- cardiopulmonary red flags: chest pain, dizziness, fainting, and unusual
+  shortness of breath;
+- pain and symptom escalation: sharp pain, symptoms that worsen, and numbness;
+- technique breakdown: painful, jerky, or uncontrolled movement.
+
+The page now cites the heart-attack symptoms source only for cardiopulmonary
+warnings, reuses `nhs-back-pain` and `mayo-weight-training` for existing
+safety/technique support, and adds `local-rowing-machine-exercise-pain` as a
+page-local source for sharp or worsening exercise pain.
+
+### Validation
+
+- `python3 -m unittest tests.test_markdown_first_real_pages` failed after the
+  test update and before the content fix because the new safety source IDs were
+  absent.
+- `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages` passed.
+- `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns` passed.
+- `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts` passed.
+- `git diff --check` passed.
