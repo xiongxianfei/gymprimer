@@ -77,7 +77,7 @@ class ExerciseMuscleGuidanceTest(unittest.TestCase):
 
             | Role | Muscle region | What it helps do |
             |---|---|---|
-            | Main driver | Chest | Helps press the handles forward. |
+            | Main driver | Chest | Helps press the handles forward. [Source][local-fixture-exercise-source] |
             | Support | Triceps | Help finish the press. |
 
             ## What you should feel
@@ -89,7 +89,7 @@ class ExerciseMuscleGuidanceTest(unittest.TestCase):
             """\
             ## Muscles involved
 
-            - **Main driver:** upper back and lats help create the pull.
+            - **Main driver:** upper back and lats help create the pull. [Source][local-fixture-exercise-source]
             - **Support:** arms help finish the movement.
 
             ## What you should feel
@@ -120,7 +120,7 @@ class ExerciseMuscleGuidanceTest(unittest.TestCase):
 
             | Phase | Muscle region | What it helps do |
             |---|---|---|
-            | Drive | Legs and glutes | Push the machine away. |
+            | Drive | Legs and glutes | Push the machine away. [Source][local-fixture-exercise-source] |
             | Finish | Upper back and arms | Complete the pull. |
 
             ## What you should feel
@@ -144,6 +144,45 @@ class ExerciseMuscleGuidanceTest(unittest.TestCase):
 
         self.assertEqual(finding_codes(valid_phase_table), [])
         self.assertIn("exercise_muscle_table_columns", finding_codes(invalid_phase_table))
+
+    def test_source_sensitive_role_guidance_requires_page_local_source_surface(self) -> None:
+        missing_citation = exercise_page(
+            """\
+            ## Muscles involved
+
+            - **Main driver:** chest helps press the handles forward.
+            - **Support:** triceps help finish the press.
+
+            ## What you should feel
+
+            You may feel the chest working while the arms help finish.
+            """
+        )
+        global_only_reference = (
+            "# Fixture Exercise\n\n"
+            "## Muscles involved\n\n"
+            "- **Main driver:** lower trapezius helps guide the shoulder blade. [Source][fixture-global]\n\n"
+            "## What you should feel\n\n"
+            "You may feel light upper-back work.\n\n"
+            "## Sources\n\n"
+            "- [Fixture source][local-fixture-exercise-source]\n\n"
+            "[local-fixture-exercise-source]: https://example.org/source\n"
+        )
+        locally_defined_reference = exercise_page(
+            """\
+            ## Muscles involved
+
+            - **Main driver:** lower trapezius helps guide the shoulder blade. [Source][local-fixture-exercise-source]
+
+            ## What you should feel
+
+            You may feel light upper-back work.
+            """
+        )
+
+        self.assertIn("exercise_muscle_source_missing", finding_codes(missing_citation))
+        self.assertIn("exercise_muscle_source_missing_definition", finding_codes(global_only_reference))
+        self.assertEqual(finding_codes(locally_defined_reference), [])
 
     def test_forbidden_muscle_and_feel_wording_fails(self) -> None:
         cases = {

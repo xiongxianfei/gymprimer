@@ -1321,6 +1321,29 @@ def muscle_section_has_role_guidance(section: str) -> bool:
     return bool(body and EXERCISE_MUSCLE_HELP_VERBS_RE.search(body))
 
 
+def muscle_section_uses_explicit_role_format(section: str) -> bool:
+    return markdown_table_header(section) is not None or has_role_bullet(section)
+
+
+def validate_exercise_muscle_source_surface(path: Path, text: str, sections: list[str]) -> list[Finding]:
+    findings: list[Finding] = []
+    local_source_ids = source_ids(text)
+    cited_ids: set[str] = set()
+    for section in sections:
+        cited_ids.update(cited_reference_ids(section))
+
+    for source_id in sorted(cited_ids - local_source_ids):
+        findings.append(
+            Finding(
+                path,
+                "exercise_muscle_source_missing_definition",
+                f"muscle guidance cites a source ID without a page-local definition: {source_id}",
+            )
+        )
+
+    return findings
+
+
 def validate_exercise_muscle_guidance(path: Path, text: str) -> list[Finding]:
     findings: list[Finding] = []
     muscles_section = exact_heading_section_text(text, EXERCISE_MUSCLE_EXACT_HEADING_RE)
@@ -1379,6 +1402,14 @@ def validate_exercise_muscle_guidance(path: Path, text: str) -> list[Finding]:
                     "## Muscles involved must explain broad muscle regions by role or what they help do",
                 )
             )
+        if muscle_section_uses_explicit_role_format(muscles_section) and not cited_reference_ids(muscles_section):
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_muscle_source_missing",
+                    "explicit role or phase muscle guidance needs at least one page-local source citation",
+                )
+            )
 
     if not feel_section:
         findings.append(
@@ -1390,6 +1421,14 @@ def validate_exercise_muscle_guidance(path: Path, text: str) -> list[Finding]:
         )
 
     checked_text = "\n\n".join(section for section in (muscles_section, feel_section) if section)
+    findings.extend(
+        validate_exercise_muscle_source_surface(
+            path,
+            text,
+            [section for section in (muscles_section, feel_section) if section],
+        )
+    )
+
     for pattern in EXERCISE_MUSCLE_EXACT_ACTIVATION_PATTERNS:
         match = pattern.search(checked_text)
         if match:
