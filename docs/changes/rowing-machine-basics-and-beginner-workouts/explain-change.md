@@ -98,7 +98,8 @@ Manual evidence recorded:
 - `manual-proof/visual-safety-review.md`
 - `validation-ledger.md`
 
-Hosted CI was not observed. Final `verify` has not run yet.
+Hosted CI was not observed. Final local verification is recorded in
+`docs/changes/rowing-machine-basics-and-beginner-workouts/verify-report.md`.
 
 ## Review Resolution Summary
 
@@ -148,14 +149,14 @@ The change preserves these non-goals:
 
 ## Risks And Follow-Ups
 
-Remaining risks before downstream gates:
+Remaining risks after final local verification:
 
 - Static images cannot prove every reader will understand setup, muscle
   attention, or stroke sequence perfectly.
 - Hosted CI has not been observed.
-- Final `verify` and PR handoff remain.
+- PR handoff remains.
 
 The active plan state after this explanation: M1-M5 are closed by code-review,
-no implementation milestones remain, and the next lifecycle stage is `verify`.
-This artifact does not claim final verification, PR readiness, hosted CI
-success, or merge readiness.
+no implementation milestones remain, and final local verification routes the
+change to `pr`. This artifact does not claim PR body readiness, PR open
+readiness, hosted CI success, or merge readiness.

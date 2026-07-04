@@ -110,12 +110,12 @@ shows that setup or stroke-sequence comprehension needs visual support.
   M2 code-review rerun; code-review M2 R2 closed M2; code-review M3 R1 closed
   M3; code-review M4 R1 closed M4; code-review M5 R1 closed M5
 - Remaining in-scope implementation milestones: none
-- Remaining lifecycle milestones: verify, PR handoff
-- Next stage: verify
+- Remaining lifecycle milestones: PR handoff
+- Next stage: pr
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1 and M2 are closed by code-review;
   M3, M4, and M5 are closed by code-review; durable rationale is complete;
-  final verification and PR handoff remain before closeout.
+  final local verification is complete; PR handoff remains before closeout.
 
 ## Milestones
 
@@ -730,6 +730,12 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: Post-explain-change checks passed:
   `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md`,
   `git diff --check`, and state-sync check.
+- 2026-07-04: Final local verification completed in
+  `docs/changes/rowing-machine-basics-and-beginner-workouts/verify-report.md`
+  with branch-ready local evidence. Hosted CI was not observed.
+- 2026-07-04: Post-verify-report checks passed:
+  privacy scan over the verify report and lifecycle metadata, `git diff --check`,
+  state-sync check, and stale verify-stage wording scan.
 
 ## Outcome and retrospective
 
@@ -744,6 +750,5 @@ shows that setup or stroke-sequence comprehension needs visual support.
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for final verification.
-- Not ready for PR handoff or Done until the remaining lifecycle gates
-  complete.
+- Ready for PR handoff.
+- Not Done until the remaining lifecycle gate completes.
