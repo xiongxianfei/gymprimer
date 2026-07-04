@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Rowing Machine Basics and Beginner Workout Guidance](plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md)
+  - Status: active
+  - Plan lifecycle state: active
+  - Current stage: code-review
+  - Active context: M1 scoped cardio method validation is review-requested.
+
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
   - Plan lifecycle state: active

@@ -28,6 +28,8 @@ The prompt-record amendment was approved by
 `docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r2.md`.
 The exercise-method guidance amendment was approved by
 `docs/changes/exercise-method-guidance/reviews/architecture-review-r1.md`.
+The rowing-machine basics and beginner workout guidance amendment was approved by
+`docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md`.
 
 ## Related artifacts
 
@@ -64,6 +66,12 @@ The exercise-method guidance amendment was approved by
   - Spec: `../../../specs/exercise-method-guidance.md`
   - Spec review:
     `../../changes/exercise-method-guidance/reviews/spec-review-r1.md`
+- Rowing machine basics and beginner workout guidance:
+  - Proposal:
+    `../../proposals/2026-07-04-rowing-machine-basics-and-beginner-workouts.md`
+  - Spec: `../../../specs/rowing-machine-basics-and-beginner-workouts.md`
+  - Spec review:
+    `../../changes/rowing-machine-basics-and-beginner-workouts/reviews/spec-review-r1.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
@@ -101,6 +109,8 @@ Goals:
   visible in Markdown and review evidence.
 - Add page-local exercise method guidance without introducing hidden metadata,
   generated data, user input, or personalized programming.
+- Add a first cardio-equipment exercise page while keeping cardio method
+  guidance static, source-backed, and technique-first.
 - Preserve old platform artifacts as historical context without treating them as active implementation guidance.
 
 ## Architecture Constraints
@@ -165,14 +175,15 @@ Goals:
   `## How much to do` and `Method type:` as the source of truth.
 - Active exercise method type values are limited to `dynamic_resistance`,
   `bodyweight_progression`, `low_load_control_drill`, `isometric_hold`,
-  `mobility_drill`, and `stretch_hold` until a later approved spec expands
-  them.
+  `mobility_drill`, `stretch_hold`, and the narrowly activated
+  `basic_cardio_equipment` scope defined by
+  `specs/rowing-machine-basics-and-beginner-workouts.md`.
 - Hidden metadata, YAML front matter, shared taxonomy files, generated indexes,
   and generated data packages are not part of the first exercise-method source
   of truth.
-- `loaded_carry` and `basic_cardio_equipment` remain deferred method types until
-  carry or cardio-equipment pages are in scope through a later approved spec or
-  amendment.
+- `loaded_carry` remains deferred. `basic_cardio_equipment` is active only for
+  `exercises/rowing-machine.md` and later cardio-equipment pages governed by
+  approved downstream specs or amendments.
 
 ## Context and Scope
 
@@ -295,6 +306,10 @@ Logical containers:
 - **Exercise method principle page**:
   `principles/sets-reps-holds-rest-and-progression.md` explains shared beginner
   concepts so exercise pages can stay concise.
+- **Basic cardio equipment page**: `exercises/rowing-machine.md` is the first
+  governed cardio-equipment exercise page. It uses the same visible method
+  section contract while adding cardio-specific time, effort, reset,
+  progression, and stop-condition wording.
 - **Optional mdBook renderer**: derived static HTML output.
 
 Forward-head-posture proof-slice building blocks:
@@ -495,6 +510,24 @@ Exercise method guidance authoring flow:
    linked exercise page's method type or range shape when both pages are
    promoted in the same slice.
 
+Basic cardio equipment authoring flow:
+
+1. A contributor drafts `exercises/rowing-machine.md` under the rowing-machine
+   spec.
+2. The page keeps the full exercise-page contract, teaches the rowing stroke
+   sequence in Markdown, and adds `## How much to do` with
+   `Method type: basic_cardio_equipment`.
+3. Local checks or manual proof distinguish `basic_cardio_equipment` from the
+   six previously active method types and keep `loaded_carry` inactive.
+4. Source-audit evidence checks setup, stroke sequence, damper, beginner
+   method, weekly activity, and stop-condition claims.
+5. Beginner-comprehension evidence records whether the reader can identify what
+   the rower is for, foot strap position, drive sequence, recovery sequence,
+   first beginner step, stop condition, and source verification.
+6. If optional setup or stroke-sequence media is added, the existing exercise
+   image and generated raster prompt-record architecture governs path,
+   purpose, provenance, prompt records, alt text, and visual-safety evidence.
+
 ## Deployment View
 
 v0.1 has no hosted deployment.
@@ -525,6 +558,10 @@ Packaging boundaries:
 - Exercise method guidance is Markdown-only. It introduces no deployment,
   runtime, CMS, API, search index, user-input flow, account system, analytics,
   hidden metadata package, or generated public data package.
+- Rowing-machine cardio-equipment guidance is Markdown-only. It introduces no
+  deployment, runtime, CMS, API, search index, user-input flow, account system,
+  analytics, hidden metadata package, generated public data package, workout
+  tracker, or calculator.
 
 ## Crosscutting Concepts
 
@@ -570,11 +607,17 @@ Scope control:
 - Exercise pages updated under `specs/exercise-method-guidance.md` use
   `## How much to do`, one active `Method type:`, and concise lines for
   beginner starting point, effort, rest, progression, and stop condition.
+- `basic_cardio_equipment` keeps the same visible method source-of-truth shape
+  but uses cardio-specific starter labels for time, effort, reset/rest,
+  technique-first progression, and stop conditions.
 - Exercise method values are authoring and validation labels, not user-facing
   personalization logic.
 - Full exercise pages remain the source of truth for exercise method guidance;
   pattern-page exercise previews are compact summaries and must not contradict
   their linked exercise pages.
+- Cardio-equipment examples remain static examples. They must not become
+  personalized conditioning plans, race plans, heart-rate-zone prescriptions,
+  workout trackers, calculators, or adaptive programming.
 
 Expanded static content page contracts:
 
@@ -724,6 +767,14 @@ Observability:
 - Exercise method manual evidence records source-audit samples for active
   method types and beginner-comprehension outcomes for starting point, effort,
   stop condition, and non-prescription understanding.
+- Basic cardio equipment validation accepts `basic_cardio_equipment` only where
+  the governing rowing-machine or later cardio-equipment spec allows it,
+  continues to reject `loaded_carry`, and reports inactive method type failures
+  for out-of-scope uses.
+- Rowing-machine manual evidence records source-audit support for foot setup,
+  stroke sequence, damper, beginner method, weekly activity, and stop
+  conditions, plus non-identifying beginner-comprehension outcomes for the
+  rowing-specific questions defined by the spec.
 
 ## Architecture Decisions
 
@@ -737,11 +788,12 @@ Observability:
 - [ADR 2026-06-30: Central red-flags disclaimer boundary](../../adr/2026-06-30-central-red-flags-disclaimer.md) - Centralize the prominent disclaimer in `RED-FLAGS.md` and keep templates focused on safety routing.
 - [ADR 2026-06-26: Repository-native reviewed content](../../adr/2026-06-26-repository-native-reviewed-content.md) - Superseded structured-platform decision retained as history.
 
-No new ADR is required for exercise method guidance. The change extends the
-accepted Markdown-first and Responsible Breadth architecture by adding a visible
-Markdown section and repository-local validation/review evidence. It does not
-introduce a new source-of-truth mechanism, runtime boundary, generated package,
-taxonomy store, or deployment architecture.
+No new ADR is required for exercise method guidance or rowing-machine
+`basic_cardio_equipment`. These changes extend the accepted Markdown-first and
+Responsible Breadth architecture by adding visible Markdown sections and
+repository-local validation/review evidence. They do not introduce a new
+source-of-truth mechanism, runtime boundary, generated package, taxonomy store,
+or deployment architecture.
 
 ## Quality Requirements
 
@@ -767,7 +819,11 @@ taxonomy store, or deployment architecture.
 | Review evidence | A semantic safety or source-quality claim cannot be automated. | A review evidence record under the relevant `docs/changes/<change-id>/` directory records the review and outcome. |
 | Pattern complete loop | A forward-head-posture detailed exercise annotation links chin nod, thoracic extension, wall slide, prone Y/T, or band pull-apart. | The target same-slice exercise page exists and carries its own page-local source support for instruction and safety claims. |
 | Exercise method source of truth | An exercise page is updated under the exercise-method spec. | The page has visible `## How much to do` and `Method type:` text; hidden metadata is not required or authoritative. |
-| Exercise method enum | A page declares an exercise method type. | The value is one of the active method types in `specs/exercise-method-guidance.md`. |
+| Exercise method enum | A page declares an exercise method type. | The value is active under `specs/exercise-method-guidance.md` or an approved downstream method-type amendment such as the rowing-machine spec. |
+| Basic cardio method boundary | A page declares `Method type: basic_cardio_equipment`. | The page is `exercises/rowing-machine.md` or another cardio-equipment page governed by a later approved spec or amendment. |
+| Loaded carry deferral | A page declares `Method type: loaded_carry`. | The page fails until a later approved spec or amendment activates `loaded_carry`. |
+| Rowing method source support | The rowing-machine page gives setup, stroke sequence, damper, beginner method, weekly activity, or stop-condition guidance. | Manual source-audit evidence records support for the claim category before promotion. |
+| Rowing beginner comprehension | The rowing-machine page is reviewed with a beginner reader. | Evidence records whether the reader can state the rower purpose, foot strap position, drive sequence, recovery sequence, first beginner step, stop condition, and where to verify technique. |
 | Exercise method boundary | A method section changes sets, reps, rest, load, or progression based on reader symptoms, goals, equipment, history, body measurements, or training response. | The page fails as adaptive programming. |
 | Exercise method source support | A method section gives a concrete amount, effort, progression, or safety claim. | The claim has page-local source support or recorded review evidence identifies the source gap before promotion. |
 | Exercise method comprehension | A proof-slice exercise page is reviewed with a beginner reader. | Evidence records whether the reader can state the starting point, effort, stop condition, and that the page is not a personal program. |
@@ -822,6 +878,14 @@ taxonomy store, or deployment architecture.
   preview updates and exercise-page method updates are reviewed separately.
   Cross-page alignment checks or manual audit remain required for promoted
   slices.
+- Activating `basic_cardio_equipment` for rowing introduces a narrow exception
+  to the previously deferred method type. Validator changes must keep the scope
+  tied to the rowing-machine spec so unrelated pages cannot use the method type
+  without downstream approval.
+- Rowing workout examples can drift into personalized or sport-performance
+  programming. Static examples, source audit, forbidden-language checks, and
+  beginner comprehension evidence mitigate but do not eliminate this semantic
+  risk.
 - Expanded top-level directories may create navigation sprawl if README and
   SUMMARY promotion gates are not kept strict.
 - Red-flag language and review cadence introduce maintenance debt; stale pages
@@ -874,10 +938,13 @@ taxonomy store, or deployment architecture.
   exercise page.
 - **Method type**: A visible label such as `dynamic_resistance` or
   `stretch_hold` that selects the starter-range shape for one exercise page.
+- **Basic cardio equipment**: A visible exercise method type for approved
+  cardio-equipment pages that use static beginner guidance for time, effort,
+  reset/rest, progression, and stop conditions.
 
 ## Next artifacts
 
-- Execution plan for the exercise-method guidance amendment.
+- Execution plan for the rowing-machine page.
 
 ## Follow-on artifacts
 
@@ -897,6 +964,12 @@ taxonomy store, or deployment architecture.
 - Exercise method guidance spec: `../../../specs/exercise-method-guidance.md`.
 - Exercise method guidance spec review:
   `../../changes/exercise-method-guidance/reviews/spec-review-r1.md`.
+- Rowing-machine basics spec:
+  `../../../specs/rowing-machine-basics-and-beginner-workouts.md`.
+- Rowing-machine basics spec review:
+  `../../changes/rowing-machine-basics-and-beginner-workouts/reviews/spec-review-r1.md`.
+- Rowing-machine basics architecture review:
+  `../../changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md`.
 
 ## Readiness
 
@@ -905,5 +978,8 @@ Markdown-first, Responsible Breadth, layout, media, forward-head-posture, and
 central-disclaimer amendments. The exercise-image-standard amendment has also
 completed architecture review. The prompt-record amendment has completed
 architecture review. The exercise-method guidance amendment has completed
-architecture review. Exercise-method implementation is not implementation-ready
-until planning, test-spec, and required downstream reviews are complete.
+architecture review. The rowing-machine basics and beginner workout guidance
+amendment has completed architecture review.
+
+Rowing-machine implementation is not implementation-ready until planning,
+test-spec, and required downstream reviews are complete.

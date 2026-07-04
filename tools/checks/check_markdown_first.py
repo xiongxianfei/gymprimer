@@ -145,12 +145,15 @@ EXERCISE_METHOD_DEFERRED_TYPES = {
     "loaded_carry",
     "basic_cardio_equipment",
 }
-EXERCISE_METHOD_REQUIRED_LABELS = (
-    "Beginner starting point:",
-    "Effort:",
-    "Rest:",
-    "Progression:",
-    "Stop if:",
+EXERCISE_METHOD_BASIC_CARDIO_PATHS = {
+    "exercises/rowing-machine.md",
+}
+EXERCISE_METHOD_REQUIRED_LABEL_GROUPS = (
+    ("Beginner starting point:",),
+    ("Effort:",),
+    ("Rest:", "Rest/reset:"),
+    ("Progression:",),
+    ("Stop if:", "Stop condition:"),
 )
 EXERCISE_METHOD_EXACT_HEADING_RE = re.compile(r"(?m)^## How much to do$")
 EXERCISE_METHOD_HEADING_PREFIX_RE = re.compile(r"(?m)^##\s+How much to do\b.*$")
@@ -1140,6 +1143,22 @@ def method_label_content(section: str, label: str) -> str | None:
     return None
 
 
+def method_label_group_content(section: str, labels: tuple[str, ...]) -> str | None:
+    for label in labels:
+        content = method_label_content(section, label)
+        if content is not None:
+            return content
+    return None
+
+
+def is_active_exercise_method_type(path: Path, method_type: str) -> bool:
+    if method_type in EXERCISE_METHOD_ACTIVE_TYPES:
+        return True
+    if method_type == "basic_cardio_equipment":
+        return repo_relative_path(path) in EXERCISE_METHOD_BASIC_CARDIO_PATHS
+    return False
+
+
 def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
     findings: list[Finding] = []
     method_section = exact_method_section_text(text)
@@ -1169,7 +1188,7 @@ def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
         findings.append(Finding(path, "exercise_method_missing_type", "method section is missing visible Method type line"))
     else:
         method_type = type_match.group(1)
-        if method_type not in EXERCISE_METHOD_ACTIVE_TYPES:
+        if not is_active_exercise_method_type(path, method_type):
             status = "deferred" if method_type in EXERCISE_METHOD_DEFERRED_TYPES else "unknown"
             findings.append(
                 Finding(
@@ -1179,10 +1198,12 @@ def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
                 )
             )
 
-    for label in EXERCISE_METHOD_REQUIRED_LABELS:
-        content = method_label_content(method_section, label)
+    for labels in EXERCISE_METHOD_REQUIRED_LABEL_GROUPS:
+        content = method_label_group_content(method_section, labels)
+        label = labels[0]
         if content is None:
-            findings.append(Finding(path, "exercise_method_missing_label", f"method section is missing label: {label}"))
+            label_names = " or ".join(labels)
+            findings.append(Finding(path, "exercise_method_missing_label", f"method section is missing label: {label_names}"))
         elif not content:
             findings.append(Finding(path, "exercise_method_empty_label", f"method section label has no content: {label}"))
 

@@ -1,0 +1,11 @@
+# Review Log: Rowing Machine Basics and Beginner Workout Guidance
+
+| Date | Stage | Review | Status | Findings | Notes |
+| --- | --- | --- | --- | --- | --- |
+| 2026-07-04 | proposal-review | [proposal-review-r1](reviews/proposal-review-r1.md) | approved | none | Clean R1 review for `docs/proposals/2026-07-04-rowing-machine-basics-and-beginner-workouts.md`; next lifecycle artifact is a focused spec amendment after proposal status normalization. |
+| 2026-07-04 | spec-review | [spec-review-r1](reviews/spec-review-r1.md) | approved | none | Clean R1 review for `specs/rowing-machine-basics-and-beginner-workouts.md`; immediate next stage is architecture assessment before planning or test-spec. |
+| 2026-07-04 | architecture-review | [architecture-review-r1](reviews/architecture-review-r1.md) | approved | none | Clean R1 review for the canonical architecture update; next lifecycle stage is plan after architecture status normalization. |
+| 2026-07-04 | plan-review | [plan-review-r1](reviews/plan-review-r1.md) | changes-requested | PR-RMB-1 | Plan prompt-record path conflicts with the approved exercise-image standard; next lifecycle stage is plan revision. |
+| 2026-07-04 | plan-review | [plan-review-r2](reviews/plan-review-r2.md) | approved | none | PR-RMB-1 resolved; next lifecycle stage is test-spec. |
+| 2026-07-04 | test-spec-review | [test-spec-review-r1](reviews/test-spec-review-r1.md) | changes-requested | TSR-RMB-1 | Manual proof cases need full required metadata before implementation handoff. |
+| 2026-07-04 | test-spec-review | [test-spec-review-r2](reviews/test-spec-review-r2.md) | approved | none | TSR-RMB-1 resolved; implementation handoff is allowed for M1. |
