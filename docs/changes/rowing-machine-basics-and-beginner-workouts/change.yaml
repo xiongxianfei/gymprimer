@@ -1,6 +1,6 @@
 change_id: rowing-machine-basics-and-beginner-workouts
 status: active
-current_stage: code-review
+current_stage: implement
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
@@ -20,18 +20,18 @@ current_plan_status: active
 current_plan_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/plan-review-r2.md
 plan_index: docs/plan.md
 
-current_milestone: M3
-current_milestone_name: Manual Proof, Comprehension, and Optional Media Decision
-current_milestone_state: review-requested
-last_reviewed_milestone: M2
+current_milestone: M4
+current_milestone_name: Integration, Promotion Gate, and Lifecycle Evidence
+current_milestone_state: planned
+last_reviewed_milestone: M3
 
 current_test_spec: specs/rowing-machine-basics-and-beginner-workouts.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md
-current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r2.md
+current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m3-r1.md
 verify_report: null
-next_stage: code-review
+next_stage: implement
 pull_request: null
 merge_commit: null
 
@@ -58,6 +58,7 @@ notes:
   - CR-RMB-M2-1 was addressed and M2 is ready for code-review rerun.
   - Code-review M2 R2 returned clean-with-notes and closed M2; M3 implementation is next.
   - M3 recorded manual proof and text-only media decision, fixed prompt-record scan handling, and is ready for code-review.
+  - Code-review M3 R1 returned clean-with-notes and closed M3; M4 implementation is next.
 
 validation:
   - command: python tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/architecture/system/architecture.md
@@ -276,3 +277,27 @@ validation:
   - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, and docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml
     result: pass
     evidence: lifecycle metadata all point to code-review for M3
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media
+    result: pass
+    evidence: reviewer rerun checked 20 Markdown file(s) during code-review M3 R1
+  - command: python3 tools/checks/check_privacy.py exercises media docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: reviewer rerun checked 63 file(s) during code-review M3 R1
+  - command: python3 -m unittest discover -s tests -p 'test_*image*.py'
+    result: pass
+    evidence: reviewer rerun passed 14 tests during code-review M3 R1
+  - command: python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'
+    result: pass
+    evidence: reviewer rerun passed 55 tests during code-review M3 R1
+  - command: git diff --check
+    result: pass
+    evidence: reviewer rerun passed during code-review M3 R1
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m3-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 5 file(s): privacy pass after code-review M3 R1 recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after code-review M3 R1 recording
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and review-log.md
+    result: pass
+    evidence: lifecycle metadata all point to implement M4 after M3 closeout

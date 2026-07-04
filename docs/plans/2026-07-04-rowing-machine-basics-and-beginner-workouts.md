@@ -100,22 +100,22 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: review-requested
-- Last reviewed milestone: M2
+- Current milestone: M4
+- Current milestone state: planned
+- Last reviewed milestone: M3
 - Review status: proposal-review R1 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 requested PR-RMB-1; PR-RMB-1
   revision approved by plan-review R2; test-spec-review R2 approved the proof
   map; code-review M2 R1 requested CR-RMB-M2-1; CR-RMB-M2-1 resolved pending
-  M2 code-review rerun; code-review M2 R2 closed M2
-- Remaining in-scope implementation milestones: M3, M4
-- Remaining lifecycle milestones: code-review, implementation, explain-change,
+  M2 code-review rerun; code-review M2 R2 closed M2; code-review M3 R1 closed M3
+- Remaining in-scope implementation milestones: M4
+- Remaining lifecycle milestones: implementation, code-review, explain-change,
   verify, PR handoff
-- Next stage: code-review M3
+- Next stage: implement M4
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1 and M2 are closed by code-review;
-  M3 is implemented pending code-review; M4, downstream review, durable rationale, and final
-  verification remain before closeout.
+  M3 is closed by code-review; M4, downstream review, durable rationale, and
+  final verification remain before closeout.
 
 ## Milestones
 
@@ -231,7 +231,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ### M3. Manual Proof, Comprehension, and Optional Media Decision
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: record bounded manual evidence and decide whether text-only guidance is
   sufficient or whether setup or stroke-sequence images are needed.
 - Requirements: R28-R36, AC5-AC7.
@@ -596,17 +596,27 @@ shows that setup or stroke-sequence comprehension needs visual support.
   `docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md`, and
   `docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml` before
   M3 handoff.
+- 2026-07-04: Code-review M3 R1 independently reran
+  `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media`,
+  `python3 tools/checks/check_privacy.py exercises media docs/changes/rowing-machine-basics-and-beginner-workouts`,
+  `python3 -m unittest discover -s tests -p 'test_*image*.py'`,
+  `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`,
+  and `git diff --check`; all passed.
+- 2026-07-04: `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m3-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md`,
+  `git diff --check`, and state-sync check passed after code-review M3 R1
+  recording.
 
 ## Outcome and retrospective
 
 - M1 implemented scoped cardio method validation and closed after clean
   code-review. M2 implemented the rowing page and source index, then closed
-  after CR-RMB-M2-1 review-resolution and clean code-review R2. M3 is
-  implemented and pending code-review. M4 is not started.
+  after CR-RMB-M2-1 review-resolution and clean code-review R2. M3 recorded
+  manual proof, comprehension evidence, and the text-only media decision, then
+  closed after clean code-review R1. M4 is not started.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M3.
+- Ready for implementation of M4.
 - Not ready for final verification, PR handoff, or Done until the remaining
   lifecycle gates complete.

@@ -12,3 +12,4 @@
 | 2026-07-04 | code-review | [code-review-m1-r1](reviews/code-review-m1-r1.md) | clean-with-notes | none | M1 scoped cardio method validation closed; next lifecycle stage is implementation M2. |
 | 2026-07-04 | code-review | [code-review-m2-r1](reviews/code-review-m2-r1.md) | changes-requested | CR-RMB-M2-1 | Safety stop-condition source support is incomplete; M2 enters review-resolution. |
 | 2026-07-04 | code-review | [code-review-m2-r2](reviews/code-review-m2-r2.md) | clean-with-notes | none | CR-RMB-M2-1 resolved; M2 rowing page and source index closed; next lifecycle stage is implementation M3. |
+| 2026-07-04 | code-review | [code-review-m3-r1](reviews/code-review-m3-r1.md) | clean-with-notes | none | M3 manual proof, comprehension evidence, text-only media decision, and prompt-record page-scan boundary closed; next lifecycle stage is implementation M4. |
