@@ -4,7 +4,7 @@ Author: GymPrimer maintainer
 Created: 2026-06-29
 Last reviewed: 2026-06-29
 Next review due: 2026-09-27
-Review scope: sources, red flags, scope boundary, comprehension
+Review scope: sources, safety routing, scope boundary, comprehension
 
 ## What this page is
 
@@ -14,9 +14,9 @@ This page explains non-specific chronic low back pain as a broad consumer-educat
 
 This page does not diagnose the reader, choose a care level, or provide an individualized care plan.
 
-## Red flags: when to stop reading and seek care
+## When this page is not enough
 
-Read [the red-flags reference](../RED-FLAGS.md) before using GymPrimer content for pain-related decisions.
+This page is for general education. If symptoms are severe, unusual, spreading, linked to injury or illness, or feel unsafe, use a qualified professional instead of this page. [Mayo Clinic][mayo-back-pain-when-to-see-doctor] The central [safety reference](../RED-FLAGS.md) gives more detail.
 
 ## Plain-language overview
 

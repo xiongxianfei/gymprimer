@@ -1,0 +1,383 @@
+change_id: exercise-image-standard-and-optimization
+status: completed
+current_stage: done
+created_date: 2026-07-01
+
+proposal: docs/proposals/2026-07-01-exercise-image-standard-and-optimization.md
+proposal_status: accepted
+proposal_review: docs/changes/exercise-image-standard-and-optimization/reviews/proposal-review-r1.md
+
+current_spec: specs/exercise-image-standard.md
+current_spec_status: approved
+current_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r4.md
+
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/exercise-image-standard-and-optimization/reviews/architecture-review-r2.md
+current_adr: docs/adr/2026-07-03-generated-raster-prompt-records.md
+current_adr_status: accepted
+
+current_plan: docs/plans/2026-07-03-exercise-image-standard.md
+current_plan_status: completed
+current_plan_review: docs/changes/exercise-image-standard-and-optimization/reviews/plan-review-r2.md
+plan_index: docs/plan.md
+
+current_milestone: Lifecycle Closeout
+current_milestone_name: Final Verification and PR Handoff
+current_milestone_state: closed
+last_reviewed_milestone: M4
+
+current_test_spec: specs/exercise-image-standard.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r5.md
+review_resolution: docs/changes/exercise-image-standard-and-optimization/review-resolution.md
+current_code_review: docs/changes/exercise-image-standard-and-optimization/reviews/code-review-m4-r1.md
+verify_report: docs/changes/exercise-image-standard-and-optimization/verify-report.md
+next_stage: none
+pull_request: https://github.com/xiongxianfei/gymprimer/pull/7
+merge_commit: 7c792508d35e3273e05e939d0cc5cf9099dba236
+
+open_findings: []
+
+notes:
+  - Proposal-review R1 approved the exercise-image standard direction.
+  - Spec-review R2 approved the spec after SR-EIS-1 resolution.
+  - Architecture-review R1 approved the canonical architecture amendment and ADR.
+  - Plan-review R1 approved the execution plan.
+  - Test-spec-review R2 approved implementation handoff after TSR-EIS-1 resolution made template-aware checker support an explicit M1/M2 obligation.
+  - M1 implemented the checker and focused tests for exercise-image purposes, generated-raster provenance, image-count limits, alt text, legacy compatibility, and template-aware validation; code-review is next.
+  - Code-review M1 R1 requested changes because required EIS-CMD4 privacy validation failed on pre-existing superseded-plan examples.
+  - Owner directed broad privacy validation to move to verify before PR. The test spec and plan now defer EIS-CMD4 to lifecycle closeout / verify, pending test-spec-review before M1 code-review re-review.
+  - Test-spec-review R3 requested changes because the plan still listed broad EIS-CMD4 as an implementation-start command.
+  - Test-spec revision aligned the plan's general validation section and the test spec's stale next-artifact/readiness wording with EIS-CMD4 lifecycle closeout / verify ownership; test-spec-review is next.
+  - Test-spec-review R4 approved the TSR-EIS-2 revision; M1 code-review re-review is next.
+  - Code-review M1 R2 resolved CR-EIS-M1-1 and closed M1; M2 implementation is next.
+  - M2 added optional exercise-image template guidance plus visual-safety and beginner-comprehension evidence templates; code-review M2 is next.
+  - Code-review M2 R1 closed M2 with no material findings; M3 implementation is next.
+  - M3 added one movement image for each forward-head support exercise, exact provenance rows, visual-safety evidence, and beginner-comprehension evidence; code-review M3 is next.
+  - Code-review M3 R1 requested changes for CR-EIS-M3-1 and CR-EIS-M3-2; review-resolution is next.
+  - M3 review-resolution addressed CR-EIS-M3-1 locally by replacing the wall-slide movement image, replacing the other movement images for clarity, adding one muscle-attention image per target page, updating provenance rows, and refreshing visual-safety evidence.
+  - CR-EIS-M3-2 remains open because the revised material image batch still needs non-identifying reader-prompt beginner-comprehension evidence before M3 can return to code-review.
+  - Prompt-preservation spec amendment set the exercise-image spec back to draft and added exact full prompt-record requirements; spec-review is next before architecture, test-spec, plan, or implementation updates.
+  - Spec-review R3 requested changes because the prompt-record amendment requires a provenance-to-prompt-record link but leaves the link field name or deterministic mapping undefined.
+  - SR-EIS-2 was addressed by defining `prompt_record` as the required provenance field for generated raster exercise image prompt-record links; spec-review re-review is next.
+  - Spec-review R4 approved the prompt-record amendment after SR-EIS-2 resolution; architecture or ADR assessment is next.
+  - Architecture amendment added prompt-record validation flow, `prompt_record` provenance linking, prompt-record packaging, and ADR 2026-07-03 generated raster prompt records; architecture-review R2 followed.
+  - Architecture-review R2 approved the prompt-record canonical architecture amendment and ADR; architecture status normalization is next before plan or test-spec amendments rely on it.
+  - Architecture status was normalized to approved. The plan now adds M3A for prompt-record checker support, test coverage, and M3 prompt-record backfill or replacement decisions; plan-review is next before test-spec amendment.
+  - Plan-review R2 approved the M3A prompt-record validation and M3 backfill plan amendment; test-spec amendment is next.
+  - Test spec was amended with M3A prompt-record requirement, example, edge-case, command, fixture, migration, observability, and readiness coverage; test-spec-review R5 followed.
+  - Test-spec-review R5 approved the M3A prompt-record proof map; implementation handoff is allowed for M3A.
+  - M3A implemented prompt-record checker support, focused tests, the `prompt_record` provenance column, and explicit compatibility-limitation evidence for in-flight M3 images whose exact prompts were not recoverable from durable repository evidence; code-review is next.
+  - Code-review M3A R1 requested changes for CR-EIS-M3A-1 because the compatibility limitation bypass is not scoped to the recorded pre-amendment M3 assets; review-resolution is next.
+  - Review-resolution addressed CR-EIS-M3A-1 by constraining the compatibility limitation to the recorded M3 assets and adding regression coverage; after CR-EIS-M3-2 replacements, that compatibility path now applies only to the five unreplaced assets.
+  - Code-review M3A R2 resolved CR-EIS-M3A-1 but requested changes for CR-EIS-M3A-2 because plan milestone states drifted for M3 and M3A; review-resolution is next.
+  - Review-resolution addressed CR-EIS-M3A-2 by restoring M3 to resolution-needed while CR-EIS-M3-2 remains open and returning M3A to review-requested for code-review re-review.
+  - Owner reader-prompt evidence and post-replacement clarity confirmation for CR-EIS-M3-2 are recorded. The unclear or inconsistent affected images were replaced with prompt-record-backed assets, and CR-EIS-M3-2 is addressed pending code-review re-review.
+  - Code-review M3A R3 resolved CR-EIS-M3A-2 and closed M3A. M3 code-review re-review is next.
+  - Code-review M3 R2 resolved CR-EIS-M3-1 and CR-EIS-M3-2 and closed M3. M4 implementation is next.
+  - M4 audited all current exercise pages, recorded keep-existing-image routing, and added regression coverage that every current exercise page appears in the audit; code-review M4 is next.
+  - Code-review M4 R1 closed M4 with no material findings. Explain-change is next before final verification.
+  - Explain-change was refreshed through M4 closeout. Final verification is next.
+  - Final verification passed locally. Broad privacy validation required one neutralization of literal scanner-pattern examples in the superseded content-schema plan before passing.
+  - PR #7 opened against `proposal/pattern-architecture` as a stacked PR for scoped exercise-image review.
+  - PR #7 merged on 2026-07-03; lifecycle cleanup marked the plan complete.
+
+validation:
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: fail-before-implementation
+    evidence: focused M1 tests failed with expected missing behavior before checker changes
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 7 focused M1 tests passed after implementation
+  - command: python3 -m unittest tests.test_markdown_first_guardrails tests.test_responsible_breadth_m1 tests.test_exercise_image_standard
+    result: pass
+    evidence: 51 checker and Responsible Breadth tests passed after implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md
+    result: pass
+    evidence: checked 10 Markdown files, including templates, after implementation
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 95 repository tests passed after implementation
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests
+    result: fail
+    evidence: broad planned command failed on pre-existing forbidden-pattern command examples in superseded docs/plans/2026-06-26-content-schema-foundation.md
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans/2026-07-03-exercise-image-standard.md media exercises tools tests
+    result: pass
+    evidence: scoped current-change privacy scan passed, checked 113 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after implementation
+  - command: python3 -m unittest tests.test_markdown_first_templates
+    result: fail-before-implementation
+    evidence: focused M2 template tests failed until the optional exercise-image guidance and evidence templates were added
+  - command: python3 -m unittest tests.test_markdown_first_templates
+    result: pass
+    evidence: 4 template tests passed after M2 implementation
+  - command: python3 -m unittest tests.test_markdown_first_templates tests.test_exercise_image_standard
+    result: pass
+    evidence: 11 template and exercise-image validation tests passed after M2 implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md
+    result: pass
+    evidence: checked 10 Markdown files, including templates, after M2 implementation
+  - command: python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization
+    result: pass
+    evidence: scoped M2 privacy scan passed, checked 23 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M2 implementation
+  - command: python3 -m unittest tests.test_markdown_first_templates tests.test_exercise_image_standard
+    result: pass
+    evidence: 11 template and exercise-image validation tests passed during M2 code-review
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md docs/templates media/PROVENANCE.md
+    result: pass
+    evidence: checked 10 Markdown files during M2 code-review
+  - command: python3 tools/checks/check_privacy.py -- docs/templates docs/changes/exercise-image-standard-and-optimization
+    result: pass
+    evidence: scoped M2 privacy scan passed, checked 23 files during M2 code-review
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed during M2 code-review
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: fail-before-implementation
+    evidence: focused M3 batch test failed until target pages, assets, provenance rows, and evidence files were added
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 8 focused exercise-image tests passed after M3 implementation
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 97 repository tests passed after M3 implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after M3 implementation
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md
+    result: pass
+    evidence: scoped M3 privacy scan passed, checked 39 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M3 implementation
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 8 focused exercise-image tests passed during M3 code-review
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 97 repository tests passed during M3 code-review
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files during M3 code-review
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md
+    result: pass
+    evidence: scoped M3 privacy scan passed, checked 39 files during M3 code-review
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed during M3 code-review
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 8 focused exercise-image tests passed after M3 review-resolution asset, page, provenance, and evidence updates
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 97 repository tests passed after M3 review-resolution updates
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after M3 review-resolution updates
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md
+    result: pass
+    evidence: scoped M3 review-resolution privacy scan passed, checked 40 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M3 review-resolution updates
+  - command: python3 tools/checks/check_markdown_first.py specs/exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: not-applicable
+    evidence: product-page Markdown checker rejects governance/spec terms and source-section expectations on this spec/plan subset; use privacy and diff checks for this spec amendment
+  - command: python3 tools/checks/check_privacy.py -- specs/exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: pass
+    evidence: scoped prompt-preservation spec amendment privacy scan passed, checked 4 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after prompt-preservation spec amendment
+  - command: python3 tools/checks/check_privacy.py -- specs/exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/review-resolution.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: pass
+    evidence: scoped SR-EIS-2 spec revision privacy scan passed, checked 5 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after SR-EIS-2 spec revision
+  - command: python3 tools/checks/check_privacy.py -- specs/exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/reviews/spec-review-r4.md docs/changes/exercise-image-standard-and-optimization/review-log.md docs/changes/exercise-image-standard-and-optimization/review-resolution.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: pass
+    evidence: scoped spec-review R4 privacy scan passed, checked 7 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after spec-review R4 recording
+  - command: python3 tools/checks/check_privacy.py -- docs/architecture/system/architecture.md docs/architecture/system/diagrams/container.mmd docs/adr/2026-07-03-generated-raster-prompt-records.md docs/adr/2026-06-28-ai-generated-raster-media-provenance.md docs/adr/2026-07-03-exercise-document-image-purposes.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: pass
+    evidence: scoped prompt-record architecture privacy scan passed, checked 8 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after prompt-record architecture amendment
+  - command: python3 tools/checks/check_privacy.py -- docs/architecture/system/architecture.md docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/change.yaml
+    result: pass
+    evidence: scoped prompt-record plan amendment privacy scan passed, checked 4 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after prompt-record plan amendment
+  - command: python3 tools/checks/check_privacy.py -- specs/exercise-image-standard.test.md docs/changes/exercise-image-standard-and-optimization/reviews/plan-review-r2.md docs/changes/exercise-image-standard-and-optimization/review-log.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: pass
+    evidence: scoped prompt-record test-spec amendment privacy scan passed, checked 6 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after prompt-record test-spec amendment
+  - command: python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/reviews/test-spec-review-r5.md specs/exercise-image-standard.test.md docs/changes/exercise-image-standard-and-optimization/review-log.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: pass
+    evidence: scoped prompt-record test-spec-review privacy scan passed, checked 6 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after prompt-record test-spec-review
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: fail-before-implementation
+    evidence: focused M3A tests failed with expected missing prompt-record validation and missing M3A backfill evidence before checker/provenance changes
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 11 focused exercise-image tests passed after M3A implementation
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 100 repository tests passed after M3A implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after M3A implementation
+  - command: python3 tools/checks/check_privacy.py -- docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/changes/exercise-image-standard-and-optimization/evidence/m3a-prompt-record-backfill.md media/PROVENANCE.md tests/test_exercise_image_standard.py tools/checks/check_markdown_first.py
+    result: pass
+    evidence: scoped M3A privacy scan passed, checked 7 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M3A implementation
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: fail-before-resolution
+    evidence: new CR-EIS-M3A-1 regression failed because a non-M3 image with the compatibility note and blank prompt_record passed before the scoped predicate fix
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 12 focused exercise-image tests passed after CR-EIS-M3A-1 resolution
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 101 repository tests passed after CR-EIS-M3A-1 resolution
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after CR-EIS-M3A-1 resolution
+  - command: python3 tools/checks/check_privacy.py -- tools/checks/check_markdown_first.py tests/test_exercise_image_standard.py docs/changes/exercise-image-standard-and-optimization/review-resolution.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md
+    result: pass
+    evidence: scoped CR-EIS-M3A-1 resolution privacy scan passed, checked 6 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after CR-EIS-M3A-1 resolution
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after CR-EIS-M3A-2 state resolution
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 12 focused exercise-image tests passed after CR-EIS-M3-2 reader-prompt evidence, replacement assets, prompt records, provenance rows, and compatibility-scope updates
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 101 repository tests passed after CR-EIS-M3-2 replacement updates
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after CR-EIS-M3-2 replacement updates
+  - command: python3 tools/checks/check_privacy.py -- docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization media/PROVENANCE.md media/prompts tools/checks/check_markdown_first.py tests/test_exercise_image_standard.py exercises
+    result: pass
+    evidence: scoped CR-EIS-M3-2 replacement privacy scan passed, checked 54 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after CR-EIS-M3-2 replacement updates
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 12 focused exercise-image tests passed after CR-EIS-M3-2 post-replacement owner clarity confirmation
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 101 repository tests passed after CR-EIS-M3-2 post-replacement owner clarity confirmation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files after CR-EIS-M3-2 post-replacement owner clarity confirmation
+  - command: python3 tools/checks/check_privacy.py -- docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization
+    result: pass
+    evidence: scoped CR-EIS-M3-2 clarity-confirmation privacy scan passed, checked 31 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after CR-EIS-M3-2 clarity-confirmation updates
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 12 focused exercise-image tests passed during M3A R3 code-review
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files during M3A R3 code-review
+  - command: python3 tools/checks/check_privacy.py -- docs/plan.md docs/plans/2026-07-03-exercise-image-standard.md docs/changes/exercise-image-standard-and-optimization media/PROVENANCE.md media/prompts tools/checks/check_markdown_first.py tests/test_exercise_image_standard.py exercises
+    result: pass
+    evidence: scoped M3A R3 privacy scan passed, checked 54 files
+  - command: git diff --check HEAD
+    result: pass
+    evidence: diff whitespace check passed during M3A R3 code-review
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 12 focused exercise-image tests passed during M3 R2 code-review
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 101 repository tests passed during M3 R2 code-review
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files during M3 R2 code-review
+  - command: python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/evidence exercises media/PROVENANCE.md media/prompts
+    result: pass
+    evidence: scoped M3 R2 privacy scan passed, checked 26 files
+  - command: git diff --check HEAD
+    result: pass
+    evidence: diff whitespace check passed during M3 R2 code-review
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 13 focused exercise-image tests passed after M4 audit implementation
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 102 repository tests passed after M4 audit implementation
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 19 Markdown files after M4 audit implementation
+  - command: python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization exercises media/PROVENANCE.md
+    result: pass
+    evidence: scoped M4 privacy scan passed, checked 48 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after M4 audit implementation
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 13 focused exercise-image tests passed during M4 code-review
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 19 Markdown files during M4 code-review
+  - command: python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md tests/test_exercise_image_standard.py docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plans/2026-07-03-exercise-image-standard.md docs/plan.md
+    result: pass
+    evidence: scoped M4 review privacy scan passed, checked 5 files
+  - command: git diff --check HEAD
+    result: pass
+    evidence: diff whitespace check passed during M4 code-review
+  - command: python3 tools/checks/check_privacy.py -- docs/changes/exercise-image-standard-and-optimization/explain-change.md docs/changes/exercise-image-standard-and-optimization/change.yaml docs/plans/2026-07-03-exercise-image-standard.md docs/plan.md
+    result: pass
+    evidence: scoped explain-change privacy scan passed, checked 4 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after explain-change refresh
+  - command: python3 -m unittest tests.test_exercise_image_standard
+    result: pass
+    evidence: 13 focused exercise-image tests passed during final verification
+  - command: python3 -m unittest discover tests
+    result: pass
+    evidence: 102 repository tests passed during final verification
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md patterns conditions principles programs exercises media/PROVENANCE.md
+    result: pass
+    evidence: checked 25 Markdown files during final verification
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests
+    result: fail-before-cleanup
+    evidence: broad privacy scan failed on literal scanner-pattern examples in superseded docs/plans/2026-06-26-content-schema-foundation.md
+  - command: python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/exercise-image-standard-and-optimization docs/plans media exercises tools tests
+    result: pass
+    evidence: broad privacy scan passed after neutralizing superseded-plan scanner-pattern examples, checked 157 files
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed during final verification

@@ -21,7 +21,7 @@ Do not add barbell lifts, Olympic lifting, kettlebell ballistic lifts, plyometri
 Responsible Breadth pages add static consumer education for accepted patterns,
 conditions, programming principles, and program examples. Pattern, condition,
 and program-example changes require higher-bar review: source traceability,
-red-flag routing, non-diagnostic language, no individualized treatment, no
+calm safety routing, non-diagnostic language, no individualized treatment, no
 personalized programming, and explicit scope-boundary fit. The higher bar means
 no personalized programming. Do not submit
 symptom checkers, diagnosis flows, treatment plans, rehab progressions,
@@ -31,7 +31,7 @@ injury-specific substitutions, or user-adaptive programs.
 
 Original v0.1 exercise pages use a prominent disclaimer stating that GymPrimer
 is educational content, not medical advice and not personalized coaching.
-Responsible Breadth pages use required scope notes, red-flag routing, and the
+Responsible Breadth pages use required scope notes, calm safety routing, and the
 project-level disclaimer instead of repeating a full disclaimer block on every
 page.
 

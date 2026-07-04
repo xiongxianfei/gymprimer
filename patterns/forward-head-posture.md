@@ -4,11 +4,11 @@ Author: xiongxianfei
 Created: 2026-06-30
 Last reviewed: 2026-06-30
 Next review due: 2026-09-28
-Review scope: sources, red flags, scope boundary, comprehension
+Review scope: sources, safety routing, scope boundary, comprehension
 
 ## What this page is
 
-This page explains forward head posture as an observable head, neck, upper-back, shoulder, and rib-cage pattern. It gives beginners a way to name what they notice, clear safety routing first, and connect the pattern to general exercise options that already have full exercise pages. [BMC Musculoskeletal Disorders 2024][local-forward-head-posture-upper-crossed-review]
+This page explains forward head posture as an observable head, neck, upper-back, shoulder, and rib-cage pattern. It gives beginners a way to name what they notice, check when the page is not enough, and connect the pattern to general exercise options that already have full exercise pages. [BMC Musculoskeletal Disorders 2024][local-forward-head-posture-upper-crossed-review]
 
 This page is written by an engineer who reads, not a clinician. Use the cited sources for context and use a qualified professional for individual assessment.
 
@@ -18,11 +18,11 @@ This page is written by an engineer who reads, not a clinician. Use the cited so
 
 This page does not diagnose the reader, prove that a posture is harmful, or provide individualized care. It does not promise to change posture, explain all pain, or turn five exercises into a personal plan.
 
-## Red flags: when to stop reading and seek care
+## When this page is not enough
 
-Stop using this page as a self-education guide and seek appropriate care if neck, shoulder, arm, or headache symptoms feel severe, unusual, rapidly worsening, linked to trauma, linked to fever or unexplained illness, linked to weakness, numbness, tingling, balance trouble, or otherwise unsafe. NICE CKS advises urgent referral or further investigation when non-specific neck pain has red flags suggesting serious pathology. [NICE CKS][local-forward-head-posture-nice-neck-red-flags]
+This page is for general exercise education. If neck, shoulder, arm, or headache symptoms feel severe, unusual, rapidly worsening, linked to trauma, linked to fever or unexplained illness, linked to weakness, numbness, tingling, balance trouble, or otherwise unsafe, use a qualified professional instead of this page. NICE CKS advises urgent referral or further investigation when non-specific neck pain has red flags suggesting serious pathology. [NICE CKS][local-forward-head-posture-nice-neck-red-flags]
 
-Read [the full red-flags reference](../RED-FLAGS.md) before using any GymPrimer page to think about pain or training decisions.
+Read the central [safety reference](../RED-FLAGS.md) for more detail before using any GymPrimer page to think about pain or training decisions.
 
 ## Why beginners come to this page
 
@@ -76,33 +76,38 @@ Read this as a menu of education options that a coach or clinician may select fr
 
 ### 0. Reduce posture anxiety
 
-Forward head posture is a visible pattern, not proof that the body is damaged. Start with red flags, then use the exercises below as general movement options.
+Forward head posture is a visible pattern, not proof that the body is damaged. Check whether this page fits, then use the exercises below as general movement options.
 
-### 1. Clear red flags first
+### 1. Check whether this page fits
 
-If any red flag above applies, stop here and read [the red-flags reference](../RED-FLAGS.md). Exercise content is not the right next step when safety flags are present. [NICE CKS][local-forward-head-posture-nice-neck-red-flags]
+If symptoms feel severe, unusual, rapidly worsening, neurologic, linked to trauma or illness, or otherwise unsafe, use the [safety reference](../RED-FLAGS.md) and a qualified professional before using the exercise menu. [NICE CKS][local-forward-head-posture-nice-neck-red-flags]
 
 ### 2. Practice head, upper-back, and shoulder-blade options
 
 - **[Chin nod](../exercises/chin-nod.md)**
   - *Fix reason:* trains small head-and-neck awareness so the reader has another option besides jutting the chin forward.
   - *Used muscles:* deep neck flexors and front-of-neck control muscles primary; light upper-back postural support secondary.
-  - *Important note:* keep the movement gentle and small; use the red-flags reference if symptoms feel unsafe. [NICE CKS][local-forward-head-posture-nice-neck-red-flags]
+  - *Starter range:* 1-3 sets of 6-10 slow reps; rest about 30 seconds.
+  - *Important note:* keep the movement gentle and small; use the safety reference if symptoms feel unsafe. [NICE CKS][local-forward-head-posture-nice-neck-red-flags]
 - **[Thoracic extension](../exercises/thoracic-extension.md)**
   - *Fix reason:* gives the upper back an extension option that can make shoulder and neck positions easier to explore.
   - *Used muscles:* thoracic spinal extensors and upper-back posture muscles; trunk muscles help keep the rib cage controlled.
+  - *Starter range:* 1-2 sets of 6-10 slow reps; rest 30-60 seconds.
   - *Important note:* move through the upper back without forcing the low back or dropping the head backward.
 - **[Wall slide](../exercises/wall-slide.md)**
   - *Fix reason:* practices shoulder flexion with shoulder-blade upward rotation instead of letting the head and ribs chase the movement.
   - *Used muscles:* serratus anterior and shoulder flexors primary; upper-back and rotator-cuff muscles assist position.
+  - *Starter range:* 2-3 sets of 6-10 reps; rest 45-60 seconds.
   - *Important note:* keep the range small enough that the shoulders do not shrug hard toward the ears.
 - **[Prone Y/T](../exercises/prone-y-t.md)**
   - *Fix reason:* trains lower-trapezius and mid-back control that can support the shoulder blades during pulling and overhead work.
   - *Used muscles:* lower trapezius and middle trapezius primary; rear deltoids, rotator cuff, and trunk support secondary.
+  - *Starter range:* 1-3 sets of 6-10 slow reps in each shape; rest 45-60 seconds.
   - *Important note:* lift only a few inches and keep the neck quiet instead of turning the drill into a low-back arch.
 - **[Band pull-apart](../exercises/band-pull-apart.md)**
   - *Fix reason:* gives beginners a simple horizontal-pulling option for upper-back strength and shoulder-blade control.
   - *Used muscles:* middle trapezius, rear deltoids, and rhomboids primary; rotator cuff and trunk muscles assist position.
+  - *Starter range:* 2-3 sets of 8-15 reps; rest 45-60 seconds.
   - *Important note:* use a light band and keep the shoulders away from the ears.
 
 ### 3. Broader collected exercise list

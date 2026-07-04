@@ -4,7 +4,7 @@ Author:
 Created:
 Last reviewed:
 Next review due:
-Review scope: sources, red flags, scope boundary, comprehension
+Review scope: sources, safety routing, scope boundary, comprehension
 
 ## What this page is
 
@@ -19,10 +19,10 @@ This page does not diagnose the reader, prove that a posture is harmful, or
 provide individualized care. It does not promise to correct the pattern or
 explain all pain.
 
-## Red flags: when to stop reading and seek care
+## When this page is not enough
 
-Inline the pattern-relevant red flags, cite them, and link to
-`../RED-FLAGS.md` before any self-management themes.
+Use calm plain language for the pattern-relevant safety limits, cite them, and
+link to `../RED-FLAGS.md` before any self-management themes.
 
 ## Why beginners come to this page
 
@@ -60,7 +60,7 @@ Describe general themes, not a corrective routine. Use the reader journey:
 Recommended internal order:
 
 1. Reduce anxiety / reframe.
-2. Clear red flags first.
+2. Check whether this page fits.
 3. Motor learning or pattern awareness.
 4. Strength category A.
 5. Strength category B, when relevant.
@@ -73,6 +73,7 @@ For each linked exercise, use this inline annotation:
 - **[Exercise name](../exercises/exercise-slug.md)**
   - *Fix reason:* one sentence on why this exercise maps to this pattern's mechanism.
   - *Used muscles:* primary muscles first; secondary muscles second.
+  - *Starter range:* general sets, reps, hold time, or rest for a beginner.
   - *Important note:* one key cue, common mistake, or safety caveat.
 ```
 

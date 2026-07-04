@@ -98,6 +98,7 @@ def forward_head_exercise_links() -> str:
                 - **[{labels[slug]}](../exercises/{slug}.md)**
                   - *Fix reason:* trains a contributor without promising correction.
                   - *Used muscles:* neck, upper-back, and shoulder support muscles.
+                  - *Starter range:* 1-3 sets of easy practice.
                   - *Important note:* keep this as an option, not a routine.
                 """
             )
@@ -112,13 +113,13 @@ def forward_head_pattern_page(extra_help: str = "", image_markdown: str = "") ->
         "Created: 2026-06-30\n"
         "Last reviewed: 2026-06-30\n"
         "Next review due: 2026-09-28\n"
-        "Review scope: sources, red flags, scope boundary, comprehension\n\n"
+        "Review scope: sources, safety routing, scope boundary, comprehension\n\n"
         "## What this page is\n\n"
         "Static consumer education about an observable pattern. [NHS][nhs-neck]\n\n"
         f"{image_markdown}\n"
         "## What this page is not\n\n"
         "This page does not diagnose you, prove a posture is harmful, provide individualized care, promise correction, or explain all pain. [Mayo Clinic][mayo-back]\n\n"
-        "## Red flags: when to stop reading and seek care\n\n"
+        "## When this page is not enough\n\n"
         "See [the red-flags reference](../RED-FLAGS.md) before exercise options. [Mayo Clinic][mayo-back]\n\n"
         "## Why beginners come to this page\n\n"
         "- head looks forward in side-view photos\n"
@@ -153,7 +154,7 @@ def forward_head_pattern_page(extra_help: str = "", image_markdown: str = "") ->
 
 
 def pattern_page(extra: str = "", red_flags_after_self_management: bool = False) -> str:
-    red_flags = f"## Red flags: when to stop reading and seek care\n\nSee [the red-flags reference](../{OLD_RED_FLAGS}) before trying self-management.\n\n"
+    red_flags = f"## When this page is not enough\n\nSee [the red-flags reference](../{OLD_RED_FLAGS}) before trying self-management.\n\n"
     self_management = "## Commonly recommended self-management themes\n\nMainstream sources commonly discuss gradual activity and exercise education. [NHS][nhs-neck]\n\n"
     middle = self_management + red_flags if red_flags_after_self_management else red_flags + self_management
     return (
@@ -162,7 +163,7 @@ def pattern_page(extra: str = "", red_flags_after_self_management: bool = False)
         "Created: 2026-06-29\n"
         "Last reviewed: 2026-06-29\n"
         "Next review due: 2026-09-27\n"
-        "Review scope: sources, red flags, scope boundary, comprehension\n\n"
+        "Review scope: sources, safety routing, scope boundary, comprehension\n\n"
         "## What this page is\n\n"
         "Static consumer education about an observable pattern. [NHS][nhs-neck]\n\n"
         "## What this page is not\n\n"
@@ -192,12 +193,12 @@ def apt_pattern_page(extra_help: str = "") -> str:
         "Created: 2026-06-29\n"
         "Last reviewed: 2026-06-29\n"
         "Next review due: 2026-09-27\n"
-        "Review scope: sources, red flags, scope boundary, comprehension\n\n"
+        "Review scope: sources, safety routing, scope boundary, comprehension\n\n"
         "## What this page is\n\n"
         "Static consumer education about an observable pattern. [NHS][nhs-neck]\n\n"
         "## What this page is not\n\n"
         "This page does not diagnose you or prescribe treatment. [Mayo Clinic][mayo-back]\n\n"
-        "## Red flags: when to stop reading and seek care\n\n"
+        "## When this page is not enough\n\n"
         f"See [the red-flags reference](../{OLD_RED_FLAGS}) before exercise options. [Mayo Clinic][mayo-back]\n\n"
         "## Why beginners come to this page\n\n"
         "- their low back arches in standing\n"
@@ -218,6 +219,7 @@ def apt_pattern_page(extra_help: str = "") -> str:
         "- **[Dead bug](../exercises/dead-bug.md)**\n"
         "  - *Fix reason:* trains anti-extension trunk control.\n"
         "  - *Used muscles:* rectus abdominis and obliques.\n"
+        "  - *Starter range:* 2-3 sets of 6-10 slow reps per side.\n"
         "  - *Important note:* shorten the reach if the low back lifts.\n"
         f"{extra_help}\n"
         "## What to avoid\n\n"
@@ -672,8 +674,8 @@ class ResponsibleBreadthM2Test(unittest.TestCase):
 
     def test_responsible_breadth_templates_exist_and_carry_contract(self) -> None:
         templates = {
-            "docs/templates/pattern-page.md": ("## Red flags", "## What is uncertain or mixed"),
-            "docs/templates/condition-page.md": ("## Red flags", "## When to see a professional"),
+            "docs/templates/pattern-page.md": ("## When this page is not enough", "## What is uncertain or mixed"),
+            "docs/templates/condition-page.md": ("## When this page is not enough", "## When to see a professional"),
             "docs/templates/programming-principle-page.md": ("## General ranges", "not your personal program"),
             "docs/templates/program-example-page.md": ("## Example week", "not your prescription"),
         }
@@ -722,7 +724,7 @@ class ResponsibleBreadthM2Test(unittest.TestCase):
             "Responsible Breadth",
             "higher-bar review",
             "source traceability",
-            "red-flag routing",
+            "calm safety routing",
             "non-diagnostic language",
             "no individualized treatment",
             "no personalized programming",

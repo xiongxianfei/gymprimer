@@ -4,7 +4,7 @@
 
 GymPrimer is an open-source Markdown primer for gym beginners. It teaches exercise, movement, and training literacy through short, citation-backed pages that explain what an exercise is for, how to set up equipment, what movement should feel like, what common problems may mean in general, how basic training structure works, and when to stop and seek help.
 
-The repository is the primary product. GymPrimer trades breadth, polish, and personalization for verifiable beginner understanding: Markdown-first pages, plain language, citation discipline, honest authorship, and red-flag routing. Optional mdBook HTML can improve navigation later, but Markdown remains the source of truth.
+The repository is the primary product. GymPrimer trades breadth, polish, and personalization for verifiable beginner understanding: Markdown-first pages, plain language, citation discipline, honest authorship, practical next steps, and calm safety routing. Optional mdBook HTML can improve navigation later, but Markdown remains the source of truth.
 
 It is for adults in their first ninety days of regular gym training, or returning after a long break, who feel lost around machines, simple dumbbell movements, bodyweight progressions, recurring aches, common posture patterns, or basic training structure. It is also for maintainers, authors, translators, illustrators, and reviewers who want to improve beginner exercise education in public.
 
@@ -49,7 +49,7 @@ Current active support files:
 - [CONTENT_LICENSE.md](./CONTENT_LICENSE.md): license split for code/tooling, written content, and original diagrams.
 - [docs/templates/exercise-card.md](./docs/templates/exercise-card.md): exercise-page template.
 - [docs/templates/principle-page.md](./docs/templates/principle-page.md): principle-page template.
-- [RED-FLAGS.md](./RED-FLAGS.md): red-flag routing reference for safety-relevant pages.
+- [RED-FLAGS.md](./RED-FLAGS.md): central safety reference for safety-relevant pages.
 - [docs/templates/pattern-page.md](./docs/templates/pattern-page.md): pattern-page template.
 - [docs/templates/condition-page.md](./docs/templates/condition-page.md): condition-page template.
 - [docs/templates/programming-principle-page.md](./docs/templates/programming-principle-page.md): programming-principle template.
@@ -80,7 +80,7 @@ These pages must not be described as published, approved, expert-reviewed, or pr
 - `CONTENT_LICENSE.md`: license posture for code/tooling, content, and media.
 - `docs/templates/`: source templates for exercise and principle pages.
 - `exercises/`, `patterns/`, `conditions/`, `principles/`, `programs/`: canonical Markdown content directories.
-- `RED-FLAGS.md`: root red-flag routing reference for safety-relevant pages.
+- `RED-FLAGS.md`: root safety reference for safety-relevant pages.
 - `media/`: optional original SVG diagrams and approved AI-generated raster
   illustrations with provenance; no third-party screenshots, stock photos, or
   borrowed public web images for v0.1.

@@ -27,7 +27,7 @@ The proof strategy uses existing Python `unittest` conventions, fixture-driven c
 
 - Unit: extend `tests/test_responsible_breadth_m1.py` and related fixtures to cover forward-head required sections, detailed exercise links, same-slice exercise page existence, one-image limits, image asset existence, provenance purpose, forbidden language, and deterministic no-in-image-text contract checks.
 - Integration: run `tools/checks/check_markdown_first.py` against real `patterns/`, `exercises/`, `media/PROVENANCE.md`, `SOURCES.md`, `RED-FLAGS.md`, and README surfaces after each owning milestone.
-- End-to-end: prove the six-page slice can be read as repository Markdown, with red-flag routing first, same-slice exercise links resolving, optional media resolving, and README still not promoting the single pattern page.
+- End-to-end: prove the six-page slice can be read as repository Markdown, with safety routing first, same-slice exercise links resolving, optional media resolving, and README still not promoting the single pattern page.
 - Smoke: assert the exact six expected Markdown paths exist by M3, the optional media contract is either absent or valid, and lifecycle validation evidence names exact local commands.
 - Manual: code review must inspect semantic source support for claim families, exercise instruction and safety claims, and generated image safety if the checker cannot prove those semantics.
 - Contract: map all R1-R32 and AC1-AC17 to checker tests, real-page checks, privacy checks, or review-only source-support inspection.

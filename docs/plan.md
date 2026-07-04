@@ -21,6 +21,12 @@
 
 ## Done (recent)
 
+- [Exercise Image Standard](plans/2026-07-03-exercise-image-standard.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #7
+  - Active context: M1-M4, explain-change, local final verification, and PR handoff are complete; hosted CI was not observed.
+
 - [Repository Layout Normalization](plans/2026-06-29-repository-layout-normalization.md)
   - Status: completed
   - Plan lifecycle state: completed
