@@ -1,6 +1,6 @@
 change_id: exercise-muscle-guidance-standard
-status: m1-review-requested
-current_stage: code-review
+status: m1-resolution-needed
+current_stage: review-resolution
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-muscle-guidance-standard.md
@@ -26,12 +26,13 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-muscle-guidance-standard/reviews/test-spec-review-r1.md
 
 current_milestone: M1
-current_milestone_state: review-requested
+current_milestone_state: resolution-needed
 last_reviewed_milestone: none
 
-next_stage: code-review
+next_stage: review-resolution
 
-open_findings: []
+open_findings:
+  - CR-XMG-M1-1
 
 notes:
   - Proposal-review R1 approved the exercise muscle guidance standard direction.
@@ -45,4 +46,5 @@ notes:
   - Test-spec-review R1 approved the proof map and allowed implementation handoff for M1.
   - M1 implemented exercise muscle guidance template prompts, focused checker validation, and unit coverage without forcing untouched legacy `## Used muscles` pages to migrate.
   - M1 validation passed locally and is ready for code-review.
+  - Code-review M1 R1 requested changes for missing XMG-T8 source-surface proof.
   - No final completion claim is authorized until implementation, code review, explain-change when useful, verification, and PR handoff gates are complete for the relevant scope.

@@ -70,19 +70,19 @@ The first proof slice should choose representative pages from the spec's allowed
 ## Current Handoff Summary
 
 - Current milestone: M1
-- Current milestone state: review-requested
-- Last reviewed milestone: none
-- Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved
+- Current milestone state: resolution-needed
+- Last reviewed milestone: M1
+- Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested
 - Remaining in-scope implementation milestones: M1, M2, M3
-- Next stage: code-review M1
+- Next stage: review-resolution M1
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 is implemented but not code-reviewed, and M2, M3, final verification, and PR handoff have not started.
+- Reason final closeout is or is not ready: M1 has an open code-review finding, and M2, M3, final verification, and PR handoff have not started.
 
 ## Milestones
 
 ### M1. Muscle Guidance Contract Validation and Template
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: make the exercise muscle guidance contract authorable and checkable before proof-slice content changes.
 - Requirements: R1-R3, R16-R20, R21-R31, R32-R37, R41-R42, AC1, AC4-AC5.
 - Files/components likely touched:
@@ -245,6 +245,7 @@ The first proof slice should choose representative pages from the spec's allowed
 - 2026-07-04: Plan-review R1 approved the plan and routed to test-spec.
 - 2026-07-04: Test-spec-review R1 approved `specs/exercise-muscle-guidance.test.md` and allowed implementation handoff for M1.
 - 2026-07-04: Implemented M1 template prompts, focused exercise muscle guidance checker coverage, and unit tests. M1 is ready for code-review.
+- 2026-07-04: Code-review M1 R1 requested changes for CR-XMG-M1-1, missing deterministic XMG-T8 source-surface proof.
 
 ## Decision log
 
@@ -267,6 +268,7 @@ The first proof slice should choose representative pages from the spec's allowed
 - 2026-07-04 M1: `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md docs/templates exercises` passed with `checked 24 Markdown file(s): pass`.
 - 2026-07-04 M1: `python3 tools/checks/check_privacy.py docs/templates specs tools tests docs/changes/exercise-muscle-guidance-standard` passed with `checked 93 file(s): privacy pass`.
 - 2026-07-04 M1: `git diff --check` passed.
+- 2026-07-04 M1 code-review: Direct reviewer probe showed adopted muscle guidance with a broad role claim and no citation/source marker returned no muscle-guidance findings. CR-XMG-M1-1 records the required resolution.
 
 ## Outcome and retrospective
 
@@ -275,4 +277,4 @@ The first proof slice should choose representative pages from the spec's allowed
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M1 code-review. Final closeout is not allowed until all implementation milestones, code review, and verification are complete.
+- Ready for M1 review-resolution. Final closeout is not allowed until all implementation milestones, code review, and verification are complete.

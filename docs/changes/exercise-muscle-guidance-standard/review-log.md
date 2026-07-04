@@ -7,3 +7,4 @@
 | 2026-07-04 | architecture-review | [architecture-review-r1](reviews/architecture-review-r1.md) | approved | none | Clean R1 review for the canonical architecture amendment; next lifecycle stage is plan. |
 | 2026-07-04 | plan-review | [plan-review-r1](reviews/plan-review-r1.md) | approved | none | Clean R1 review for `docs/plans/2026-07-04-exercise-muscle-guidance.md`; next lifecycle stage is test-spec. |
 | 2026-07-04 | test-spec-review | [test-spec-review-r1](reviews/test-spec-review-r1.md) | approved | none | Clean R1 review for `specs/exercise-muscle-guidance.test.md`; implementation handoff is allowed for M1. |
+| 2026-07-04 | code-review M1 | [code-review-m1-r1](reviews/code-review-m1-r1.md) | changes-requested | CR-XMG-M1-1 | M1 is missing required XMG-T8 source-surface proof; review-resolution is required before M1 can close. |

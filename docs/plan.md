@@ -5,8 +5,8 @@
 - [Exercise Muscle Guidance](plans/2026-07-04-exercise-muscle-guidance.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M1 implementation is review-requested after local validation; code-review is next before M2.
+  - Current stage: review-resolution
+  - Active context: code-review M1 R1 requested changes for missing XMG-T8 source-surface proof; resolve CR-XMG-M1-1 before M2.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
