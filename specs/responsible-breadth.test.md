@@ -153,7 +153,7 @@ reopen the original M1-M4 milestone scope.
 | R5 | RB-T2, RB-T11 | unit, integration | Pattern/condition required sections are fixture-tested and checked on real pages. |
 | R5a | RB-T2, RB-T11 | unit, integration | Condition pages are fixture-tested against the additional required condition sections. |
 | R6 | RB-T2, RB-T6, RB-T11 | unit, integration | Forbidden diagnosis/treatment/corrective-routine headings fail. |
-| R7 | RB-T3, RB-T11 | unit, integration | Red-flags link must appear before self-management discussion. |
+| R7 | RB-T3, RB-T11 | unit, integration | Safety-reference link must appear before self-management discussion. |
 | R8 | RB-T2, RB-T12, RB-T14 | unit, audit | Non-diagnostic/no-treatment statement is checked structurally and through bounded audit evidence. |
 | R9 | RB-T6, RB-T11, RB-T12 | unit, integration, audit | Condition page scope is checked against path and content boundaries. |
 | R10 | RB-T6, RB-T12 | unit, audit | Pattern page must not frame posture as diagnosis or guaranteed problem. |
@@ -191,15 +191,15 @@ reopen the original M1-M4 milestone scope.
 | R35e | RB-T15, RB-T22 | audit, unit | Condition anatomy images use `anatomical_region_illustration` only for plain region context. |
 | R35f | RB-T15, RB-T21, RB-T22 | audit, unit, integration | Exercise preview images support pattern/condition pages without replacing exercise instructions. |
 | R36 | RB-T7, RB-T12, RB-T13, RB-T17 | audit, integration | Higher-bar review evidence is required for expanded pages. |
-| R37 | RB-T7, RB-T12, RB-T13 | audit | Source traceability, red flags, non-diagnosis, no treatment, no personalization, and scope fit are evidence fields. |
+| R37 | RB-T7, RB-T12, RB-T13 | audit | Source traceability, safety routing, non-diagnosis, no treatment, no personalization, and scope fit are evidence fields. |
 | R38 | RB-T6, RB-T11 | unit, integration | Excluded populations/categories fail automated and real-page checks. |
 | R39 | RB-T6, RB-T12, RB-T13 | unit, audit | Diagnosis, treatment, rehab, posture promise, and injury protocol fail. |
 | R40 | RB-T6, RB-T16, RB-T19 | unit, smoke, migration | No symptom checker, runtime API, hosted app, CMS, or AI source-of-truth surfaces. |
 | R41 | RB-T16, RB-T17 | smoke, audit | Promotion requires completed lifecycle evidence. |
-| R42 | RB-T14 | audit | Comprehension evidence covers purpose, boundary, red flags/stop condition, and source verification. |
+| R42 | RB-T14 | audit | Comprehension evidence covers purpose, boundary, safety/stop condition, and source verification. |
 | R43 | RB-T14 | audit | Pattern/condition reader must understand no diagnosis. |
 | R44 | RB-T14 | audit | Program-example reader must understand no personal prescription. |
-| R45 | RB-T1 through RB-T6, RB-T11 | unit, integration | Validation tooling should fail missing sections, metadata, sources, red flags, media, and scope guardrails. |
+| R45 | RB-T1 through RB-T6, RB-T11 | unit, integration | Validation tooling should fail missing sections, metadata, sources, safety routing, media, and scope guardrails. |
 | R46 | RB-T12, RB-T13, RB-T14, RB-T15 | audit | Semantic source quality and scope-boundary evidence are required. |
 | R47 | RB-T8 | integration, audit | Red-flags reference distinguishes emergency, prompt, and professional care. |
 | R48 | RB-T8 | integration, audit | Red-flags reference must not diagnose or choose the reader's condition. |
@@ -224,7 +224,7 @@ reopen the original M1-M4 milestone scope.
 | Example | Covered by | Notes |
 | --- | --- | --- |
 | E1 | RB-T2, RB-T3, RB-T12, RB-T14 | Pattern page non-diagnostic framing and comprehension proof. |
-| E2 | RB-T3, RB-T8, RB-T12, RB-T14 | Condition page red-flag routing and urgent/individual boundary. |
+| E2 | RB-T3, RB-T8, RB-T12, RB-T14 | Condition page safety routing and urgent/individual boundary. |
 | E3 | RB-T6, RB-T13, RB-T14 | Static program example and non-prescription comprehension. |
 | E4 | RB-T5, RB-T12 | Three weak sources fail source-quality review. |
 | E5 | RB-T15, Markdown-first media regression tests | Necessary visuals pass without mandatory overlay. |
@@ -291,10 +291,11 @@ reopen the original M1-M4 milestone scope.
 
 - Covers: R7, R47, R48, E2, EC4
 - Level: unit
-- Fixture/setup: Fixtures with red-flags links before self-management, missing
-  red-flags links, and red-flags links after self-management.
+- Fixture/setup: Fixtures with safety-reference links before self-management,
+  missing safety-reference links, and safety-reference links after
+  self-management.
 - Steps: Run checker fixtures and inspect failure codes.
-- Expected result: Safety-relevant pages pass only when red-flag routing
+- Expected result: Safety-relevant pages pass only when safety routing
   precedes self-management discussion.
 - Failure proves: Readers can reach self-management language before safety
   routing.
@@ -415,7 +416,7 @@ reopen the original M1-M4 milestone scope.
   E9, EC1, EC2, EC5
 - Level: audit
 - Fixture/setup: Pattern and condition pages plus bounded source/scope evidence.
-- Steps: Review source quality, claim support, red-flag routing, uncertainty,
+- Steps: Review source quality, claim support, safety routing, uncertainty,
   non-diagnostic framing, no treatment plan, and professional routing.
 - Expected result: Pattern/condition pages are consumer education, not
   diagnosis, treatment, rehab, or corrective prescription.
@@ -541,7 +542,8 @@ reopen the original M1-M4 milestone scope.
   `What commonly helps`. Assert `Why beginners come to this page` has three to
   five bullets. Assert `The core reason` has three to five named contributors
   and each contributor has a citation. Assert every linked exercise preview in
-  `What commonly helps` has `Fix reason`, `Used muscles`, and `Important note`.
+  `What commonly helps` has `Fix reason`, `Used muscles`, `Starter range`, and
+  `Important note`.
   Resolve each exercise link and fail broken links unless the page is explicitly
   draft-only and marks the exercise unavailable.
 - Expected result: The pattern page maps user pain point to observable pattern,
@@ -694,7 +696,7 @@ personally identifying reader details in validation output.
 - Confirm no expanded page requires JavaScript, generated HTML, accounts, CMS,
   API, local server, or user input.
 - Confirm path classification is unambiguous.
-- Confirm pattern and condition pages link red flags before self-management.
+- Confirm pattern and condition pages link the central safety reference before self-management.
 - Confirm pattern and condition pages say what the page is not and avoid
   diagnosis or individualized treatment.
 - Confirm program example says it is not the reader's prescription.
@@ -726,7 +728,7 @@ personally identifying reader details in validation output.
   API, or deployment because Responsible Breadth does not introduce them.
 - Do not test broad content scaling beyond the five-page expanded proof slice.
 - Do not test formal clinician review-board mechanics because the accepted
-  trust model is citation discipline, red-flag routing, honest authorship, and
+  trust model is citation discipline, safety routing, honest authorship, and
   bounded audit evidence.
 - Do not require network link checks as unit proof; link-health can be optional
   or audit evidence.

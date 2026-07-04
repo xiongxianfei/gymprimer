@@ -4,7 +4,7 @@ Author: xiongxianfei
 Created: 2026-06-29
 Last reviewed: 2026-06-29
 Next review due: 2026-09-27
-Review scope: sources, red flags, scope boundary, comprehension
+Review scope: sources, safety routing, scope boundary, comprehension
 
 ## What this page is
 
@@ -18,19 +18,11 @@ This page is written by an engineer who reads, not a clinician. Check the cited 
 
 This page does not diagnose the reader, prove that a posture is harmful, or provide individualized care. It does not promise to correct a pelvis position or explain all low back pain.
 
-## Red flags: when to stop reading and seek care
+## When this page is not enough
 
-Stop using this page as a self-education guide and seek appropriate care if back or leg symptoms include any item below. [Mayo Clinic][mayo-back-pain-when-to-see-doctor] [MedlinePlus][medlineplus-low-back-pain-acute]
+This page is for general exercise education. If back or leg symptoms are severe, unusual, spreading, linked to injury or illness, or feel unsafe, use a qualified professional instead of this page. [Mayo Clinic][mayo-back-pain-when-to-see-doctor] [MedlinePlus][medlineplus-low-back-pain-acute]
 
-- follow a crash, fall, or sports injury
-- include new bowel or bladder control problems
-- include fever
-- spread below the knee
-- include weakness, numbness, or tingling in one or both legs
-- wake the reader at night
-- make balance or walking difficult
-
-Read [the full red-flags reference](../RED-FLAGS.md) before using any GymPrimer page to think about pain or training decisions.
+Read the central [safety reference](../RED-FLAGS.md) for more detail before using any GymPrimer page to think about pain or training decisions.
 
 ## Why beginners come to this page
 
@@ -87,9 +79,9 @@ Read this as a menu of education options that a coach or clinician may select fr
 
 Anterior pelvic tilt is common, often asymptomatic, and not automatically a problem. The evidence linking posture to pain is mixed. Approach the rest of this section as movement education, not as a flaw repair project.
 
-### 1. Clear red flags first
+### 1. Check whether this page fits
 
-If any of the red flags above apply, stop here and read [the red-flags reference](../RED-FLAGS.md). Exercise content is not the right next step when safety flags are present. [Mayo Clinic][mayo-back-pain-when-to-see-doctor] [MedlinePlus][medlineplus-low-back-pain-acute]
+If symptoms are severe, unusual, spreading, linked to injury or illness, or feel unsafe, use the [safety reference](../RED-FLAGS.md) and a qualified professional before using the exercise menu. [Mayo Clinic][mayo-back-pain-when-to-see-doctor] [MedlinePlus][medlineplus-low-back-pain-acute]
 
 ### 2. Learn pelvis control before loading it
 
@@ -108,14 +100,17 @@ These exercises train the rib-cage and pelvis relationship without forcing the l
 - **[Dead bug](../exercises/dead-bug.md)**
   - *Fix reason:* trains anti-extension control while the arms and legs move.
   - *Used muscles:* rectus abdominis, obliques, and transverse abdominis primary; hip flexors secondary in a controlled range.
+  - *Starter range:* 2-3 sets of 6-10 slow reps per side; rest 30-60 seconds.
   - *Important note:* shorten the arm or leg reach if the low back lifts away from the floor.
 - **[Plank](../exercises/plank.md)**
   - *Fix reason:* trains whole-body trunk stiffness without hanging on the low-back arch.
   - *Used muscles:* rectus abdominis, obliques, transverse abdominis, glutes, and shoulders.
+  - *Starter range:* 2-3 holds of 10-30 seconds; rest 45-60 seconds.
   - *Important note:* keep ribs down and glutes lightly engaged; sagging at the hips reinforces the same arching strategy.
 - **[Bird dog](../exercises/bird-dog.md)**
   - *Fix reason:* trains trunk stability while hip extension and shoulder flexion happen together.
   - *Used muscles:* gluteus maximus, lumbar extensors, deep trunk muscles, shoulders, and hamstrings.
+  - *Starter range:* 2-3 sets of 6-10 slow reps per side; rest 30-60 seconds.
   - *Important note:* move slowly and keep the pelvis level instead of letting one hip drop or hike.
 
 ### 4. Strengthen hip extensors
@@ -125,10 +120,12 @@ These exercises build glute and hamstring capacity so hip extension does not hav
 - **[Glute bridge](../exercises/glute-bridge.md)**
   - *Fix reason:* trains hip extension with low spinal load.
   - *Used muscles:* gluteus maximus primary; hamstrings and trunk muscles secondary.
+  - *Starter range:* 2-3 sets of 8-12 reps; rest about 60 seconds.
   - *Important note:* finish by squeezing the glutes, not by driving the ribs up and over-arching the low back.
 - **[Hip hinge](../exercises/hip-hinge.md)**
   - *Fix reason:* teaches bending from the hips while keeping the ribs and pelvis organized.
   - *Used muscles:* hamstrings and gluteus maximus primary; spinal erectors and trunk muscles secondary.
+  - *Starter range:* 2-3 sets of 6-10 slow practice reps; rest about 60 seconds.
   - *Important note:* stop the descent before the low back rounds or over-arches. [Mayo Clinic][mayo-weight-training]
 
 ### 5. Use hip-flexor mobility as an option, not proof
@@ -138,6 +135,7 @@ Stretching can be useful for some people, but a stretch helping does not prove t
 - **[Kneeling hip-flexor stretch](../exercises/kneeling-hip-flexor-stretch.md)**
   - *Fix reason:* gives the iliopsoas and rectus femoris a simple stretch option while practicing pelvis position.
   - *Used muscles:* stretches iliopsoas and rectus femoris on the rear leg; lightly uses glutes and trunk muscles for position.
+  - *Starter range:* 1-2 holds of 20-40 seconds per side; breathe normally between sides.
   - *Important note:* gently squeeze the rear glute and tuck the pelvis before moving forward; leaning back moves the stretch into the low back.
 
 ### 6. Train the body consistently, not specially

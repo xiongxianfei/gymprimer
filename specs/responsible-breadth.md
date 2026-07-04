@@ -94,7 +94,7 @@ prerequisite for recognizing the original v0.1 contract.
 | Original five-page v0.1 slice | `specs/markdown-first-primer.md` | Responsible Breadth does not change the closeout contract for the original slice. |
 | New beginner exercise pages within original narrow scope | `specs/markdown-first-primer.md`, plus stricter Responsible Breadth visual/source rules if adopted for that page | Markdown-first governs baseline page structure; Responsible Breadth may add stricter visual/citation obligations. |
 | Pattern education pages | `specs/responsible-breadth.md` | Responsible Breadth supersedes old v0.1 scope exclusions only to allow non-diagnostic pattern education. |
-| Condition education pages | `specs/responsible-breadth.md` | Responsible Breadth supersedes old v0.1 scope exclusions only to allow consumer education with red-flag routing. |
+| Condition education pages | `specs/responsible-breadth.md` | Responsible Breadth supersedes old v0.1 scope exclusions only to allow consumer education with safety routing. |
 | Programming-principle pages | `specs/responsible-breadth.md` | Responsible Breadth allows general programming literacy, not individualized prescription. |
 | Static program examples | `specs/responsible-breadth.md` | Responsible Breadth allows worked examples, not personalized plans. |
 | Markdown source-of-truth | `specs/markdown-first-primer.md` | Continues to apply. |
@@ -129,7 +129,7 @@ If this spec and `specs/markdown-first-primer.md` conflict:
    mdBook-derived-output behavior, and local validation mechanics,
    `specs/markdown-first-primer.md` continues to apply unless this spec gives a
    stricter rule.
-4. For safety, privacy, red-flag routing, source quality, and program-boundary
+4. For safety, privacy, safety routing, source quality, and program-boundary
    rules, the stricter rule controls.
 5. No conflict rule may permit diagnosis, personalized treatment, personalized
    programming, acute injury guidance, post-surgical guidance,
@@ -159,7 +159,7 @@ If this spec and `specs/markdown-first-primer.md` conflict:
 - `pattern_page`: A Responsible Breadth page class for non-diagnostic education
   about common movement or posture patterns.
 - `condition_page`: A Responsible Breadth page class for consumer education
-  about well-studied conditions with red-flag routing.
+  about well-studied conditions with safety routing.
 - `programming_principle_page`: A Responsible Breadth page class for general
   training-literacy content.
 - `program_example_page`: A Responsible Breadth page class for static worked
@@ -172,7 +172,7 @@ If this spec and `specs/markdown-first-primer.md` conflict:
 | Page class | Description | Allowed example |
 | --- | --- | --- |
 | `pattern_page` | Non-diagnostic education about common movement or posture patterns. | anterior pelvic tilt, forward head posture |
-| `condition_page` | Consumer education about well-studied conditions with red-flag routing. | non-specific chronic low back pain, plantar fasciitis |
+| `condition_page` | Consumer education about well-studied conditions with safety routing. | non-specific chronic low back pain, plantar fasciitis |
 | `programming_principle_page` | General training-literacy content. | sets and reps, training frequency, progression |
 | `program_example_page` | Static worked example showing how principles compose. | generic 3-day beginner full-body example |
 | `expanded_exercise_page` | Exercise page using Responsible Breadth visual or source standards. | goblet squat with necessary visuals |
@@ -190,7 +190,7 @@ The first expanded slice should classify pages by path:
 Example E1: a pattern page remains non-diagnostic
 Given `patterns/anterior-pelvic-tilt.md` exists
 When a reader opens the page
-Then the page explains the pattern in general terms, links to red flags, states
+Then the page explains the pattern in general terms, links to the central safety reference, states
 what the page does not do, avoids diagnosis language, and routes individual
 assessment to a qualified professional.
 
@@ -237,7 +237,7 @@ Example E8: a Responsible Breadth pattern page is allowed
 Given `patterns/anterior-pelvic-tilt.md` exists
 When it is reviewed for promotion
 Then it may be promoted only if it is non-diagnostic, cites required sources,
-links to red flags, avoids individualized treatment language, and passes shared
+links to the central safety reference, avoids individualized treatment language, and passes shared
 Markdown-first citation, media, and privacy validation.
 
 Example E9: a condition page that becomes treatment fails
@@ -274,7 +274,7 @@ approved migration spec changes them: `about/red-flags.md`,
 
 R5. Pattern pages MUST include page-local sections equivalent to:
 `What this page is`, `What this page is not`,
-`Red flags: when to stop reading and seek care`,
+`When this page is not enough`,
 `Why beginners come to this page`, `Working definition`,
 `How to notice this in yourself`, `The core reason`,
 `What is uncertain or mixed`, `What commonly helps`, `What to avoid`,
@@ -283,7 +283,7 @@ R5. Pattern pages MUST include page-local sections equivalent to:
 
 R5a. Condition pages MUST include page-local sections equivalent to:
 `What this page is`, `What this page is not`,
-`Red flags: when to stop reading and seek care`, `Plain-language overview`,
+`When this page is not enough`, `Plain-language overview`,
 `What mainstream sources generally agree on`, `What is uncertain or mixed`,
 `Commonly recommended self-management themes`, `What to avoid`,
 `When to see a professional`, `Sources`, and `Author and review date`.
@@ -292,8 +292,10 @@ R6. Pattern and condition pages MUST NOT include sections or framing equivalent
 to `Diagnosis`, `Treatment plan`, `Fix this in 30 days`, or `Corrective routine
 for you`.
 
-R7. Pattern and condition pages MUST link to the red-flags reference before any
-general self-management discussion.
+R7. Pattern and condition pages MUST link to the central safety reference before
+any general self-management discussion. The page-local safety section SHOULD use
+calm plain language such as `When this page is not enough` unless the page topic
+requires a more urgent heading.
 
 R8. Pattern and condition pages MUST state that the page does not diagnose the
 reader or provide individualized treatment.
@@ -423,7 +425,7 @@ page remains the source of truth for full setup and movement instructions.
 R36. Pattern, condition, and program-example PRs MUST receive higher-bar review
 than ordinary exercise-page wording edits.
 
-R37. Higher-bar review MUST verify source traceability, red-flag routing,
+R37. Higher-bar review MUST verify source traceability, safety routing,
 non-diagnostic language, no individualized treatment, no personalized
 programming, and scope-boundary fit.
 
@@ -511,11 +513,15 @@ contributors or mechanisms, and each named contributor MUST cite at least one
 source.
 
 R60. The `What commonly helps` section MUST be framed as an educational menu,
-not a routine, prescription, or guaranteed fix.
+not a routine, prescription, or guaranteed fix. Pattern pages SHOULD give
+beginner-usable starter ranges such as sets, reps, hold times, rest, frequency,
+or progression cues when those ranges are general education and not adapted to
+an individual reader.
 
 R61. Each linked exercise preview in a pattern page's `What commonly helps`
-section MUST include a fix reason for that pattern, used muscles, and one
-important note. Full exercise instructions remain in the exercise page.
+section MUST include a fix reason for that pattern, used muscles, a starter
+range, and one important note. Full exercise instructions remain in the
+exercise page.
 
 R62. Pattern-page exercise previews MUST link only to existing exercise pages,
 unless the preview explicitly marks the exercise page as not yet available and
@@ -565,7 +571,7 @@ Outputs:
 
 ## Error and boundary behavior
 
-- A page that lacks required red-flag routing fails promotion.
+- A page that lacks required safety routing fails promotion.
 - A page that uses diagnosis, treatment-plan, or personalized-prescription
   language fails promotion.
 - A page that meets source count but fails source quality fails promotion.
@@ -645,7 +651,7 @@ contract.
 
 EC3. A program page says "follow this program": fails prescription boundary.
 
-EC4. A page links red flags only at the bottom: fails safety-routing order.
+EC4. A page links the safety reference only at the bottom: fails safety-routing order.
 
 EC5. A page cites three sources but none are institutional, clinical,
 public-health, or professional guidance: fails source quality.

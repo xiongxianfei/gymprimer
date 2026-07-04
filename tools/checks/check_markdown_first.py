@@ -53,7 +53,7 @@ RESPONSIBLE_BREADTH_METADATA_FIELDS = (
 PATTERN_SECTIONS = (
     "## What this page is",
     "## What this page is not",
-    "## Red flags",
+    "## When this page is not enough",
     "## Why beginners come to this page",
     "## Working definition",
     "## How to notice this in yourself",
@@ -69,7 +69,7 @@ PATTERN_SECTIONS = (
 CONDITION_SECTIONS = (
     "## What this page is",
     "## What this page is not",
-    "## Red flags",
+    "## When this page is not enough",
     "## Plain-language overview",
     "## What mainstream sources generally agree on",
     "## What is uncertain or mixed",
@@ -935,17 +935,19 @@ def validate_responsible_breadth_page(
             findings.append(Finding(path, "RB003", "Responsible Breadth review due date is too far in the future"))
 
     if page_class in {"pattern_page", "condition_page"}:
-        red_flags_position = heading_position(text, "## Red flags")
+        safety_position = heading_position(text, "## When this page is not enough")
+        if safety_position == -1:
+            safety_position = heading_position(text, "## Red flags")
         self_management_heading = "## What commonly helps" if page_class == "pattern_page" else "## Commonly recommended self-management themes"
         self_management_position = heading_position(text, self_management_heading)
-        if red_flags_position == -1:
-            findings.append(Finding(path, "RB004", "red-flags section is missing"))
+        if safety_position == -1:
+            findings.append(Finding(path, "RB004", "safety-routing section is missing"))
         elif normalized_layout_active(ROOT) and "RED-FLAGS.md" not in text:
-            findings.append(Finding(path, "RB004", "red-flags section must link to RED-FLAGS.md"))
+            findings.append(Finding(path, "RB004", "safety-routing section must link to RED-FLAGS.md"))
         elif not normalized_layout_active(ROOT) and "../about/" + "red-flags.md" not in text and "about/" + "red-flags.md" not in text:
-            findings.append(Finding(path, "RB004", "red-flags section must link to the nested red-flags reference"))
-        elif self_management_position != -1 and red_flags_position > self_management_position:
-            findings.append(Finding(path, "RB004", "red-flags routing must appear before self-management discussion"))
+            findings.append(Finding(path, "RB004", "safety-routing section must link to the nested red-flags reference"))
+        elif self_management_position != -1 and safety_position > self_management_position:
+            findings.append(Finding(path, "RB004", "safety routing must appear before self-management discussion"))
 
     if page_class == "pattern_page":
         findings.extend(validate_pattern_architecture(path, text))
@@ -1016,7 +1018,7 @@ def validate_pattern_architecture(path: Path, text: str) -> list[Finding]:
         exercise_path = (path.parent / link_target).resolve()
         if not exercise_path.exists() and "not yet available" not in block.lower():
             findings.append(Finding(path, "RB007", f"pattern exercise preview links missing exercise page: {link_target}"))
-        for required in ("Fix reason", "Used muscles", "Important note"):
+        for required in ("Fix reason", "Used muscles", "Starter range", "Important note"):
             if f"*{required}:*" not in block:
                 findings.append(Finding(path, "RB007", f"pattern exercise preview is missing {required}: {link_target}"))
 

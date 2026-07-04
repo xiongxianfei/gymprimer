@@ -10,7 +10,7 @@ The repository is the primary product. A beginner can read a page directly on Gi
 
 Most fitness resources teach in fragments. Short videos show motion but often skip setup and safety context. Exercise databases list muscles but rarely teach the beginner standing in front of the machine. Workout apps prescribe sets and reps before the user understands the exercises. Health pages explain pain but often do not connect it to beginner training decisions. AI assistants can sound confident without being reliably grounded.
 
-GymPrimer trades breadth, polish, and personalization for verifiable beginner understanding. It stays Markdown-first, plain-language, citation-heavy, and honest about authorship. It can cover common patterns, well-studied conditions, and basic programming literacy, but only as static education with red-flag routing and clear limits.
+GymPrimer trades breadth, polish, and personalization for verifiable beginner understanding. It stays Markdown-first, plain-language, citation-heavy, practical, and honest about authorship. It can cover common patterns, well-studied conditions, and basic programming literacy, but only as static education with calm safety routing, recommended next steps, and clear limits.
 
 ## Who it is for
 
@@ -28,7 +28,7 @@ It is not a coach replacement, medical product, injury-diagnosis tool, posture-c
 
 GymPrimer commits to self-contained Markdown pages that are useful when opened directly from a repository URL. Exercise pages explain purpose, setup, muscles involved, movement breakdown, practical feel cues, common mistakes, easier and harder versions, safety notes, and sources.
 
-Pattern and condition pages explain common topics in general terms, link to red flags, distinguish mainstream agreement from uncertainty, and route readers to professionals for individual assessment. Programming pages teach principles and show generic examples without adapting to the reader.
+Pattern and condition pages explain common topics in general terms, link to a central safety reference, distinguish mainstream agreement from uncertainty, give practical general next steps when the evidence allows, and route readers to professionals for individual assessment. Programming pages teach principles and show generic examples without adapting to the reader.
 
 The project uses citation-based authority until named expert reviewers exist. Safety warnings need claim-level sources. Every page needs its own source list, and reused sources belong in a global source index.
 
@@ -46,6 +46,6 @@ It will not let mdBook, generated output, or future website work replace the Mar
 
 ## What would prove this wrong
 
-The project has failed if a beginner cannot read one page and explain what the exercise, pattern, condition, principle, or example is for; what it does and does not claim; what to try only in general terms; what red flags bypass the project; and where the sources are.
+The project has failed if a beginner cannot read one page and explain what the exercise, pattern, condition, principle, or example is for; what it does and does not claim; what to try only in general terms; when the page is not enough; and where the sources are.
 
 It has also failed if safety claims cannot be traced to public sources, if contributors cannot tell what is in scope, if pattern or condition pages read like diagnosis, if program examples read like prescriptions, if media rights are unclear, if Markdown pages are not useful without a renderer, or if the project spends more effort on platform machinery than on understandable beginner education.

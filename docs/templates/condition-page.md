@@ -4,7 +4,7 @@ Author:
 Created:
 Last reviewed:
 Next review due:
-Review scope: sources, red flags, scope boundary, comprehension
+Review scope: sources, safety routing, scope boundary, comprehension
 
 ## What this page is
 
@@ -14,9 +14,10 @@ Describe the condition as consumer education for general fit adults.
 
 This page does not diagnose the reader, choose a care level, or provide a treatment plan.
 
-## Red flags: when to stop reading and seek care
+## When this page is not enough
 
-Link to `../RED-FLAGS.md` before self-management themes.
+Use calm plain language for safety limits and link to `../RED-FLAGS.md` before
+self-management themes.
 
 ## Plain-language overview
 
