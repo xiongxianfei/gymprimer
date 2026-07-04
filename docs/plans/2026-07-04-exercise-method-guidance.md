@@ -93,24 +93,23 @@ The first proof slice is exactly:
 
 ## Current Handoff Summary
 
-- Current milestone: M1
-- Current milestone state: review-requested
-- Last reviewed milestone: none
+- Current milestone: M2
+- Current milestone state: planned
+- Last reviewed milestone: M1
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review R2
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
-- Remaining in-scope implementation milestones: M1, M2, M3, M4, Lifecycle Closeout
-- Next stage: code-review M1 re-review
+- Remaining in-scope implementation milestones: M2, M3, M4, Lifecycle Closeout
+- Next stage: implement M2
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 review-resolution fixes are
-  complete and awaiting code-review re-review; later milestones, explain-change,
-  verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M1 is closed; M2, M3, M4,
+  explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
 ### M1. Method Contract Validation and Template
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: make the exercise-method contract authorable and checkable before
   proof-slice content changes.
 - Requirements: R1-R6, R7-R13, R26-R27, R33-R38, R42, AC1, AC3, AC6, AC8-AC10.
@@ -419,6 +418,8 @@ The first proof slice is exactly:
   exact method-heading validation, non-empty required-label validation, focused
   regression tests, and rerun M1 validation. M1 is review-requested for
   code-review re-review.
+- 2026-07-04: Code-review M1 R2 confirmed CR-EMG-M1-1 and CR-EMG-M1-2 are
+  resolved. M1 is closed and M2 implementation is next.
 
 ## Decision log
 
@@ -472,5 +473,5 @@ The first proof slice is exactly:
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M1 code-review re-review. Final closeout is not ready until M1-M4,
+- Ready for M2 implementation. Final closeout is not ready until M2-M4,
   code-review loops, explain-change, verify, and PR handoff complete.
