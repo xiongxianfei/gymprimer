@@ -94,16 +94,16 @@ The first proof slice is exactly:
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M3
 - Review status: proposal-review R2 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 approved; test-spec-review R2
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
 - Remaining in-scope implementation milestones: M4, Lifecycle Closeout
-- Next stage: implement M4
+- Next stage: code-review M4
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1, M2, and M3 are closed; M4,
-  explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M1, M2, and M3 are closed and M4
+  is awaiting code-review; explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -263,7 +263,7 @@ The first proof slice is exactly:
 
 ### M4. Manual Evidence and Broad-Rollout Gate
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: record the semantic proof that automation cannot provide before any
   broad rollout is considered.
 - Requirements: R11-R13, R33-R40, AC6-AC10.
@@ -430,6 +430,13 @@ The first proof slice is exactly:
   added real-page method mapping tests. M3 is review-requested.
 - 2026-07-04: Code-review M3 R1 confirmed the six proof-slice exercise pages,
   found no material issues, and closed M3. M4 implementation is next.
+- 2026-07-04: M4 implementation started. Same-slice completeness set is
+  `method-source-audit.md`, `beginner-comprehension.md`, `validation-ledger.md`,
+  broad-rollout gate wording, M4 validation evidence, and workflow handoff
+  state.
+- 2026-07-04: M4 recorded the source audit, beginner-comprehension proof,
+  validation ledger, deferred-method guardrail, and broad-rollout gate evidence.
+  M4 is review-requested.
 
 ## Decision log
 
@@ -509,6 +516,15 @@ The first proof slice is exactly:
   - `patterns/anterior-pelvic-tilt.md` now aligns the kneeling hip-flexor stretch preview range with the exercise page.
   - `patterns/forward-head-posture.md` required no edit because chin nod and thoracic extension method guidance matches the existing preview range shapes.
   - `tests/test_exercise_method_guidance.py` now asserts proof-slice method mappings, method-section validity, principle links, and deterministic preview-range alignment.
+- M4 targeted validation:
+  - `python3 tools/checks/check_privacy.py docs/changes/exercise-method-guidance` passed, checked 18 files.
+  - `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md principles exercises patterns` passed, checked 22 Markdown files.
+  - `python3 -m unittest discover -s tests` passed, 114 tests.
+  - `git diff --check` passed.
+- M4 aligned-surface audit:
+  - `docs/changes/exercise-method-guidance/manual-proof/method-source-audit.md` records EMG-M1 source and non-prescription evidence for one proof page from each active method type.
+  - `docs/changes/exercise-method-guidance/manual-proof/beginner-comprehension.md` records EMG-M2 comprehension evidence for the proof-slice pages and promoted pattern previews.
+  - `docs/changes/exercise-method-guidance/manual-proof/validation-ledger.md` records EMG-M3 deferred-method guardrail evidence, M4 command results, residual risks, and the broad-rollout gate.
 
 ## Outcome and retrospective
 
@@ -517,5 +533,5 @@ The first proof slice is exactly:
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M4 implementation. Final closeout is not ready until M4,
+- Ready for M4 code-review. Final closeout is not ready until M4,
   code-review loops, explain-change, verify, and PR handoff complete.

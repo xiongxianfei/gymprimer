@@ -5,8 +5,8 @@
 - [Exercise Method Guidance](plans/2026-07-04-exercise-method-guidance.md)
   - Status: draft
   - Plan lifecycle state: active
-  - Current stage: implement
-  - Active context: M3 code-review R1 closed the six proof-slice exercise pages; M4 implementation is next for manual evidence and the broad-rollout gate.
+  - Current stage: code-review
+  - Active context: M4 implementation recorded manual source audit, beginner-comprehension proof, validation ledger, deferred-method guardrail, and broad-rollout gate evidence; M4 is review-requested for code-review.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
