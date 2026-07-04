@@ -65,6 +65,18 @@ Make the chin movement smaller and hold for less time.
 
 Use the same small nod while keeping the ribs and shoulders quiet for a longer pause. Increase control before adding volume or load. [ACSM][acsm-resistance-training]
 
+## How much to do
+
+Method type: low_load_control_drill
+
+For the terms in this section, see [Sets, Reps, Holds, Rest, and Progression](../principles/sets-reps-holds-rest-and-progression.md).
+
+Beginner starting point: Try 1-3 short practice sets of 6-10 slow reps; rest about 30 seconds. [Source][local-chin-nod-instruction]
+Effort: Keep the effort low and the motion small enough that the jaw and shoulders stay relaxed. [Source][local-chin-nod-instruction]
+Rest: Rest as needed until the next set can stay slow and quiet. [Source][local-chin-nod-instruction]
+Progression: Progress by making the nod smoother and more consistent, not by pressing harder or chasing fatigue. [ACSM][acsm-resistance-training]
+Stop if: Stop the set when the motion turns into a head tip, jaw tension, shoulder shrugging, or a sharp or unsafe feeling. [NHS][nhs-neck-pain]
+
 ## Safety notes
 
 Stop the set if the movement feels sharp, worsening, unusual, or unsafe. Use the red-flags reference for symptoms that call for professional care instead of continuing from a general exercise page. [NHS][nhs-neck-pain]

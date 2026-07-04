@@ -5,8 +5,8 @@
 - [Exercise Method Guidance](plans/2026-07-04-exercise-method-guidance.md)
   - Status: draft
   - Plan lifecycle state: active
-  - Current stage: implement
-  - Active context: M2 code-review R1 closed the principle page slice; M3 implementation is next for the six proof-slice exercise pages.
+  - Current stage: code-review
+  - Active context: M3 implementation added source-cited method sections to the six proof-slice exercise pages and aligned the hip-flexor pattern preview; M3 is review-requested for code-review.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

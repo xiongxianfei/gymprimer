@@ -6,6 +6,14 @@ from tools.checks.check_markdown_first import validate_exercise_method_guidance
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PROOF_SLICE_METHOD_TYPES = {
+    "exercises/chest-press.md": "dynamic_resistance",
+    "exercises/incline-push-up.md": "bodyweight_progression",
+    "exercises/chin-nod.md": "low_load_control_drill",
+    "exercises/plank.md": "isometric_hold",
+    "exercises/thoracic-extension.md": "mobility_drill",
+    "exercises/kneeling-hip-flexor-stretch.md": "stretch_hold",
+}
 
 
 def method_page(method_section: str) -> str:
@@ -198,6 +206,36 @@ class ExerciseMethodGuidanceTest(unittest.TestCase):
             self.assertIn("specs/exercise-method-guidance.md", text)
             self.assertIn("Method type:", text)
             self.assertNotIn("dynamic_resistance`, `bodyweight_progression`, `low_load_control_drill`", text)
+
+    def test_six_proof_slice_pages_have_method_sections_and_mappings(self) -> None:
+        for relative_path, method_type in PROOF_SLICE_METHOD_TYPES.items():
+            with self.subTest(path=relative_path):
+                path = ROOT / relative_path
+                text = path.read_text(encoding="utf-8")
+
+                self.assertIn("## How much to do", text)
+                self.assertIn(f"Method type: {method_type}", text)
+                self.assertIn("../principles/sets-reps-holds-rest-and-progression.md", text)
+                self.assertEqual(
+                    [finding.code for finding in validate_exercise_method_guidance(path, text)],
+                    [],
+                )
+
+    def test_pattern_previews_align_with_method_guidance_ranges(self) -> None:
+        forward_head = (ROOT / "patterns/forward-head-posture.md").read_text(encoding="utf-8")
+        anterior_pelvic_tilt = (ROOT / "patterns/anterior-pelvic-tilt.md").read_text(encoding="utf-8")
+
+        for expected in (
+            "*Starter range:* 1-3 sets of 6-10 slow reps; rest about 30 seconds.",
+            "*Starter range:* 1-2 sets of 6-10 slow reps; rest 30-60 seconds.",
+        ):
+            self.assertIn(expected, forward_head)
+
+        for expected in (
+            "*Starter range:* 2-3 holds of 10-30 seconds; rest 45-60 seconds.",
+            "*Starter range:* 1-2 holds of about 20-30 seconds per side; breathe normally between sides.",
+        ):
+            self.assertIn(expected, anterior_pelvic_tilt)
 
 
 if __name__ == "__main__":

@@ -65,6 +65,18 @@ Use a smaller range and a shorter pause.
 
 Pause briefly before returning. Keep this as a mobility option, not a required routine. [ACSM][acsm-resistance-training]
 
+## How much to do
+
+Method type: mobility_drill
+
+For the terms in this section, see [Sets, Reps, Holds, Rest, and Progression](../principles/sets-reps-holds-rest-and-progression.md).
+
+Beginner starting point: Try 1-2 sets of 6-10 slow reps; rest 30-60 seconds. [Source][local-thoracic-extension-instruction]
+Effort: Use an easy range that feels controlled through the upper back. [Source][local-thoracic-extension-instruction]
+Rest: Rest long enough that the next rep stays gentle and unforced. [Source][local-thoracic-extension-instruction]
+Progression: Progress by smoother control or a brief comfortable pause, not by forcing the end range. [ACSM][acsm-resistance-training]
+Stop if: Stop the set when the neck is forced backward, the chair feels unstable, or the position feels sharp, worsening, unusual, or unsafe. [NHS][nhs-neck-pain]
+
 ## Safety notes
 
 Stop if the position feels sharp, worsening, unusual, or unsafe. A static exercise page cannot decide whether symptoms are safe to train through; use the red-flags reference and professional care when needed. [NHS][nhs-neck-pain]

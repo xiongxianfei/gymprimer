@@ -79,6 +79,18 @@ Use less load and shorten the range slightly while you learn the setup.
 
 Keep the same setup and slow the return before increasing the load.
 
+## How much to do
+
+Method type: dynamic_resistance
+
+For the terms in this section, see [Sets, Reps, Holds, Rest, and Progression](../principles/sets-reps-holds-rest-and-progression.md).
+
+Beginner starting point: Try 1-3 easy sets of 8-15 controlled repetitions with a load you can move smoothly. [Mayo Clinic][mayo-weight-training]
+Effort: Stop each set with several controlled repetitions still available. [Mayo Clinic][mayo-weight-training]
+Rest: Rest about 60-120 seconds between sets. [ACSM][acsm-resistance-training]
+Progression: Add repetitions first; when the top of the range is repeatable, make a small load increase. [ACSM][acsm-resistance-training]
+Stop if: Stop the set when the handles wobble, the shoulders shrug, or the return is no longer controlled. [Mayo Clinic][mayo-weight-training]
+
 ## Safety notes
 
 Stop if sharp or unsafe. [Mayo Clinic][mayo-weight-training]
@@ -88,7 +100,9 @@ Stop if sharp or unsafe. [Mayo Clinic][mayo-weight-training]
 - [Mayo Clinic weight training technique guidance][mayo-weight-training]
 - [Mayo Clinic weight training setup reference][local-chest-press-setup]
 - [Mayo Clinic weight training safety reference][local-chest-press-safety]
+- [ACSM resistance training guidance][acsm-resistance-training]
 
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [local-chest-press-setup]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [local-chest-press-safety]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
+[acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/

@@ -27,6 +27,18 @@ Use a mat or pad under the rear knee. Set up in a half-kneeling position with on
 3. Shift the body forward until the front of the rear hip feels a mild stretch.
 4. Breathe and hold without leaning backward.
 
+## How much to do
+
+Method type: stretch_hold
+
+For the terms in this section, see [Sets, Reps, Holds, Rest, and Progression](../principles/sets-reps-holds-rest-and-progression.md).
+
+Beginner starting point: Try 1-2 holds of about 20-30 seconds per side. Keep the stretch mild. [Mayo Clinic][mayo-stretching]
+Effort: Use relaxed effort and breathe normally; do not bounce. [Mayo Clinic][mayo-stretching]
+Rest: Breathe normally between sides or rounds. [Mayo Clinic][mayo-stretching]
+Progression: Progress by finding the position more consistently before adding time. [Mayo Clinic][mayo-stretching]
+Stop if: Stop or back off if the stretch becomes painful, sharp, worsening, or moves into the low back. [Mayo Clinic][mayo-stretching]
+
 ## Important notes
 
 Do not chase a stronger stretch by arching the low back. The stretch should stay near the front of the rear hip. General mobility guidance applies: use a mild, controllable position and stop for sharp, worsening, unusual, or unsafe symptoms. [Mayo Clinic][mayo-weight-training]
@@ -42,10 +54,12 @@ The image above shows the setup, the controlled stretch position, and a common m
 ## Sources
 
 - [Mayo Clinic - Weight training technique guidance][mayo-weight-training]
+- [Mayo Clinic - Stretching basics][mayo-stretching]
 - [NASM - Anterior pelvic tilt overview][local-kneeling-hip-flexor-stretch-nasm-apt]
 - [Physiopedia - Anterior pelvic tilt][local-kneeling-hip-flexor-stretch-physiopedia-apt]
 
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
+[mayo-stretching]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/stretching/art-20546848
 [local-kneeling-hip-flexor-stretch-nasm-apt]: https://blog.nasm.org/what-is-anterior-pelvic-tilt-and-how-do-you-fix-it
 [local-kneeling-hip-flexor-stretch-physiopedia-apt]: https://www.physio-pedia.com/Anterior_Pelvic_Tilt
 
