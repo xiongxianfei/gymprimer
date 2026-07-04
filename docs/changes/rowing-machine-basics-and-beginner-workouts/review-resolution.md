@@ -2,7 +2,7 @@
 
 ## Status
 
-pending code-review
+closed
 
 ## Open findings
 
@@ -10,7 +10,7 @@ pending code-review
 | --- | --- | --- | --- |
 | PR-RMB-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/plan-review-r1.md` | resolved by `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/plan-review-r2.md` | Plan references were revised from the incorrect prompt-record directory to the approved `media/prompts/exercises/rowing-machine/<asset-stem>.md` path shape, and plan-review R2 approved the resolution. |
 | TSR-RMB-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r1.md` | resolved by `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r2.md` | `RMB-M1` through `RMB-M5` now include explicit automation rationale, required environment, evidence artifact, pass condition, failure condition, owning stage, and re-run trigger; test-spec-review R2 approved the resolution. |
-| CR-RMB-M2-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r1.md` | resolved pending M2 code-review | Safety notes were split into source-supported groups in `exercises/rowing-machine.md`; real-page tests now require the page-local safety source IDs, and M2 validation passed. |
+| CR-RMB-M2-1 | `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r1.md` | resolved by `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r2.md` | Safety notes were split into source-supported groups in `exercises/rowing-machine.md`; real-page tests now require the page-local safety source IDs, and M2 code-review R2 approved the resolution. |
 
 ## Resolution notes
 
@@ -37,3 +37,5 @@ pending code-review
   cardiopulmonary, pain/worsening/numbness, and painful/uncontrolled technique
   groups with nearby page-local citations. Added test coverage for the safety
   source IDs and reran M2 validation. M2 is ready for code-review rerun.
+- 2026-07-04: Code-review M2 R2 approved the CR-RMB-M2-1 resolution and closed
+  the code-review finding.

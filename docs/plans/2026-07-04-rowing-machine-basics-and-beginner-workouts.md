@@ -100,21 +100,21 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ## Current Handoff Summary
 
-- Current milestone: M2
-- Current milestone state: review-requested
-- Last reviewed milestone: M1
+- Current milestone: M3
+- Current milestone state: planned
+- Last reviewed milestone: M2
 - Review status: proposal-review R1 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 requested PR-RMB-1; PR-RMB-1
   revision approved by plan-review R2; test-spec-review R2 approved the proof
   map; code-review M2 R1 requested CR-RMB-M2-1; CR-RMB-M2-1 resolved pending
-  M2 code-review rerun
-- Remaining in-scope implementation milestones: M2, M3, M4
-- Remaining lifecycle milestones: code-review, implementation, explain-change,
+  M2 code-review rerun; code-review M2 R2 closed M2
+- Remaining in-scope implementation milestones: M3, M4
+- Remaining lifecycle milestones: implementation, code-review, explain-change,
   verify, PR handoff
-- Next stage: code-review M2
+- Next stage: implement M3
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 is closed by code-review and M2
-  is implemented with CR-RMB-M2-1 resolved pending re-review; M3-M4, downstream review, durable rationale, and final
+- Reason final closeout is or is not ready: M1 and M2 are closed by code-review;
+  M3-M4, downstream review, durable rationale, and final
   verification remain before closeout.
 
 ## Milestones
@@ -177,7 +177,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ### M2. Rowing Page and Source Index
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: draft the text-first rowing-machine page with page-local citations,
   global source-index support where required, and no optional media yet.
 - Requirements: R1-R14, R18-R30, R37-R38, AC3-AC9.
@@ -422,6 +422,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
   page-local source support on the safety stop-condition sentence.
 - 2026-07-04: Review-resolution split `## Safety notes` into source-supported
   groups and moved M2 back to review-requested for code-review.
+- 2026-07-04: Code-review M2 R2 returned clean-with-notes and closed M2.
 
 ## Decision log
 
@@ -551,16 +552,25 @@ shows that setup or stroke-sequence comprehension needs visual support.
   passed after CR-RMB-M2-1 resolution.
 - 2026-07-04: `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts`,
   `git diff --check`, and state-sync check passed after CR-RMB-M2-1 resolution.
+- 2026-07-04: Code-review M2 R2 independently reran
+  `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages`,
+  `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns`,
+  `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts`,
+  and `git diff --check`; all passed.
+- 2026-07-04: `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r2.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md`,
+  `git diff --check`, and state-sync check passed after code-review M2 R2
+  recording.
 
 ## Outcome and retrospective
 
 - M1 implemented scoped cardio method validation and closed after clean
-  code-review. M2 is implemented with CR-RMB-M2-1 resolved pending code-review
-  rerun. M3-M4 are not started.
+  code-review. M2 implemented the rowing page and source index, then closed
+  after CR-RMB-M2-1 review-resolution and clean code-review R2. M3-M4 are not
+  started.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M2.
+- Ready for implementation M3.
 - Not ready for final verification, PR handoff, or Done until the remaining
   lifecycle gates complete.

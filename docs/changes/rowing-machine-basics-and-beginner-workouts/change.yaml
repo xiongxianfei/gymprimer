@@ -1,6 +1,6 @@
 change_id: rowing-machine-basics-and-beginner-workouts
 status: active
-current_stage: code-review
+current_stage: implement
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
@@ -20,18 +20,18 @@ current_plan_status: active
 current_plan_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/plan-review-r2.md
 plan_index: docs/plan.md
 
-current_milestone: M2
-current_milestone_name: Rowing Page and Source Index
-current_milestone_state: review-requested
-last_reviewed_milestone: M1
+current_milestone: M3
+current_milestone_name: Manual Proof, Comprehension, and Optional Media Decision
+current_milestone_state: planned
+last_reviewed_milestone: M2
 
 current_test_spec: specs/rowing-machine-basics-and-beginner-workouts.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md
-current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r1.md
+current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r2.md
 verify_report: null
-next_stage: code-review
+next_stage: implement
 pull_request: null
 merge_commit: null
 
@@ -56,6 +56,7 @@ notes:
   - M2 added the rowing-machine page, source-index entries, real-page tests, and is ready for code-review.
   - Code-review M2 R1 requested CR-RMB-M2-1; M2 is paused for review-resolution.
   - CR-RMB-M2-1 was addressed and M2 is ready for code-review rerun.
+  - Code-review M2 R2 returned clean-with-notes and closed M2; M3 implementation is next.
 
 validation:
   - command: python tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/architecture/system/architecture.md
@@ -229,3 +230,24 @@ validation:
   - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and review-resolution.md
     result: pass
     evidence: lifecycle metadata all point to code-review rerun for M2
+  - command: python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages
+    result: pass
+    evidence: reviewer rerun passed with 19 tests during code-review M2 R2
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises principles patterns
+    result: pass
+    evidence: checked 23 Markdown file(s): pass during code-review M2 R2
+  - command: python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises docs/changes/rowing-machine-basics-and-beginner-workouts
+    result: pass
+    evidence: checked 31 file(s): privacy pass during code-review M2 R2
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed during code-review M2 R2
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m2-r2.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md
+    result: pass
+    evidence: checked 6 file(s): privacy pass after code-review M2 R2 recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after code-review M2 R2 recording
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and review-resolution.md
+    result: pass
+    evidence: lifecycle metadata all point to implement M3 after M2 closeout

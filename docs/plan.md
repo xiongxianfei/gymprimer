@@ -5,8 +5,8 @@
 - [Rowing Machine Basics and Beginner Workout Guidance](plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M2 CR-RMB-M2-1 resolution is ready for code-review rerun.
+  - Current stage: implement
+  - Active context: M2 closed after code-review R2; implement M3 next.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
