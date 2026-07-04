@@ -1,6 +1,6 @@
 change_id: exercise-method-guidance
 status: active
-current_stage: explain-change
+current_stage: verify
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-method-guidance.md
@@ -29,7 +29,7 @@ current_test_spec: specs/exercise-method-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-method-guidance/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/exercise-method-guidance/review-resolution.md
-next_stage: explain-change
+next_stage: verify
 
 open_findings: []
 
@@ -55,6 +55,7 @@ notes:
   - M4 recorded manual source audit, beginner-comprehension proof, validation ledger, deferred-method guardrail, and broad-rollout gate evidence.
   - M4 targeted validation passed and the milestone is review-requested for code-review.
   - Code-review M4 R1 confirmed the manual proof records and closed all implementation milestones; Lifecycle Closeout is next.
+  - Explain-change recorded durable rationale for the proposal-to-diff trail; final verification is next.
 
 validation:
   - command: python3 -m unittest tests.test_exercise_method_guidance

@@ -5,8 +5,8 @@
 - [Exercise Method Guidance](plans/2026-07-04-exercise-method-guidance.md)
   - Status: draft
   - Plan lifecycle state: active
-  - Current stage: explain-change
-  - Active context: M4 code-review R1 closed all implementation milestones; Lifecycle Closeout is next, starting with durable explain-change before final verification and PR handoff.
+  - Current stage: verify
+  - Active context: Durable explain-change is recorded after M4 code-review closed all implementation milestones; final verification is next before PR handoff.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

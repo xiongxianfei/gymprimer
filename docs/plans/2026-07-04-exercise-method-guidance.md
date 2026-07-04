@@ -101,10 +101,10 @@ The first proof slice is exactly:
   approved after TSR-EMG-1 and TSR-EMG-2 resolution
 - Remaining in-scope implementation milestones: none
 - Remaining lifecycle milestones: Lifecycle Closeout
-- Next stage: explain-change
+- Next stage: verify
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1, M2, M3, and M4 are closed;
-  explain-change, verify, and PR handoff remain.
+  verify and PR handoff remain.
 
 ## Milestones
 
@@ -440,6 +440,9 @@ The first proof slice is exactly:
   M4 is review-requested.
 - 2026-07-04: Code-review M4 R1 confirmed the manual proof records, found no
   material issues, and closed M4. Lifecycle Closeout is next.
+- 2026-07-04: Explain-change recorded the durable rationale from problem,
+  proposal, requirements, architecture, milestones, tests, reviews, and
+  validation evidence to the actual diff. Final verification is next.
 
 ## Decision log
 
@@ -536,5 +539,5 @@ The first proof slice is exactly:
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for explain-change. Final closeout is not ready until explain-change,
-  verify, and PR handoff complete.
+- Ready for verify. Final closeout is not ready until verify and PR handoff
+  complete.
