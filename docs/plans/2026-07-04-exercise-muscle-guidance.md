@@ -69,14 +69,14 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: review-requested
-- Last reviewed milestone: M2
-- Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes
-- Remaining in-scope implementation milestones: M3
-- Next stage: code-review M3
+- Current milestone: Lifecycle Closeout
+- Current milestone state: planned
+- Last reviewed milestone: M3
+- Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes; code-review M3 R1 clean-with-notes
+- Remaining in-scope implementation milestones: none
+- Next stage: explain-change
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 and M2 are closed and M3 is awaiting code-review, but final verification and PR handoff have not started.
+- Reason final closeout is or is not ready: M1, M2, and M3 are closed by code review, but explain-change refresh, final verification, and PR handoff have not started.
 
 ## Milestones
 
@@ -168,7 +168,7 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ### M3. Manual Proof and Broad Rollout Gate
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: record semantic source-support proof, beginner comprehension outcomes, optional image alignment evidence, and a broad-rollout gate before future batches.
 - Requirements: R24-R28, R32-R36, R38-R44, AC3-AC5.
 - Files/components likely touched:
@@ -257,6 +257,7 @@ The first proof slice should choose representative pages from the spec's allowed
 - 2026-07-04: Added M3 tests for required manual proof files, source-audit claim types, beginner-comprehension prompts, muscle-attention image alignment records, remaining-page rollout classifications, and validation-ledger commands.
 - 2026-07-04: Recorded M3 manual proof artifacts under `docs/changes/exercise-muscle-guidance-standard/manual-proof/` and `validation-ledger.md`.
 - 2026-07-04: M3 validation passed locally; M3 is ready for code-review.
+- 2026-07-04: Code-review M3 R1 accepted the manual proof and broad rollout gate with no material findings. M3 is closed and no implementation milestones remain.
 
 ## Decision log
 

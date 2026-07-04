@@ -5,8 +5,8 @@
 - [Exercise Muscle Guidance](plans/2026-07-04-exercise-muscle-guidance.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M1 and M2 are closed after code review; M3 manual proof and broad rollout gate implementation is ready for code-review.
+  - Current stage: explain-change
+  - Active context: M1, M2, and M3 are closed after code review; final closeout starts with explain-change before final verification and PR handoff.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
