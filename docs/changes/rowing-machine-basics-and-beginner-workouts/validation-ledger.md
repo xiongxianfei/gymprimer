@@ -2,7 +2,7 @@
 
 ## Status
 
-M5 media enhancement review-requested
+M5 media enhancement closed by code-review
 
 ## Scope
 
@@ -24,6 +24,8 @@ M5 media enhancement review-requested
 - Rowing-machine setup, muscle-attention, and movement images now have local
   page references, `media/PROVENANCE.md` rows, exact prompt records, and
   visual-safety review.
+- Code-review M5 R1 closed the media enhancement with no implementation
+  findings.
 
 ## Commands
 
@@ -37,6 +39,21 @@ M5 media enhancement review-requested
 | `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md` | pass | Checked 84 files; result `privacy pass`. |
 | `git diff --check` | pass | No whitespace errors reported. |
 
+## Reviewer Reruns
+
+| Command | Result | Evidence summary |
+| --- | --- | --- |
+| `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_media_is_local_prompt_backed_and_reviewed` | pass | Code-review M5 R1 reran the targeted rowing media regression; result `OK`. |
+| `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media` | pass | Code-review M5 R1 checked 20 Markdown files; result `pass`. |
+| `python3 -m unittest discover -s tests -p 'test_*image*.py'` | pass | Code-review M5 R1 ran 14 image-standard tests; result `OK`. |
+| `python3 -m unittest discover -s tests` | pass | Code-review M5 R1 ran 121 tests; result `OK`. |
+| `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media` | pass | Code-review M5 R1 checked 27 Markdown files; result `pass`. |
+| `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md` | pass | Code-review M5 R1 checked 84 files; result `privacy pass`. |
+| `git diff --check` | pass | Code-review M5 R1 found no whitespace errors. |
+| `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m5-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md` | pass | Post-review recording check covered six lifecycle files; result `privacy pass`. |
+| `git diff --check` | pass | Post-review recording check found no whitespace errors. |
+| `state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, review-log.md, and validation-ledger.md` | pass | Lifecycle metadata points to explain-change after M5 closeout. |
+
 ## Promotion and Navigation Decision
 
 No README or navigation edit is included in M5. The approved plan lists
@@ -48,8 +65,8 @@ by code-review and later final verification.
 ## Residual Risk
 
 - Hosted CI was not observed.
-- M5 code-review, durable cross-milestone review, final verification, and PR
-  handoff remain downstream gates.
+- Durable cross-milestone rationale, final verification, and PR handoff remain
+  downstream gates.
 - The generated images are static support assets; Markdown remains the source
   of truth for setup, muscle engagement, sequence, safety, and method guidance.
 

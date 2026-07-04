@@ -101,22 +101,21 @@ shows that setup or stroke-sequence comprehension needs visual support.
 ## Current Handoff Summary
 
 - Current milestone: M5
-- Current milestone state: review-requested
-- Last reviewed milestone: M4
+- Current milestone state: closed
+- Last reviewed milestone: M5
 - Review status: proposal-review R1 approved; spec-review R1 approved;
   architecture-review R1 approved; plan-review R1 requested PR-RMB-1; PR-RMB-1
   revision approved by plan-review R2; test-spec-review R2 approved the proof
   map; code-review M2 R1 requested CR-RMB-M2-1; CR-RMB-M2-1 resolved pending
   M2 code-review rerun; code-review M2 R2 closed M2; code-review M3 R1 closed
-  M3; code-review M4 R1 closed M4
-- Remaining in-scope implementation milestones: M5
-- Remaining lifecycle milestones: code-review, explain-change, verify, PR
-  handoff
-- Next stage: code-review M5
+  M3; code-review M4 R1 closed M4; code-review M5 R1 closed M5
+- Remaining in-scope implementation milestones: none
+- Remaining lifecycle milestones: explain-change, verify, PR handoff
+- Next stage: explain-change
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M1 and M2 are closed by code-review;
-  M3 and M4 are closed by code-review; M5 is implemented pending code-review;
-  durable rationale, final verification, and PR handoff remain before closeout.
+  M3, M4, and M5 are closed by code-review; durable rationale, final
+  verification, and PR handoff remain before closeout.
 
 ## Milestones
 
@@ -342,7 +341,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
 
 ### M5. Follow-up Rowing Media Enhancement
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: add the smallest useful set of rowing-machine images after follow-up
   readability and muscle-engagement requests while preserving Markdown as the
   source of truth.
@@ -394,6 +393,7 @@ shows that setup or stroke-sequence comprehension needs visual support.
   - broad validation passed
   - visual-safety proof recorded
   - milestone committed
+  - code-review M5 R1 closed the milestone with no findings
 - Risks:
   - Images could be mistaken for source-of-truth technique instruction.
   - Generated images could contain unsupported labels, brand marks, or visual
@@ -713,6 +713,17 @@ shows that setup or stroke-sequence comprehension needs visual support.
 - 2026-07-04: `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md docs/changes/rowing-machine-basics-and-beginner-workouts/explain-change.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/manual-proof media/prompts/exercises/rowing-machine`,
   `git diff --check`, and state-sync check passed after M5 handoff metadata
   updates.
+- 2026-07-04: Code-review M5 R1 reran
+  `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_media_is_local_prompt_backed_and_reviewed`,
+  `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media`,
+  `python3 -m unittest discover -s tests -p 'test_*image*.py'`,
+  `python3 -m unittest discover -s tests`,
+  `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media`,
+  `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md`,
+  and `git diff --check`; all passed.
+- 2026-07-04: Post-review recording checks passed:
+  `python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m5-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md`,
+  `git diff --check`, and state-sync check.
 
 ## Outcome and retrospective
 
@@ -722,11 +733,11 @@ shows that setup or stroke-sequence comprehension needs visual support.
   manual proof, comprehension evidence, and the text-only media decision, then
   closed after clean code-review R1. M4 recorded integration validation
   evidence, then closed after clean code-review R1. M5 added follow-up setup,
-  muscle-attention, and movement images and is pending code-review.
+  muscle-attention, and movement images and closed after clean code-review R1.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M5.
+- Ready for explain-change/final closeout.
 - Not ready for final verification, PR handoff, or Done until the remaining
   lifecycle gates complete.

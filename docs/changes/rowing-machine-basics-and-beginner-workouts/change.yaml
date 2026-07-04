@@ -1,6 +1,6 @@
 change_id: rowing-machine-basics-and-beginner-workouts
 status: active
-current_stage: code-review
+current_stage: explain-change
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
@@ -22,16 +22,16 @@ plan_index: docs/plan.md
 
 current_milestone: M5
 current_milestone_name: Follow-up Rowing Media Enhancement
-current_milestone_state: review-requested
-last_reviewed_milestone: M4
+current_milestone_state: closed
+last_reviewed_milestone: M5
 
 current_test_spec: specs/rowing-machine-basics-and-beginner-workouts.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/test-spec-review-r2.md
 review_resolution: docs/changes/rowing-machine-basics-and-beginner-workouts/review-resolution.md
-current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m4-r1.md
+current_code_review: docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m5-r1.md
 verify_report: null
-next_stage: code-review
+next_stage: explain-change
 pull_request: null
 merge_commit: null
 
@@ -61,7 +61,8 @@ notes:
   - Code-review M3 R1 returned clean-with-notes and closed M3; M4 implementation is next.
   - M4 recorded the validation ledger and is ready for code-review.
   - Code-review M4 R1 returned clean-with-notes and closed M4 before the M5 follow-up media request.
-  - M5 follow-up media enhancement added setup, muscle-attention, and movement images and is ready for code-review.
+  - M5 follow-up media enhancement added setup, muscle-attention, and movement images for code-review.
+  - Code-review M5 R1 returned clean-with-notes and closed M5; no implementation milestones remain.
 
 validation:
   - command: python tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/architecture/system/architecture.md
@@ -379,3 +380,33 @@ validation:
   - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, and validation-ledger.md
     result: pass
     evidence: lifecycle metadata all point to code-review for M5
+  - command: python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_media_is_local_prompt_backed_and_reviewed
+    result: pass
+    evidence: reviewer rerun passed 1 test during code-review M5 R1
+  - command: python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises media
+    result: pass
+    evidence: reviewer rerun checked 20 Markdown file(s) during code-review M5 R1
+  - command: python3 -m unittest discover -s tests -p 'test_*image*.py'
+    result: pass
+    evidence: reviewer rerun passed 14 tests during code-review M5 R1
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: reviewer rerun passed 121 tests during code-review M5 R1
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media
+    result: pass
+    evidence: reviewer rerun checked 27 Markdown file(s) during code-review M5 R1
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md exercises patterns principles programs media docs/changes/rowing-machine-basics-and-beginner-workouts specs/rowing-machine-basics-and-beginner-workouts.md docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md
+    result: pass
+    evidence: reviewer rerun checked 84 file(s) during code-review M5 R1
+  - command: git diff --check
+    result: pass
+    evidence: reviewer rerun passed during code-review M5 R1
+  - command: python3 tools/checks/check_privacy.py docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/code-review-m5-r1.md docs/changes/rowing-machine-basics-and-beginner-workouts/review-log.md docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md docs/plan.md docs/changes/rowing-machine-basics-and-beginner-workouts/validation-ledger.md
+    result: pass
+    evidence: checked 6 file(s): privacy pass after code-review M5 R1 recording
+  - command: git diff --check
+    result: pass
+    evidence: diff whitespace check passed after code-review M5 R1 recording
+  - command: state-sync check for docs/plan.md, docs/plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md, docs/changes/rowing-machine-basics-and-beginner-workouts/change.yaml, review-log.md, and validation-ledger.md
+    result: pass
+    evidence: lifecycle metadata all point to explain-change after M5 closeout
