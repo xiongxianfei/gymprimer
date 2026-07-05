@@ -63,20 +63,20 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 
 ## Current Handoff Summary
 
-- Current milestone: M1
-- Current milestone state: review-requested
-- Last reviewed milestone: none
-- Review status: proposal-review R2 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 inconclusive
-- Remaining in-scope implementation milestones: M1, M2, M3
-- Next stage: code-review
+- Current milestone: M2
+- Current milestone state: planned
+- Last reviewed milestone: M1
+- Review status: proposal-review R2 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 clean-with-notes
+- Remaining in-scope implementation milestones: M2, M3
+- Next stage: implement
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 code-review clean closeout is blocked by untracked governing artifacts; remaining implementation milestones, review-resolution if triggered, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M2 and M3 implementation, their code reviews, review-resolution if triggered, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
 ### M1. Method Contract, Template, and Checker Support
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: make `basic_cardio_activity` authorable and checkable before adding the walking pages.
 - Requirements: BWG-R7-R13, BWG-R27-R29, AC4, AC8-AC10.
 - Files/components likely touched:
@@ -250,6 +250,7 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 - 2026-07-05: Started M1 implementation for `basic_cardio_activity` method, template, and checker support.
 - 2026-07-05: Completed M1 implementation and validation; M1 is ready for code-review.
 - 2026-07-05: Code-review M1 R1 found no material implementation findings in the inspected diff but recorded an inconclusive result because governing artifacts for this change are untracked; M1 remains review-requested.
+- 2026-07-05: Code-review M1 R2 passed after governing artifacts were committed and tracked; M1 is closed and M2 implementation is next.
 
 ## Decision log
 
@@ -277,4 +278,4 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M1 is ready for code-review. M2 and M3 have not started.
+- M1 is closed. M2 and M3 have not started.

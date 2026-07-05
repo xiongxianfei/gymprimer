@@ -5,8 +5,8 @@
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M1 code-review R1 is inconclusive because governing artifacts are untracked; M1 remains review-requested.
+  - Current stage: implement
+  - Active context: M1 code-review R2 is clean and M1 is closed; M2 walking page implementation is next.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

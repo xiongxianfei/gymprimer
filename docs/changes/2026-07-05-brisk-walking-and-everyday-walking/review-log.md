@@ -9,3 +9,4 @@
 | 2026-07-05 | plan-review | [plan-review-r1](reviews/plan-review-r1.md) | approved | none | Clean R1 review for the execution plan; the next stage is test-spec authoring. |
 | 2026-07-05 | test-spec-review | [test-spec-review-r1](reviews/test-spec-review-r1.md) | approved | none | Clean R1 review for the active test spec; implementation handoff is allowed, but implementation has not started. |
 | 2026-07-05 | code-review | [code-review-m1-r1](reviews/code-review-m1-r1.md) | inconclusive | none | M1 diff inspection found no material implementation findings, but clean milestone closeout is blocked because the governing artifacts for this change are untracked in branch state. |
+| 2026-07-05 | code-review | [code-review-m1-r2](reviews/code-review-m1-r2.md) | clean-with-notes | none | Clean R2 review for M1 after governing artifacts were committed and tracked; M1 is closed and the next stage is M2 implementation. |
