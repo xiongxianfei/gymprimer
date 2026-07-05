@@ -5,8 +5,8 @@
 - [Exercise Muscle Guidance](plans/2026-07-04-exercise-muscle-guidance.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: pr
-  - Active context: PR #11 is open; final local verification passed and GitHub Actions `Validation checks` is pending.
+  - Current stage: code-review
+  - Active context: PR #11 is open, but a post-PR seated-row muscle-attention image follow-up is ready for code-review before renewed verification.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

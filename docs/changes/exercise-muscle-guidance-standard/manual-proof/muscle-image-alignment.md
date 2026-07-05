@@ -29,6 +29,12 @@ Every proof-slice muscle-attention image is optional support media, has Markdown
 
 `exercises/chest-press.md` and `exercises/plank.md` do not use `exercise_muscle_attention_illustration`. That is compatible with the spec because muscle-attention images are optional, and the Markdown sections carry the muscle names, roles, cues, caveats, and citations.
 
+## Post-PR Follow-Up Image
+
+| Image path | Page | nearby Markdown | alt text | provenance | broad region | no in-image labels | no red pain marks | no wrong/correct framing | no precise anatomy | no diagnosis or treatment | Result |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `media/exercises/seated-row/muscle-attention.png` | `exercises/seated-row.md` | Role table names upper back/lats, arms/grip, and trunk posture support. Feel cue names upper-back effort, arm support, and quiet torso. | Broad highlights on upper back, arms, grip, and trunk posture area. | Approved row with `exercise_muscle_attention_illustration`, page ref, and prompt record. | pass | pass | pass | pass | pass | pass | pass |
+
 ## Residual Risk
 
 This review checks the repository-visible image references, alt text, provenance rows, and nearby Markdown. It does not re-render or regenerate images. Any future image edit, alt-text change, provenance change, or nearby muscle guidance change should rerun this alignment review.

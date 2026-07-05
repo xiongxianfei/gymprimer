@@ -69,14 +69,14 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ## Current Handoff Summary
 
-- Current milestone: Lifecycle Closeout
-- Current milestone state: pr-opened
+- Current milestone: PR Follow-up: seated-row muscle-attention image
+- Current milestone state: review-requested
 - Last reviewed milestone: M3
 - Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes; code-review M3 R1 clean-with-notes
 - Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: PR #11 opened; hosted CI pending
-- Reason final closeout is or is not ready: M1, M2, M3, explain-change, final local verification, and PR handoff are complete, but hosted CI and downstream merge/closeout have not happened.
+- Next stage: code-review
+- Final closeout readiness: not ready
+- Reason final closeout is or is not ready: PR #11 is open, but a post-PR seated-row muscle-attention image follow-up has been added and needs code review before renewed verification or PR readiness claims.
 
 ## Milestones
 
@@ -261,6 +261,7 @@ The first proof slice should choose representative pages from the spec's allowed
 - 2026-07-04: Refreshed `docs/changes/exercise-muscle-guidance-standard/explain-change.md` from the final reviewed diff. The next lifecycle stage is verify.
 - 2026-07-04: Final local verification passed and recorded `docs/changes/exercise-muscle-guidance-standard/verify-report.md`. The branch is ready for PR handoff; hosted CI has not been observed.
 - 2026-07-04: Opened PR #11 from `proposal/exercise-muscle-guidance-standard` to `main`. GitHub Actions `Validation checks` was pending at handoff.
+- 2026-07-05: Added a post-PR follow-up for `exercises/seated-row.md`: role-based muscle guidance, one support-only muscle-attention image, prompt record, provenance row, manual image/source evidence, and focused real-page test coverage. Validation passed locally; the follow-up is ready for code-review.
 
 ## Decision log
 

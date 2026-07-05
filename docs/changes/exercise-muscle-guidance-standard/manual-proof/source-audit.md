@@ -42,6 +42,12 @@ The sampled proof-slice claims use page-local source definitions and stay within
 - Mayo Clinic weight-training guidance was checked for controlled movement, form quality, breathing, balanced major muscle work, and stopping exercise that causes pain.
 - `media/PROVENANCE.md` and page-local source definitions were checked for source-surface consistency where muscle-attention images are present.
 
+## Post-PR Follow-Up: Seated Row Image Addition
+
+| page_path | claim_type | sampled claim | supporting_source | disposition | residual_risk |
+| --- | --- | --- | --- | --- | --- |
+| `exercises/seated-row.md` | image-to-Markdown alignment | The muscle-attention image highlights broad upper-back, arm/grip, and trunk-posture regions while nearby Markdown keeps exact guidance in a role table. | `local-seated-row-instruction`; `media/PROVENANCE.md`; `media/prompts/exercises/seated-row/muscle-attention.md` | supported as broad image alignment and source-surface proof. The page cites a seated-row instruction page for the pull, arm support, and still-torso cue. | medium; this is a post-PR follow-up outside the original proof slice and needs code review before renewed branch-ready claims. |
+
 ## Residual Risk
 
 This is a bounded source audit, not a clinical review or a remote-source archival snapshot. It is sufficient for the approved M3 manual evidence gate because every sampled claim is either directly exercise-specific, broadly institutionally supported, or softened to practical beginner language. Any later changes to proof-slice muscle roles, feel cues, compensation cues, safety cues, or source IDs must rerun this audit.

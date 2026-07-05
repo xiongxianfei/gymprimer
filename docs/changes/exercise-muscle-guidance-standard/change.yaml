@@ -1,6 +1,6 @@
 change_id: exercise-muscle-guidance-standard
-status: pr-open
-current_stage: pr
+status: post-pr-follow-up-review-requested
+current_stage: code-review
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-muscle-guidance-standard.md
@@ -25,11 +25,11 @@ current_test_spec: specs/exercise-muscle-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-muscle-guidance-standard/reviews/test-spec-review-r1.md
 
-current_milestone: Lifecycle Closeout
-current_milestone_state: pr-opened
+current_milestone: PR Follow-up: seated-row muscle-attention image
+current_milestone_state: review-requested
 last_reviewed_milestone: M3
 
-next_stage: pr
+next_stage: code-review
 
 open_findings: []
 
@@ -58,4 +58,6 @@ notes:
   - Final local verification passed and recorded branch-ready evidence in `docs/changes/exercise-muscle-guidance-standard/verify-report.md`.
   - PR #11 opened from `proposal/exercise-muscle-guidance-standard` to `main`.
   - GitHub Actions `Validation checks` was pending when PR handoff was recorded.
+  - Post-PR follow-up added a seated-row muscle-attention image, prompt record, provenance row, page-local role table, and focused test coverage.
+  - Post-PR follow-up validation passed locally and is ready for code-review.
   - No final completion claim is authorized until implementation, code review, explain-change when useful, verification, and PR handoff gates are complete for the relevant scope.
