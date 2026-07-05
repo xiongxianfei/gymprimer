@@ -21,6 +21,8 @@ FIRST_SLICE = (
     "exercises/incline-push-up.md",
 )
 ROWING_MACHINE_PAGE = ROOT / "exercises/rowing-machine.md"
+BRISK_WALKING_PAGE = ROOT / "exercises/brisk-walking.md"
+EVERYDAY_WALKING_PAGE = ROOT / "principles/everyday-walking.md"
 MUSCLE_GUIDANCE_PROOF_SLICE = {
     "cardio equipment": {
         "path": "exercises/rowing-machine.md",
@@ -71,6 +73,32 @@ ROWING_REQUIRED_SECTIONS = (
     "## How much to do",
     "## Easier version",
     "## Harder version",
+    "## Safety notes",
+    "## Sources",
+)
+BRISK_WALKING_REQUIRED_SECTIONS = (
+    "## What this is for",
+    "## Before you start",
+    "## How to know the pace is brisk",
+    "## Muscles involved",
+    "## Walking technique",
+    "## What you should feel",
+    "## Common mistakes",
+    "## How much to do",
+    "## Easier version",
+    "## Harder version",
+    "## Safety notes",
+    "## Sources",
+)
+EVERYDAY_WALKING_REQUIRED_SECTIONS = (
+    "## What this page is",
+    "## What this page is not",
+    "## Plain-language overview",
+    "## Everyday walking vs. brisk walking",
+    "## Ways to add more walking",
+    "## How much counts",
+    "## What to pay attention to",
+    "## Common mistakes",
     "## Safety notes",
     "## Sources",
 )
@@ -159,6 +187,172 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
 
     def rowing_text(self) -> str:
         return ROWING_MACHINE_PAGE.read_text(encoding="utf-8")
+
+    def brisk_walking_text(self) -> str:
+        return BRISK_WALKING_PAGE.read_text(encoding="utf-8")
+
+    def everyday_walking_text(self) -> str:
+        return EVERYDAY_WALKING_PAGE.read_text(encoding="utf-8")
+
+    def test_walking_pages_exist_and_have_required_shape(self) -> None:
+        expected = {
+            BRISK_WALKING_PAGE: BRISK_WALKING_REQUIRED_SECTIONS,
+            EVERYDAY_WALKING_PAGE: EVERYDAY_WALKING_REQUIRED_SECTIONS,
+        }
+
+        for path, sections in expected.items():
+            with self.subTest(path=path.relative_to(ROOT)):
+                self.assertTrue(path.is_file())
+                text = path.read_text(encoding="utf-8")
+                self.assertIn("Disclaimer: GymPrimer is educational content", text)
+                for section in sections:
+                    self.assertIn(section, text)
+
+    def test_brisk_walking_page_contract(self) -> None:
+        text = self.brisk_walking_text()
+        lower = text.lower()
+        compact = " ".join(lower.split())
+
+        self.assertIn("deliberate moderate-intensity cardio activity", lower)
+        self.assertIn("everyday walking", lower)
+        self.assertIn("talk, but not comfortably sing", lower)
+        self.assertIn("2.5 mph or faster", lower)
+        self.assertIn("method type: basic_cardio_activity", lower)
+        self.assertIn("beginner starting point:", lower)
+        self.assertIn("5-10 minutes", lower)
+        self.assertIn("effort:", lower)
+        self.assertIn("progression:", lower)
+        self.assertIn("first add total minutes", lower)
+        self.assertIn("then add more brisk minutes", lower)
+        self.assertIn("then add hills or faster sections", compact)
+        self.assertIn("stop if:", lower)
+        self.assertIn("sets and reps", lower)
+        self.assertIn("not a schedule", lower)
+        self.assertIn("look forward", lower)
+        self.assertIn("neck and shoulders relaxed", lower)
+        self.assertIn("natural arm swing", lower)
+        self.assertIn("relaxed hands", lower)
+        self.assertIn("stay tall", lower)
+        self.assertIn("heel to toe", lower)
+        self.assertIn("easy start", lower)
+        self.assertIn("easy finish", lower)
+        self.assertIn("not a personal walking plan", compact)
+
+    def test_everyday_walking_page_contract(self) -> None:
+        text = self.everyday_walking_text()
+        lower = text.lower()
+
+        self.assertIn("daily movement", lower)
+        self.assertIn("sitting interruption", lower)
+        self.assertIn("habit-building", lower)
+        self.assertIn("not every step is brisk cardio", lower)
+        self.assertIn("brisk walking is the version", lower)
+        self.assertIn("errands", lower)
+        self.assertIn("commuting", lower)
+        self.assertIn("walking breaks", lower)
+        self.assertIn("parking farther away", lower)
+        self.assertIn("../exercises/brisk-walking.md", text)
+        self.assertNotIn("method type:", lower)
+        self.assertNotIn("## Muscles involved", text)
+
+    def test_walking_pages_safety_sources_forbidden_scope_and_text_only_media(self) -> None:
+        for path in (BRISK_WALKING_PAGE, EVERYDAY_WALKING_PAGE):
+            with self.subTest(path=path.relative_to(ROOT)):
+                text = path.read_text(encoding="utf-8")
+                lower = text.lower()
+
+                self.assertIn("../RED-FLAGS.md", text)
+                for term in (
+                    "chest pain",
+                    "fainting",
+                    "severe dizziness",
+                    "unusual shortness of breath",
+                    "new severe pain",
+                    "numbness",
+                    "weakness",
+                    "neurological symptoms",
+                    "symptoms that worsen",
+                    "do not settle",
+                ):
+                    self.assertIn(term, lower)
+
+                for term in (
+                    "weight-loss",
+                    "calorie target",
+                    "10,000 steps",
+                    "heart-rate zone",
+                    "wearable",
+                    "calculator",
+                    "dashboard",
+                    "adaptive recommendation",
+                    "race-walking",
+                    "running progression",
+                    "hiking",
+                    "rucking",
+                    "treadmill protocol",
+                    "incline protocol",
+                    "medical walking program",
+                    "return-to-walking",
+                ):
+                    self.assertNotIn(term, lower)
+
+                self.assertNotIn("![", text)
+
+        everyday_text = self.everyday_walking_text()
+        self.assertNotIn("media/", everyday_text)
+
+    def test_walking_pages_source_ids_are_page_local_and_indexed(self) -> None:
+        expected = {
+            BRISK_WALKING_PAGE: (
+                "cdc-physical-activity-intensity",
+                "cdc-adult-activity",
+                "aha-physical-activity-recommendations",
+                "mayo-walking",
+                "nhs-walking-for-health",
+                "local-brisk-walking-red-flags",
+            ),
+            EVERYDAY_WALKING_PAGE: (
+                "cdc-adult-activity",
+                "aha-physical-activity-recommendations",
+                "nhs-walking-for-health",
+                "local-everyday-walking-red-flags",
+            ),
+        }
+        sources = (ROOT / "SOURCES.md").read_text(encoding="utf-8")
+
+        for path, source_ids in expected.items():
+            text = path.read_text(encoding="utf-8")
+            for source_id in source_ids:
+                with self.subTest(path=path.relative_to(ROOT), source_id=source_id):
+                    self.assertIn(f"[{source_id}]:", text)
+                    self.assertIn(f"][{source_id}]", text)
+                    if not source_id.startswith("local-"):
+                        self.assertIn(f"[{source_id}]:", sources)
+
+    def test_brisk_walking_muscle_and_feel_guidance(self) -> None:
+        text = self.brisk_walking_text()
+        muscle_section = section_text(text, "## Muscles involved")
+        feel_section = section_text(text, "## What you should feel")
+        finding_codes = [
+            finding.code for finding in validate_exercise_muscle_guidance(BRISK_WALKING_PAGE, text)
+        ]
+
+        self.assertEqual(finding_codes, [])
+        self.assertIn("| Role | Muscle region | What it helps do |", muscle_section)
+        for term in (
+            "Main driver",
+            "Posture / transfer",
+            "Arm swing support",
+            "Foot control",
+            "Glutes, thighs, and calves",
+            "Trunk",
+            "Shoulders and upper back",
+            "Feet and ankles",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, muscle_section)
+        self.assertRegex(feel_section.lower(), r"\b(you may feel|pay attention to)\b")
+        self.assertIn("able to talk", " ".join(feel_section.lower().split()))
 
     def test_rowing_machine_page_has_required_shape(self) -> None:
         self.assertTrue(ROWING_MACHINE_PAGE.is_file())

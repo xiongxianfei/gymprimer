@@ -64,11 +64,11 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
 - Review status: proposal-review R2 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 clean-with-notes
 - Remaining in-scope implementation milestones: M2, M3
-- Next stage: implement
+- Next stage: code-review
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M2 and M3 implementation, their code reviews, review-resolution if triggered, explain-change, verify, and PR handoff remain.
 
@@ -119,7 +119,7 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 
 ### M2. Walking Markdown Pages and Sources
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: add the brisk walking exercise page and everyday walking principle page with page-local citations and safety routing.
 - Requirements: BWG-R1-R28, AC1-AC7, AC9-AC10.
 - Files/components likely touched:
@@ -251,6 +251,10 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 - 2026-07-05: Completed M1 implementation and validation; M1 is ready for code-review.
 - 2026-07-05: Code-review M1 R1 found no material implementation findings in the inspected diff but recorded an inconclusive result because governing artifacts for this change are untracked; M1 remains review-requested.
 - 2026-07-05: Code-review M1 R2 passed after governing artifacts were committed and tracked; M1 is closed and M2 implementation is next.
+- 2026-07-05: Started M2 implementation for brisk walking and everyday walking Markdown pages, page-local sources, safety routing, and real-page tests.
+- 2026-07-05: Added failing real-page tests for walking page existence, structure, method, source IDs, safety routing, forbidden scope, text-only media, and brisk walking muscle/feel guidance.
+- 2026-07-05: Added `exercises/brisk-walking.md` and `principles/everyday-walking.md`; kept both text-only; left `SOURCES.md` and `RED-FLAGS.md` unchanged because required source IDs and central safety routing already existed.
+- 2026-07-05: M2 validation passed; M2 is ready for code-review.
 
 ## Decision log
 
@@ -262,6 +266,8 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 ## Surprises and discoveries
 
 - Existing checker and tests already cover method guidance, exercise images, muscle guidance, real pages, and templates; this plan can extend those surfaces instead of creating a separate validation system.
+- M2 did not need a `SOURCES.md` edit because the accepted proposal/spec work had already added the reusable walking source IDs.
+- M2 did not need a `RED-FLAGS.md` edit because the walking pages could route to the existing central safety page.
 
 ## Validation notes
 
@@ -270,6 +276,13 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 - 2026-07-05: `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_templates tests.test_markdown_first_real_pages` passed, running 29 tests.
 - 2026-07-05: `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md docs/templates exercises` passed, checking 24 Markdown files.
 - 2026-07-05: `python3 tools/checks/check_privacy.py specs/brisk-walking-and-everyday-walking.md specs/exercise-method-guidance.md docs/templates tools tests docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checking 78 files.
+- M2 validation passed and is ready for code-review.
+- 2026-07-05: `python3 -m unittest tests.test_markdown_first_real_pages` passed, running 16 tests.
+- 2026-07-05: `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md` passed, checking 4 Markdown files.
+- 2026-07-05: `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checking 5 Markdown files.
+- 2026-07-05: `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_markdown_first_real_pages` passed, running 44 tests.
+- 2026-07-05: `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed, running 65 tests.
+- 2026-07-05: `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checking 16 files.
 
 ## Outcome and retrospective
 
@@ -278,4 +291,4 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M1 is closed. M2 and M3 have not started.
+- M1 is closed. M2 is ready for code-review. M3 has not started.

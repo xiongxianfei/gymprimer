@@ -1,6 +1,6 @@
 change_id: 2026-07-05-brisk-walking-and-everyday-walking
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-05
 
 proposal: docs/proposals/2026-07-05-brisk-walking-and-everyday-walking.md
@@ -26,10 +26,10 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/test-spec-review-r1.md
 
 current_milestone: M2
-current_milestone_state: planned
+current_milestone_state: review-requested
 last_reviewed_milestone: M1
 
-next_stage: implement
+next_stage: code-review
 
 open_findings: []
 
@@ -59,7 +59,17 @@ notes:
   - M1 validation passed locally and is ready for code-review.
   - Code-review M1 R1 found no material implementation findings in the inspected M1 diff but recorded an inconclusive result because governing artifacts for this change are untracked; M1 remains review-requested.
   - Code-review M1 R2 passed after governing artifacts were committed and tracked; M1 is closed and M2 implementation is next.
+  - Started M2 implementation for brisk walking and everyday walking Markdown pages, page-local sources, safety routing, and real-page tests.
+  - Added focused failing tests first for walking page existence, structure, method, source IDs, safety routing, forbidden scope, text-only media, and brisk walking muscle/feel guidance.
+  - Added `exercises/brisk-walking.md` and `principles/everyday-walking.md`; kept both text-only and did not need `SOURCES.md` or `RED-FLAGS.md` edits.
+  - M2 validation passed locally and is ready for code-review.
 validation:
   - 2026-07-05 M1 `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_templates tests.test_markdown_first_real_pages` passed, 29 tests.
   - 2026-07-05 M1 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md docs/templates exercises` passed, checked 24 Markdown files.
   - 2026-07-05 M1 `python3 tools/checks/check_privacy.py specs/brisk-walking-and-everyday-walking.md specs/exercise-method-guidance.md docs/templates tools tests docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checked 78 files.
+  - 2026-07-05 M2 `python3 -m unittest tests.test_markdown_first_real_pages` passed, 16 tests.
+  - 2026-07-05 M2 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md` passed, checked 4 Markdown files.
+  - 2026-07-05 M2 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checked 5 Markdown files.
+  - 2026-07-05 M2 `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_markdown_first_real_pages` passed, 44 tests.
+  - 2026-07-05 M2 `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed, 65 tests.
+  - 2026-07-05 M2 `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checked 16 files.
