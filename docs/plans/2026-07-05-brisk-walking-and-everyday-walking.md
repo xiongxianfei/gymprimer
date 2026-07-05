@@ -63,14 +63,14 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 
 ## Current Handoff Summary
 
-- Current milestone: M2
-- Current milestone state: review-requested
-- Last reviewed milestone: M1
-- Review status: proposal-review R2 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 clean-with-notes
-- Remaining in-scope implementation milestones: M2, M3
-- Next stage: code-review
+- Current milestone: M3
+- Current milestone state: planned
+- Last reviewed milestone: M2
+- Review status: proposal-review R2 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes
+- Remaining in-scope implementation milestones: M3
+- Next stage: implement
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M2 and M3 implementation, their code reviews, review-resolution if triggered, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M3 implementation, M3 code review, review-resolution if triggered, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -119,7 +119,7 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 
 ### M2. Walking Markdown Pages and Sources
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: add the brisk walking exercise page and everyday walking principle page with page-local citations and safety routing.
 - Requirements: BWG-R1-R28, AC1-AC7, AC9-AC10.
 - Files/components likely touched:
@@ -255,6 +255,7 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 - 2026-07-05: Added failing real-page tests for walking page existence, structure, method, source IDs, safety routing, forbidden scope, text-only media, and brisk walking muscle/feel guidance.
 - 2026-07-05: Added `exercises/brisk-walking.md` and `principles/everyday-walking.md`; kept both text-only; left `SOURCES.md` and `RED-FLAGS.md` unchanged because required source IDs and central safety routing already existed.
 - 2026-07-05: M2 validation passed; M2 is ready for code-review.
+- 2026-07-05: Code-review M2 R1 passed; M2 is closed and M3 implementation is next.
 
 ## Decision log
 
@@ -291,4 +292,4 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M1 is closed. M2 is ready for code-review. M3 has not started.
+- M1 and M2 are closed. M3 has not started.

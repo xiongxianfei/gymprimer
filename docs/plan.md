@@ -5,8 +5,8 @@
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M2 walking page implementation and validation are complete; code-review M2 is next.
+  - Current stage: implement
+  - Active context: M2 code-review R1 is clean and M2 is closed; M3 manual proof and optional image decision are next.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
