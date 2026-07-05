@@ -56,6 +56,20 @@ Implementation is not allowed until proposal, spec, spec review, architecture as
 
 If this guide is silent for an artifact type and a stage skill has a safe portable default, use that default. If neither this guide nor the owning skill gives a safe path, stop and ask for an explicit path.
 
+## Change ID requirements
+
+For new workflow-managed change roots, create or identify `docs/changes/<change-id>/` before recording change-local metadata, formal review records, review logs, review resolution, explain-change, verify reports, or PR handoff evidence.
+
+New change IDs use this format:
+
+```text
+YYYY-MM-DD-slug
+```
+
+Use the project-local date when the change root is first created. Build the slug from the accepted proposal title, active plan title, or user-provided change topic using lowercase hyphen-separated words.
+
+Existing historical, undated, numbered, or explicitly project-customized change roots may remain valid legacy records until touched, migrated, or superseded. Do not create new undated change roots unless a higher-ranked artifact explicitly requires that project-customized path.
+
 ## Current change
 
 - Change ID: `markdown-first-gym-primer`
@@ -108,6 +122,7 @@ Deferred execution work must not be stored in `docs/project-map.md`; the project
 ## Workflow guide change record
 
 - 2026-06-26: Created guide because the repository adopted staged RigorLoop artifacts and no project-local workflow guide existed. Added locations for proposals, specs, architecture, ADRs, plans, change-local reviews, explain-change, verify reports, learn sessions, and follow-ups. No migration is needed because existing artifacts already match these paths.
+- 2026-07-05: Added explicit change ID requirements for new workflow-managed change roots: new roots use `YYYY-MM-DD-slug`, existing undated roots remain valid legacy records until touched, migrated, or superseded, and no migration is needed for current historical records.
 - 2026-06-27: Updated current-change routing from the superseded structured-platform track to the accepted Markdown-first direction after proposal-review R2, vision revision, and constitution revision.
 - 2026-06-27: Routed the Markdown-first change to `spec-review` after drafting `specs/markdown-first-primer.md`.
 - 2026-06-27: Routed the Markdown-first change to architecture after clean `spec-review-r1`; spec status still needs normalization to `approved` before downstream reliance.

@@ -32,6 +32,8 @@ The rowing-machine basics and beginner workout guidance amendment was approved b
 `docs/changes/rowing-machine-basics-and-beginner-workouts/reviews/architecture-review-r1.md`.
 The exercise-muscle-guidance amendment was approved by
 `docs/changes/exercise-muscle-guidance-standard/reviews/architecture-review-r1.md`.
+The brisk-walking and everyday-walking guidance amendment was approved by
+`docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r1.md`.
 
 ## Related artifacts
 
@@ -80,6 +82,12 @@ The exercise-muscle-guidance amendment was approved by
   - Spec: `../../../specs/exercise-muscle-guidance.md`
   - Spec review:
     `../../changes/exercise-muscle-guidance-standard/reviews/spec-review-r1.md`
+- Brisk walking and everyday walking guidance:
+  - Proposal:
+    `../../proposals/2026-07-05-brisk-walking-and-everyday-walking.md`
+  - Spec: `../../../specs/brisk-walking-and-everyday-walking.md`
+  - Spec review:
+    `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r1.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
@@ -122,6 +130,10 @@ Goals:
 - Add page-local role-based exercise muscle guidance without introducing an
   anatomy atlas, exact activation source of truth, clinical cueing, generated
   data, or personalized coaching.
+- Add brisk walking and everyday walking guidance as static Markdown education,
+  distinguishing deliberate non-equipment cardio activity from daily movement
+  habits without introducing a tracker, calculator, walking program, or adaptive
+  plan.
 - Preserve old platform artifacts as historical context without treating them as active implementation guidance.
 
 ## Architecture Constraints
@@ -188,13 +200,18 @@ Goals:
   `bodyweight_progression`, `low_load_control_drill`, `isometric_hold`,
   `mobility_drill`, `stretch_hold`, and the narrowly activated
   `basic_cardio_equipment` scope defined by
-  `specs/rowing-machine-basics-and-beginner-workouts.md`.
+  `specs/rowing-machine-basics-and-beginner-workouts.md`, plus the
+  `basic_cardio_activity` scope defined by
+  `specs/brisk-walking-and-everyday-walking.md`.
 - Hidden metadata, YAML front matter, shared taxonomy files, generated indexes,
   and generated data packages are not part of the first exercise-method source
   of truth.
 - `loaded_carry` remains deferred. `basic_cardio_equipment` is active only for
   `exercises/rowing-machine.md` and later cardio-equipment pages governed by
   approved downstream specs or amendments.
+- `basic_cardio_activity` is active for `exercises/brisk-walking.md` and later
+  non-equipment aerobic activity pages governed by approved downstream specs or
+  amendments.
 - Exercise muscle guidance is visible Markdown inside exercise pages, using
   `## Muscles involved` as the durable heading for new and migrated exercise
   pages and pairing it with `## What you should feel`.
@@ -331,6 +348,14 @@ Logical containers:
   governed cardio-equipment exercise page. It uses the same visible method
   section contract while adding cardio-specific time, effort, reset,
   progression, and stop-condition wording.
+- **Basic cardio activity page**: `exercises/brisk-walking.md` is the first
+  governed non-equipment cardio activity exercise page. It uses visible
+  `## How much to do` guidance with `Method type: basic_cardio_activity`, time,
+  talk-test effort, progression, and stop rules instead of strength-training
+  sets and reps.
+- **Everyday walking principle page**: `principles/everyday-walking.md` is a
+  daily movement and sitting-interruption principle page. It is linked
+  conceptually to brisk walking but does not treat every step as formal cardio.
 - **Exercise muscle guidance**: visible Markdown sections inside exercise pages
   headed `## Muscles involved`, paired with `## What you should feel`. The
   exercise page owns broad muscle regions, movement roles, phase-linked roles
@@ -557,6 +582,32 @@ Basic cardio equipment authoring flow:
    image and generated raster prompt-record architecture governs path,
    purpose, provenance, prompt records, alt text, and visual-safety evidence.
 
+Basic cardio activity authoring flow:
+
+1. A contributor drafts `exercises/brisk-walking.md` and
+   `principles/everyday-walking.md` under the walking spec.
+2. The brisk walking page keeps the full exercise-page contract, teaches
+   deliberate moderate-intensity walking in Markdown, and adds
+   `## How much to do` with `Method type: basic_cardio_activity`.
+3. The everyday walking page stays a principle page about daily movement and
+   sitting interruption, and it does not imply that all walking is deliberate
+   moderate-intensity cardio.
+4. Local checks or manual proof distinguish `basic_cardio_activity` from
+   `basic_cardio_equipment`, keep `loaded_carry` inactive, and validate required
+   walking headings, page-local sources, central safety routing, and forbidden
+   personalized or medical walking-plan wording.
+5. Source-audit evidence checks intensity, talk-test, weekly activity where
+   used, less-sitting framing, walking technique, starter-duration or
+   progression, and stop-rule claims.
+6. Beginner-comprehension evidence records whether the reader can distinguish
+   everyday walking from brisk walking, identify how to know the pace is brisk,
+   name a reasonable starting duration, describe what the body should feel,
+   name stop conditions, and identify the source supporting the intensity claim.
+7. If an optional brisk-walking movement image is added, the existing exercise
+   image and generated raster prompt-record architecture governs path, purpose,
+   provenance, prompt records, alt text, and visual-safety evidence. The
+   everyday walking principle page remains text-only in the first slice.
+
 Exercise muscle guidance authoring flow:
 
 1. A contributor updates an exercise page selected for the muscle-guidance
@@ -618,6 +669,11 @@ Packaging boundaries:
   runtime, CMS, API, search index, user-input flow, account system, analytics,
   hidden metadata package, generated public data package, anatomy database, EMG
   data model, cueing engine, or personalized coaching flow.
+- Brisk walking and everyday walking guidance is Markdown-only. It introduces
+  no deployment, runtime, CMS, API, search index, user-input flow, account
+  system, analytics, hidden metadata package, generated public data package,
+  step tracker, wearable integration, calorie calculator, walking program, or
+  adaptive recommendation flow.
 
 ## Crosscutting Concepts
 
@@ -666,6 +722,9 @@ Scope control:
 - `basic_cardio_equipment` keeps the same visible method source-of-truth shape
   but uses cardio-specific starter labels for time, effort, reset/rest,
   technique-first progression, and stop conditions.
+- `basic_cardio_activity` keeps the same visible method source-of-truth shape
+  but uses non-equipment cardio-specific guidance for time, talk-test effort,
+  repeatability, progression, and stop conditions.
 - Exercise method values are authoring and validation labels, not user-facing
   personalization logic.
 - Full exercise pages remain the source of truth for exercise method guidance;
@@ -674,6 +733,11 @@ Scope control:
 - Cardio-equipment examples remain static examples. They must not become
   personalized conditioning plans, race plans, heart-rate-zone prescriptions,
   workout trackers, calculators, or adaptive programming.
+- Basic cardio activity examples remain static education. They must not become
+  personalized walking plans, weight-loss prescriptions, calorie targets,
+  universal step-count mandates, heart-rate-zone prescriptions, race-walking
+  technique, running progressions, hiking or rucking programs, treadmill
+  protocols, trackers, calculators, or adaptive programming.
 - Exercise muscle guidance may teach broad muscle roles, movement phases, feel
   cues, and compensation cues. It must not become diagnosis, treatment,
   rehabilitation, posture-correction promise, individualized cueing, exact
@@ -719,8 +783,13 @@ Source quality and review evidence:
 - Exercise muscle guidance requires page-local source support for broad role
   claims, specific muscle claims, exact setup or movement cues, feel cues,
   compensation cues, and safety stop conditions at the level claimed.
+- Brisk walking and everyday walking guidance requires page-local source
+  support for intensity, talk test, weekly activity guidance where used,
+  less-sitting framing, walking technique, starter-duration or progression, and
+  stop-rule claims at the level claimed.
 - Global `SOURCES.md` entries support reused sources but do not replace
-  page-local support for exercise muscle claims.
+  page-local support for exercise muscle, walking method, walking technique, or
+  walking safety claims.
 
 Media:
 
@@ -838,6 +907,16 @@ Observability:
 - Exercise method manual evidence records source-audit samples for active
   method types and beginner-comprehension outcomes for starting point, effort,
   stop condition, and non-prescription understanding.
+- Basic cardio activity validation accepts `basic_cardio_activity` only where
+  the governing walking or later non-equipment cardio activity spec allows it,
+  distinguishes it from `basic_cardio_equipment`, continues to reject
+  `loaded_carry`, and reports inactive method type failures for out-of-scope
+  uses.
+- Walking manual evidence records source-audit support for intensity, talk
+  test, weekly activity guidance where used, less-sitting framing, technique,
+  starter-duration or progression, and stop rules, plus non-identifying
+  beginner-comprehension outcomes for the walking-specific questions defined by
+  the spec.
 - Exercise muscle validation reports missing `## Muscles involved`, legacy
   `## Used muscles` misuse in migrated pages, missing `## What you should
   feel`, deterministic forbidden activation or diagnosis/treatment/correction
@@ -870,11 +949,13 @@ Observability:
 - [ADR 2026-06-26: Repository-native reviewed content](../../adr/2026-06-26-repository-native-reviewed-content.md) - Superseded structured-platform decision retained as history.
 
 No new ADR is required for exercise method guidance, rowing-machine
-`basic_cardio_equipment`, or exercise muscle guidance. These changes extend the
+`basic_cardio_equipment`, brisk-walking `basic_cardio_activity`, everyday
+walking guidance, or exercise muscle guidance. These changes extend the
 accepted Markdown-first and Responsible Breadth architecture by adding visible
 Markdown sections and repository-local validation/review evidence. They do not
 introduce a new source-of-truth mechanism, runtime boundary, generated package,
-taxonomy store, anatomy database, cueing engine, or deployment architecture.
+taxonomy store, anatomy database, cueing engine, tracker, calculator, or
+deployment architecture.
 
 ## Quality Requirements
 
@@ -902,9 +983,12 @@ taxonomy store, anatomy database, cueing engine, or deployment architecture.
 | Exercise method source of truth | An exercise page is updated under the exercise-method spec. | The page has visible `## How much to do` and `Method type:` text; hidden metadata is not required or authoritative. |
 | Exercise method enum | A page declares an exercise method type. | The value is active under `specs/exercise-method-guidance.md` or an approved downstream method-type amendment such as the rowing-machine spec. |
 | Basic cardio method boundary | A page declares `Method type: basic_cardio_equipment`. | The page is `exercises/rowing-machine.md` or another cardio-equipment page governed by a later approved spec or amendment. |
+| Basic cardio activity boundary | A page declares `Method type: basic_cardio_activity`. | The page is `exercises/brisk-walking.md` or another non-equipment cardio activity page governed by a later approved spec or amendment. |
 | Loaded carry deferral | A page declares `Method type: loaded_carry`. | The page fails until a later approved spec or amendment activates `loaded_carry`. |
 | Rowing method source support | The rowing-machine page gives setup, stroke sequence, damper, beginner method, weekly activity, or stop-condition guidance. | Manual source-audit evidence records support for the claim category before promotion. |
 | Rowing beginner comprehension | The rowing-machine page is reviewed with a beginner reader. | Evidence records whether the reader can state the rower purpose, foot strap position, drive sequence, recovery sequence, first beginner step, stop condition, and where to verify technique. |
+| Walking method source support | A walking page gives intensity, talk-test, weekly activity, less-sitting, technique, progression, or stop-rule guidance. | Manual source-audit evidence records support for the claim category before promotion. |
+| Walking beginner comprehension | The walking pages are reviewed with a beginner reader. | Evidence records whether the reader can distinguish everyday walking from brisk walking, identify brisk pace, name a starting duration, describe expected body feel, name stop conditions, and identify the source for intensity. |
 | Exercise method boundary | A method section changes sets, reps, rest, load, or progression based on reader symptoms, goals, equipment, history, body measurements, or training response. | The page fails as adaptive programming. |
 | Exercise method source support | A method section gives a concrete amount, effort, progression, or safety claim. | The claim has page-local source support or recorded review evidence identifies the source gap before promotion. |
 | Exercise method comprehension | A proof-slice exercise page is reviewed with a beginner reader. | Evidence records whether the reader can state the starting point, effort, stop condition, and that the page is not a personal program. |
@@ -972,6 +1056,19 @@ taxonomy store, anatomy database, cueing engine, or deployment architecture.
   programming. Static examples, source audit, forbidden-language checks, and
   beginner comprehension evidence mitigate but do not eliminate this semantic
   risk.
+- Brisk walking guidance can drift into a personalized walking plan,
+  weight-loss prescription, step-count mandate, or medical walking program.
+  Static wording, forbidden-language checks, source audit, safety routing, and
+  beginner comprehension evidence mitigate but do not eliminate this semantic
+  risk.
+- Everyday walking guidance can collapse into motivational filler or imply that
+  all walking is equivalent to deliberate moderate-intensity cardio. The
+  two-page contract, practical habit examples, brisk-walking cross-reference,
+  and reader comprehension proof mitigate this risk.
+- Activating `basic_cardio_activity` adds another method label without a
+  metadata store. Validator updates must keep it tied to approved
+  non-equipment cardio activity pages and avoid reactivating unrelated deferred
+  method types.
 - Exercise muscle guidance can drift into overprecise anatomy, EMG instruction,
   posture-correction promises, or individualized cueing if authors overstate
   what a beginner should feel. Role-based wording, soft feel cues, page-local
@@ -1035,6 +1132,12 @@ taxonomy store, anatomy database, cueing engine, or deployment architecture.
 - **Basic cardio equipment**: A visible exercise method type for approved
   cardio-equipment pages that use static beginner guidance for time, effort,
   reset/rest, progression, and stop conditions.
+- **Basic cardio activity**: A visible exercise method type for approved
+  non-equipment aerobic activity pages that use static beginner guidance for
+  time, talk-test effort, repeatability, progression, and stop conditions.
+- **Everyday walking**: A principle-page movement-habit concept for daily
+  walking, sitting interruption, errands, commuting, stairs, and walking breaks;
+  it is not automatically equivalent to deliberate brisk cardio.
 - **Exercise muscle guidance**: The visible `## Muscles involved` section on an
   exercise page, paired with `## What you should feel`.
 - **Role-based muscle guidance**: Muscle wording organized by movement
@@ -1074,6 +1177,12 @@ taxonomy store, anatomy database, cueing engine, or deployment architecture.
 - Exercise muscle guidance spec: `../../../specs/exercise-muscle-guidance.md`.
 - Exercise muscle guidance spec review:
   `../../changes/exercise-muscle-guidance-standard/reviews/spec-review-r1.md`.
+- Brisk walking and everyday walking spec:
+  `../../../specs/brisk-walking-and-everyday-walking.md`.
+- Brisk walking and everyday walking spec review:
+  `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r1.md`.
+- Brisk walking and everyday walking architecture review:
+  `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r1.md`.
 
 ## Readiness
 
@@ -1086,5 +1195,8 @@ architecture review. The rowing-machine basics and beginner workout guidance
 amendment has completed architecture review. The exercise-muscle-guidance
 amendment has completed architecture review.
 
-Exercise-muscle-guidance implementation is not implementation-ready until
+The brisk-walking and everyday-walking amendment has completed architecture
+review.
+
+Walking implementation is not implementation-ready until architecture review,
 planning, test-spec, and required downstream reviews are complete.

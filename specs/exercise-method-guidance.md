@@ -11,6 +11,8 @@ approved
 - Review log: `docs/changes/exercise-method-guidance/review-log.md`
 - Related baseline spec: `specs/markdown-first-primer.md`
 - Related expanded-scope spec: `specs/responsible-breadth.md`
+- Brisk walking and everyday walking spec:
+  `specs/brisk-walking-and-everyday-walking.md`
 - Vision: `VISION.md`
 - Constitution: `CONSTITUTION.md`
 
@@ -126,7 +128,8 @@ using one active method type value from this spec.
 
 R3. The active method type values MUST be exactly:
 `dynamic_resistance`, `bodyweight_progression`, `low_load_control_drill`,
-`isometric_hold`, `mobility_drill`, and `stretch_hold`.
+`isometric_hold`, `mobility_drill`, `stretch_hold`, and approved downstream
+method-type amendments scoped to their approved pages.
 
 R4. The first version MUST NOT require hidden metadata, YAML front matter, a
 shared taxonomy file, or generated data as the source of truth for method type.
@@ -138,6 +141,11 @@ supersedes this source-of-truth rule.
 R6. The `## How much to do` section MUST include these visible labels or
 equivalent plain-language lines: `Beginner starting point:`, `Effort:`,
 `Rest:`, `Progression:`, and `Stop if:`.
+
+R6A. The `basic_cardio_activity` method type MUST include visible beginner
+starting point, effort, progression, and stop language. It MAY omit a rest label
+when the approved page contract frames repeatability or accumulated walking
+time instead of exercise-set rest.
 
 R7. Method guidance MUST be framed as static general education for healthy adult
 beginners or returning beginners, not as a personal instruction to follow.
@@ -212,6 +220,10 @@ R26. The first implementation slice MUST NOT use `loaded_carry` or
 R27. `loaded_carry` and `basic_cardio_equipment` MAY be introduced only by a
 later approved spec or spec amendment after carry or cardio-equipment pages are
 in scope.
+
+R27A. `basic_cardio_activity` is active only for `exercises/brisk-walking.md`
+and later non-equipment aerobic activity pages governed by an approved spec or
+spec amendment.
 
 R28. The first proof slice MUST include these six exercise pages:
 `exercises/chest-press.md`, `exercises/incline-push-up.md`,
@@ -467,8 +479,8 @@ contract until selected.
 - No hidden metadata or generated data source of truth for method type in the
   first version.
 - No broad rewrite of every exercise page in the first implementation slice.
-- No activation of `loaded_carry` or `basic_cardio_equipment` method types in
-  the first slice.
+- No activation of `loaded_carry` or unscoped cardio method types in the first
+  slice.
 - No advanced athlete, sport-specific, powerlifting, Olympic lifting,
   kettlebell ballistic, plyometric, sprint, or competition programming content.
 
@@ -510,8 +522,8 @@ advanced performance programming.
 ## Open questions
 
 None for spec-review. Future spec amendments may add `loaded_carry`,
-`basic_cardio_equipment`, machine-readable metadata, or additional proof-slice
-requirements after those topics are in scope.
+machine-readable metadata, or additional proof-slice requirements after those
+topics are in scope.
 
 ## Next artifacts
 

@@ -158,6 +158,37 @@ class ExerciseMethodGuidanceTest(unittest.TestCase):
 
         self.assertIn("exercise_method_missing_label", finding_codes(text, "exercises/rowing-machine.md"))
 
+    def test_basic_cardio_activity_passes_only_for_brisk_walking_scope(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do
+
+            Method type: basic_cardio_activity
+
+            Beginner starting point: Start with 5-10 minutes of brisk walking.
+            Effort: Use the talk test: you can talk, but not comfortably sing.
+            Progression: First add total minutes, then more brisk minutes.
+            Stop if: Stop for chest pain, severe dizziness, or unusual shortness of breath.
+            """
+        )
+
+        self.assertEqual(finding_codes(text, "exercises/brisk-walking.md"), [])
+        self.assertIn("exercise_method_inactive_type", finding_codes(text, "exercises/fixture-exercise.md"))
+
+    def test_basic_cardio_activity_requires_visible_cardio_labels(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do
+
+            Method type: basic_cardio_activity
+
+            Beginner starting point: Start with 5-10 minutes of brisk walking.
+            Effort: Use the talk test: you can talk, but not comfortably sing.
+            """
+        )
+
+        self.assertIn("exercise_method_missing_label", finding_codes(text, "exercises/brisk-walking.md"))
+
     def test_hidden_only_method_metadata_fails_but_visible_markdown_remains_authoritative(self) -> None:
         hidden_only = textwrap.dedent(
             """\
