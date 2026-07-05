@@ -4,7 +4,7 @@
 
 accepted
 
-This proposal records an accepted content-direction decision for adding brisk walking and everyday walking guidance to GymPrimer. It does not authorize implementation, checker changes, page publication, image generation, navigation promotion, or downstream handoff until required downstream artifacts approve the work.
+This amended proposal records an accepted content-direction decision for adding brisk walking and everyday walking guidance to GymPrimer, including required support images for the brisk walking exercise document. It does not authorize implementation, checker changes, page publication, image generation, navigation promotion, or downstream handoff until required downstream artifacts approve the work.
 
 ## Problem
 
@@ -34,6 +34,7 @@ This is especially relevant because GymPrimer's accepted exercise-method directi
 - Explain muscles involved in beginner-readable, role-based language.
 - Clarify that walking complements strength training rather than replacing all strength work.
 - Use the proposal as a proof case for a non-equipment cardio-activity method type.
+- Add necessary support images to the brisk walking exercise document when they improve exercise comprehension while keeping Markdown as the instructional source of truth.
 
 ## Non-goals
 
@@ -347,18 +348,24 @@ Do not add symptom-specific walking advice for chronic disease, pregnancy, post-
 
 ### Image guidance
 
-Walking pages do not require images by default.
+The brisk walking exercise document should include the necessary support images for a beginner to understand the movement and the broad muscle regions involved.
 
-If images are added, they should follow the accepted exercise-image standard: images should teach setup, movement, or muscle attention; remain subordinate to Markdown; avoid in-image labels and clinical framing; and use provenance-backed generated raster assets when generated.
+Images must follow the accepted exercise-image standard: images should teach setup, movement, or muscle attention; remain subordinate to Markdown; avoid in-image labels and clinical framing; and use provenance-backed generated raster assets when generated.
 
 Recommended first-slice media decision:
 
 | Page | Image recommendation |
 | --- | --- |
-| `exercises/brisk-walking.md` | Optional one `exercise_movement_illustration` showing upright posture, arm swing, and heel-to-toe stride. |
+| `exercises/brisk-walking.md` | Required one `exercise_movement_illustration` showing upright posture, arm swing, and heel-to-toe stride; required one `exercise_muscle_attention_illustration` showing broad walking-related attention regions. |
 | `principles/everyday-walking.md` | No image needed. |
 
-Do not add multiple walking images unless a beginner read test shows text alone is unclear.
+The movement image should teach visible walking form: upright posture, forward gaze, relaxed neck and shoulders, natural arm swing, relaxed hands, and heel-to-toe stride.
+
+The muscle-attention image should teach broad regions only: glutes, thighs, calves, trunk, shoulders or upper back, and feet or ankles.
+
+Do not add labels, red pain marks, wrong/correct framing, exposed musculature, exact anatomy, clinical framing, or any image that becomes the source of truth for technique, muscles, safety, or programming.
+
+Do not add an image to `principles/everyday-walking.md` in this slice.
 
 ## Expected behavior changes
 
@@ -369,6 +376,7 @@ After this proposal is accepted and downstream artifacts are implemented:
 - Beginners can tell the difference between a stroll, everyday walking, and brisk moderate-intensity walking.
 - Walking pages use time, effort, and progression rather than sets and reps.
 - Brisk walking can serve as the first proof of `basic_cardio_activity`.
+- Brisk walking has support images for movement form and broad muscle attention.
 - Everyday walking can support the "move more, sit less" message without pretending that every walk is a workout.
 - Walking content remains static, general, and non-clinical.
 
@@ -384,7 +392,9 @@ Expected touched surfaces:
 | `docs/templates/exercise-card.md` | No immediate change unless walking exposes a cardio-activity method need. |
 | `specs/exercise-method-guidance.md` or equivalent | Add `basic_cardio_activity` if accepted. |
 | `tools/checks/check_markdown_first.py` | No change unless method-type validation is active. |
-| `media/PROVENANCE.md` | Only touched if generated raster media is added. |
+| `media/exercises/brisk-walking/` | Add required movement and muscle-attention raster images. |
+| `media/prompts/exercises/brisk-walking/` | Add exact prompt records for generated raster images. |
+| `media/PROVENANCE.md` | Add approved provenance rows for generated raster media. |
 
 No runtime, app, tracker, database, or generated JSON is needed.
 
@@ -407,7 +417,7 @@ Likely checks:
 - no diagnosis, treatment, rehab, personalized plan, or weight-loss guarantee language;
 - internal links resolve;
 - privacy scan passes;
-- images, if present, have local paths, alt text, and provenance.
+- required brisk walking images have local paths, meaningful alt text, prompt records, approved provenance, page references, supported image purpose, and visual-safety evidence.
 
 The project previously found that structural source checks alone are not enough: source IDs need validation against `SOURCES.md`, and semantic source support still needs review for exercise-specific claims.
 
@@ -429,6 +439,7 @@ Beginner comprehension proof should ask:
 - What should your body feel?
 - What would make you stop?
 - Which source would you click to verify the intensity claim?
+- Do the movement and muscle-attention images clarify the page without replacing the written instructions?
 
 A prior GymPrimer review found that general approval from a beginner reader was not enough; manual proof should record per-page comprehension outcomes.
 
@@ -442,14 +453,14 @@ Rollout should proceed through normal artifact order:
 4. Draft `exercises/brisk-walking.md`.
 5. Draft `principles/everyday-walking.md`.
 6. Add page-local sources and update `SOURCES.md` for reused sources.
-7. Add one optional walking technique image only if needed.
-8. Run automated checks, manual source review, and beginner read-test proof before promotion.
+7. Add the required brisk walking movement and muscle-attention images with prompt records, provenance rows, alt text, visual-safety evidence, and page references.
+8. Run automated checks, manual source review, visual-safety review, and beginner read-test proof before promotion.
 
 Rollback options:
 
 - If the two-page split is too much, keep `exercises/brisk-walking.md`, fold everyday walking into a short section, and defer `principles/everyday-walking.md`.
 - If brisk walking method guidance becomes too prescriptive, reduce it to "try 5-10 minutes" and link to a principle page.
-- If the walking image is not helpful, remove the image reference and asset while keeping text-only guidance.
+- If a walking image is not helpful or fails visual-safety/provenance review, regenerate, revise, or remove that image and re-review the media decision before promotion; reverting the brisk page to text-only requires another approved proposal/spec decision.
 
 ## Risks and mitigations
 
@@ -460,7 +471,8 @@ Rollback options:
 | Page becomes too medical | High | No disease-specific walking plans; link red flags and route to professionals. |
 | Method guidance feels like a personalized plan | Medium | Use "beginner starting point" and general education wording. |
 | Step-count claims become overconfident | Medium | Avoid fixed step-count mandates in first slice. |
-| Images add little value | Low | Default to text-only; add one image only if needed. |
+| Images add little value | Medium | Require only two support images for the exercise page, keep them subordinate to Markdown, and validate them with visual-safety and beginner proof. |
+| Muscle-attention image becomes too anatomical or clinical | Medium | Use broad regions only; avoid labels, red marks, exact anatomy, and exposed musculature. |
 | Source support is too broad | Medium | Use direct sources for intensity and technique claims. |
 | Everyday walking page becomes motivational fluff | Medium | Keep it practical: sitting breaks, short walks, errands, stairs, consistency. |
 
@@ -474,7 +486,7 @@ Downstream spec or implementation can decide only contract details:
 - exact requirement wording for `principles/everyday-walking.md`;
 - exact `basic_cardio_activity` method-contract wording and validation timing;
 - source ID naming and `SOURCES.md` reuse details;
-- whether walking pages need an image;
+- exact asset paths, prompt-record paths, and alt text for the required brisk walking images;
 - exact beginner read-test wording.
 
 ## Initial intent preservation
@@ -487,6 +499,7 @@ Downstream spec or implementation can decide only contract details:
 | Follow best practices | in scope | Context; Testing and verification strategy; Risks and mitigations |
 | Fit GymPrimer project direction | in scope | Vision fit; Architecture impact |
 | Avoid unsafe medical or personalized guidance | in scope | Non-goals; Safety guidance; Risks and mitigations |
+| Add all necessary images for the exercise document | in scope | Image guidance; Architecture impact; Testing and verification strategy |
 
 ## Scope budget
 
@@ -498,7 +511,8 @@ Downstream spec or implementation can decide only contract details:
 | Walking technique guidance | core to this proposal | Beginners need posture, arm swing, and foot-roll cues. |
 | Walking intensity guidance | core to this proposal | Distinguishes brisk walking from strolling. |
 | Muscle guidance | same-slice dependency | Walking page should use role-based muscle guidance. |
-| Image for brisk walking | first-slice candidate | Useful only if it improves posture or stride comprehension. |
+| Brisk walking movement image | core to this proposal | Helps beginners see posture, arm swing, and heel-to-toe stride. |
+| Brisk walking muscle-attention image | core to this proposal | Helps beginners connect the role-based muscle guidance to broad body regions without exact anatomy. |
 | Step-count guidance | deferable follow-up | Avoids overcomplicating first slice. |
 | Walking program | deferable follow-up | Too prescriptive before basic pages are proven. |
 | Treadmill walking page | separate implementation slice | Related but equipment-specific. |
@@ -514,16 +528,15 @@ Downstream spec or implementation can decide only contract details:
 | 2026-07-05 | Use talk test and moderate-intensity framing. | Directly supported by CDC and NHS and beginner-readable. | Heart-rate zones or calorie targets. |
 | 2026-07-05 | Avoid step-count mandates in first slice. | Step targets can distract from intensity and consistency. | 10,000-step rule or fixed daily step prescription. |
 | 2026-07-05 | Keep everyday walking as movement habit guidance. | Useful for reducing sitting and building consistency. | Treat every walk as a formal workout. |
+| 2026-07-05 | Require two support images for `exercises/brisk-walking.md`. | Maintainer clarified that the exercise document should include all necessary images according to best practices. | Keep brisk walking text-only; add only one optional movement image. |
 
 ## Next artifacts
 
-1. Proposal review.
-2. Focused exercise-method spec amendment for `basic_cardio_activity`.
-3. Draft `exercises/brisk-walking.md`.
-4. Draft `principles/everyday-walking.md`.
-5. Source-support review.
-6. Optional image decision.
-7. Beginner read-test proof before promotion.
+1. Proposal review for this amended image decision.
+2. Spec-review R2 resolution and amended spec re-review.
+3. Downstream architecture, plan, and test-spec updates as needed.
+4. Implement required brisk walking images with prompt records, provenance, and visual-safety proof.
+5. Beginner read-test proof before promotion.
 
 ## Follow-on artifacts
 
@@ -532,12 +545,13 @@ Downstream spec or implementation can decide only contract details:
 - Review log: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/review-log.md`
 - Review resolution: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/review-resolution.md`
 - Spec: `specs/brisk-walking-and-everyday-walking.md`
+- Spec review R2: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r2.md`
 
 ## Readiness
 
-This proposal is accepted and ready for the next lifecycle stage: `spec`.
+This amended proposal is accepted and ready for spec re-review.
 
-It is not ready for implementation until downstream artifacts define the exact `basic_cardio_activity` contract, the `exercises/brisk-walking.md` page contract, the `principles/everyday-walking.md` page contract, validation timing, source IDs, optional image handling, and beginner read-test proof.
+It is not ready for implementation until proposal review accepts the amended image decision and downstream artifacts define or confirm the exact `basic_cardio_activity` contract, the `exercises/brisk-walking.md` page contract, the `principles/everyday-walking.md` page contract, validation timing, source IDs, required image handling, visual-safety proof, and beginner read-test proof.
 
 [cdc-physical-activity-intensity]: https://www.cdc.gov/physical-activity-basics/measuring/index.html
 [cdc-adult-activity]: https://www.cdc.gov/physical-activity-basics/guidelines/adults.html

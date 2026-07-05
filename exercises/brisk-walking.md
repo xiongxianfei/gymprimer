@@ -19,6 +19,11 @@ Use this page when you want a simple, no-equipment way to practice beginner
 cardio. For daily movement that is not necessarily brisk, see
 [Everyday Walking](../principles/everyday-walking.md).
 
+Use these images as broad visual references. The Markdown instructions below
+remain the source of truth for effort, technique, muscles, and safety.
+
+![Brisk walking movement reference showing upright posture, forward gaze, relaxed shoulders, natural arm swing, and heel-to-toe stride](../media/exercises/brisk-walking/movement.png)
+
 ## Before you start
 
 Choose a route where you can pay attention to traffic, surfaces, weather, and
@@ -54,6 +59,8 @@ the main check.
 
 Treat this as broad body-awareness guidance, not a test of exact muscle
 activation.
+
+![Brisk walking muscle-attention reference with broad highlights on glutes, thighs, calves, trunk, shoulders, upper back, feet, and ankles](../media/exercises/brisk-walking/muscle-attention.png)
 
 ## Walking technique
 

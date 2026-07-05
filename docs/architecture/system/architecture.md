@@ -34,6 +34,8 @@ The exercise-muscle-guidance amendment was approved by
 `docs/changes/exercise-muscle-guidance-standard/reviews/architecture-review-r1.md`.
 The brisk-walking and everyday-walking guidance amendment was approved by
 `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r1.md`.
+The required brisk-walking media amendment was approved by
+`docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r2.md`.
 
 ## Related artifacts
 
@@ -88,6 +90,10 @@ The brisk-walking and everyday-walking guidance amendment was approved by
   - Spec: `../../../specs/brisk-walking-and-everyday-walking.md`
   - Spec review:
     `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r1.md`
+  - Amended proposal review:
+    `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/proposal-review-r3.md`
+  - Amended spec review:
+    `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r3.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
@@ -172,6 +178,11 @@ Goals:
   Breadth pages may also use generated raster support images for pattern
   alignment, anatomical region context, and compact exercise previews when
   those images satisfy the stricter expanded media-purpose rules.
+- Exercise images remain optional by default unless a downstream approved spec
+  requires support images for a specific exercise document. The amended brisk
+  walking spec requires exactly one `exercise_movement_illustration` and one
+  `exercise_muscle_attention_illustration` for `exercises/brisk-walking.md`;
+  `principles/everyday-walking.md` remains text-only.
 - New generated raster images on full exercise documents use setup, movement,
   or muscle-attention purposes. Existing exercise images that use
   `equipment_identification` or `key_movement_illustration` remain valid
@@ -353,6 +364,11 @@ Logical containers:
   `## How much to do` guidance with `Method type: basic_cardio_activity`, time,
   talk-test effort, progression, and stop rules instead of strength-training
   sets and reps.
+- **Brisk walking exercise media**: `exercises/brisk-walking.md` requires two
+  generated raster support assets under `media/exercises/brisk-walking/`: one
+  movement image and one muscle-attention image. Each asset is governed by the
+  exercise-image purpose, prompt-record, provenance, alt-text, page-reference,
+  and visual-safety architecture.
 - **Everyday walking principle page**: `principles/everyday-walking.md` is a
   daily movement and sitting-interruption principle page. It is linked
   conceptually to brisk walking but does not treat every step as formal cardio.
@@ -603,10 +619,13 @@ Basic cardio activity authoring flow:
    everyday walking from brisk walking, identify how to know the pace is brisk,
    name a reasonable starting duration, describe what the body should feel,
    name stop conditions, and identify the source supporting the intensity claim.
-7. If an optional brisk-walking movement image is added, the existing exercise
-   image and generated raster prompt-record architecture governs path, purpose,
-   provenance, prompt records, alt text, and visual-safety evidence. The
-   everyday walking principle page remains text-only in the first slice.
+7. The brisk walking page references exactly one generated raster
+   `exercise_movement_illustration` and exactly one generated raster
+   `exercise_muscle_attention_illustration` under
+   `media/exercises/brisk-walking/`. The existing exercise-image and generated
+   raster prompt-record architecture governs path, purpose, provenance, prompt
+   records, alt text, page references, and visual-safety evidence. The everyday
+   walking principle page remains text-only in the first slice.
 
 Exercise muscle guidance authoring flow:
 
@@ -748,6 +767,10 @@ Scope control:
 - `## What you should feel` translates muscle roles into beginner body
   awareness and must not imply that a reader is wrong because they do not feel
   one exact muscle.
+- The brisk walking muscle-attention image may show only broad walking-related
+  regions named by the page, such as glutes, thighs, calves, trunk, shoulders or
+  upper back, and feet or ankles. The image must not expose precise anatomy,
+  embed labels, imply diagnosis or treatment, or make exact activation claims.
 
 Expanded static content page contracts:
 
@@ -794,6 +817,10 @@ Source quality and review evidence:
 Media:
 
 - Images are optional; a text-only page can be valid.
+- A downstream approved spec may make exercise images required for a specific
+  exercise document. For brisk walking, `exercises/brisk-walking.md` requires
+  exactly one movement image and one muscle-attention image; this requirement
+  does not change the default text-only validity of unrelated exercise pages.
 - Original Markdown-first v0.1 media purposes are `equipment_identification`
   and `key_movement_illustration`.
 - Expanded Responsible Breadth media purposes add
@@ -888,6 +915,10 @@ Observability:
 - Exercise image validation findings identify image-count, muscle-attention
   limit, media-purpose, alt-text, visual-safety evidence, provenance, and
   page-reference failures.
+- Brisk walking image validation reports missing required movement image,
+  missing required muscle-attention image, wrong image purpose, missing local
+  asset, missing or mismatched prompt record, missing approved provenance,
+  missing page reference, generic alt text, and missing visual-safety evidence.
 - Expanded static content validation should identify page class, missing section,
   missing metadata, missing red-flag link, source-count failure, source-index
   failure, excluded-scope failure, media-provenance failure, and privacy failure
@@ -970,6 +1001,7 @@ deployment architecture.
 | Expanded media purpose | A pattern page references an alignment image. | The provenance row uses `pattern_alignment_illustration`, not a generic movement purpose. |
 | Condition image safety | A condition page references an anatomical-region image. | The image gives region context without implying diagnosis, pathology, or treatment. |
 | Exercise image purpose | A new generated raster image is referenced from a full exercise document. | The provenance row uses `exercise_setup_illustration`, `exercise_movement_illustration`, or `exercise_muscle_attention_illustration` according to the teaching purpose. |
+| Brisk walking required media | `exercises/brisk-walking.md` is promoted under the amended walking spec. | The page references exactly one movement image and one muscle-attention image, both repository-local, approved in provenance, linked to prompt records, visually reviewed, and subordinate to Markdown. |
 | Exercise image count | A full exercise document references exercise images. | The page uses zero to three exercise images unless a downstream approved spec or plan records an exception, and it uses at most one muscle-attention image. |
 | Exercise visual safety | A full exercise document references an exercise image. | Review evidence confirms one-concept teaching purpose, Markdown consistency, no in-image labels or claims, no identifying person or misleading brand, no clinical framing, and color-accessibility. |
 | Existing exercise image compatibility | An existing exercise page references a raster image with `equipment_identification` or `key_movement_illustration`. | The image remains valid without media-purpose migration when its provenance row is otherwise valid. |
@@ -1183,6 +1215,12 @@ deployment architecture.
   `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r1.md`.
 - Brisk walking and everyday walking architecture review:
   `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r1.md`.
+- Brisk walking and everyday walking required media architecture review:
+  `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r2.md`.
+- Brisk walking and everyday walking amended proposal review:
+  `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/proposal-review-r3.md`.
+- Brisk walking and everyday walking amended spec review:
+  `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r3.md`.
 
 ## Readiness
 
@@ -1195,8 +1233,9 @@ architecture review. The rowing-machine basics and beginner workout guidance
 amendment has completed architecture review. The exercise-muscle-guidance
 amendment has completed architecture review.
 
-The brisk-walking and everyday-walking amendment has completed architecture
-review.
+The original brisk-walking and everyday-walking amendment has completed
+architecture review. The required brisk-walking media amendment has completed
+architecture review.
 
-Walking implementation is not implementation-ready until architecture review,
-planning, test-spec, and required downstream reviews are complete.
+Walking image implementation is not implementation-ready until planning,
+test-spec, and required downstream reviews are complete.

@@ -31,7 +31,7 @@ This spec defines the observable contract for adding brisk walking and everyday 
 
 The change adds two complementary Markdown pages, keeps brisk walking and everyday walking distinct, introduces `basic_cardio_activity` as the non-equipment cardio method type for brisk walking, and keeps the work static, citation-backed, beginner-readable, and non-clinical.
 
-This spec does not authorize page implementation, checker changes, image generation, publication, navigation promotion, or PR readiness. It prepares the change for `spec-review`.
+This amended spec does not authorize page implementation, checker changes, publication, navigation promotion, or PR readiness. It changes the prior text-only media decision and prepares the revised media contract for `spec-review`.
 
 ## Glossary
 
@@ -71,10 +71,12 @@ When citation support is reviewed
 Then the claim has page-local source support
 And the reused source ID appears in `SOURCES.md`.
 
-Example E5: optional walking image remains support-only
-Given `exercises/brisk-walking.md` includes a generated walking image
+Example E5: required walking images remain support-only
+Given `exercises/brisk-walking.md` includes generated walking images
 When image validation and visual-safety review run
-Then the image uses `exercise_movement_illustration`, has meaningful alt text, has approved provenance, contains no in-image labels, and remains subordinate to the Markdown guidance.
+Then one image uses `exercise_movement_illustration`
+And one image uses `exercise_muscle_attention_illustration`
+And both images have meaningful alt text, approved provenance, prompt records, no in-image labels, no red pain marks, and remain subordinate to the Markdown guidance.
 
 ## Requirements
 
@@ -124,9 +126,13 @@ BWG-R22. Reused walking, activity-guideline, intensity, technique, and safety so
 
 BWG-R23. Source review MUST sample the claims for intensity, talk test, weekly activity guidance when used, less-sitting framing, walking technique, starter duration or progression, and stop rules.
 
-BWG-R24. `exercises/brisk-walking.md` MAY include no image and MUST remain valid as a text-only page.
+BWG-R24. `exercises/brisk-walking.md` MUST include exactly two generated raster support images in the media-bearing walking slice: one `exercise_movement_illustration` and one `exercise_muscle_attention_illustration`.
 
-BWG-R25. If `exercises/brisk-walking.md` includes a generated raster image in the first slice, it MUST include no more than one walking image, the image MUST use `exercise_movement_illustration`, and the image MUST satisfy `specs/exercise-image-standard.md`.
+BWG-R25. The `exercise_movement_illustration` on `exercises/brisk-walking.md` MUST teach brisk-walking form by showing upright posture, forward gaze, relaxed neck and shoulders, natural arm swing, relaxed hands, and heel-to-toe walking without race-walking, running, treadmill, hiking, wearable-tracker, wrong/correct, or clinical framing.
+
+BWG-R25A. The `exercise_muscle_attention_illustration` on `exercises/brisk-walking.md` MUST teach only broad attention regions for the muscles involved in walking, including glutes, thighs, calves, trunk, shoulders or upper back, and feet or ankles. It MUST avoid precise anatomy, exposed musculature, muscle labels, diagnosis, treatment, rehabilitation, pain marks, and exact activation claims.
+
+BWG-R25B. Each generated raster image on `exercises/brisk-walking.md` MUST satisfy `specs/exercise-image-standard.md`, including local asset path, meaningful alt text, prompt record, approved provenance row, supported media purpose, visual-safety review, and page reference.
 
 BWG-R26. `principles/everyday-walking.md` MUST NOT include an image in the first implementation slice unless a later approved spec amendment records why the principle page needs one.
 
@@ -134,7 +140,7 @@ BWG-R27. Walking pages MUST NOT include a calorie target, weight-loss prescripti
 
 BWG-R28. Walking pages MUST NOT include race-walking technique, running progression, hiking, rucking, loaded walking, treadmill protocol, incline-walking protocol, or a full walking program in the first slice.
 
-BWG-R29. Automated validation SHOULD check walking page existence, required headings, page-local sources, `SOURCES.md` reuse, `Method type: basic_cardio_activity`, central safety routing, forbidden personalization or medical wording, privacy, links, and image provenance when images are present.
+BWG-R29. Automated validation SHOULD check walking page existence, required headings, page-local sources, `SOURCES.md` reuse, `Method type: basic_cardio_activity`, central safety routing, forbidden personalization or medical wording, privacy, links, required brisk-walking image references, image purpose, alt text, prompt records, provenance rows, and page references.
 
 BWG-R30. Manual beginner proof MUST record whether a beginner can distinguish everyday walking from brisk walking, identify how to know the pace is brisk, name a reasonable starting duration, describe what the body should feel, name stop conditions, and identify which source supports the intensity claim.
 
@@ -154,7 +160,7 @@ Outputs:
 - New principle page contract for `principles/everyday-walking.md`.
 - Updated method contract recognizing `basic_cardio_activity`.
 - Page-local sources and reused source IDs.
-- Optional generated raster image, provenance row, and prompt record only if the first slice decides an image is needed.
+- Required generated raster movement and muscle-attention images for `exercises/brisk-walking.md`, with provenance rows and prompt records.
 - Review, validation, source-audit, and beginner proof evidence under the change root.
 
 ## State and invariants
@@ -163,7 +169,7 @@ Outputs:
 - The accepted Option C two-page split remains the decision for this spec.
 - `basic_cardio_activity` remains distinct from `basic_cardio_equipment`.
 - Everyday walking and brisk walking must remain distinguishable in reader-facing text.
-- Generated images, if any, support Markdown but never prove technique, safety, anatomy, or programming claims.
+- Generated images support Markdown but never prove technique, safety, anatomy, or programming claims.
 - Walking content remains static general education and never becomes personalized coaching, diagnosis, treatment, rehabilitation, or a walking program.
 - Implementation remains blocked until downstream workflow artifacts approve it.
 
@@ -175,7 +181,8 @@ Outputs:
 - An everyday walking page that implies all walking counts as deliberate moderate-intensity cardio fails this spec.
 - A walking page with source links only in `SOURCES.md` and no page-local source support fails source review.
 - A walking page that gives disease-specific, pregnancy-specific, post-surgery, injury-recovery, cardiopulmonary, or return-to-walking advice fails first-slice scope.
-- A generated walking image without approved provenance, meaningful alt text, local path, and image-purpose alignment fails promotion.
+- A brisk walking page without exactly one movement image and exactly one muscle-attention image fails the amended media contract.
+- A generated walking image without approved provenance, meaningful alt text, local path, prompt record, visual-safety review, page reference, and image-purpose alignment fails promotion.
 - If automated validation cannot prove semantic source support or beginner comprehension, manual source audit and read-test evidence remain required.
 
 ## Compatibility and migration
@@ -184,7 +191,7 @@ This change is additive. It adds two new Markdown pages and a new non-equipment 
 
 The method-contract work must avoid reactivating `basic_cardio_equipment` or `loaded_carry` unless a separate approved spec or spec amendment does so.
 
-Rollback is Markdown-first. If the brisk walking method guidance is too prescriptive, narrow or remove the problematic method wording while preserving safety routing and sources. If the everyday walking page duplicates the brisk page too heavily, revise cross-links and scope boundaries rather than merging the pages without a new approved decision. If an optional image is not useful or not valid, remove the image reference and related unused media artifacts while keeping the text-only page.
+Rollback is Markdown-first. If the brisk walking method guidance is too prescriptive, narrow or remove the problematic method wording while preserving safety routing and sources. If the everyday walking page duplicates the brisk page too heavily, revise cross-links and scope boundaries rather than merging the pages without a new approved decision. If a required walking image is not useful or not valid, remove or replace the image artifact and update prompt, provenance, manual proof, and validation evidence before promotion; reverting the brisk page to text-only requires a later approved spec amendment.
 
 ## Observability
 
@@ -197,14 +204,15 @@ Automated validation should report file-level failures for:
 - reused source IDs missing from `SOURCES.md`;
 - unresolved `RED-FLAGS.md` links;
 - forbidden medical, personalization, weight-loss, calorie, step-count mandate, heart-rate-zone, tracker, or adaptive-plan wording where deterministic;
-- image path, alt-text, provenance, purpose, prompt-record, and page-reference failures when an image is present;
+- missing required brisk-walking movement or muscle-attention image references;
+- image path, alt-text, provenance, purpose, prompt-record, and page-reference failures;
 - privacy scan failures.
 
 Manual validation must record:
 
 - sampled source-support results for the claims listed in BWG-R23;
 - beginner read-test outcomes for the prompts listed in BWG-R30;
-- optional visual-safety evidence when a walking image is included;
+- visual-safety evidence for the required walking images;
 - residual risk where automated checks cannot prove source support, tone, or comprehension.
 
 Validation reports must not claim CI passed unless a CI run was actually observed.
@@ -225,7 +233,7 @@ Headings must make the distinction between everyday walking and brisk walking ea
 
 Tables may be used only when short enough to remain readable in plain Markdown. If a table becomes too wide, the implementation should use bullets instead.
 
-If an image is used, it must have meaningful alt text and nearby Markdown must carry the instructional content for readers who cannot see the image.
+Images must have meaningful alt text and nearby Markdown must carry the instructional content for readers who cannot see the images.
 
 The pages must not rely on color, icons, video, JavaScript, generated HTML, calculators, or interactive controls to communicate the walking guidance.
 
@@ -249,6 +257,10 @@ EC6. The method validator still knows only the six previous method types. The im
 
 EC7. A generated image shows a person walking but includes in-image labels or red pain marks. The image fails visual-safety and image-standard review.
 
+EC7A. The brisk walking page includes only a movement image and omits the muscle-attention image. The page fails the amended media contract because the approved media-bearing slice requires both support images.
+
+EC7B. The brisk walking page includes a muscle-attention image with exact anatomical muscles, exposed musculature, or muscle labels. The image fails the amended media contract because muscle attention must remain broad and beginner-readable.
+
 EC8. The everyday walking page begins to sound like motivational filler. The page fails content review unless it gives practical daily movement examples, scope boundaries, safety notes, and sources.
 
 ## Non-goals
@@ -267,12 +279,13 @@ EC8. The everyday walking page begins to sound like motivational filler. The pag
 - No tracker app, wearable integration, calculator, dashboard, user input, or adaptive recommendation flow.
 - No broad migration of existing exercise pages.
 - No generated image as source of truth.
+- No image on `principles/everyday-walking.md` in this slice.
 
 ## Acceptance criteria
 
 AC1. Spec review confirms that Option C, `exercises/brisk-walking.md`, `principles/everyday-walking.md`, and `basic_cardio_activity` are contract decisions rather than open product questions.
 
-AC2. Spec review confirms that only downstream contract details remain open, including exact requirement wording in amended specs, validation timing, source ID finalization, optional image use, and exact read-test wording.
+AC2. Spec review confirms that only downstream contract details remain open, including exact requirement wording in amended specs, validation timing, source ID finalization, required image asset details, and exact read-test wording.
 
 AC3. The spec defines testable page contracts for brisk walking and everyday walking.
 
@@ -282,7 +295,7 @@ AC5. The spec defines source-support, source-index, and manual source-audit obli
 
 AC6. The spec defines safety boundaries and stop-rule obligations without authorizing medical or personalized walking guidance.
 
-AC7. The spec defines image-optional behavior and the required constraints if a brisk walking image is added.
+AC7. The spec defines required brisk-walking movement and muscle-attention image behavior and the constraints each image must satisfy.
 
 AC8. The spec defines automated and manual validation surfaces for implementation planning and test-spec authoring.
 
@@ -299,22 +312,24 @@ Downstream artifacts may decide only contract details needed to implement the ac
 - exact final wording for the `basic_cardio_activity` method-contract amendment;
 - whether `basic_cardio_activity` validation is updated in the first implementation slice or covered by manual proof until validator work is approved;
 - exact source IDs used on each page after `SOURCES.md` review;
-- whether `exercises/brisk-walking.md` uses no image or one optional `exercise_movement_illustration`;
+- exact final asset paths, prompt-record paths, and alt text for the required `exercises/brisk-walking.md` movement and muscle-attention images;
 - exact beginner read-test wording and evidence format.
 
 ## Next artifacts
 
 - Spec review.
 - Architecture assessment or architecture artifact if spec review determines the method-contract and validation changes need one.
-- Execution plan covering method contract, walking pages, source index, validation, optional media, source audit, and beginner proof.
+- Execution plan update covering method contract, walking pages, source index, validation, required media, source audit, and beginner proof.
 - Test specification mapping requirements to automated checks and manual evidence.
 
 ## Follow-on artifacts
 
 - Spec review R1: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r1.md`
+- Spec review R2: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r2.md`
+- Spec review R3: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r3.md`
 
 ## Readiness
 
 Approved for downstream architecture assessment.
 
-This spec is not ready for implementation until spec review is approved and required downstream architecture, planning, test-spec, test-spec-review, implementation, review, and verification artifacts are complete.
+This amended spec is not ready for implementation until required downstream architecture, planning, test-spec, test-spec-review, implementation, review, and verification artifacts are updated or confirmed current.

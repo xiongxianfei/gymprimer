@@ -9,26 +9,26 @@ active
 - Spec: `specs/brisk-walking-and-everyday-walking.md`
 - Plan: `docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md`
 - Architecture: `docs/architecture/system/architecture.md`
-- Architecture review: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r1.md`
+- Architecture review: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r2.md`
 
 ## Input artifact identities
 
 | Input | Path | Status / Review state | Identity |
 | --- | --- | --- | --- |
-| Proposal | `docs/proposals/2026-07-05-brisk-walking-and-everyday-walking.md` | accepted | Proposal-review R2 approved on 2026-07-05. |
-| Spec | `specs/brisk-walking-and-everyday-walking.md` | approved | Spec-review R1 approved on 2026-07-05. |
-| Spec review | `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r1.md` | approved | No material findings. |
-| Architecture | `docs/architecture/system/architecture.md` | approved | Architecture-review R1 approved the walking amendment on 2026-07-05. |
-| Plan | `docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md` | reviewed | Plan-review R1 approved on 2026-07-05. |
-| Plan review | `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/plan-review-r1.md` | approved | No material findings. |
+| Proposal | `docs/proposals/2026-07-05-brisk-walking-and-everyday-walking.md` | accepted | Proposal-review R3 approved the required brisk-walking movement and muscle-attention image amendment on 2026-07-05. |
+| Spec | `specs/brisk-walking-and-everyday-walking.md` | approved | Spec-review R3 approved the amended media contract and closed SR-WALK-IMG-1. |
+| Spec review | `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r3.md` | approved | No material findings; eventual test-spec readiness was conditional on downstream architecture and plan updates. |
+| Architecture | `docs/architecture/system/architecture.md` | approved | Architecture-review R2 approved the required brisk-walking media amendment. |
+| Plan | `docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md` | reviewed | Plan-review R2 approved M4 for required brisk-walking images. |
+| Plan review | `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/plan-review-r2.md` | approved | No material findings; immediate next stage is test-spec. |
 
 ## Testing strategy
 
-Unit tests cover method-type scope, required labels, forbidden wording, template prompts, real-page structure, source-index reuse, muscle/feel sections, and optional image behavior.
+Unit tests cover method-type scope, required labels, forbidden wording, template prompts, real-page structure, source-index reuse, muscle/feel sections, and required image behavior.
 
-Integration-style checker runs cover the actual Markdown pages, `SOURCES.md`, `RED-FLAGS.md`, and optional media provenance.
+Integration-style checker runs cover the actual Markdown pages, `SOURCES.md`, `RED-FLAGS.md`, and required media provenance.
 
-Manual proof covers semantic source support, beginner comprehension, optional image necessity, and residual risk because deterministic checks cannot prove claim support or reader understanding.
+Manual proof covers semantic source support, beginner comprehension, M4 required image suitability, and residual risk because deterministic checks cannot prove claim support, reader understanding, or visual instructional value.
 
 No end-to-end browser test is required because the product surface is GitHub-readable Markdown and this change introduces no runtime, UI, generated HTML dependency, tracker, calculator, account, or API.
 
@@ -59,12 +59,14 @@ No end-to-end browser test is required because the product surface is GitHub-rea
 | BWG-R21 | BWG-T3, BWG-T4, CMD6 | integration | Both pages need page-local `## Sources`. |
 | BWG-R22 | BWG-T7, CMD6 | integration | Reused source IDs must appear in `SOURCES.md`. |
 | BWG-R23 | BWG-MP1 | manual | Source-audit proof covers named claim categories. |
-| BWG-R24 | BWG-T8, CMD4 | unit, integration | Brisk page remains valid with no image. |
-| BWG-R25 | BWG-T8, BWG-MP3, CMD4 | unit, manual | If image exists, image-standard proof applies. |
-| BWG-R26 | BWG-T8, CMD4 | integration | Everyday walking remains text-only unless a later spec changes it. |
+| BWG-R24 | BWG-T8, BWG-T9, BWG-MP3, CMD4, CMD9 | unit, integration, manual | Brisk page must include one movement image and one muscle-attention image. |
+| BWG-R25 | BWG-T8, BWG-MP3, CMD4, CMD9 | unit, manual | Movement image must teach brisk-walking form and satisfy image-standard proof. |
+| BWG-R25A | BWG-T8, BWG-MP3, CMD4, CMD9 | unit, manual | Muscle-attention image must remain broad and satisfy image-standard proof. |
+| BWG-R25B | BWG-T8, BWG-T9, BWG-MP3, CMD4, CMD9 | unit, manual | Required generated raster image metadata, provenance, prompt records, and page refs must be valid. |
+| BWG-R26 | BWG-T8, CMD4, CMD9 | integration | Everyday walking remains text-only unless a later spec changes it. |
 | BWG-R27 | BWG-T5, CMD1, CMD6, CMD7 | unit, integration | Forbidden calorie, weight-loss, step, tracker, and adaptive behavior is checked where deterministic. |
 | BWG-R28 | BWG-T5, CMD6 | unit, integration | Race-walking, running, hiking, rucking, treadmill, incline, and walking-program scope is excluded. |
-| BWG-R29 | BWG-T1-BWG-T8, CMD1-CMD7 | unit, integration | Automated validation surfaces are implemented across milestones. |
+| BWG-R29 | BWG-T1-BWG-T9, CMD1-CMD11 | unit, integration | Automated validation surfaces are implemented across milestones. |
 | BWG-R30 | BWG-MP2 | manual | Beginner proof records the walking-specific comprehension prompts. |
 
 ## Example coverage map
@@ -75,7 +77,7 @@ No end-to-end browser test is required because the product surface is GitHub-rea
 | E2 | BWG-T4, BWG-MP2 | Everyday walking habit framing and distinction from brisk cardio. |
 | E3 | BWG-T1, BWG-T2, BWG-T3 | Method type and method-shape checks. |
 | E4 | BWG-T7, BWG-MP1 | Page-local source and source-index proof. |
-| E5 | BWG-T8, BWG-MP3 | Optional image behavior and text-only validity. |
+| E5 | BWG-T8, BWG-T9, BWG-MP3 | Required movement and muscle-attention image behavior. |
 
 ## Edge case coverage
 
@@ -88,6 +90,8 @@ No end-to-end browser test is required because the product surface is GitHub-rea
 | EC5 source index without page-local source | BWG-T7, CMD6 | integration | Page-local source omission fails. |
 | EC6 validator lacks method type | BWG-T1, CMD1 | unit | Method validator must accept scoped `basic_cardio_activity`. |
 | EC7 image with labels or pain marks | BWG-T8, CMD4 | unit | Existing exercise-image checks fail unsafe image behavior. |
+| EC7A missing required brisk image | BWG-T8, BWG-T9, BWG-MP3, CMD4, CMD9 | integration, manual | Brisk page must include both required support image purposes. |
+| EC7B exact anatomy muscle image | BWG-T8, BWG-MP3, CMD4, CMD9 | unit, manual | Muscle-attention image must stay broad and unlabeled. |
 | EC8 motivational filler | BWG-T4, BWG-MP2 | integration, manual | Everyday page must contain practical examples and pass comprehension proof. |
 
 ## Validation commands
@@ -97,19 +101,23 @@ No end-to-end browser test is required because the product surface is GitHub-rea
 | CMD1 | `python3 -m unittest tests.test_exercise_method_guidance` | planned-for-implementation | implementation agent | M1 | M1 code-review | Nonzero exit blocks M1 closeout. | Zero tests discovered blocks M1 closeout. | M1 validation notes and `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/validation-ledger.md` | Local read/write test fixtures only; no network or publication. |
 | CMD2 | `python3 -m unittest tests.test_markdown_first_templates tests.test_markdown_first_real_pages` | planned-for-implementation | implementation agent | M1 | M1 code-review | Nonzero exit blocks milestone closeout. | Zero tests discovered blocks milestone closeout. | Validation ledger | Local unittest only; no network or publication. |
 | CMD3 | `python3 -m unittest tests.test_exercise_muscle_guidance` | planned-for-implementation | implementation agent | M2 | M2 code-review | Nonzero exit blocks M2 closeout. | Zero tests discovered blocks M2 closeout. | Validation ledger | Local unittest only; no network or publication. |
-| CMD4 | `python3 -m unittest tests.test_exercise_image_standard` | existing/configured | implementation agent | M3 | M3 code-review when image is present; otherwise verify as regression smoke | Nonzero exit blocks required milestone when image is present. | Zero tests discovered blocks when command is required. | Validation ledger | Local unittest only; no network or image generation. |
+| CMD4 | `python3 -m unittest tests.test_exercise_image_standard` | existing/configured | implementation agent | M3 and M4 | M3 code-review for historical image audit; M4 code-review for required images | Nonzero exit blocks M3 or M4 closeout when required by that milestone. | Zero tests discovered blocks M3 or M4 closeout when required by that milestone. | Validation ledger | Local unittest only; no network or image generation. |
 | CMD5 | `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` | existing/configured | implementation agent | M2 | M2 code-review | Nonzero exit blocks milestone closeout. | Zero tests discovered blocks milestone closeout. | Validation ledger | Local unittest discovery only; no network or publication. |
-| CMD6 | `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` | planned-for-implementation | implementation agent | M2 | M2 code-review | Nonzero exit blocks M2 and later promotion readiness unless the failure is an expected text-only media gap explicitly recorded by M3. | Not applicable. | Validation ledger | Local checker only; no network or publication. |
+| CMD6 | `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` | planned-for-implementation | implementation agent | M2 and M4 | M2 code-review for page contract; M4 code-review for required image references | Nonzero exit blocks M2 and later promotion readiness. | Not applicable. | Validation ledger | Local checker only; no network or publication. |
 | CMD7 | `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking` | existing/configured | implementation agent | M2 | M2 code-review | Any forbidden finding or setup error blocks closeout. | Not applicable. | Validation ledger | Local privacy scan only; no network or publication. |
-| CMD8 | `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking` | existing/configured | implementation agent | M3 | M3 code-review | Any forbidden finding or setup error blocks closeout. | Not applicable. | Validation ledger | Local privacy scan only; no network or publication. |
+| CMD8 | `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking` | existing/configured | implementation agent | M3 and M4 | M3 code-review for historical media-proof scan; M4 code-review for required images | Any forbidden finding or setup error blocks closeout when required by that milestone. | Not applicable. | Validation ledger | Local privacy scan only; no network or publication. |
+| CMD9 | `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` | planned-for-implementation | implementation agent | M4 | M4 code-review | Nonzero exit blocks M4 closeout. | Zero tests discovered blocks M4 closeout. | Validation ledger | Local unittest only; no network or image generation. |
+| CMD10 | `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` | existing/configured | implementation agent | M4 | M4 code-review | Nonzero exit blocks M4 closeout. | Zero tests discovered blocks M4 closeout. | Validation ledger | Local unittest only; no network or publication. |
+| CMD11 | `git diff --check` | existing/configured | implementation agent | M4 | M4 code-review | Whitespace errors block M4 closeout. | Not applicable. | Validation ledger | Local diff check only; no network or publication. |
 
 ## Milestone proof map
 
 | Milestone | Required test IDs | Manual proof IDs | Command IDs | Evidence artifacts | Required before | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | M1 | BWG-T1, BWG-T2, BWG-T5 | none | CMD1, CMD2, CMD7 | M1 validation notes; validation ledger | M1 code-review | Proves method type scope and authoring support before page content. |
-| M2 | BWG-T3, BWG-T4, BWG-T6, BWG-T7, BWG-T8 | none | CMD1, CMD2, CMD3, CMD5, CMD6, CMD7 | M2 validation notes; validation ledger | M2 code-review | Proves page structure, sources, method, muscle/feel, and text-only media validity. |
-| M3 | BWG-T8 | BWG-MP1, BWG-MP2, BWG-MP3 | CMD4 when image is present, CMD5, CMD6, CMD8 | `manual-proof/source-audit.md`; `manual-proof/beginner-comprehension.md`; `manual-proof/optional-image-decision.md`; validation ledger | M3 code-review | Records semantic proof and image/no-image decision before final closeout. |
+| M2 | BWG-T3, BWG-T4, BWG-T6, BWG-T7 | none | CMD1, CMD2, CMD3, CMD5, CMD6, CMD7 | M2 validation notes; validation ledger | M2 code-review | Proves page structure, sources, method, and muscle/feel. |
+| M3 | none | BWG-MP1, BWG-MP2 | CMD4, CMD5, CMD6, CMD8 | `manual-proof/source-audit.md`; `manual-proof/beginner-comprehension.md`; `manual-proof/optional-image-decision.md`; validation ledger | M3 code-review | Closed under the prior text-only media contract; the historical optional-image decision remains evidence but no longer satisfies the amended required-media contract. |
+| M4 | BWG-T8, BWG-T9 | BWG-MP3 | CMD4, CMD5, CMD6, CMD8, CMD9, CMD10, CMD11 | `manual-proof/required-image-decision.md`; `manual-proof/visual-safety.md`; `media/PROVENANCE.md`; prompt records; validation ledger | M4 code-review | Proves the two required brisk-walking images, prompt/provenance/page-ref wiring, visual-safety evidence, and no everyday-walking image before final closeout resumes. |
 
 ## Test cases
 
@@ -204,18 +212,31 @@ No end-to-end browser test is required because the product surface is GitHub-rea
 - Automation location: `tests/test_markdown_first_real_pages.py`, checker command CMD6
 - Required by milestone: M2
 
-### BWG-T8. Optional Image and Text-Only Validity
+### BWG-T8. Required Brisk Walking Images
 
-- Covers: BWG-R24, BWG-R25, BWG-R26, E5, EC7
+- Covers: BWG-R24, BWG-R25, BWG-R25A, BWG-R25B, BWG-R26, E5, EC7, EC7A, EC7B
 - Level: integration
-- Command IDs: CMD4, CMD6, CMD8
-- Fixture/setup: Real walking pages and optional generated raster image artifacts if M3 approves an image.
-- Steps: First assert no image is required. If an image exists, assert one brisk-walking `exercise_movement_illustration`, local path, meaningful alt text, approved provenance, prompt record, page refs, no in-image labels, and no everyday-walking image.
-- Expected result: Text-only pages pass; image-bearing pages pass only under the exercise-image standard.
-- Failure proves: Optional media has become required, unsupported, unsafe, or out of scope.
-- Evidence artifact: M3 optional image decision and validation ledger.
+- Command IDs: CMD4, CMD6, CMD8, CMD9
+- Fixture/setup: Real walking pages, generated raster image artifacts, prompt records, and `media/PROVENANCE.md`.
+- Steps: Assert `exercises/brisk-walking.md` references exactly one `exercise_movement_illustration` and exactly one `exercise_muscle_attention_illustration`; assert both image paths are local, have meaningful alt text, approved provenance, prompt records, page refs, supported media purpose, no in-image labels, and no red pain marks; assert `principles/everyday-walking.md` has no image.
+- Expected result: Brisk walking image-bearing page passes only with both required support images under the exercise-image standard, and everyday walking remains text-only.
+- Failure proves: Required media is missing, unsupported, unsafe, incorrectly purposed, or out of scope.
+- Evidence artifact: M4 required-image decision, provenance rows, prompt records, visual-safety evidence, and validation ledger.
 - Automation location: `tests/test_exercise_image_standard.py`, `tests/test_markdown_first_real_pages.py`
-- Required by milestone: M2 and M3
+- Required by milestone: M4
+
+### BWG-T9. Required Image Prompt and Provenance Wiring
+
+- Covers: BWG-R24, BWG-R25B, BWG-R29, E5, EC7A
+- Level: integration
+- Command IDs: CMD4, CMD6, CMD8, CMD9, CMD10
+- Fixture/setup: `media/exercises/brisk-walking/movement.png`, `media/exercises/brisk-walking/muscle-attention.png`, prompt records under `media/prompts/exercises/brisk-walking/`, `media/PROVENANCE.md`, and `exercises/brisk-walking.md`.
+- Steps: Assert each required image has exactly one approved provenance row with `asset_type = ai_generated_raster`, the expected media purpose, a repository-local prompt record, a prompt-record asset path matching the provenance asset path, non-blank exact prompt text, page refs containing `exercises/brisk-walking.md`, and no unsupported source input or privacy data.
+- Expected result: Each required generated raster asset is traceable from Markdown reference to provenance row to exact prompt record and back to the same normalized asset path.
+- Failure proves: The image is not auditable, the prompt/provenance contract is incomplete, or the wrong asset is being promoted.
+- Evidence artifact: `media/PROVENANCE.md`, prompt records, and validation ledger.
+- Automation location: `tests/test_exercise_image_standard.py`, checker command CMD6
+- Required by milestone: M4
 
 ### BWG-MP1. Manual Source Audit
 
@@ -243,25 +264,27 @@ No end-to-end browser test is required because the product surface is GitHub-rea
 - Automation location: manual
 - Required by milestone: M3
 
-### BWG-MP3. Optional Image Decision
+### BWG-MP3. Required Image Decision and Visual-Safety Proof
 
-- Covers: BWG-R24, BWG-R25, BWG-R26, E5
+- Covers: BWG-R24, BWG-R25, BWG-R25A, BWG-R25B, BWG-R26, E5, EC7, EC7A, EC7B
 - Level: manual
-- Command IDs: CMD4 when image is present
-- Fixture/setup: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/manual-proof/optional-image-decision.md`.
-- Steps: Record whether the brisk page remains text-only. If an image is approved, record the comprehension gap, asset path, purpose, prompt record, provenance row, alt text, visual-safety outcome, and page reference.
-- Expected result: No image is added by default; any image is justified and governed by the exercise-image standard.
-- Failure proves: Media scope was added without approved necessity or provenance.
-- Evidence artifact: optional image decision record and image-standard validation output when applicable.
-- Automation location: manual plus `tests/test_exercise_image_standard.py` when image is present
-- Required by milestone: M3
+- Command IDs: CMD4, CMD9
+- Fixture/setup: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/manual-proof/required-image-decision.md` and `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/manual-proof/visual-safety.md`.
+- Steps: Record why the media-bearing walking slice uses both required images, asset paths, image purposes, prompt records, provenance rows, alt text, visual-safety outcomes, page references, rejected-asset notes where relevant, and any residual risk. Confirm the movement image teaches brisk-walking form and the muscle-attention image teaches only broad attention regions.
+- Expected result: Both required brisk-walking images are justified, local, provenance-backed, visually reviewed, and subordinate to Markdown; everyday walking remains text-only.
+- Failure proves: Required media was added without approved purpose, visual-safety proof, or provenance.
+- Evidence artifact: `manual-proof/required-image-decision.md`, `manual-proof/visual-safety.md`, image-standard validation output, and validation ledger.
+- Automation location: manual plus `tests/test_exercise_image_standard.py`
+- Required by milestone: M4
 
 ## Fixtures and data
 
 - Method fixtures in `tests/test_exercise_method_guidance.py` for valid and invalid `basic_cardio_activity`.
 - Real pages `exercises/brisk-walking.md` and `principles/everyday-walking.md`.
 - Existing `SOURCES.md` and `RED-FLAGS.md` files.
-- Existing media provenance fixtures from exercise-image tests when optional media is present.
+- Existing media provenance fixtures from exercise-image tests and required walking image artifacts.
+- Required M4 image artifacts at `media/exercises/brisk-walking/movement.png` and `media/exercises/brisk-walking/muscle-attention.png`.
+- Required M4 prompt records at `media/prompts/exercises/brisk-walking/movement.md` and `media/prompts/exercises/brisk-walking/muscle-attention.md`.
 - Manual proof files under `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/manual-proof/`.
 
 ## Mocking/stubbing policy
@@ -270,11 +293,11 @@ Use temporary filesystem fixtures for checker unit tests.
 
 Do not mock source-support review, beginner comprehension proof, `SOURCES.md` reuse, or generated raster provenance when those artifacts are the evidence under review.
 
-Do not call external websites, generate images, publish pages, or use network-dependent validation in this proof map.
+Do not call external websites, publish pages, or use network-dependent validation in this proof map. Image generation itself is implementation work and must produce local assets, prompt records, provenance rows, and review evidence before promotion.
 
 ## Migration or compatibility tests
 
-Compatibility tests must prove `basic_cardio_equipment` remains scoped to rowing-machine or later approved cardio-equipment pages, `loaded_carry` remains inactive, and text-only exercise pages remain valid.
+Compatibility tests must prove `basic_cardio_equipment` remains scoped to rowing-machine or later approved cardio-equipment pages, `loaded_carry` remains inactive, and unrelated text-only exercise pages remain valid.
 
 No old-data, database, API, or path migration tests are required because this change adds new Markdown pages and a method type without moving existing content.
 
@@ -305,7 +328,9 @@ Local unittest and checker commands should remain suitable for normal repository
 - Confirm both pages route safety concerns to `RED-FLAGS.md`.
 - Confirm source-audit rows cover all BWG-R23 categories used by the pages.
 - Confirm beginner comprehension proof records each BWG-R30 prompt.
-- Confirm optional image decision is text-only or fully provenance-backed.
+- Confirm required brisk-walking movement and muscle-attention images are fully provenance-backed, visually reviewed, and subordinate to Markdown.
+- Confirm the movement image shows upright posture, forward gaze, relaxed neck and shoulders, natural arm swing, relaxed hands, and heel-to-toe walking without race-walking, running, treadmill, hiking, wearable-tracker, wrong/correct, or clinical framing.
+- Confirm the muscle-attention image shows only broad attention regions for glutes, thighs, calves, trunk, shoulders or upper back, and feet or ankles without precise anatomy, exposed musculature, labels, diagnosis, treatment, rehabilitation, pain marks, or exact activation claims.
 
 ## What not to test and why
 
@@ -321,13 +346,14 @@ None. Semantic source adequacy and beginner comprehension are manual proof oblig
 
 ## Next artifacts
 
-- Test-spec review.
-- Implementation after test-spec-review approval.
+- Test-spec review R2.
+- Implementation after test-spec-review R2 approval.
 
 ## Follow-on artifacts
 
 - Test-spec review R1: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/test-spec-review-r1.md`
+- Test-spec review R2: `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/test-spec-review-r2.md`
 
 ## Readiness
 
-Active proof map approved for implementation handoff by test-spec-review R1.
+Active proof map approved by test-spec-review R2. M4 implementation handoff is allowed, but implementation has not started from this review.

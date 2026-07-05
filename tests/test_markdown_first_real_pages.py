@@ -258,7 +258,7 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
         self.assertNotIn("method type:", lower)
         self.assertNotIn("## Muscles involved", text)
 
-    def test_walking_pages_safety_sources_forbidden_scope_and_text_only_media(self) -> None:
+    def test_walking_pages_safety_sources_forbidden_scope_and_everyday_text_only_media(self) -> None:
         for path in (BRISK_WALKING_PAGE, EVERYDAY_WALKING_PAGE):
             with self.subTest(path=path.relative_to(ROOT)):
                 text = path.read_text(encoding="utf-8")
@@ -295,13 +295,12 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
                     "treadmill protocol",
                     "incline protocol",
                     "medical walking program",
-                    "return-to-walking",
+                        "return-to-walking",
                 ):
                     self.assertNotIn(term, lower)
 
-                self.assertNotIn("![", text)
-
         everyday_text = self.everyday_walking_text()
+        self.assertNotIn("![", everyday_text)
         self.assertNotIn("media/", everyday_text)
 
     def test_walking_pages_source_ids_are_page_local_and_indexed(self) -> None:
@@ -445,6 +444,95 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
         ):
             with self.subTest(command=command):
                 self.assertIn(command, text)
+
+    def test_brisk_walking_required_images_are_local_prompt_backed_and_reviewed(self) -> None:
+        text = self.brisk_walking_text()
+        provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
+        expected = {
+            "media/exercises/brisk-walking/movement.png": (
+                "exercise_movement_illustration",
+                "Brisk walking movement reference showing upright posture, forward gaze, relaxed shoulders, natural arm swing, and heel-to-toe stride",
+            ),
+            "media/exercises/brisk-walking/muscle-attention.png": (
+                "exercise_muscle_attention_illustration",
+                "Brisk walking muscle-attention reference with broad highlights on glutes, thighs, calves, trunk, shoulders, upper back, feet, and ankles",
+            ),
+        }
+
+        self.assertEqual(text.count("![Brisk walking "), 2)
+        self.assertIn("Use these images as broad visual references.", text)
+
+        for asset_path, (purpose, alt_text) in expected.items():
+            with self.subTest(asset_path=asset_path):
+                self.assertIn(f"![{alt_text}](../{asset_path})", text)
+                self.assertTrue((ROOT / asset_path).is_file())
+
+                rows = provenance.get(asset_path, [])
+                self.assertEqual(len(rows), 1)
+                row = rows[0]
+                self.assertEqual(row.get("asset_type"), "ai_generated_raster")
+                self.assertEqual(row.get("media_purpose"), purpose)
+                self.assertEqual(row.get("review_status"), "approved")
+                self.assertIn("exercises/brisk-walking.md", split_page_refs(row.get("page_refs", "")))
+
+                prompt_record = row.get("prompt_record", "")
+                self.assertEqual(prompt_record, asset_path.replace("media/exercises/", "media/prompts/exercises/").replace(".png", ".md"))
+                self.assertTrue((ROOT / prompt_record).is_file())
+
+                prompt_text = (ROOT / prompt_record).read_text(encoding="utf-8")
+                self.assertIn(f"asset_path: {asset_path}", prompt_text)
+                self.assertIn("## Exact prompt", prompt_text)
+                self.assertIn("no in-image text", prompt_text.lower())
+
+    def test_walking_m4_required_image_proof_records_visual_safety(self) -> None:
+        required_image_decision = WALKING_MANUAL_PROOF_ROOT / "required-image-decision.md"
+        visual_safety = WALKING_MANUAL_PROOF_ROOT / "visual-safety.md"
+
+        for path in (required_image_decision, visual_safety):
+            with self.subTest(path=path.relative_to(ROOT)):
+                self.assertTrue(path.is_file())
+                text = path.read_text(encoding="utf-8")
+                for token in (
+                    "media/exercises/brisk-walking/movement.png",
+                    "media/exercises/brisk-walking/muscle-attention.png",
+                    "exercise_movement_illustration",
+                    "exercise_muscle_attention_illustration",
+                    "exercises/brisk-walking.md",
+                    "principles/everyday-walking.md",
+                    "approved",
+                    "residual risk",
+                ):
+                    self.assertIn(token, text)
+
+        visual_text = visual_safety.read_text(encoding="utf-8").lower()
+        for token in (
+            "upright posture",
+            "forward gaze",
+            "relaxed neck and shoulders",
+            "natural arm swing",
+            "heel-to-toe",
+            "broad attention regions",
+            "glutes",
+            "thighs",
+            "calves",
+            "trunk",
+            "shoulders",
+            "feet",
+            "no in-image labels",
+            "no red pain marks",
+            "no race-walking",
+            "no running",
+            "no treadmill",
+            "no hiking",
+            "no wearable",
+            "no wrong/correct",
+            "no clinical",
+            "no precise anatomy",
+            "no exposed musculature",
+            "no exact activation",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, visual_text)
 
     def test_rowing_machine_page_has_required_shape(self) -> None:
         self.assertTrue(ROWING_MACHINE_PAGE.is_file())

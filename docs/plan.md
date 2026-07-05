@@ -6,7 +6,7 @@
   - Status: reviewed
   - Plan lifecycle state: active
   - Current stage: code-review
-  - Active context: M3 manual proof and optional image decision are complete; code-review M3 is next.
+  - Active context: M4 implementation added the required brisk-walking movement and muscle-attention images with validation evidence; code-review M4 is next.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
