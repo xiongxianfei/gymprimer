@@ -58,6 +58,6 @@ notes:
   - Final local verification passed and recorded branch-ready evidence in `docs/changes/exercise-muscle-guidance-standard/verify-report.md`.
   - PR #11 opened from `proposal/exercise-muscle-guidance-standard` to `main`.
   - GitHub Actions `Validation checks` was pending when PR handoff was recorded.
-  - Post-PR follow-up added a seated-row muscle-attention image, prompt record, provenance row, page-local role table, and focused test coverage.
+  - Post-PR follow-up added chest-press, plank, and seated-row muscle-attention images, prompt records, provenance rows, page-local image references, and focused test coverage.
   - Post-PR follow-up validation passed locally and is ready for code-review.
   - No final completion claim is authorized until implementation, code review, explain-change when useful, verification, and PR handoff gates are complete for the relevant scope.

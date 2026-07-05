@@ -6,7 +6,7 @@
   - Status: reviewed
   - Plan lifecycle state: active
   - Current stage: code-review
-  - Active context: PR #11 is open, but a post-PR seated-row muscle-attention image follow-up is ready for code-review before renewed verification.
+  - Active context: PR #11 is open, but a post-PR muscle-attention image follow-up for chest press, plank, and seated row is ready for code-review before renewed verification.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active

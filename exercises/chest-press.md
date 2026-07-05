@@ -43,7 +43,10 @@ shape, arm path, and adjustment points can vary by gym.
 | Support | Triceps and front shoulders | Help finish the press while the handles stay controlled. [Mayo Clinic][mayo-weight-training] |
 | Stabilizer | Upper back and shoulder blades | Help keep the shoulders from shrugging or rolling forward during the press. [Mayo Clinic][local-chest-press-setup] |
 
+![Chest press muscle-attention reference with broad highlights on the chest, front shoulders, triceps, and upper-back support area](../media/exercises/chest-press/muscle-attention.png)
+
 Treat this as a practical role cue, not a precise muscle-activation test.
+Use the muscle-attention image only as a broad region reference.
 
 ## Movement breakdown
 

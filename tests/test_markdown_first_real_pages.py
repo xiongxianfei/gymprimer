@@ -241,31 +241,44 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
                 self.assertEqual(prompt_record, f"media/prompts/exercises/rowing-machine/{Path(asset_path).stem}.md")
                 self.assertTrue((ROOT / prompt_record).is_file())
 
-    def test_seated_row_muscle_attention_image_is_local_prompt_backed_and_reviewed(self) -> None:
-        path = ROOT / "exercises/seated-row.md"
-        text = path.read_text(encoding="utf-8")
+    def test_post_pr_muscle_attention_images_are_local_prompt_backed_and_reviewed(self) -> None:
         provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
-        asset_path = "media/exercises/seated-row/muscle-attention.png"
-        alt_text = (
-            "Seated row muscle-attention reference with broad highlights on the upper back, arms, grip, and trunk posture area"
-        )
+        expected = {
+            "exercises/chest-press.md": (
+                "media/exercises/chest-press/muscle-attention.png",
+                "Chest press muscle-attention reference with broad highlights on the chest, front shoulders, triceps, and upper-back support area",
+            ),
+            "exercises/plank.md": (
+                "media/exercises/plank/muscle-attention.png",
+                "Plank muscle-attention reference with broad highlights on the abdomen, side trunk, glutes, shoulders, upper back, and legs",
+            ),
+            "exercises/seated-row.md": (
+                "media/exercises/seated-row/muscle-attention.png",
+                "Seated row muscle-attention reference with broad highlights on the upper back, arms, grip, and trunk posture area",
+            ),
+        }
 
-        self.assertIn(f"![{alt_text}](../{asset_path})", text)
-        self.assertIn("| Role | Muscle region | What it helps do |", text)
-        self.assertIn("Use the muscle-attention image only as a broad region reference.", text)
-        self.assertTrue((ROOT / asset_path).is_file())
+        for page_path, (asset_path, alt_text) in expected.items():
+            with self.subTest(page_path=page_path):
+                path = ROOT / page_path
+                text = path.read_text(encoding="utf-8")
 
-        rows = provenance.get(asset_path, [])
-        self.assertEqual(len(rows), 1)
-        row = rows[0]
-        self.assertEqual(row.get("asset_type"), "ai_generated_raster")
-        self.assertEqual(row.get("media_purpose"), "exercise_muscle_attention_illustration")
-        self.assertEqual(row.get("review_status"), "approved")
-        self.assertIn("exercises/seated-row.md", split_page_refs(row.get("page_refs", "")))
+                self.assertIn(f"![{alt_text}](../{asset_path})", text)
+                self.assertIn("| Role | Muscle region | What it helps do |", text)
+                self.assertIn("Use the muscle-attention image only as a broad region reference.", text)
+                self.assertTrue((ROOT / asset_path).is_file())
 
-        prompt_record = row.get("prompt_record", "")
-        self.assertEqual(prompt_record, "media/prompts/exercises/seated-row/muscle-attention.md")
-        self.assertTrue((ROOT / prompt_record).is_file())
+                rows = provenance.get(asset_path, [])
+                self.assertEqual(len(rows), 1)
+                row = rows[0]
+                self.assertEqual(row.get("asset_type"), "ai_generated_raster")
+                self.assertEqual(row.get("media_purpose"), "exercise_muscle_attention_illustration")
+                self.assertEqual(row.get("review_status"), "approved")
+                self.assertIn(page_path, split_page_refs(row.get("page_refs", "")))
+
+                prompt_record = row.get("prompt_record", "")
+                self.assertEqual(prompt_record, asset_path.replace("media/exercises/", "media/prompts/exercises/").replace(".png", ".md"))
+                self.assertTrue((ROOT / prompt_record).is_file())
 
     def test_rowing_machine_safety_sources_and_forbidden_scope(self) -> None:
         text = self.rowing_text()

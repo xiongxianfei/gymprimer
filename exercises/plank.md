@@ -20,7 +20,10 @@ The plank is an isometric trunk-control exercise. It teaches the reader to hold 
 | Support | Glutes and shoulders | Help hold the body position without turning the hold into a low-back arch. [Mayo Clinic][mayo-weight-training] |
 | Stabilizer | Legs and upper back | Help keep the knees, hips, and shoulders organized during the hold. [Mayo Clinic][mayo-weight-training] |
 
+![Plank muscle-attention reference with broad highlights on the abdomen, side trunk, glutes, shoulders, upper back, and legs](../media/exercises/plank/muscle-attention.png)
+
 Treat these as broad regions to notice, not a test of exact muscle activation.
+Use the muscle-attention image only as a broad region reference.
 
 ## Equipment and setup
 

@@ -27,12 +27,14 @@ Every proof-slice muscle-attention image is optional support media, has Markdown
 
 ## Text-Only Proof-Slice Pages
 
-`exercises/chest-press.md` and `exercises/plank.md` do not use `exercise_muscle_attention_illustration`. That is compatible with the spec because muscle-attention images are optional, and the Markdown sections carry the muscle names, roles, cues, caveats, and citations.
+Initial M3 proof recorded `exercises/chest-press.md` and `exercises/plank.md` as text-only compatible pages because muscle-attention images are optional. The post-PR follow-up now adds one support-only muscle-attention image to each page while keeping Markdown authoritative.
 
 ## Post-PR Follow-Up Image
 
 | Image path | Page | nearby Markdown | alt text | provenance | broad region | no in-image labels | no red pain marks | no wrong/correct framing | no precise anatomy | no diagnosis or treatment | Result |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `media/exercises/chest-press/muscle-attention.png` | `exercises/chest-press.md` | Role table names chest, triceps/front shoulders, and upper-back/shoulder-blade support. Feel cue names controlled push, arm support, low shoulders, and steady handles. | Broad highlights on chest, front shoulders, triceps, and upper-back support area. | Approved row with `exercise_muscle_attention_illustration`, page ref, and prompt record. | pass | pass | pass | pass | pass | pass | pass |
+| `media/exercises/plank/muscle-attention.png` | `exercises/plank.md` | Role table names abdomen/side trunk, glutes/shoulders, legs, and upper back. Feel cue names steady abdomen/side-trunk effort and ribs/pelvis control. | Broad highlights on abdomen, side trunk, glutes, shoulders, upper back, and legs. | Approved row with `exercise_muscle_attention_illustration`, page ref, and prompt record. | pass | pass | pass | pass | pass | pass | pass |
 | `media/exercises/seated-row/muscle-attention.png` | `exercises/seated-row.md` | Role table names upper back/lats, arms/grip, and trunk posture support. Feel cue names upper-back effort, arm support, and quiet torso. | Broad highlights on upper back, arms, grip, and trunk posture area. | Approved row with `exercise_muscle_attention_illustration`, page ref, and prompt record. | pass | pass | pass | pass | pass | pass | pass |
 
 ## Residual Risk
