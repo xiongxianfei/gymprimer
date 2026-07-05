@@ -72,8 +72,8 @@ Generated exercise images are governed by `specs/exercise-image-standard.md`, `m
 - Review status: proposal-review R2 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes; code-review M3 R1 clean-with-notes; spec-review R2 changes-requested; proposal-review R3 approved amended proposal; spec-review R3 approved and closed SR-WALK-IMG-1; architecture-review R2 approved; plan-review R2 approved; test-spec-review R2 approved; code-review M4 R1 clean-with-notes
 - Remaining in-scope implementation milestones: none
 - Next stage: pr
-- Final closeout readiness: branch-ready
-- Reason final closeout is or is not ready: final local verify passed; PR handoff remains.
+- Final closeout readiness: pr-opened-ci-passed
+- Reason final closeout is or is not ready: PR #12 is open and hosted CI passed; review, merge, and closeout remain.
 
 ## Milestones
 
@@ -344,6 +344,8 @@ Generated exercise images are governed by `specs/exercise-image-standard.md`, `m
 - 2026-07-05: Code-review M4 R1 passed with no material findings; all implementation milestones are closed and final closeout began.
 - 2026-07-05: Added `explain-change.md` for the final reviewed diff and routed the change to verify.
 - 2026-07-05: Final local verify passed, branch-ready evidence is recorded in `verify-report.md`, and PR handoff is next.
+- 2026-07-05: Opened PR #12 from `proposal/brisk-walking-everyday-walking` to `main`.
+- 2026-07-05: GitHub Actions `Validation checks` completed successfully for PR #12.
 
 ## Decision log
 
@@ -387,9 +389,9 @@ Generated exercise images are governed by `specs/exercise-image-standard.md`, `m
 
 ## Outcome and retrospective
 
-- M1-M3 implementation milestones were closed under the prior text-only media contract. The accepted amended proposal and approved amended spec required brisk-walking images, M4 is now closed with no material code-review findings, explain-change is complete, and final local verify passed. PR handoff is next.
+- M1-M3 implementation milestones were closed under the prior text-only media contract. The accepted amended proposal and approved amended spec required brisk-walking images, M4 is now closed with no material code-review findings, explain-change is complete, final local verify passed, PR #12 is open, and hosted CI passed. Review, merge, and closeout remain.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M1, M2, M3, and M4 are closed with validation evidence recorded. Explain-change and final local verify are complete; PR handoff is next.
+- M1, M2, M3, and M4 are closed with validation evidence recorded. Explain-change and final local verify are complete; PR #12 is open and hosted CI passed.

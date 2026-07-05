@@ -6,7 +6,7 @@
   - Status: reviewed
   - Plan lifecycle state: active
   - Current stage: pr
-  - Active context: final local verify passed with branch-ready evidence; PR handoff is next.
+  - Active context: PR #12 opened from `proposal/brisk-walking-everyday-walking` to `main`; GitHub Actions `Validation checks` passed.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
