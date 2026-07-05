@@ -37,8 +37,16 @@ shape, pad style, and foot support can vary by gym.
 
 ## Muscles involved
 
-You should mostly notice work across the upper back and through the front of
-the upper arms. Treat this as a practical cue for where effort may show up.
+| Role | Muscle region | What it helps do |
+|---|---|---|
+| Main driver | Upper back and lats | Help pull the handles toward your torso. [Source][local-seated-row-instruction] |
+| Support | Arms and grip | Help hold the handles and finish the pull without taking over. [Source][local-seated-row-instruction] |
+| Posture / transfer | Trunk | Helps keep the torso steady while the cable moves. [Source][local-seated-row-instruction] |
+
+![Seated row muscle-attention reference with broad highlights on the upper back, arms, grip, and trunk posture area](../media/exercises/seated-row/muscle-attention.png)
+
+Use the muscle-attention image only as a broad region reference. The exact
+muscle guidance stays in the table and source notes.
 
 ## Movement breakdown
 
@@ -62,8 +70,9 @@ and lowering are part of proper weight-training technique.
 
 ## What you should feel
 
-You should feel a steady pull through your upper back and arms. If your torso
-rocks to move the handles, make the load lighter.
+You may feel a steady pull across the upper back while the arms help finish the
+movement. Pay attention to keeping the torso quiet; if your torso rocks to move
+the handles, make the load lighter.
 
 ## Common mistakes
 
@@ -89,7 +98,9 @@ Stop if sharp or unsafe. [Mayo Clinic][mayo-weight-training]
 - [Mayo Clinic weight training technique guidance][mayo-weight-training]
 - [Mayo Clinic weight training setup reference][local-seated-row-setup]
 - [Mayo Clinic weight training safety reference][local-seated-row-safety]
+- [Seated cable row instruction and muscle reference][local-seated-row-instruction]
 
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [local-seated-row-setup]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [local-seated-row-safety]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
+[local-seated-row-instruction]: https://www.muscleandstrength.com/exercises/seated-row.html

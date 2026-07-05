@@ -14,7 +14,19 @@ Explain how to set up the machine, bench, cable, dumbbell, or body position.
 
 ## Muscles involved
 
-Name the main muscles in beginner-readable language.
+Use role-based muscle guidance in beginner-readable language. Name broad regions
+first, then technical names only when useful and source-supported.
+
+| Role | Muscle region | What it helps do |
+|---|---|---|
+| Main driver | Broad region | What this region helps do during the movement. |
+| Support | Broad region | How this region helps without taking over. |
+
+Use short bullets instead when the drill is simple. Common roles include main
+driver, support, posture / transfer, finish / control, stabilizer, and mobility
+focus; write them in page text as needed, such as main driver. Keep exact muscle
+names, caveats, and page-local source support in
+Markdown.
 
 ## Movement breakdown
 
@@ -38,7 +50,9 @@ Stop if: Use concise form, breathing, control, or pain backoff language and link
 
 ## What you should feel
 
-Frame feel cues as practical beginner orientation. Cite anatomy or safety claims.
+Translate the muscle roles into practical beginner body awareness. Prefer soft
+phrasing such as "you may feel" and "pay attention to". Do not say the reader
+is wrong if they feel the exercise differently. Cite anatomy or safety claims.
 
 ## Common mistakes
 

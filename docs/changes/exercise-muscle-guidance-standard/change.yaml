@@ -1,0 +1,63 @@
+change_id: exercise-muscle-guidance-standard
+status: post-pr-follow-up-review-requested
+current_stage: code-review
+created_date: 2026-07-04
+
+proposal: docs/proposals/2026-07-04-exercise-muscle-guidance-standard.md
+proposal_status: accepted
+proposal_review: docs/changes/exercise-muscle-guidance-standard/reviews/proposal-review-r1.md
+
+current_spec: specs/exercise-muscle-guidance.md
+current_spec_status: approved
+current_spec_review: docs/changes/exercise-muscle-guidance-standard/reviews/spec-review-r1.md
+
+architecture_assessment: architecture-required
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/exercise-muscle-guidance-standard/reviews/architecture-review-r1.md
+
+current_plan: docs/plans/2026-07-04-exercise-muscle-guidance.md
+current_plan_status: reviewed
+current_plan_review: docs/changes/exercise-muscle-guidance-standard/reviews/plan-review-r1.md
+plan_index: docs/plan.md
+
+current_test_spec: specs/exercise-muscle-guidance.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/exercise-muscle-guidance-standard/reviews/test-spec-review-r1.md
+
+current_milestone: PR Follow-up: seated-row muscle-attention image
+current_milestone_state: review-requested
+last_reviewed_milestone: M3
+
+next_stage: code-review
+
+open_findings: []
+
+notes:
+  - Proposal-review R1 approved the exercise muscle guidance standard direction.
+  - Owner authorization via `$workflow auto: test-spec-review` normalized the proposal to accepted for downstream reliance.
+  - Spec-review R1 approved the focused exercise-muscle-guidance spec.
+  - Architecture assessment recorded `architecture-required` because the change affects the exercise-page contract, templates, validation tooling, media alignment, and manual-proof boundaries.
+  - Architecture-review R1 approved the canonical architecture amendment.
+  - Drafted the execution plan with M1 contract/template/checker support, M2 proof-slice exercise pages, and M3 manual proof plus broad rollout gate.
+  - Plan-review R1 approved the execution plan.
+  - Drafted the active test spec mapping deterministic tests, manual proof, validation commands, and milestone gates.
+  - Test-spec-review R1 approved the proof map and allowed implementation handoff for M1.
+  - M1 implemented exercise muscle guidance template prompts, focused checker validation, and unit coverage without forcing untouched legacy `## Used muscles` pages to migrate.
+  - M1 validation passed locally and is ready for code-review.
+  - Code-review M1 R1 requested changes for missing XMG-T8 source-surface proof.
+  - Review-resolution addressed CR-XMG-M1-1 with focused source-surface tests and minimal structural checker behavior; M1 is ready for code-review rerun.
+  - Code-review M1 R2 accepted the resolution and closed M1.
+  - M2 migrated the representative proof-slice pages: rowing machine, chest press, plank, chin nod, thoracic extension, and band pull-apart.
+  - M2 validation passed locally and is ready for code-review.
+  - Code-review M2 R1 accepted the proof-slice implementation and closed M2.
+  - M3 recorded manual source-audit, beginner-comprehension, muscle-image-alignment, broad-rollout-gate, and validation-ledger evidence.
+  - M3 validation passed locally and is ready for code-review.
+  - Code-review M3 R1 accepted the manual proof and broad rollout gate, closed M3, and left no remaining implementation milestones.
+  - Explain-change refreshed the durable rationale artifact and routed the change to final verification.
+  - Final local verification passed and recorded branch-ready evidence in `docs/changes/exercise-muscle-guidance-standard/verify-report.md`.
+  - PR #11 opened from `proposal/exercise-muscle-guidance-standard` to `main`.
+  - GitHub Actions `Validation checks` was pending when PR handoff was recorded.
+  - Post-PR follow-up added chest-press, plank, and seated-row muscle-attention images, prompt records, provenance rows, page-local image references, and focused test coverage.
+  - Post-PR follow-up validation passed locally and is ready for code-review.
+  - No final completion claim is authorized until implementation, code review, explain-change when useful, verification, and PR handoff gates are complete for the relevant scope.

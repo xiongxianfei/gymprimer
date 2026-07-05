@@ -12,9 +12,18 @@ The plank is an isometric trunk-control exercise. It teaches the reader to hold 
 
 ![Plank position sequence](../media/exercises/plank/plank-sequence.png)
 
-## Used muscles
+## Muscles involved
 
-Primary: rectus abdominis, obliques, transverse abdominis, glutes, and shoulder stabilizers. Secondary: quadriceps, hip flexors, and lumbar extensors.
+| Role | Muscle region | What it helps do |
+|---|---|---|
+| Main control | Abdomen and side trunk | Help keep the ribs and pelvis steady while you hold the line. [Mayo Clinic][mayo-weight-training] |
+| Support | Glutes and shoulders | Help hold the body position without turning the hold into a low-back arch. [Mayo Clinic][mayo-weight-training] |
+| Stabilizer | Legs and upper back | Help keep the knees, hips, and shoulders organized during the hold. [Mayo Clinic][mayo-weight-training] |
+
+![Plank muscle-attention reference with broad highlights on the abdomen, side trunk, glutes, shoulders, upper back, and legs](../media/exercises/plank/muscle-attention.png)
+
+Treat these as broad regions to notice, not a test of exact muscle activation.
+Use the muscle-attention image only as a broad region reference.
 
 ## Equipment and setup
 
@@ -26,6 +35,12 @@ Use the floor or a firm exercise mat. Set elbows under the shoulders and extend 
 2. Lift the knees so the body forms a long line from shoulders to heels.
 3. Hold without letting the hips sag or the ribs flare.
 4. Lower before form changes.
+
+## What you should feel
+
+You may feel steady effort around the abdomen and side trunk while breathing
+stays normal. Pay attention to keeping the ribs and pelvis connected instead of
+letting the low back arch, hips sag, or shoulders take over.
 
 ## How much to do
 

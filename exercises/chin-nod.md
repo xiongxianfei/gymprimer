@@ -20,7 +20,10 @@ Sit upright with the neck and back straight. Keep the setup easy enough that the
 
 ## Muscles involved
 
-Primary: deep cervical flexors at the front of the neck. Secondary: nearby neck-control muscles that help keep the motion small. Treat this as a beginner orientation cue, not a diagnostic anatomy test. [Source][local-chin-nod-deep-cervical-flexor]
+- **Control focus:** front-of-neck control muscles, including the deep cervical flexors, help make the chin movement small and smooth. [Source][local-chin-nod-deep-cervical-flexor]
+- **Posture support:** nearby neck and upper-back control muscles may help keep the shoulders relaxed while the head moves lightly. [Source][local-chin-nod-instruction]
+
+Treat this as a beginner orientation cue, not a diagnostic anatomy test.
 
 ![Chin nod muscle-attention reference with the front-neck region subtly highlighted](../media/exercises/chin-nod/muscle-attention.png)
 
@@ -50,7 +53,7 @@ Return to the starting position slowly. Keep the shoulders quiet instead of shru
 
 ## What you should feel
 
-You may feel light effort or stretch around the neck. You should not need jaw tension or a hard push to make the movement happen. [Source][local-chin-nod-instruction]
+You may feel light effort near the front of the neck or a mild stretch around the neck. Try to keep the jaw, shoulders, and push effort quiet. [Source][local-chin-nod-instruction]
 
 ## Common mistakes
 

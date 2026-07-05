@@ -53,10 +53,14 @@ Keep the recovery controlled instead of rushing back to the front.
 
 ## Muscles involved
 
-The drive should start with the legs and glutes. The trunk helps keep posture
-and transfer force through the stroke. The upper back, lats, and arms help
-finish the handle pull near the ribs. Treat this as broad exercise literacy,
-not a precise muscle-activation test. [Concept2][local-rowing-machine-muscles]
+| Phase | Muscle region | What it helps do |
+|---|---|---|
+| Drive | Legs and glutes | Start the work by pushing through the footplates. [Concept2][local-rowing-machine-muscles] |
+| Transfer | Trunk | Helps keep posture and pass force from the legs into the handle path. [Concept2][local-rowing-machine-muscles] |
+| Finish | Upper back, lats, and arms | Complete the handle pull near the lower ribs without turning the stroke into an arm yank. [Concept2][local-rowing-machine-muscles] |
+| Recovery | Trunk and hips | Help return to the catch with control before the next drive. [Concept2][concept2-rowing-technique] |
+
+Treat this as broad exercise literacy, not a precise muscle-activation test.
 
 ![Rowing machine muscle attention reference with broad highlights on legs, glutes, trunk, upper back, lats, and arms](../media/exercises/rowing-machine/muscle-attention.png)
 
@@ -101,8 +105,9 @@ cleared the knees, let the knees bend and slide forward under control.
 
 ## What you should feel
 
-You should feel a smooth leg-driven push, a steady trunk position, and a light
-upper-back and arm finish. The stroke should feel connected rather than jerky.
+You may feel a smooth leg-driven push, a steady trunk position, and a light
+upper-back and arm finish. Pay attention to a connected stroke rather than a
+jerky arm pull.
 
 Breathing should feel like easy or moderate cardio during beginner practice. If
 the stroke becomes rushed, noisy, or painful, make the effort easier and reset

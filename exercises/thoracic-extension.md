@@ -20,7 +20,10 @@ Use a sturdy chair with a back rest. Sit upright, slide the hips back in the cha
 
 ## Muscles involved
 
-Primary: upper-back movement at the thoracic spine. Secondary: trunk control that keeps the drill from turning into a low-back hinge. Treat the muscle wording as a movement cue, not a claim that the drill changes posture. [Source][local-thoracic-extension-instruction]
+- **Mobility focus:** the upper back, or thoracic region, is the area being moved gently over the chair. [Source][local-thoracic-extension-instruction]
+- **Support:** the trunk and neck stay quiet enough that the drill does not turn into low-back arching or neck forcing. [Source][local-thoracic-extension-instruction]
+
+Treat the muscle wording as a movement cue, not a claim that the drill changes posture.
 
 ![Thoracic extension muscle-attention reference with the upper-back region subtly highlighted](../media/exercises/thoracic-extension/muscle-attention.png)
 
@@ -50,7 +53,7 @@ Return to the upright starting position with control. [Source][local-thoracic-ex
 
 ## What you should feel
 
-You may feel light movement or stretch through the upper back. Keep the movement gentle rather than forcing the neck backward. [Source][local-thoracic-extension-instruction]
+You may feel light movement or stretch through the upper back. Pay attention to a gentle upper-back motion rather than forcing the neck backward or arching the low back. [Source][local-thoracic-extension-instruction]
 
 ## Common mistakes
 

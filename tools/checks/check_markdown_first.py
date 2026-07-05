@@ -179,6 +179,36 @@ EXERCISE_METHOD_FORBIDDEN_PATTERNS = (
     re.compile(r"\bguarantee(?:d|s)? (?:a )?(?:fix|result|correction)\b", re.IGNORECASE),
     re.compile(r"\bfix (?:your|this|it)\b", re.IGNORECASE),
 )
+EXERCISE_MUSCLE_EXACT_HEADING_RE = re.compile(r"(?m)^## Muscles involved$")
+EXERCISE_MUSCLE_USED_HEADING_RE = re.compile(r"(?m)^## Used muscles$")
+EXERCISE_MUSCLE_FEEL_HEADING_RE = re.compile(r"(?m)^## What you should feel$")
+EXERCISE_MUSCLE_HEADING_PREFIX_RE = re.compile(r"(?m)^##\s+(?:Muscles involved|Used muscles|What you should feel)\b.*$")
+EXERCISE_MUSCLE_HELP_VERBS_RE = re.compile(
+    r"\b(help|helps|press|presses|push|pushes|pull|pulls|finish|finishes|control|controls|keep|keeps|hold|holds|move|moves|stretch|stretched|transfer|transfers|brace|bracing|stabiliz(?:e|es|ing)|notice|work|working)\b",
+    re.IGNORECASE,
+)
+EXERCISE_MUSCLE_BARE_LIST_RE = re.compile(
+    r"(?im)^\s*(?:muscles|primary|secondary)\s*:\s*[^.\n]+\.?\s*$"
+)
+EXERCISE_MUSCLE_EXACT_ACTIVATION_PATTERNS = (
+    re.compile(r"\bactivat(?:e|es|ed|ing)\b.{0,80}\b(?:\d+(?:\.\d+)?\s*%|percent|exactly)\b", re.IGNORECASE),
+    re.compile(r"\b\d+(?:\.\d+)?\s*%\b.{0,80}\bactivat", re.IGNORECASE),
+)
+EXERCISE_MUSCLE_EMG_RE = re.compile(r"\bEMG\b.{0,120}\b(?:should|must|proves?|activate|activation|instruction)\b", re.IGNORECASE)
+EXERCISE_MUSCLE_MUST_FEEL_RE = re.compile(
+    r"\bmust feel\b.{0,100}\b(?:wrong|doing it wrong|incorrect|prove|proves)\b|\b(?:wrong|doing it wrong|incorrect)\b.{0,100}\bmust feel\b",
+    re.IGNORECASE,
+)
+EXERCISE_MUSCLE_FORBIDDEN_PATTERNS = (
+    re.compile(r"\b(?:you have|diagnos(?:e|is|ed)|diagnostic decision tree)\b", re.IGNORECASE),
+    re.compile(r"\btreat(?:s|ment|ing)?\b.{0,80}\b(?:pain|injur|posture correction|dysfunction)\b", re.IGNORECASE),
+    re.compile(r"\brehab(?:ilitation)?(?: progression| protocol| routine)?\b", re.IGNORECASE),
+    re.compile(r"\bposture correction\b", re.IGNORECASE),
+    re.compile(r"\bfix(?:es|ing)? (?:your|this|it)\b", re.IGNORECASE),
+    re.compile(r"\bweak muscle\b", re.IGNORECASE),
+    re.compile(r"\bdysfunction\b", re.IGNORECASE),
+    re.compile(r"\bpersonalized (?:cueing|coaching)\b", re.IGNORECASE),
+)
 SUPPORT_FILENAMES = {
     "README.md",
     "SOURCES.md",
@@ -1011,6 +1041,7 @@ def validate_responsible_breadth_page(
 
     if page_class == "expanded_exercise_page":
         findings.extend(validate_exercise_method_guidance(path, text))
+        findings.extend(validate_exercise_muscle_guidance(path, text))
 
     if page_class == "expanded_exercise_page" and re.search(r"(^##\s+Exact prompt\b|^prompt_record:)", text, re.MULTILINE | re.IGNORECASE):
         findings.append(Finding(path, "media_prompt_record_embedded", "prompt records must not be embedded in reader-facing exercise Markdown"))
@@ -1235,6 +1266,209 @@ def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
                     path,
                     "exercise_method_forbidden_scope",
                     f"method guidance contains diagnosis, treatment, rehab, correction, return-to-training, guarantee, or fix language: {match.group(0)}",
+                )
+            )
+            break
+
+    return findings
+
+
+def exact_heading_section_text(text: str, heading_re: re.Pattern[str]) -> str:
+    match = heading_re.search(text)
+    if match is None:
+        return ""
+    next_heading = re.search(r"^##\s+", text[match.end() :], re.MULTILINE)
+    end = len(text) if next_heading is None else match.end() + next_heading.start()
+    return text[match.start() : end]
+
+
+def markdown_table_header(section: str) -> list[str] | None:
+    for line in section.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("|") and stripped.endswith("|"):
+            cells = [cell.lower() for cell in markdown_table_cells(stripped)]
+            if cells and not all(set(cell) <= {"-", ":"} for cell in cells):
+                return cells
+    return None
+
+
+def muscle_table_has_required_columns(header: list[str]) -> bool:
+    normalized = " ".join(header)
+    has_region = any("muscle" in cell and "region" in cell for cell in header)
+    has_action = any("what" in cell and "helps" in cell and "do" in cell for cell in header)
+    has_role_or_phase = any(cell in {"role", "phase"} for cell in header)
+    return has_role_or_phase and has_region and has_action and "muscles" not in normalized
+
+
+def has_role_bullet(section: str) -> bool:
+    return bool(re.search(r"(?m)^\s*-\s+\*\*[^*]+:\*\*.+", section))
+
+
+def muscle_section_has_role_guidance(section: str) -> bool:
+    header = markdown_table_header(section)
+    if header is not None:
+        return muscle_table_has_required_columns(header)
+    if has_role_bullet(section):
+        return True
+    body_lines = [
+        line.strip()
+        for line in section.splitlines()[1:]
+        if line.strip() and not line.strip().startswith("![")
+    ]
+    body = " ".join(body_lines)
+    if EXERCISE_MUSCLE_BARE_LIST_RE.search(section):
+        return False
+    return bool(body and EXERCISE_MUSCLE_HELP_VERBS_RE.search(body))
+
+
+def muscle_section_uses_explicit_role_format(section: str) -> bool:
+    return markdown_table_header(section) is not None or has_role_bullet(section)
+
+
+def validate_exercise_muscle_source_surface(path: Path, text: str, sections: list[str]) -> list[Finding]:
+    findings: list[Finding] = []
+    local_source_ids = source_ids(text)
+    cited_ids: set[str] = set()
+    for section in sections:
+        cited_ids.update(cited_reference_ids(section))
+
+    for source_id in sorted(cited_ids - local_source_ids):
+        findings.append(
+            Finding(
+                path,
+                "exercise_muscle_source_missing_definition",
+                f"muscle guidance cites a source ID without a page-local definition: {source_id}",
+            )
+        )
+
+    return findings
+
+
+def validate_exercise_muscle_guidance(path: Path, text: str) -> list[Finding]:
+    findings: list[Finding] = []
+    muscles_section = exact_heading_section_text(text, EXERCISE_MUSCLE_EXACT_HEADING_RE)
+    used_muscles_section = exact_heading_section_text(text, EXERCISE_MUSCLE_USED_HEADING_RE)
+    feel_section = exact_heading_section_text(text, EXERCISE_MUSCLE_FEEL_HEADING_RE)
+
+    adopted = bool(muscles_section or feel_section)
+    if not adopted and used_muscles_section:
+        return findings
+
+    if not adopted and EXERCISE_MUSCLE_HEADING_PREFIX_RE.search(text):
+        findings.append(
+            Finding(
+                path,
+                "exercise_muscle_missing_section",
+                "muscle guidance heading must be exactly ## Muscles involved when adopted",
+            )
+        )
+        return findings
+
+    if not adopted:
+        return findings
+
+    if used_muscles_section:
+        findings.append(
+            Finding(
+                path,
+                "exercise_muscle_legacy_heading_migrated",
+                "migrated exercise muscle guidance must use ## Muscles involved instead of ## Used muscles",
+            )
+        )
+
+    if not muscles_section:
+        findings.append(
+            Finding(
+                path,
+                "exercise_muscle_missing_section",
+                "adopted exercise muscle guidance is missing ## Muscles involved",
+            )
+        )
+    else:
+        header = markdown_table_header(muscles_section)
+        if header is not None and not muscle_table_has_required_columns(header):
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_muscle_table_columns",
+                    "muscle guidance tables must use Role or Phase, Muscle region, and What it helps do columns",
+                )
+            )
+        elif not muscle_section_has_role_guidance(muscles_section):
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_muscle_role_guidance_missing",
+                    "## Muscles involved must explain broad muscle regions by role or what they help do",
+                )
+            )
+        if muscle_section_uses_explicit_role_format(muscles_section) and not cited_reference_ids(muscles_section):
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_muscle_source_missing",
+                    "explicit role or phase muscle guidance needs at least one page-local source citation",
+                )
+            )
+
+    if not feel_section:
+        findings.append(
+            Finding(
+                path,
+                "exercise_muscle_missing_feel_section",
+                "adopted exercise muscle guidance is missing ## What you should feel",
+            )
+        )
+
+    checked_text = "\n\n".join(section for section in (muscles_section, feel_section) if section)
+    findings.extend(
+        validate_exercise_muscle_source_surface(
+            path,
+            text,
+            [section for section in (muscles_section, feel_section) if section],
+        )
+    )
+
+    for pattern in EXERCISE_MUSCLE_EXACT_ACTIVATION_PATTERNS:
+        match = pattern.search(checked_text)
+        if match:
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_muscle_exact_activation",
+                    f"muscle guidance must not make exact activation claims without direct source review: {match.group(0)}",
+                )
+            )
+            break
+
+    match = EXERCISE_MUSCLE_EMG_RE.search(checked_text)
+    if match:
+        findings.append(
+            Finding(
+                path,
+                "exercise_muscle_emg_instruction",
+                f"EMG findings must not become direct beginner muscle instruction: {match.group(0)}",
+            )
+        )
+
+    match = EXERCISE_MUSCLE_MUST_FEEL_RE.search(checked_text)
+    if match:
+        findings.append(
+            Finding(
+                path,
+                "exercise_muscle_must_feel",
+                f"feel cues must not say the reader is wrong if they do not feel one exact muscle: {match.group(0)}",
+            )
+        )
+
+    for pattern in EXERCISE_MUSCLE_FORBIDDEN_PATTERNS:
+        match = pattern.search(checked_text)
+        if match:
+            findings.append(
+                Finding(
+                    path,
+                    "exercise_muscle_forbidden_scope",
+                    f"muscle guidance must not diagnose, treat, correct posture, infer weakness, or personalize coaching: {match.group(0)}",
                 )
             )
             break
