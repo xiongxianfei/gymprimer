@@ -67,13 +67,13 @@ Generated exercise images are governed by `specs/exercise-image-standard.md`, `m
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: review-requested
-- Last reviewed milestone: M3
-- Review status: proposal-review R2 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes; code-review M3 R1 clean-with-notes; spec-review R2 changes-requested; proposal-review R3 approved amended proposal; spec-review R3 approved and closed SR-WALK-IMG-1; architecture-review R2 approved; plan-review R2 approved; test-spec-review R2 approved
-- Remaining in-scope implementation milestones: M4
-- Next stage: code-review
-- Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M4 code-review, explain-change, verify, and PR handoff remain before final closeout.
+- Current milestone state: closed
+- Last reviewed milestone: M4
+- Review status: proposal-review R2 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes; code-review M3 R1 clean-with-notes; spec-review R2 changes-requested; proposal-review R3 approved amended proposal; spec-review R3 approved and closed SR-WALK-IMG-1; architecture-review R2 approved; plan-review R2 approved; test-spec-review R2 approved; code-review M4 R1 clean-with-notes
+- Remaining in-scope implementation milestones: none
+- Next stage: pr
+- Final closeout readiness: branch-ready
+- Reason final closeout is or is not ready: final local verify passed; PR handoff remains.
 
 ## Milestones
 
@@ -207,7 +207,7 @@ Generated exercise images are governed by `specs/exercise-image-standard.md`, `m
 
 ### M4. Required Brisk Walking Images
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: add the two required support images for `exercises/brisk-walking.md` without making images the source of truth.
 - Requirements: BWG-R24, BWG-R25, BWG-R25A, BWG-R25B, BWG-R26, BWG-R29.
 - Files/components likely touched:
@@ -257,7 +257,7 @@ Generated exercise images are governed by `specs/exercise-image-standard.md`, `m
   - M4 proof records updated
   - validation ledger updated
   - plan progress updated
-  - code-review M4 requested
+  - code-review M4 passed
 - Risks:
   - Generated images could imply exact anatomy, clinical correction, wrong/correct comparison, race-walking, running, or other out-of-scope guidance.
   - Prompt records or provenance rows could drift from the accepted asset path.
@@ -326,7 +326,7 @@ Generated exercise images are governed by `specs/exercise-image-standard.md`, `m
 - 2026-07-05: Added source audit, beginner-comprehension proof, and optional-image text-only decision records.
 - 2026-07-05: Updated the exercise-image audit inventory to include text-only `exercises/brisk-walking.md`.
 - 2026-07-05: M3 validation passed; M3 is ready for code-review.
-- 2026-07-05: Code-review M3 R1 passed; M3 is closed, all implementation milestones are closed, and explain-change is next.
+- 2026-07-05: Code-review M3 R1 passed; M3 and the then-current implementation milestones were closed, and explain-change was next before the later image amendment.
 - 2026-07-05: Amended the walking spec and test spec to require brisk-walking movement and muscle-attention images; final closeout is paused pending amended spec review and downstream artifact updates.
 - 2026-07-05: Spec-review R2 requested changes with SR-WALK-IMG-1 because the amended two-image requirement conflicts with the accepted proposal's first-slice image decision.
 - 2026-07-05: Owner selected the proposal-amendment path for SR-WALK-IMG-1 and revised the proposal to require brisk-walking movement and muscle-attention images.
@@ -340,7 +340,10 @@ Generated exercise images are governed by `specs/exercise-image-standard.md`, `m
 - 2026-07-05: Updated the test spec with the M4 required-image proof map; test-spec-review R2 followed before implementation.
 - 2026-07-05: Test-spec-review R2 approved the M4 required-image proof map; M4 implementation handoff is allowed.
 - 2026-07-05: Started M4 implementation with failing required-image real-page tests before adding assets or page references.
-- 2026-07-05: Completed M4 implementation with exactly two brisk-walking support images, prompt records, provenance rows, page references, required-image proof, visual-safety proof, and validation evidence; M4 is ready for code-review.
+- 2026-07-05: Completed M4 implementation with exactly two brisk-walking support images, prompt records, provenance rows, page references, required-image proof, visual-safety proof, and validation evidence; M4 moved to code-review.
+- 2026-07-05: Code-review M4 R1 passed with no material findings; all implementation milestones are closed and final closeout began.
+- 2026-07-05: Added `explain-change.md` for the final reviewed diff and routed the change to verify.
+- 2026-07-05: Final local verify passed, branch-ready evidence is recorded in `verify-report.md`, and PR handoff is next.
 
 ## Decision log
 
@@ -377,14 +380,16 @@ Generated exercise images are governed by `specs/exercise-image-standard.md`, `m
 - 2026-07-05: `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed after ledger update.
 - 2026-07-05: `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed after ledger update.
 - 2026-07-05: `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checking 62 files.
-- 2026-07-05: M4 plan update validation passed with `python3 tools/checks/check_privacy.py docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md docs/plan.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml` and `git diff --check`.
-- 2026-07-05: M4 implementation validation passed with `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_brisk_walking_required_images_are_local_prompt_backed_and_reviewed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_walking_m4_required_image_proof_records_visual_safety`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`, `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md`, `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking`, and `git diff --check`.
+  - 2026-07-05: M4 plan update validation passed with `python3 tools/checks/check_privacy.py docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md docs/plan.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml` and `git diff --check`.
+  - 2026-07-05: M4 implementation validation passed with `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_brisk_walking_required_images_are_local_prompt_backed_and_reviewed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_walking_m4_required_image_proof_records_visual_safety`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'`, `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md`, `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking`, and `git diff --check`.
+  - 2026-07-05: Explain-change validation passed with `python3 tools/checks/check_privacy.py docs/changes/2026-07-05-brisk-walking-and-everyday-walking/explain-change.md docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md docs/plan.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml`, lifecycle routing grep, and `git diff --check`.
+  - 2026-07-05: Final verify validation passed with `python3 -m unittest discover -s tests`, `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md principles exercises patterns`, `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md docs specs tools tests principles exercises patterns media`, walking-specific image/proof tests, walking-specific Markdown-first check, lifecycle routing grep, and `git diff --check`.
 
 ## Outcome and retrospective
 
-- M1-M3 implementation milestones were closed under the prior text-only media contract. The accepted amended proposal and approved amended spec now require brisk-walking images. M4 implementation is complete and review-requested, and final closeout is paused pending code-review, explain-change, verify, and PR handoff.
+- M1-M3 implementation milestones were closed under the prior text-only media contract. The accepted amended proposal and approved amended spec required brisk-walking images, M4 is now closed with no material code-review findings, explain-change is complete, and final local verify passed. PR handoff is next.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M1, M2, and M3 are closed for the prior contract. M4 is review-requested with validation evidence recorded; code-review is next.
+- M1, M2, M3, and M4 are closed with validation evidence recorded. Explain-change and final local verify are complete; PR handoff is next.

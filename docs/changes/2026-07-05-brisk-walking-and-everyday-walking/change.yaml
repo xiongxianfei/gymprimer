@@ -1,6 +1,6 @@
 change_id: 2026-07-05-brisk-walking-and-everyday-walking
 status: active
-current_stage: code-review
+current_stage: pr
 created_date: 2026-07-05
 
 proposal: docs/proposals/2026-07-05-brisk-walking-and-everyday-walking.md
@@ -26,10 +26,10 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/test-spec-review-r2.md
 
 current_milestone: M4
-current_milestone_state: review-requested
-last_reviewed_milestone: M3
+current_milestone_state: closed
+last_reviewed_milestone: M4
 
-next_stage: code-review
+next_stage: pr
 
 open_findings: []
 
@@ -69,7 +69,7 @@ notes:
   - Added walking source audit, beginner-comprehension proof, and optional-image text-only decision records.
   - Updated the exercise-image audit inventory to include text-only `exercises/brisk-walking.md`.
   - M3 validation passed locally and is ready for code-review.
-  - Code-review M3 R1 passed; M3 is closed, all implementation milestones are closed, and explain-change is next.
+  - Code-review M3 R1 passed; M3 and the then-current implementation milestones were closed, and explain-change was next before the later image amendment.
   - Amended the walking spec and test spec to require brisk-walking movement and muscle-attention images; downstream approvals and final closeout are paused pending amended spec review.
   - Spec-review R2 requested changes because the amended two-image requirement conflicts with the accepted proposal's first-slice image decision; SR-WALK-IMG-1 is open.
   - Owner selected the proposal-amendment path for SR-WALK-IMG-1; amended the proposal to require brisk-walking movement and muscle-attention images and routed it to proposal-review.
@@ -83,7 +83,10 @@ notes:
   - Updated the test spec for the M4 required-image proof map; test-spec-review R2 followed before implementation.
   - Test-spec-review R2 approved the M4 required-image proof map; implementation handoff is allowed, but implementation has not started.
   - Started M4 implementation with failing required-image real-page tests before adding assets or page references.
-  - Completed M4 implementation with exactly two brisk-walking support images, prompt records, provenance rows, page references, required-image proof, visual-safety proof, and validation evidence; M4 is ready for code-review.
+  - Completed M4 implementation with exactly two brisk-walking support images, prompt records, provenance rows, page references, required-image proof, visual-safety proof, and validation evidence; M4 moved to code-review.
+  - Code-review M4 R1 passed with no material findings; all implementation milestones are closed and final closeout starts with explain-change.
+  - Added explain-change for the final reviewed diff and routed the change to verify.
+  - Final local verify passed, branch-ready evidence is recorded, and PR handoff is next.
 validation:
   - 2026-07-05 M1 `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_templates tests.test_markdown_first_real_pages` passed, 29 tests.
   - 2026-07-05 M1 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md docs/templates exercises` passed, checked 24 Markdown files.
@@ -112,3 +115,19 @@ validation:
   - 2026-07-05 M4 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checked 5 Markdown files.
   - 2026-07-05 M4 `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checked 75 files.
   - 2026-07-05 M4 `git diff --check` passed.
+  - 2026-07-05 code-review M4 R1 `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed, 36 tests.
+  - 2026-07-05 code-review M4 R1 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checked 5 Markdown files.
+  - 2026-07-05 code-review M4 R1 `git diff --check` passed.
+  - 2026-07-05 explain-change `python3 tools/checks/check_privacy.py docs/changes/2026-07-05-brisk-walking-and-everyday-walking/explain-change.md docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md docs/plan.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml` passed, checked 4 files.
+  - 2026-07-05 explain-change lifecycle routing grep confirmed verify routing in `change.yaml`, the active plan, `docs/plan.md`, and `explain-change.md`.
+  - 2026-07-05 explain-change `git diff --check` passed.
+  - 2026-07-05 verify `python3 -m unittest discover -s tests` passed, 151 tests.
+  - 2026-07-05 verify `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md principles exercises patterns` passed, checked 26 Markdown files.
+  - 2026-07-05 verify `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md docs specs tools tests principles exercises patterns media` passed, checked 471 files.
+  - 2026-07-05 verify `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed, 64 tests.
+  - 2026-07-05 verify `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_brisk_walking_required_images_are_local_prompt_backed_and_reviewed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_walking_m4_required_image_proof_records_visual_safety` passed, 2 tests.
+  - 2026-07-05 verify `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checked 5 Markdown files.
+  - 2026-07-05 verify `python3 tools/checks/check_privacy.py docs/changes/2026-07-05-brisk-walking-and-everyday-walking/review-resolution.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/review-log.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml` passed.
+  - 2026-07-05 verify `python3 tools/checks/check_privacy.py docs/changes/2026-07-05-brisk-walking-and-everyday-walking/verify-report.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md docs/plan.md` passed.
+  - 2026-07-05 verify lifecycle routing grep confirmed PR routing and no stale verify routing in active surfaces.
+  - 2026-07-05 verify `git diff --check` passed.

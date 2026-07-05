@@ -4,6 +4,22 @@
 
 closed
 
+## Closeout status
+
+closed
+
+All material findings have final dispositions.
+No finding has `needs-decision`.
+`review-log.md` records the same-stage or owner-approved follow-up reviews that closed each material finding.
+`change.yaml` lists `open_findings: []`.
+
+## Resolution overview
+
+| Finding | Final disposition | Closing evidence |
+| --- | --- | --- |
+| PR-WALK-1 | accepted | Proposal-review R2 approved the revised proposal and confirmed Option C, both page paths, and `basic_cardio_activity` are decisions rather than open questions. |
+| SR-WALK-IMG-1 | accepted | Proposal-review R3 approved the required-image proposal amendment, and spec-review R3 approved the amended spec that matches it. |
+
 ## Findings
 
 | Finding | Status | Disposition | Resolution notes |
@@ -26,3 +42,7 @@ Review closeout:
 - `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r2.md` recorded changes requested with SR-WALK-IMG-1 open.
 - `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/proposal-review-r3.md` accepted the amended proposal. Spec re-review is required before closing SR-WALK-IMG-1.
 - `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r3.md` approved the amended spec and closed SR-WALK-IMG-1.
+
+Verification hardening:
+
+- `python3 tools/checks/check_privacy.py docs/changes/2026-07-05-brisk-walking-and-everyday-walking/review-resolution.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/review-log.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml` passed during final verify.

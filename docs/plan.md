@@ -5,8 +5,8 @@
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M4 implementation added the required brisk-walking movement and muscle-attention images with validation evidence; code-review M4 is next.
+  - Current stage: pr
+  - Active context: final local verify passed with branch-ready evidence; PR handoff is next.
 
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
