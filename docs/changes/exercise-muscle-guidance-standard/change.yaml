@@ -1,6 +1,6 @@
 change_id: exercise-muscle-guidance-standard
-status: post-pr-follow-up-review-requested
-current_stage: code-review
+status: completed
+current_stage: done
 created_date: 2026-07-04
 
 proposal: docs/proposals/2026-07-04-exercise-muscle-guidance-standard.md
@@ -25,11 +25,11 @@ current_test_spec: specs/exercise-muscle-guidance.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/exercise-muscle-guidance-standard/reviews/test-spec-review-r1.md
 
-current_milestone: PR Follow-up: seated-row muscle-attention image
-current_milestone_state: review-requested
+current_milestone: Lifecycle Closeout
+current_milestone_state: completed
 last_reviewed_milestone: M3
 
-next_stage: code-review
+next_stage: none
 
 open_findings: []
 
@@ -60,4 +60,6 @@ notes:
   - GitHub Actions `Validation checks` was pending when PR handoff was recorded.
   - Post-PR follow-up added chest-press, plank, and seated-row muscle-attention images, prompt records, provenance rows, page-local image references, and focused test coverage.
   - Post-PR follow-up validation passed locally and is ready for code-review.
-  - No final completion claim is authorized until implementation, code review, explain-change when useful, verification, and PR handoff gates are complete for the relevant scope.
+  - PR #11 merged on 2026-07-05 with merge commit `abe7acedccefcad59265f673e50416fc4f8d15d4`.
+  - GitHub Actions `Validation checks` completed successfully for PR #11 before merge.
+  - Lifecycle cleanup marked the change complete on `main`.

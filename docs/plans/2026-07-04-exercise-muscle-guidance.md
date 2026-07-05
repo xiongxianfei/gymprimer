@@ -2,9 +2,9 @@
 
 ## Status
 
-- Status: reviewed
-- Plan lifecycle state: active
-- Terminal disposition: not terminal
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed by PR #11
 
 ## Purpose / big picture
 
@@ -69,14 +69,14 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ## Current Handoff Summary
 
-- Current milestone: PR Follow-up: chest-press, plank, and seated-row muscle-attention images
-- Current milestone state: review-requested
+- Current milestone: Lifecycle Closeout
+- Current milestone state: completed
 - Last reviewed milestone: M3
-- Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes; code-review M3 R1 clean-with-notes
+- Review status: proposal-review R1 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes; code-review M3 R1 clean-with-notes; PR #11 merged
 - Remaining in-scope implementation milestones: none
-- Next stage: code-review
-- Final closeout readiness: not ready
-- Reason final closeout is or is not ready: PR #11 is open, but a post-PR muscle-attention image follow-up for chest press, plank, and seated row has been added and needs code review before renewed verification or PR readiness claims.
+- Next stage: none
+- Final closeout readiness: complete
+- Reason final closeout is or is not ready: PR #11 merged on 2026-07-05 with GitHub Actions `Validation checks` successful, and lifecycle cleanup is recorded on `main`.
 
 ## Milestones
 
@@ -262,6 +262,8 @@ The first proof slice should choose representative pages from the spec's allowed
 - 2026-07-04: Final local verification passed and recorded `docs/changes/exercise-muscle-guidance-standard/verify-report.md`. The branch is ready for PR handoff; hosted CI has not been observed.
 - 2026-07-04: Opened PR #11 from `proposal/exercise-muscle-guidance-standard` to `main`. GitHub Actions `Validation checks` was pending at handoff.
 - 2026-07-05: Added a post-PR follow-up for `exercises/chest-press.md`, `exercises/plank.md`, and `exercises/seated-row.md`: support-only muscle-attention images, prompt records, provenance rows, manual image/source evidence, and focused real-page test coverage. The seated-row page also gained role-based muscle guidance. Validation passed locally; the follow-up is ready for code-review.
+- 2026-07-05: PR #11 merged with merge commit `abe7acedccefcad59265f673e50416fc4f8d15d4`; GitHub Actions `Validation checks` completed successfully before merge.
+- 2026-07-05: Lifecycle cleanup marked this plan complete on `main`.
 
 ## Decision log
 
@@ -325,9 +327,8 @@ The first proof slice should choose representative pages from the spec's allowed
 
 ## Outcome and retrospective
 
-- M3 implementation is pending code-review. Final outcome remains pending downstream verification.
+- Completed by PR #11 after proposal/spec/architecture/plan/test-spec review, M1-M3 implementation, code review, explain-change, local final verification, PR handoff, hosted CI validation, and merge.
 
 ## Readiness
 
-- See `Current Handoff Summary`.
-- Ready for M3 code-review. Final closeout is not allowed until all implementation milestones, code review, and verification are complete.
+- Complete. No next workflow stage remains for this change.

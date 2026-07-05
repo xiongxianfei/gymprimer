@@ -2,12 +2,6 @@
 
 ## Active
 
-- [Exercise Muscle Guidance](plans/2026-07-04-exercise-muscle-guidance.md)
-  - Status: reviewed
-  - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: PR #11 is open, but a post-PR muscle-attention image follow-up for chest press, plank, and seated row is ready for code-review before renewed verification.
-
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
   - Plan lifecycle state: active
@@ -26,6 +20,12 @@
   - Active context: retained only as historical context for the structured-platform implementation path; it is not active execution guidance.
 
 ## Done (recent)
+
+- [Exercise Muscle Guidance](plans/2026-07-04-exercise-muscle-guidance.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #11
+  - Active context: proposal/spec/architecture/plan/test-spec review, M1-M3, explain-change, final local verification, CI validation, PR handoff, and merge/closeout are complete.
 
 - [Rowing Machine Basics and Beginner Workout Guidance](plans/2026-07-04-rowing-machine-basics-and-beginner-workouts.md)
   - Status: completed
