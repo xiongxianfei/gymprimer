@@ -64,11 +64,11 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
 - Review status: proposal-review R2 approved; spec-review R1 approved; architecture-review R1 approved; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 clean-with-notes; code-review M2 R1 clean-with-notes
 - Remaining in-scope implementation milestones: M3
-- Next stage: implement
+- Next stage: code-review
 - Final closeout readiness: not-ready
 - Reason final closeout is or is not ready: M3 implementation, M3 code review, review-resolution if triggered, explain-change, verify, and PR handoff remain.
 
@@ -164,7 +164,7 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 
 ### M3. Manual Proof, Optional Media Decision, and Promotion Gate
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: record semantic evidence that checks cannot fully automate and decide whether the brisk walking page remains text-only.
 - Requirements: BWG-R23-R30, AC5-AC10.
 - Files/components likely touched:
@@ -256,6 +256,11 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 - 2026-07-05: Added `exercises/brisk-walking.md` and `principles/everyday-walking.md`; kept both text-only; left `SOURCES.md` and `RED-FLAGS.md` unchanged because required source IDs and central safety routing already existed.
 - 2026-07-05: M2 validation passed; M2 is ready for code-review.
 - 2026-07-05: Code-review M2 R1 passed; M2 is closed and M3 implementation is next.
+- 2026-07-05: Started M3 implementation for manual source audit, beginner comprehension proof, optional image decision, and promotion-gate validation evidence.
+- 2026-07-05: Added failing tests for walking manual proof records and M3 validation ledger coverage.
+- 2026-07-05: Added source audit, beginner-comprehension proof, and optional-image text-only decision records.
+- 2026-07-05: Updated the exercise-image audit inventory to include text-only `exercises/brisk-walking.md`.
+- 2026-07-05: M3 validation passed; M3 is ready for code-review.
 
 ## Decision log
 
@@ -269,6 +274,7 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 - Existing checker and tests already cover method guidance, exercise images, muscle guidance, real pages, and templates; this plan can extend those surfaces instead of creating a separate validation system.
 - M2 did not need a `SOURCES.md` edit because the accepted proposal/spec work had already added the reusable walking source IDs.
 - M2 did not need a `RED-FLAGS.md` edit because the walking pages could route to the existing central safety page.
+- M3 needed an aligned exercise-image audit update because the existing image-standard tests require every current `exercises/*.md` page to appear in the audit inventory.
 
 ## Validation notes
 
@@ -284,6 +290,11 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 - 2026-07-05: `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_markdown_first_real_pages` passed, running 44 tests.
 - 2026-07-05: `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed, running 65 tests.
 - 2026-07-05: `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checking 16 files.
+- M3 validation passed and is ready for code-review.
+- 2026-07-05: `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checking 5 Markdown files.
+- 2026-07-05: `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed after ledger update.
+- 2026-07-05: `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed after ledger update.
+- 2026-07-05: `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checking 62 files.
 
 ## Outcome and retrospective
 
@@ -292,4 +303,4 @@ Optional generated exercise images are governed by `specs/exercise-image-standar
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M1 and M2 are closed. M3 has not started.
+- M1 and M2 are closed. M3 is ready for code-review.

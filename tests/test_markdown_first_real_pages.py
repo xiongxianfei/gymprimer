@@ -23,6 +23,9 @@ FIRST_SLICE = (
 ROWING_MACHINE_PAGE = ROOT / "exercises/rowing-machine.md"
 BRISK_WALKING_PAGE = ROOT / "exercises/brisk-walking.md"
 EVERYDAY_WALKING_PAGE = ROOT / "principles/everyday-walking.md"
+WALKING_CHANGE_ROOT = ROOT / "docs/changes/2026-07-05-brisk-walking-and-everyday-walking"
+WALKING_MANUAL_PROOF_ROOT = WALKING_CHANGE_ROOT / "manual-proof"
+WALKING_VALIDATION_LEDGER = WALKING_CHANGE_ROOT / "validation-ledger.md"
 MUSCLE_GUIDANCE_PROOF_SLICE = {
     "cardio equipment": {
         "path": "exercises/rowing-machine.md",
@@ -353,6 +356,95 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
                 self.assertIn(term, muscle_section)
         self.assertRegex(feel_section.lower(), r"\b(you may feel|pay attention to)\b")
         self.assertIn("able to talk", " ".join(feel_section.lower().split()))
+
+    def test_walking_m3_source_audit_records_required_claim_samples(self) -> None:
+        path = WALKING_MANUAL_PROOF_ROOT / "source-audit.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for heading in (
+            "# Walking Source Audit",
+            "## Scope",
+            "## Claim Samples",
+            "## Disposition",
+            "## Residual Risk",
+        ):
+            with self.subTest(heading=heading):
+                self.assertIn(heading, text)
+
+        for claim_type in (
+            "intensity",
+            "talk-test",
+            "weekly-activity-guidance",
+            "less-sitting-framing",
+            "walking-technique",
+            "starter-duration-or-progression",
+            "stop-rules",
+        ):
+            with self.subTest(claim_type=claim_type):
+                self.assertIn(claim_type, text)
+
+        for token in ("page_path", "claim_type", "supporting_source", "source_fit", "outcome", "residual_risk"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+        for page_path in ("exercises/brisk-walking.md", "principles/everyday-walking.md"):
+            with self.subTest(page_path=page_path):
+                self.assertIn(page_path, text)
+
+    def test_walking_m3_beginner_comprehension_records_required_prompts(self) -> None:
+        path = WALKING_MANUAL_PROOF_ROOT / "beginner-comprehension.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for prompt in (
+            "difference between everyday walking and brisk walking",
+            "how to know the pace is brisk",
+            "reasonable starting duration",
+            "what the body should feel",
+            "stop conditions",
+            "source supports the intensity claim",
+            "non-identifying",
+            "residual confusion",
+        ):
+            with self.subTest(prompt=prompt):
+                self.assertIn(prompt, text)
+
+        for page_path in ("exercises/brisk-walking.md", "principles/everyday-walking.md"):
+            with self.subTest(page_path=page_path):
+                self.assertIn(page_path, text)
+
+    def test_walking_m3_optional_image_decision_keeps_first_slice_text_only(self) -> None:
+        path = WALKING_MANUAL_PROOF_ROOT / "optional-image-decision.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for token in (
+            "# Optional Image Decision",
+            "decision: text-only",
+            "no image added",
+            "exercises/brisk-walking.md",
+            "principles/everyday-walking.md",
+            "exercise_movement_illustration",
+            "no comprehension gap",
+            "media/PROVENANCE.md unaffected",
+            "residual risk",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_walking_m3_validation_ledger_records_required_commands(self) -> None:
+        self.assertTrue(WALKING_VALIDATION_LEDGER.is_file())
+        text = WALKING_VALIDATION_LEDGER.read_text(encoding="utf-8")
+
+        for command in (
+            "python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md",
+            "python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages",
+            "python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'",
+            "python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking",
+        ):
+            with self.subTest(command=command):
+                self.assertIn(command, text)
 
     def test_rowing_machine_page_has_required_shape(self) -> None:
         self.assertTrue(ROWING_MACHINE_PAGE.is_file())

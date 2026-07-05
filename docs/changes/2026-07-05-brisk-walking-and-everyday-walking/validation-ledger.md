@@ -33,3 +33,20 @@
 - Added `principles/everyday-walking.md` as a text-only daily-movement principle page that distinguishes everyday walking from brisk walking and links to the brisk walking page.
 - `SOURCES.md` was unaffected because the required reusable walking source IDs were already indexed before M2.
 - `RED-FLAGS.md` was unaffected because the existing central safety route resolved and the walking pages only needed page-local links to it.
+
+## M3 Validation
+
+| Date | Command | Result | Notes |
+| --- | --- | --- | --- |
+| 2026-07-05 | `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` | pass | Checked 5 Markdown files; walking pages remain text-only and media provenance remains unchanged. |
+| 2026-07-05 | `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` | pass | Ran after adding manual proof and updating the exercise-image audit for `exercises/brisk-walking.md`. |
+| 2026-07-05 | `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` | pass | Ran Markdown-first discovery after M3 proof records and ledger update. |
+| 2026-07-05 | `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking` | pass | Checked 62 files; manual proof contains no private reader details or private health information. |
+
+## M3 Notes
+
+- Added focused failing tests first for walking manual proof files and required M3 validation ledger commands.
+- Added `manual-proof/source-audit.md` with sampled claim categories for intensity, talk test, weekly activity guidance, less-sitting framing, walking technique, starter/progression, and stop rules.
+- Added `manual-proof/beginner-comprehension.md` with non-identifying prompt outcomes for the approved walking questions.
+- Added `manual-proof/optional-image-decision.md` and kept the first walking slice text-only because no comprehension gap required an image.
+- Updated `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` to include the new text-only `exercises/brisk-walking.md` exercise page in the current exercise inventory.

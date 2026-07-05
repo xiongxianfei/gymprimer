@@ -23,6 +23,7 @@ or page review identifies a concrete beginner comprehension gap.
 | --- | ---: | --- | --- | --- |
 | `exercises/band-pull-apart.md` | 2 | `exercise_muscle_attention_illustration`, `exercise_movement_illustration` | keep existing image | No additional image needed now; keep prompt-backed M3 images. |
 | `exercises/bird-dog.md` | 1 | `key_movement_illustration` | keep existing image | Keep legacy-compatible sequence image; no migration-only edit. |
+| `exercises/brisk-walking.md` | 0 | none | text-only page | Walking M3 optional image decision keeps the first slice text-only; future image work needs a concrete comprehension gap. |
 | `exercises/chest-press.md` | 1 | `equipment_identification` | keep existing image | Keep legacy-compatible machine image; future setup/movement work needs a reviewed batch. |
 | `exercises/chin-nod.md` | 2 | `exercise_muscle_attention_illustration`, `exercise_movement_illustration` | keep existing image | No additional image needed now; keep M3 images. |
 | `exercises/dead-bug.md` | 1 | `key_movement_illustration` | keep existing image | Keep legacy-compatible sequence image; no migration-only edit. |
