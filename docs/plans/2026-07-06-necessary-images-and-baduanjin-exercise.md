@@ -2,9 +2,9 @@
 
 ## Status
 
-- Status: reviewed
-- Plan lifecycle state: active
-- Terminal disposition: not applicable
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed by PR #14
 
 ## Purpose / big picture
 
@@ -59,14 +59,14 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ## Current Handoff Summary
 
-- Current milestone: PR handoff
-- Current milestone state: open
+- Current milestone: Lifecycle Closeout
+- Current milestone state: completed
 - Last reviewed milestone: final holistic code-review
-- Review status: final holistic code-review R1 passed with no material findings; explain-change complete; verify passed; PR #14 opened
+- Review status: final holistic code-review R1 passed with no material findings; explain-change complete; verify passed; PR #14 merged
 - Remaining in-scope implementation milestones: none
-- Next stage: hosted CI / PR review
-- Final closeout readiness: PR handoff open; hosted CI pending
-- Reason final closeout is or is not ready: M1-M4 and final holistic code-review are closed, explain-change is complete, final local verification passed, and PR #14 is open; hosted CI has not been observed.
+- Next stage: none
+- Final closeout readiness: complete
+- Reason final closeout is or is not ready: PR #14 merged on 2026-07-06 with GitHub Actions `Validation checks` successful, and lifecycle cleanup is recorded on `main`.
 
 ## Milestones
 
@@ -320,6 +320,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Explain-change refreshed the final reviewed-diff rationale; verify is next.
 - 2026-07-06: Final local verify passed; PR handoff is next.
 - 2026-07-06: PR #14 opened from `proposal/baduanjin-exercise-images` to `main`; hosted CI is pending.
+- 2026-07-06: PR #14 merged with GitHub Actions `Validation checks` successful; lifecycle cleanup marked the change complete on `main`.
 
 ## Decision log
 

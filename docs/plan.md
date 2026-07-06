@@ -2,12 +2,6 @@
 
 ## Active
 
-- [Necessary Images and Baduanjin Exercise](plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)
-  - Status: reviewed
-  - Plan lifecycle state: active
-  - Current stage: pr
-  - Active context: PR #14 opened from `proposal/baduanjin-exercise-images` to `main`; hosted CI is pending.
-
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active
@@ -32,6 +26,12 @@
   - Active context: retained only as historical context for the structured-platform implementation path; it is not active execution guidance.
 
 ## Done (recent)
+
+- [Necessary Images and Baduanjin Exercise](plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #14
+  - Active context: proposal/spec/architecture/plan/test-spec review, M1-M4, explain-change, final local verification, CI validation, PR handoff, and merge/closeout are complete.
 
 - [Necessary Images and Tai Chi Exercise](plans/2026-07-05-necessary-images-and-tai-chi-exercise.md)
   - Status: completed
