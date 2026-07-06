@@ -5,8 +5,8 @@
 - [Necessary Images and Baduanjin Exercise](plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: verify
-  - Active context: Explain-change complete after final holistic code-review R1; verify is next.
+  - Current stage: pr
+  - Active context: Final local verify passed; PR handoff is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

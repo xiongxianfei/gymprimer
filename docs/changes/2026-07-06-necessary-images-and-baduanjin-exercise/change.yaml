@@ -1,6 +1,6 @@
 change_id: 2026-07-06-necessary-images-and-baduanjin-exercise
 status: active
-current_stage: verify
+current_stage: pr
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-necessary-images-and-baduanjin-exercise.md
@@ -25,11 +25,11 @@ current_test_spec: specs/necessary-images-and-baduanjin-exercise.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md
 
-current_milestone: explain-change
+current_milestone: verify
 current_milestone_state: closed
 last_reviewed_milestone: final holistic code-review
 
-next_stage: verify
+next_stage: pr
 
 open_findings: []
 
@@ -73,4 +73,5 @@ notes:
   - Code-review M4 R2 closed CR-M4-001 and M4 with no material findings.
   - Final holistic code-review R1 passed with no material findings.
   - Explain-change refreshed the final reviewed-diff rationale.
-  - Current handoff is verify; final verification and PR readiness are not claimed.
+  - Final local verify passed with branch-ready evidence in `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/verify-report.md`; hosted CI has not been observed.
+  - Current handoff is PR; PR body/open readiness is not claimed until PR handoff completes.

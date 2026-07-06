@@ -59,14 +59,14 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ## Current Handoff Summary
 
-- Current milestone: explain-change
+- Current milestone: verify
 - Current milestone state: closed
 - Last reviewed milestone: final holistic code-review
-- Review status: final holistic code-review R1 passed with no material findings; explain-change complete
+- Review status: final holistic code-review R1 passed with no material findings; explain-change complete; verify passed
 - Remaining in-scope implementation milestones: none
-- Next stage: verify
-- Final closeout readiness: in progress
-- Reason final closeout is or is not ready: M1-M4 and final holistic code-review are closed, and explain-change is complete; final verification and PR handoff have not happened.
+- Next stage: pr
+- Final closeout readiness: branch-ready for PR handoff
+- Reason final closeout is or is not ready: M1-M4 and final holistic code-review are closed, explain-change is complete, and final local verification passed; PR handoff and hosted CI have not happened.
 
 ## Milestones
 
@@ -318,6 +318,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Code-review M4 R2 closed CR-M4-001 and M4; final closeout is next.
 - 2026-07-06: Final holistic code-review R1 passed with no material findings; explain-change is next.
 - 2026-07-06: Explain-change refreshed the final reviewed-diff rationale; verify is next.
+- 2026-07-06: Final local verify passed; PR handoff is next.
 
 ## Decision log
 
