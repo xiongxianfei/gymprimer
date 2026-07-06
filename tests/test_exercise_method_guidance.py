@@ -298,6 +298,42 @@ class ExerciseMethodGuidanceTest(unittest.TestCase):
         self.assertIn("exercise_method_adaptive_programming", codes)
         self.assertIn("exercise_method_forbidden_scope", codes)
 
+    def test_baduanjin_low_load_control_method_shape_passes_without_adaptation(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do
+
+            Method type: low_load_control_drill
+
+            Beginner starting point: Practice for 3-5 minutes with small, slow movements.
+            Effort: Keep the movement easy and controlled enough to breathe normally.
+            Rest: Rest as needed between short practice rounds.
+            Progression: First make the movement smoother, then practice for a little longer.
+            Stop if: Pause when balance, posture, breathing, or attention breaks down.
+            """
+        )
+
+        self.assertEqual(finding_codes(text, "exercises/baduanjin-basics.md"), [])
+
+    def test_baduanjin_low_load_control_method_rejects_adaptive_or_rehab_wording(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do
+
+            Method type: low_load_control_drill
+
+            Beginner starting point: Use this rehab progression to treat balance symptoms.
+            Effort: Keep the movement easy.
+            Rest: Rest as needed.
+            Progression: Increase range based on your symptoms and medication response.
+            Stop if: Stop when form breaks.
+            """
+        )
+
+        codes = finding_codes(text, "exercises/baduanjin-basics.md")
+        self.assertIn("exercise_method_adaptive_programming", codes)
+        self.assertIn("exercise_method_forbidden_scope", codes)
+
     def test_related_specs_point_to_focused_method_spec_without_copying_enum(self) -> None:
         markdown_first = (ROOT / "specs/markdown-first-primer.md").read_text(encoding="utf-8")
         responsible_breadth = (ROOT / "specs/responsible-breadth.md").read_text(encoding="utf-8")

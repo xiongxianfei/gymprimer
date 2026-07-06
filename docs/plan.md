@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Necessary Images and Baduanjin Exercise](plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)
+  - Status: reviewed
+  - Plan lifecycle state: active
+  - Current stage: code-review
+  - Active context: M1 implementation completed validation/proof-map changes and is ready for code-review; M2-M4 remain unimplemented.
+
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active
@@ -78,3 +84,9 @@
 ## Notes
 
 - This index is a routing surface, not the long-form plan. The plan body owns milestone detail and current handoff state.
+
+## Sources
+
+- `docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md`
+- `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md`
+- `docs/workflows.md`

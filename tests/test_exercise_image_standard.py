@@ -64,6 +64,33 @@ TAI_CHI_ASSETS = (
         "Tai Chi muscle-attention image showing broad leg and trunk regions",
     ),
 )
+BADUANJIN_ASSETS = (
+    (
+        "setup",
+        "exercise_setup_illustration",
+        "Baduanjin setup image showing comfortable ready stance with soft knees",
+    ),
+    (
+        "two-hands-lift",
+        "exercise_movement_illustration",
+        "Baduanjin two-hands-lift image showing a slow upward reach with relaxed shoulders",
+    ),
+    (
+        "drawing-bow",
+        "exercise_movement_illustration",
+        "Baduanjin drawing-bow image showing a calm side stance and non-combat arm path",
+    ),
+    (
+        "alternating-reach",
+        "exercise_movement_illustration",
+        "Baduanjin alternating-reach image showing one hand up and one hand lowering gently",
+    ),
+    (
+        "muscle-attention",
+        "exercise_muscle_attention_illustration",
+        "Baduanjin muscle-attention image showing broad leg trunk shoulder upper-back foot and ankle regions",
+    ),
+)
 
 
 def run_check_with_root(root: Path, *paths: Path) -> subprocess.CompletedProcess[str]:
@@ -240,7 +267,163 @@ def write_tai_chi_image_fixture(root: Path, assets: tuple[tuple[str, str, str], 
     return write_exercise_page(root, "\n".join(image_blocks), slug="tai-chi-basics")
 
 
+def write_baduanjin_image_fixture(root: Path, assets: tuple[tuple[str, str, str], ...] = BADUANJIN_ASSETS) -> Path:
+    rows = []
+    image_blocks = []
+    for stem, purpose, alt_text in assets:
+        asset_path = f"media/exercises/baduanjin-basics/{stem}.png"
+        prompt_record = f"media/prompts/exercises/baduanjin-basics/{stem}.md"
+        write_asset(root, asset_path)
+        rows.append(
+            {
+                "asset_path": asset_path,
+                "media_purpose": purpose,
+                "prompt_record": prompt_record,
+                "page_refs": "exercises/baduanjin-basics.md",
+            }
+        )
+        image_blocks.append(f"![{alt_text}](../{asset_path})")
+    write_provenance(root, rows)
+    return write_exercise_page(root, "\n".join(image_blocks), slug="baduanjin-basics")
+
+
 class ExerciseImageStandardTest(unittest.TestCase):
+    def test_baduanjin_candidate_pool_records_deferred_alternatives(self) -> None:
+        evidence = (ROOT / "docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/image-candidate-pool.md").read_text(encoding="utf-8")
+
+        for rank in range(1, 11):
+            self.assertIn(f"| {rank} |", evidence)
+
+        self.assertIn("Baduanjin Basics", evidence)
+        self.assertIn("setup.png", evidence)
+        self.assertIn("two-hands-lift.png", evidence)
+        self.assertIn("drawing-bow.png", evidence)
+        self.assertIn("alternating-reach.png", evidence)
+        self.assertIn("muscle-attention.png", evidence)
+        self.assertIn("Candidates 6-10", evidence)
+        self.assertIn("deferred alternatives", evidence)
+        self.assertIn("not approval to publish a sixth image", evidence)
+
+    def test_baduanjin_first_batch_five_images_passes_with_path_scoped_exception(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_baduanjin_image_fixture(root)
+
+            result = run_check_with_root(root, page)
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_baduanjin_sixth_image_and_second_muscle_attention_fail(self) -> None:
+        sixth_image_assets = BADUANJIN_ASSETS + (
+            (
+                "look-back",
+                "exercise_movement_illustration",
+                "Baduanjin look-back image showing gentle trunk rotation within comfortable range",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_baduanjin_image_fixture(root, sixth_image_assets)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_count_exceeded", result.stdout)
+
+        second_muscle_assets = BADUANJIN_ASSETS + (
+            (
+                "second-muscle-attention",
+                "exercise_muscle_attention_illustration",
+                "Baduanjin second muscle-attention image showing another broad body-region reference",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_baduanjin_image_fixture(root, second_muscle_assets)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_count_exceeded", result.stdout)
+        self.assertIn("exercise_muscle_attention_limit", result.stdout)
+
+    def test_baduanjin_exception_does_not_change_default_three_image_limit(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            rows = []
+            image_blocks = []
+            for index, purpose in enumerate(("exercise_setup_illustration", "exercise_movement_illustration", "exercise_movement_illustration", "exercise_movement_illustration"), start=1):
+                asset_path = f"media/exercises/fixture-exercise/image-{index}.png"
+                write_asset(root, asset_path)
+                rows.append({"asset_path": asset_path, "media_purpose": purpose})
+                image_blocks.append(f"![Fixture exercise image {index}](../{asset_path})")
+            write_provenance(root, rows)
+            page = write_exercise_page(root, "\n".join(image_blocks))
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_count_exceeded", result.stdout)
+
+    def test_baduanjin_prompt_record_and_visual_text_failures_are_deterministic(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            asset_path = "media/exercises/baduanjin-basics/drawing-bow.png"
+            write_asset(root, asset_path)
+            write_provenance(
+                root,
+                [
+                    {
+                        "asset_path": asset_path,
+                        "media_purpose": "exercise_movement_illustration",
+                        "prompt_record": "",
+                        "page_refs": "exercises/baduanjin-basics.md",
+                    }
+                ],
+                create_prompt_records=False,
+            )
+            page = write_exercise_page(root, "![Baduanjin drawing-bow image showing calm stance](../media/exercises/baduanjin-basics/drawing-bow.png)", slug="baduanjin-basics")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("media_prompt_record_missing", result.stdout)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            asset_path = "media/exercises/baduanjin-basics/drawing-bow.png"
+            write_asset(root, asset_path)
+            write_provenance(
+                root,
+                [
+                    {
+                        "asset_path": asset_path,
+                        "media_purpose": "exercise_movement_illustration",
+                        "prompt_record": "media/prompts/exercises/baduanjin-basics/drawing-bow.md",
+                        "page_refs": "exercises/baduanjin-basics.md",
+                        "prompt_or_creation_notes": "Baduanjin image with weapon target and combat warning badge",
+                    }
+                ],
+            )
+            page = write_exercise_page(root, "![Baduanjin drawing-bow combat image](../media/exercises/baduanjin-basics/drawing-bow.png)", slug="baduanjin-basics")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_visual_safety_text", result.stdout)
+
     def test_tai_chi_candidate_pool_records_deferred_alternatives(self) -> None:
         spec = (ROOT / "specs/necessary-images-and-tai-chi-exercise.md").read_text(encoding="utf-8")
         plan = (ROOT / "docs/plans/2026-07-05-necessary-images-and-tai-chi-exercise.md").read_text(encoding="utf-8")
