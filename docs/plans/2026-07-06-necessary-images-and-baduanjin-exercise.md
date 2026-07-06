@@ -59,14 +59,14 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: review-requested
-- Last reviewed milestone: M2
-- Review status: M3 implementation complete; code-review pending
-- Remaining in-scope implementation milestones: M3 pending code-review, then M4
-- Next stage: code-review M3
+- Current milestone: M4
+- Current milestone state: planned
+- Last reviewed milestone: M3
+- Review status: code-review M3 R1 closed M3 with no material findings
+- Remaining in-scope implementation milestones: M4
+- Next stage: implement M4
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 code-review, M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M4 implementation, downstream review, final verification, and PR handoff have not happened.
 
 ## Milestones
 
@@ -170,7 +170,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ### M3. Governed First Image Batch
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Generate and promote exactly five Baduanjin support images through the governed media workflow.
 - Requirements: R21-R40, R43
 - Files/components likely touched:
@@ -214,6 +214,8 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
   - `git diff --check` passed.
 - Aligned-surface audit:
   - Beginner-comprehension proof and rollback proof are intentionally unchanged for M3; they belong to M4.
+- Code-review:
+  - Code-review M3 R1 closed M3 with no material findings.
 - Risks:
   - A generated image may imply therapy, combat, exact correctness, overprecise anatomy, or identifying-person content.
 - Rollback/recovery:
@@ -282,6 +284,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: M2 implementation added the text-only Baduanjin page, source audit, real-page tests, and exercise-image audit inventory row; milestone moved to code-review.
 - 2026-07-06: Code-review M2 R1 closed M2; next stage is M3 implementation.
 - 2026-07-06: M3 implementation added the governed first image batch, prompt records, provenance rows, page references, visual-safety review, and real-page media tests; milestone moved to code-review.
+- 2026-07-06: Code-review M3 R1 closed M3; next stage is M4 implementation.
 
 ## Decision log
 

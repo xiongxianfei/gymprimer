@@ -1,6 +1,6 @@
 change_id: 2026-07-06-necessary-images-and-baduanjin-exercise
 status: active
-current_stage: code-review
+current_stage: implement
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-necessary-images-and-baduanjin-exercise.md
@@ -25,11 +25,11 @@ current_test_spec: specs/necessary-images-and-baduanjin-exercise.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md
 
-current_milestone: M3
-current_milestone_state: review-requested
-last_reviewed_milestone: M2
+current_milestone: M4
+current_milestone_state: planned
+last_reviewed_milestone: M3
 
-next_stage: code-review
+next_stage: implement
 
 open_findings: []
 
@@ -64,4 +64,5 @@ notes:
   - Code-review M2 R1 closed M2 with no material findings.
   - M3 implementation added exactly five generated Baduanjin images, prompt records, approved provenance rows, page references, visual-safety review evidence, and real-page media tests.
   - M3 validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m3_images_are_local_prompt_backed_and_reviewed`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`, `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`, and `git diff --check`.
-  - Current handoff is code-review for M3 only; M4 remains unimplemented.
+  - Code-review M3 R1 closed M3 with no material findings.
+  - Current handoff is M4 implementation; M4 remains unimplemented.

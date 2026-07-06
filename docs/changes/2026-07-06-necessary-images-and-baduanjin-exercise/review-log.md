@@ -10,6 +10,7 @@
 | 2026-07-06 | code-review | 1 | changes-requested | `reviews/code-review-r1.md` | CR-M1-001 | M1 lacks direct BJ-T8 forbidden-scope fixture coverage for treatment, full-form, fall-prevention, and adaptive-coaching wording. |
 | 2026-07-06 | code-review | 2 | clean-with-notes | `reviews/code-review-r2.md` | none | CR-M1-001 is resolved; M1 is closed and the next stage is M2 implementation. |
 | 2026-07-06 | code-review M2 | 1 | clean-with-notes | `reviews/code-review-m2-r1.md` | none | M2 text-only page is closed; next stage is M3 implementation. |
+| 2026-07-06 | code-review M3 | 1 | clean-with-notes | `reviews/code-review-m3-r1.md` | none | M3 governed image batch is closed; next stage is M4 implementation. |
 
 ## Sources
 
@@ -21,4 +22,5 @@
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/code-review-r1.md`
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/code-review-r2.md`
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/code-review-m2-r1.md`
+- `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/code-review-m3-r1.md`
 - `docs/proposals/2026-07-06-necessary-images-and-baduanjin-exercise.md`
