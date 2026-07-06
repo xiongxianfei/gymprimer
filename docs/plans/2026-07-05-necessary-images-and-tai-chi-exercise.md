@@ -56,14 +56,14 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ## Current Handoff Summary
 
-- Current milestone: M2
-- Current milestone state: review-requested
-- Last reviewed milestone: M1
-- Review status: M1 code-review clean; M2 implemented and awaiting code-review
-- Remaining in-scope implementation milestones: M2 review, M3, M4
-- Next stage: code-review M2
+- Current milestone: M3
+- Current milestone state: planned
+- Last reviewed milestone: M2
+- Review status: M1 and M2 code-review clean
+- Remaining in-scope implementation milestones: M3, M4
+- Next stage: implement M3
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M2 has not passed code-review, M3-M4 are not implemented, and final verification and PR handoff have not happened.
+- Reason final closeout is or is not ready: M3-M4 are not implemented, and final verification and PR handoff have not happened.
 
 ## Milestones
 
@@ -109,7 +109,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ### M2. Tai Chi Markdown Page
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Draft the static beginner-facing Tai Chi Basics page without generated images.
 - Requirements: R1-R19, R42-R43
 - Files/components likely touched:
@@ -258,6 +258,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Implemented M1 by adding Tai Chi-specific method and exercise-image validation tests; existing checker behavior already covered the required failures, so no checker code change was needed.
 - 2026-07-06: Code-review M1 R1 was clean with no material findings; M1 closed and routed to implementation M2.
 - 2026-07-06: Implemented M2 by adding the text-only `exercises/tai-chi-basics.md` page, Tai Chi source IDs in `SOURCES.md`, MP1 source-audit evidence, real-page tests, and the aligned text-only row in the existing exercise-image audit.
+- 2026-07-06: Code-review M2 R1 was clean with no material findings; M2 closed and routed to implementation M3.
 
 ## Decision log
 
@@ -293,12 +294,13 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - `python3 -m unittest tests.test_exercise_method_guidance` passed: 17 tests.
 - `python3 -m unittest discover -s tests` initially failed because the existing exercise-image audit did not list `exercises/tai-chi-basics.md`; after adding the text-only audit row it passed: 164 tests.
 - `git diff --check` passed.
+- Code-review M2 reviewer rerun passed: focused Tai Chi real-page tests, Markdown-first check, privacy check, and full unittest discovery.
 
 ## Outcome and retrospective
 
-- M2 implementation is complete and pending code-review.
+- M2 is closed after clean code-review; M3 is pending implementation.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M2 is ready for code-review.
+- M3 is ready for implementation.

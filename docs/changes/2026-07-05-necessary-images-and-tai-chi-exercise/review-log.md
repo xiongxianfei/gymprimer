@@ -9,3 +9,4 @@
 | 2026-07-06 | plan-review | 1 | approved | `reviews/plan-review-r1.md` | none | Execution plan is approved; route to test-spec. |
 | 2026-07-06 | test-spec-review | 1 | approved | `reviews/test-spec-review-r1.md` | none | Test spec is approved; implementation handoff is allowed, but workflow auto-run stops before implementation. |
 | 2026-07-06 | code-review M1 | 1 | clean-with-notes | `reviews/code-review-m1-r1.md` | none | M1 validation proof-map implementation is clean; M1 closed and routed to implement M2. |
+| 2026-07-06 | code-review M2 | 1 | clean-with-notes | `reviews/code-review-m2-r1.md` | none | M2 text-only Tai Chi page implementation is clean; M2 closed and routed to implement M3. |
