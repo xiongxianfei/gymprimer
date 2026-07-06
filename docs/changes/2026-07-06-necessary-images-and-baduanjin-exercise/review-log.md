@@ -7,6 +7,7 @@
 | 2026-07-06 | architecture-review | 1 | approved | `reviews/architecture-review-r1.md` | none | Canonical architecture update is approved; route to execution planning. |
 | 2026-07-06 | plan-review | 1 | approved | `reviews/plan-review-r1.md` | none | Execution plan is approved; route to test-spec. |
 | 2026-07-06 | test-spec-review | 1 | approved | `reviews/test-spec-review-r1.md` | none | Active test spec is approved; implementation handoff is allowed, but `$workflow auto: test-spec-review` halts before implementation. |
+| 2026-07-06 | code-review | 1 | changes-requested | `reviews/code-review-r1.md` | CR-M1-001 | M1 lacks direct BJ-T8 forbidden-scope fixture coverage for treatment, full-form, fall-prevention, and adaptive-coaching wording. |
 
 ## Sources
 
@@ -15,4 +16,5 @@
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/architecture-review-r1.md`
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/plan-review-r1.md`
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md`
+- `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/code-review-r1.md`
 - `docs/proposals/2026-07-06-necessary-images-and-baduanjin-exercise.md`

@@ -60,19 +60,19 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M1
-- Current milestone state: review-requested
+- Current milestone state: resolution-needed
 - Last reviewed milestone: none
-- Review status: M1 implementation complete; code-review pending
-- Remaining in-scope implementation milestones: M1 pending code-review, then M2, M3, M4
-- Next stage: code-review M1
+- Review status: code-review R1 requested changes for CR-M1-001
+- Remaining in-scope implementation milestones: M1 resolution, then M2, M3, M4
+- Next stage: review-resolution for M1
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 code-review, M2-M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M1 has an unresolved code-review finding, and M2-M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
 
 ## Milestones
 
 ### M1. Validation and Proof Map
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: Add or update deterministic tests and proof obligations before content and media are introduced.
 - Requirements: R21-R29, R36-R43
 - Files/components likely touched:
@@ -111,6 +111,8 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
   - `exercises/baduanjin-basics.md` is intentionally unchanged for M1; it belongs to M2.
   - Baduanjin generated assets, prompt records, and `media/PROVENANCE.md` rows are intentionally unchanged for M1; they belong to M3.
   - Visual-safety review, beginner-comprehension proof, and rollback proof are intentionally unchanged for M1; they belong to M4.
+- Code-review R1:
+  - Finding CR-M1-001 requires direct BJ-T8 forbidden-scope fixture coverage for treatment, full-form, fall-prevention, and adaptive-coaching wording, or an upstream re-reviewed deferral.
 - Risks:
   - Overfitting checks to one page could hide broader media regressions.
 - Rollback/recovery:
@@ -228,6 +230,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Plan drafted during `$workflow auto: test-spec-review`.
 - 2026-07-06: Plan-review R1 approved this plan.
 - 2026-07-06: M1 implementation added validation fixtures, path-scoped checker support, candidate-pool evidence, and validation notes; milestone moved to code-review.
+- 2026-07-06: Code-review R1 requested changes for CR-M1-001; M1 moved to review-resolution.
 
 ## Decision log
 
