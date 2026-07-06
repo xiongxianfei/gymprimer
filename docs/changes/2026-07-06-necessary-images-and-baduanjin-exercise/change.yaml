@@ -26,10 +26,10 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md
 
 current_milestone: M4
-current_milestone_state: review-requested
+current_milestone_state: closed
 last_reviewed_milestone: M4
 
-next_stage: code-review
+next_stage: final-closeout
 
 open_findings: []
 
@@ -70,4 +70,5 @@ notes:
   - Code-review M4 R1 requested changes for CR-M4-001 because the rollback proof records wildcard temp-root commands as passing, but the recorded Markdown-first command fails when run literally.
   - CR-M4-001 resolution replaced the wildcard rollback evidence with concrete temporary-root commands for `/tmp/gymprimer-baduanjin-rollback.cr-m4-001` and reran focused rollback Markdown-first and privacy checks.
   - CR-M4-001 resolution validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup`, concrete temporary rollback Markdown-first and privacy checks, `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, full Markdown-first and privacy checks, and `git diff --check`.
-  - Current handoff is code-review rereview for M4; final closeout is not ready until M4 is closed, final holistic review, and final verification complete.
+  - Code-review M4 R2 closed CR-M4-001 and M4 with no material findings.
+  - Current handoff is final closeout; final verification and PR readiness are not claimed.

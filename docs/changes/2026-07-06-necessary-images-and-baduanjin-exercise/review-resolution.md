@@ -2,14 +2,14 @@
 
 ## Status
 
-M4 review-resolution implemented for CR-M4-001; code-review rereview pending.
+M4 review-resolution complete; code-review M4 R2 closed CR-M4-001.
 
 ## Findings
 
 | Finding | Status | Resolution |
 |---|---|---|
 | CR-M1-001 | resolved by `reviews/code-review-r2.md` | Added focused Baduanjin forbidden-scope fixtures for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording. |
-| CR-M4-001 | resolved pending code-review rereview | Updated rollback proof, validation notes, plan evidence, and change metadata with concrete temporary-root commands and reran focused rollback checks. |
+| CR-M4-001 | resolved by `reviews/code-review-m4-r2.md` | Updated rollback proof, validation notes, plan evidence, and change metadata with concrete temporary-root commands and reran focused rollback checks. |
 
 ## CR-M1-001
 
@@ -62,5 +62,6 @@ Validation:
 
 - [Code review R1](reviews/code-review-r1.md)
 - [Code review M4 R1](reviews/code-review-m4-r1.md)
+- [Code review M4 R2](reviews/code-review-m4-r2.md)
 - [Necessary Images and Baduanjin Exercise test spec](../../../specs/necessary-images-and-baduanjin-exercise.test.md)
 - [Necessary Images and Baduanjin Exercise plan](../../plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)

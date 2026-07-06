@@ -60,13 +60,13 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: review-requested
+- Current milestone state: closed
 - Last reviewed milestone: M4
-- Review status: CR-M4-001 resolution implemented; code-review rereview pending
-- Remaining in-scope implementation milestones: M4 pending code-review rereview
-- Next stage: code-review M4 rereview
-- Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M4 code-review rereview, final holistic review, final verification, and PR handoff have not happened.
+- Review status: code-review M4 R2 closed CR-M4-001 with no material findings
+- Remaining in-scope implementation milestones: none
+- Next stage: final closeout
+- Final closeout readiness: ready to start final closeout sequence
+- Reason final closeout is or is not ready: M1-M4 are closed and no review-resolution remains open; final holistic review if required, final verification, and PR handoff have not happened.
 
 ## Milestones
 
@@ -223,7 +223,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ### M4. Review Evidence and Final Local Readiness
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Record manual visual-safety review, beginner comprehension proof, rollback proof, and final local validation evidence.
 - Requirements: R40-R43
 - Files/components likely touched:
@@ -266,6 +266,8 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
   - Updated rollback proof, validation notes, plan evidence, and change metadata to record concrete temporary-root commands for `/tmp/gymprimer-baduanjin-rollback.cr-m4-001`.
   - Reran the focused rollback Markdown-first and privacy checks from that concrete temporary root.
   - Reran M4 proof tests, full local unittest discovery, Markdown-first checks, privacy checks, and `git diff --check`.
+- Code-review R2:
+  - Closed CR-M4-001 and M4 with no material findings.
 - Risks:
   - Beginner comprehension proof could be too vague or store private health information.
 - Rollback/recovery:
@@ -313,6 +315,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: M4 implementation added beginner-comprehension proof, rollback proof, proof-record tests, temporary rollback validation, and final local validation evidence; milestone moved to code-review.
 - 2026-07-06: Code-review M4 R1 requested changes for CR-M4-001; M4 moved to review-resolution.
 - 2026-07-06: CR-M4-001 resolution recorded concrete rollback commands and returned M4 to code-review rereview.
+- 2026-07-06: Code-review M4 R2 closed CR-M4-001 and M4; final closeout is next.
 
 ## Decision log
 
