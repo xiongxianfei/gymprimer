@@ -25,6 +25,20 @@ It uses page-local Tai Chi source definitions, and `SOURCES.md` now indexes the 
 `tests/test_markdown_first_real_pages.py` now checks the real Tai Chi page shape, text-only rollback surface, beginner scope, source-index discipline, low-load method labels, broad muscle guidance, and M2 source-audit evidence.
 `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` also gets a Tai Chi text-only row because the existing image-standard test treats that audit as the current inventory of exercise pages.
 
+## M3 governed first image batch implementation
+
+M3 adds the first governed Tai Chi support-image batch.
+The generated assets are stored under `media/exercises/tai-chi-basics/` as `setup.png`, `weight-shift.png`, and `muscle-attention.png`.
+The page now references exactly those three local assets with meaningful alt text near the Markdown sections they support.
+
+Each generated raster has a repository-local prompt record under `media/prompts/exercises/tai-chi-basics/` preserving the exact prompt text and selected-output notes.
+`media/PROVENANCE.md` records approved rows for all three assets with the expected media purposes, prompt-record paths, generator, reviewer, license assertion, source inputs, review status, and `exercises/tai-chi-basics.md` page refs.
+
+`docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/visual-safety-review.md` records MP2 evidence for one-concept purpose fit, nearby-Markdown alignment, no in-image text, no identifiable person, no brand mark, no clinical or combat framing, no unsupported claim, color accessibility, and broad muscle highlighting for the muscle-attention image.
+
+`tests/test_exercise_image_standard.py` now includes a real-page M3 test for the Tai Chi assets, prompt records, provenance rows, page refs, alt text, and visual-safety review.
+The older Tai Chi page-shape test in `tests/test_markdown_first_real_pages.py` was narrowed to structure only because M3 intentionally moves the page beyond the M2 text-only state.
+
 ## Validation evidence
 
 - `python3 -m unittest tests.test_exercise_image_standard tests.test_exercise_method_guidance` passed after correcting an overly literal contract assertion.
@@ -39,6 +53,14 @@ It uses page-local Tai Chi source definitions, and `SOURCES.md` now indexes the 
 - `python3 tools/checks/check_privacy.py exercises/tai-chi-basics.md media/PROVENANCE.md docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/ SOURCES.md` passed.
 - `python3 -m unittest discover -s tests` initially failed because the current exercise-image audit did not list `exercises/tai-chi-basics.md`; after adding the text-only audit row it passed.
 - `git diff --check` passed.
+- `python3 -m unittest tests.test_exercise_image_standard.ExerciseImageStandardTest.test_tai_chi_m3_support_batch_has_page_images_prompt_records_and_visual_review` failed before M3 implementation because the page had zero Tai Chi image references.
+- `python3 -m unittest tests.test_exercise_image_standard.ExerciseImageStandardTest.test_tai_chi_m3_support_batch_has_page_images_prompt_records_and_visual_review` passed after adding assets, prompt records, provenance, page references, and visual-safety evidence.
+- `python3 tools/checks/check_markdown_first.py exercises/tai-chi-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md` passed after M3.
+- `python3 tools/checks/check_privacy.py exercises/tai-chi-basics.md media/PROVENANCE.md media/prompts/exercises/tai-chi-basics/ docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/ SOURCES.md` passed after M3.
+- `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed after M3.
+- `python3 -m unittest discover -s tests` passed after M3.
+- `du -h media/exercises/tai-chi-basics/*.png` reported `setup.png` 1.9M, `weight-shift.png` 1.6M, and `muscle-attention.png` 1.8M.
+- `git diff --check` passed after M3.
 
 `python3 -m pytest` was attempted because the draft plan had named it, but it could not run in this environment because `pytest` is not installed.
-The reviewed test spec command ledger uses unittest commands for M1/M2.
+The reviewed test spec command ledger uses unittest commands for M1-M3.

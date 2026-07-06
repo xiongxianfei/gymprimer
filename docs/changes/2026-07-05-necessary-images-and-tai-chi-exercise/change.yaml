@@ -1,6 +1,6 @@
 change_id: 2026-07-05-necessary-images-and-tai-chi-exercise
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-05-necessary-images-and-tai-chi-exercise.md
@@ -25,7 +25,7 @@ current_test_spec: specs/necessary-images-and-tai-chi-exercise.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/test-spec-review-r1.md
 
-next_stage: implement
+next_stage: code-review
 
 open_findings: []
 
@@ -55,3 +55,7 @@ notes:
   - M2 implemented the text-only `exercises/tai-chi-basics.md` page, Tai Chi source IDs in `SOURCES.md`, MP1 source-audit evidence, real-page tests, and the aligned current exercise-image audit row.
   - M2 targeted validation passed with focused Tai Chi tests, Markdown-first check, privacy scan, unittest discovery, method-guidance tests, and diff check; `python3 -m pytest` remains unavailable because pytest is not installed.
   - Code-review M2 R1 was clean with no material findings; M2 closed and next stage is implement M3.
+  - M3 implementation started for the governed first Tai Chi image batch.
+  - M3 implemented three generated Tai Chi support images, prompt records, provenance rows, Markdown references, real-asset tests, and visual-safety review evidence.
+  - M3 targeted validation passed with focused image tests, Markdown-first check, privacy scan, unittest discovery, and diff check; `python3 -m pytest` remains unavailable because pytest is not installed.
+  - M3 is ready for code-review.

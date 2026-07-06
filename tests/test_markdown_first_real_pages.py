@@ -231,7 +231,7 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
                 for section in sections:
                     self.assertIn(section, text)
 
-    def test_tai_chi_page_exists_and_has_required_text_only_shape(self) -> None:
+    def test_tai_chi_page_exists_and_has_required_shape(self) -> None:
         self.assertTrue(TAI_CHI_PAGE.is_file())
         text = self.tai_chi_text()
 
@@ -248,9 +248,6 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
         ):
             with self.subTest(step=step):
                 self.assertIn(step, text)
-
-        self.assertNotIn("![", text)
-        self.assertNotIn("../media/exercises/tai-chi-basics/", text)
 
     def test_tai_chi_beginner_scope_and_forbidden_product_language(self) -> None:
         text = self.tai_chi_text()

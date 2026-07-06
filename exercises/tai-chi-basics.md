@@ -19,6 +19,8 @@ Tai Chi Basics is low-impact mindful movement practice. Use it to practice slow 
 
 This page covers only a beginner-ready stance, a small weight shift, a simple opening movement, and a return to quiet standing. The written Markdown remains the source of truth for setup, muscles, method, and safety.
 
+Use these images as broad visual references. Keep the written setup, movement, muscle, and safety notes as the source of truth.
+
 ## Before you start
 
 Practice in comfortable clothing and use footwear or stable foot contact that does not slip. Choose a clear, flat surface, and keep a wall or stable chair nearby when balance is uncertain. Start with small, slow movements. Harvard Health recommends comfortable clothing and non-slip shoes with enough support for balance, and NHS balance-exercise guidance recommends building up slowly near a wall or stable chair when needed. [Harvard Health][harvard-tai-chi] [NHS][nhs-balance-exercises]
@@ -28,6 +30,8 @@ Ask a qualified instructor or clinician before using this page when a medical co
 ## Setup
 
 Stand tall on a clear, flat surface. Place the feet about hip-width to shoulder-width apart, or slightly narrower if that feels steadier. Keep the knees soft instead of locked, the trunk upright, the shoulders relaxed, and the arms resting naturally.
+
+![Tai Chi setup reference showing relaxed ready stance with soft knees, upright trunk, relaxed shoulders, and natural arms](../media/exercises/tai-chi-basics/setup.png)
 
 Keep the first version small. Let the feet feel connected to the floor, breathe normally, and stay close enough to a wall or stable chair to pause or steady the body if needed. [NHS][nhs-balance-exercises]
 
@@ -42,6 +46,8 @@ Keep the first version small. Let the feet feel connected to the floor, breathe 
 
 Treat this as broad body-awareness guidance, not a test of exact muscle effort.
 
+![Tai Chi muscle-attention reference with broad highlights on legs, glutes, trunk, shoulders, upper back, feet, and ankles](../media/exercises/tai-chi-basics/muscle-attention.png)
+
 ## Movement breakdown
 
 ### 1. Ready stance
@@ -51,6 +57,8 @@ Stand in the setup position. Let the knees stay soft, the shoulders settle, and 
 ### 2. Weight shift
 
 Slowly move a little more weight into one foot. Let the other foot become lighter without lifting it high or leaning the trunk. Return toward center, then repeat to the other side. VA describes Tai Chi as using slow, flowing movements, and notes that simple motions may include shifting weight. [VA][va-tai-chi-qigong]
+
+![Tai Chi weight-shift reference showing smooth weight transfer between feet with calm upper body](../media/exercises/tai-chi-basics/weight-shift.png)
 
 ### 3. Opening movement
 

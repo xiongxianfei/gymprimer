@@ -57,13 +57,13 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
-- Review status: M1 and M2 code-review clean
+- Review status: M1 and M2 code-review clean; M3 implemented and awaiting code-review
 - Remaining in-scope implementation milestones: M3, M4
-- Next stage: implement M3
+- Next stage: code-review M3
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M3-M4 are not implemented, and final verification and PR handoff have not happened.
+- Reason final closeout is or is not ready: M3 has not passed code-review, M4 is not implemented, and final verification and PR handoff have not happened.
 
 ## Milestones
 
@@ -146,7 +146,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ### M3. Governed First Image Batch
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Generate and promote exactly three Tai Chi support images through the governed media workflow.
 - Requirements: R20-R40, R43
 - Files/components likely touched:
@@ -175,11 +175,12 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
   - `python3 tools/checks/check_privacy.py exercises/tai-chi-basics.md media/PROVENANCE.md media/prompts/exercises/tai-chi-basics/`
   - `python3 -m pytest`
 - Expected observable result: the page references exactly three generated raster images with matching prompt records, approved provenance, valid purposes, and meaningful alt text.
+- Implemented result: `exercises/tai-chi-basics.md` references exactly three generated raster images with matching prompt records, approved provenance rows, page refs, valid purposes, meaningful alt text, and M3 visual-safety review evidence.
 - Commit message: `M3: add governed Tai Chi support images`
 - Milestone closeout:
-  - validation passed
+  - validation passed locally with focused image tests, Markdown-first check, privacy scan, unittest discovery, and diff check
   - progress updated
-  - decision log updated if needed
+  - decision log updated
   - validation notes updated
   - milestone committed
 - Risks:
@@ -259,6 +260,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Code-review M1 R1 was clean with no material findings; M1 closed and routed to implementation M2.
 - 2026-07-06: Implemented M2 by adding the text-only `exercises/tai-chi-basics.md` page, Tai Chi source IDs in `SOURCES.md`, MP1 source-audit evidence, real-page tests, and the aligned text-only row in the existing exercise-image audit.
 - 2026-07-06: Code-review M2 R1 was clean with no material findings; M2 closed and routed to implementation M3.
+- 2026-07-06: Implemented M3 by generating three Tai Chi support images through the built-in imagegen path, adding workspace assets, exact prompt records, approved provenance rows, page image references, real-asset tests, and visual-safety review evidence.
 
 ## Decision log
 
@@ -269,11 +271,14 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 | 2026-07-06 | Leave checker code unchanged for M1. | New Tai Chi-specific fixtures passed against existing method, media-purpose, prompt-record, image-count, alt-text, and visual-safety validation. | Add page-specific checker branches before a failing test demonstrates a gap. |
 | 2026-07-06 | Keep M2 text-only and defer all Tai Chi images to M3. | M2 must prove the Markdown page and rollback path before generated assets become page references. | Add placeholder image references or generate images during M2. |
 | 2026-07-06 | Update the existing exercise-image audit with a Tai Chi text-only row. | Broad unittest discovery treats that audit as an inventory of current exercise pages. | Leave the audit stale until image generation. |
+| 2026-07-06 | Use the built-in imagegen path for M3. | The imagegen skill prefers built-in generation for ordinary project-bound raster assets, with generated files copied from Codex output into workspace media paths. | CLI/API fallback requiring `OPENAI_API_KEY`. |
+| 2026-07-06 | Keep the three generated PNG files as-is. | The files are 1.6-1.9 MB each and remain reasonable for the first governed batch. | Add compression tooling or regenerate solely for size. |
 
 ## Surprises and discoveries
 
 - The approved plan still mentioned `python3 -m pytest`, but the active test spec owns the reviewed command ledger and uses unittest commands. `python3 -m pytest` is unavailable in this environment.
 - Broad unittest discovery failed until `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` was updated to include the new text-only Tai Chi page.
+- Broad unittest discovery initially failed in M3 because the M2 real-page test still asserted that the Tai Chi page had no images. The assertion was removed, and the new M3 real-asset test now owns image-count, provenance, prompt-record, and visual-review coverage.
 
 ## Validation notes
 
@@ -295,12 +300,22 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - `python3 -m unittest discover -s tests` initially failed because the existing exercise-image audit did not list `exercises/tai-chi-basics.md`; after adding the text-only audit row it passed: 164 tests.
 - `git diff --check` passed.
 - Code-review M2 reviewer rerun passed: focused Tai Chi real-page tests, Markdown-first check, privacy check, and full unittest discovery.
+- `python3 -m unittest tests.test_exercise_image_standard.ExerciseImageStandardTest.test_tai_chi_m3_support_batch_has_page_images_prompt_records_and_visual_review` failed before implementation because `exercises/tai-chi-basics.md` had zero Tai Chi image references.
+- `python3 -m unittest tests.test_exercise_image_standard.ExerciseImageStandardTest.test_tai_chi_m3_support_batch_has_page_images_prompt_records_and_visual_review` passed.
+- `python3 tools/checks/check_markdown_first.py exercises/tai-chi-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md` passed.
+- `python3 tools/checks/check_privacy.py exercises/tai-chi-basics.md media/PROVENANCE.md media/prompts/exercises/tai-chi-basics/ docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/ SOURCES.md` passed.
+- `python3 -m unittest tests.test_exercise_image_standard.ExerciseImageStandardTest.test_tai_chi_m3_support_batch_has_page_images_prompt_records_and_visual_review tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_tai_chi_page_exists_and_has_required_shape` passed: 2 tests.
+- `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 48 tests.
+- `python3 -m unittest discover -s tests` passed: 165 tests.
+- `du -h media/exercises/tai-chi-basics/*.png` reported `setup.png` 1.9M, `weight-shift.png` 1.6M, and `muscle-attention.png` 1.8M.
+- `python3 -m pytest` could not run because `pytest` is not installed: `/usr/bin/python3: No module named pytest`.
+- `git diff --check` passed.
 
 ## Outcome and retrospective
 
-- M2 is closed after clean code-review; M3 is pending implementation.
+- M3 implementation is complete and pending code-review.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M3 is ready for implementation.
+- M3 is ready for code-review.

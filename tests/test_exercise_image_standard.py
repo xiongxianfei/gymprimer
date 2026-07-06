@@ -778,6 +778,77 @@ class ExerciseImageStandardTest(unittest.TestCase):
         self.assertTrue((evidence_root / "m3-beginner-comprehension.md").exists())
         self.assertTrue((evidence_root / "m3a-prompt-record-backfill.md").exists())
 
+    def test_tai_chi_m3_support_batch_has_page_images_prompt_records_and_visual_review(self) -> None:
+        page_path = ROOT / "exercises/tai-chi-basics.md"
+        page_text = page_path.read_text(encoding="utf-8")
+        provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
+        expected = {
+            "media/exercises/tai-chi-basics/setup.png": (
+                "exercise_setup_illustration",
+                "Tai Chi setup reference showing relaxed ready stance with soft knees, upright trunk, relaxed shoulders, and natural arms",
+            ),
+            "media/exercises/tai-chi-basics/weight-shift.png": (
+                "exercise_movement_illustration",
+                "Tai Chi weight-shift reference showing smooth weight transfer between feet with calm upper body",
+            ),
+            "media/exercises/tai-chi-basics/muscle-attention.png": (
+                "exercise_muscle_attention_illustration",
+                "Tai Chi muscle-attention reference with broad highlights on legs, glutes, trunk, shoulders, upper back, feet, and ankles",
+            ),
+        }
+
+        self.assertEqual(page_text.count("![Tai Chi "), 3)
+        self.assertIn("Use these images as broad visual references.", page_text)
+
+        for asset_path, (purpose, alt_text) in expected.items():
+            with self.subTest(asset_path=asset_path):
+                self.assertIn(f"![{alt_text}](../{asset_path})", page_text)
+                self.assertTrue((ROOT / asset_path).is_file())
+
+                rows = provenance.get(asset_path, [])
+                self.assertEqual(len(rows), 1)
+                row = rows[0]
+                self.assertEqual(row.get("asset_type"), "ai_generated_raster")
+                self.assertEqual(row.get("media_purpose"), purpose)
+                self.assertEqual(row.get("review_status"), "approved")
+                self.assertIn("exercises/tai-chi-basics.md", split_page_refs(row.get("page_refs", "")))
+
+                prompt_record = row.get("prompt_record", "")
+                self.assertEqual(prompt_record, f"media/prompts/exercises/tai-chi-basics/{Path(asset_path).stem}.md")
+                self.assertTrue((ROOT / prompt_record).is_file())
+
+                prompt_text = (ROOT / prompt_record).read_text(encoding="utf-8")
+                self.assertIn(f"asset_path: {asset_path}", prompt_text)
+                self.assertIn("## Exact prompt", prompt_text)
+                self.assertIn("no in-image text", prompt_text.lower())
+                self.assertIn("no combat framing", prompt_text.lower())
+
+        visual_safety = ROOT / "docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/visual-safety-review.md"
+        self.assertTrue(visual_safety.is_file())
+        visual_text = visual_safety.read_text(encoding="utf-8").lower()
+        for token in (
+            "media/exercises/tai-chi-basics/setup.png",
+            "media/exercises/tai-chi-basics/weight-shift.png",
+            "media/exercises/tai-chi-basics/muscle-attention.png",
+            "exercise_setup_illustration",
+            "exercise_movement_illustration",
+            "exercise_muscle_attention_illustration",
+            "one concept",
+            "matches nearby markdown",
+            "no in-image text",
+            "no identifiable person",
+            "no brand mark",
+            "no clinical",
+            "no combat",
+            "no unsupported claim",
+            "color-accessible",
+            "broad muscle highlighting",
+            "approved",
+            "residual risk",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, visual_text)
+
     def test_m4_exercise_audit_covers_current_exercise_pages(self) -> None:
         audit_path = ROOT / "docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md"
         audit_text = audit_path.read_text(encoding="utf-8")
