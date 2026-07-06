@@ -48,13 +48,13 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: review-requested
+- Current milestone state: resolution-needed
 - Last reviewed milestone: M1
-- Review status: code-review R2 clean-with-notes; M1 closed
+- Review status: code-review R3 changes-requested; M2 review-resolution required
 - Remaining in-scope implementation milestones: M2, M3
-- Next stage: code-review M2
+- Next stage: review-resolution for M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M2 and M3 implementation, code-review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M2 has unresolved code-review findings and M3 implementation, code-review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -86,7 +86,7 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 
 ### M2. First Milestone Batch Images
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: Audit and implement generated-image gaps for the first batch of included exercise documents.
 - Requirements: R1-R30
 - Files/components likely touched:
@@ -200,6 +200,10 @@ Each milestone must report exact commands and outcomes before code-review.
 - M2 markdown validation: `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents` passed.
 - M2 privacy validation: `python3 tools/checks/check_privacy.py exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents` passed.
 - M2 whitespace validation: `git diff --check` passed.
+- M2 code-review R3 requested changes: CR-T5IMG-M2-1 for the M2 audit's 0-3 score scale, and CR-T5IMG-M2-2 for `bird-dog/short-reach.png` not visibly supporting the shorter-reach teaching purpose.
+- M2 code-review R3 reviewer validation: `python3 tools/checks/check_privacy.py exercises media media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents` passed with 107 files.
+- M2 code-review R3 reviewer validation: `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents` passed with 32 Markdown files.
+- M2 code-review R3 reviewer validation: `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -207,7 +211,7 @@ Not started.
 
 ## Readiness
 
-M2 is implemented and ready for code-review. M3 remains pending.
+M2 needs review-resolution. M3 remains pending and must not start until M2 passes rereview.
 
 ## Sources
 
