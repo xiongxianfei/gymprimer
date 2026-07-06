@@ -62,7 +62,7 @@ It does not broaden the exercise-image standard's count policy.
 - Remaining in-scope implementation milestones: none
 - Next stage: pr
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: implementation milestones, explain-change, and final local verify are complete; PR handoff remains.
+- Reason final closeout is or is not ready: implementation milestones, explain-change, final local verify, and PR opening are complete; hosted CI, author review, and lifecycle cleanup remain.
 
 ## Milestones
 
@@ -192,6 +192,7 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - 2026-07-06: Code-review M3 R1 closed M3; final closeout begins with explain-change.
 - 2026-07-06: Explain-change refreshed the durable rationale for the final reviewed M1-M3 diff; verify is next.
 - 2026-07-06: Final local verify passed with branch-ready evidence; PR handoff is next.
+- 2026-07-06: PR #15 opened from `proposal/exercise-document-image-prioritization` to `main`; GitHub Actions `Validation checks` is in progress.
 
 ## Decision log
 
@@ -276,7 +277,7 @@ Final local verify is complete.
 
 ## Readiness
 
-Ready for PR handoff.
+PR handoff is open.
 Not ready for final closeout completion.
 
 ## Sources

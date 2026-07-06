@@ -27,6 +27,7 @@ current_verification: docs/changes/2026-07-06-exercise-document-best-practice-im
 current_milestone: Lifecycle Closeout
 current_milestone_state: planned
 last_reviewed_milestone: M3
+pull_request: https://github.com/xiongxianfei/gymprimer/pull/15
 next_stage: pr
 
 open_findings: []
@@ -74,3 +75,4 @@ notes:
   - Explain-change refreshed the durable rationale for the final reviewed M1-M3 diff; verify is next.
   - Explain-change validation passed locally: Markdown-first, privacy, state-sync inspection, and `git diff --check`.
   - Final local verify passed with branch-ready evidence in `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/verify-report.md`; hosted CI has not been observed.
+  - PR #15 opened from `proposal/exercise-document-image-prioritization` to `main`; GitHub Actions `Validation checks` is in progress.
