@@ -21,6 +21,7 @@ or page review identifies a concrete beginner comprehension gap.
 
 | Exercise page | Current image count | Current image purposes | M4 category | Follow-up routing |
 | --- | ---: | --- | --- | --- |
+| `exercises/baduanjin-basics.md` | 0 | none | text-only page | Necessary Images and Baduanjin Exercise M2 adds the page text-only; first image batch remains deferred to the governed five-image loop. |
 | `exercises/band-pull-apart.md` | 2 | `exercise_muscle_attention_illustration`, `exercise_movement_illustration` | keep existing image | No additional image needed now; keep prompt-backed M3 images. |
 | `exercises/bird-dog.md` | 1 | `key_movement_illustration` | keep existing image | Keep legacy-compatible sequence image; no migration-only edit. |
 | `exercises/brisk-walking.md` | 0 | none | text-only page | Walking M3 optional image decision keeps the first slice text-only; future image work needs a concrete comprehension gap. |
@@ -56,3 +57,9 @@ or page review identifies a concrete beginner comprehension gap.
 
 This audit is a routing artifact, not a generated public index. It records the
 current page inventory and does not authorize immediate image generation.
+
+## Sources
+
+- `specs/exercise-image-standard.md`
+- `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/source-audit.md`
+- `exercises/baduanjin-basics.md`

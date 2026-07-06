@@ -5,8 +5,8 @@
 - [Necessary Images and Baduanjin Exercise](plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: implement
-  - Active context: M1 is closed by code-review R2; next stage is M2 implementation.
+  - Current stage: code-review
+  - Active context: M2 implementation added the text-only Baduanjin page and source-audit proof; M2 code-review is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

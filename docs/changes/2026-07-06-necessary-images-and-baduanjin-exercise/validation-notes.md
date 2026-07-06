@@ -47,6 +47,37 @@ Commands run:
 | `python3 -m unittest discover -s tests` | pass: 175 tests |
 | `git diff --check` | pass |
 
+## 2026-07-06 M2
+
+Scope validated:
+
+- text-only `exercises/baduanjin-basics.md`;
+- required Baduanjin title, alias line, sections, and beginner movement breakdown;
+- non-clinical, non-martial, static-page wording;
+- setup and safety source support;
+- `low_load_control_drill` method labels;
+- broad role-based muscle and feel guidance;
+- source-audit proof;
+- current exercise-image audit inventory updated for the new text-only page.
+
+Commands run:
+
+| Command | Result |
+|---|---|
+| `python3 -m unittest tests.test_markdown_first_real_pages` | pass: 36 tests |
+| `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/source-audit.md` | pass after fixing source-audit references |
+| `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md SOURCES.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/source-audit.md` | pass: checked 3 files |
+| `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages` | pass: 55 tests |
+| `python3 -m unittest discover -s tests` | pass: 181 tests |
+| `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/source-audit.md docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` | pass: checked 5 Markdown files |
+| `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md SOURCES.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/source-audit.md docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` | pass: checked 4 files |
+| `git diff --check` | pass |
+
+Residual risk:
+
+- M2 does not generate or reference Baduanjin images.
+- Prompt records, provenance rows, visual-safety review, beginner-comprehension proof, and rollback proof remain assigned to M3-M4.
+
 ## Sources
 
 - [Necessary Images and Baduanjin Exercise spec](../../../specs/necessary-images-and-baduanjin-exercise.md)

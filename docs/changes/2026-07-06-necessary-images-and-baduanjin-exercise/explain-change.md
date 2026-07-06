@@ -20,8 +20,18 @@ It identifies the exact first five asset paths and records candidates 6-10 as de
 
 ## Unaffected Surfaces
 
-The Baduanjin page, generated media assets, prompt records, provenance rows, visual-safety review, beginner-comprehension proof, and rollback proof are intentionally unchanged in M1.
-They belong to M2-M4 after this validation/proof-map slice is reviewed.
+Generated media assets, prompt records, provenance rows, visual-safety review, beginner-comprehension proof, and rollback proof are intentionally unchanged through M2.
+They belong to M3-M4 after the text-only page is reviewed.
+
+## M2 Changes
+
+`exercises/baduanjin-basics.md` adds the text-only Baduanjin Basics page with the required title, alias line, sections, beginner movement breakdown, source-backed setup and safety guidance, `low_load_control_drill` method labels, and broad role-based muscle guidance.
+
+`docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/source-audit.md` records sampled source support for setup, safety, method, movement, muscle, feel, and pause-condition claims.
+
+`tests/test_markdown_first_real_pages.py` adds real-page tests for Baduanjin page shape, scope boundaries, setup and safety sources, method guidance, broad muscle guidance, and M2 source-audit evidence.
+
+`docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` now lists `exercises/baduanjin-basics.md` as a text-only page so the exercise-image inventory remains current after adding the new exercise page.
 
 ## Sources
 
