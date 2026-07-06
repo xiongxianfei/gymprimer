@@ -9,6 +9,7 @@
 | 2026-07-06 | test-spec-review | 1 | approved | `reviews/test-spec-review-r1.md` | none | Test spec is ready for M1 implementation. Workflow autoprogression target reached. |
 | 2026-07-06 | code-review | M1 R1 | changes-requested | `reviews/code-review-m1-r1.md` | GP-SRB-M1-CR1 | M1 is missing required page shape, alias-boundary, and source-registration test coverage. |
 | 2026-07-06 | review-resolution | M1 R1 | resolved-pending-rereview | `review-resolution.md` | GP-SRB-M1-CR1 | Added focused M1 fixture tests and checker enforcement for safer-running page shape, alias, sections, and source-registration proof. |
+| 2026-07-06 | code-review | M1 R2 | clean-with-notes | `reviews/code-review-m1-r2.md` | none | GP-SRB-M1-CR1 resolved; M1 is closed and M2 implementation is next. |
 
 ## Sources
 
@@ -23,3 +24,4 @@
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/test-spec-review-r1.md`
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m1-r1.md`
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/review-resolution.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m1-r2.md`

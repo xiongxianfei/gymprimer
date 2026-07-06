@@ -5,8 +5,8 @@
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M1 review-resolution for GP-SRB-M1-CR1 is resolved pending rereview; proposal-review R1, spec-review R1, plan-review R1, and test-spec-review R1 approved; architecture assessment recorded `architecture-not-required`.
+  - Current stage: implement
+  - Active context: M1 is closed after code-review M1 R2; M2 Markdown page and source contract implementation is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

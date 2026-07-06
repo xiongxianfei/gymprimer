@@ -4,13 +4,13 @@ Change ID: `2026-07-06-safer-running-basics-and-running-images`
 
 Current milestone: M1
 
-Status: resolved-pending-rereview
+Status: resolved
 
 ## Findings
 
 | Finding ID | Source review | Severity | Status | Required outcome |
 |---|---|---|---|---|
-| GP-SRB-M1-CR1 | `reviews/code-review-m1-r1.md` | major | resolved-pending-rereview | Added active M1 fixture coverage for page heading, alias line, required headings, page-local sources, and shared source registration. |
+| GP-SRB-M1-CR1 | `reviews/code-review-m1-r1.md` | major | resolved | Added active M1 fixture coverage for page heading, alias line, required headings, page-local sources, and shared source registration; accepted by code-review M1 R2. |
 
 ## Resolution Notes
 
@@ -20,7 +20,7 @@ Fixes applied:
 - Added checker enforcement for `# Safer Running Basics`, the exact alias line, and required safer-running headings.
 - Updated the safer-running image fixture so image exception tests also satisfy the page-shape contract.
 
-The next stage is code-review rereview for M1.
+Code-review M1 R2 accepted the resolution.
 
 ## Validation Evidence
 

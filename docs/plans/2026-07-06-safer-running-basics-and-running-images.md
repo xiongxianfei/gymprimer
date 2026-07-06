@@ -16,15 +16,15 @@ Review log: `docs/changes/2026-07-06-safer-running-basics-and-running-images/rev
 
 ## Current Handoff Summary
 
-Current milestone: M1
+Current milestone: M2
 
-Current state: review-requested
+Current state: planned
 
-Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; review-resolution for GP-SRB-M1-CR1 resolved pending rereview.
+Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes.
 
-Next required gate: code-review rereview for M1.
+Next required gate: implementation M2.
 
-Implementation status: M1 implemented with review-resolution fix.
+Implementation status: M1 closed; M2 not started.
 
 Final closeout status: not ready.
 
@@ -55,7 +55,7 @@ Acceptance evidence:
 
 Progress:
 
-- State: review-requested.
+- State: closed.
 - Added a `basic_cardio_activity` path-scope test for `exercises/safer-running-basics.md`.
 - Added fixture tests proving the six approved running image paths pass with the page-specific exception.
 - Added fixture tests proving a seventh running image, a second muscle-attention image, and an unapproved running asset fail.
@@ -65,6 +65,7 @@ Progress:
 - Review-resolution added fixture-backed page contract tests for the approved H1, alias line, required headings, page-local source definitions, and shared source registration.
 - Review-resolution added checker enforcement for the safer-running title, alias line, and required sections.
 - Review-resolution updated the safer-running image fixture so image-exception tests continue to exercise a valid page shape.
+- Code-review M1 R2 accepted the review-resolution and closed M1.
 
 Tests-first evidence:
 
@@ -156,7 +157,7 @@ For workflow-artifact-only validation before implementation, run the scoped chec
 
 ## M1 Handoff
 
-State: review-requested
+State: closed
 
 Implemented surfaces:
 
@@ -173,7 +174,7 @@ Unchanged with rationale:
 - `media/PROVENANCE.md`: deferred to M3 by plan.
 - Visual-safety review and beginner comprehension proof: deferred to M3 and M4 by plan.
 
-Ready for: code-review rereview of M1.
+Ready for: implementation M2.
 
 ## Recovery
 
