@@ -25,11 +25,12 @@ current_test_spec: specs/necessary-images-and-baduanjin-exercise.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md
 
-current_milestone: verify
-current_milestone_state: closed
+current_milestone: PR handoff
+current_milestone_state: open
 last_reviewed_milestone: final holistic code-review
 
-next_stage: pr
+pull_request: https://github.com/xiongxianfei/gymprimer/pull/14
+next_stage: hosted_ci_pr_review
 
 open_findings: []
 
@@ -74,4 +75,4 @@ notes:
   - Final holistic code-review R1 passed with no material findings.
   - Explain-change refreshed the final reviewed-diff rationale.
   - Final local verify passed with branch-ready evidence in `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/verify-report.md`; hosted CI has not been observed.
-  - Current handoff is PR; PR body/open readiness is not claimed until PR handoff completes.
+  - PR #14 opened from `proposal/baduanjin-exercise-images` to `main`; hosted CI is pending and has not been observed.

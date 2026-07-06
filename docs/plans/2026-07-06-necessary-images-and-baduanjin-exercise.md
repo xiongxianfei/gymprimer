@@ -59,14 +59,14 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ## Current Handoff Summary
 
-- Current milestone: verify
-- Current milestone state: closed
+- Current milestone: PR handoff
+- Current milestone state: open
 - Last reviewed milestone: final holistic code-review
-- Review status: final holistic code-review R1 passed with no material findings; explain-change complete; verify passed
+- Review status: final holistic code-review R1 passed with no material findings; explain-change complete; verify passed; PR #14 opened
 - Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: branch-ready for PR handoff
-- Reason final closeout is or is not ready: M1-M4 and final holistic code-review are closed, explain-change is complete, and final local verification passed; PR handoff and hosted CI have not happened.
+- Next stage: hosted CI / PR review
+- Final closeout readiness: PR handoff open; hosted CI pending
+- Reason final closeout is or is not ready: M1-M4 and final holistic code-review are closed, explain-change is complete, final local verification passed, and PR #14 is open; hosted CI has not been observed.
 
 ## Milestones
 
@@ -319,6 +319,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Final holistic code-review R1 passed with no material findings; explain-change is next.
 - 2026-07-06: Explain-change refreshed the final reviewed-diff rationale; verify is next.
 - 2026-07-06: Final local verify passed; PR handoff is next.
+- 2026-07-06: PR #14 opened from `proposal/baduanjin-exercise-images` to `main`; hosted CI is pending.
 
 ## Decision log
 

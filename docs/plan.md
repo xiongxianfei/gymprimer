@@ -6,7 +6,7 @@
   - Status: reviewed
   - Plan lifecycle state: active
   - Current stage: pr
-  - Active context: Final local verify passed; PR handoff is next.
+  - Active context: PR #14 opened from `proposal/baduanjin-exercise-images` to `main`; hosted CI is pending.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
