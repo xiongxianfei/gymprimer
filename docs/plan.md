@@ -5,8 +5,8 @@
 - [Necessary Images and Tai Chi Exercise](plans/2026-07-05-necessary-images-and-tai-chi-exercise.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M4 review evidence and local readiness implementation is ready for code-review; final verification and PR handoff have not happened.
+  - Current stage: final-closeout
+  - Active context: M4 code-review passed cleanly; all implementation milestones are closed, and final closeout starts with explain-change before final verification and PR handoff.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

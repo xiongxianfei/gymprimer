@@ -57,13 +57,13 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: review-requested
-- Last reviewed milestone: M3
-- Review status: M1, M2, and M3 code-review clean
-- Remaining in-scope implementation milestones: none pending implementation; M4 is awaiting code-review
-- Next stage: code-review M4
-- Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M4 has not passed code-review, and final verification and PR handoff have not happened.
+- Current milestone state: closed
+- Last reviewed milestone: M4
+- Review status: M1, M2, M3, and M4 code-review clean
+- Remaining in-scope implementation milestones: none
+- Next stage: final closeout
+- Final closeout readiness: ready-to-start
+- Reason final closeout is or is not ready: all implementation milestones are closed; explain-change, final verification, and PR handoff have not happened.
 
 ## Milestones
 
@@ -190,7 +190,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ### M4. Review Evidence and Final Local Readiness
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Record manual visual-safety review, beginner comprehension proof, rollback proof, and final local validation evidence.
 - Requirements: R40-R43
 - Files/components likely touched:
@@ -264,6 +264,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Implemented M3 by generating three Tai Chi support images through the built-in imagegen path, adding workspace assets, exact prompt records, approved provenance rows, page image references, real-asset tests, and visual-safety review evidence.
 - 2026-07-06: Code-review M3 R1 was clean with no material findings; M3 closed and routed to implementation M4.
 - 2026-07-06: Implemented M4 by adding proof checks, beginner-comprehension proof, text-only rollback proof, final validation notes, and a non-destructive temporary rollback rehearsal.
+- 2026-07-06: Code-review M4 R1 was clean with no material findings; all implementation milestones are closed and final closeout is next.
 
 ## Decision log
 
@@ -330,9 +331,9 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ## Outcome and retrospective
 
-- M4 implementation is ready for code-review.
+- M4 is closed after clean code-review. All implementation milestones are closed.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M4 is ready for code-review.
+- Final closeout is ready to start with explain-change, followed by final verification and PR handoff if verification passes.
