@@ -247,6 +247,41 @@ def write_asset(root: Path, relative_path: str = "media/exercises/fixture-exerci
     asset.write_bytes(b"fixture")
 
 
+def write_top_five_reviewer_exception_fixture(
+    root: Path,
+    slug: str = "bird-dog",
+    prompt_record: str = "media/prompts/exercises/bird-dog/setup.md",
+    include_prompt_record: bool = True,
+) -> Path:
+    asset_path = f"media/exercises/{slug}/setup.png"
+    write_asset(root, asset_path)
+    write_provenance(
+        root,
+        [
+            {
+                "asset_path": asset_path,
+                "media_purpose": "exercise_setup_illustration",
+                "prompt_record": prompt_record,
+                "human_reviewer": "",
+                "page_refs": f"exercises/{slug}.md",
+            }
+        ],
+        create_prompt_records=False,
+    )
+    if include_prompt_record:
+        write_prompt_record(
+            root,
+            prompt_record=prompt_record,
+            asset_path=asset_path,
+            extra_fields={"human_reviewer": ""},
+        )
+    return write_exercise_page(
+        root,
+        f"![{slug} setup image](../{asset_path})",
+        slug=slug,
+    )
+
+
 def write_tai_chi_image_fixture(root: Path, assets: tuple[tuple[str, str, str], ...] = TAI_CHI_ASSETS) -> Path:
     rows = []
     image_blocks = []
@@ -350,7 +385,6 @@ class ExerciseImageStandardTest(unittest.TestCase):
             result = run_check_with_root(root, page)
 
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("exercise_image_count_exceeded", result.stdout)
         self.assertIn("exercise_muscle_attention_limit", result.stdout)
 
     def test_baduanjin_exception_does_not_change_default_three_image_limit(self) -> None:
@@ -473,7 +507,7 @@ class ExerciseImageStandardTest(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
-    def test_tai_chi_fourth_image_and_second_muscle_attention_fail(self) -> None:
+    def test_tai_chi_top_five_exception_allows_fourth_image_but_second_muscle_attention_fails(self) -> None:
         fourth_image_assets = TAI_CHI_ASSETS + (
             (
                 "opening",
@@ -489,8 +523,7 @@ class ExerciseImageStandardTest(unittest.TestCase):
 
             result = run_check_with_root(root, page)
 
-        self.assertNotEqual(result.returncode, 0)
-        self.assertIn("exercise_image_count_exceeded", result.stdout)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
         second_muscle_assets = TAI_CHI_ASSETS + (
             (
@@ -508,7 +541,6 @@ class ExerciseImageStandardTest(unittest.TestCase):
             result = run_check_with_root(root, page)
 
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("exercise_image_count_exceeded", result.stdout)
         self.assertIn("exercise_muscle_attention_limit", result.stdout)
 
     def test_tai_chi_prompt_record_and_alt_text_failures_are_deterministic(self) -> None:
@@ -816,6 +848,40 @@ class ExerciseImageStandardTest(unittest.TestCase):
             result = run_check_with_root(root, page)
 
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_top_five_named_initiative_allows_blank_reviewer_but_keeps_prompt_record(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_top_five_reviewer_exception_fixture(root)
+
+            result = run_check_with_root(root, page)
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_top_five_reviewer_exception_fixture(root, include_prompt_record=False)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("media_prompt_record_missing", result.stdout)
+
+    def test_top_five_reviewer_exception_is_path_scoped(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_top_five_reviewer_exception_fixture(root, slug="fixture-exercise")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("media_provenance_incomplete", result.stdout)
 
     def test_media_prompt_records_are_not_checked_as_content_pages(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -1,0 +1,37 @@
+change_id: 2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents
+status: active
+current_stage: code-review
+created_date: 2026-07-06
+
+proposal: docs/proposals/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md
+proposal_status: accepted
+proposal_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/proposal-review-r2.md
+
+current_spec: specs/top-five-generated-images-for-fewer-than-five-exercise-documents.md
+current_spec_status: approved
+current_spec_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/spec-review-r1.md
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/architecture-review-r1.md
+current_plan: docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md
+current_plan_status: reviewed
+current_plan_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/plan-review-r1.md
+current_test_spec: specs/top-five-generated-images-for-fewer-than-five-exercise-documents.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/test-spec-review-r1.md
+next_stage: code-review
+
+open_findings: []
+
+notes:
+  - Proposal-review R1 requested changes for the reviewer-field replacement accountability model.
+  - Owner clarified that the repository should not require human-reviewer fields, review-owner fields, visual-safety-review evidence, or replacement accountability artifacts for this initiative because PR merge follows human review.
+  - PR-T5IMG-1 was resolved in review-resolution by updating the proposal and draft spec with that owner decision.
+  - Proposal-review R2 approved the revised proposal direction with no material findings.
+  - Proposal status normalized to accepted.
+  - Spec-review R1 approved the spec amendment.
+  - Architecture-review R1 approved the canonical architecture amendment.
+  - Plan-review R1 approved the three-milestone execution plan.
+  - Test-spec-review R1 approved the proof map and allowed implementation handoff.
+  - M1 implementation added validation and audit framework support.
+  - M1 is review-requested; code-review is next.

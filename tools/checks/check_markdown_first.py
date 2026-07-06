@@ -288,9 +288,29 @@ REQUIRED_PROVENANCE_FIELDS = (
 )
 PROMPT_RECORD_COMPATIBILITY_NOTE = "M3 pre-amendment prompt unavailable; compatibility limitation recorded"
 DEFAULT_EXERCISE_IMAGE_LIMIT = 3
+TOP_FIVE_REVIEWER_EXCEPTION_EXERCISE_PAGES = {
+    "exercises/band-pull-apart.md",
+    "exercises/bird-dog.md",
+    "exercises/brisk-walking.md",
+    "exercises/chest-press.md",
+    "exercises/chin-nod.md",
+    "exercises/dead-bug.md",
+    "exercises/glute-bridge.md",
+    "exercises/hip-hinge.md",
+    "exercises/incline-push-up.md",
+    "exercises/kneeling-hip-flexor-stretch.md",
+    "exercises/lat-pulldown.md",
+    "exercises/plank.md",
+    "exercises/prone-y-t.md",
+    "exercises/rowing-machine.md",
+    "exercises/seated-row.md",
+    "exercises/tai-chi-basics.md",
+    "exercises/thoracic-extension.md",
+    "exercises/wall-slide.md",
+}
 EXERCISE_IMAGE_LIMIT_EXCEPTIONS = {
     "exercises/baduanjin-basics.md": 5,
-}
+} | {page_ref: 5 for page_ref in TOP_FIVE_REVIEWER_EXCEPTION_EXERCISE_PAGES}
 PROMPT_RECORD_COMPATIBILITY_ASSETS = {
     "media/exercises/chin-nod/muscle-attention.png",
     "media/exercises/thoracic-extension/muscle-attention.png",
@@ -716,7 +736,12 @@ def validate_prompt_record(
     text = prompt_record_path.read_text(encoding="utf-8")
     fields = parse_prompt_record_fields(text)
     missing_fields = [field for field in PROMPT_RECORD_REQUIRED_FIELDS if not fields.get(field, "").strip()]
-    if not fields.get("human_reviewer", "").strip() and not fields.get("review_owner", "").strip():
+    reviewer_exception = top_five_reviewer_exception_applies(page_path, asset_path, root)
+    if (
+        not reviewer_exception
+        and not fields.get("human_reviewer", "").strip()
+        and not fields.get("review_owner", "").strip()
+    ):
         missing_fields.append("human_reviewer_or_review_owner")
     if missing_fields or not has_prompt_record_text_or_redaction(text):
         if not has_prompt_record_text_or_redaction(text):
@@ -770,6 +795,14 @@ def ai_tool_reviewer(value: str) -> bool:
     return bool(AI_REVIEWER_RE.search(value.strip()))
 
 
+def top_five_reviewer_exception_applies(page_path: Path, asset_path: str, root: Path = ROOT) -> bool:
+    page_ref = repo_relative_path(page_path, root)
+    if page_ref not in TOP_FIVE_REVIEWER_EXCEPTION_EXERCISE_PAGES:
+        return False
+    expected_prefix = f"media/exercises/{Path(page_ref).stem}/"
+    return asset_path.startswith(expected_prefix)
+
+
 def validate_raster_provenance(
     page_path: Path,
     asset_path: str,
@@ -798,7 +831,12 @@ def validate_raster_provenance(
         ]
 
     row = rows[0]
-    missing_fields = [field for field in REQUIRED_PROVENANCE_FIELDS if not row.get(field, "").strip()]
+    reviewer_exception = top_five_reviewer_exception_applies(page_path, asset_path, root)
+    missing_fields = [
+        field
+        for field in REQUIRED_PROVENANCE_FIELDS
+        if not row.get(field, "").strip() and not (reviewer_exception and field == "human_reviewer")
+    ]
     if missing_fields or row.get("asset_type", "").strip() != "ai_generated_raster":
         return [
             Finding(
@@ -818,7 +856,7 @@ def validate_raster_provenance(
             )
         ]
 
-    if page_class == "expanded_exercise_page" and ai_tool_reviewer(row["human_reviewer"]):
+    if page_class == "expanded_exercise_page" and row.get("human_reviewer", "").strip() and ai_tool_reviewer(row["human_reviewer"]):
         return [
             Finding(
                 page_path,

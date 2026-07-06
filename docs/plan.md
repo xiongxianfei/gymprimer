@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Top-Five Generated Images for Fewer-Than-Five Exercise Documents](plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md)
+  - Status: reviewed
+  - Plan lifecycle state: active
+  - Current stage: code-review
+  - Active context: M1 validation and audit framework implementation is review-requested; M2 and M3 remain pending after M1 review.
+
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active
