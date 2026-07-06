@@ -2,7 +2,9 @@
 
 ## Status
 
-Closed.
+Open.
+Code-review M2 R1 opened CR-EDIP-M2-1.
+M2 is in review-resolution.
 Code-review M1 R2 confirmed CR-EDIP-M1-1 is resolved.
 Proposal-review findings PR-EDIP-001 and PR-EDIP-002 remain resolved by proposal revision and proposal-review R2.
 
@@ -13,8 +15,23 @@ Proposal-review findings PR-EDIP-001 and PR-EDIP-002 remain resolved by proposal
 | PR-EDIP-001 | resolved | The proposal now treats fewer than five images as an evaluation trigger and the top five as a candidate backlog, while preserving the approved three-image normal limit unless downstream approved artifacts justify a fourth or fifth image. |
 | PR-EDIP-002 | resolved | The proposal now removes proposal-specific PR-review rule language and states that generated image promotion remains governed by the existing exercise-image standard, provenance contract, and visual-safety review requirements. |
 | CR-EDIP-M1-1 | resolved | Code-review M1 R2 confirmed M1 validation now rejects top-five candidate dispositions that select generation directly and focused tests cover `generate_now` and `first_generation_candidate`. |
+| CR-EDIP-M2-1 | open | The Bird Dog page-local candidate table must record the required five per-candidate scoring fields, total score, and disposition for ranks 1-10. |
 
 Proposal-review R2 approved the revised proposal with no material findings.
+
+## CR-EDIP-M2-1
+
+Source review: `reviews/code-review-m2-r1.md`
+
+Required outcome:
+
+The Bird Dog page-local candidate table must record the five per-candidate scoring fields required by M1, while retaining the total score and disposition for each rank.
+
+Resolution:
+
+Open.
+M2 must expand the audit evidence table or add an adjacent per-rank scoring matrix with beginner comprehension, setup value, muscle-attention value, page value, and readiness scores for ranks 1-10.
+After updating evidence, rerun Markdown/privacy validation and route M2 back to code-review.
 
 ## CR-EDIP-M1-1
 
@@ -70,5 +87,6 @@ It now records the user's statement that pull requests merge only after author r
 - `reviews/proposal-review-r2.md`
 - `reviews/code-review-m1-r1.md`
 - `reviews/code-review-m1-r2.md`
+- `reviews/code-review-m2-r1.md`
 - `docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md`
 - `specs/exercise-image-standard.md`

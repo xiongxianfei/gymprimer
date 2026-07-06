@@ -1,6 +1,6 @@
 change_id: 2026-07-06-exercise-document-best-practice-image-prioritization
 status: active
-current_stage: code-review
+current_stage: review-resolution
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md
@@ -24,11 +24,12 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/test-spec-review-r1.md
 
 current_milestone: M2
-current_milestone_state: review-requested
+current_milestone_state: resolution-needed
 last_reviewed_milestone: M1
-next_stage: code-review
+next_stage: review-resolution
 
-open_findings: []
+open_findings:
+  - CR-EDIP-M2-1
 
 autoprogression:
   review_fix:
@@ -59,3 +60,5 @@ notes:
   - M2 implemented the first page-specific audit slice for `exercises/bird-dog.md`, preserved the existing sequence image, selected zero generated images, and added focused M2 validator tests.
   - M2 validation passed locally: `python3 -m unittest tests.test_exercise_document_image_prioritization tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`, `python3 tools/checks/check_privacy.py -- exercises media docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`, and `git diff --check`.
   - M2 state-sync and broader changed-artifact Markdown/privacy checks passed locally before code-review handoff.
+  - Code-review M2 R1 requested changes for CR-EDIP-M2-1 because the Bird Dog page-local candidate table records total scores but omits the five required per-candidate scoring fields.
+  - Code-review M2 R1 review-record validation passed locally: Markdown-first, privacy, state-sync inspection, and `git diff --check`.

@@ -5,8 +5,8 @@
 - [Exercise Document Best-Practice Image Prioritization](plans/2026-07-06-exercise-document-best-practice-image-prioritization.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: code-review M2
-  - Active context: M2 implemented the Bird Dog page-specific audit slice, selected zero generated images, and passed targeted local validation.
+  - Current stage: review-resolution M2
+  - Active context: Code-review M2 R1 opened CR-EDIP-M2-1 because the Bird Dog page-local candidate table records total scores but omits the required five per-candidate scoring fields.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

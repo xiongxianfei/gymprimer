@@ -56,13 +56,13 @@ It does not broaden the exercise-image standard's count policy.
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: review-requested
+- Current milestone state: resolution-needed
 - Last reviewed milestone: M1
-- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution; M2 implementation complete and awaiting code-review.
+- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution; code-review M2 R1 requested changes for CR-EDIP-M2-1.
 - Remaining in-scope implementation milestones: M2, M3
-- Next stage: code-review M2
+- Next stage: review-resolution for M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M2 is implemented but not reviewed; M3, explain-change refresh, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M2 has an open review finding; M3, explain-change refresh, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -97,7 +97,7 @@ It does not broaden the exercise-image standard's count policy.
 
 ### M2. First Page-Specific Evaluation Slice
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: apply the audit to one selected exercise document or deliberately small page batch, record top-10 candidates, and choose the minimum-needed generated subset.
 - Requirements: R3-R18, R23, AC2-AC6.
 - Likely files:
@@ -119,7 +119,7 @@ It does not broaden the exercise-image standard's count policy.
   - `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
   - `python3 tools/checks/check_privacy.py -- exercises media docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
   - `git diff --check`
-- Result: Implemented. Applied the audit to `exercises/bird-dog.md`, recorded the page-local top-10 candidate backlog, preserved the existing sequence image, selected zero generated images for this slice, and added M2 validation coverage for image-count exceptions, accepted purposes, second muscle-attention prevention, forbidden claims, and small-slice scope.
+- Result: Code-review M2 R1 requested changes for CR-EDIP-M2-1 because the Bird Dog top-10 candidate table records total scores but omits the required five per-candidate scoring fields.
 - Risks: generated images create visual overload or unsupported claims.
 - Rollback: remove page references, unused generated assets, prompt records, provenance rows, and keep the selected page readable as text.
 
@@ -185,6 +185,7 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - 2026-07-06: Review-resolution addressed CR-EDIP-M1-1 by rejecting top-five direct generation dispositions and adding focused tests; M1 routed back to code-review.
 - 2026-07-06: Code-review M1 R2 confirmed CR-EDIP-M1-1 resolved, closed M1, and routed to implement M2.
 - 2026-07-06: M2 implemented the first page-specific audit slice for `exercises/bird-dog.md`, selected zero generated images, and routed to code-review M2.
+- 2026-07-06: Code-review M2 R1 requested changes for CR-EDIP-M2-1; M2 routes to review-resolution.
 
 ## Decision log
 
@@ -221,16 +222,21 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - M2 state-sync inspection passed with `rg -n "Current stage: code-review M2|Current milestone: M2|Current milestone state: review-requested|Next stage: code-review M2|current_stage: code-review|current_milestone: M2|current_milestone_state: review-requested|next_stage: code-review|M2 implemented" docs/plan.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml`.
 - M2 broader changed-artifact Markdown-first check passed with `python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.test.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/plan.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests/test_exercise_document_image_prioritization.py tools/checks/exercise_document_image_prioritization.py`.
 - M2 broader changed-artifact privacy check passed with `python3 tools/checks/check_privacy.py -- docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.test.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/plan.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests tools`.
+- Code-review M2 R1 recorded CR-EDIP-M2-1 and routed M2 to review-resolution.
+- Code-review M2 R1 review-record Markdown-first check passed with `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/plan.md`.
+- Code-review M2 R1 review-record privacy check passed with `python3 tools/checks/check_privacy.py -- docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/plan.md`.
+- Code-review M2 R1 state-sync inspection passed with `rg -n "Current stage: review-resolution M2|Current milestone: M2|Current milestone state: resolution-needed|Next stage: review-resolution for M2|current_stage: review-resolution|current_milestone: M2|current_milestone_state: resolution-needed|next_stage: review-resolution|CR-EDIP-M2-1" docs/plan.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/review-log.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/review-resolution.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/code-review-m2-r1.md`.
+- Code-review M2 R1 whitespace check passed with `git diff --check`.
 
 ## Outcome and retrospective
 
 M1 is closed.
-M2 implementation is ready for code-review.
+M2 is in review-resolution for CR-EDIP-M2-1.
 M3 remains unimplemented.
 
 ## Readiness
 
-Ready for code-review of M2.
+Ready for review-resolution of CR-EDIP-M2-1.
 Not ready for explain-change refresh, verify, PR handoff, or final closeout.
 
 ## Sources
