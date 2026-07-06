@@ -2,64 +2,124 @@
 
 ## Status
 
-Implementation rationale through M4; code-review pending for M4.
+Final reviewed-diff rationale complete after final holistic code-review R1.
 
-## M1 Changes
+Next lifecycle stage: verify.
 
-The checker now keeps the default exercise-image limit at three and applies a path-scoped five-image exception only to `exercises/baduanjin-basics.md`.
-This implements the approved sequence-based exception without broadening image capacity for other exercise pages.
+This explanation does not claim final verification, hosted CI, PR readiness, or branch readiness.
 
-`tests/test_exercise_image_standard.py` now includes temporary Baduanjin fixtures for the planned five-image batch, sixth-image rejection, second muscle-attention rejection, prompt-record failure, visual-semantic failure, and unchanged default behavior for unrelated pages.
-These tests prove the media contract before real Baduanjin assets exist.
+## Summary
 
-`tests/test_exercise_method_guidance.py` now includes Baduanjin-shaped `low_load_control_drill` fixtures.
-The passing fixture keeps the method static and general; the failing fixture rejects adaptive, recovery-care, treatment, symptom-based, and medication-response wording.
+This change adds a static beginner-facing `Baduanjin Basics` exercise page with exactly five governed generated support images.
+It also adds the spec, test spec, architecture amendment, execution plan, tests, prompt records, provenance rows, manual visual-safety proof, beginner-comprehension proof, rollback proof, review records, and validation evidence needed to keep the page Markdown-first and non-clinical.
 
-`image-candidate-pool.md` records the ranked top-10 image candidate pool as change-local evidence.
-It identifies the exact first five asset paths and records candidates 6-10 as deferred alternatives rather than permission to publish more images.
+The main product decision is the path-scoped five-image exception for `exercises/baduanjin-basics.md`.
+Baduanjin is a sequence-based gentle-movement page, so the first image batch covers setup, upward reach, drawing-bow side stance, alternating reach, and broad muscle attention while keeping candidates 6-10 deferred.
 
-## M2 Changes
+## Problem
 
-`exercises/baduanjin-basics.md` adds the text-only Baduanjin Basics page with the required title, alias line, sections, beginner movement breakdown, source-backed setup and safety guidance, `low_load_control_drill` method labels, and broad role-based muscle guidance.
+Baduanjin is not one static exercise setup.
+Beginners need visual help for ready stance, soft knees, arm path, weight shift, side stance, upward reach, alternating reach, and broad body regions to notice.
 
-`docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/source-audit.md` records sampled source support for setup, safety, method, movement, muscle, feel, and pause-condition claims.
+The risk was that adding many images could turn a static primer page into a martial curriculum, medical qigong treatment page, fall-prevention program, adaptive coaching feature, or image-led source of truth.
+The implementation therefore makes Markdown authoritative, uses generated images only as support assets, and requires prompt records, provenance rows, manual visual review, beginner-comprehension proof, and rollback proof.
 
-`tests/test_markdown_first_real_pages.py` adds real-page tests for Baduanjin page shape, scope boundaries, setup and safety sources, method guidance, broad muscle guidance, and M2 source-audit evidence.
+## Decision Trail
 
-`docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` now lists `exercises/baduanjin-basics.md` as a text-only page so the exercise-image inventory remains current after adding the new exercise page.
+| Decision source | Decision | Implementation result |
+|---|---|---|
+| Proposal | Add Baduanjin Basics and evaluate top-10 image candidates before generation. | Added `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/image-candidate-pool.md` and selected exactly five first-batch images. |
+| Spec R1-R20 | Add a static beginner page with source-backed setup, safety, method, movement, muscle, and feel guidance. | Added `exercises/baduanjin-basics.md` and Baduanjin real-page tests. |
+| Spec R21-R29 | Allow exactly five selected first-batch images for this page only. | Added a path-scoped five-image exception and tests that preserve the three-image default elsewhere. |
+| Spec R30-R39 | Require prompt records, approved provenance rows, meaningful alt text, and safe image semantics. | Added five generated assets, five exact prompt records, five provenance rows, alt text, visual-safety proof, and real-page media tests. |
+| Spec R40-R43 | Require manual visual-safety proof, beginner-comprehension proof, rollback proof, and no runtime or coaching behavior. | Added `visual-safety-review.md`, `beginner-comprehension-proof.md`, `rollback-proof.md`, scope tests, and final review evidence. |
+| Architecture | Keep generated media repository-local and subordinate to Markdown. | Updated architecture and kept assets under `media/exercises/`, prompt records under `media/prompts/`, and provenance in `media/PROVENANCE.md`. |
+| Plan | Implement in M1-M4 with tests/proof before promotion. | M1-M4 are closed by code review; final holistic code-review R1 passed. |
 
-## M3 Changes
+## Diff Rationale By Area
 
-`exercises/baduanjin-basics.md` now references exactly five first-batch support images: setup, two-hands-lift, drawing-bow, alternating-reach, and muscle-attention.
-The page keeps the written Markdown as source of truth and introduces the images as broad visual references.
+| Area | Files | Why they changed | Requirements and evidence |
+|---|---|---|---|
+| Governing contract | `specs/necessary-images-and-baduanjin-exercise.md`, `specs/necessary-images-and-baduanjin-exercise.test.md` | Captures the Baduanjin page contract, image exception, media governance, tests, proof obligations, non-goals, and validation commands. | Proposal, R1-R43, BJ-T1-BJ-T11, MP1-MP4. |
+| Architecture | `docs/architecture/system/architecture.md` | Adds the Baduanjin five-image exception and repository-local media/prompt/provenance flow to the canonical architecture. | Architecture-review R1 and final holistic code-review R1. |
+| Page content | `exercises/baduanjin-basics.md`, `SOURCES.md` | Adds the beginner page, aliases, sections, citations, movement breakdown, method labels, safety routing, and shared source IDs. | R1-R20, R42-R43, M2 source audit, real-page tests. |
+| Image policy enforcement | `tools/checks/check_markdown_first.py` | Keeps the normal exercise-image limit at three while allowing five images only for `exercises/baduanjin-basics.md`; adds forbidden-scope wording checks needed by review. | R27, R4, R7-R9, R43, CR-M1-001 resolution. |
+| Unit and integration tests | `tests/test_exercise_image_standard.py`, `tests/test_exercise_method_guidance.py`, `tests/test_markdown_first_real_pages.py` | Adds Baduanjin fixtures and real-page checks for image limits, prompt/provenance wiring, forbidden wording, method guidance, source support, proof records, and rollback evidence. | BJ-T1-BJ-T11, CMD1-CMD6. |
+| Generated media | `media/exercises/baduanjin-basics/*.png` | Adds the five approved generated support images selected from the ranked candidate pool. | R22-R29, M3 visual-safety review. |
+| Prompt records | `media/prompts/exercises/baduanjin-basics/*.md` | Preserves exact prompts, generator, date, reviewer, status, and selected-output notes for each generated raster. | R30-R32, R38-R40. |
+| Provenance | `media/PROVENANCE.md` | Adds approved rows for the five Baduanjin assets with purpose, prompt record, license assertion, reviewer, status, and page refs. | R30, R33-R35. |
+| Manual proof | `source-audit.md`, `visual-safety-review.md`, `beginner-comprehension-proof.md`, `rollback-proof.md` | Records source support, visual-safety review, beginner-comprehension outcomes, and a reproducible text-only rollback rehearsal. | MP1-MP4, R40-R42, CR-M4-001 resolution. |
+| Exercise image inventory | `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` | Keeps the current exercise-image audit inventory aligned with the new Baduanjin page and images. | Derived artifact currency checked by M2/M3/final reviews. |
+| Workflow records | `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/`, `docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md`, `docs/plan.md` | Records proposal/spec/architecture/plan/test-spec reviews, milestone reviews, review-resolution, validation notes, and current handoff state. | Standard workflow and final holistic code-review R1. |
 
-`media/exercises/baduanjin-basics/` now contains the five generated raster assets selected by the approved candidate pool.
+## Tests Added Or Changed
 
-`media/prompts/exercises/baduanjin-basics/` now contains one exact prompt record per generated raster asset.
-Each prompt record names the asset path, generator, creation date, human reviewer, approval status, exact prompt, and selected-output notes.
+| Test area | What it proves | Why this level is appropriate |
+|---|---|---|
+| Baduanjin image-standard fixtures | Five Baduanjin images pass only under the path-scoped exception; sixth image, second muscle-attention image, missing prompt record, prompt mismatch, invalid purpose, visual-scope wording, and unrelated four-image pages fail. | Checker-level fixtures prove policy before relying on real generated assets. |
+| Baduanjin method fixtures | `low_load_control_drill` wording passes when static and general; adaptive, treatment, recovery-care, symptom, and medication-response wording fails. | Unit-level validation protects non-clinical and non-coaching scope. |
+| Real Baduanjin page tests | The page exists with required shape, aliases, sections, sources, method guidance, muscle guidance, scope boundaries, and safety routing. | Integration tests validate the actual public Markdown page. |
+| Real media tests | The page references exactly five local Baduanjin assets with meaningful alt text; each asset has one approved provenance row and matching prompt record. | Integration tests prevent page/media/provenance drift. |
+| Proof-record tests | Beginner-comprehension and rollback proof files include the required prompts, paths, cleanup surfaces, commands, and pass results. | Token-level tests keep manual proof records present while semantic judgment remains manual. |
 
-`media/PROVENANCE.md` now has approved rows for the five Baduanjin assets with local prompt-record paths, expected exercise image purposes, and `exercises/baduanjin-basics.md` page refs.
+## Validation Evidence Before Final Verify
 
-`docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/visual-safety-review.md` records manual visual review evidence for the five selected images.
+Latest final holistic code-review reruns:
 
-`tests/test_markdown_first_real_pages.py` now proves the real Baduanjin page uses exactly five local, prompt-backed, approved generated raster images with meaningful alt text.
+| Command | Result |
+|---|---|
+| `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` | pass: 84 tests |
+| `python3 -m unittest discover -s tests` | pass: 184 tests |
+| `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` | pass: checked 27 Markdown files |
+| `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` | pass: checked 31 files |
+| `git diff --check` | pass |
 
-`docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` now lists `exercises/baduanjin-basics.md` as a five-image page with governed first-batch images.
+No hosted CI run has been observed for this branch.
 
-## M4 Changes
+## Review Resolution Summary
 
-`docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/beginner-comprehension-proof.md` records non-identifying beginner-comprehension evidence for the page and five images.
-It checks Baduanjin purpose, ready stance, upward reach, drawing bow, alternating reach, body regions to notice, pause conditions, and whether images help more than text alone.
+Two material findings were recorded and resolved:
 
-`docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/rollback-proof.md` records a temporary text-only rollback rehearsal.
-The rehearsal removes Baduanjin image references, unused assets, prompt records, and provenance rows from a temporary review state and confirms the text-only page still passes Markdown-first and privacy checks.
+| Finding | Disposition | Resolution |
+|---|---|---|
+| CR-M1-001 | closed by code-review R2 | Added direct Baduanjin forbidden-scope fixture coverage for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording. |
+| CR-M4-001 | closed by code-review M4 R2 | Replaced the wildcard rollback command record with concrete temporary-root commands and reran focused rollback Markdown-first and privacy checks. |
 
-`tests/test_markdown_first_real_pages.py` now checks that the Baduanjin M4 beginner-comprehension and rollback proof records contain the required prompts, paths, cleanup surfaces, commands, and pass results.
+Details are in `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/review-resolution.md`.
 
-`validation-notes.md`, `change.yaml`, and the active plan now record M4 validation evidence and route the milestone to code review.
+Final holistic code-review R1 passed with no material findings.
+
+## Alternatives Rejected
+
+- Generate all eight movements immediately: rejected because it would increase governance burden and imply a complete traditional form course.
+- Add Baduanjin as text-only only: rejected because the sequence is image-dependent for beginners.
+- Split content and image proposals: rejected because the central decision is that this page needs a governed first image batch.
+- Use borrowed or stock images: rejected because the accepted media workflow requires governed generated assets, prompt records, provenance, and visual review.
+- Make images source-of-truth instructions: rejected because Markdown must remain authoritative for setup, cues, muscles, safety, sources, and rollback.
+
+## Scope Control
+
+Preserved non-goals:
+
+- No medical qigong treatment, disease claim, pain cure, posture fix, or replacement for medical care.
+- No fall-prevention program, individualized balance program, recovery plan, symptom protocol, or adaptive coaching.
+- No martial application, combat framing, lineage debate, or full eight-brocade curriculum.
+- No video, animation, hosted app, database, user account, user-input flow, or generated public API.
+- No in-image labels, Chinese characters, arrows, citations, safety warnings, pain marks, brand marks, identifiable faces, exact anatomy labels, weapons, targets, or clinical framing.
+
+## Risks And Follow-Ups
+
+- Beginner-comprehension proof is a static non-identifying reviewer simulation, not public-reader research.
+- Static images cannot prove exact form quality or individual balance safety.
+- External source freshness and link health should be maintained during normal review cycles.
+- Final verification still needs to run after this explanation.
+- PR readiness is not claimed until verify and PR handoff complete.
 
 ## Sources
 
+- [Necessary Images and Baduanjin Exercise proposal](../../../docs/proposals/2026-07-06-necessary-images-and-baduanjin-exercise.md)
 - [Necessary Images and Baduanjin Exercise spec](../../../specs/necessary-images-and-baduanjin-exercise.md)
 - [Necessary Images and Baduanjin Exercise test spec](../../../specs/necessary-images-and-baduanjin-exercise.test.md)
 - [Necessary Images and Baduanjin Exercise plan](../../plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)
+- [Final Holistic Code Review R1](reviews/code-review-final-r1.md)
+- [Review Resolution](review-resolution.md)
