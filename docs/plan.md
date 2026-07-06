@@ -5,8 +5,8 @@
 - [Exercise Document Best-Practice Image Prioritization](plans/2026-07-06-exercise-document-best-practice-image-prioritization.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: code-review M2 re-review
-  - Active context: Review-resolution addressed CR-EDIP-M2-1 by adding per-rank scoring fields to the Bird Dog M2 audit evidence; M2 is ready for code-review re-review.
+  - Current stage: implement M3
+  - Active context: Code-review M2 R2 confirmed CR-EDIP-M2-1 resolved, closed M2, and routed to M3 review evidence and closeout implementation.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
