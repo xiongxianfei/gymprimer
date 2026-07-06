@@ -56,20 +56,20 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ## Current Handoff Summary
 
-- Current milestone: M1
-- Current milestone state: review-requested
-- Last reviewed milestone: none
-- Review status: M1 ready for code-review
-- Remaining in-scope implementation milestones: M1 review pending; M2, M3, M4 planned
-- Next stage: code-review M1
+- Current milestone: M2
+- Current milestone state: planned
+- Last reviewed milestone: M1
+- Review status: M1 code-review clean
+- Remaining in-scope implementation milestones: M2, M3, M4
+- Next stage: implement M2
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 has not completed code-review, M2-M4 are not implemented, and explain-change, verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M2-M4 are not implemented, and explain-change, verification, and PR handoff have not happened.
 
 ## Milestones
 
 ### M1. Validation and Proof Map
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Add or update deterministic tests and proof obligations before content and media are introduced.
 - Requirements: R20-R29, R36-R43
 - Files/components likely touched:
@@ -255,6 +255,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Plan-review R1 approved the plan with no material findings.
 - 2026-07-06: Test-spec-review R1 approved the active test spec with no material findings; workflow auto-run stopped before implementation.
 - 2026-07-06: Implemented M1 by adding Tai Chi-specific method and exercise-image validation tests; existing checker behavior already covered the required failures, so no checker code change was needed.
+- 2026-07-06: Code-review M1 R1 was clean with no material findings; M1 closed and routed to implementation M2.
 
 ## Decision log
 
@@ -288,4 +289,4 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M1 is implemented and ready for code-review.
+- M1 is closed after clean code-review; M2 is ready for implementation.

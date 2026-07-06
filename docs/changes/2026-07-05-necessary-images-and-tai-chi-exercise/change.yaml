@@ -1,6 +1,6 @@
 change_id: 2026-07-05-necessary-images-and-tai-chi-exercise
 status: active
-current_stage: code-review
+current_stage: implement
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-05-necessary-images-and-tai-chi-exercise.md
@@ -25,7 +25,7 @@ current_test_spec: specs/necessary-images-and-tai-chi-exercise.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/test-spec-review-r1.md
 
-next_stage: code-review
+next_stage: implement
 
 open_findings: []
 
@@ -51,3 +51,4 @@ notes:
   - Test-spec-review R1 approved the active test spec with no material findings; implementation handoff is allowed, but this workflow auto-run stopped at the requested target before implementation.
   - M1 implemented Tai Chi-specific validation fixtures in `tests/test_exercise_image_standard.py` and `tests/test_exercise_method_guidance.py`; existing checker code already satisfied the new fixture coverage.
   - M1 targeted validation passed with unittest discovery, focused suites, privacy scan, and diff check; `python3 -m pytest` is unavailable because pytest is not installed.
+  - Code-review M1 R1 was clean with no material findings; M1 closed and next stage is implement M2.

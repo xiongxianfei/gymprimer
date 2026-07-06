@@ -5,8 +5,8 @@
 - [Necessary Images and Tai Chi Exercise](plans/2026-07-05-necessary-images-and-tai-chi-exercise.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M1 validation/proof-map implementation is complete and ready for code-review; M2-M4 remain planned.
+  - Current stage: implement
+  - Active context: M1 validation/proof-map implementation passed code-review; M2 Tai Chi Markdown page is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
