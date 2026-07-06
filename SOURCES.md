@@ -20,6 +20,10 @@ Rules:
 - [Mayo Clinic stretching basics][mayo-stretching]
 - [Mayo Clinic walking guidance][mayo-walking]
 - [NHS walking for health][nhs-walking-for-health]
+- [NCCIH tai chi overview][nccih-tai-chi]
+- [Harvard Health tai chi overview][harvard-tai-chi]
+- [Veterans Affairs Tai Chi and Qigong overview][va-tai-chi-qigong]
+- [NHS balance exercises][nhs-balance-exercises]
 - [ACSM resistance training guidance][acsm-resistance-training]
 - [CDC plain-language communication resources][cdc-plain-language]
 - [NHS back pain patient guidance][nhs-back-pain]
@@ -49,6 +53,10 @@ Each page still needs its own matching reference definition so the page renders 
 [mayo-stretching]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/stretching/art-20546848
 [mayo-walking]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/walking/art-20046261
 [nhs-walking-for-health]: https://www.nhs.uk/live-well/exercise/walking-for-health/
+[nccih-tai-chi]: https://www.nccih.nih.gov/health/tai-chi-what-you-need-to-know
+[harvard-tai-chi]: https://www.health.harvard.edu/exercise-and-fitness/the-health-benefits-of-tai-chi
+[va-tai-chi-qigong]: https://www.va.gov/WHOLEHEALTH/cih/Tai_Chi_and_Qigong.asp
+[nhs-balance-exercises]: https://www.nhs.uk/live-well/exercise/balance-exercises/
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
 [cdc-plain-language]: https://www.cdc.gov/health-literacy/php/develop-materials/plain-language.html
 [nhs-back-pain]: https://www.nhs.uk/conditions/back-pain/

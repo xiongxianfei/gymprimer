@@ -1,0 +1,68 @@
+change_id: 2026-07-05-necessary-images-and-tai-chi-exercise
+status: active
+current_stage: pr
+created_date: 2026-07-06
+
+proposal: docs/proposals/2026-07-05-necessary-images-and-tai-chi-exercise.md
+proposal_status: accepted
+proposal_review: docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/proposal-review-r2.md
+
+current_spec: specs/necessary-images-and-tai-chi-exercise.md
+current_spec_status: approved
+current_spec_review: docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/spec-review-r1.md
+
+architecture_assessment: architecture-required
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/architecture-review-r1.md
+
+current_plan: docs/plans/2026-07-05-necessary-images-and-tai-chi-exercise.md
+current_plan_status: reviewed
+current_plan_review: docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/plan-review-r1.md
+plan_index: docs/plan.md
+
+current_test_spec: specs/necessary-images-and-tai-chi-exercise.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/test-spec-review-r1.md
+
+next_stage: pr
+
+open_findings: []
+
+autoprogression:
+  review_fix:
+    profile: bounded-review-fix
+    requested_target: test-spec-review
+    status: complete
+    authorized_by: user
+    authorization: "$workflow auto: test-spec-review"
+    authorized_date: 2026-07-06
+    stop_before: implementation
+
+notes:
+  - Owner authorization via `$workflow auto: test-spec-review` activated bounded review-fix routing through the requested target, stopping before implementation.
+  - Proposal-review R2 approved the accepted Tai Chi proposal with no open blockers.
+  - Spec-review R1 approved the spec with no material findings; spec status normalized to approved before downstream reliance.
+  - Architecture assessment recorded architecture-required because the change affects generated-output flow, media paths, prompt records, provenance, validation evidence, and cross-cutting visual-safety boundaries.
+  - Architecture-review R1 approved the canonical architecture amendment with no material findings; architecture status normalized to approved before planning.
+  - Draft execution plan created with four implementation milestones and routed to plan-review.
+  - Plan-review R1 approved the execution plan with no material findings; routed to test-spec.
+  - Test spec created, normalized to active for review reliance, and routed to test-spec-review.
+  - Test-spec-review R1 approved the active test spec with no material findings; implementation handoff is allowed, but this workflow auto-run stopped at the requested target before implementation.
+  - M1 implemented Tai Chi-specific validation fixtures in `tests/test_exercise_image_standard.py` and `tests/test_exercise_method_guidance.py`; existing checker code already satisfied the new fixture coverage.
+  - M1 targeted validation passed with unittest discovery, focused suites, privacy scan, and diff check; `python3 -m pytest` is unavailable because pytest is not installed.
+  - Code-review M1 R1 was clean with no material findings; M1 closed and next stage is implement M2.
+  - M2 implemented the text-only `exercises/tai-chi-basics.md` page, Tai Chi source IDs in `SOURCES.md`, MP1 source-audit evidence, real-page tests, and the aligned current exercise-image audit row.
+  - M2 targeted validation passed with focused Tai Chi tests, Markdown-first check, privacy scan, unittest discovery, method-guidance tests, and diff check; `python3 -m pytest` remains unavailable because pytest is not installed.
+  - Code-review M2 R1 was clean with no material findings; M2 closed and next stage is implement M3.
+  - M3 implementation started for the governed first Tai Chi image batch.
+  - M3 implemented three generated Tai Chi support images, prompt records, provenance rows, Markdown references, real-asset tests, and visual-safety review evidence.
+  - M3 targeted validation passed with focused image tests, Markdown-first check, privacy scan, unittest discovery, and diff check; `python3 -m pytest` remains unavailable because pytest is not installed.
+  - Code-review M3 R1 was clean with no material findings; M3 closed and next stage is implement M4.
+  - M4 implemented proof checks, beginner-comprehension proof, text-only rollback proof, validation notes, and a temporary rollback rehearsal.
+  - M4 targeted validation passed with focused proof tests, rollback rehearsal, method-guidance tests, Markdown-first check, privacy scan, focused suites, unittest discovery, and diff check; `python3 -m pytest` remains unavailable because pytest is not installed.
+  - Code-review M4 R1 was clean with no material findings; all implementation milestones are closed and final closeout starts with explain-change.
+  - Explain-change was refreshed for the final reviewed diff and routed the change to verify.
+  - Final local verify passed with branch-ready evidence; PR handoff is next. Hosted CI has not been observed.
+  - PR #13 opened from `proposal/necessary-images-and-tai-chi-exercise` to `main`: https://github.com/xiongxianfei/gymprimer/pull/13
+  - GitHub Actions `Validation checks` is in progress for PR #13.

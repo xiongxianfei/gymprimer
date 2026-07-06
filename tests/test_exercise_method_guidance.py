@@ -262,6 +262,42 @@ class ExerciseMethodGuidanceTest(unittest.TestCase):
         self.assertIn("exercise_method_adaptive_programming", finding_codes(adaptive))
         self.assertIn("exercise_method_forbidden_scope", finding_codes(treatment))
 
+    def test_tai_chi_low_load_control_method_shape_passes_without_adaptation(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do
+
+            Method type: low_load_control_drill
+
+            Beginner starting point: Practice for a short, easy round.
+            Effort: Keep the movement easy and controlled.
+            Rest: Rest as needed between short practice rounds.
+            Progression: First make the movement smoother.
+            Stop if: Stop when balance, posture, or breathing no longer feels controlled.
+            """
+        )
+
+        self.assertEqual(finding_codes(text, "exercises/tai-chi-basics.md"), [])
+
+    def test_tai_chi_low_load_control_method_rejects_adaptive_or_rehab_wording(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do
+
+            Method type: low_load_control_drill
+
+            Beginner starting point: Use this rehab progression to treat balance problems.
+            Effort: Keep the movement easy.
+            Rest: Rest as needed.
+            Progression: Increase practice time based on your symptoms.
+            Stop if: Stop when form breaks.
+            """
+        )
+
+        codes = finding_codes(text, "exercises/tai-chi-basics.md")
+        self.assertIn("exercise_method_adaptive_programming", codes)
+        self.assertIn("exercise_method_forbidden_scope", codes)
+
     def test_related_specs_point_to_focused_method_spec_without_copying_enum(self) -> None:
         markdown_first = (ROOT / "specs/markdown-first-primer.md").read_text(encoding="utf-8")
         responsible_breadth = (ROOT / "specs/responsible-breadth.md").read_text(encoding="utf-8")

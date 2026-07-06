@@ -47,6 +47,23 @@ M3_PROMPT_RECORD_COMPATIBILITY_ASSETS = {
     "media/exercises/wall-slide/muscle-attention.png",
     "media/exercises/prone-y-t/muscle-attention.png",
 }
+TAI_CHI_ASSETS = (
+    (
+        "setup",
+        "exercise_setup_illustration",
+        "Tai Chi setup image showing a relaxed ready stance",
+    ),
+    (
+        "weight-shift",
+        "exercise_movement_illustration",
+        "Tai Chi weight-shift image showing weight moving between feet",
+    ),
+    (
+        "muscle-attention",
+        "exercise_muscle_attention_illustration",
+        "Tai Chi muscle-attention image showing broad leg and trunk regions",
+    ),
+)
 
 
 def run_check_with_root(root: Path, *paths: Path) -> subprocess.CompletedProcess[str]:
@@ -203,7 +220,172 @@ def write_asset(root: Path, relative_path: str = "media/exercises/fixture-exerci
     asset.write_bytes(b"fixture")
 
 
+def write_tai_chi_image_fixture(root: Path, assets: tuple[tuple[str, str, str], ...] = TAI_CHI_ASSETS) -> Path:
+    rows = []
+    image_blocks = []
+    for stem, purpose, alt_text in assets:
+        asset_path = f"media/exercises/tai-chi-basics/{stem}.png"
+        prompt_record = f"media/prompts/exercises/tai-chi-basics/{stem}.md"
+        write_asset(root, asset_path)
+        rows.append(
+            {
+                "asset_path": asset_path,
+                "media_purpose": purpose,
+                "prompt_record": prompt_record,
+                "page_refs": "exercises/tai-chi-basics.md",
+            }
+        )
+        image_blocks.append(f"![{alt_text}](../{asset_path})")
+    write_provenance(root, rows)
+    return write_exercise_page(root, "\n".join(image_blocks), slug="tai-chi-basics")
+
+
 class ExerciseImageStandardTest(unittest.TestCase):
+    def test_tai_chi_candidate_pool_records_deferred_alternatives(self) -> None:
+        spec = (ROOT / "specs/necessary-images-and-tai-chi-exercise.md").read_text(encoding="utf-8")
+        plan = (ROOT / "docs/plans/2026-07-05-necessary-images-and-tai-chi-exercise.md").read_text(encoding="utf-8")
+        proposal = (ROOT / "docs/proposals/2026-07-05-necessary-images-and-tai-chi-exercise.md").read_text(encoding="utf-8")
+
+        for text in (spec, plan, proposal):
+            with self.subTest(surface=text[:40]):
+                self.assertIn("Tai Chi", text)
+                self.assertTrue("top-10" in text or "ten-candidate" in text)
+                self.assertIn("exactly three", text)
+                self.assertIn("Candidates 4-10", text)
+                self.assertIn("deferred alternatives", text)
+                self.assertTrue("fourth image" in text or "more than three images" in text)
+
+        self.assertIn("setup.png", spec)
+        self.assertIn("weight-shift.png", spec)
+        self.assertIn("muscle-attention.png", spec)
+        self.assertIn("media/exercises/tai-chi-basics/", plan)
+
+    def test_tai_chi_first_batch_exact_three_paths_and_purposes_pass(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_tai_chi_image_fixture(root)
+
+            result = run_check_with_root(root, page)
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_tai_chi_fourth_image_and_second_muscle_attention_fail(self) -> None:
+        fourth_image_assets = TAI_CHI_ASSETS + (
+            (
+                "opening",
+                "exercise_movement_illustration",
+                "Tai Chi opening movement image showing relaxed arms rising",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_tai_chi_image_fixture(root, fourth_image_assets)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_count_exceeded", result.stdout)
+
+        second_muscle_assets = TAI_CHI_ASSETS + (
+            (
+                "second-muscle-attention",
+                "exercise_muscle_attention_illustration",
+                "Tai Chi second muscle-attention image showing another broad region",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_tai_chi_image_fixture(root, second_muscle_assets)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_count_exceeded", result.stdout)
+        self.assertIn("exercise_muscle_attention_limit", result.stdout)
+
+    def test_tai_chi_prompt_record_and_alt_text_failures_are_deterministic(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            asset_path = "media/exercises/tai-chi-basics/setup.png"
+            write_asset(root, asset_path)
+            write_provenance(
+                root,
+                [
+                    {
+                        "asset_path": asset_path,
+                        "media_purpose": "exercise_setup_illustration",
+                        "prompt_record": "",
+                        "page_refs": "exercises/tai-chi-basics.md",
+                    }
+                ],
+                create_prompt_records=False,
+            )
+            page = write_exercise_page(root, "![Tai Chi setup image](../media/exercises/tai-chi-basics/setup.png)", slug="tai-chi-basics")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("media_prompt_record_missing", result.stdout)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            asset_path = "media/exercises/tai-chi-basics/setup.png"
+            prompt_record = "media/prompts/exercises/tai-chi-basics/setup.md"
+            write_asset(root, asset_path)
+            write_provenance(
+                root,
+                [
+                    {
+                        "asset_path": asset_path,
+                        "media_purpose": "exercise_setup_illustration",
+                        "prompt_record": prompt_record,
+                        "page_refs": "exercises/tai-chi-basics.md",
+                    }
+                ],
+            )
+            page = write_exercise_page(root, "![image](../media/exercises/tai-chi-basics/setup.png)", slug="tai-chi-basics")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_alt_text_generic", result.stdout)
+
+    def test_tai_chi_visual_semantic_text_failures_are_deterministic(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            asset_path = "media/exercises/tai-chi-basics/weight-shift.png"
+            write_asset(root, asset_path)
+            write_provenance(
+                root,
+                [
+                    {
+                        "asset_path": asset_path,
+                        "media_purpose": "exercise_movement_illustration",
+                        "prompt_record": "media/prompts/exercises/tai-chi-basics/weight-shift.md",
+                        "page_refs": "exercises/tai-chi-basics.md",
+                        "prompt_or_creation_notes": "Tai Chi image with red pain warning badge",
+                    }
+                ],
+            )
+            page = write_exercise_page(root, "![Tai Chi weight-shift image with calm posture](../media/exercises/tai-chi-basics/weight-shift.png)", slug="tai-chi-basics")
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_visual_safety_text", result.stdout)
+
     def test_text_only_exercise_page_passes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -595,6 +777,77 @@ class ExerciseImageStandardTest(unittest.TestCase):
         self.assertTrue((evidence_root / "m3-visual-safety-review.md").exists())
         self.assertTrue((evidence_root / "m3-beginner-comprehension.md").exists())
         self.assertTrue((evidence_root / "m3a-prompt-record-backfill.md").exists())
+
+    def test_tai_chi_m3_support_batch_has_page_images_prompt_records_and_visual_review(self) -> None:
+        page_path = ROOT / "exercises/tai-chi-basics.md"
+        page_text = page_path.read_text(encoding="utf-8")
+        provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
+        expected = {
+            "media/exercises/tai-chi-basics/setup.png": (
+                "exercise_setup_illustration",
+                "Tai Chi setup reference showing relaxed ready stance with soft knees, upright trunk, relaxed shoulders, and natural arms",
+            ),
+            "media/exercises/tai-chi-basics/weight-shift.png": (
+                "exercise_movement_illustration",
+                "Tai Chi weight-shift reference showing smooth weight transfer between feet with calm upper body",
+            ),
+            "media/exercises/tai-chi-basics/muscle-attention.png": (
+                "exercise_muscle_attention_illustration",
+                "Tai Chi muscle-attention reference with broad highlights on legs, glutes, trunk, shoulders, upper back, feet, and ankles",
+            ),
+        }
+
+        self.assertEqual(page_text.count("![Tai Chi "), 3)
+        self.assertIn("Use these images as broad visual references.", page_text)
+
+        for asset_path, (purpose, alt_text) in expected.items():
+            with self.subTest(asset_path=asset_path):
+                self.assertIn(f"![{alt_text}](../{asset_path})", page_text)
+                self.assertTrue((ROOT / asset_path).is_file())
+
+                rows = provenance.get(asset_path, [])
+                self.assertEqual(len(rows), 1)
+                row = rows[0]
+                self.assertEqual(row.get("asset_type"), "ai_generated_raster")
+                self.assertEqual(row.get("media_purpose"), purpose)
+                self.assertEqual(row.get("review_status"), "approved")
+                self.assertIn("exercises/tai-chi-basics.md", split_page_refs(row.get("page_refs", "")))
+
+                prompt_record = row.get("prompt_record", "")
+                self.assertEqual(prompt_record, f"media/prompts/exercises/tai-chi-basics/{Path(asset_path).stem}.md")
+                self.assertTrue((ROOT / prompt_record).is_file())
+
+                prompt_text = (ROOT / prompt_record).read_text(encoding="utf-8")
+                self.assertIn(f"asset_path: {asset_path}", prompt_text)
+                self.assertIn("## Exact prompt", prompt_text)
+                self.assertIn("no in-image text", prompt_text.lower())
+                self.assertIn("no combat framing", prompt_text.lower())
+
+        visual_safety = ROOT / "docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/visual-safety-review.md"
+        self.assertTrue(visual_safety.is_file())
+        visual_text = visual_safety.read_text(encoding="utf-8").lower()
+        for token in (
+            "media/exercises/tai-chi-basics/setup.png",
+            "media/exercises/tai-chi-basics/weight-shift.png",
+            "media/exercises/tai-chi-basics/muscle-attention.png",
+            "exercise_setup_illustration",
+            "exercise_movement_illustration",
+            "exercise_muscle_attention_illustration",
+            "one concept",
+            "matches nearby markdown",
+            "no in-image text",
+            "no identifiable person",
+            "no brand mark",
+            "no clinical",
+            "no combat",
+            "no unsupported claim",
+            "color-accessible",
+            "broad muscle highlighting",
+            "approved",
+            "residual risk",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, visual_text)
 
     def test_m4_exercise_audit_covers_current_exercise_pages(self) -> None:
         audit_path = ROOT / "docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md"
