@@ -336,7 +336,67 @@ def write_safer_running_image_fixture(root: Path, assets: tuple[tuple[str, str, 
         )
         image_blocks.append(f"![{alt_text}](../{asset_path})")
     write_provenance(root, rows)
-    return write_exercise_page(root, "\n".join(image_blocks), slug="safer-running-basics")
+    (root / "exercises").mkdir(exist_ok=True)
+    page = root / "exercises/safer-running-basics.md"
+    page.write_text(
+        (
+            "# Safer Running Basics\n\n"
+            "Author: Fixture Maintainer\n"
+            "Created: 2026-07-06\n"
+            "Last reviewed: 2026-07-06\n"
+            "Next review due: 2027-07-06\n"
+            "Review scope: safer running image validation\n\n"
+            "Also searched as: injury-free running, beginner running, running without getting hurt\n\n"
+            "General beginner running education. [Fixture][fixture-training]\n\n"
+            + "\n".join(image_blocks)
+            + "\n\n"
+            "## What this is for\n\n"
+            "Use this page to learn a simple beginner running start. [Fixture][fixture-training]\n\n"
+            "## What this page cannot promise\n\n"
+            "No page can guarantee injury-free running; this is general education. [Fixture][fixture-setup]\n\n"
+            "## Before you start\n\n"
+            "Start easy and stop for unusual symptoms. [Fixture][fixture-training]\n\n"
+            "## Warm up\n\n"
+            "Begin with easy walking before running. [Fixture][fixture-setup]\n\n"
+            "## Running form basics\n\n"
+            "Run tall, keep the shoulders relaxed, and avoid forcing a specific foot strike. [Fixture][fixture-movement]\n\n"
+            "## Muscles involved\n\n"
+            "| Role | Muscle region | What it helps do |\n"
+            "|---|---|---|\n"
+            "| Support and push-off | Glutes, thighs, and calves | Help support each step. [Fixture][fixture-movement] |\n"
+            "| Landing control | Feet, ankles, calves, and thighs | Help control each landing. |\n"
+            "| Posture and transfer | Trunk | Helps you stay tall. |\n"
+            "| Rhythm and balance | Shoulders, upper back, and arms | Help arm swing stay relaxed. |\n\n"
+            "## What you should feel\n\n"
+            "You should feel warm and slightly out of breath. Stop for chest pain, dizziness, unusual shortness of breath, sharp pain, or worsening symptoms. [Fixture][fixture-training]\n\n"
+            "## How much to do\n\n"
+            "Method type: basic_cardio_activity\n\n"
+            "Beginner starting point: Try 10-20 minutes total with short easy running intervals and walking breaks.\n"
+            "Effort: Keep the running portions easy enough that you could speak in short sentences.\n"
+            "Progression: First make running feel smoother, then add a little total time.\n"
+            "Stop if: Stop for chest pain, dizziness, unusual shortness of breath, sharp pain, or worsening symptoms. [Fixture][fixture-training]\n\n"
+            "## Common mistakes\n\n"
+            "| Mistake | Safer framing |\n"
+            "|---|---|\n"
+            "| Running too far too soon | Use run/walk intervals and increase gradually. [Fixture][fixture-training] |\n"
+            "| Ignoring sharp or worsening symptoms | Stop and use the safety guidance. [Fixture][fixture-training] |\n\n"
+            "## Easier version\n\n"
+            "Use shorter total time, more walking, flatter routes, and fewer running days.\n\n"
+            "## Harder version\n\n"
+            "First add a little total time or a little more easy running inside the same session.\n\n"
+            "## Safety notes\n\n"
+            "Use the central [red flags](../RED-FLAGS.md) page for chest pain, dizziness, fainting, unusual shortness of breath, numbness, weakness, sharp pain, or worsening symptoms. [Fixture][fixture-training]\n\n"
+            "## Sources\n\n"
+            "- [Fixture training][fixture-training]\n"
+            "- [Fixture setup][fixture-setup]\n"
+            "- [Fixture movement][fixture-movement]\n\n"
+            "[fixture-training]: https://example.org/fixture-training\n"
+            "[fixture-setup]: https://example.org/fixture-setup\n"
+            "[fixture-movement]: https://example.org/fixture-movement\n"
+        ),
+        encoding="utf-8",
+    )
+    return page
 
 
 class ExerciseImageStandardTest(unittest.TestCase):

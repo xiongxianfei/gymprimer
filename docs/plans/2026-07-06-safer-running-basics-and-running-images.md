@@ -20,11 +20,11 @@ Current milestone: M1
 
 Current state: review-requested
 
-Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved.
+Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; review-resolution for GP-SRB-M1-CR1 resolved pending rereview.
 
-Next required gate: code-review for M1.
+Next required gate: code-review rereview for M1.
 
-Implementation status: M1 implemented.
+Implementation status: M1 implemented with review-resolution fix.
 
 Final closeout status: not ready.
 
@@ -61,6 +61,10 @@ Progress:
 - Added fixture tests proving a seventh running image, a second muscle-attention image, and an unapproved running asset fail.
 - Activated `basic_cardio_activity` validation for `exercises/safer-running-basics.md`.
 - Added the page-specific six-image exception and allowed first-batch asset set to the Markdown-first checker.
+- Code-review M1 R1 recorded GP-SRB-M1-CR1: M1 still needs required page heading, alias-boundary, required-section, and source-registration test coverage or an upstream plan/test-spec revision.
+- Review-resolution added fixture-backed page contract tests for the approved H1, alias line, required headings, page-local source definitions, and shared source registration.
+- Review-resolution added checker enforcement for the safer-running title, alias line, and required sections.
+- Review-resolution updated the safer-running image fixture so image-exception tests continue to exercise a valid page shape.
 
 Tests-first evidence:
 
@@ -72,6 +76,7 @@ Validation notes:
 - `python3 -m unittest tests.test_exercise_method_guidance` passed: 20 tests.
 - `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 67 tests.
 - `python3 -m unittest discover -s tests` passed: 201 tests.
+- Review-resolution validation passed: `python3 -m unittest tests.test_markdown_first_page_structure`, `python3 -m unittest tests.test_exercise_method_guidance`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, and `python3 -m unittest discover -s tests`.
 - Artifact Markdown, privacy, and diff checks are recorded in the M1 handoff.
 
 Decisions and discoveries:
@@ -168,7 +173,7 @@ Unchanged with rationale:
 - `media/PROVENANCE.md`: deferred to M3 by plan.
 - Visual-safety review and beginner comprehension proof: deferred to M3 and M4 by plan.
 
-Ready for: code-review of M1.
+Ready for: code-review rereview of M1.
 
 ## Recovery
 

@@ -66,6 +66,17 @@ python3 -m unittest discover -s tests
 
 Final Markdown, privacy, and diff checks are recorded in the implementation handoff.
 
+## Review Resolution
+
+Code-review M1 R1 recorded GP-SRB-M1-CR1 for missing M1 coverage of the approved page shape, alias boundary, and source-registration proof.
+
+Resolution added:
+
+- safer-running page-shape fixture tests for the approved H1, alias line, required headings, and page-local sources;
+- source-registration proof through the shared `SOURCES.md` fixture;
+- checker enforcement for the safer-running title, alias line, and required sections;
+- a safer-running image fixture update so image-exception tests still exercise a valid page contract.
+
 ## Sources
 
 - `specs/safer-running-basics-and-running-images.md`

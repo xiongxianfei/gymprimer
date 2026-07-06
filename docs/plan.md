@@ -6,7 +6,7 @@
   - Status: reviewed
   - Plan lifecycle state: active
   - Current stage: code-review
-  - Active context: M1 validation/checker implementation is review-requested; proposal-review R1, spec-review R1, plan-review R1, and test-spec-review R1 approved; architecture assessment recorded `architecture-not-required`.
+  - Active context: M1 review-resolution for GP-SRB-M1-CR1 is resolved pending rereview; proposal-review R1, spec-review R1, plan-review R1, and test-spec-review R1 approved; architecture assessment recorded `architecture-not-required`.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

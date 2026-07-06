@@ -16,10 +16,13 @@ workflow:
 current_stage: code-review
 current_milestone: M1
 milestone_state: review-requested
+required_review_resolution: false
+open_findings: []
 notes:
   - Owner accepted the proposal after proposal-review round 1 approved it with no findings.
   - Spec-review round 1 approved the feature spec with no findings.
   - Architecture assessment recorded architecture-not-required.
   - Plan-review round 1 approved the execution plan with no findings.
   - Test-spec-review round 1 approved the proof map with no findings.
-  - M1 validation/checker implementation is ready for code-review.
+  - M1 code-review round 1 requested changes for GP-SRB-M1-CR1.
+  - GP-SRB-M1-CR1 has been resolved and is pending code-review rereview.

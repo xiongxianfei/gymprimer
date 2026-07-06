@@ -118,6 +118,23 @@ FORWARD_HEAD_EXERCISE_SECTIONS = (
     "## Safety notes",
     "## Sources",
 )
+SAFER_RUNNING_BASICS_PAGE = "exercises/safer-running-basics.md"
+SAFER_RUNNING_ALIAS_LINE = "Also searched as: injury-free running, beginner running, running without getting hurt"
+SAFER_RUNNING_BASICS_SECTIONS = (
+    "## What this is for",
+    "## What this page cannot promise",
+    "## Before you start",
+    "## Warm up",
+    "## Running form basics",
+    "## Muscles involved",
+    "## What you should feel",
+    "## How much to do",
+    "## Common mistakes",
+    "## Easier version",
+    "## Harder version",
+    "## Safety notes",
+    "## Sources",
+)
 RESPONSIBLE_BREADTH_FORBIDDEN_PATTERNS = (
     re.compile(r"\byou have\b", re.IGNORECASE),
     re.compile(r"\btreatment plan\b", re.IGNORECASE),
@@ -155,7 +172,7 @@ EXERCISE_METHOD_BASIC_CARDIO_PATHS = {
 }
 EXERCISE_METHOD_BASIC_CARDIO_ACTIVITY_PATHS = {
     "exercises/brisk-walking.md",
-    "exercises/safer-running-basics.md",
+    SAFER_RUNNING_BASICS_PAGE,
 }
 EXERCISE_METHOD_REQUIRED_LABEL_GROUPS = (
     ("Beginner starting point:",),
@@ -291,10 +308,10 @@ PROMPT_RECORD_COMPATIBILITY_NOTE = "M3 pre-amendment prompt unavailable; compati
 DEFAULT_EXERCISE_IMAGE_LIMIT = 3
 EXERCISE_IMAGE_LIMIT_EXCEPTIONS = {
     "exercises/baduanjin-basics.md": 5,
-    "exercises/safer-running-basics.md": 6,
+    SAFER_RUNNING_BASICS_PAGE: 6,
 }
 EXERCISE_IMAGE_EXCEPTION_ALLOWED_ASSETS = {
-    "exercises/safer-running-basics.md": {
+    SAFER_RUNNING_BASICS_PAGE: {
         "media/exercises/safer-running-basics/posture.png",
         "media/exercises/safer-running-basics/landing.png",
         "media/exercises/safer-running-basics/run-walk.png",
@@ -1080,6 +1097,9 @@ def validate_responsible_breadth_page(
     if page_class == "expanded_exercise_page" and is_forward_head_exercise(path):
         findings.extend(validate_forward_head_exercise_contract(path, text))
 
+    if page_class == "expanded_exercise_page" and is_safer_running_basics(path):
+        findings.extend(validate_safer_running_basics_contract(path, text))
+
     if page_class == "expanded_exercise_page":
         findings.extend(validate_exercise_method_guidance(path, text))
         findings.extend(validate_exercise_muscle_guidance(path, text))
@@ -1202,6 +1222,44 @@ def validate_forward_head_exercise_contract(path: Path, text: str) -> list[Findi
     for section in FORWARD_HEAD_EXERCISE_SECTIONS:
         if heading_position(text, section) == -1:
             findings.append(Finding(path, "RB010", f"forward-head exercise page section is missing: {section.removeprefix('## ')}"))
+
+    return findings
+
+
+def is_safer_running_basics(path: Path) -> bool:
+    return repo_relative_path(path) == SAFER_RUNNING_BASICS_PAGE
+
+
+def validate_safer_running_basics_contract(path: Path, text: str) -> list[Finding]:
+    findings: list[Finding] = []
+
+    if not text.startswith("# Safer Running Basics\n"):
+        findings.append(
+            Finding(
+                path,
+                "safer_running_title_invalid",
+                "safer-running page title must be exactly # Safer Running Basics",
+            )
+        )
+
+    if SAFER_RUNNING_ALIAS_LINE not in text:
+        findings.append(
+            Finding(
+                path,
+                "safer_running_alias_missing",
+                f"safer-running page must include alias line: {SAFER_RUNNING_ALIAS_LINE}",
+            )
+        )
+
+    for section in SAFER_RUNNING_BASICS_SECTIONS:
+        if heading_position(text, section) == -1:
+            findings.append(
+                Finding(
+                    path,
+                    "safer_running_missing_section",
+                    f"safer-running page section is missing: {section.removeprefix('## ')}",
+                )
+            )
 
     return findings
 
