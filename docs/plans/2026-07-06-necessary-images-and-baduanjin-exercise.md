@@ -59,14 +59,14 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ## Current Handoff Summary
 
-- Current milestone: M2
-- Current milestone state: review-requested
-- Last reviewed milestone: M1
-- Review status: M2 implementation complete; code-review pending
-- Remaining in-scope implementation milestones: M2 pending code-review, then M3, M4
-- Next stage: code-review M2
+- Current milestone: M3
+- Current milestone state: planned
+- Last reviewed milestone: M2
+- Review status: code-review M2 R1 closed M2 with no material findings
+- Remaining in-scope implementation milestones: M3, M4
+- Next stage: implement M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M2 code-review, M3-M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M3-M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
 
 ## Milestones
 
@@ -130,7 +130,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ### M2. Baduanjin Markdown Page
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Draft the static beginner-facing Baduanjin Basics page without generated images.
 - Requirements: R1-R20, R42-R43
 - Files/components likely touched:
@@ -161,6 +161,8 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - Aligned-surface audit:
   - Baduanjin generated assets, prompt records, and `media/PROVENANCE.md` rows are intentionally unchanged for M2; they belong to M3.
   - Visual-safety review, beginner-comprehension proof, and rollback proof are intentionally unchanged for M2; they belong to M4.
+- Code-review:
+  - Code-review M2 R1 closed M2 with no material findings.
 - Risks:
   - Content could drift into clinical, martial, lineage, or full-form instruction.
 - Rollback/recovery:
@@ -259,6 +261,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: CR-M1-001 resolution added focused forbidden-scope fixtures and returned M1 to code-review rereview.
 - 2026-07-06: Code-review R2 closed M1; next stage is M2 implementation.
 - 2026-07-06: M2 implementation added the text-only Baduanjin page, source audit, real-page tests, and exercise-image audit inventory row; milestone moved to code-review.
+- 2026-07-06: Code-review M2 R1 closed M2; next stage is M3 implementation.
 
 ## Decision log
 
