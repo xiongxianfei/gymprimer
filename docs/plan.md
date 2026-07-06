@@ -5,8 +5,8 @@
 - [Exercise Document Best-Practice Image Prioritization](plans/2026-07-06-exercise-document-best-practice-image-prioritization.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: verify
-  - Active context: Explain-change refreshed the durable rationale for the final reviewed M1-M3 diff; final verification is next.
+  - Current stage: pr
+  - Active context: final local verification passed with branch-ready evidence; PR handoff is next. Hosted CI has not been observed.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

@@ -60,9 +60,9 @@ It does not broaden the exercise-image standard's count policy.
 - Last reviewed milestone: M3
 - Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution; code-review M2 R2 closed M2 after CR-EDIP-M2-1 resolution; code-review M3 R1 closed M3.
 - Remaining in-scope implementation milestones: none
-- Next stage: verify
+- Next stage: pr
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: implementation milestones are closed and explain-change is complete; verify and PR handoff remain.
+- Reason final closeout is or is not ready: implementation milestones, explain-change, and final local verify are complete; PR handoff remains.
 
 ## Milestones
 
@@ -191,6 +191,7 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - 2026-07-06: M3 implemented review closeout proof for the zero-generated-image Bird Dog slice and routed to code-review M3.
 - 2026-07-06: Code-review M3 R1 closed M3; final closeout begins with explain-change.
 - 2026-07-06: Explain-change refreshed the durable rationale for the final reviewed M1-M3 diff; verify is next.
+- 2026-07-06: Final local verify passed with branch-ready evidence; PR handoff is next.
 
 ## Decision log
 
@@ -259,6 +260,11 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - Explain-change validation passed with `python3 tools/checks/check_privacy.py -- docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/explain-change.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/plan.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml`.
 - Explain-change state-sync inspection passed with `rg -n 'Current stage: verify|Next stage: verify|current_stage: verify|next_stage: verify|Explain-change refreshed|Ready for verify|open_findings: \\[\\]|review-resolution|Final verification has not run yet' docs/plan.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/explain-change.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/review-resolution.md`.
 - Explain-change validation passed with `git diff --check`.
+- Final verify passed with `python3 -m unittest discover -s tests`.
+- Final verify passed with `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`.
+- Final verify passed with `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans media exercises tools tests`.
+- Final verify passed with local CI-equivalent Markdown-first and privacy checks from `.github/workflows/ci.yml`.
+- Final verify passed with `git diff --check`.
 
 ## Outcome and retrospective
 
@@ -266,11 +272,12 @@ M1 is closed.
 M2 is closed.
 M3 is closed.
 Explain-change is complete.
+Final local verify is complete.
 
 ## Readiness
 
-Ready for verify.
-Not ready for PR handoff or final closeout completion.
+Ready for PR handoff.
+Not ready for final closeout completion.
 
 ## Sources
 

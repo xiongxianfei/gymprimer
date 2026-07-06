@@ -98,8 +98,8 @@ Local validation recorded before this explain-change stage includes:
 | Rollback worktree proof for `exercises/bird-dog.md` | passed Markdown-first and privacy checks |
 | `git diff --check` | passed after each milestone and review handoff |
 
-Hosted CI has not been observed for this change.
-Final verification has not run yet.
+Hosted CI had not been observed when explain-change was recorded.
+Final verification had not run yet when explain-change was recorded; later final verification evidence belongs in `verify-report.md`.
 
 ## Review Resolution Summary
 
@@ -148,7 +148,7 @@ The change preserves the approved non-goals:
 | Manual beginner-comprehension proof is qualitative. | Accepted for this slice because no generated image is promoted and final verify still remains. |
 | The audit helper validates structured records, while Markdown evidence is still partly manually reviewed. | Mitigated by code reviews and the CR-EDIP-M2-1 scoring-matrix fix. |
 | Remaining exercise documents still need their own page-specific audits. | Deferred to future slices; this change proves the first page-specific workflow. |
-| Final lifecycle gates remain. | Next stage is `verify`; PR readiness is not claimed. |
+| Final lifecycle gates remain. | `verify-report.md` records final local verify; PR body/open readiness is not claimed here. |
 
 ## Readiness
 
