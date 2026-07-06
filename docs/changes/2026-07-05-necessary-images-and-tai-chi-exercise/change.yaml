@@ -64,3 +64,5 @@ notes:
   - Code-review M4 R1 was clean with no material findings; all implementation milestones are closed and final closeout starts with explain-change.
   - Explain-change was refreshed for the final reviewed diff and routed the change to verify.
   - Final local verify passed with branch-ready evidence; PR handoff is next. Hosted CI has not been observed.
+  - PR #13 opened from `proposal/necessary-images-and-tai-chi-exercise` to `main`: https://github.com/xiongxianfei/gymprimer/pull/13
+  - GitHub Actions `Validation checks` is in progress for PR #13.

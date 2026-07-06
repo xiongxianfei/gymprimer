@@ -62,8 +62,8 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - Review status: M1, M2, M3, and M4 code-review clean
 - Remaining in-scope implementation milestones: none
 - Next stage: pr
-- Final closeout readiness: branch-ready-local
-- Reason final closeout is or is not ready: final local verify passed and PR handoff is next; hosted CI has not been observed.
+- Final closeout readiness: pr-opened-ci-pending
+- Reason final closeout is or is not ready: PR #13 is open and GitHub Actions `Validation checks` is in progress; review, CI completion, merge, and closeout remain.
 
 ## Milestones
 
@@ -267,6 +267,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Code-review M4 R1 was clean with no material findings; all implementation milestones are closed and final closeout is next.
 - 2026-07-06: Refreshed `explain-change.md` for the final reviewed diff and routed the change to verify.
 - 2026-07-06: Final local verify passed with branch-ready evidence and routed the change to PR handoff.
+- 2026-07-06: Opened PR #13 from `proposal/necessary-images-and-tai-chi-exercise` to `main`; GitHub Actions `Validation checks` is in progress.
 
 ## Decision log
 
@@ -338,4 +339,4 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 ## Readiness
 
 - See `Current Handoff Summary`.
-- PR handoff is next. Hosted CI has not been observed for this branch.
+- PR #13 is open. GitHub Actions `Validation checks` is in progress.
