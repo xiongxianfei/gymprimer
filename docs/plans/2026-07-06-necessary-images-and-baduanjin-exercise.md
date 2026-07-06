@@ -60,13 +60,13 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: review-requested
-- Last reviewed milestone: M3
-- Review status: M4 implementation complete; code-review pending
-- Remaining in-scope implementation milestones: M4 pending code-review
-- Next stage: code-review M4
+- Current milestone state: resolution-needed
+- Last reviewed milestone: M4
+- Review status: code-review M4 R1 requested changes for CR-M4-001
+- Remaining in-scope implementation milestones: M4 resolution
+- Next stage: review-resolution for CR-M4-001
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M4 code-review, final holistic review if required, final verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M4 has an unresolved rollback-proof finding, and final holistic review, final verification, and PR handoff have not happened.
 
 ## Milestones
 
@@ -223,7 +223,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ### M4. Review Evidence and Final Local Readiness
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: Record manual visual-safety review, beginner comprehension proof, rollback proof, and final local validation evidence.
 - Requirements: R40-R43
 - Files/components likely touched:
@@ -260,6 +260,8 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
   - `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` passed: checked 28 files.
 - Aligned-surface audit:
   - No generated asset, prompt-record, provenance, or page-reference changes were needed for M4.
+- Code-review:
+  - Finding CR-M4-001 requires the rollback proof to record a reproducible temporary-root command sequence and rerun the focused rollback Markdown-first and privacy checks.
 - Risks:
   - Beginner comprehension proof could be too vague or store private health information.
 - Rollback/recovery:
@@ -305,6 +307,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: M3 implementation added the governed first image batch, prompt records, provenance rows, page references, visual-safety review, and real-page media tests; milestone moved to code-review.
 - 2026-07-06: Code-review M3 R1 closed M3; next stage is M4 implementation.
 - 2026-07-06: M4 implementation added beginner-comprehension proof, rollback proof, proof-record tests, temporary rollback validation, and final local validation evidence; milestone moved to code-review.
+- 2026-07-06: Code-review M4 R1 requested changes for CR-M4-001; M4 moved to review-resolution.
 
 ## Decision log
 

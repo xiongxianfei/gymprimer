@@ -5,8 +5,8 @@
 - [Necessary Images and Baduanjin Exercise](plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M4 implementation added beginner-comprehension and rollback proof; M4 code-review is next.
+  - Current stage: review-resolution
+  - Active context: Code-review M4 R1 requested changes for CR-M4-001; M4 rollback proof command evidence needs correction.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

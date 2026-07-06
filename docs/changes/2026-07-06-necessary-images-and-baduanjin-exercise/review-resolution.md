@@ -2,13 +2,14 @@
 
 ## Status
 
-M1 review-resolution complete; code-review R2 closed M1.
+M4 review-resolution required for CR-M4-001.
 
 ## Findings
 
 | Finding | Status | Resolution |
 |---|---|---|
 | CR-M1-001 | resolved by `reviews/code-review-r2.md` | Added focused Baduanjin forbidden-scope fixtures for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording. |
+| CR-M4-001 | open | Rollback proof must record a reproducible temporary-root command sequence and rerun the focused rollback checks. |
 
 ## CR-M1-001
 
@@ -32,8 +33,19 @@ Validation:
 | `python3 -m unittest discover -s tests` | pass: 175 tests |
 | `git diff --check` | pass |
 
+## CR-M4-001
+
+Source review: `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/code-review-m4-r1.md`
+
+Required outcome: M4 rollback evidence must record a reproducible temporary-root command sequence that matches the command actually exercised, and the focused rollback Markdown-first and privacy checks must pass from that recorded sequence.
+
+Resolution: pending.
+
+Validation: pending.
+
 ## Sources
 
 - [Code review R1](reviews/code-review-r1.md)
+- [Code review M4 R1](reviews/code-review-m4-r1.md)
 - [Necessary Images and Baduanjin Exercise test spec](../../../specs/necessary-images-and-baduanjin-exercise.test.md)
 - [Necessary Images and Baduanjin Exercise plan](../../plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)
