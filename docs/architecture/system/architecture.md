@@ -36,6 +36,8 @@ The brisk-walking and everyday-walking guidance amendment was approved by
 `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r1.md`.
 The required brisk-walking media amendment was approved by
 `docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r2.md`.
+The Tai Chi Basics image-priority amendment was approved by
+`docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/architecture-review-r1.md`.
 
 ## Related artifacts
 
@@ -94,6 +96,12 @@ The required brisk-walking media amendment was approved by
     `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/proposal-review-r3.md`
   - Amended spec review:
     `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r3.md`
+- Necessary images and Tai Chi exercise:
+  - Proposal:
+    `../../proposals/2026-07-05-necessary-images-and-tai-chi-exercise.md`
+  - Spec: `../../../specs/necessary-images-and-tai-chi-exercise.md`
+  - Spec review:
+    `../../changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/spec-review-r1.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
@@ -140,6 +148,9 @@ Goals:
   distinguishing deliberate non-equipment cardio activity from daily movement
   habits without introducing a tracker, calculator, walking program, or adaptive
   plan.
+- Add Tai Chi Basics as a static beginner exercise page with a ranked
+  page-local image candidate pool and exactly three first-batch generated
+  support images.
 - Preserve old platform artifacts as historical context without treating them as active implementation guidance.
 
 ## Architecture Constraints
@@ -183,6 +194,11 @@ Goals:
   walking spec requires exactly one `exercise_movement_illustration` and one
   `exercise_muscle_attention_illustration` for `exercises/brisk-walking.md`;
   `principles/everyday-walking.md` remains text-only.
+- The Tai Chi Basics spec requires a ranked top-10 image candidate pool for
+  `exercises/tai-chi-basics.md` and selects exactly three first-batch generated
+  support images: setup, weight shift, and broad muscle attention. Candidates
+  4-10 are deferred alternatives or replacement candidates, not approval to
+  publish a fourth image without downstream approved exception justification.
 - New generated raster images on full exercise documents use setup, movement,
   or muscle-attention purposes. Existing exercise images that use
   `equipment_identification` or `key_movement_illustration` remain valid
@@ -369,6 +385,13 @@ Logical containers:
   movement image and one muscle-attention image. Each asset is governed by the
   exercise-image purpose, prompt-record, provenance, alt-text, page-reference,
   and visual-safety architecture.
+- **Tai Chi Basics exercise media**: `exercises/tai-chi-basics.md` requires a
+  ranked page-local pool of ten image candidates and exactly three first-batch
+  generated raster support assets under `media/exercises/tai-chi-basics/`:
+  `setup.png`, `weight-shift.png`, and `muscle-attention.png`. These assets are
+  governed by the existing exercise-image purpose, prompt-record, provenance,
+  alt-text, page-reference, visual-safety, and beginner-comprehension evidence
+  architecture.
 - **Everyday walking principle page**: `principles/everyday-walking.md` is a
   daily movement and sitting-interruption principle page. It is linked
   conceptually to brisk walking but does not treat every step as formal cardio.
@@ -626,6 +649,33 @@ Basic cardio activity authoring flow:
    raster prompt-record architecture governs path, purpose, provenance, prompt
    records, alt text, page references, and visual-safety evidence. The everyday
    walking principle page remains text-only in the first slice.
+
+Tai Chi Basics authoring and media flow:
+
+1. A contributor drafts `exercises/tai-chi-basics.md` under the Tai Chi spec.
+2. The page keeps the full exercise-page contract, teaches only beginner ready
+   stance, weight shift, simple opening movement, and return to quiet standing,
+   and adds `## How much to do` with
+   `Method type: low_load_control_drill`.
+3. Change-local planning or test evidence records the top-10 image candidate
+   pool for the Tai Chi Basics page before image generation starts.
+4. The first image batch references exactly three generated raster support
+   assets under `media/exercises/tai-chi-basics/`: `setup.png`,
+   `weight-shift.png`, and `muscle-attention.png`.
+5. Candidates 4-10 may replace one selected image in a later reviewed revision,
+   but a fourth page image requires explicit downstream approved spec or plan
+   justification before implementation.
+6. Each generated Tai Chi asset has a matching
+   `media/prompts/exercises/tai-chi-basics/<asset-stem>.md` prompt record and
+   an approved `media/PROVENANCE.md` row with `page_refs` including
+   `exercises/tai-chi-basics.md`.
+7. Visual-safety review and beginner-comprehension proof record whether the
+   images remain non-clinical, support-only, non-identifying, aligned with
+   nearby Markdown, and useful for understanding posture, weight shift, body
+   feel, and stop conditions.
+8. The rollback path removes failed image references, unused assets, prompt
+   records, and provenance rows while preserving a valid text-only Tai Chi
+   Basics page.
 
 Exercise muscle guidance authoring flow:
 
@@ -1003,6 +1053,7 @@ deployment architecture.
 | Exercise image purpose | A new generated raster image is referenced from a full exercise document. | The provenance row uses `exercise_setup_illustration`, `exercise_movement_illustration`, or `exercise_muscle_attention_illustration` according to the teaching purpose. |
 | Brisk walking required media | `exercises/brisk-walking.md` is promoted under the amended walking spec. | The page references exactly one movement image and one muscle-attention image, both repository-local, approved in provenance, linked to prompt records, visually reviewed, and subordinate to Markdown. |
 | Exercise image count | A full exercise document references exercise images. | The page uses zero to three exercise images unless a downstream approved spec or plan records an exception, and it uses at most one muscle-attention image. |
+| Tai Chi required media | `exercises/tai-chi-basics.md` is promoted under the Tai Chi spec. | The page records a ten-candidate image pool and references exactly three first-batch support images, all repository-local, approved in provenance, linked to prompt records, visually reviewed, beginner-tested, and subordinate to Markdown. |
 | Exercise visual safety | A full exercise document references an exercise image. | Review evidence confirms one-concept teaching purpose, Markdown consistency, no in-image labels or claims, no identifying person or misleading brand, no clinical framing, and color-accessibility. |
 | Existing exercise image compatibility | An existing exercise page references a raster image with `equipment_identification` or `key_movement_illustration`. | The image remains valid without media-purpose migration when its provenance row is otherwise valid. |
 | Page classification | An expanded static content page is reviewed. | Its path maps to exactly one page class or the page declares one equivalent class before promotion. |
@@ -1059,6 +1110,12 @@ deployment architecture.
 - Exercise muscle-attention images may imply overprecise anatomy or corrective
   treatment if prompted or reviewed poorly; broad-region limits and
   support-only review evidence remain mandatory.
+- Tai Chi support images may imply martial instruction, therapy,
+  fall-prevention treatment, exact form correctness, or a fourth-image
+  exception if the candidate pool is mistaken for an asset list. The
+  architecture keeps Tai Chi images under the existing three-image exercise
+  limit, requires non-clinical visual review, and treats candidates 4-10 as
+  deferred alternatives unless a downstream approved exception exists.
 - Adding exercise-specific purpose values increases provenance enum complexity;
   tests must keep legacy exercise purposes compatible while restricting new
   generated raster exercise images to setup, movement, or muscle attention.
