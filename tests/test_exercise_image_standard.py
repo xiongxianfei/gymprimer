@@ -91,6 +91,38 @@ BADUANJIN_ASSETS = (
         "Baduanjin muscle-attention image showing broad leg trunk shoulder upper-back foot and ankle regions",
     ),
 )
+SAFER_RUNNING_ASSETS = (
+    (
+        "posture",
+        "exercise_movement_illustration",
+        "Safer running posture image showing tall posture and relaxed arm swing",
+    ),
+    (
+        "landing",
+        "exercise_movement_illustration",
+        "Safer running landing image showing the foot close to the body with a short quiet stride",
+    ),
+    (
+        "run-walk",
+        "exercise_movement_illustration",
+        "Safer running run-walk image showing easy running and walking recovery",
+    ),
+    (
+        "warm-up",
+        "exercise_movement_illustration",
+        "Safer running warm-up image showing walking easy jogging and dynamic preparation",
+    ),
+    (
+        "muscle-attention",
+        "exercise_muscle_attention_illustration",
+        "Safer running muscle-attention image showing broad glute thigh calf foot ankle trunk and shoulder regions",
+    ),
+    (
+        "overstride-comparison",
+        "exercise_movement_illustration",
+        "Safer running overstride comparison image showing an overreaching step beside a shorter neutral step",
+    ),
+)
 
 
 def run_check_with_root(root: Path, *paths: Path) -> subprocess.CompletedProcess[str]:
@@ -287,7 +319,95 @@ def write_baduanjin_image_fixture(root: Path, assets: tuple[tuple[str, str, str]
     return write_exercise_page(root, "\n".join(image_blocks), slug="baduanjin-basics")
 
 
+def write_safer_running_image_fixture(root: Path, assets: tuple[tuple[str, str, str], ...] = SAFER_RUNNING_ASSETS) -> Path:
+    rows = []
+    image_blocks = []
+    for stem, purpose, alt_text in assets:
+        asset_path = f"media/exercises/safer-running-basics/{stem}.png"
+        prompt_record = f"media/prompts/exercises/safer-running-basics/{stem}.md"
+        write_asset(root, asset_path)
+        rows.append(
+            {
+                "asset_path": asset_path,
+                "media_purpose": purpose,
+                "prompt_record": prompt_record,
+                "page_refs": "exercises/safer-running-basics.md",
+            }
+        )
+        image_blocks.append(f"![{alt_text}](../{asset_path})")
+    write_provenance(root, rows)
+    return write_exercise_page(root, "\n".join(image_blocks), slug="safer-running-basics")
+
+
 class ExerciseImageStandardTest(unittest.TestCase):
+    def test_safer_running_first_batch_six_images_passes_with_path_scoped_exception(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_safer_running_image_fixture(root)
+
+            result = run_check_with_root(root, page)
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_safer_running_seventh_image_second_muscle_and_unapproved_asset_fail(self) -> None:
+        seventh_image_assets = SAFER_RUNNING_ASSETS + (
+            (
+                "shoes",
+                "exercise_setup_illustration",
+                "Safer running shoe and clothing setup image showing simple running gear",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_safer_running_image_fixture(root, seventh_image_assets)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_count_exceeded", result.stdout)
+        self.assertIn("exercise_image_unapproved_exception_asset", result.stdout)
+
+        second_muscle_assets = SAFER_RUNNING_ASSETS + (
+            (
+                "second-muscle-attention",
+                "exercise_muscle_attention_illustration",
+                "Safer running second muscle-attention image showing another broad body-region reference",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_safer_running_image_fixture(root, second_muscle_assets)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_count_exceeded", result.stdout)
+        self.assertIn("exercise_muscle_attention_limit", result.stdout)
+
+        unapproved_within_limit = SAFER_RUNNING_ASSETS[:5] + (
+            (
+                "shoes",
+                "exercise_setup_illustration",
+                "Safer running shoe and clothing setup image showing simple running gear",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_safer_running_image_fixture(root, unapproved_within_limit)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_unapproved_exception_asset", result.stdout)
+
     def test_baduanjin_candidate_pool_records_deferred_alternatives(self) -> None:
         evidence = (ROOT / "docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/image-candidate-pool.md").read_text(encoding="utf-8")
 

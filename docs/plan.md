@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
+  - Status: reviewed
+  - Plan lifecycle state: active
+  - Current stage: code-review
+  - Active context: M1 validation/checker implementation is review-requested; proposal-review R1, spec-review R1, plan-review R1, and test-spec-review R1 approved; architecture assessment recorded `architecture-not-required`.
+
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active
@@ -94,5 +100,7 @@
 ## Sources
 
 - `docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md`
+- `docs/plans/2026-07-06-safer-running-basics-and-running-images.md`
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/review-log.md`
 - `docs/workflows.md`

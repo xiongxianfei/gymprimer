@@ -175,6 +175,22 @@ class ExerciseMethodGuidanceTest(unittest.TestCase):
         self.assertEqual(finding_codes(text, "exercises/brisk-walking.md"), [])
         self.assertIn("exercise_method_inactive_type", finding_codes(text, "exercises/fixture-exercise.md"))
 
+    def test_basic_cardio_activity_passes_for_safer_running_scope(self) -> None:
+        text = method_page(
+            """\
+            ## How much to do
+
+            Method type: basic_cardio_activity
+
+            Beginner starting point: Try 10-20 minutes total with short easy running intervals and walking breaks.
+            Effort: Keep the running portions easy enough that you could speak in short sentences.
+            Progression: First make running feel smoother, then add a little total time.
+            Stop if: Stop for chest pain, dizziness, unusual shortness of breath, sharp pain, or worsening symptoms.
+            """
+        )
+
+        self.assertEqual(finding_codes(text, "exercises/safer-running-basics.md"), [])
+
     def test_basic_cardio_activity_requires_visible_cardio_labels(self) -> None:
         text = method_page(
             """\

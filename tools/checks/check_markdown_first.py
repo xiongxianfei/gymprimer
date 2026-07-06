@@ -155,6 +155,7 @@ EXERCISE_METHOD_BASIC_CARDIO_PATHS = {
 }
 EXERCISE_METHOD_BASIC_CARDIO_ACTIVITY_PATHS = {
     "exercises/brisk-walking.md",
+    "exercises/safer-running-basics.md",
 }
 EXERCISE_METHOD_REQUIRED_LABEL_GROUPS = (
     ("Beginner starting point:",),
@@ -290,6 +291,17 @@ PROMPT_RECORD_COMPATIBILITY_NOTE = "M3 pre-amendment prompt unavailable; compati
 DEFAULT_EXERCISE_IMAGE_LIMIT = 3
 EXERCISE_IMAGE_LIMIT_EXCEPTIONS = {
     "exercises/baduanjin-basics.md": 5,
+    "exercises/safer-running-basics.md": 6,
+}
+EXERCISE_IMAGE_EXCEPTION_ALLOWED_ASSETS = {
+    "exercises/safer-running-basics.md": {
+        "media/exercises/safer-running-basics/posture.png",
+        "media/exercises/safer-running-basics/landing.png",
+        "media/exercises/safer-running-basics/run-walk.png",
+        "media/exercises/safer-running-basics/warm-up.png",
+        "media/exercises/safer-running-basics/muscle-attention.png",
+        "media/exercises/safer-running-basics/overstride-comparison.png",
+    },
 }
 PROMPT_RECORD_COMPATIBILITY_ASSETS = {
     "media/exercises/chin-nod/muscle-attention.png",
@@ -902,6 +914,7 @@ def validate_exercise_image_summary(
         )
 
     muscle_attention_count = 0
+    allowed_exception_assets = EXERCISE_IMAGE_EXCEPTION_ALLOWED_ASSETS.get(page_ref or "")
     for match in image_matches:
         target = match.group(2).strip()
         if is_remote_media_reference(target) or Path(target).is_absolute() or target.startswith("/"):
@@ -909,6 +922,14 @@ def validate_exercise_image_summary(
         asset_path = repo_relative_path((page_path.parent / target).resolve(), root)
         if asset_path is None:
             continue
+        if allowed_exception_assets is not None and asset_path not in allowed_exception_assets:
+            findings.append(
+                Finding(
+                    page_path,
+                    "exercise_image_unapproved_exception_asset",
+                    f"exercise image exception for {page_ref} only allows approved first-batch assets: {asset_path}",
+                )
+            )
         rows = provenance_rows.get(asset_path, [])
         if len(rows) == 1 and rows[0].get("media_purpose", "").strip() == "exercise_muscle_attention_illustration":
             muscle_attention_count += 1
