@@ -1,6 +1,6 @@
 change_id: 2026-07-06-necessary-images-and-baduanjin-exercise
 status: active
-current_stage: code-review
+current_stage: explain-change
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-necessary-images-and-baduanjin-exercise.md
@@ -25,11 +25,11 @@ current_test_spec: specs/necessary-images-and-baduanjin-exercise.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md
 
-current_milestone: M4
+current_milestone: final holistic code-review
 current_milestone_state: closed
-last_reviewed_milestone: M4
+last_reviewed_milestone: final holistic code-review
 
-next_stage: final-closeout
+next_stage: explain-change
 
 open_findings: []
 
@@ -71,4 +71,5 @@ notes:
   - CR-M4-001 resolution replaced the wildcard rollback evidence with concrete temporary-root commands for `/tmp/gymprimer-baduanjin-rollback.cr-m4-001` and reran focused rollback Markdown-first and privacy checks.
   - CR-M4-001 resolution validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup`, concrete temporary rollback Markdown-first and privacy checks, `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, full Markdown-first and privacy checks, and `git diff --check`.
   - Code-review M4 R2 closed CR-M4-001 and M4 with no material findings.
-  - Current handoff is final closeout; final verification and PR readiness are not claimed.
+  - Final holistic code-review R1 passed with no material findings.
+  - Current handoff is explain-change; final verification and PR readiness are not claimed.

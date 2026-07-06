@@ -13,6 +13,7 @@
 | 2026-07-06 | code-review M3 | 1 | clean-with-notes | `reviews/code-review-m3-r1.md` | none | M3 governed image batch is closed; next stage is M4 implementation. |
 | 2026-07-06 | code-review M4 | 1 | changes-requested | `reviews/code-review-m4-r1.md` | CR-M4-001 | M4 rollback proof records wildcard temp-root commands as passing, but the recorded Markdown-first command fails when run literally. |
 | 2026-07-06 | code-review M4 | 2 | clean-with-notes | `reviews/code-review-m4-r2.md` | none | CR-M4-001 is resolved; M4 is closed and final closeout is next. |
+| 2026-07-06 | final holistic code-review | 1 | clean-with-notes | `reviews/code-review-final-r1.md` | none | Complete branch diff is clean; next stage is explain-change. |
 
 ## Sources
 
@@ -27,4 +28,5 @@
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/code-review-m3-r1.md`
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/code-review-m4-r1.md`
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/code-review-m4-r2.md`
+- `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/code-review-final-r1.md`
 - `docs/proposals/2026-07-06-necessary-images-and-baduanjin-exercise.md`
