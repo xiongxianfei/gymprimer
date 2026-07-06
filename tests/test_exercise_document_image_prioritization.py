@@ -125,6 +125,12 @@ class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
         automatic_top_five = valid_audit_record(
             candidate_table=[candidate(rank, disposition="automatic_generation") for rank in range(1, 6)]
         )
+        generate_now_top_five = valid_audit_record(
+            candidate_table=[candidate(rank, disposition="generate_now") for rank in range(1, 6)]
+        )
+        first_generation_top_five = valid_audit_record(
+            candidate_table=[candidate(rank, disposition="first_generation_candidate") for rank in range(1, 6)]
+        )
         sixth_without_rationale = valid_audit_record(
             candidate_table=[
                 *[candidate(rank) for rank in range(1, 6)],
@@ -133,6 +139,8 @@ class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
         )
 
         self.assertIn("top_five_candidate_must_not_be_automatic_generation: rank 1", validate_audit_record(automatic_top_five))
+        self.assertIn("top_five_candidate_must_not_select_generation_directly: rank 1", validate_audit_record(generate_now_top_five))
+        self.assertIn("top_five_candidate_must_not_select_generation_directly: rank 1", validate_audit_record(first_generation_top_five))
         self.assertIn("sixth_candidate_generation_missing_churn_rationale: rank 6", validate_audit_record(sixth_without_rationale))
 
     def test_style_only_replacement_fails_but_concrete_replacement_reason_passes(self) -> None:

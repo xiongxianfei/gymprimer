@@ -130,6 +130,8 @@ def validate_candidate_table(candidate_table: Sequence[object], record: Mapping[
         disposition = str(raw_candidate.get("disposition", ""))
         if isinstance(rank, int) and rank <= 5 and disposition == "automatic_generation":
             errors.append(f"top_five_candidate_must_not_be_automatic_generation: rank {rank}")
+        elif isinstance(rank, int) and rank <= 5 and disposition in GENERATE_DISPOSITIONS:
+            errors.append(f"top_five_candidate_must_not_select_generation_directly: rank {rank}")
         if isinstance(rank, int) and rank > 5 and disposition in GENERATE_DISPOSITIONS:
             if not raw_candidate.get("downstream_churn_rationale"):
                 errors.append(f"sixth_candidate_generation_missing_churn_rationale: rank {rank}")

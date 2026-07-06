@@ -25,7 +25,7 @@ current_test_spec_review: docs/changes/2026-07-06-exercise-document-best-practic
 
 current_milestone: M1
 current_milestone_state: review-requested
-last_reviewed_milestone: none
+last_reviewed_milestone: M1
 next_stage: code-review
 
 open_findings: []
@@ -51,3 +51,7 @@ notes:
   - M1 implemented focused audit inventory and proof-contract tests, the pure audit helper, M1 audit criteria evidence, and lifecycle state updates.
   - M1 validation passed locally: `python3 -m unittest tests.test_exercise_document_image_prioritization`, `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`, `python3 tools/checks/check_privacy.py -- docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests`, and `git diff --check`.
   - M1 state-sync and broader changed-artifact Markdown/privacy checks passed locally before code-review handoff.
+  - Code-review M1 R1 requested changes for CR-EDIP-M1-1 because top-five generation dispositions can bypass backlog semantics.
+  - Review-resolution addressed CR-EDIP-M1-1 by adding top-five `generate_now` and `first_generation_candidate` tests and rejecting direct top-five generation dispositions in the audit validator.
+  - CR-EDIP-M1-1 resolution validation passed locally: `python3 -m unittest tests.test_exercise_document_image_prioritization`, `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`, `python3 tools/checks/check_privacy.py -- docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests`, and `git diff --check`.
+  - CR-EDIP-M1-1 state-sync and broader changed-artifact Markdown/privacy checks passed locally before M1 code-review re-review handoff.
