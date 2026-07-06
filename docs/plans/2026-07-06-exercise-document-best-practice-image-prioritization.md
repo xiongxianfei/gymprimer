@@ -2,9 +2,9 @@
 
 ## Status
 
-- Status: active
-- Plan lifecycle state: active
-- Terminal disposition: not-applicable
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed by PR #15
 
 ## Purpose / big picture
 
@@ -56,13 +56,13 @@ It does not broaden the exercise-image standard's count policy.
 ## Current Handoff Summary
 
 - Current milestone: Lifecycle Closeout
-- Current milestone state: planned
+- Current milestone state: completed
 - Last reviewed milestone: M3
 - Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution; code-review M2 R2 closed M2 after CR-EDIP-M2-1 resolution; code-review M3 R1 closed M3.
 - Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: not ready
-- Reason final closeout is or is not ready: implementation milestones, explain-change, final local verify, and PR opening are complete; hosted CI, author review, and lifecycle cleanup remain.
+- Next stage: none
+- Final closeout readiness: complete
+- Reason final closeout is or is not ready: implementation milestones, explain-change, final local verify, CI validation, PR handoff, merge, and lifecycle cleanup are complete.
 
 ## Milestones
 
@@ -193,6 +193,7 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - 2026-07-06: Explain-change refreshed the durable rationale for the final reviewed M1-M3 diff; verify is next.
 - 2026-07-06: Final local verify passed with branch-ready evidence; PR handoff is next.
 - 2026-07-06: PR #15 opened from `proposal/exercise-document-image-prioritization` to `main`; GitHub Actions `Validation checks` is in progress.
+- 2026-07-06: PR #15 merged with GitHub Actions `Validation checks` passing; lifecycle cleanup marked the change complete.
 
 ## Decision log
 
@@ -274,11 +275,13 @@ M2 is closed.
 M3 is closed.
 Explain-change is complete.
 Final local verify is complete.
+PR handoff is complete.
+CI validation is complete.
+Merge and lifecycle cleanup are complete.
 
 ## Readiness
 
-PR handoff is open.
-Not ready for final closeout completion.
+Completed by PR #15.
 
 ## Sources
 

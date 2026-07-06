@@ -2,12 +2,6 @@
 
 ## Active
 
-- [Exercise Document Best-Practice Image Prioritization](plans/2026-07-06-exercise-document-best-practice-image-prioritization.md)
-  - Status: active
-  - Plan lifecycle state: active
-  - Current stage: pr
-  - Active context: PR #15 opened from `proposal/exercise-document-image-prioritization` to `main`; GitHub Actions `Validation checks` is in progress.
-
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active
@@ -32,6 +26,12 @@
   - Active context: retained only as historical context for the structured-platform implementation path; it is not active execution guidance.
 
 ## Done (recent)
+
+- [Exercise Document Best-Practice Image Prioritization](plans/2026-07-06-exercise-document-best-practice-image-prioritization.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #15
+  - Active context: proposal/spec/architecture assessment/plan/test-spec review, M1-M3, explain-change, final local verification, CI validation, PR handoff, and merge/closeout are complete.
 
 - [Necessary Images and Baduanjin Exercise](plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)
   - Status: completed

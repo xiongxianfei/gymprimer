@@ -1,6 +1,6 @@
 change_id: 2026-07-06-exercise-document-best-practice-image-prioritization
-status: active
-current_stage: pr
+status: completed
+current_stage: done
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md
@@ -15,7 +15,7 @@ architecture_assessment: architecture-not-required
 architecture_assessment_record: docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/architecture-assessment.md
 
 current_plan: docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md
-current_plan_status: active
+current_plan_status: completed
 current_plan_review: docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/plan-review-r1.md
 plan_index: docs/plan.md
 
@@ -25,10 +25,11 @@ current_test_spec_review: docs/changes/2026-07-06-exercise-document-best-practic
 current_verification: docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/verify-report.md
 
 current_milestone: Lifecycle Closeout
-current_milestone_state: planned
+current_milestone_state: completed
 last_reviewed_milestone: M3
 pull_request: https://github.com/xiongxianfei/gymprimer/pull/15
-next_stage: pr
+merge_commit: a8b30d0ab4e2716e974cb09b4fa68c16951291cf
+next_stage: none
 
 open_findings: []
 
@@ -76,3 +77,6 @@ notes:
   - Explain-change validation passed locally: Markdown-first, privacy, state-sync inspection, and `git diff --check`.
   - Final local verify passed with branch-ready evidence in `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/verify-report.md`; hosted CI has not been observed.
   - PR #15 opened from `proposal/exercise-document-image-prioritization` to `main`; GitHub Actions `Validation checks` is in progress.
+  - PR #15 merged on 2026-07-06 with merge commit `a8b30d0ab4e2716e974cb09b4fa68c16951291cf`.
+  - GitHub Actions `Validation checks` completed successfully for PR #15 before merge.
+  - Lifecycle cleanup marked the change complete on `main`.
