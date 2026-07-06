@@ -61,9 +61,9 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - Last reviewed milestone: M4
 - Review status: M1, M2, M3, and M4 code-review clean
 - Remaining in-scope implementation milestones: none
-- Next stage: final closeout
+- Next stage: verify
 - Final closeout readiness: ready-to-start
-- Reason final closeout is or is not ready: all implementation milestones are closed; explain-change, final verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: all implementation milestones are closed and explain-change is refreshed; final verification and PR handoff have not happened.
 
 ## Milestones
 
@@ -265,6 +265,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Code-review M3 R1 was clean with no material findings; M3 closed and routed to implementation M4.
 - 2026-07-06: Implemented M4 by adding proof checks, beginner-comprehension proof, text-only rollback proof, final validation notes, and a non-destructive temporary rollback rehearsal.
 - 2026-07-06: Code-review M4 R1 was clean with no material findings; all implementation milestones are closed and final closeout is next.
+- 2026-07-06: Refreshed `explain-change.md` for the final reviewed diff and routed the change to verify.
 
 ## Decision log
 
@@ -336,4 +337,4 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Final closeout is ready to start with explain-change, followed by final verification and PR handoff if verification passes.
+- Verify is next. PR handoff should happen only if final verification passes.
