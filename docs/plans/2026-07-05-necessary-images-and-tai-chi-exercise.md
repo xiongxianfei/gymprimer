@@ -56,14 +56,14 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: review-requested
-- Last reviewed milestone: M2
-- Review status: M1 and M2 code-review clean; M3 implemented and awaiting code-review
-- Remaining in-scope implementation milestones: M3, M4
-- Next stage: code-review M3
+- Current milestone: M4
+- Current milestone state: planned
+- Last reviewed milestone: M3
+- Review status: M1, M2, and M3 code-review clean
+- Remaining in-scope implementation milestones: M4
+- Next stage: implement M4
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M3 has not passed code-review, M4 is not implemented, and final verification and PR handoff have not happened.
+- Reason final closeout is or is not ready: M4 is not implemented, and final verification and PR handoff have not happened.
 
 ## Milestones
 
@@ -146,7 +146,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ### M3. Governed First Image Batch
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Generate and promote exactly three Tai Chi support images through the governed media workflow.
 - Requirements: R20-R40, R43
 - Files/components likely touched:
@@ -261,6 +261,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Implemented M2 by adding the text-only `exercises/tai-chi-basics.md` page, Tai Chi source IDs in `SOURCES.md`, MP1 source-audit evidence, real-page tests, and the aligned text-only row in the existing exercise-image audit.
 - 2026-07-06: Code-review M2 R1 was clean with no material findings; M2 closed and routed to implementation M3.
 - 2026-07-06: Implemented M3 by generating three Tai Chi support images through the built-in imagegen path, adding workspace assets, exact prompt records, approved provenance rows, page image references, real-asset tests, and visual-safety review evidence.
+- 2026-07-06: Code-review M3 R1 was clean with no material findings; M3 closed and routed to implementation M4.
 
 ## Decision log
 
@@ -310,12 +311,13 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - `du -h media/exercises/tai-chi-basics/*.png` reported `setup.png` 1.9M, `weight-shift.png` 1.6M, and `muscle-attention.png` 1.8M.
 - `python3 -m pytest` could not run because `pytest` is not installed: `/usr/bin/python3: No module named pytest`.
 - `git diff --check` passed.
+- Code-review M3 reviewer rerun passed: focused M3 image test, Markdown-first check, privacy check, full unittest discovery, and manual visual inspection of the three generated images.
 
 ## Outcome and retrospective
 
-- M3 implementation is complete and pending code-review.
+- M3 is closed after clean code-review; M4 is pending implementation.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M3 is ready for code-review.
+- M4 is ready for implementation.

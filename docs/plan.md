@@ -5,8 +5,8 @@
 - [Necessary Images and Tai Chi Exercise](plans/2026-07-05-necessary-images-and-tai-chi-exercise.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M3 governed first image batch is implemented and ready for code-review.
+  - Current stage: implement
+  - Active context: M3 governed first image batch passed code-review; M4 review evidence and final local readiness is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
