@@ -55,20 +55,20 @@ It does not broaden the exercise-image standard's count policy.
 
 ## Current Handoff Summary
 
-- Current milestone: M1
-- Current milestone state: review-requested
-- Last reviewed milestone: none
-- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 requested changes for CR-EDIP-M1-1; review-resolution addressed CR-EDIP-M1-1 and M1 is awaiting code-review re-review.
-- Remaining in-scope implementation milestones: M1, M2, M3
-- Next stage: code-review M1 re-review
+- Current milestone: M2
+- Current milestone state: planned
+- Last reviewed milestone: M1
+- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution.
+- Remaining in-scope implementation milestones: M2, M3
+- Next stage: implement M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 fix is implemented but not re-reviewed; M2, M3, explain-change refresh, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M2 and M3 remain unimplemented; explain-change refresh, verify, and PR handoff remain.
 
 ## Milestones
 
 ### M1. Audit Inventory and Proof Contract
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: add or update tests and evidence surfaces for the evaluation population, page-local audit fields, top-10 candidate table, top-five backlog semantics, and older-image replacement reasons.
 - Requirements: R1-R9, R19-R22, AC1-AC3, AC5.
 - Likely files:
@@ -91,7 +91,7 @@ It does not broaden the exercise-image standard's count policy.
   - `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
   - `python3 tools/checks/check_privacy.py -- docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests`
   - `git diff --check`
-- Result: Implemented. Code-review M1 R1 requested changes for CR-EDIP-M1-1; review-resolution added focused top-five `generate_now` and `first_generation_candidate` tests and tightened validation. M1 is ready for code-review re-review.
+- Result: Closed by code-review M1 R2 after CR-EDIP-M1-1 resolution.
 - Risks: audit helper over-specifies the first slice or accidentally treats five images as required.
 - Rollback: remove the focused helper/tests/evidence and leave exercise content and media unchanged.
 
@@ -183,6 +183,7 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - 2026-07-06: M1 implemented audit inventory and proof-contract helper/tests, recorded change-local audit criteria and current evaluation population, and routed to code-review M1.
 - 2026-07-06: Code-review M1 R1 requested changes for CR-EDIP-M1-1; M1 routes to review-resolution.
 - 2026-07-06: Review-resolution addressed CR-EDIP-M1-1 by rejecting top-five direct generation dispositions and adding focused tests; M1 routed back to code-review.
+- 2026-07-06: Code-review M1 R2 confirmed CR-EDIP-M1-1 resolved, closed M1, and routed to implement M2.
 
 ## Decision log
 
@@ -213,13 +214,13 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 
 ## Outcome and retrospective
 
-M1 review-resolution is implemented and ready for code-review re-review.
+M1 is closed.
 M2 and M3 remain unimplemented.
 
 ## Readiness
 
-Ready for code-review re-review of M1.
-Not ready for M2, explain-change refresh, verify, PR handoff, or final closeout.
+Ready for implementation of M2.
+Not ready for explain-change refresh, verify, PR handoff, or final closeout.
 
 ## Sources
 

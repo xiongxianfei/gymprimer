@@ -8,6 +8,7 @@
 | 2026-07-06 | plan-review | 1 | approved | `reviews/plan-review-r1.md` | none | Plan is ready for test-spec; architecture assessment recorded `architecture-not-required`. |
 | 2026-07-06 | test-spec-review | 1 | approved | `reviews/test-spec-review-r1.md` | none | Test spec is approved and implementation handoff is allowed for M1; workflow auto target reached, so implementation did not start. |
 | 2026-07-06 | code-review | M1 R1 | changes-requested | `reviews/code-review-m1-r1.md` | CR-EDIP-M1-1 | Top-five generation dispositions can bypass backlog semantics; route to review-resolution for M1. |
+| 2026-07-06 | code-review | M1 R2 | clean-with-notes | `reviews/code-review-m1-r2.md` | none | CR-EDIP-M1-1 is resolved; M1 is closed and the next stage is implement M2. |
 
 ## Sources
 
@@ -22,3 +23,4 @@
 - `specs/exercise-document-best-practice-image-prioritization.test.md`
 - `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/test-spec-review-r1.md`
 - `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/code-review-m1-r1.md`
+- `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/code-review-m1-r2.md`

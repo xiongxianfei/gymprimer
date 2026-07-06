@@ -2,7 +2,8 @@
 
 ## Status
 
-Resolved for M1 code-review finding CR-EDIP-M1-1, pending code-review re-review.
+Closed.
+Code-review M1 R2 confirmed CR-EDIP-M1-1 is resolved.
 Proposal-review findings PR-EDIP-001 and PR-EDIP-002 remain resolved by proposal revision and proposal-review R2.
 
 ## Findings
@@ -11,7 +12,7 @@ Proposal-review findings PR-EDIP-001 and PR-EDIP-002 remain resolved by proposal
 |---|---|---|
 | PR-EDIP-001 | resolved | The proposal now treats fewer than five images as an evaluation trigger and the top five as a candidate backlog, while preserving the approved three-image normal limit unless downstream approved artifacts justify a fourth or fifth image. |
 | PR-EDIP-002 | resolved | The proposal now removes proposal-specific PR-review rule language and states that generated image promotion remains governed by the existing exercise-image standard, provenance contract, and visual-safety review requirements. |
-| CR-EDIP-M1-1 | resolved pending re-review | M1 validation now rejects top-five candidate dispositions that select generation directly and focused tests cover `generate_now` and `first_generation_candidate`. |
+| CR-EDIP-M1-1 | resolved | Code-review M1 R2 confirmed M1 validation now rejects top-five candidate dispositions that select generation directly and focused tests cover `generate_now` and `first_generation_candidate`. |
 
 Proposal-review R2 approved the revised proposal with no material findings.
 
@@ -29,6 +30,7 @@ Resolution:
 Addressed by extending EDIP-T5 focused tests with top-five `generate_now` and `first_generation_candidate` fixtures.
 The audit validator now rejects rank 1-5 generation dispositions with `top_five_candidate_must_not_select_generation_directly`.
 Focused M1 validation passed after the fix.
+Code-review M1 R2 confirmed the finding is resolved.
 
 ## PR-EDIP-001
 
@@ -67,5 +69,6 @@ It now records the user's statement that pull requests merge only after author r
 - `reviews/proposal-review-r1.md`
 - `reviews/proposal-review-r2.md`
 - `reviews/code-review-m1-r1.md`
+- `reviews/code-review-m1-r2.md`
 - `docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md`
 - `specs/exercise-image-standard.md`

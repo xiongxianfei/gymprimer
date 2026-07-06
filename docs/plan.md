@@ -5,8 +5,8 @@
 - [Exercise Document Best-Practice Image Prioritization](plans/2026-07-06-exercise-document-best-practice-image-prioritization.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: code-review M1 re-review
-  - Active context: CR-EDIP-M1-1 review-resolution added focused top-five generation-disposition tests and tightened audit validation; M1 is ready for code-review re-review.
+  - Current stage: implement M2
+  - Active context: code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution; M2 is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
