@@ -61,6 +61,28 @@ FORBIDDEN_CLAIM_TERMS = (
     "workout planner",
 )
 
+REQUIRED_CLOSEOUT_PROOF_FIELDS = {
+    "exercise_documents",
+    "generated_image_count",
+    "generated_image_paths",
+    "visual_safety_review",
+    "source_support_audit",
+    "beginner_comprehension_proof",
+    "privacy_review",
+    "rollback_proof",
+    "non_goal_smoke",
+}
+
+REQUIRED_NON_GOAL_FLAGS = (
+    "no_pr_review_rule",
+    "no_hosted_app",
+    "no_cms",
+    "no_database",
+    "no_api",
+    "no_video_first_path",
+    "no_personalized_coaching",
+)
+
 ACCEPTED_REPLACEMENT_REASONS = {
     "unsafe_visual_implication",
     "missing_required_provenance_or_prompt_record",
@@ -250,6 +272,75 @@ def validate_slice_scope(exercise_documents: Sequence[str], rationale: str = "")
     if len(exercise_documents) == 2 and rationale.strip():
         return []
     return ["first_slice_scope_too_broad_without_rationale"]
+
+
+def validate_closeout_proof(proof: Mapping[str, object]) -> list[str]:
+    errors: list[str] = []
+    for field in sorted(REQUIRED_CLOSEOUT_PROOF_FIELDS):
+        if field not in proof:
+            errors.append(f"closeout_proof_missing_required_field: {field}")
+
+    generated_count = proof.get("generated_image_count", 0)
+    if not isinstance(generated_count, int):
+        errors.append("generated_image_count_must_be_integer")
+        return errors
+
+    generated_paths = proof.get("generated_image_paths", [])
+    if not isinstance(generated_paths, Sequence) or isinstance(generated_paths, (str, bytes)):
+        errors.append("generated_image_paths_must_be_list")
+        return errors
+    if generated_count != len(generated_paths):
+        errors.append("generated_image_count_path_mismatch")
+
+    visual_review = proof.get("visual_safety_review")
+    if isinstance(visual_review, Mapping):
+        visual_status = visual_review.get("status")
+        reviewed_items = visual_review.get("reviewed_items", [])
+        if generated_count > 0 and visual_status == "not_triggered_no_generated_images":
+            errors.append("visual_safety_review_required_for_generated_images")
+        if generated_count > 0 and len(reviewed_items) != generated_count:
+            errors.append("visual_safety_review_item_count_mismatch")
+    elif "visual_safety_review" in proof:
+        errors.append("visual_safety_review_must_be_mapping")
+
+    source_audit = proof.get("source_support_audit")
+    if isinstance(source_audit, Mapping):
+        if source_audit.get("status") != "passed":
+            errors.append("source_support_audit_not_passed")
+        unsupported_claims = source_audit.get("unsupported_claims", [])
+        if unsupported_claims:
+            errors.append("source_support_audit_has_unsupported_claims")
+    elif "source_support_audit" in proof:
+        errors.append("source_support_audit_must_be_mapping")
+
+    privacy_review = proof.get("privacy_review")
+    if isinstance(privacy_review, Mapping):
+        if privacy_review.get("status") != "passed":
+            errors.append("privacy_review_not_passed")
+        if privacy_review.get("private_data_present") is not False:
+            errors.append("privacy_review_private_data_present")
+    elif "privacy_review" in proof:
+        errors.append("privacy_review_must_be_mapping")
+
+    rollback_proof = proof.get("rollback_proof")
+    if isinstance(rollback_proof, Mapping):
+        commands = rollback_proof.get("commands", [])
+        if not isinstance(commands, Sequence) or isinstance(commands, (str, bytes)) or not commands:
+            errors.append("rollback_proof_missing_commands")
+        if rollback_proof.get("page_readable_without_new_images") is not True:
+            errors.append("rollback_proof_page_not_readable")
+    elif "rollback_proof" in proof:
+        errors.append("rollback_proof_must_be_mapping")
+
+    non_goal_smoke = proof.get("non_goal_smoke")
+    if isinstance(non_goal_smoke, Mapping):
+        for flag in REQUIRED_NON_GOAL_FLAGS:
+            if non_goal_smoke.get(flag) is not True:
+                errors.append(f"non_goal_smoke_failed: {flag}")
+    elif "non_goal_smoke" in proof:
+        errors.append("non_goal_smoke_must_be_mapping")
+
+    return errors
 
 
 def validate_image_decisions(image_decisions: Sequence[object]) -> list[str]:

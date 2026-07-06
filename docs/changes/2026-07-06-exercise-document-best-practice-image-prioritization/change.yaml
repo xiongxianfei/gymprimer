@@ -1,6 +1,6 @@
 change_id: 2026-07-06-exercise-document-best-practice-image-prioritization
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md
@@ -24,9 +24,9 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/test-spec-review-r1.md
 
 current_milestone: M3
-current_milestone_state: planned
+current_milestone_state: review-requested
 last_reviewed_milestone: M2
-next_stage: implement
+next_stage: code-review
 
 open_findings: []
 
@@ -65,3 +65,6 @@ notes:
   - CR-EDIP-M2-1 resolution validation passed locally: focused audit unit tests, Markdown-first, privacy, state-sync inspection, and `git diff --check`.
   - Code-review M2 R2 confirmed CR-EDIP-M2-1 resolved, closed M2, and routed to implement M3.
   - Code-review M2 R2 review-record validation passed locally: Markdown-first, privacy, state-sync inspection, and `git diff --check`.
+  - M3 implemented review closeout proof for the zero-generated-image Bird Dog slice and added focused closeout-proof validator tests.
+  - M3 validation passed locally: `python3 -m unittest discover -s tests`, `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`, `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans media exercises tools tests`, rollback worktree Markdown/privacy checks, and `git diff --check`.
+  - M3 state-sync inspection passed locally before code-review handoff.

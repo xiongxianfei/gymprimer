@@ -5,8 +5,8 @@
 - [Exercise Document Best-Practice Image Prioritization](plans/2026-07-06-exercise-document-best-practice-image-prioritization.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: implement M3
-  - Active context: Code-review M2 R2 confirmed CR-EDIP-M2-1 resolved, closed M2, and routed to M3 review evidence and closeout implementation.
+  - Current stage: code-review M3
+  - Active context: M3 implemented review closeout proof for the zero-generated-image Bird Dog slice, added focused closeout-proof tests, and passed local validation.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

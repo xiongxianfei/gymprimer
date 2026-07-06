@@ -56,13 +56,13 @@ It does not broaden the exercise-image standard's count policy.
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
-- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution; code-review M2 R2 closed M2 after CR-EDIP-M2-1 resolution.
+- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution; code-review M2 R2 closed M2 after CR-EDIP-M2-1 resolution; M3 implementation complete and awaiting code-review.
 - Remaining in-scope implementation milestones: M3
-- Next stage: implement M3
+- Next stage: code-review M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3, explain-change refresh, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M3 is implemented but not reviewed; explain-change refresh, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -125,7 +125,7 @@ It does not broaden the exercise-image standard's count policy.
 
 ### M3. Review Evidence and Closeout
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: record visual-safety review, source-support audit, beginner-comprehension proof, rollback proof, and final local validation for the first slice.
 - Requirements: R16-R18, R24-R26, AC6-AC8.
 - Likely files:
@@ -146,7 +146,7 @@ It does not broaden the exercise-image standard's count policy.
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
   - `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans media exercises tools tests`
   - `git diff --check`
-- Result: pending.
+- Result: Implemented. Recorded zero-generated-image visual-safety, source-support, beginner-comprehension, privacy, rollback, and non-goal smoke proof; added focused M3 closeout-proof tests.
 - Risks: manual proof may be too global to prove page-level comprehension.
 - Rollback: remove incomplete proof artifacts or return to M2 for corrected page-specific evidence.
 
@@ -188,6 +188,7 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - 2026-07-06: Code-review M2 R1 requested changes for CR-EDIP-M2-1; M2 routes to review-resolution.
 - 2026-07-06: Review-resolution addressed CR-EDIP-M2-1 by adding the required per-rank scoring matrix; M2 routes back to code-review.
 - 2026-07-06: Code-review M2 R2 confirmed CR-EDIP-M2-1 resolved, closed M2, and routed to implement M3.
+- 2026-07-06: M3 implemented review closeout proof for the zero-generated-image Bird Dog slice and routed to code-review M3.
 
 ## Decision log
 
@@ -239,16 +240,23 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - Code-review M2 R2 reviewer validation passed with `python3 tools/checks/check_privacy.py -- docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/plan.md`.
 - Code-review M2 R2 state-sync inspection passed with `rg -n "Current stage: implement M3|Current milestone: M3|Current milestone state: planned|Last reviewed milestone: M2|Next stage: implement M3|current_stage: implement|current_milestone: M3|current_milestone_state: planned|last_reviewed_milestone: M2|next_stage: implement|open_findings: \\[\\]|CR-EDIP-M2-1|code-review M2 R2" docs/plan.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/review-log.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/review-resolution.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/code-review-m2-r2.md`.
 - Code-review M2 R2 reviewer validation passed with `git diff --check`.
+- M3 focused closeout-proof validation passed with `python3 -m unittest tests.test_exercise_document_image_prioritization`.
+- M3 rollback worktree validation passed with `git worktree add --detach .tmp/gymprimer-edip-m3-rollback HEAD`, `python3 tools/checks/check_markdown_first.py exercises/bird-dog.md`, `python3 tools/checks/check_privacy.py -- exercises/bird-dog.md`, and `git worktree remove .tmp/gymprimer-edip-m3-rollback`.
+- M3 validation passed with `python3 -m unittest discover -s tests`.
+- M3 validation passed with `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`.
+- M3 validation passed with `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans media exercises tools tests`.
+- M3 validation passed with `git diff --check`.
+- M3 state-sync inspection passed with `rg -n "Current stage: code-review M3|Current milestone: M3|Current milestone state: review-requested|Last reviewed milestone: M2|Next stage: code-review M3|current_stage: code-review|current_milestone: M3|current_milestone_state: review-requested|last_reviewed_milestone: M2|next_stage: code-review|open_findings: \\[\\]|M3 implemented" docs/plan.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml`.
 
 ## Outcome and retrospective
 
 M1 is closed.
 M2 is closed.
-M3 remains unimplemented.
+M3 is ready for code-review.
 
 ## Readiness
 
-Ready for M3 implementation.
+Ready for code-review of M3.
 Not ready for explain-change refresh, verify, PR handoff, or final closeout.
 
 ## Sources

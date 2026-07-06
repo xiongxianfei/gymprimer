@@ -8,6 +8,7 @@ from tools.checks.exercise_document_image_prioritization import (
     image_count_by_exercise,
     validate_slice_scope,
     validate_audit_record,
+    validate_closeout_proof,
 )
 
 
@@ -81,6 +82,61 @@ def valid_audit_record(**overrides: object) -> dict[str, object]:
     }
     record.update(overrides)
     return record
+
+
+def valid_closeout_proof(**overrides: object) -> dict[str, object]:
+    proof = {
+        "exercise_documents": ["exercises/bird-dog.md"],
+        "generated_image_count": 0,
+        "generated_image_paths": [],
+        "visual_safety_review": {
+            "status": "not_triggered_no_generated_images",
+            "reviewed_items": [],
+        },
+        "source_support_audit": {
+            "status": "passed",
+            "sampled_claims": [
+                "setup",
+                "movement",
+                "muscle_guidance",
+                "safety_notes",
+                "sources",
+            ],
+            "unsupported_claims": [],
+        },
+        "beginner_comprehension_proof": {
+            "status": "minimum_needed_subset_is_zero",
+            "prompts": [
+                "Can the page explain setup without new images?",
+                "Can the page explain movement without new images?",
+            ],
+            "unresolved_confusion": [],
+        },
+        "privacy_review": {
+            "status": "passed",
+            "private_data_present": False,
+        },
+        "rollback_proof": {
+            "status": "passed",
+            "paths_to_remove": [],
+            "commands": [
+                "python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization",
+                "python3 tools/checks/check_privacy.py -- exercises media docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization",
+            ],
+            "page_readable_without_new_images": True,
+        },
+        "non_goal_smoke": {
+            "no_pr_review_rule": True,
+            "no_hosted_app": True,
+            "no_cms": True,
+            "no_database": True,
+            "no_api": True,
+            "no_video_first_path": True,
+            "no_personalized_coaching": True,
+        },
+    }
+    proof.update(overrides)
+    return proof
 
 
 class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
@@ -236,6 +292,49 @@ class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
         self.assertEqual(one_page, [])
         self.assertEqual(small_batch, [])
         self.assertIn("first_slice_scope_too_broad_without_rationale", broad_batch)
+
+    def test_closeout_proof_accepts_zero_generated_image_slice(self) -> None:
+        errors = validate_closeout_proof(valid_closeout_proof())
+
+        self.assertEqual(errors, [])
+
+    def test_closeout_proof_requires_rollback_and_non_goal_evidence(self) -> None:
+        missing_rollback_command = valid_closeout_proof(
+            rollback_proof={
+                "status": "passed",
+                "paths_to_remove": [],
+                "commands": [],
+                "page_readable_without_new_images": True,
+            }
+        )
+        leaked_non_goal = valid_closeout_proof(
+            non_goal_smoke={
+                "no_pr_review_rule": True,
+                "no_hosted_app": True,
+                "no_cms": True,
+                "no_database": False,
+                "no_api": True,
+                "no_video_first_path": True,
+                "no_personalized_coaching": True,
+            }
+        )
+
+        self.assertIn("rollback_proof_missing_commands", validate_closeout_proof(missing_rollback_command))
+        self.assertIn("non_goal_smoke_failed: no_database", validate_closeout_proof(leaked_non_goal))
+
+    def test_closeout_proof_requires_visual_review_for_generated_images(self) -> None:
+        generated_without_review = valid_closeout_proof(
+            generated_image_count=1,
+            generated_image_paths=["media/exercises/fixture/setup.png"],
+            visual_safety_review={
+                "status": "not_triggered_no_generated_images",
+                "reviewed_items": [],
+            },
+        )
+
+        errors = validate_closeout_proof(generated_without_review)
+
+        self.assertIn("visual_safety_review_required_for_generated_images", errors)
 
 
 if __name__ == "__main__":

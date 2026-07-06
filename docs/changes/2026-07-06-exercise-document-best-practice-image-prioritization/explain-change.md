@@ -6,8 +6,8 @@ active
 
 ## Scope
 
-This reasoning surface covers the M1 implementation handoff for the exercise-document image-prioritization workflow.
-It will need refresh after later implementation milestones change exercise pages, media, or proof evidence.
+This reasoning surface covers the M1-M3 implementation handoffs for the exercise-document image-prioritization workflow.
+It will need refresh before final verification if later review-resolution changes exercise pages, media, or proof evidence.
 
 ## M1 Change Rationale
 
@@ -26,14 +26,23 @@ Review-resolution for CR-EDIP-M2-1 added an adjacent per-rank scoring matrix so 
 
 The helper and tests now cover M2 boundaries for image-count exceptions, accepted candidate and generated-image purposes, second muscle-attention prevention, forbidden image-adjacent claims, and small first-slice scope.
 
+## M3 Change Rationale
+
+M3 records closeout proof for the first Bird Dog slice.
+Because M2 selected zero generated images, the M3 proof records visual-safety and beginner-comprehension status as zero-generated-image proof instead of promoting media.
+It also records source-support, privacy, rollback, and non-goal smoke evidence before M3 code review.
+
+The focused helper and tests now validate closeout proof shape for generated image count, visual-review triggering, rollback commands, privacy status, source-support status, and non-goal flags.
+
 ## Changed Surfaces
 
 | Surface | Why it changed | Governing requirement |
 |---|---|---|
-| `tools/checks/exercise_document_image_prioritization.py` | Adds the pure helper used by focused tests and future audit proof. | R1-R9, R19-R22 |
-| `tests/test_exercise_document_image_prioritization.py` | Adds M1 and M2 proof for inventory, audit fields, candidate scoring, backlog semantics, image-count exceptions, purpose boundaries, replacement reasons, forbidden claims, small-slice scope, and template deferral. | EDIP-T1 through EDIP-T12 |
+| `tools/checks/exercise_document_image_prioritization.py` | Adds pure helpers used by focused tests and future audit or closeout proof. | R1-R24 |
+| `tests/test_exercise_document_image_prioritization.py` | Adds M1-M3 proof for inventory, audit fields, candidate scoring, backlog semantics, image-count exceptions, purpose boundaries, replacement reasons, forbidden claims, small-slice scope, template deferral, rollback evidence, and non-goal smoke. | EDIP-T1 through EDIP-T14 |
 | `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/evidence/m1-audit-criteria.md` | Records the first-slice audit criteria and current fewer-than-five evaluation population. | R1, R2, R5-R9, R19-R22 |
 | `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/evidence/m2-bird-dog-page-audit.md` | Records the first page-specific top-10 candidate backlog, per-rank scoring fields, and zero-image generated subset decision. | R3-R18, R23, AC2-AC6 |
+| `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/evidence/m3-review-closeout-proof.md` | Records M3 visual-safety status, source-support audit, beginner-comprehension proof, privacy review, rollback proof, and non-goal smoke for the zero-generated-image slice. | R16-R18, R24-R26, AC6-AC8 |
 | `docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md` | Records milestone progress, validation evidence, and review-requested handoffs. | Implement skill plan-update requirement |
 | `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml` and `docs/plan.md` | Keep lifecycle routing synchronized for milestone handoffs. | Workflow metadata |
 
