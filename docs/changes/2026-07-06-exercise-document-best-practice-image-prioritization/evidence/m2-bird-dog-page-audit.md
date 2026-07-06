@@ -71,7 +71,23 @@ No image-adjacent Markdown is changed in this slice.
 
 Scores use the approved five-field model: beginner comprehension, setup value, muscle-attention value, page value, and readiness.
 Each field is scored from 1 to 5.
-The table records total score only to keep this evidence readable.
+The top-10 candidate table records the total score.
+The scoring matrix records the five required per-candidate scoring fields.
+
+## Scoring Matrix
+
+| Rank | Beginner comprehension | Setup value | Muscle-attention value | Page value | Readiness | Total score |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 5 | 5 | 2 | 4 | 4 | 20 |
+| 2 | 4 | 1 | 5 | 4 | 4 | 18 |
+| 3 | 4 | 2 | 2 | 5 | 4 | 17 |
+| 4 | 3 | 3 | 1 | 4 | 4 | 15 |
+| 5 | 3 | 1 | 2 | 4 | 4 | 14 |
+| 6 | 3 | 4 | 1 | 2 | 2 | 12 |
+| 7 | 2 | 4 | 1 | 2 | 2 | 11 |
+| 8 | 2 | 1 | 1 | 4 | 2 | 10 |
+| 9 | 2 | 1 | 1 | 3 | 2 | 9 |
+| 10 | 2 | 1 | 1 | 2 | 1 | 7 |
 
 ## Generation Decision
 

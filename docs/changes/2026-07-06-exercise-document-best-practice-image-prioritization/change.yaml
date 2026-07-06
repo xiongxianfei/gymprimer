@@ -1,6 +1,6 @@
 change_id: 2026-07-06-exercise-document-best-practice-image-prioritization
 status: active
-current_stage: review-resolution
+current_stage: code-review
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md
@@ -24,12 +24,11 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/test-spec-review-r1.md
 
 current_milestone: M2
-current_milestone_state: resolution-needed
+current_milestone_state: review-requested
 last_reviewed_milestone: M1
-next_stage: review-resolution
+next_stage: code-review
 
-open_findings:
-  - CR-EDIP-M2-1
+open_findings: []
 
 autoprogression:
   review_fix:
@@ -62,3 +61,5 @@ notes:
   - M2 state-sync and broader changed-artifact Markdown/privacy checks passed locally before code-review handoff.
   - Code-review M2 R1 requested changes for CR-EDIP-M2-1 because the Bird Dog page-local candidate table records total scores but omits the five required per-candidate scoring fields.
   - Code-review M2 R1 review-record validation passed locally: Markdown-first, privacy, state-sync inspection, and `git diff --check`.
+  - Review-resolution addressed CR-EDIP-M2-1 by adding an adjacent per-rank scoring matrix to the Bird Dog M2 audit evidence and routed M2 back to code-review.
+  - CR-EDIP-M2-1 resolution validation passed locally: focused audit unit tests, Markdown-first, privacy, state-sync inspection, and `git diff --check`.

@@ -2,9 +2,9 @@
 
 ## Status
 
-Open.
-Code-review M2 R1 opened CR-EDIP-M2-1.
-M2 is in review-resolution.
+Addressed pending code-review.
+Review-resolution addressed CR-EDIP-M2-1 by adding per-rank scoring fields to the M2 audit evidence.
+M2 is ready for code-review re-review.
 Code-review M1 R2 confirmed CR-EDIP-M1-1 is resolved.
 Proposal-review findings PR-EDIP-001 and PR-EDIP-002 remain resolved by proposal revision and proposal-review R2.
 
@@ -15,7 +15,7 @@ Proposal-review findings PR-EDIP-001 and PR-EDIP-002 remain resolved by proposal
 | PR-EDIP-001 | resolved | The proposal now treats fewer than five images as an evaluation trigger and the top five as a candidate backlog, while preserving the approved three-image normal limit unless downstream approved artifacts justify a fourth or fifth image. |
 | PR-EDIP-002 | resolved | The proposal now removes proposal-specific PR-review rule language and states that generated image promotion remains governed by the existing exercise-image standard, provenance contract, and visual-safety review requirements. |
 | CR-EDIP-M1-1 | resolved | Code-review M1 R2 confirmed M1 validation now rejects top-five candidate dispositions that select generation directly and focused tests cover `generate_now` and `first_generation_candidate`. |
-| CR-EDIP-M2-1 | open | The Bird Dog page-local candidate table must record the required five per-candidate scoring fields, total score, and disposition for ranks 1-10. |
+| CR-EDIP-M2-1 | addressed pending code-review | The Bird Dog page-local candidate table now has an adjacent scoring matrix with the required five per-candidate scoring fields, total score, and disposition traceability for ranks 1-10. |
 
 Proposal-review R2 approved the revised proposal with no material findings.
 
@@ -29,9 +29,10 @@ The Bird Dog page-local candidate table must record the five per-candidate scori
 
 Resolution:
 
-Open.
-M2 must expand the audit evidence table or add an adjacent per-rank scoring matrix with beginner comprehension, setup value, muscle-attention value, page value, and readiness scores for ranks 1-10.
-After updating evidence, rerun Markdown/privacy validation and route M2 back to code-review.
+Addressed pending code-review.
+The M2 audit evidence now has an adjacent scoring matrix with beginner comprehension, setup value, muscle-attention value, page value, readiness, and total score for ranks 1-10.
+Markdown/privacy validation passed after the evidence update.
+M2 is routed back to code-review.
 
 ## CR-EDIP-M1-1
 
