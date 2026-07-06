@@ -2,9 +2,9 @@
 
 ## Status
 
-- Status: reviewed
-- Plan lifecycle state: active
-- Terminal disposition: none
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed by PR #13
 
 ## Purpose / big picture
 
@@ -56,14 +56,14 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ## Current Handoff Summary
 
-- Current milestone: M4
-- Current milestone state: closed
+- Current milestone: Lifecycle Closeout
+- Current milestone state: completed
 - Last reviewed milestone: M4
-- Review status: M1, M2, M3, and M4 code-review clean
+- Review status: M1, M2, M3, and M4 code-review clean; PR #13 merged
 - Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: pr-opened-ci-pending
-- Reason final closeout is or is not ready: PR #13 is open and GitHub Actions `Validation checks` is in progress; review, CI completion, merge, and closeout remain.
+- Next stage: none
+- Final closeout readiness: complete
+- Reason final closeout is or is not ready: PR #13 merged on 2026-07-06 with GitHub Actions `Validation checks` successful, and lifecycle cleanup is recorded on `main`.
 
 ## Milestones
 
@@ -268,6 +268,8 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Refreshed `explain-change.md` for the final reviewed diff and routed the change to verify.
 - 2026-07-06: Final local verify passed with branch-ready evidence and routed the change to PR handoff.
 - 2026-07-06: Opened PR #13 from `proposal/necessary-images-and-tai-chi-exercise` to `main`; GitHub Actions `Validation checks` is in progress.
+- 2026-07-06: PR #13 merged with merge commit `ee94e0d76257eb4f7e034996b60313738790b5fb`; GitHub Actions `Validation checks` completed successfully before merge.
+- 2026-07-06: Lifecycle cleanup marked the change completed on `main`.
 
 ## Decision log
 
@@ -334,9 +336,9 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ## Outcome and retrospective
 
-- M4 is closed after clean code-review. All implementation milestones are closed.
+- M4 is closed after clean code-review. PR #13 merged, CI passed, and lifecycle closeout is complete.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- PR #13 is open. GitHub Actions `Validation checks` is in progress.
+- Complete. PR #13 merged on 2026-07-06 with GitHub Actions `Validation checks` successful.

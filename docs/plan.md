@@ -2,12 +2,6 @@
 
 ## Active
 
-- [Necessary Images and Tai Chi Exercise](plans/2026-07-05-necessary-images-and-tai-chi-exercise.md)
-  - Status: reviewed
-  - Plan lifecycle state: active
-  - Current stage: pr
-  - Active context: PR #13 opened from `proposal/necessary-images-and-tai-chi-exercise` to `main`; GitHub Actions `Validation checks` is in progress.
-
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active
@@ -32,6 +26,12 @@
   - Active context: retained only as historical context for the structured-platform implementation path; it is not active execution guidance.
 
 ## Done (recent)
+
+- [Necessary Images and Tai Chi Exercise](plans/2026-07-05-necessary-images-and-tai-chi-exercise.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #13
+  - Active context: proposal/spec/architecture/plan/test-spec review, M1-M4, explain-change, final local verification, CI validation, PR handoff, and merge/closeout are complete.
 
 - [Exercise Muscle Guidance](plans/2026-07-04-exercise-muscle-guidance.md)
   - Status: completed
