@@ -5,8 +5,8 @@
 - [Exercise Document Best-Practice Image Prioritization](plans/2026-07-06-exercise-document-best-practice-image-prioritization.md)
   - Status: active
   - Plan lifecycle state: active
-  - Current stage: explain-change
-  - Active context: Code-review M3 R1 closed all implementation milestones; final closeout starts with explain-change before verification and PR handoff.
+  - Current stage: verify
+  - Active context: Explain-change refreshed the durable rationale for the final reviewed M1-M3 diff; final verification is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

@@ -1,6 +1,6 @@
 change_id: 2026-07-06-exercise-document-best-practice-image-prioritization
 status: active
-current_stage: explain-change
+current_stage: verify
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md
@@ -26,7 +26,7 @@ current_test_spec_review: docs/changes/2026-07-06-exercise-document-best-practic
 current_milestone: Lifecycle Closeout
 current_milestone_state: planned
 last_reviewed_milestone: M3
-next_stage: explain-change
+next_stage: verify
 
 open_findings: []
 
@@ -70,3 +70,5 @@ notes:
   - M3 state-sync inspection passed locally before code-review handoff.
   - Code-review M3 R1 returned clean-with-notes, closed M3, and routed to final closeout beginning with explain-change.
   - Code-review M3 R1 review-record validation passed locally: Markdown-first, privacy, state-sync inspection, and `git diff --check`.
+  - Explain-change refreshed the durable rationale for the final reviewed M1-M3 diff; verify is next.
+  - Explain-change validation passed locally: Markdown-first, privacy, state-sync inspection, and `git diff --check`.
