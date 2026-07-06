@@ -410,6 +410,54 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
             with self.subTest(token=token):
                 self.assertIn(token, text)
 
+    def test_tai_chi_m4_beginner_comprehension_records_required_prompts(self) -> None:
+        path = TAI_CHI_CHANGE_ROOT / "beginner-comprehension-proof.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for prompt in (
+            "Tai Chi purpose",
+            "ready stance",
+            "weight shift",
+            "body feel",
+            "pause/stop conditions",
+            "images helped more than text alone",
+            "non-identifying",
+            "residual confusion",
+            "exercises/tai-chi-basics.md",
+            "media/exercises/tai-chi-basics/setup.png",
+            "media/exercises/tai-chi-basics/weight-shift.png",
+            "media/exercises/tai-chi-basics/muscle-attention.png",
+        ):
+            with self.subTest(prompt=prompt):
+                self.assertIn(prompt, text)
+
+    def test_tai_chi_m4_rollback_proof_records_text_only_cleanup(self) -> None:
+        path = TAI_CHI_CHANGE_ROOT / "rollback-proof.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for token in (
+            "text-only",
+            "temporary review state",
+            "remove image references",
+            "unused Tai Chi assets",
+            "prompt records",
+            "provenance rows",
+            "exercises/tai-chi-basics.md",
+            "media/exercises/tai-chi-basics/setup.png",
+            "media/exercises/tai-chi-basics/weight-shift.png",
+            "media/exercises/tai-chi-basics/muscle-attention.png",
+            "media/prompts/exercises/tai-chi-basics/setup.md",
+            "media/prompts/exercises/tai-chi-basics/weight-shift.md",
+            "media/prompts/exercises/tai-chi-basics/muscle-attention.md",
+            "python3 tools/checks/check_markdown_first.py",
+            "python3 tools/checks/check_privacy.py",
+            "pass",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
     def test_brisk_walking_page_contract(self) -> None:
         text = self.brisk_walking_text()
         lower = text.lower()

@@ -57,13 +57,13 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M3
 - Review status: M1, M2, and M3 code-review clean
-- Remaining in-scope implementation milestones: M4
-- Next stage: implement M4
+- Remaining in-scope implementation milestones: none pending implementation; M4 is awaiting code-review
+- Next stage: code-review M4
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M4 is not implemented, and final verification and PR handoff have not happened.
+- Reason final closeout is or is not ready: M4 has not passed code-review, and final verification and PR handoff have not happened.
 
 ## Milestones
 
@@ -190,7 +190,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 
 ### M4. Review Evidence and Final Local Readiness
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Record manual visual-safety review, beginner comprehension proof, rollback proof, and final local validation evidence.
 - Requirements: R40-R43
 - Files/components likely touched:
@@ -212,11 +212,12 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
   - `python3 tools/checks/check_privacy.py exercises/tai-chi-basics.md media/PROVENANCE.md media/prompts/exercises/tai-chi-basics/ docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/`
   - `python3 -m pytest`
 - Expected observable result: manual evidence and automated checks support promotion of the Tai Chi page and first image batch.
+- Implemented result: M4 records beginner-comprehension proof, text-only rollback proof, existing visual-safety evidence, and final local validation notes for the Tai Chi page and first three images.
 - Commit message: `M4: record Tai Chi image review evidence`
 - Milestone closeout:
-  - validation passed
+  - validation passed locally with focused proof tests, rollback rehearsal, Markdown-first check, privacy scan, focused suites, unittest discovery, and diff check
   - progress updated
-  - decision log updated if needed
+  - decision log updated
   - validation notes updated
   - milestone committed
 - Risks:
@@ -262,6 +263,7 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Code-review M2 R1 was clean with no material findings; M2 closed and routed to implementation M3.
 - 2026-07-06: Implemented M3 by generating three Tai Chi support images through the built-in imagegen path, adding workspace assets, exact prompt records, approved provenance rows, page image references, real-asset tests, and visual-safety review evidence.
 - 2026-07-06: Code-review M3 R1 was clean with no material findings; M3 closed and routed to implementation M4.
+- 2026-07-06: Implemented M4 by adding proof checks, beginner-comprehension proof, text-only rollback proof, final validation notes, and a non-destructive temporary rollback rehearsal.
 
 ## Decision log
 
@@ -274,12 +276,15 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 | 2026-07-06 | Update the existing exercise-image audit with a Tai Chi text-only row. | Broad unittest discovery treats that audit as an inventory of current exercise pages. | Leave the audit stale until image generation. |
 | 2026-07-06 | Use the built-in imagegen path for M3. | The imagegen skill prefers built-in generation for ordinary project-bound raster assets, with generated files copied from Codex output into workspace media paths. | CLI/API fallback requiring `OPENAI_API_KEY`. |
 | 2026-07-06 | Keep the three generated PNG files as-is. | The files are 1.6-1.9 MB each and remain reasonable for the first governed batch. | Add compression tooling or regenerate solely for size. |
+| 2026-07-06 | Use a non-identifying reviewer simulation for MP3. | Existing project proof records use this pattern, and it avoids private reader or health data while checking the required beginner prompts. | Store identifiable reader details or block M4 for live reader data. |
+| 2026-07-06 | Exercise MP4 in a temporary rollback root. | The rollback proof needs a real text-only check without destructively removing live approved media. | Edit the working tree to remove and restore live assets. |
 
 ## Surprises and discoveries
 
 - The approved plan still mentioned `python3 -m pytest`, but the active test spec owns the reviewed command ledger and uses unittest commands. `python3 -m pytest` is unavailable in this environment.
 - Broad unittest discovery failed until `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` was updated to include the new text-only Tai Chi page.
 - Broad unittest discovery initially failed in M3 because the M2 real-page test still asserted that the Tai Chi page had no images. The assertion was removed, and the new M3 real-asset test now owns image-count, provenance, prompt-record, and visual-review coverage.
+- The M4 rollback rehearsal passed with `GYMPRIMER_ROOT` pointed at a temporary root after stripping temporary Tai Chi image references and provenance rows.
 
 ## Validation notes
 
@@ -312,12 +317,22 @@ Candidates 4-10 are deferred alternatives or future replacements, not permission
 - `python3 -m pytest` could not run because `pytest` is not installed: `/usr/bin/python3: No module named pytest`.
 - `git diff --check` passed.
 - Code-review M3 reviewer rerun passed: focused M3 image test, Markdown-first check, privacy check, full unittest discovery, and manual visual inspection of the three generated images.
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_tai_chi_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_tai_chi_m4_rollback_proof_records_text_only_cleanup` failed before implementation because `beginner-comprehension-proof.md` and `rollback-proof.md` did not exist.
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_tai_chi_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_tai_chi_m4_rollback_proof_records_text_only_cleanup` passed after adding M4 proof records: 2 tests.
+- Temporary rollback rehearsal passed with `GYMPRIMER_ROOT=/tmp/gymprimer-tai-chi-rollback.CcCD26`: `python3 tools/checks/check_markdown_first.py /tmp/gymprimer-tai-chi-rollback.CcCD26/exercises/tai-chi-basics.md /tmp/gymprimer-tai-chi-rollback.CcCD26/media/PROVENANCE.md /tmp/gymprimer-tai-chi-rollback.CcCD26/SOURCES.md /tmp/gymprimer-tai-chi-rollback.CcCD26/RED-FLAGS.md` checked 4 Markdown files; `python3 tools/checks/check_privacy.py /tmp/gymprimer-tai-chi-rollback.CcCD26/exercises/tai-chi-basics.md /tmp/gymprimer-tai-chi-rollback.CcCD26/media/PROVENANCE.md /tmp/gymprimer-tai-chi-rollback.CcCD26/SOURCES.md /tmp/gymprimer-tai-chi-rollback.CcCD26/RED-FLAGS.md` checked 4 files.
+- `python3 -m unittest tests.test_exercise_method_guidance` passed: 17 tests.
+- `python3 tools/checks/check_markdown_first.py exercises/tai-chi-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md` passed: checked 4 Markdown files.
+- `python3 tools/checks/check_privacy.py exercises/tai-chi-basics.md media/PROVENANCE.md media/prompts/exercises/tai-chi-basics/ docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/` passed: checked 23 files.
+- `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 50 tests.
+- `python3 -m unittest discover -s tests` passed: 167 tests.
+- `git diff --check` passed.
+- `python3 -m pytest` could not run because `pytest` is not installed: `/usr/bin/python3: No module named pytest`.
 
 ## Outcome and retrospective
 
-- M3 is closed after clean code-review; M4 is pending implementation.
+- M4 implementation is ready for code-review.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- M4 is ready for implementation.
+- M4 is ready for code-review.

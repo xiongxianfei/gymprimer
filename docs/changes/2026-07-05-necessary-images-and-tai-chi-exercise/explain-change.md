@@ -39,6 +39,18 @@ Each generated raster has a repository-local prompt record under `media/prompts/
 `tests/test_exercise_image_standard.py` now includes a real-page M3 test for the Tai Chi assets, prompt records, provenance rows, page refs, alt text, and visual-safety review.
 The older Tai Chi page-shape test in `tests/test_markdown_first_real_pages.py` was narrowed to structure only because M3 intentionally moves the page beyond the M2 text-only state.
 
+## M4 review evidence implementation
+
+M4 adds the remaining manual proof surfaces needed before downstream review.
+`docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/beginner-comprehension-proof.md` records a non-identifying reviewer simulation for the required Tai Chi purpose, ready stance, weight shift, body feel, pause/stop conditions, and image-helpfulness prompts.
+The proof avoids private reader and health data, and it records residual confusion explicitly.
+
+`docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/rollback-proof.md` records a text-only rollback path for removing the three Tai Chi image references, unused assets, prompt records, and provenance rows.
+The rollback was rehearsed in a temporary root, leaving the live working tree media intact.
+
+`docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/validation-notes.md` records the M4 proof-test failure before implementation, the passing rollback rehearsal, the required command ledger, and the `pytest` environment gap.
+`tests/test_markdown_first_real_pages.py` now checks that the M4 proof files include the required prompts, paths, privacy boundary, residual-confusion language, cleanup steps, and validation command references.
+
 ## Validation evidence
 
 - `python3 -m unittest tests.test_exercise_image_standard tests.test_exercise_method_guidance` passed after correcting an overly literal contract assertion.
@@ -64,3 +76,12 @@ The older Tai Chi page-shape test in `tests/test_markdown_first_real_pages.py` w
 
 `python3 -m pytest` was attempted because the draft plan had named it, but it could not run in this environment because `pytest` is not installed.
 The reviewed test spec command ledger uses unittest commands for M1-M3.
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_tai_chi_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_tai_chi_m4_rollback_proof_records_text_only_cleanup` failed before M4 implementation because the proof files did not exist, then passed after adding them.
+- Temporary rollback rehearsal passed with `GYMPRIMER_ROOT=/tmp/gymprimer-tai-chi-rollback.CcCD26`: Markdown-first checked 4 files and privacy checked 4 files.
+- `python3 -m unittest tests.test_exercise_method_guidance` passed after M4.
+- `python3 tools/checks/check_markdown_first.py exercises/tai-chi-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md` passed after M4.
+- `python3 tools/checks/check_privacy.py exercises/tai-chi-basics.md media/PROVENANCE.md media/prompts/exercises/tai-chi-basics/ docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/` passed after M4.
+- `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed after M4.
+- `python3 -m unittest discover -s tests` passed after M4.
+- `git diff --check` passed after M4.
+- `python3 -m pytest` remains unavailable because `pytest` is not installed.
