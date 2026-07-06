@@ -121,10 +121,15 @@ FORWARD_HEAD_EXERCISE_SECTIONS = (
 RESPONSIBLE_BREADTH_FORBIDDEN_PATTERNS = (
     re.compile(r"\byou have\b", re.IGNORECASE),
     re.compile(r"\btreatment plan\b", re.IGNORECASE),
+    re.compile(r"\btreatment protocol\b", re.IGNORECASE),
     re.compile(r"\brehab(?:ilitation)? progression\b", re.IGNORECASE),
     re.compile(r"\bcorrect(?:ive|ion) routine\b", re.IGNORECASE),
     re.compile(r"\bfix (?:this|your|it)\b", re.IGNORECASE),
     re.compile(r"\bfollow this program\b", re.IGNORECASE),
+    re.compile(r"\bfull(?: traditional)? form\b", re.IGNORECASE),
+    re.compile(r"\ball eight brocades\b", re.IGNORECASE),
+    re.compile(r"\bfall-prevention program\b", re.IGNORECASE),
+    re.compile(r"\badaptive coaching\b", re.IGNORECASE),
     re.compile(r"\bfor your [a-z -]*pain\b", re.IGNORECASE),
     re.compile(r"\bsymptom checker\b", re.IGNORECASE),
     re.compile(r"\bdiagnostic decision tree\b", re.IGNORECASE),
@@ -282,6 +287,10 @@ REQUIRED_PROVENANCE_FIELDS = (
     "notes",
 )
 PROMPT_RECORD_COMPATIBILITY_NOTE = "M3 pre-amendment prompt unavailable; compatibility limitation recorded"
+DEFAULT_EXERCISE_IMAGE_LIMIT = 3
+EXERCISE_IMAGE_LIMIT_EXCEPTIONS = {
+    "exercises/baduanjin-basics.md": 5,
+}
 PROMPT_RECORD_COMPATIBILITY_ASSETS = {
     "media/exercises/chin-nod/muscle-attention.png",
     "media/exercises/thoracic-extension/muscle-attention.png",
@@ -881,12 +890,14 @@ def validate_exercise_image_summary(
     root: Path = ROOT,
 ) -> list[Finding]:
     findings: list[Finding] = []
-    if len(image_matches) > 3:
+    page_ref = repo_relative_path(page_path, root)
+    image_limit = EXERCISE_IMAGE_LIMIT_EXCEPTIONS.get(page_ref or "", DEFAULT_EXERCISE_IMAGE_LIMIT)
+    if len(image_matches) > image_limit:
         findings.append(
             Finding(
                 page_path,
                 "exercise_image_count_exceeded",
-                f"exercise pages may reference no more than three exercise images without an approved exception; found {len(image_matches)}",
+                f"exercise pages may reference no more than {image_limit} exercise images without an approved exception; found {len(image_matches)}",
             )
         )
 

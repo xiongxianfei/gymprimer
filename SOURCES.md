@@ -21,6 +21,8 @@ Rules:
 - [Mayo Clinic walking guidance][mayo-walking]
 - [NHS walking for health][nhs-walking-for-health]
 - [NCCIH tai chi overview][nccih-tai-chi]
+- [NCCIH qigong overview][nccih-qigong]
+- [Baduanjin qigong systematic review][baduanjin-review]
 - [Harvard Health tai chi overview][harvard-tai-chi]
 - [Veterans Affairs Tai Chi and Qigong overview][va-tai-chi-qigong]
 - [NHS balance exercises][nhs-balance-exercises]
@@ -54,6 +56,8 @@ Each page still needs its own matching reference definition so the page renders 
 [mayo-walking]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/walking/art-20046261
 [nhs-walking-for-health]: https://www.nhs.uk/live-well/exercise/walking-for-health/
 [nccih-tai-chi]: https://www.nccih.nih.gov/health/tai-chi-what-you-need-to-know
+[nccih-qigong]: https://www.nccih.nih.gov/health/qigong-what-you-need-to-know
+[baduanjin-review]: https://pmc.ncbi.nlm.nih.gov/articles/PMC5359459/
 [harvard-tai-chi]: https://www.health.harvard.edu/exercise-and-fitness/the-health-benefits-of-tai-chi
 [va-tai-chi-qigong]: https://www.va.gov/WHOLEHEALTH/cih/Tai_Chi_and_Qigong.asp
 [nhs-balance-exercises]: https://www.nhs.uk/live-well/exercise/balance-exercises/

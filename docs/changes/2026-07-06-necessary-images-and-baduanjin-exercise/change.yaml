@@ -1,0 +1,78 @@
+change_id: 2026-07-06-necessary-images-and-baduanjin-exercise
+status: active
+current_stage: pr
+created_date: 2026-07-06
+
+proposal: docs/proposals/2026-07-06-necessary-images-and-baduanjin-exercise.md
+proposal_status: accepted
+proposal_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/proposal-review-r1.md
+
+current_spec: specs/necessary-images-and-baduanjin-exercise.md
+current_spec_status: approved
+current_spec_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/spec-review-r1.md
+
+architecture_assessment: architecture-required
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/architecture-review-r1.md
+
+current_plan: docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md
+current_plan_status: reviewed
+current_plan_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/plan-review-r1.md
+plan_index: docs/plan.md
+
+current_test_spec: specs/necessary-images-and-baduanjin-exercise.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md
+
+current_milestone: PR handoff
+current_milestone_state: open
+last_reviewed_milestone: final holistic code-review
+
+pull_request: https://github.com/xiongxianfei/gymprimer/pull/14
+next_stage: hosted_ci_pr_review
+
+open_findings: []
+
+autoprogression:
+  review_fix:
+    profile: bounded-review-fix
+    requested_target: test-spec-review
+    status: complete
+    authorized_by: user
+    authorization: "$workflow auto: test-spec-review"
+    authorized_date: 2026-07-06
+    stop_before: implementation
+
+notes:
+  - Owner authorization via `$workflow auto: test-spec-review` activated bounded review-fix routing through the requested target, stopping before implementation.
+  - Proposal-review R1 approved the accepted Baduanjin proposal with no open blockers.
+  - Spec-review R1 approved the spec with no material findings; spec status is approved for downstream reliance.
+  - Architecture assessment recorded architecture-required because the change affects generated-output flow, media paths, prompt records, provenance, validation evidence, and cross-cutting visual-safety boundaries.
+  - Architecture-review R1 approved the canonical architecture amendment with no material findings; architecture status is approved before planning.
+  - Draft execution plan created with four implementation milestones and routed to plan-review.
+  - Plan-review R1 approved the execution plan with no material findings; routed to test-spec.
+  - Test spec created, normalized to active for review reliance, and routed to test-spec-review.
+  - Test-spec-review R1 approved the active test spec with no material findings; implementation handoff is allowed, but this workflow auto-run stopped at the requested target before implementation.
+  - M1 implementation added path-scoped checker support, Baduanjin image and method fixtures, candidate-pool evidence, validation notes, and explain-change rationale.
+  - M1 validation passed locally: `python3 -m unittest tests.test_exercise_method_guidance`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, `git diff --check`, candidate-pool Markdown check, and candidate-pool privacy check.
+  - Code-review R1 requested changes for CR-M1-001; current handoff is review-resolution for M1 only, and M2-M4 remain unimplemented.
+  - CR-M1-001 resolution added focused forbidden-scope fixtures for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording.
+  - M1 review-resolution validation passed locally: `python3 -m unittest tests.test_exercise_image_standard`, `python3 -m unittest tests.test_exercise_method_guidance`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, and `git diff --check`.
+  - Code-review R2 closed M1 with no material findings.
+  - M2 implementation added the text-only Baduanjin page, source audit, real-page tests, and exercise-image audit inventory row.
+  - M2 validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages`, `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/source-audit.md docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`, `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md SOURCES.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/source-audit.md docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`, `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, and `git diff --check`.
+  - Code-review M2 R1 closed M2 with no material findings.
+  - M3 implementation added exactly five generated Baduanjin images, prompt records, approved provenance rows, page references, visual-safety review evidence, and real-page media tests.
+  - M3 validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m3_images_are_local_prompt_backed_and_reviewed`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`, `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`, and `git diff --check`.
+  - Code-review M3 R1 closed M3 with no material findings.
+  - M4 implementation added beginner-comprehension proof, rollback proof, proof-record tests, temporary rollback validation, and final local validation evidence.
+  - M4 validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup`, temporary rollback Markdown-first and privacy checks from `/tmp/gymprimer-baduanjin-rollback.cr-m4-001`, `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/`, `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/`, and `git diff --check`.
+  - Code-review M4 R1 requested changes for CR-M4-001 because the rollback proof records wildcard temp-root commands as passing, but the recorded Markdown-first command fails when run literally.
+  - CR-M4-001 resolution replaced the wildcard rollback evidence with concrete temporary-root commands for `/tmp/gymprimer-baduanjin-rollback.cr-m4-001` and reran focused rollback Markdown-first and privacy checks.
+  - CR-M4-001 resolution validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup`, concrete temporary rollback Markdown-first and privacy checks, `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, full Markdown-first and privacy checks, and `git diff --check`.
+  - Code-review M4 R2 closed CR-M4-001 and M4 with no material findings.
+  - Final holistic code-review R1 passed with no material findings.
+  - Explain-change refreshed the final reviewed-diff rationale.
+  - Final local verify passed with branch-ready evidence in `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/verify-report.md`; hosted CI has not been observed.
+  - PR #14 opened from `proposal/baduanjin-exercise-images` to `main`; hosted CI is pending and has not been observed.
