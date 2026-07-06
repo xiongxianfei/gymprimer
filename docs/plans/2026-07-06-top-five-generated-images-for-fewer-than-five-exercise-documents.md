@@ -48,11 +48,11 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
 - Review status: code-review R2 clean-with-notes; M1 closed
 - Remaining in-scope implementation milestones: M2, M3
-- Next stage: implement M2
+- Next stage: code-review M2
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: M2 and M3 implementation, code-review, explain-change, verify, and PR handoff remain.
 
@@ -86,7 +86,7 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 
 ### M2. First Milestone Batch Images
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Audit and implement generated-image gaps for the first batch of included exercise documents.
 - Requirements: R1-R30
 - Files/components likely touched:
@@ -158,6 +158,8 @@ Each milestone must report exact commands and outcomes before code-review.
 - Plan created for plan-review.
 - M1 implementation added named-population audit validation, five-total image counting, top-five rank 1-5 generation dispositions for this initiative, sixth-image rejection, duplicate muscle-attention rejection, and path-scoped reviewer exceptions.
 - M1 added change-local audit framework evidence at `docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/m1-audit-framework.md`.
+- M2 selected `exercises/band-pull-apart.md` and `exercises/bird-dog.md` as the first generated-image batch.
+- M2 promoted two new band pull-apart images and four new bird dog images with prompt records, provenance rows, page references, and batch audit evidence.
 
 ## Decision log
 
@@ -165,11 +167,14 @@ Each milestone must report exact commands and outcomes before code-review.
 |---|---|---|---|
 | 2026-07-06 | Use three implementation milestones. | Separates validation framework, first batch, and remaining batch closeout. | One page per slice; one giant all-media milestone. |
 | 2026-07-06 | Keep reviewer exception path-scoped. | Prevents accidental global weakening of the exercise-image standard. | Global removal of reviewer fields. |
+| 2026-07-06 | Use band pull-apart and bird dog for M2. | Exercises cover an existing modern-media page and an older sequence-image page while keeping the generated batch reviewable. | Starting with a large all-page generated-media batch. |
+| 2026-07-06 | Leave band pull-apart at four total images for M2. | The fifth generated candidate duplicated existing movement coverage, so it would add count without distinct page value. | Promoting the duplicate chest-height movement candidate solely to reach five images. |
 
 ## Surprises and discoveries
 
 - `tests/test_exercise_image_standard.py` contained temporary-directory checks that ran after fixture cleanup in two older branches; M1 moved those checks inside the fixture lifetime while preserving their original validation purpose.
 - `exercises/tai-chi-basics.md` is part of the named top-five population, so its older fourth-image failure fixture was updated to allow four images while still rejecting a second muscle-attention image.
+- `exercises/band-pull-apart.md` did not need five promoted images in M2 because the generated fifth candidate overlapped the existing movement image.
 
 ## Validation notes
 
@@ -191,6 +196,10 @@ Each milestone must report exact commands and outcomes before code-review.
 - M1 code-review R2: `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed.
 - M1 code-review R2: `python3 tools/checks/check_privacy.py docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed.
 - M1 code-review R2: `git diff --check` passed.
+- M2 unit validation: `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed with 68 tests.
+- M2 markdown validation: `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents` passed.
+- M2 privacy validation: `python3 tools/checks/check_privacy.py exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents` passed.
+- M2 whitespace validation: `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -198,7 +207,7 @@ Not started.
 
 ## Readiness
 
-M1 is closed; M2 is ready for implementation.
+M2 is implemented and ready for code-review. M3 remains pending.
 
 ## Sources
 

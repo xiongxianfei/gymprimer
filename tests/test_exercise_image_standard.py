@@ -1117,6 +1117,91 @@ class ExerciseImageStandardTest(unittest.TestCase):
             with self.subTest(token=token):
                 self.assertIn(token, visual_text)
 
+    def test_top_five_m2_first_batch_has_page_images_prompt_records_and_audit_evidence(self) -> None:
+        provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
+        expected_pages = {
+            "band-pull-apart": {
+                "expected_count": 4,
+                "assets": {
+                    "media/exercises/band-pull-apart/setup.png": (
+                        "exercise_setup_illustration",
+                        "Band pull-apart setup reference with arms forward at chest height and light band slack",
+                    ),
+                    "media/exercises/band-pull-apart/quiet-ribs-neck.png": (
+                        "exercise_movement_illustration",
+                        "Band pull-apart posture reference with relaxed neck, quiet ribs, and open arms at chest height",
+                    ),
+                },
+            },
+            "bird-dog": {
+                "expected_count": 5,
+                "assets": {
+                    "media/exercises/bird-dog/setup.png": (
+                        "exercise_setup_illustration",
+                        "Bird dog setup reference on hands and knees with hands under shoulders, knees under hips, and a long spine",
+                    ),
+                    "media/exercises/bird-dog/level-pelvis-reach.png": (
+                        "exercise_movement_illustration",
+                        "Bird dog movement reference with opposite arm and leg reaching while the pelvis stays level",
+                    ),
+                    "media/exercises/bird-dog/short-reach.png": (
+                        "exercise_movement_illustration",
+                        "Bird dog shorter-reach reference showing a smaller arm and leg reach with a steady trunk",
+                    ),
+                    "media/exercises/bird-dog/muscle-attention.png": (
+                        "exercise_muscle_attention_illustration",
+                        "Bird dog muscle-attention reference with broad highlights on glutes, trunk, shoulder support, and hamstring regions",
+                    ),
+                },
+            },
+        }
+
+        for slug, expected in expected_pages.items():
+            page_path = ROOT / f"exercises/{slug}.md"
+            page_text = page_path.read_text(encoding="utf-8")
+            self.assertEqual(page_text.count(f"](../media/exercises/{slug}/"), expected["expected_count"])
+
+            for asset_path, (purpose, alt_text) in expected["assets"].items():
+                with self.subTest(asset_path=asset_path):
+                    self.assertIn(f"![{alt_text}](../{asset_path})", page_text)
+                    self.assertTrue((ROOT / asset_path).is_file())
+
+                    rows = provenance.get(asset_path, [])
+                    self.assertEqual(len(rows), 1)
+                    row = rows[0]
+                    self.assertEqual(row.get("asset_type"), "ai_generated_raster")
+                    self.assertEqual(row.get("media_purpose"), purpose)
+                    self.assertEqual(row.get("human_reviewer"), "")
+                    self.assertEqual(row.get("review_status"), "approved")
+                    self.assertIn(f"exercises/{slug}.md", split_page_refs(row.get("page_refs", "")))
+
+                    prompt_record = row.get("prompt_record", "")
+                    self.assertEqual(prompt_record, f"media/prompts/exercises/{slug}/{Path(asset_path).stem}.md")
+                    self.assertTrue((ROOT / prompt_record).is_file())
+
+                    prompt_text = (ROOT / prompt_record).read_text(encoding="utf-8")
+                    self.assertIn(f"asset_path: {asset_path}", prompt_text)
+                    self.assertIn("## Exact prompt", prompt_text)
+                    self.assertIn("no text", prompt_text.lower())
+                    self.assertIn("no labels", prompt_text.lower())
+
+        audit_path = ROOT / "docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/evidence/m2-first-batch-audit.md"
+        audit_text = audit_path.read_text(encoding="utf-8")
+        for token in (
+            "`exercises/band-pull-apart.md`",
+            "`exercises/bird-dog.md`",
+            "Coverage-limit outcome",
+            "beginner_comprehension",
+            "setup_value",
+            "muscle_attention_value",
+            "page_value",
+            "readiness",
+            "Generated chest-height path candidate",
+            "rejected_duplicate_coverage",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, audit_text)
+
     def test_m4_exercise_audit_covers_current_exercise_pages(self) -> None:
         audit_path = ROOT / "docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md"
         audit_text = audit_path.read_text(encoding="utf-8")

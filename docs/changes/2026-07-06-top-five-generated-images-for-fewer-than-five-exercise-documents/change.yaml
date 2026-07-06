@@ -1,6 +1,6 @@
 change_id: 2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md
@@ -20,7 +20,7 @@ current_test_spec: specs/top-five-generated-images-for-fewer-than-five-exercise-
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/test-spec-review-r1.md
 current_code_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/code-review-r2.md
-next_stage: implement
+next_stage: code-review
 
 open_findings: []
 
@@ -39,4 +39,5 @@ notes:
   - CR-T5IMG-M1-1 was resolved by replacing safety_setup_value with setup_value and adding regression coverage.
   - CR-T5IMG-M1-2 was resolved by rejecting automatic_generation for ranks 1-5 while preserving named generate_now and first_generation_candidate dispositions.
   - Code-review R2 closed M1 with clean-with-notes.
-  - M2 implementation is next.
+  - M2 implemented the first generated-image batch for band pull-apart and bird dog.
+  - M2 is ready for code-review.
