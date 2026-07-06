@@ -7,6 +7,7 @@ from tools.checks.check_markdown_first import (
     load_media_provenance,
     section_text,
     split_page_refs,
+    validate_exercise_method_guidance,
     validate_exercise_muscle_guidance,
 )
 
@@ -23,9 +24,11 @@ FIRST_SLICE = (
 ROWING_MACHINE_PAGE = ROOT / "exercises/rowing-machine.md"
 BRISK_WALKING_PAGE = ROOT / "exercises/brisk-walking.md"
 EVERYDAY_WALKING_PAGE = ROOT / "principles/everyday-walking.md"
+TAI_CHI_PAGE = ROOT / "exercises/tai-chi-basics.md"
 WALKING_CHANGE_ROOT = ROOT / "docs/changes/2026-07-05-brisk-walking-and-everyday-walking"
 WALKING_MANUAL_PROOF_ROOT = WALKING_CHANGE_ROOT / "manual-proof"
 WALKING_VALIDATION_LEDGER = WALKING_CHANGE_ROOT / "validation-ledger.md"
+TAI_CHI_CHANGE_ROOT = ROOT / "docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise"
 MUSCLE_GUIDANCE_PROOF_SLICE = {
     "cardio equipment": {
         "path": "exercises/rowing-machine.md",
@@ -102,6 +105,20 @@ EVERYDAY_WALKING_REQUIRED_SECTIONS = (
     "## How much counts",
     "## What to pay attention to",
     "## Common mistakes",
+    "## Safety notes",
+    "## Sources",
+)
+TAI_CHI_REQUIRED_SECTIONS = (
+    "## What this is for",
+    "## Before you start",
+    "## Setup",
+    "## Muscles involved",
+    "## Movement breakdown",
+    "## What you should feel",
+    "## Common mistakes",
+    "## How much to do",
+    "## Easier version",
+    "## Harder version",
     "## Safety notes",
     "## Sources",
 )
@@ -197,6 +214,9 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
     def everyday_walking_text(self) -> str:
         return EVERYDAY_WALKING_PAGE.read_text(encoding="utf-8")
 
+    def tai_chi_text(self) -> str:
+        return TAI_CHI_PAGE.read_text(encoding="utf-8")
+
     def test_walking_pages_exist_and_have_required_shape(self) -> None:
         expected = {
             BRISK_WALKING_PAGE: BRISK_WALKING_REQUIRED_SECTIONS,
@@ -210,6 +230,188 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
                 self.assertIn("Disclaimer: GymPrimer is educational content", text)
                 for section in sections:
                     self.assertIn(section, text)
+
+    def test_tai_chi_page_exists_and_has_required_text_only_shape(self) -> None:
+        self.assertTrue(TAI_CHI_PAGE.is_file())
+        text = self.tai_chi_text()
+
+        self.assertTrue(text.startswith("# Tai Chi Basics\n"))
+        self.assertIn("Disclaimer: GymPrimer is educational content", text)
+        for section in TAI_CHI_REQUIRED_SECTIONS:
+            with self.subTest(section=section):
+                self.assertIn(section, text)
+        for step in (
+            "### 1. Ready stance",
+            "### 2. Weight shift",
+            "### 3. Opening movement",
+            "### 4. Return to quiet standing",
+        ):
+            with self.subTest(step=step):
+                self.assertIn(step, text)
+
+        self.assertNotIn("![", text)
+        self.assertNotIn("../media/exercises/tai-chi-basics/", text)
+
+    def test_tai_chi_beginner_scope_and_forbidden_product_language(self) -> None:
+        text = self.tai_chi_text()
+        lower = text.lower()
+        compact = " ".join(lower.split())
+
+        for term in (
+            "low-impact mindful movement",
+            "coordination",
+            "relaxed posture",
+            "breathing",
+            "movement literacy",
+            "ready stance",
+            "weight shift",
+            "opening movement",
+            "return to quiet standing",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, lower)
+
+        for term in (
+            "martial application",
+            "combat application",
+            "competition form",
+            "lineage",
+            "long form",
+            "fall-prevention program",
+            "recovery plan",
+            "treatment protocol",
+            "individualized balance program",
+            "adaptive coaching",
+            "hosted app",
+            "cms",
+            "database",
+            "user account",
+            "user-input flow",
+            "generated public json",
+            "video-first",
+            "generated exercise guidance as source of truth",
+            "cures pain",
+            "fixes posture",
+            "replaces medical care",
+            "guarantees",
+        ):
+            with self.subTest(term=term):
+                self.assertNotIn(term, compact)
+
+    def test_tai_chi_setup_safety_sources_and_source_index(self) -> None:
+        text = self.tai_chi_text()
+        lower = text.lower()
+        sources = (ROOT / "SOURCES.md").read_text(encoding="utf-8")
+
+        for term in (
+            "clear, flat surface",
+            "non-slip",
+            "small, slow movements",
+            "wall or stable chair",
+            "balance is uncertain",
+            "dizziness",
+            "chest pain",
+            "fainting",
+            "unusual shortness of breath",
+            "sharp pain",
+            "worsening symptoms",
+            "loss of balance control",
+            "medical condition",
+            "medication",
+            "injury history",
+            "../red-flags.md",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, lower)
+
+        for source_id in (
+            "nccih-tai-chi",
+            "harvard-tai-chi",
+            "va-tai-chi-qigong",
+            "nhs-balance-exercises",
+            "local-tai-chi-basics-red-flags",
+        ):
+            with self.subTest(source_id=source_id):
+                self.assertIn(f"[{source_id}]:", text)
+                self.assertIn(f"][{source_id}]", text)
+                if not source_id.startswith("local-"):
+                    self.assertIn(f"[{source_id}]:", sources)
+
+    def test_tai_chi_low_load_method_guidance(self) -> None:
+        text = self.tai_chi_text()
+        lower = text.lower()
+        finding_codes = [
+            finding.code for finding in validate_exercise_method_guidance(TAI_CHI_PAGE, text)
+        ]
+
+        self.assertEqual(finding_codes, [])
+        self.assertIn("method type: low_load_control_drill", lower)
+        self.assertIn("beginner starting point:", lower)
+        self.assertIn("3-5 minutes", lower)
+        self.assertIn("effort:", lower)
+        self.assertIn("rest:", lower)
+        self.assertIn("progression:", lower)
+        self.assertIn("first make the movement smoother", lower)
+        self.assertIn("then practice for a little longer", lower)
+        self.assertIn("do not make the movement bigger, deeper, faster, or more complex", lower)
+        self.assertIn("stop if:", lower)
+        self.assertNotIn("based on your", lower)
+
+    def test_tai_chi_broad_muscle_and_feel_guidance(self) -> None:
+        text = self.tai_chi_text()
+        muscle_section = section_text(text, "## Muscles involved")
+        feel_section = section_text(text, "## What you should feel")
+        finding_codes = [
+            finding.code for finding in validate_exercise_muscle_guidance(TAI_CHI_PAGE, text)
+        ]
+
+        self.assertEqual(finding_codes, [])
+        self.assertIn("| Role | Muscle region | What it helps do |", muscle_section)
+        for term in (
+            "Support and weight shift",
+            "Posture and balance",
+            "Relaxed arm motion",
+            "Foot control",
+            "Legs and glutes",
+            "Trunk",
+            "Shoulders and upper back",
+            "Feet and ankles",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, muscle_section)
+        self.assertRegex(feel_section.lower(), r"\b(you may feel|pay attention to|try to keep)\b")
+        self.assertNotIn("activation", muscle_section.lower())
+
+    def test_tai_chi_m2_source_audit_records_required_claim_samples(self) -> None:
+        path = TAI_CHI_CHANGE_ROOT / "source-audit.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for heading in (
+            "# Tai Chi Source Audit",
+            "## Scope",
+            "## Claim Samples",
+            "## Disposition",
+            "## Residual Risk",
+        ):
+            with self.subTest(heading=heading):
+                self.assertIn(heading, text)
+
+        for claim_type in (
+            "setup",
+            "safety",
+            "method",
+            "movement",
+            "muscle",
+            "feel",
+            "stop-condition",
+        ):
+            with self.subTest(claim_type=claim_type):
+                self.assertIn(claim_type, text)
+
+        for token in ("page_path", "claim_type", "supporting_source", "source_fit", "outcome", "residual_risk"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
 
     def test_brisk_walking_page_contract(self) -> None:
         text = self.brisk_walking_text()
