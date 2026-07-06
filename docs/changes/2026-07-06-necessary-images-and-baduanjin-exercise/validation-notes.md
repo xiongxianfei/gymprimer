@@ -31,6 +31,22 @@ Residual risk:
 - M1 does not implement `exercises/baduanjin-basics.md`, generated assets, prompt records, provenance rows, visual-safety review, beginner-comprehension proof, or rollback proof.
 - Real-page integration tests for Baduanjin remain assigned to later milestones once those files exist.
 
+## 2026-07-06 M1 Review Resolution
+
+Scope validated:
+
+- CR-M1-001 forbidden-scope fixture coverage for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording.
+
+Commands run:
+
+| Command | Result |
+|---|---|
+| `python3 -m unittest tests.test_exercise_image_standard` | pass: 26 tests |
+| `python3 -m unittest tests.test_exercise_method_guidance` | pass: 19 tests |
+| `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` | pass: 56 tests |
+| `python3 -m unittest discover -s tests` | pass: 175 tests |
+| `git diff --check` | pass |
+
 ## Sources
 
 - [Necessary Images and Baduanjin Exercise spec](../../../specs/necessary-images-and-baduanjin-exercise.md)

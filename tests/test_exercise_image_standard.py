@@ -424,6 +424,25 @@ class ExerciseImageStandardTest(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("exercise_image_visual_safety_text", result.stdout)
 
+    def test_baduanjin_forbidden_scope_wording_fails(self) -> None:
+        cases = (
+            "This Baduanjin page is a treatment protocol for balance problems.",
+            "This Baduanjin page teaches the full traditional form and all eight brocades.",
+            "This Baduanjin page is a fall-prevention program.",
+            "This Baduanjin page provides adaptive coaching for balance practice.",
+        )
+        for body_text in cases:
+            with self.subTest(body_text=body_text), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                write_sources(root)
+                write_red_flags(root)
+                page = write_exercise_page(root, body_text, slug="baduanjin-basics")
+
+                result = run_check_with_root(root, page)
+
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("RB006", result.stdout)
+
     def test_tai_chi_candidate_pool_records_deferred_alternatives(self) -> None:
         spec = (ROOT / "specs/necessary-images-and-tai-chi-exercise.md").read_text(encoding="utf-8")
         plan = (ROOT / "docs/plans/2026-07-05-necessary-images-and-tai-chi-exercise.md").read_text(encoding="utf-8")

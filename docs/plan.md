@@ -5,8 +5,8 @@
 - [Necessary Images and Baduanjin Exercise](plans/2026-07-06-necessary-images-and-baduanjin-exercise.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: review-resolution
-  - Active context: Code-review R1 requested changes for CR-M1-001; M1 needs review-resolution before M2 can begin.
+  - Current stage: code-review
+  - Active context: CR-M1-001 resolution is implemented; M1 needs code-review rereview before M2 can begin.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

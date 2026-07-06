@@ -60,19 +60,19 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M1
-- Current milestone state: resolution-needed
+- Current milestone state: review-requested
 - Last reviewed milestone: none
-- Review status: code-review R1 requested changes for CR-M1-001
-- Remaining in-scope implementation milestones: M1 resolution, then M2, M3, M4
-- Next stage: review-resolution for M1
+- Review status: CR-M1-001 addressed; code-review rereview pending
+- Remaining in-scope implementation milestones: M1 pending code-review rereview, then M2, M3, M4
+- Next stage: code-review M1 rereview
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 has an unresolved code-review finding, and M2-M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M1 needs code-review rereview, and M2-M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
 
 ## Milestones
 
 ### M1. Validation and Proof Map
 
-- Milestone state: resolution-needed
+- Milestone state: review-requested
 - Goal: Add or update deterministic tests and proof obligations before content and media are introduced.
 - Requirements: R21-R29, R36-R43
 - Files/components likely touched:
@@ -113,6 +113,13 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
   - Visual-safety review, beginner-comprehension proof, and rollback proof are intentionally unchanged for M1; they belong to M4.
 - Code-review R1:
   - Finding CR-M1-001 requires direct BJ-T8 forbidden-scope fixture coverage for treatment, full-form, fall-prevention, and adaptive-coaching wording, or an upstream re-reviewed deferral.
+- Review-resolution:
+  - Added direct Baduanjin forbidden-scope fixtures for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording.
+  - `python3 -m unittest tests.test_exercise_image_standard` passed: 26 tests.
+  - `python3 -m unittest tests.test_exercise_method_guidance` passed: 19 tests.
+  - `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 56 tests.
+  - `python3 -m unittest discover -s tests` passed: 175 tests.
+  - `git diff --check` passed.
 - Risks:
   - Overfitting checks to one page could hide broader media regressions.
 - Rollback/recovery:
@@ -231,6 +238,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Plan-review R1 approved this plan.
 - 2026-07-06: M1 implementation added validation fixtures, path-scoped checker support, candidate-pool evidence, and validation notes; milestone moved to code-review.
 - 2026-07-06: Code-review R1 requested changes for CR-M1-001; M1 moved to review-resolution.
+- 2026-07-06: CR-M1-001 resolution added focused forbidden-scope fixtures and returned M1 to code-review rereview.
 
 ## Decision log
 

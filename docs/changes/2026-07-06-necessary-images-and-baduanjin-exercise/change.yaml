@@ -1,6 +1,6 @@
 change_id: 2026-07-06-necessary-images-and-baduanjin-exercise
 status: active
-current_stage: review-resolution
+current_stage: code-review
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-necessary-images-and-baduanjin-exercise.md
@@ -26,13 +26,12 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md
 
 current_milestone: M1
-current_milestone_state: resolution-needed
+current_milestone_state: review-requested
 last_reviewed_milestone: none
 
-next_stage: review-resolution
+next_stage: code-review
 
-open_findings:
-  - CR-M1-001
+open_findings: []
 
 autoprogression:
   review_fix:
@@ -57,3 +56,6 @@ notes:
   - M1 implementation added path-scoped checker support, Baduanjin image and method fixtures, candidate-pool evidence, validation notes, and explain-change rationale.
   - M1 validation passed locally: `python3 -m unittest tests.test_exercise_method_guidance`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, `git diff --check`, candidate-pool Markdown check, and candidate-pool privacy check.
   - Code-review R1 requested changes for CR-M1-001; current handoff is review-resolution for M1 only, and M2-M4 remain unimplemented.
+  - CR-M1-001 resolution added focused forbidden-scope fixtures for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording.
+  - M1 review-resolution validation passed locally: `python3 -m unittest tests.test_exercise_image_standard`, `python3 -m unittest tests.test_exercise_method_guidance`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, and `git diff --check`.
+  - Current handoff is code-review rereview for M1 only; M2-M4 remain unimplemented.
