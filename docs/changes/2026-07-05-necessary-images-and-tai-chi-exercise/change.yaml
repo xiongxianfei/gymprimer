@@ -1,6 +1,6 @@
 change_id: 2026-07-05-necessary-images-and-tai-chi-exercise
 status: active
-current_stage: verify
+current_stage: pr
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-05-necessary-images-and-tai-chi-exercise.md
@@ -25,7 +25,7 @@ current_test_spec: specs/necessary-images-and-tai-chi-exercise.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/test-spec-review-r1.md
 
-next_stage: verify
+next_stage: pr
 
 open_findings: []
 
@@ -63,3 +63,4 @@ notes:
   - M4 targeted validation passed with focused proof tests, rollback rehearsal, method-guidance tests, Markdown-first check, privacy scan, focused suites, unittest discovery, and diff check; `python3 -m pytest` remains unavailable because pytest is not installed.
   - Code-review M4 R1 was clean with no material findings; all implementation milestones are closed and final closeout starts with explain-change.
   - Explain-change was refreshed for the final reviewed diff and routed the change to verify.
+  - Final local verify passed with branch-ready evidence; PR handoff is next. Hosted CI has not been observed.

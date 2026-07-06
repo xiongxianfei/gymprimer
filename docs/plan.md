@@ -5,8 +5,8 @@
 - [Necessary Images and Tai Chi Exercise](plans/2026-07-05-necessary-images-and-tai-chi-exercise.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: verify
-  - Active context: Explain-change is refreshed after clean M4 code-review; verify is next before PR handoff.
+  - Current stage: pr
+  - Active context: Final local verify passed with branch-ready evidence; PR handoff is next. Hosted CI has not been observed.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

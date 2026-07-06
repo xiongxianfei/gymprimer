@@ -1,5 +1,12 @@
 # Review Resolution: Necessary Images and Tai Chi Exercise
 
+## Closeout status
+
+closed
+
+All recorded findings are closed.
+There are no open findings, no `needs-decision` dispositions, and no required review-resolution work before PR handoff.
+
 ## Open Findings
 
 | Finding ID | Status | Required outcome | Resolution owner |
