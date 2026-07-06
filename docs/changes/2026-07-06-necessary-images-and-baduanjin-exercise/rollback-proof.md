@@ -43,11 +43,17 @@ Rollback steps exercised:
 Commands exercised against the temporary review state:
 
 ```sh
-GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.* python3 tools/checks/check_markdown_first.py /tmp/gymprimer-baduanjin-rollback.*/exercises/baduanjin-basics.md /tmp/gymprimer-baduanjin-rollback.*/media/PROVENANCE.md /tmp/gymprimer-baduanjin-rollback.*/SOURCES.md /tmp/gymprimer-baduanjin-rollback.*/RED-FLAGS.md
-GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.* python3 tools/checks/check_privacy.py /tmp/gymprimer-baduanjin-rollback.*/exercises/baduanjin-basics.md /tmp/gymprimer-baduanjin-rollback.*/media/PROVENANCE.md /tmp/gymprimer-baduanjin-rollback.*/SOURCES.md /tmp/gymprimer-baduanjin-rollback.*/RED-FLAGS.md
+tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001
+if [ -e "$tmp" ]; then rm -rf "$tmp"; fi
+mkdir -p "$tmp/exercises" "$tmp/media"
+awk 'NR < 22 || NR > 32' exercises/baduanjin-basics.md > "$tmp/exercises/baduanjin-basics.md"
+awk '!/media\/exercises\/baduanjin-basics\//' media/PROVENANCE.md > "$tmp/media/PROVENANCE.md"
+cp SOURCES.md RED-FLAGS.md "$tmp"/
+GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_markdown_first.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"
+GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_privacy.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"
 ```
 
-Result: pass.
+Result: pass; Markdown-first checked 4 Markdown files, and privacy checked 4 files.
 
 ## Cleanup Contract
 

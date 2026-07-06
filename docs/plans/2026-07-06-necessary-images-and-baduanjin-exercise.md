@@ -60,13 +60,13 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: resolution-needed
+- Current milestone state: review-requested
 - Last reviewed milestone: M4
-- Review status: code-review M4 R1 requested changes for CR-M4-001
-- Remaining in-scope implementation milestones: M4 resolution
-- Next stage: review-resolution for CR-M4-001
+- Review status: CR-M4-001 resolution implemented; code-review rereview pending
+- Remaining in-scope implementation milestones: M4 pending code-review rereview
+- Next stage: code-review M4 rereview
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M4 has an unresolved rollback-proof finding, and final holistic review, final verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M4 code-review rereview, final holistic review, final verification, and PR handoff have not happened.
 
 ## Milestones
 
@@ -223,7 +223,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ### M4. Review Evidence and Final Local Readiness
 
-- Milestone state: resolution-needed
+- Milestone state: review-requested
 - Goal: Record manual visual-safety review, beginner comprehension proof, rollback proof, and final local validation evidence.
 - Requirements: R40-R43
 - Files/components likely touched:
@@ -249,8 +249,8 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - Validation results:
   - `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup` failed before implementation because proof files were missing.
   - `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup` passed after implementation.
-  - `GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.* python3 tools/checks/check_markdown_first.py /tmp/gymprimer-baduanjin-rollback.*/exercises/baduanjin-basics.md /tmp/gymprimer-baduanjin-rollback.*/media/PROVENANCE.md /tmp/gymprimer-baduanjin-rollback.*/SOURCES.md /tmp/gymprimer-baduanjin-rollback.*/RED-FLAGS.md` passed: checked 4 Markdown files.
-  - `GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.* python3 tools/checks/check_privacy.py /tmp/gymprimer-baduanjin-rollback.*/exercises/baduanjin-basics.md /tmp/gymprimer-baduanjin-rollback.*/media/PROVENANCE.md /tmp/gymprimer-baduanjin-rollback.*/SOURCES.md /tmp/gymprimer-baduanjin-rollback.*/RED-FLAGS.md` passed: checked 4 files.
+  - `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_markdown_first.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"` passed after CR-M4-001 correction: checked 4 Markdown files.
+  - `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_privacy.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"` passed after CR-M4-001 correction: checked 4 files.
   - `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 84 tests.
   - `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` passed: checked 22 Markdown files.
   - `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` passed: checked 26 files.
@@ -262,6 +262,10 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
   - No generated asset, prompt-record, provenance, or page-reference changes were needed for M4.
 - Code-review:
   - Finding CR-M4-001 requires the rollback proof to record a reproducible temporary-root command sequence and rerun the focused rollback Markdown-first and privacy checks.
+- Review-resolution:
+  - Updated rollback proof, validation notes, plan evidence, and change metadata to record concrete temporary-root commands for `/tmp/gymprimer-baduanjin-rollback.cr-m4-001`.
+  - Reran the focused rollback Markdown-first and privacy checks from that concrete temporary root.
+  - Reran M4 proof tests, full local unittest discovery, Markdown-first checks, privacy checks, and `git diff --check`.
 - Risks:
   - Beginner comprehension proof could be too vague or store private health information.
 - Rollback/recovery:
@@ -308,6 +312,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Code-review M3 R1 closed M3; next stage is M4 implementation.
 - 2026-07-06: M4 implementation added beginner-comprehension proof, rollback proof, proof-record tests, temporary rollback validation, and final local validation evidence; milestone moved to code-review.
 - 2026-07-06: Code-review M4 R1 requested changes for CR-M4-001; M4 moved to review-resolution.
+- 2026-07-06: CR-M4-001 resolution recorded concrete rollback commands and returned M4 to code-review rereview.
 
 ## Decision log
 

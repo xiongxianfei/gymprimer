@@ -119,9 +119,10 @@ Scope validated:
 
 Temporary rollback rehearsal:
 
-- Temporary root: `/tmp/gymprimer-baduanjin-rollback.*`
-- `GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.* python3 tools/checks/check_markdown_first.py /tmp/gymprimer-baduanjin-rollback.*/exercises/baduanjin-basics.md /tmp/gymprimer-baduanjin-rollback.*/media/PROVENANCE.md /tmp/gymprimer-baduanjin-rollback.*/SOURCES.md /tmp/gymprimer-baduanjin-rollback.*/RED-FLAGS.md`: pass, checked 4 Markdown files.
-- `GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.* python3 tools/checks/check_privacy.py /tmp/gymprimer-baduanjin-rollback.*/exercises/baduanjin-basics.md /tmp/gymprimer-baduanjin-rollback.*/media/PROVENANCE.md /tmp/gymprimer-baduanjin-rollback.*/SOURCES.md /tmp/gymprimer-baduanjin-rollback.*/RED-FLAGS.md`: pass, checked 4 files.
+- Temporary root: `/tmp/gymprimer-baduanjin-rollback.cr-m4-001`
+- Setup command: `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; if [ -e "$tmp" ]; then rm -rf "$tmp"; fi; mkdir -p "$tmp/exercises" "$tmp/media"; awk 'NR < 22 || NR > 32' exercises/baduanjin-basics.md > "$tmp/exercises/baduanjin-basics.md"; awk '!/media\/exercises\/baduanjin-basics\//' media/PROVENANCE.md > "$tmp/media/PROVENANCE.md"; cp SOURCES.md RED-FLAGS.md "$tmp"/`
+- `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_markdown_first.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"`: pass, checked 4 Markdown files.
+- `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_privacy.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"`: pass, checked 4 files.
 
 Commands run:
 
@@ -129,6 +130,8 @@ Commands run:
 |---|---|
 | `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup` | fail before implementation: proof files missing |
 | `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup` | pass after adding proof files |
+| `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_markdown_first.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"` | pass after CR-M4-001 correction: checked 4 Markdown files |
+| `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_privacy.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"` | pass after CR-M4-001 correction: checked 4 files |
 | `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/beginner-comprehension-proof.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/rollback-proof.md` | pass after adding claim-level safety source reference: checked 2 Markdown files |
 | `python3 tools/checks/check_privacy.py docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/beginner-comprehension-proof.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/rollback-proof.md` | pass: checked 2 files |
 | `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` | pass: 84 tests |
@@ -143,6 +146,31 @@ Residual risk:
 
 - M4 records a non-identifying reviewer simulation for beginner comprehension.
 - This does not replace future public-reader feedback after publication.
+
+## 2026-07-06 M4 Review Resolution
+
+Scope validated:
+
+- CR-M4-001 rollback command evidence now uses concrete temporary-root commands for `/tmp/gymprimer-baduanjin-rollback.cr-m4-001`;
+- the focused temporary rollback Markdown-first and privacy checks pass from the recorded command sequence;
+- M4 proof tests, full local unit discovery, Markdown-first checks, privacy checks, and whitespace checks pass after the correction.
+
+Commands run:
+
+| Command | Result |
+|---|---|
+| `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_markdown_first.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"` | pass: checked 4 Markdown files |
+| `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_privacy.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"` | pass: checked 4 files |
+| `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup` | pass: 2 tests |
+| `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` | pass: 84 tests |
+| `python3 -m unittest discover -s tests` | pass: 184 tests |
+| `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` | pass: checked 25 Markdown files |
+| `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` | pass: checked 29 files |
+| `git diff --check` | pass |
+
+Residual risk:
+
+- Code-review rereview is still required to close CR-M4-001.
 
 ## Sources
 

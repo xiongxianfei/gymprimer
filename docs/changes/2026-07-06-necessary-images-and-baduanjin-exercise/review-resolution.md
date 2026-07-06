@@ -2,14 +2,14 @@
 
 ## Status
 
-M4 review-resolution required for CR-M4-001.
+M4 review-resolution implemented for CR-M4-001; code-review rereview pending.
 
 ## Findings
 
 | Finding | Status | Resolution |
 |---|---|---|
 | CR-M1-001 | resolved by `reviews/code-review-r2.md` | Added focused Baduanjin forbidden-scope fixtures for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording. |
-| CR-M4-001 | open | Rollback proof must record a reproducible temporary-root command sequence and rerun the focused rollback checks. |
+| CR-M4-001 | resolved pending code-review rereview | Updated rollback proof, validation notes, plan evidence, and change metadata with concrete temporary-root commands and reran focused rollback checks. |
 
 ## CR-M1-001
 
@@ -39,9 +39,24 @@ Source review: `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/
 
 Required outcome: M4 rollback evidence must record a reproducible temporary-root command sequence that matches the command actually exercised, and the focused rollback Markdown-first and privacy checks must pass from that recorded sequence.
 
-Resolution: pending.
+Resolution:
 
-Validation: pending.
+- Replaced the wildcard `GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.*` evidence with a concrete temporary root: `/tmp/gymprimer-baduanjin-rollback.cr-m4-001`.
+- Updated the rollback proof to record the setup commands that create the temporary text-only page and remove Baduanjin provenance rows.
+- Updated validation notes, plan evidence, and change metadata to use the concrete temporary-root command record.
+
+Validation:
+
+| Command | Result |
+|---|---|
+| `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_markdown_first.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"` | pass: checked 4 Markdown files |
+| `tmp=/tmp/gymprimer-baduanjin-rollback.cr-m4-001; GYMPRIMER_ROOT="$tmp" python3 tools/checks/check_privacy.py "$tmp/exercises/baduanjin-basics.md" "$tmp/media/PROVENANCE.md" "$tmp/SOURCES.md" "$tmp/RED-FLAGS.md"` | pass: checked 4 files |
+| `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup` | pass: 2 tests |
+| `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` | pass: 84 tests |
+| `python3 -m unittest discover -s tests` | pass: 184 tests |
+| `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` | pass: checked 25 Markdown files |
+| `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` | pass: checked 29 files |
+| `git diff --check` | pass |
 
 ## Sources
 

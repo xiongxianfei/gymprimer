@@ -26,13 +26,12 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md
 
 current_milestone: M4
-current_milestone_state: resolution-needed
+current_milestone_state: review-requested
 last_reviewed_milestone: M4
 
-next_stage: review-resolution
+next_stage: code-review
 
-open_findings:
-  - CR-M4-001
+open_findings: []
 
 autoprogression:
   review_fix:
@@ -67,6 +66,8 @@ notes:
   - M3 validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m3_images_are_local_prompt_backed_and_reviewed`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`, `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`, and `git diff --check`.
   - Code-review M3 R1 closed M3 with no material findings.
   - M4 implementation added beginner-comprehension proof, rollback proof, proof-record tests, temporary rollback validation, and final local validation evidence.
-  - M4 validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup`, temporary rollback Markdown-first and privacy checks with `GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.*`, `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/`, `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/`, and `git diff --check`.
+  - M4 validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup`, temporary rollback Markdown-first and privacy checks from `/tmp/gymprimer-baduanjin-rollback.cr-m4-001`, `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/`, `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/`, and `git diff --check`.
   - Code-review M4 R1 requested changes for CR-M4-001 because the rollback proof records wildcard temp-root commands as passing, but the recorded Markdown-first command fails when run literally.
-  - Current handoff is review-resolution for CR-M4-001; final closeout is not ready until M4 is closed, final holistic review, and final verification complete.
+  - CR-M4-001 resolution replaced the wildcard rollback evidence with concrete temporary-root commands for `/tmp/gymprimer-baduanjin-rollback.cr-m4-001` and reran focused rollback Markdown-first and privacy checks.
+  - CR-M4-001 resolution validation passed locally: `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup`, concrete temporary rollback Markdown-first and privacy checks, `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, full Markdown-first and privacy checks, and `git diff --check`.
+  - Current handoff is code-review rereview for M4; final closeout is not ready until M4 is closed, final holistic review, and final verification complete.
