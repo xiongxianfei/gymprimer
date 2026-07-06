@@ -1,6 +1,6 @@
 change_id: 2026-07-06-exercise-document-best-practice-image-prioritization
 status: active
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md
@@ -24,9 +24,9 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/test-spec-review-r1.md
 
 current_milestone: M2
-current_milestone_state: planned
+current_milestone_state: review-requested
 last_reviewed_milestone: M1
-next_stage: implement
+next_stage: code-review
 
 open_findings: []
 
@@ -56,3 +56,6 @@ notes:
   - CR-EDIP-M1-1 resolution validation passed locally: `python3 -m unittest tests.test_exercise_document_image_prioritization`, `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`, `python3 tools/checks/check_privacy.py -- docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests`, and `git diff --check`.
   - CR-EDIP-M1-1 state-sync and broader changed-artifact Markdown/privacy checks passed locally before M1 code-review re-review handoff.
   - Code-review M1 R2 confirmed CR-EDIP-M1-1 resolved, closed M1, and routed to implement M2.
+  - M2 implemented the first page-specific audit slice for `exercises/bird-dog.md`, preserved the existing sequence image, selected zero generated images, and added focused M2 validator tests.
+  - M2 validation passed locally: `python3 -m unittest tests.test_exercise_document_image_prioritization tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`, `python3 tools/checks/check_privacy.py -- exercises media docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`, and `git diff --check`.
+  - M2 state-sync and broader changed-artifact Markdown/privacy checks passed locally before code-review handoff.

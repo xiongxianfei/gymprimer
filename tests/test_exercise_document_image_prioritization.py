@@ -6,6 +6,7 @@ from tools.checks.exercise_document_image_prioritization import (
     ACCEPTED_REPLACEMENT_REASONS,
     evaluation_population,
     image_count_by_exercise,
+    validate_slice_scope,
     validate_audit_record,
 )
 
@@ -172,6 +173,69 @@ class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
         errors = validate_audit_record(premature_update)
 
         self.assertIn("template_update_requires_later_approval", errors)
+
+    def test_image_count_exception_required_for_four_or_five_images(self) -> None:
+        four_images_without_exception = valid_audit_record(
+            current_image_count=3,
+            generation_decision={
+                "selected_count": 1,
+                "decision": "generate_minimum_needed_subset",
+                "rationale": "Fixture would end with four images.",
+                "selected_purposes": ["exercise_setup_illustration"],
+            },
+        )
+        four_images_with_exception = valid_audit_record(
+            current_image_count=3,
+            image_count_exception_approval="docs/plans/fixture.md#approved-fourth-image",
+            generation_decision={
+                "selected_count": 1,
+                "decision": "generate_minimum_needed_subset",
+                "rationale": "Fixture has approved page-specific exception.",
+                "selected_purposes": ["exercise_setup_illustration"],
+            },
+        )
+
+        self.assertIn("image_count_exception_required_for_four_or_five_images", validate_audit_record(four_images_without_exception))
+        self.assertEqual(validate_audit_record(four_images_with_exception), [])
+
+    def test_candidate_purposes_and_selected_muscle_attention_are_bounded(self) -> None:
+        invalid_candidate_purpose = valid_audit_record(
+            candidate_table=[candidate(1, purpose="pattern_alignment_illustration"), *[candidate(rank) for rank in range(2, 11)]]
+        )
+        second_muscle_attention = valid_audit_record(
+            existing_image_purposes=["exercise_muscle_attention_illustration"],
+            generation_decision={
+                "selected_count": 1,
+                "decision": "generate_minimum_needed_subset",
+                "rationale": "Fixture would add a second muscle-attention image.",
+                "selected_purposes": ["exercise_muscle_attention_illustration"],
+            },
+        )
+
+        self.assertIn("candidate_purpose_not_accepted: rank 1", validate_audit_record(invalid_candidate_purpose))
+        self.assertIn("second_muscle_attention_image_not_allowed", validate_audit_record(second_muscle_attention))
+
+    def test_forbidden_image_adjacent_claims_fail_audit_validation(self) -> None:
+        forbidden_candidate = valid_audit_record(
+            candidate_table=[
+                candidate(1, candidate_image="Treatment protocol correction image", why_it_matters="Promises a cure for pain."),
+                *[candidate(rank) for rank in range(2, 11)],
+            ]
+        )
+
+        errors = validate_audit_record(forbidden_candidate)
+
+        self.assertIn("candidate_forbidden_claim: rank 1 treatment", errors)
+        self.assertIn("candidate_forbidden_claim: rank 1 cure", errors)
+
+    def test_first_slice_scope_is_one_page_or_deliberately_small_batch(self) -> None:
+        one_page = validate_slice_scope(["exercises/bird-dog.md"])
+        small_batch = validate_slice_scope(["exercises/bird-dog.md", "exercises/dead-bug.md"], rationale="paired sequence-image audit")
+        broad_batch = validate_slice_scope(["exercises/bird-dog.md", "exercises/dead-bug.md", "exercises/glute-bridge.md"])
+
+        self.assertEqual(one_page, [])
+        self.assertEqual(small_batch, [])
+        self.assertIn("first_slice_scope_too_broad_without_rationale", broad_batch)
 
 
 if __name__ == "__main__":

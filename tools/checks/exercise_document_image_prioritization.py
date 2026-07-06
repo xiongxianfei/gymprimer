@@ -41,6 +41,26 @@ SCORE_FIELDS = (
     "readiness",
 )
 
+ACCEPTED_PURPOSES = {
+    "exercise_setup_illustration",
+    "exercise_movement_illustration",
+    "exercise_muscle_attention_illustration",
+}
+
+LEGACY_COMPATIBLE_PURPOSES = {
+    "equipment_identification",
+    "key_movement_illustration",
+}
+
+FORBIDDEN_CLAIM_TERMS = (
+    "treatment",
+    "cure",
+    "individualized coaching",
+    "clinical assessment",
+    "recovery-care protocol",
+    "workout planner",
+)
+
 ACCEPTED_REPLACEMENT_REASONS = {
     "unsafe_visual_implication",
     "missing_required_provenance_or_prompt_record",
@@ -110,6 +130,8 @@ def validate_audit_record(record: Mapping[str, object]) -> list[str]:
     if record.get("template_update_status") != "deferred" and "template_update_approval" not in record:
         errors.append("template_update_requires_later_approval")
 
+    errors.extend(validate_generation_decision(record))
+
     return errors
 
 
@@ -128,6 +150,10 @@ def validate_candidate_table(candidate_table: Sequence[object], record: Mapping[
                 errors.append(f"candidate_missing_required_field: rank {rank} {field}")
         errors.extend(validate_candidate_scores(raw_candidate))
         disposition = str(raw_candidate.get("disposition", ""))
+        purpose = str(raw_candidate.get("purpose", ""))
+        if purpose and purpose not in ACCEPTED_PURPOSES:
+            errors.append(f"candidate_purpose_not_accepted: rank {rank}")
+        errors.extend(validate_forbidden_claims(raw_candidate, rank))
         if isinstance(rank, int) and rank <= 5 and disposition == "automatic_generation":
             errors.append(f"top_five_candidate_must_not_be_automatic_generation: rank {rank}")
         elif isinstance(rank, int) and rank <= 5 and disposition in GENERATE_DISPOSITIONS:
@@ -136,6 +162,66 @@ def validate_candidate_table(candidate_table: Sequence[object], record: Mapping[
             if not raw_candidate.get("downstream_churn_rationale"):
                 errors.append(f"sixth_candidate_generation_missing_churn_rationale: rank {rank}")
     return errors
+
+
+def validate_generation_decision(record: Mapping[str, object]) -> list[str]:
+    errors: list[str] = []
+    generation_decision = record.get("generation_decision")
+    if not isinstance(generation_decision, Mapping):
+        if "generation_decision" in record:
+            errors.append("generation_decision_must_be_mapping")
+        return errors
+
+    selected_count = generation_decision.get("selected_count", 0)
+    if not isinstance(selected_count, int):
+        errors.append("generation_selected_count_must_be_integer")
+        return errors
+
+    current_image_count = record.get("current_image_count", 0)
+    if not isinstance(current_image_count, int):
+        errors.append("current_image_count_must_be_integer")
+        return errors
+
+    final_image_count = current_image_count + selected_count
+    if final_image_count in {4, 5} and not record.get("image_count_exception_approval"):
+        errors.append("image_count_exception_required_for_four_or_five_images")
+    if final_image_count > 5:
+        errors.append("image_count_exceeds_first_slice_limit")
+
+    selected_purposes = generation_decision.get("selected_purposes", [])
+    if not isinstance(selected_purposes, Sequence) or isinstance(selected_purposes, (str, bytes)):
+        errors.append("generation_selected_purposes_must_be_list")
+        return errors
+
+    for purpose in selected_purposes:
+        if purpose not in ACCEPTED_PURPOSES:
+            errors.append(f"generation_purpose_not_accepted: {purpose}")
+
+    existing_purposes = record.get("existing_image_purposes", [])
+    if not isinstance(existing_purposes, Sequence) or isinstance(existing_purposes, (str, bytes)):
+        errors.append("existing_image_purposes_must_be_list")
+        return errors
+
+    muscle_attention_count = sum(
+        1
+        for purpose in (*existing_purposes, *selected_purposes)
+        if purpose == "exercise_muscle_attention_illustration"
+    )
+    if muscle_attention_count > 1:
+        errors.append("second_muscle_attention_image_not_allowed")
+    return errors
+
+
+def validate_forbidden_claims(candidate: Mapping[str, object], rank: object) -> list[str]:
+    candidate_text = " ".join(
+        str(candidate.get(field, ""))
+        for field in ("candidate_image", "why_it_matters", "page_section_supported", "disposition")
+    ).lower()
+    return [
+        f"candidate_forbidden_claim: rank {rank} {term}"
+        for term in FORBIDDEN_CLAIM_TERMS
+        if term in candidate_text
+    ]
 
 
 def validate_candidate_scores(candidate: Mapping[str, object]) -> list[str]:
@@ -156,6 +242,14 @@ def validate_candidate_scores(candidate: Mapping[str, object]) -> list[str]:
     if "score" in candidate and candidate.get("score") != total:
         errors.append(f"candidate_score_mismatch: rank {rank}")
     return errors
+
+
+def validate_slice_scope(exercise_documents: Sequence[str], rationale: str = "") -> list[str]:
+    if len(exercise_documents) <= 1:
+        return []
+    if len(exercise_documents) == 2 and rationale.strip():
+        return []
+    return ["first_slice_scope_too_broad_without_rationale"]
 
 
 def validate_image_decisions(image_decisions: Sequence[object]) -> list[str]:

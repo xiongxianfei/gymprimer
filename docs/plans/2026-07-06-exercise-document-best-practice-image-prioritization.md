@@ -56,13 +56,13 @@ It does not broaden the exercise-image standard's count policy.
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
-- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution.
+- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution; M2 implementation complete and awaiting code-review.
 - Remaining in-scope implementation milestones: M2, M3
-- Next stage: implement M2
+- Next stage: code-review M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M2 and M3 remain unimplemented; explain-change refresh, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M2 is implemented but not reviewed; M3, explain-change refresh, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -97,7 +97,7 @@ It does not broaden the exercise-image standard's count policy.
 
 ### M2. First Page-Specific Evaluation Slice
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: apply the audit to one selected exercise document or deliberately small page batch, record top-10 candidates, and choose the minimum-needed generated subset.
 - Requirements: R3-R18, R23, AC2-AC6.
 - Likely files:
@@ -119,7 +119,7 @@ It does not broaden the exercise-image standard's count policy.
   - `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
   - `python3 tools/checks/check_privacy.py -- exercises media docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
   - `git diff --check`
-- Result: pending.
+- Result: Implemented. Applied the audit to `exercises/bird-dog.md`, recorded the page-local top-10 candidate backlog, preserved the existing sequence image, selected zero generated images for this slice, and added M2 validation coverage for image-count exceptions, accepted purposes, second muscle-attention prevention, forbidden claims, and small-slice scope.
 - Risks: generated images create visual overload or unsupported claims.
 - Rollback: remove page references, unused generated assets, prompt records, provenance rows, and keep the selected page readable as text.
 
@@ -184,6 +184,7 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - 2026-07-06: Code-review M1 R1 requested changes for CR-EDIP-M1-1; M1 routes to review-resolution.
 - 2026-07-06: Review-resolution addressed CR-EDIP-M1-1 by rejecting top-five direct generation dispositions and adding focused tests; M1 routed back to code-review.
 - 2026-07-06: Code-review M1 R2 confirmed CR-EDIP-M1-1 resolved, closed M1, and routed to implement M2.
+- 2026-07-06: M2 implemented the first page-specific audit slice for `exercises/bird-dog.md`, selected zero generated images, and routed to code-review M2.
 
 ## Decision log
 
@@ -192,10 +193,12 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 | 2026-07-06 | Use a three-milestone implementation plan. | Separates audit proof, first page-specific slice, and manual closeout evidence. | Generate images in the planning stage. |
 | 2026-07-06 | Keep template update out of M1. | The accepted proposal requires first-slice criteria to be proven change-locally first. | Update `docs/templates/exercise-card.md` immediately. |
 | 2026-07-06 | Add a focused helper instead of extending the Markdown-first checker. | M1 needs deterministic audit-record validation, not product-page validation. | Overload `check_markdown_first.py` with change-local audit schema rules. |
+| 2026-07-06 | Use Bird Dog as the first M2 page-specific audit. | It is in the fewer-than-five evaluation population and has an older sequence image that exercises the preserve-existing-image path without requiring generated media. | Start with a page that needs image generation. |
 
 ## Surprises and discoveries
 
 - The existing exercise-image audit from 2026-07-03 is now stale for several pages because later page-specific image work added images. M1 records the current image counts directly in this change-local evidence.
+- The first page-specific M2 audit can select zero generated images while still recording a top-10 backlog; this preserves the evaluation-trigger distinction.
 
 ## Validation notes
 
@@ -211,15 +214,23 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - CR-EDIP-M1-1 resolution validation passed with `python3 tools/checks/check_privacy.py -- docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests`.
 - CR-EDIP-M1-1 resolution validation passed with `git diff --check`.
 - CR-EDIP-M1-1 state-sync inspection passed with `rg -n "Current stage: code-review M1 re-review|Current milestone state: review-requested|Next stage: code-review M1 re-review|current_stage: code-review|current_milestone_state: review-requested|next_stage: code-review|open_findings: \\[\\]|CR-EDIP-M1-1" docs/plan.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/review-resolution.md`.
+- M2 validation passed with `python3 -m unittest tests.test_exercise_document_image_prioritization tests.test_exercise_image_standard tests.test_markdown_first_real_pages`.
+- M2 validation passed with `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`.
+- M2 validation passed with `python3 tools/checks/check_privacy.py -- exercises media docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`.
+- M2 validation passed with `git diff --check`.
+- M2 state-sync inspection passed with `rg -n "Current stage: code-review M2|Current milestone: M2|Current milestone state: review-requested|Next stage: code-review M2|current_stage: code-review|current_milestone: M2|current_milestone_state: review-requested|next_stage: code-review|M2 implemented" docs/plan.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml`.
+- M2 broader changed-artifact Markdown-first check passed with `python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.test.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/plan.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests/test_exercise_document_image_prioritization.py tools/checks/exercise_document_image_prioritization.py`.
+- M2 broader changed-artifact privacy check passed with `python3 tools/checks/check_privacy.py -- docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.test.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/plan.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests tools`.
 
 ## Outcome and retrospective
 
 M1 is closed.
-M2 and M3 remain unimplemented.
+M2 implementation is ready for code-review.
+M3 remains unimplemented.
 
 ## Readiness
 
-Ready for implementation of M2.
+Ready for code-review of M2.
 Not ready for explain-change refresh, verify, PR handoff, or final closeout.
 
 ## Sources
