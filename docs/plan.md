@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Exercise Document Best-Practice Image Prioritization](plans/2026-07-06-exercise-document-best-practice-image-prioritization.md)
+  - Status: active
+  - Plan lifecycle state: active
+  - Current stage: code-review M1
+  - Active context: M1 implemented audit inventory/proof-contract tests, audit helper, and change-local audit criteria evidence; targeted local validation passed and M1 is ready for code-review.
+
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active

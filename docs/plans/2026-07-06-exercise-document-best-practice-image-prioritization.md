@@ -1,0 +1,221 @@
+# Plan: Exercise Document Best-Practice Image Prioritization
+
+## Status
+
+- Status: active
+- Plan lifecycle state: active
+- Terminal disposition: not-applicable
+
+## Purpose / big picture
+
+Sequence the approved per-exercise-document image-prioritization contract into small, reviewable implementation work.
+The plan starts with audit proof and validation infrastructure, then handles one selected exercise document or a deliberately small page batch.
+It treats documents with fewer than five images as an evaluation population, not a generation target.
+
+## Source artifacts
+
+- Proposal: `../proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md`
+- Proposal review:
+  - `../changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/proposal-review-r1.md`
+  - `../changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/proposal-review-r2.md`
+- Review resolution: `../changes/2026-07-06-exercise-document-best-practice-image-prioritization/review-resolution.md`
+- Spec: `../../specs/exercise-document-best-practice-image-prioritization.md`
+- Spec review: `../changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/spec-review-r1.md`
+- Architecture assessment: `../changes/2026-07-06-exercise-document-best-practice-image-prioritization/architecture-assessment.md`
+- Governing exercise-image spec: `../../specs/exercise-image-standard.md`
+- Governing media ADRs:
+  - `../adr/2026-07-03-exercise-document-image-purposes.md`
+  - `../adr/2026-07-03-generated-raster-prompt-records.md`
+
+## Context and orientation
+
+Exercise pages live under `exercises/`.
+Generated exercise media lives under `media/exercises/<exercise-slug>/`, prompt records live under `media/prompts/exercises/<exercise-slug>/`, and generated raster provenance is centralized in `media/PROVENANCE.md`.
+The current Markdown-first checker and exercise-image tests already govern media paths, prompt records, provenance, image purposes, one muscle-attention image, and image-count exceptions.
+
+This plan adds a workflow layer around page-local audit and candidate prioritization.
+It does not broaden the exercise-image standard's count policy.
+
+## Non-goals
+
+- Do not generate images before test-spec review and implementation milestones authorize them.
+- Do not require exercise documents to reach five images.
+- Do not evaluate a repository-wide top-10 list.
+- Do not replace existing acceptable images for style alone.
+- Do not update `docs/templates/exercise-card.md` before first-slice audit criteria are proven.
+- Do not add new exercise pages, hosted app behavior, video-first media, clinical behavior, or personalized coaching.
+
+## Requirements covered
+
+- R1-R8: M1 records the evaluation population, audit schema, top-10 table fields, and candidate scoring rules.
+- R9-R18: M1 and M2 separate top-five backlog from generated subset and preserve image-count, purpose, prompt/provenance, Markdown-source, and safety boundaries.
+- R19-R22: M1 records older-image preservation and change-local proof before template updates.
+- R23-R26: M2 and M3 keep implementation slices small, prove rollback, and preserve non-goals.
+- AC1-AC8: M1-M3 plus review evidence provide acceptance proof before PR handoff.
+
+## Current Handoff Summary
+
+- Current milestone: M1
+- Current milestone state: review-requested
+- Last reviewed milestone: none
+- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; M1 implementation complete and awaiting code-review.
+- Remaining in-scope implementation milestones: M1, M2, M3
+- Next stage: code-review M1
+- Final closeout readiness: not ready
+- Reason final closeout is or is not ready: M1 is implemented but not reviewed; M2, M3, explain-change refresh, verify, and PR handoff remain.
+
+## Milestones
+
+### M1. Audit Inventory and Proof Contract
+
+- Milestone state: review-requested
+- Goal: add or update tests and evidence surfaces for the evaluation population, page-local audit fields, top-10 candidate table, top-five backlog semantics, and older-image replacement reasons.
+- Requirements: R1-R9, R19-R22, AC1-AC3, AC5.
+- Likely files:
+  - `tests/test_exercise_document_image_prioritization.py`
+  - `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/evidence/`
+  - possible focused helper in `tools/checks/` only if current checks cannot validate audit artifacts.
+- Tests:
+  - exercise document image counts identify fewer-than-five pages as evaluation population;
+  - fewer-than-five status does not require generated images;
+  - page-local audit fixtures require candidate fields and scoring dimensions;
+  - top-five rows are backlog, not generation target;
+  - style-only replacement rationale fails.
+- Steps:
+  - Add failing fixtures or tests for audit inventory and candidate-table behavior.
+  - Implement the smallest local validation or proof helper needed for page-local audit artifacts.
+  - Create first-slice audit criteria evidence under the change root.
+  - Do not edit exercise pages or media assets in this milestone.
+- Validation:
+  - `python3 -m unittest tests.test_exercise_document_image_prioritization`
+  - `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
+  - `python3 tools/checks/check_privacy.py -- docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests`
+  - `git diff --check`
+- Result: Implemented. Added focused M1 tests, a pure audit helper, M1 audit criteria evidence, and lifecycle state updates. No exercise pages or media assets were changed.
+- Risks: audit helper over-specifies the first slice or accidentally treats five images as required.
+- Rollback: remove the focused helper/tests/evidence and leave exercise content and media unchanged.
+
+### M2. First Page-Specific Evaluation Slice
+
+- Milestone state: planned
+- Goal: apply the audit to one selected exercise document or deliberately small page batch, record top-10 candidates, and choose the minimum-needed generated subset.
+- Requirements: R3-R18, R23, AC2-AC6.
+- Likely files:
+  - selected `exercises/*.md` pages only when page-local edits are approved by the audit;
+  - `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/evidence/`;
+  - optional `media/exercises/<exercise-slug>/`, `media/prompts/exercises/<exercise-slug>/`, and `media/PROVENANCE.md` only if the approved minimum-needed subset includes generated images.
+- Tests:
+  - selected page has page-local audit and top-10 table;
+  - any generated subset stays within zero-to-three images unless approved page-specific exception exists;
+  - no second muscle-attention image is introduced;
+  - prompt/provenance/alt/page-reference checks cover generated assets when present.
+- Steps:
+  - Identify selected page or small batch from the fewer-than-five evaluation population.
+  - Record image count, current image purposes, source support, existing-image preservation or replacement reasons, top-10 candidate table, and generation decision.
+  - Add only the minimum-needed generated subset, if any, after prompt records and provenance rows are ready.
+  - Keep setup, movement, muscles, safety, and citations in Markdown.
+- Validation:
+  - `python3 -m unittest tests.test_exercise_document_image_prioritization tests.test_exercise_image_standard tests.test_markdown_first_real_pages`
+  - `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
+  - `python3 tools/checks/check_privacy.py -- exercises media docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
+  - `git diff --check`
+- Result: pending.
+- Risks: generated images create visual overload or unsupported claims.
+- Rollback: remove page references, unused generated assets, prompt records, provenance rows, and keep the selected page readable as text.
+
+### M3. Review Evidence and Closeout
+
+- Milestone state: planned
+- Goal: record visual-safety review, source-support audit, beginner-comprehension proof, rollback proof, and final local validation for the first slice.
+- Requirements: R16-R18, R24-R26, AC6-AC8.
+- Likely files:
+  - `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/evidence/`
+  - `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml`
+  - `docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md`
+  - `docs/plan.md`
+- Tests:
+  - proof artifacts contain required visual-safety, source-support, beginner-comprehension, privacy, and rollback fields;
+  - final Markdown-first and privacy checks cover changed pages, media, prompts, provenance, and evidence.
+- Steps:
+  - Record manual proof for any generated image batch.
+  - Record rollback proof using concrete local paths and commands.
+  - Update lifecycle state and validation notes.
+  - Route to final code review, explain-change, verify, and PR after implementation reviews are clean.
+- Validation:
+  - `python3 -m unittest discover -s tests`
+  - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
+  - `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans media exercises tools tests`
+  - `git diff --check`
+- Result: pending.
+- Risks: manual proof may be too global to prove page-level comprehension.
+- Rollback: remove incomplete proof artifacts or return to M2 for corrected page-specific evidence.
+
+## Validation plan
+
+The proof strategy starts with focused tests for audit artifacts, then broadens to existing exercise-image and real-page checks only when page/media changes exist.
+Manual proof is required for visual semantics, beginner comprehension, and rollback because static checks cannot prove those fully.
+
+## Risks and recovery
+
+| Risk | Recovery |
+|---|---|
+| Five-image trigger is misread as a five-image target. | M1 tests and evidence must fail wording or audit records that make generation mandatory. |
+| Existing images are replaced for style alone. | Require concrete replacement reasons and preserve acceptable images. |
+| Page-specific slice becomes too broad. | Keep M2 to one exercise document or a deliberately small batch. |
+| Current validation cannot express an audit rule. | Add the narrowest helper/test, or return to architecture if shared validation architecture changes. |
+| Generated assets fail safety or privacy review. | Roll back image references, assets, prompt records, and provenance rows. |
+
+## Dependencies
+
+- Approved spec and clean spec review.
+- Architecture-not-required assessment.
+- Clean plan review.
+- Active test spec and clean test-spec review before implementation.
+- Existing exercise-image standard, prompt-record ADR, provenance contract, and Markdown-first validation.
+
+## Progress
+
+- 2026-07-06: Proposal accepted after proposal-review R2.
+- 2026-07-06: Spec approved by spec-review R1.
+- 2026-07-06: Architecture assessment recorded `architecture-not-required`.
+- 2026-07-06: Plan drafted and approved by plan-review R1.
+- 2026-07-06: Test spec drafted and approved by test-spec-review R1.
+- 2026-07-06: M1 implemented audit inventory and proof-contract helper/tests, recorded change-local audit criteria and current evaluation population, and routed to code-review M1.
+
+## Decision log
+
+| Date | Decision | Reason | Rejected alternatives |
+|---|---|---|---|
+| 2026-07-06 | Use a three-milestone implementation plan. | Separates audit proof, first page-specific slice, and manual closeout evidence. | Generate images in the planning stage. |
+| 2026-07-06 | Keep template update out of M1. | The accepted proposal requires first-slice criteria to be proven change-locally first. | Update `docs/templates/exercise-card.md` immediately. |
+| 2026-07-06 | Add a focused helper instead of extending the Markdown-first checker. | M1 needs deterministic audit-record validation, not product-page validation. | Overload `check_markdown_first.py` with change-local audit schema rules. |
+
+## Surprises and discoveries
+
+- The existing exercise-image audit from 2026-07-03 is now stale for several pages because later page-specific image work added images. M1 records the current image counts directly in this change-local evidence.
+
+## Validation notes
+
+- `python3 -m unittest tests.test_exercise_document_image_prioritization` passed: 7 focused M1 tests.
+- `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization` passed.
+- `python3 tools/checks/check_privacy.py -- docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests` passed.
+- `git diff --check` passed.
+- State-sync inspection passed with `rg -n "Current stage: code-review M1|Current milestone state: review-requested|Next stage: code-review M1|current_stage: code-review|current_milestone_state: review-requested|next_stage: code-review|M1 implementation complete" docs/plan.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml`.
+- Broader changed-artifact Markdown-first check passed with `python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.test.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/plan.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`.
+- Broader changed-artifact privacy check passed with `python3 tools/checks/check_privacy.py -- docs/proposals/2026-07-06-exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.md specs/exercise-document-best-practice-image-prioritization.test.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/plan.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization tests tools`.
+
+## Outcome and retrospective
+
+M1 implementation is ready for code-review.
+M2 and M3 remain unimplemented.
+
+## Readiness
+
+Ready for code-review of M1.
+Not ready for M2, explain-change refresh, verify, PR handoff, or final closeout.
+
+## Sources
+
+- `specs/exercise-document-best-practice-image-prioritization.md`
+- `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/spec-review-r1.md`
+- `docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/architecture-assessment.md`
