@@ -39,7 +39,7 @@ def candidate(rank: int, **overrides: object) -> dict[str, object]:
         "why_it_matters": "Clarifies a beginner setup point.",
         "scores": {
             "beginner_comprehension": 4,
-            "safety_setup_value": 4,
+            "setup_value": 4,
             "muscle_attention_value": 1,
             "page_value": 3,
             "readiness": 5,
@@ -224,6 +224,27 @@ class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
             ["accepted_older_sequence_count_exceeds_existing_count"],
         )
 
+    def test_named_top_five_audit_uses_setup_value_score_field(self) -> None:
+        setup_value_record = valid_top_five_audit_record()
+        missing_setup_value = valid_top_five_audit_record(
+            candidate_table=[
+                candidate(
+                    1,
+                    scores={
+                        "beginner_comprehension": 4,
+                        "muscle_attention_value": 1,
+                        "page_value": 3,
+                        "readiness": 5,
+                    },
+                    score=13,
+                ),
+                *[candidate(rank) for rank in range(2, 11)],
+            ]
+        )
+
+        self.assertEqual(validate_audit_record(setup_value_record), [])
+        self.assertIn("candidate_score_out_of_range: rank 1 setup_value", validate_audit_record(missing_setup_value))
+
     def test_fewer_than_five_can_record_no_generation_needed(self) -> None:
         errors = validate_audit_record(valid_audit_record())
 
@@ -276,6 +297,12 @@ class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
                 for rank in range(1, 11)
             ]
         )
+        automatic_generation = valid_top_five_audit_record(
+            candidate_table=[
+                candidate(rank, disposition="automatic_generation" if rank == 1 else "generate_now" if rank <= 4 else "preserve_existing" if rank == 5 else "later_candidate")
+                for rank in range(1, 11)
+            ]
+        )
         sixth = valid_top_five_audit_record(
             candidate_table=[
                 *[
@@ -300,6 +327,7 @@ class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
 
         self.assertEqual(validate_audit_record(generate_now), [])
         self.assertEqual(validate_audit_record(first_generation), [])
+        self.assertIn("top_five_candidate_must_not_be_automatic_generation: rank 1", validate_audit_record(automatic_generation))
         self.assertIn("sixth_candidate_generation_not_allowed: rank 6", validate_audit_record(sixth))
 
     def test_style_only_replacement_fails_but_concrete_replacement_reason_passes(self) -> None:

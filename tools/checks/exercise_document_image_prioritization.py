@@ -35,7 +35,7 @@ REQUIRED_CANDIDATE_FIELDS = {
 
 SCORE_FIELDS = (
     "beginner_comprehension",
-    "safety_setup_value",
+    "setup_value",
     "muscle_attention_value",
     "page_value",
     "readiness",
@@ -284,11 +284,10 @@ def validate_candidate_table(candidate_table: Sequence[object], record: Mapping[
         if purpose and purpose not in ACCEPTED_PURPOSES:
             errors.append(f"candidate_purpose_not_accepted: rank {rank}")
         errors.extend(validate_forbidden_claims(raw_candidate, rank))
-        if isinstance(rank, int) and rank <= 5 and disposition in GENERATE_DISPOSITIONS and not is_top_five_initiative(record):
-            if disposition == "automatic_generation":
-                errors.append(f"top_five_candidate_must_not_be_automatic_generation: rank {rank}")
-            else:
-                errors.append(f"top_five_candidate_must_not_select_generation_directly: rank {rank}")
+        if isinstance(rank, int) and rank <= 5 and disposition == "automatic_generation":
+            errors.append(f"top_five_candidate_must_not_be_automatic_generation: rank {rank}")
+        elif isinstance(rank, int) and rank <= 5 and disposition in GENERATE_DISPOSITIONS and not is_top_five_initiative(record):
+            errors.append(f"top_five_candidate_must_not_select_generation_directly: rank {rank}")
         if isinstance(rank, int) and rank > 5 and disposition in GENERATE_DISPOSITIONS:
             if is_top_five_initiative(record):
                 if not raw_candidate.get("later_approved_sixth_image_authorization"):

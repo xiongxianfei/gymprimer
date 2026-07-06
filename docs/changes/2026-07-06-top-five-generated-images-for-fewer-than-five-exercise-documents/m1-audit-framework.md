@@ -64,7 +64,7 @@ Each candidate rank uses these 1-5 scores:
 | Score field | Score meaning |
 |---|---|
 | `beginner_comprehension` | Helps a beginner understand the page without replacing Markdown. |
-| `safety_setup_value` | Helps setup, positioning, or boundaries described by the page. |
+| `setup_value` | Helps setup, positioning, or boundaries described by the page. |
 | `muscle_attention_value` | Helps one allowed broad muscle-attention purpose when not already present. |
 | `page_value` | Supports a concrete page section and avoids duplicate coverage. |
 | `readiness` | Has enough source support, prompt readiness, and rollback clarity to implement. |

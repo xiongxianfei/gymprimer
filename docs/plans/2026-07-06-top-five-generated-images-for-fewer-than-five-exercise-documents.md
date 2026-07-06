@@ -47,20 +47,20 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 
 ## Current Handoff Summary
 
-- Current milestone: M1
-- Current milestone state: review-requested
-- Last reviewed milestone: none
-- Review status: plan-review R1 approved; test-spec-review R1 approved implementation handoff
-- Remaining in-scope implementation milestones: M1, M2, M3
-- Next stage: code-review for M1
+- Current milestone: M2
+- Current milestone state: planned
+- Last reviewed milestone: M1
+- Review status: code-review R2 clean-with-notes; M1 closed
+- Remaining in-scope implementation milestones: M2, M3
+- Next stage: implement M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 is awaiting code-review; M2, M3, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M2 and M3 implementation, code-review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
 ### M1. Validation and Audit Framework
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Update deterministic validation and evidence structure for the named population, five-total-image counting, accepted existing image counting, older sequence image counting, no-sixth-image behavior, duplicate muscle-attention rejection, and repository reviewer exception.
 - Requirements: R1-R15, R20-R22A, R25-R30
 - Files/components likely touched:
@@ -178,6 +178,19 @@ Each milestone must report exact commands and outcomes before code-review.
 - M1 markdown validation: `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents` passed.
 - M1 privacy validation: `python3 tools/checks/check_privacy.py docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents` passed.
 - M1 whitespace validation: `git diff --check` passed.
+- M1 code-review R1 recorded changes requested for score field alignment and named `automatic_generation` rejection.
+- M1 review-resolution for CR-T5IMG-M1-1: `python3 -m unittest tests.test_exercise_document_image_prioritization tests.test_exercise_image_standard` passed with 47 tests.
+- M1 review-resolution for CR-T5IMG-M1-1: `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed.
+- M1 review-resolution for CR-T5IMG-M1-1: `python3 tools/checks/check_privacy.py docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed.
+- M1 review-resolution for CR-T5IMG-M1-1: `git diff --check` passed.
+- M1 review-resolution for CR-T5IMG-M1-2: `python3 -m unittest tests.test_exercise_document_image_prioritization tests.test_exercise_image_standard` passed with 47 tests.
+- M1 review-resolution for CR-T5IMG-M1-2: `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed.
+- M1 review-resolution for CR-T5IMG-M1-2: `python3 tools/checks/check_privacy.py docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed.
+- M1 review-resolution for CR-T5IMG-M1-2: `git diff --check` passed.
+- M1 code-review R2: `python3 -m unittest tests.test_exercise_document_image_prioritization tests.test_exercise_image_standard` passed with 47 tests.
+- M1 code-review R2: `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed.
+- M1 code-review R2: `python3 tools/checks/check_privacy.py docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed.
+- M1 code-review R2: `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -185,7 +198,7 @@ Not started.
 
 ## Readiness
 
-M1 is ready for code-review.
+M1 is closed; M2 is ready for implementation.
 
 ## Sources
 
