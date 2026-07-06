@@ -55,14 +55,14 @@ It does not broaden the exercise-image standard's count policy.
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: review-requested
-- Last reviewed milestone: M2
-- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution; code-review M2 R2 closed M2 after CR-EDIP-M2-1 resolution; M3 implementation complete and awaiting code-review.
-- Remaining in-scope implementation milestones: M3
-- Next stage: code-review M3
+- Current milestone: Lifecycle Closeout
+- Current milestone state: planned
+- Last reviewed milestone: M3
+- Review status: proposal-review R2 approved; spec-review R1 approved; architecture assessment recorded architecture-not-required; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R2 closed M1 after CR-EDIP-M1-1 resolution; code-review M2 R2 closed M2 after CR-EDIP-M2-1 resolution; code-review M3 R1 closed M3.
+- Remaining in-scope implementation milestones: none
+- Next stage: explain-change
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 is implemented but not reviewed; explain-change refresh, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: implementation milestones are closed; explain-change refresh, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -125,7 +125,7 @@ It does not broaden the exercise-image standard's count policy.
 
 ### M3. Review Evidence and Closeout
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: record visual-safety review, source-support audit, beginner-comprehension proof, rollback proof, and final local validation for the first slice.
 - Requirements: R16-R18, R24-R26, AC6-AC8.
 - Likely files:
@@ -146,7 +146,7 @@ It does not broaden the exercise-image standard's count policy.
   - `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`
   - `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans media exercises tools tests`
   - `git diff --check`
-- Result: Implemented. Recorded zero-generated-image visual-safety, source-support, beginner-comprehension, privacy, rollback, and non-goal smoke proof; added focused M3 closeout-proof tests.
+- Result: Closed by code-review M3 R1.
 - Risks: manual proof may be too global to prove page-level comprehension.
 - Rollback: remove incomplete proof artifacts or return to M2 for corrected page-specific evidence.
 
@@ -189,6 +189,7 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - 2026-07-06: Review-resolution addressed CR-EDIP-M2-1 by adding the required per-rank scoring matrix; M2 routes back to code-review.
 - 2026-07-06: Code-review M2 R2 confirmed CR-EDIP-M2-1 resolved, closed M2, and routed to implement M3.
 - 2026-07-06: M3 implemented review closeout proof for the zero-generated-image Bird Dog slice and routed to code-review M3.
+- 2026-07-06: Code-review M3 R1 closed M3; final closeout begins with explain-change.
 
 ## Decision log
 
@@ -247,17 +248,23 @@ Manual proof is required for visual semantics, beginner comprehension, and rollb
 - M3 validation passed with `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans media exercises tools tests`.
 - M3 validation passed with `git diff --check`.
 - M3 state-sync inspection passed with `rg -n "Current stage: code-review M3|Current milestone: M3|Current milestone state: review-requested|Last reviewed milestone: M2|Next stage: code-review M3|current_stage: code-review|current_milestone: M3|current_milestone_state: review-requested|last_reviewed_milestone: M2|next_stage: code-review|open_findings: \\[\\]|M3 implemented" docs/plan.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml`.
+- Code-review M3 R1 reviewer validation passed with `python3 -m unittest discover -s tests`.
+- Code-review M3 R1 reviewer validation passed with `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization`.
+- Code-review M3 R1 reviewer validation passed with `python3 tools/checks/check_privacy.py -- README.md SOURCES.md RED-FLAGS.md specs docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization docs/plans media exercises tools tests`.
+- Code-review M3 R1 rollback worktree proof passed with Markdown-first and privacy checks against `exercises/bird-dog.md`.
+- Code-review M3 R1 reviewer validation passed with `git diff --check`.
+- Code-review M3 R1 state-sync inspection passed with `rg -n "Current stage: explain-change|Current milestone: Lifecycle Closeout|Current milestone state: planned|Last reviewed milestone: M3|last_reviewed_milestone: M3|Next stage: explain-change|current_stage: explain-change|current_milestone: Lifecycle Closeout|current_milestone_state: planned|next_stage: explain-change|open_findings: \\[\\]|Code-review M3 R1|M3 is closed|Ready for explain-change" docs/plan.md docs/plans/2026-07-06-exercise-document-best-practice-image-prioritization.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/change.yaml docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/review-log.md docs/changes/2026-07-06-exercise-document-best-practice-image-prioritization/reviews/code-review-m3-r1.md`.
 
 ## Outcome and retrospective
 
 M1 is closed.
 M2 is closed.
-M3 is ready for code-review.
+M3 is closed.
 
 ## Readiness
 
-Ready for code-review of M3.
-Not ready for explain-change refresh, verify, PR handoff, or final closeout.
+Ready for explain-change.
+Not ready for verify, PR handoff, or final closeout completion.
 
 ## Sources
 
