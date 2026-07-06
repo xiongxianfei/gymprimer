@@ -60,13 +60,13 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
-- Review status: code-review M2 R1 closed M2 with no material findings
-- Remaining in-scope implementation milestones: M3, M4
-- Next stage: implement M3
+- Review status: M3 implementation complete; code-review pending
+- Remaining in-scope implementation milestones: M3 pending code-review, then M4
+- Next stage: code-review M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3-M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M3 code-review, M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
 
 ## Milestones
 
@@ -170,7 +170,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ### M3. Governed First Image Batch
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Generate and promote exactly five Baduanjin support images through the governed media workflow.
 - Requirements: R21-R40, R43
 - Files/components likely touched:
@@ -195,6 +195,25 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
   - `python3 -m unittest discover -s tests`
   - `git diff --check`
 - Expected observable result: the page references exactly five generated raster images with matching prompt records, approved provenance, valid purposes, and meaningful alt text.
+- Implemented result:
+  - Added exactly five generated raster assets under `media/exercises/baduanjin-basics/`.
+  - Added exact prompt records under `media/prompts/exercises/baduanjin-basics/`.
+  - Added approved `media/PROVENANCE.md` rows with expected media purposes and `exercises/baduanjin-basics.md` page refs.
+  - Added five Markdown image references with meaningful alt text to `exercises/baduanjin-basics.md`.
+  - Added `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/visual-safety-review.md`.
+  - Updated `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` from text-only to the governed five-image batch.
+- Validation results:
+  - `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m3_images_are_local_prompt_backed_and_reviewed` failed before implementation because the page had zero image references.
+  - `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m3_images_are_local_prompt_backed_and_reviewed` passed after implementation.
+  - `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 63 tests.
+  - `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` passed: checked 24 files.
+  - `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` passed: checked 20 Markdown files.
+  - `python3 -m unittest discover -s tests` passed: 182 tests.
+  - `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` passed: checked 22 Markdown files.
+  - `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` passed: checked 26 files.
+  - `git diff --check` passed.
+- Aligned-surface audit:
+  - Beginner-comprehension proof and rollback proof are intentionally unchanged for M3; they belong to M4.
 - Risks:
   - A generated image may imply therapy, combat, exact correctness, overprecise anatomy, or identifying-person content.
 - Rollback/recovery:
@@ -262,6 +281,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Code-review R2 closed M1; next stage is M2 implementation.
 - 2026-07-06: M2 implementation added the text-only Baduanjin page, source audit, real-page tests, and exercise-image audit inventory row; milestone moved to code-review.
 - 2026-07-06: Code-review M2 R1 closed M2; next stage is M3 implementation.
+- 2026-07-06: M3 implementation added the governed first image batch, prompt records, provenance rows, page references, visual-safety review, and real-page media tests; milestone moved to code-review.
 
 ## Decision log
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-M1 implementation validation complete; code-review pending.
+M3 implementation validation complete; code-review pending.
 
 ## 2026-07-06 M1
 
@@ -77,6 +77,37 @@ Residual risk:
 
 - M2 does not generate or reference Baduanjin images.
 - Prompt records, provenance rows, visual-safety review, beginner-comprehension proof, and rollback proof remain assigned to M3-M4.
+
+## 2026-07-06 M3
+
+Scope validated:
+
+- exactly five Baduanjin first-batch image references on `exercises/baduanjin-basics.md`;
+- local generated raster assets under `media/exercises/baduanjin-basics/`;
+- exact prompt records under `media/prompts/exercises/baduanjin-basics/`;
+- approved `media/PROVENANCE.md` rows with expected purposes and page refs;
+- meaningful alt text for each Baduanjin image;
+- manual visual-safety review evidence for the selected image batch;
+- exercise-image audit inventory updated from text-only to the governed first image batch.
+
+Commands run:
+
+| Command | Result |
+|---|---|
+| `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m3_images_are_local_prompt_backed_and_reviewed` | fail before implementation: expected five image references, found zero |
+| `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m3_images_are_local_prompt_backed_and_reviewed` | pass after adding images, prompt records, provenance rows, and page references |
+| `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` | pass: 63 tests |
+| `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` | pass: checked 24 files |
+| `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` | pass after adding `visual-safety-review.md` sources: checked 20 Markdown files |
+| `python3 -m unittest discover -s tests` | pass: 182 tests |
+| `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` | pass: checked 22 Markdown files |
+| `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/ docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` | pass: checked 26 files |
+| `git diff --check` | pass |
+
+Residual risk:
+
+- M3 does not record beginner comprehension proof or text-only rollback proof.
+- M4 must still run final local validation and prove that removing image references, unused assets, prompt records, and provenance rows preserves the text-only page.
 
 ## Sources
 

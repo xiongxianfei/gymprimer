@@ -19,6 +19,18 @@ Baduanjin Basics is gentle qigong movement for posture and breathing practice, c
 
 This page teaches only a short beginner introduction: ready stance, two hands lift upward, drawing the bow, alternating reach, and return to quiet standing. The written Markdown remains the source of truth for setup, muscles, method, and safety.
 
+Use these images as broad visual references.
+
+![Baduanjin setup image showing comfortable ready stance with soft knees](../media/exercises/baduanjin-basics/setup.png)
+
+![Baduanjin two-hands-lift image showing a slow upward reach with relaxed shoulders](../media/exercises/baduanjin-basics/two-hands-lift.png)
+
+![Baduanjin drawing-bow image showing a calm side stance and non-combat arm path](../media/exercises/baduanjin-basics/drawing-bow.png)
+
+![Baduanjin alternating-reach image showing one hand up and one hand lowering gently](../media/exercises/baduanjin-basics/alternating-reach.png)
+
+![Baduanjin muscle-attention image showing broad leg trunk shoulder upper-back foot and ankle regions](../media/exercises/baduanjin-basics/muscle-attention.png)
+
 ## Before you start
 
 Practice on a clear, flat surface. Wear comfortable clothing and use shoes, socks, or bare feet only when the foot contact is non-slip. Keep movements small at first, and keep a wall or stable chair nearby when balance is uncertain. VA describes Tai Chi and Qigong as gentle practices using slow movements, breathing, and focus, and notes that qigong combines breathing, posture, focus, and slow movement. [VA][va-tai-chi-qigong]

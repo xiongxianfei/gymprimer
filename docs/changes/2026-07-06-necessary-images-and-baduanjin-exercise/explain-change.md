@@ -2,7 +2,7 @@
 
 ## Status
 
-Implementation rationale for M1; code-review pending.
+Implementation rationale through M3; code-review pending for M3.
 
 ## M1 Changes
 
@@ -20,8 +20,8 @@ It identifies the exact first five asset paths and records candidates 6-10 as de
 
 ## Unaffected Surfaces
 
-Generated media assets, prompt records, provenance rows, visual-safety review, beginner-comprehension proof, and rollback proof are intentionally unchanged through M2.
-They belong to M3-M4 after the text-only page is reviewed.
+Beginner-comprehension proof and rollback proof are intentionally unchanged through M3.
+They belong to M4 after the governed image batch is reviewed.
 
 ## M2 Changes
 
@@ -32,6 +32,24 @@ They belong to M3-M4 after the text-only page is reviewed.
 `tests/test_markdown_first_real_pages.py` adds real-page tests for Baduanjin page shape, scope boundaries, setup and safety sources, method guidance, broad muscle guidance, and M2 source-audit evidence.
 
 `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` now lists `exercises/baduanjin-basics.md` as a text-only page so the exercise-image inventory remains current after adding the new exercise page.
+
+## M3 Changes
+
+`exercises/baduanjin-basics.md` now references exactly five first-batch support images: setup, two-hands-lift, drawing-bow, alternating-reach, and muscle-attention.
+The page keeps the written Markdown as source of truth and introduces the images as broad visual references.
+
+`media/exercises/baduanjin-basics/` now contains the five generated raster assets selected by the approved candidate pool.
+
+`media/prompts/exercises/baduanjin-basics/` now contains one exact prompt record per generated raster asset.
+Each prompt record names the asset path, generator, creation date, human reviewer, approval status, exact prompt, and selected-output notes.
+
+`media/PROVENANCE.md` now has approved rows for the five Baduanjin assets with local prompt-record paths, expected exercise image purposes, and `exercises/baduanjin-basics.md` page refs.
+
+`docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/visual-safety-review.md` records manual visual review evidence for the five selected images.
+
+`tests/test_markdown_first_real_pages.py` now proves the real Baduanjin page uses exactly five local, prompt-backed, approved generated raster images with meaningful alt text.
+
+`docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` now lists `exercises/baduanjin-basics.md` as a five-image page with governed first-batch images.
 
 ## Sources
 

@@ -31,6 +31,33 @@ WALKING_MANUAL_PROOF_ROOT = WALKING_CHANGE_ROOT / "manual-proof"
 WALKING_VALIDATION_LEDGER = WALKING_CHANGE_ROOT / "validation-ledger.md"
 TAI_CHI_CHANGE_ROOT = ROOT / "docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise"
 BADUANJIN_CHANGE_ROOT = ROOT / "docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise"
+BADUANJIN_IMAGE_ASSETS = (
+    (
+        "media/exercises/baduanjin-basics/setup.png",
+        "exercise_setup_illustration",
+        "Baduanjin setup image showing comfortable ready stance with soft knees",
+    ),
+    (
+        "media/exercises/baduanjin-basics/two-hands-lift.png",
+        "exercise_movement_illustration",
+        "Baduanjin two-hands-lift image showing a slow upward reach with relaxed shoulders",
+    ),
+    (
+        "media/exercises/baduanjin-basics/drawing-bow.png",
+        "exercise_movement_illustration",
+        "Baduanjin drawing-bow image showing a calm side stance and non-combat arm path",
+    ),
+    (
+        "media/exercises/baduanjin-basics/alternating-reach.png",
+        "exercise_movement_illustration",
+        "Baduanjin alternating-reach image showing one hand up and one hand lowering gently",
+    ),
+    (
+        "media/exercises/baduanjin-basics/muscle-attention.png",
+        "exercise_muscle_attention_illustration",
+        "Baduanjin muscle-attention image showing broad leg trunk shoulder upper-back foot and ankle regions",
+    ),
+)
 MUSCLE_GUIDANCE_PROOF_SLICE = {
     "cardio equipment": {
         "path": "exercises/rowing-machine.md",
@@ -275,7 +302,36 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
             with self.subTest(step=step):
                 self.assertIn(step, text)
         self.assertNotIn("![](", text)
-        self.assertNotIn("](../media/exercises/baduanjin-basics/", text)
+
+    def test_baduanjin_m3_images_are_local_prompt_backed_and_reviewed(self) -> None:
+        text = self.baduanjin_text()
+        provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
+
+        self.assertEqual(
+            text.count("](../media/exercises/baduanjin-basics/"),
+            5,
+        )
+        self.assertIn("Use these images as broad visual references.", text)
+        for asset_path, purpose, alt_text in BADUANJIN_IMAGE_ASSETS:
+            with self.subTest(asset_path=asset_path):
+                prompt_record = asset_path.replace("media/exercises/", "media/prompts/exercises/").replace(".png", ".md")
+                self.assertTrue((ROOT / asset_path).is_file())
+                self.assertTrue((ROOT / prompt_record).is_file())
+                self.assertIn(f"![{alt_text}](../{asset_path})", text)
+                self.assertIn(asset_path, provenance)
+                rows = provenance[asset_path]
+                self.assertEqual(len(rows), 1)
+                row = rows[0]
+                self.assertEqual(row.get("asset_type"), "ai_generated_raster")
+                self.assertEqual(row.get("media_purpose"), purpose)
+                self.assertEqual(row.get("prompt_record"), prompt_record)
+                self.assertEqual(row.get("review_status"), "approved")
+                self.assertIn("exercises/baduanjin-basics.md", split_page_refs(row.get("page_refs", "")))
+                prompt_text = (ROOT / prompt_record).read_text(encoding="utf-8")
+                self.assertIn(f"asset_path: {asset_path}", prompt_text)
+                self.assertIn("## Exact prompt", prompt_text)
+                self.assertIn("no in-image text", prompt_text.lower())
+                self.assertIn("no combat framing", prompt_text.lower())
 
     def test_baduanjin_beginner_scope_and_forbidden_product_language(self) -> None:
         text = self.baduanjin_text()
