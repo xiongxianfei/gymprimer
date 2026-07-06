@@ -60,13 +60,13 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M4
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M3
-- Review status: code-review M3 R1 closed M3 with no material findings
-- Remaining in-scope implementation milestones: M4
-- Next stage: implement M4
+- Review status: M4 implementation complete; code-review pending
+- Remaining in-scope implementation milestones: M4 pending code-review
+- Next stage: code-review M4
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M4 implementation, downstream review, final verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M4 code-review, final holistic review if required, final verification, and PR handoff have not happened.
 
 ## Milestones
 
@@ -223,7 +223,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 
 ### M4. Review Evidence and Final Local Readiness
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Record manual visual-safety review, beginner comprehension proof, rollback proof, and final local validation evidence.
 - Requirements: R40-R43
 - Files/components likely touched:
@@ -241,6 +241,25 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
   - `python3 -m unittest discover -s tests`
   - `git diff --check`
 - Expected observable result: manual evidence and automated checks support promotion of the Baduanjin page and first image batch.
+- Implemented result:
+  - Added `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/beginner-comprehension-proof.md`.
+  - Added `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/rollback-proof.md`.
+  - Added Baduanjin M4 proof-record checks to `tests/test_markdown_first_real_pages.py`.
+  - Rehearsed a temporary text-only rollback state with Baduanjin image references, assets, prompt records, and provenance rows removed.
+- Validation results:
+  - `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup` failed before implementation because proof files were missing.
+  - `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup` passed after implementation.
+  - `GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.* python3 tools/checks/check_markdown_first.py /tmp/gymprimer-baduanjin-rollback.*/exercises/baduanjin-basics.md /tmp/gymprimer-baduanjin-rollback.*/media/PROVENANCE.md /tmp/gymprimer-baduanjin-rollback.*/SOURCES.md /tmp/gymprimer-baduanjin-rollback.*/RED-FLAGS.md` passed: checked 4 Markdown files.
+  - `GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.* python3 tools/checks/check_privacy.py /tmp/gymprimer-baduanjin-rollback.*/exercises/baduanjin-basics.md /tmp/gymprimer-baduanjin-rollback.*/media/PROVENANCE.md /tmp/gymprimer-baduanjin-rollback.*/SOURCES.md /tmp/gymprimer-baduanjin-rollback.*/RED-FLAGS.md` passed: checked 4 files.
+  - `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 84 tests.
+  - `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` passed: checked 22 Markdown files.
+  - `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` passed: checked 26 files.
+  - `python3 -m unittest discover -s tests` passed: 184 tests.
+  - `git diff --check` passed.
+  - `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` passed: checked 24 Markdown files.
+  - `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` passed: checked 28 files.
+- Aligned-surface audit:
+  - No generated asset, prompt-record, provenance, or page-reference changes were needed for M4.
 - Risks:
   - Beginner comprehension proof could be too vague or store private health information.
 - Rollback/recovery:
@@ -285,6 +304,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: Code-review M2 R1 closed M2; next stage is M3 implementation.
 - 2026-07-06: M3 implementation added the governed first image batch, prompt records, provenance rows, page references, visual-safety review, and real-page media tests; milestone moved to code-review.
 - 2026-07-06: Code-review M3 R1 closed M3; next stage is M4 implementation.
+- 2026-07-06: M4 implementation added beginner-comprehension proof, rollback proof, proof-record tests, temporary rollback validation, and final local validation evidence; milestone moved to code-review.
 
 ## Decision log
 

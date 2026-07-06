@@ -2,7 +2,7 @@
 
 ## Status
 
-Implementation rationale through M3; code-review pending for M3.
+Implementation rationale through M4; code-review pending for M4.
 
 ## M1 Changes
 
@@ -17,11 +17,6 @@ The passing fixture keeps the method static and general; the failing fixture rej
 
 `image-candidate-pool.md` records the ranked top-10 image candidate pool as change-local evidence.
 It identifies the exact first five asset paths and records candidates 6-10 as deferred alternatives rather than permission to publish more images.
-
-## Unaffected Surfaces
-
-Beginner-comprehension proof and rollback proof are intentionally unchanged through M3.
-They belong to M4 after the governed image batch is reviewed.
 
 ## M2 Changes
 
@@ -50,6 +45,18 @@ Each prompt record names the asset path, generator, creation date, human reviewe
 `tests/test_markdown_first_real_pages.py` now proves the real Baduanjin page uses exactly five local, prompt-backed, approved generated raster images with meaningful alt text.
 
 `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` now lists `exercises/baduanjin-basics.md` as a five-image page with governed first-batch images.
+
+## M4 Changes
+
+`docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/beginner-comprehension-proof.md` records non-identifying beginner-comprehension evidence for the page and five images.
+It checks Baduanjin purpose, ready stance, upward reach, drawing bow, alternating reach, body regions to notice, pause conditions, and whether images help more than text alone.
+
+`docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/rollback-proof.md` records a temporary text-only rollback rehearsal.
+The rehearsal removes Baduanjin image references, unused assets, prompt records, and provenance rows from a temporary review state and confirms the text-only page still passes Markdown-first and privacy checks.
+
+`tests/test_markdown_first_real_pages.py` now checks that the Baduanjin M4 beginner-comprehension and rollback proof records contain the required prompts, paths, cleanup surfaces, commands, and pass results.
+
+`validation-notes.md`, `change.yaml`, and the active plan now record M4 validation evidence and route the milestone to code review.
 
 ## Sources
 

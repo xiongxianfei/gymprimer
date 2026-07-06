@@ -496,6 +496,62 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
             with self.subTest(token=token):
                 self.assertIn(token, text)
 
+    def test_baduanjin_m4_beginner_comprehension_records_required_prompts(self) -> None:
+        path = BADUANJIN_CHANGE_ROOT / "beginner-comprehension-proof.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for prompt in (
+            "Baduanjin purpose",
+            "ready stance",
+            "upward reach",
+            "drawing bow",
+            "alternating reach",
+            "body regions to notice",
+            "pause conditions",
+            "images helped more than text alone",
+            "non-identifying",
+            "residual confusion",
+            "exercises/baduanjin-basics.md",
+            "media/exercises/baduanjin-basics/setup.png",
+            "media/exercises/baduanjin-basics/two-hands-lift.png",
+            "media/exercises/baduanjin-basics/drawing-bow.png",
+            "media/exercises/baduanjin-basics/alternating-reach.png",
+            "media/exercises/baduanjin-basics/muscle-attention.png",
+        ):
+            with self.subTest(prompt=prompt):
+                self.assertIn(prompt, text)
+
+    def test_baduanjin_m4_rollback_proof_records_text_only_cleanup(self) -> None:
+        path = BADUANJIN_CHANGE_ROOT / "rollback-proof.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for token in (
+            "text-only",
+            "temporary review state",
+            "remove image references",
+            "unused Baduanjin assets",
+            "prompt records",
+            "provenance rows",
+            "exercises/baduanjin-basics.md",
+            "media/exercises/baduanjin-basics/setup.png",
+            "media/exercises/baduanjin-basics/two-hands-lift.png",
+            "media/exercises/baduanjin-basics/drawing-bow.png",
+            "media/exercises/baduanjin-basics/alternating-reach.png",
+            "media/exercises/baduanjin-basics/muscle-attention.png",
+            "media/prompts/exercises/baduanjin-basics/setup.md",
+            "media/prompts/exercises/baduanjin-basics/two-hands-lift.md",
+            "media/prompts/exercises/baduanjin-basics/drawing-bow.md",
+            "media/prompts/exercises/baduanjin-basics/alternating-reach.md",
+            "media/prompts/exercises/baduanjin-basics/muscle-attention.md",
+            "python3 tools/checks/check_markdown_first.py",
+            "python3 tools/checks/check_privacy.py",
+            "pass",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
     def test_tai_chi_beginner_scope_and_forbidden_product_language(self) -> None:
         text = self.tai_chi_text()
         lower = text.lower()

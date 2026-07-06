@@ -2,7 +2,7 @@
 
 ## Status
 
-M3 implementation validation complete; code-review pending.
+M4 implementation validation complete; code-review pending.
 
 ## 2026-07-06 M1
 
@@ -108,6 +108,41 @@ Residual risk:
 
 - M3 does not record beginner comprehension proof or text-only rollback proof.
 - M4 must still run final local validation and prove that removing image references, unused assets, prompt records, and provenance rows preserves the text-only page.
+
+## 2026-07-06 M4
+
+Scope validated:
+
+- beginner-comprehension proof for Baduanjin purpose, ready stance, upward reach, drawing bow, alternating reach, body regions to notice, pause conditions, and image usefulness;
+- rollback proof that the text-only page remains valid after Baduanjin image references, unused assets, prompt records, and provenance rows are removed in a temporary review state;
+- final local validation across exercise method, image standard, real page, Markdown-first, privacy, and whitespace checks.
+
+Temporary rollback rehearsal:
+
+- Temporary root: `/tmp/gymprimer-baduanjin-rollback.*`
+- `GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.* python3 tools/checks/check_markdown_first.py /tmp/gymprimer-baduanjin-rollback.*/exercises/baduanjin-basics.md /tmp/gymprimer-baduanjin-rollback.*/media/PROVENANCE.md /tmp/gymprimer-baduanjin-rollback.*/SOURCES.md /tmp/gymprimer-baduanjin-rollback.*/RED-FLAGS.md`: pass, checked 4 Markdown files.
+- `GYMPRIMER_ROOT=/tmp/gymprimer-baduanjin-rollback.* python3 tools/checks/check_privacy.py /tmp/gymprimer-baduanjin-rollback.*/exercises/baduanjin-basics.md /tmp/gymprimer-baduanjin-rollback.*/media/PROVENANCE.md /tmp/gymprimer-baduanjin-rollback.*/SOURCES.md /tmp/gymprimer-baduanjin-rollback.*/RED-FLAGS.md`: pass, checked 4 files.
+
+Commands run:
+
+| Command | Result |
+|---|---|
+| `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup` | fail before implementation: proof files missing |
+| `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_baduanjin_m4_rollback_proof_records_text_only_cleanup` | pass after adding proof files |
+| `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/beginner-comprehension-proof.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/rollback-proof.md` | pass after adding claim-level safety source reference: checked 2 Markdown files |
+| `python3 tools/checks/check_privacy.py docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/beginner-comprehension-proof.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/rollback-proof.md` | pass: checked 2 files |
+| `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` | pass: 84 tests |
+| `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` | pass: checked 22 Markdown files |
+| `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` | pass: checked 26 files |
+| `python3 -m unittest discover -s tests` | pass: 184 tests |
+| `git diff --check` | pass |
+| `python3 tools/checks/check_markdown_first.py exercises/baduanjin-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` | pass: checked 24 Markdown files |
+| `python3 tools/checks/check_privacy.py exercises/baduanjin-basics.md media/PROVENANCE.md media/prompts/exercises/baduanjin-basics/ docs/plan.md docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/` | pass: checked 28 files |
+
+Residual risk:
+
+- M4 records a non-identifying reviewer simulation for beginner comprehension.
+- This does not replace future public-reader feedback after publication.
 
 ## Sources
 
