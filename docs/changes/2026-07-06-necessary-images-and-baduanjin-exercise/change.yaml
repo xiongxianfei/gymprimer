@@ -25,11 +25,11 @@ current_test_spec: specs/necessary-images-and-baduanjin-exercise.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md
 
-current_milestone: M1
-current_milestone_state: review-requested
-last_reviewed_milestone: none
+current_milestone: M2
+current_milestone_state: planned
+last_reviewed_milestone: M1
 
-next_stage: code-review
+next_stage: implement
 
 open_findings: []
 
@@ -58,4 +58,5 @@ notes:
   - Code-review R1 requested changes for CR-M1-001; current handoff is review-resolution for M1 only, and M2-M4 remain unimplemented.
   - CR-M1-001 resolution added focused forbidden-scope fixtures for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording.
   - M1 review-resolution validation passed locally: `python3 -m unittest tests.test_exercise_image_standard`, `python3 -m unittest tests.test_exercise_method_guidance`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, `python3 -m unittest discover -s tests`, and `git diff --check`.
-  - Current handoff is code-review rereview for M1 only; M2-M4 remain unimplemented.
+  - Code-review R2 closed M1 with no material findings.
+  - Current handoff is M2 implementation; M2-M4 remain unimplemented.

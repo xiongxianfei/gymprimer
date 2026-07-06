@@ -60,19 +60,20 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 ## Current Handoff Summary
 
 - Current milestone: M1
-- Current milestone state: review-requested
-- Last reviewed milestone: none
-- Review status: CR-M1-001 addressed; code-review rereview pending
-- Remaining in-scope implementation milestones: M1 pending code-review rereview, then M2, M3, M4
-- Next stage: code-review M1 rereview
+- Current milestone: M2
+- Current milestone state: planned
+- Last reviewed milestone: M1
+- Review status: code-review R2 closed M1 with no material findings
+- Remaining in-scope implementation milestones: M2, M3, M4
+- Next stage: implement M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 needs code-review rereview, and M2-M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
+- Reason final closeout is or is not ready: M2-M4 implementation, downstream reviews, final verification, and PR handoff have not happened.
 
 ## Milestones
 
 ### M1. Validation and Proof Map
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Add or update deterministic tests and proof obligations before content and media are introduced.
 - Requirements: R21-R29, R36-R43
 - Files/components likely touched:
@@ -120,6 +121,9 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
   - `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 56 tests.
   - `python3 -m unittest discover -s tests` passed: 175 tests.
   - `git diff --check` passed.
+- Code-review R2:
+  - CR-M1-001 resolved.
+  - M1 closed with no material findings.
 - Risks:
   - Overfitting checks to one page could hide broader media regressions.
 - Rollback/recovery:
@@ -239,6 +243,7 @@ Candidates 6-10 are deferred alternatives or future replacements, not permission
 - 2026-07-06: M1 implementation added validation fixtures, path-scoped checker support, candidate-pool evidence, and validation notes; milestone moved to code-review.
 - 2026-07-06: Code-review R1 requested changes for CR-M1-001; M1 moved to review-resolution.
 - 2026-07-06: CR-M1-001 resolution added focused forbidden-scope fixtures and returned M1 to code-review rereview.
+- 2026-07-06: Code-review R2 closed M1; next stage is M2 implementation.
 
 ## Decision log
 

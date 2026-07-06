@@ -2,13 +2,13 @@
 
 ## Status
 
-M1 review-resolution complete; code-review rereview pending.
+M1 review-resolution complete; code-review R2 closed M1.
 
 ## Findings
 
 | Finding | Status | Resolution |
 |---|---|---|
-| CR-M1-001 | ready for rereview | Added focused Baduanjin forbidden-scope fixtures for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording. |
+| CR-M1-001 | resolved by `reviews/code-review-r2.md` | Added focused Baduanjin forbidden-scope fixtures for treatment protocol, full traditional form / all eight brocades, fall-prevention program, and adaptive coaching wording. |
 
 ## CR-M1-001
 
