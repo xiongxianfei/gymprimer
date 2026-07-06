@@ -13,9 +13,13 @@ Rules:
 ## Reusable Sources
 
 - [CDC adult activity guidance][cdc-adult-activity]
+- [CDC physical activity intensity guidance][cdc-physical-activity-intensity]
 - [WHO physical activity guidance][who-physical-activity]
+- [American Heart Association physical activity recommendations][aha-physical-activity-recommendations]
 - [Mayo Clinic weight training technique guidance][mayo-weight-training]
 - [Mayo Clinic stretching basics][mayo-stretching]
+- [Mayo Clinic walking guidance][mayo-walking]
+- [NHS walking for health][nhs-walking-for-health]
 - [ACSM resistance training guidance][acsm-resistance-training]
 - [CDC plain-language communication resources][cdc-plain-language]
 - [NHS back pain patient guidance][nhs-back-pain]
@@ -38,9 +42,13 @@ Rules:
 Each page still needs its own matching reference definition so the page renders as standalone Markdown.
 
 [cdc-adult-activity]: https://www.cdc.gov/physical-activity-basics/guidelines/adults.html
+[cdc-physical-activity-intensity]: https://www.cdc.gov/physical-activity-basics/measuring/index.html
 [who-physical-activity]: https://www.who.int/initiatives/behealthy/physical-activity
+[aha-physical-activity-recommendations]: https://www.heart.org/en/healthy-living/exercise-and-physical-activity/fitness-basics/aha-recs-for-physical-activity-in-adults
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [mayo-stretching]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/stretching/art-20546848
+[mayo-walking]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/walking/art-20046261
+[nhs-walking-for-health]: https://www.nhs.uk/live-well/exercise/walking-for-health/
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
 [cdc-plain-language]: https://www.cdc.gov/health-literacy/php/develop-materials/plain-language.html
 [nhs-back-pain]: https://www.nhs.uk/conditions/back-pain/

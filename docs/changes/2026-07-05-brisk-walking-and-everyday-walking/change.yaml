@@ -1,0 +1,136 @@
+change_id: 2026-07-05-brisk-walking-and-everyday-walking
+status: active
+current_stage: pr
+created_date: 2026-07-05
+
+proposal: docs/proposals/2026-07-05-brisk-walking-and-everyday-walking.md
+proposal_status: accepted
+proposal_review: docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/proposal-review-r3.md
+
+current_spec: specs/brisk-walking-and-everyday-walking.md
+current_spec_status: approved
+current_spec_review: docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r3.md
+
+architecture_assessment: architecture-required
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/architecture-review-r2.md
+
+current_plan: docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md
+current_plan_status: reviewed
+current_plan_review: docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/plan-review-r2.md
+plan_index: docs/plan.md
+
+current_test_spec: specs/brisk-walking-and-everyday-walking.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/test-spec-review-r2.md
+
+current_milestone: M4
+current_milestone_state: closed
+last_reviewed_milestone: M4
+
+next_stage: pr
+
+open_findings: []
+
+autoprogression:
+  review_fix:
+    profile: bounded-review-fix
+    requested_target: test-spec-review
+    status: completed
+    authorized_by: user
+    authorization: "$workflow auto: test-spec-review"
+    authorized_date: 2026-07-05
+    stop_before: implementation
+
+notes:
+  - Proposal-review R2 approved the walking proposal after PR-WALK-1 was resolved.
+  - Owner authorization via `$workflow auto: test-spec-review` activated bounded review-fix routing through the requested target, stopping before implementation.
+  - Spec-review R1 approved the focused walking spec and normalized it to approved for downstream architecture assessment.
+  - Architecture assessment recorded `architecture-required` because the change affects the exercise-page content contract, method type boundaries, validation tooling, optional media, source-support review, and manual-proof evidence.
+  - Updated the canonical architecture package with `basic_cardio_activity`, brisk-walking and everyday-walking authoring flow, source-support rules, validation observations, quality scenarios, risks, and no-new-ADR rationale.
+  - Architecture-review R1 approved the canonical architecture amendment with no ADR or diagram changes required.
+  - Drafted the execution plan with M1 method/template/checker support, M2 walking page content, and M3 manual proof plus optional image decision.
+  - Plan-review R1 approved the execution plan and routed the change to test-spec authoring.
+  - Drafted the test spec mapping walking requirements to automated tests, manual proof, validation commands, and milestone gates.
+  - Test-spec-review R1 approved the active proof map and allowed implementation handoff. The `$workflow auto: test-spec-review` request stopped before implementation.
+  - Started M1 implementation for `basic_cardio_activity` method, template, and checker support.
+  - M1 added scoped `basic_cardio_activity` checker behavior, template guidance, method-spec amendment text, and focused tests.
+  - M1 validation passed locally and is ready for code-review.
+  - Code-review M1 R1 found no material implementation findings in the inspected M1 diff but recorded an inconclusive result because governing artifacts for this change are untracked; M1 remains review-requested.
+  - Code-review M1 R2 passed after governing artifacts were committed and tracked; M1 is closed and M2 implementation is next.
+  - Started M2 implementation for brisk walking and everyday walking Markdown pages, page-local sources, safety routing, and real-page tests.
+  - Added focused failing tests first for walking page existence, structure, method, source IDs, safety routing, forbidden scope, text-only media, and brisk walking muscle/feel guidance.
+  - Added `exercises/brisk-walking.md` and `principles/everyday-walking.md`; kept both text-only and did not need `SOURCES.md` or `RED-FLAGS.md` edits.
+  - M2 validation passed locally and is ready for code-review.
+  - Code-review M2 R1 passed; M2 is closed and M3 implementation is next.
+  - Started M3 implementation for manual source audit, beginner comprehension proof, optional image decision, and promotion-gate validation evidence.
+  - Added focused failing tests first for walking manual proof files and M3 validation ledger coverage.
+  - Added walking source audit, beginner-comprehension proof, and optional-image text-only decision records.
+  - Updated the exercise-image audit inventory to include text-only `exercises/brisk-walking.md`.
+  - M3 validation passed locally and is ready for code-review.
+  - Code-review M3 R1 passed; M3 and the then-current implementation milestones were closed, and explain-change was next before the later image amendment.
+  - Amended the walking spec and test spec to require brisk-walking movement and muscle-attention images; downstream approvals and final closeout are paused pending amended spec review.
+  - Spec-review R2 requested changes because the amended two-image requirement conflicts with the accepted proposal's first-slice image decision; SR-WALK-IMG-1 is open.
+  - Owner selected the proposal-amendment path for SR-WALK-IMG-1; amended the proposal to require brisk-walking movement and muscle-attention images and routed it to proposal-review.
+  - Proposal-review R3 approved the amended proposal; SR-WALK-IMG-1 remains open pending spec-review recheck.
+  - Spec-review R3 approved the amended spec and closed SR-WALK-IMG-1; architecture update is next.
+  - Updated the canonical architecture package for the required brisk-walking movement and muscle-attention image contract; architecture-review R2 followed.
+  - Architecture-review R2 approved the required brisk-walking media architecture amendment; architecture status normalization followed before downstream artifacts rely on it.
+  - Normalized the canonical architecture package to approved for the required brisk-walking media amendment; plan update followed.
+  - Revised the execution plan with M4 for required brisk-walking movement and muscle-attention images; plan-review followed.
+  - Plan-review R2 approved the M4 required-image plan update; test-spec update followed before implementation.
+  - Updated the test spec for the M4 required-image proof map; test-spec-review R2 followed before implementation.
+  - Test-spec-review R2 approved the M4 required-image proof map; implementation handoff is allowed, but implementation has not started.
+  - Started M4 implementation with failing required-image real-page tests before adding assets or page references.
+  - Completed M4 implementation with exactly two brisk-walking support images, prompt records, provenance rows, page references, required-image proof, visual-safety proof, and validation evidence; M4 moved to code-review.
+  - Code-review M4 R1 passed with no material findings; all implementation milestones are closed and final closeout starts with explain-change.
+  - Added explain-change for the final reviewed diff and routed the change to verify.
+  - Final local verify passed, branch-ready evidence is recorded, and PR handoff is next.
+  - PR #12 opened from `proposal/brisk-walking-everyday-walking` to `main`.
+  - GitHub Actions `Validation checks` completed successfully for PR #12.
+validation:
+  - 2026-07-05 M1 `python3 -m unittest tests.test_exercise_method_guidance tests.test_markdown_first_templates tests.test_markdown_first_real_pages` passed, 29 tests.
+  - 2026-07-05 M1 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md docs/templates exercises` passed, checked 24 Markdown files.
+  - 2026-07-05 M1 `python3 tools/checks/check_privacy.py specs/brisk-walking-and-everyday-walking.md specs/exercise-method-guidance.md docs/templates tools tests docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checked 78 files.
+  - 2026-07-05 M2 `python3 -m unittest tests.test_markdown_first_real_pages` passed, 16 tests.
+  - 2026-07-05 M2 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md` passed, checked 4 Markdown files.
+  - 2026-07-05 M2 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checked 5 Markdown files.
+  - 2026-07-05 M2 `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_markdown_first_real_pages` passed, 44 tests.
+  - 2026-07-05 M2 `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed, 65 tests.
+  - 2026-07-05 M2 `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checked 16 files.
+  - 2026-07-05 M3 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checked 5 Markdown files.
+  - 2026-07-05 M3 `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed after ledger update.
+  - 2026-07-05 M3 `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed after ledger update.
+  - 2026-07-05 M3 `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checked 62 files.
+  - 2026-07-05 architecture amendment `python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md docs/plan.md` passed, checked 4 files.
+  - 2026-07-05 architecture amendment `git diff --check` passed.
+  - 2026-07-05 architecture amendment routing grep confirmed the draft architecture amendment and required brisk-walking media architecture tokens before architecture-review R2.
+  - 2026-07-05 architecture approval `python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md docs/plan.md` passed, checked 4 files.
+  - 2026-07-05 architecture approval `git diff --check` passed.
+  - 2026-07-05 M4 plan update `python3 tools/checks/check_privacy.py docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md docs/plan.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml` passed, checked 3 files.
+  - 2026-07-05 M4 plan update `git diff --check` passed.
+  - 2026-07-05 M4 `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_brisk_walking_required_images_are_local_prompt_backed_and_reviewed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_walking_m4_required_image_proof_records_visual_safety` failed before implementation, then passed after implementation.
+  - 2026-07-05 M4 `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed, 36 tests.
+  - 2026-07-05 M4 `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed, 64 tests.
+  - 2026-07-05 M4 `python3 -m unittest discover -s tests -p 'test_markdown_first_*.py'` passed, 71 tests.
+  - 2026-07-05 M4 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checked 5 Markdown files.
+  - 2026-07-05 M4 `python3 tools/checks/check_privacy.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media docs/changes/2026-07-05-brisk-walking-and-everyday-walking` passed, checked 75 files.
+  - 2026-07-05 M4 `git diff --check` passed.
+  - 2026-07-05 code-review M4 R1 `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed, 36 tests.
+  - 2026-07-05 code-review M4 R1 `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checked 5 Markdown files.
+  - 2026-07-05 code-review M4 R1 `git diff --check` passed.
+  - 2026-07-05 explain-change `python3 tools/checks/check_privacy.py docs/changes/2026-07-05-brisk-walking-and-everyday-walking/explain-change.md docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md docs/plan.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml` passed, checked 4 files.
+  - 2026-07-05 explain-change lifecycle routing grep confirmed verify routing in `change.yaml`, the active plan, `docs/plan.md`, and `explain-change.md`.
+  - 2026-07-05 explain-change `git diff --check` passed.
+  - 2026-07-05 verify `python3 -m unittest discover -s tests` passed, 151 tests.
+  - 2026-07-05 verify `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md principles exercises patterns` passed, checked 26 Markdown files.
+  - 2026-07-05 verify `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md docs specs tools tests principles exercises patterns media` passed, checked 471 files.
+  - 2026-07-05 verify `python3 -m unittest tests.test_exercise_method_guidance tests.test_exercise_muscle_guidance tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed, 64 tests.
+  - 2026-07-05 verify `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_brisk_walking_required_images_are_local_prompt_backed_and_reviewed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_walking_m4_required_image_proof_records_visual_safety` passed, 2 tests.
+  - 2026-07-05 verify `python3 tools/checks/check_markdown_first.py SOURCES.md RED-FLAGS.md exercises/brisk-walking.md principles/everyday-walking.md media/PROVENANCE.md` passed, checked 5 Markdown files.
+  - 2026-07-05 verify `python3 tools/checks/check_privacy.py docs/changes/2026-07-05-brisk-walking-and-everyday-walking/review-resolution.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/review-log.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml` passed.
+  - 2026-07-05 verify `python3 tools/checks/check_privacy.py docs/changes/2026-07-05-brisk-walking-and-everyday-walking/verify-report.md docs/changes/2026-07-05-brisk-walking-and-everyday-walking/change.yaml docs/plans/2026-07-05-brisk-walking-and-everyday-walking.md docs/plan.md` passed.
+  - 2026-07-05 verify lifecycle routing grep confirmed PR routing and no stale verify routing in active surfaces.
+  - 2026-07-05 verify `git diff --check` passed.
+  - 2026-07-05 PR #12 GitHub Actions `Validation checks` completed successfully.

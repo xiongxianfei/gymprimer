@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
+  - Status: reviewed
+  - Plan lifecycle state: active
+  - Current stage: pr
+  - Active context: PR #12 opened from `proposal/brisk-walking-everyday-walking` to `main`; GitHub Actions `Validation checks` passed.
+
 - [Forward Head Posture Pattern Architecture](plans/2026-06-30-forward-head-posture-pattern-architecture.md)
   - Status: active
   - Plan lifecycle state: active

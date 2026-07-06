@@ -48,6 +48,11 @@ Rest: Give source-supported general rest guidance, or say rest as needed when th
 Progression: Progress one variable at a time without creating a personal routine.
 Stop if: Use concise form, breathing, control, or pain backoff language and link broader safety concerns to `../RED-FLAGS.md` when needed.
 
+For non-equipment cardio activity pages such as brisk walking, use `Method type:
+basic_cardio_activity`. Keep the method shape based on time, talk test effort,
+repeatability, progression, and stop rules instead of strength-training sets and
+repetitions.
+
 ## What you should feel
 
 Translate the muscle roles into practical beginner body awareness. Prefer soft

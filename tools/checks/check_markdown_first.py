@@ -148,10 +148,19 @@ EXERCISE_METHOD_DEFERRED_TYPES = {
 EXERCISE_METHOD_BASIC_CARDIO_PATHS = {
     "exercises/rowing-machine.md",
 }
+EXERCISE_METHOD_BASIC_CARDIO_ACTIVITY_PATHS = {
+    "exercises/brisk-walking.md",
+}
 EXERCISE_METHOD_REQUIRED_LABEL_GROUPS = (
     ("Beginner starting point:",),
     ("Effort:",),
     ("Rest:", "Rest/reset:"),
+    ("Progression:",),
+    ("Stop if:", "Stop condition:"),
+)
+EXERCISE_METHOD_CARDIO_ACTIVITY_LABEL_GROUPS = (
+    ("Beginner starting point:",),
+    ("Effort:",),
     ("Progression:",),
     ("Stop if:", "Stop condition:"),
 )
@@ -1195,7 +1204,15 @@ def is_active_exercise_method_type(path: Path, method_type: str) -> bool:
         return True
     if method_type == "basic_cardio_equipment":
         return repo_relative_path(path) in EXERCISE_METHOD_BASIC_CARDIO_PATHS
+    if method_type == "basic_cardio_activity":
+        return repo_relative_path(path) in EXERCISE_METHOD_BASIC_CARDIO_ACTIVITY_PATHS
     return False
+
+
+def exercise_method_required_label_groups(method_type: str | None) -> tuple[tuple[str, ...], ...]:
+    if method_type == "basic_cardio_activity":
+        return EXERCISE_METHOD_CARDIO_ACTIVITY_LABEL_GROUPS
+    return EXERCISE_METHOD_REQUIRED_LABEL_GROUPS
 
 
 def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
@@ -1223,6 +1240,7 @@ def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
         return findings
 
     type_match = EXERCISE_METHOD_TYPE_RE.search(method_section)
+    method_type = None
     if type_match is None:
         findings.append(Finding(path, "exercise_method_missing_type", "method section is missing visible Method type line"))
     else:
@@ -1237,7 +1255,7 @@ def validate_exercise_method_guidance(path: Path, text: str) -> list[Finding]:
                 )
             )
 
-    for labels in EXERCISE_METHOD_REQUIRED_LABEL_GROUPS:
+    for labels in exercise_method_required_label_groups(method_type):
         content = method_label_group_content(method_section, labels)
         label = labels[0]
         if content is None:
