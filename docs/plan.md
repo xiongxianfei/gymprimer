@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Exercise Document Best-Practice Image Prioritization](plans/2026-07-06-exercise-document-best-practice-image-prioritization.md)
+  - Status: active
+  - Plan lifecycle state: active
+  - Current stage: pr
+  - Active context: PR #15 opened from `proposal/exercise-document-image-prioritization` to `main`; GitHub Actions `Validation checks` is in progress.
+
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active
