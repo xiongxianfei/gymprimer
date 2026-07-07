@@ -2,9 +2,11 @@
 
 Change ID: `2026-07-06-safer-running-basics-and-running-images`
 
-Current milestone: M3
+Current milestone: M4
 
-Status: resolved
+Status: closed
+
+Closeout status: closed
 
 ## Findings
 
@@ -13,6 +15,7 @@ Status: resolved
 | GP-SRB-M1-CR1 | `reviews/code-review-m1-r1.md` | major | resolved | Added active M1 fixture coverage for page heading, alias line, required headings, page-local sources, and shared source registration; accepted by code-review M1 R2. |
 | GP-SRB-M2-CR1 | `reviews/code-review-m2-r1.md` | major | resolved | Added explicit persistent-pain routing to the required `What you should feel` route and added a direct real-page test assertion; accepted by code-review M2 R2. |
 | GP-SRB-M3-CR1 | `reviews/code-review-m3-r1.md` | major | resolved | Moved the visual-review artifact to the approved proof-map path and updated M3 tests and plan references; accepted by code-review M3 R2. |
+| GP-SRB-M4-CR1 | `reviews/code-review-m4-r1.md` | major | withdrawn | Code-review M4 R2 withdrew the stricter rollback-proof finding as over-strict for the intended lightweight rollback evidence after owner clarification. |
 
 ## Resolution Notes
 
@@ -40,6 +43,12 @@ M3 fix applied:
 
 Code-review M3 R2 accepted the resolution.
 
+M4 finding disposition:
+
+- Code-review M4 R1 recorded GP-SRB-M4-CR1 for a stricter rollback-proof regression expectation.
+- Code-review M4 R2 withdrew GP-SRB-M4-CR1 after owner clarification that rollback evidence should remain lightweight.
+- No implementation fix is required for the withdrawn finding.
+
 ## Validation Evidence
 
 Passed locally:
@@ -53,6 +62,8 @@ python3 tools/checks/check_markdown_first.py exercises/safer-running-basics.md m
 python3 tools/checks/check_privacy.py exercises/safer-running-basics.md media/PROVENANCE.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images docs/plans/2026-07-06-safer-running-basics-and-running-images.md docs/plan.md
 git diff --check
 ```
+
+Additional M4 closeout validation is recorded in `docs/changes/2026-07-06-safer-running-basics-and-running-images/validation-ledger.md` and final holistic review is recorded in `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-final-r1.md`.
 
 ## Required Validation After Fix
 
@@ -70,5 +81,8 @@ git diff --check
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m1-r1.md`
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m3-r1.md`
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m3-r2.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m4-r1.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m4-r2.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-final-r1.md`
 - `docs/plans/2026-07-06-safer-running-basics-and-running-images.md`
 - `specs/safer-running-basics-and-running-images.test.md`

@@ -5,8 +5,8 @@
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: verify
-  - Active context: Final holistic code-review R1 found no blocking or required-change findings; final closeout and verification are next.
+  - Current stage: pr
+  - Active context: final local verification passed with branch-ready evidence; hosted CI was not observed and PR handoff is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

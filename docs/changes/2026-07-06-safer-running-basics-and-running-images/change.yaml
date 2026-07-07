@@ -13,7 +13,7 @@ workflow:
     authorized_by: user
     authorized_on: 2026-07-06
     stop_before: implementation
-current_stage: verify
+current_stage: pr
 current_milestone: M4
 milestone_state: closed
 required_review_resolution: false
@@ -42,3 +42,5 @@ notes:
   - Code-review M4 R2 withdrew GP-SRB-M4-CR1 as over-strict for the intended lightweight rollback proof.
   - M4 is closed and ready for final verification.
   - Final holistic code-review R1 found no blocking or required-change findings.
+  - Explain-change was updated after final holistic code-review.
+  - Final local verification passed and the branch is ready for PR handoff; hosted CI was not observed.
