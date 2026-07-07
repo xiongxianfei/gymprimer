@@ -6,7 +6,7 @@
   - Status: reviewed
   - Plan lifecycle state: active
   - Current stage: pr
-  - Active context: final local verify passed with branch-ready evidence; hosted CI was not observed. PR handoff is next.
+  - Active context: PR #16 opened from `proposal/top-five-generated-images` to `main`; hosted CI is pending/not observed.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

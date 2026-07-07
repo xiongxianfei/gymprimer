@@ -53,8 +53,8 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 - Review status: code-review R5 clean-with-notes; M3 closed
 - Remaining in-scope implementation milestones: none
 - Next stage: pr
-- Final closeout readiness: ready for PR handoff
-- Reason final closeout is or is not ready: all implementation milestones are closed, explain-change is recorded, and final local verify passed; PR handoff remains.
+- Final closeout readiness: PR #16 opened
+- Reason final closeout is or is not ready: all implementation milestones are closed, explain-change is recorded, final local verify passed, and PR #16 is open; hosted CI is pending/not observed.
 
 ## Milestones
 
@@ -235,7 +235,7 @@ Final closeout is not complete until PR handoff finishes.
 
 ## Readiness
 
-M1, M2, and M3 are closed. Explain-change is recorded. Final local verify passed. The next stage is pr.
+M1, M2, and M3 are closed. Explain-change is recorded. Final local verify passed. PR #16 is open.
 
 ## Sources
 

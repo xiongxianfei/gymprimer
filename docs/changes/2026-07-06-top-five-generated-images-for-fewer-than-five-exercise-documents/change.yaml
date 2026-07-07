@@ -21,6 +21,7 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/test-spec-review-r1.md
 current_code_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/code-review-r5.md
 verify_report: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/verify-report.md
+pull_request: https://github.com/xiongxianfei/gymprimer/pull/16
 next_stage: pr
 
 open_findings: []
@@ -50,4 +51,4 @@ notes:
   - Code-review R5 closed M3 with clean-with-notes.
   - Explain-change recorded the reviewed-diff rationale in `explain-change.md`.
   - Final local verify passed with branch-ready evidence; hosted CI was not observed.
-  - PR handoff is next.
+  - PR #16 opened from `proposal/top-five-generated-images` to `main`; hosted CI is pending/not observed.
