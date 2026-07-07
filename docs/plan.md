@@ -5,8 +5,8 @@
 - [Advanced Rowing Machine Tutorial](plans/2026-07-07-advanced-rowing-machine-tutorial.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: implement
-  - Active context: M2 advanced Markdown content closed after code-review R3; M3 governed media, prompt packets, and provenance is next.
+  - Current stage: code-review
+  - Active context: M3 governed media, prompt packets, provenance, page integration, visual-safety proof, and grayscale proof are implemented and routed to code-review; M4 remains pending.
 
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed

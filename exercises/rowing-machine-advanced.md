@@ -56,6 +56,13 @@ Do not use damper 10 as proof of strength or better rowing. Concept2 recommends
 starting around damper 3-5 while technique is the priority.
 [Concept2][concept2-advanced-damper-drag-factor]
 
+### Damper and drag factor image guide
+
+![Advanced rowing damper and drag factor image showing machine feel versus measured flywheel feedback](../media/exercises/rowing-machine-advanced/damper-drag-factor.png)
+
+No in-image labels are required. Markdown and alt text carry the labels: damper
+changes flywheel feel; drag factor is the comparable flywheel feedback concept.
+
 ## Monitor basics: split, watts, stroke rate, and distance
 
 The monitor is useful only when the numbers are read as feedback, not as an
@@ -73,6 +80,13 @@ stroke rate, distance/time, and force curve. [Concept2][concept2-pm5-how-to-use]
 
 These metrics are concepts. They are not personal pace prescriptions.
 
+### Monitor metrics image guide
+
+![Advanced rowing monitor metrics diagram showing split watts stroke rate distance time and force curve concepts](../media/exercises/rowing-machine-advanced/monitor-metrics.png)
+
+No in-image labels are required. Markdown and alt text carry the labels: split
+or pace per 500m, watts, stroke rate, distance/time, and force curve.
+
 ## Rhythm and recovery ratio
 
 Advanced rowing is not just harder pulling. A useful rhythm is a decisive drive
@@ -85,6 +99,20 @@ Use the rhythm to keep the slide from rushing. If the seat returns faster than
 the handle and body can organize, lower the stroke rate and rebuild the
 sequence.
 
+### Rhythm ratio image guide
+
+![Advanced rowing rhythm ratio image showing stronger drive effort and controlled lower-effort recovery](../media/exercises/rowing-machine-advanced/rhythm-ratio.png)
+
+Color intensity guide:
+- Level 0: not emphasized in this phase
+- Level 1: low control role
+- Level 2: moderate support role
+- Level 3: primary effort role
+
+This is a relative teaching guide, not a force measurement. The image uses
+stronger emphasis on the drive and quieter emphasis on the recovery to show
+rhythm, not correctness.
+
 ## Force curve and power application
 
 The force curve can help you notice how power is applied during a stroke.
@@ -93,6 +121,20 @@ Concept2 describes it as a graph of power application. [Concept2][concept2-pm5-h
 Treat the curve as feedback, not a form verdict. It cannot diagnose why a
 stroke looks different, and it cannot replace practice with the sequence,
 or outside technique feedback when available.
+
+### Force curve image guide
+
+![Advanced rowing force curve image showing smooth power application with relative effort emphasis](../media/exercises/rowing-machine-advanced/force-curve.png)
+
+Color intensity guide:
+- Level 0: not emphasized in this phase
+- Level 1: low control role
+- Level 2: moderate support role
+- Level 3: primary effort role
+
+This is a relative teaching guide, not a force measurement. The image pairs
+broad body emphasis with a generic curve concept so the curve stays feedback,
+not a diagnosis.
 
 ## Stroke-rate control
 
@@ -107,6 +149,14 @@ lower rates; then raise the rate only when the stroke stays organized.
 Concept2 describes broad examples: lower rates for technique work, moderate
 rates for steady rowing, and higher rates for shorter or racing-oriented work.
 Use those as context, not universal targets. [Concept2][concept2-stroke-rate-explained]
+
+### Stroke-rate ladder image guide
+
+![Advanced rowing stroke rate ladder image showing rate changes as structured practice blocks](../media/exercises/rowing-machine-advanced/stroke-rate-ladder.png)
+
+No in-image labels are required. Markdown and alt text carry the labels: lower,
+moderate, and higher rate blocks are structure cues for practice, not quality
+scores.
 
 ## Workout types
 
@@ -124,6 +174,28 @@ These are static examples for understanding workout types. They are not a traini
 
 For structured benchmark work, use official plans from Concept2 or qualified
 instruction rather than treating this page as a plan. [Concept2][concept2-2k-plan]
+
+### Power per stroke image guide
+
+![Advanced rowing power per stroke image showing a controlled low-rate drive with relative effort emphasis](../media/exercises/rowing-machine-advanced/power-per-stroke.png)
+
+Color intensity guide:
+- Level 0: not emphasized in this phase
+- Level 1: low control role
+- Level 2: moderate support role
+- Level 3: primary effort role
+
+This is a relative teaching guide, not a force measurement. The image emphasizes
+the leg and trunk connection during a controlled drive without implying that a
+reader should row harder every stroke.
+
+### Interval structure image guide
+
+![Advanced rowing interval structure image showing static work and easy-rowing rest blocks](../media/exercises/rowing-machine-advanced/interval-structure.png)
+
+No in-image labels are required. Markdown and alt text carry the labels: taller
+blocks represent static work examples, shorter blocks represent very easy
+rowing rest, and the diagram is not a weekly schedule.
 
 ## Muscles involved
 
@@ -174,7 +246,7 @@ only when the same information is repeated in Markdown and alt text.
 
 Do not use copied PM5 UI, screenshots, logos or brand marks, identifiable
 people, correct/wrong badges, red pain marks, elite or race-win framing, or
-unsupported promises. Generated images need prompt records, provenance, visual
+unsupported outcome claims. Generated images need prompt records, provenance, visual
 review, meaningful alt text, and nearby Markdown before promotion.
 
 ## Force-intensity visual system
@@ -213,6 +285,21 @@ be checked against the cited rowing sequence before image promotion.
 | Recovery | None; low effort | Trunk and hips | Arms, shoulders, and slide control |
 
 The map is relative and educational. It is not a measurement of real force.
+
+### Stroke timing image guide
+
+![Advanced rowing stroke timing image showing relative effort shifting from catch through drive finish and recovery](../media/exercises/rowing-machine-advanced/stroke-timing.png)
+
+Color intensity guide:
+- Level 0: not emphasized in this phase
+- Level 1: low control role
+- Level 2: moderate support role
+- Level 3: primary effort role
+
+This is a relative teaching guide, not a force measurement. Use it with the
+phase force map above: legs and glutes are most emphasized early in the drive,
+the trunk supports transfer, and upper back, lats, and arms rise near the
+finish.
 
 ## Safety notes
 

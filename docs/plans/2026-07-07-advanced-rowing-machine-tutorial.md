@@ -55,13 +55,13 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 ## Current Handoff Summary
 
 - Current milestone: M3. Governed Media, Prompt Packets, and Provenance
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2. Advanced Rowing Markdown Content
-- Review status: code-review R3 clean-with-notes; M2 closed
-- Remaining in-scope open milestones: M3 implementation, M4 implementation
-- Next stage: implement
+- Review status: M3 implementation complete; code-review pending
+- Remaining in-scope open milestones: M3 code-review, M4 implementation
+- Next stage: code-review
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M3-M4 implementation, later review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M3 code-review, M4 implementation, later review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -151,7 +151,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 
 ### M3. Governed Media, Prompt Packets, and Provenance
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Prepare and integrate the approved first-batch advanced rowing images only through governed prompt records, provenance rows, alt text, and visual review.
 - Requirements: R22-R46, R50
 - Files/components likely touched:
@@ -281,6 +281,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: Code-review R2 accepted the CR1 and CR2 fixes and closed M1.
 - 2026-07-07: M2 added `exercises/rowing-machine-advanced.md`, the beginner-page companion link, reused source-index entries, real-page regression tests, M2 source-audit evidence, and an aligned text-only row in the exercise-image audit.
 - 2026-07-07: Code-review R3 accepted the M2 implementation and closed M2.
+- 2026-07-07: M3 implemented eight governed advanced-rowing image assets, image-instruction prompt packets, provenance rows, page image integration, visual-safety proof, grayscale proof, and real-page media regression tests.
 
 ## Decision log
 
@@ -292,11 +293,14 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 | 2026-07-07 | Validate M1 through fixtures before the real advanced page exists. | The real page is created in M2, so M1 should prove checker behavior with tests and fixtures. | Running real-page validation before the page exists. |
 | 2026-07-07 | Scope M1 checker fixture commands to `tests/fixtures/advanced-rowing-machine-tutorial`. | The broader `tests/fixtures` tree intentionally contains invalid fixtures for other checker tests. | Scanning all fixture directories as one passing command. |
 | 2026-07-07 | Keep M2 media-free. | M2 proves the static advanced Markdown contract; M3 owns generated images, prompt records, provenance, visual-safety review, and grayscale review. | Referencing future generated image paths before media governance exists. |
+| 2026-07-07 | Use no readable in-image labels for all M3 advanced rowing assets. | Markdown and alt text can carry the labels while preserving the stricter body-image and technical-diagram accessibility boundary. | Minimal diagram labels in the generated images. |
+| 2026-07-07 | Retain all eight first-batch images after visual review. | Each asset passed the one-purpose, privacy, label, brand, clinical, and unsupported-claim checks and maps to a distinct page concept. | Deferring the monitor, damper, interval, or rate visuals. |
 
 ## Surprises and discoveries
 
 - The canonical architecture package has pre-existing Markdown-first checker incompatibilities when scanned directly; the architecture-review record treats that as a validation gap rather than an amendment blocker.
 - Adding `exercises/rowing-machine-advanced.md` required updating the existing exercise-image audit row set because current tests enumerate every `exercises/*.md` page.
+- M3 full-suite validation caught that using the exact forbidden phrase in rule text can trip the media-forbidden checker; the page and prompt packets now use `unsupported outcome claims` for the instructional boundary.
 
 ## Validation notes
 
@@ -324,17 +328,25 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - Code-review R3 reviewer-ran `python3 tools/checks/check_markdown_first.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md`: pass, checked 4 Markdown file(s).
 - Code-review R3 reviewer-ran `python3 tools/checks/check_privacy.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 17 file(s).
 - Code-review R3 reviewer-ran `git diff --check`: pass, no whitespace errors reported.
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_media_batch_is_local_prompt_backed_and_reviewed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_prompt_packets_record_force_and_label_boundaries tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_media_markdown_has_legends_and_label_duplication`: initial M3 fail before page integration because image guide sections and assets were not complete.
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_media_batch_is_local_prompt_backed_and_reviewed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_prompt_packets_record_force_and_label_boundaries tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_media_markdown_has_legends_and_label_duplication`: pass, 3 tests.
+- `python3 -m unittest discover -s tests`: initial M3 fail because the media-forbidden checker caught the exact phrase `performance promise` in prompt constraints and `unsupported promises` in rule text.
+- `python3 -m unittest discover -s tests`: pass, 237 tests.
+- `python3 tools/checks/check_markdown_first.py exercises/rowing-machine-advanced.md media/PROVENANCE.md media/prompts/exercises/rowing-machine-advanced`: pass, checked 2 Markdown file(s).
+- `python3 tools/checks/check_privacy.py exercises/rowing-machine-advanced.md media/prompts/exercises/rowing-machine-advanced media/PROVENANCE.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 26 file(s).
+- `git diff --check`: pass, no whitespace errors reported.
 
 ## Outcome and retrospective
 
 - M1 implementation and review-resolution are closed.
 - M2 implementation is closed after clean code-review R3.
-- M3-M4 remain pending.
+- M3 implementation is routed to code-review.
+- M4 remains pending.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implementation M3.
+- Ready for code-review of M3.
 
 ## Sources
 
