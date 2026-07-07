@@ -1,6 +1,6 @@
 change_id: 2026-07-07-advanced-rowing-machine-tutorial
 status: accepted
-current_stage: verify
+current_stage: pr
 created_date: 2026-07-07
 
 proposal: docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
@@ -26,11 +26,13 @@ current_test_spec_review: docs/changes/2026-07-07-advanced-rowing-machine-tutori
 
 current_code_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r5.md
 current_code_review_status: clean-with-notes
+current_verification: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md
+current_verification_status: branch-ready
 
 review_resolution: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md
 review_resolution_status: closed
 
-next_stage: verify
+next_stage: pr
 
 open_findings: []
 
@@ -63,6 +65,7 @@ notes:
   - M4 final source-audit proof, advanced-reader comprehension proof, validation ledger, and broad local validation evidence implemented and routed to code-review.
   - Code-review R5 accepted the M4 implementation and closed M4.
   - Explain-change recorded the reviewed-diff rationale and routed the change to verify.
+  - Final local verification passed and routed the branch to PR handoff. Hosted CI was not observed.
 
 validation:
   - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/proposal-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
@@ -98,6 +101,45 @@ validation:
   - command: git diff --check
     result: pass
     evidence: explain-change whitespace validation reported no errors
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: final verify ran 237 tests
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md principles exercises patterns
+    result: pass
+    evidence: final verify checked 30 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md docs specs tools tests principles exercises patterns
+    result: pass
+    evidence: final verify checked 594 file(s): privacy pass
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: final verify checked 46 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md exercises media docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: final verify checked 251 file(s): privacy pass
+  - command: python3 tools/checks/check_markdown_first.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md
+    result: pass
+    evidence: final verify checked 4 Markdown file(s)
+  - command: python3 tools/checks/check_markdown_first.py exercises/rowing-machine-advanced.md media/PROVENANCE.md media/prompts/exercises/rowing-machine-advanced
+    result: pass
+    evidence: final verify checked 2 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: final verify checked 26 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: final verify whitespace check reported no errors
+  - command: python3 tools/checks/check_markdown_first.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md
+    result: pass
+    evidence: verify-report validation checked 4 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml
+    result: pass
+    evidence: verify-report validation checked 5 file(s): privacy pass
+  - command: rg -n 'Current stage: pr|Next stage: pr|current_stage: pr|next_stage: pr|current_verification_status: branch-ready|Ready for PR handoff|branch-ready|open_findings: \[\]|review_resolution_status: closed|Hosted CI was not observed|PR body/open readiness is not claimed' docs/plan.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md
+    result: pass
+    evidence: verify-report lifecycle scan found PR routing, branch-ready status, closed review-resolution, no open findings, and no hosted-CI or PR-body/open-readiness claim
+  - command: git diff --check
+    result: pass
+    evidence: verify-report whitespace validation reported no errors
   - command: python3 -m unittest discover -s tests
     result: pass
     evidence: code-review R4 reviewer-ran 237 tests

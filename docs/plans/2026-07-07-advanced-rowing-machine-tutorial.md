@@ -59,9 +59,9 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - Last reviewed milestone: M3. Governed Media, Prompt Packets, and Provenance
 - Review status: code-review R5 clean-with-notes; M4 closed
 - Remaining in-scope open milestones: none
-- Next stage: verify
-- Final closeout readiness: ready for verify
-- Reason final closeout is or is not ready: implementation milestones, code-review, review-resolution, and explain-change are complete; verify and PR handoff remain.
+- Next stage: pr
+- Final closeout readiness: ready for PR handoff
+- Reason final closeout is or is not ready: implementation milestones, code-review, review-resolution, explain-change, and final local verification are complete; PR handoff remains.
 
 ## Milestones
 
@@ -286,6 +286,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: M4 recorded final source-audit proof, advanced-reader comprehension proof, validation ledger, broad local validation evidence, and routed the milestone to code-review.
 - 2026-07-07: Code-review R5 accepted the M4 implementation and closed M4.
 - 2026-07-07: Explain-change recorded the reviewed-diff rationale in `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md` and routed the change to verify.
+- 2026-07-07: Final local verification passed, recorded `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md`, and routed the change to PR handoff. Hosted CI was not observed.
 
 ## Decision log
 
@@ -357,6 +358,19 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - Explain-change validation passed with `python3 tools/checks/check_privacy.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml`: checked 4 file(s).
 - Explain-change state-sync inspection passed with `rg -n 'Current stage: verify|Next stage: verify|current_stage: verify|next_stage: verify|Explain-change recorded|Ready for verify|open_findings: \[\]|review_resolution_status: closed|Final verification has not run yet|Hosted CI has not been observed' docs/plan.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md`.
 - Explain-change validation passed with `git diff --check`: no whitespace errors reported.
+- Final verify passed with `python3 -m unittest discover -s tests`: 237 tests.
+- Final verify passed with `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md principles exercises patterns`: checked 30 Markdown file(s).
+- Final verify passed with `python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md docs specs tools tests principles exercises patterns`: checked 594 file(s).
+- Final verify passed with `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: checked 46 Markdown file(s).
+- Final verify passed with `python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md exercises media docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: checked 251 file(s).
+- Final verify passed with `python3 tools/checks/check_markdown_first.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md`: checked 4 Markdown file(s).
+- Final verify passed with `python3 tools/checks/check_markdown_first.py exercises/rowing-machine-advanced.md media/PROVENANCE.md media/prompts/exercises/rowing-machine-advanced`: checked 2 Markdown file(s).
+- Final verify passed with `python3 tools/checks/check_privacy.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: checked 26 file(s).
+- Final verify passed with `git diff --check`: no whitespace errors reported.
+- Verify-report validation passed with `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md`: checked 4 Markdown file(s).
+- Verify-report validation passed with `python3 tools/checks/check_privacy.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml`: checked 5 file(s).
+- Verify-report state-sync inspection passed with `rg -n 'Current stage: pr|Next stage: pr|current_stage: pr|next_stage: pr|current_verification_status: branch-ready|Ready for PR handoff|branch-ready|open_findings: \[\]|review_resolution_status: closed|Hosted CI was not observed|PR body/open readiness is not claimed' docs/plan.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md`.
+- Verify-report validation passed with `git diff --check`: no whitespace errors reported.
 
 ## Outcome and retrospective
 
@@ -365,11 +379,12 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - M3 implementation is closed after clean code-review R4.
 - M4 implementation is closed after clean code-review R5.
 - Explain-change is complete.
+- Final local verification is complete and branch-ready is recorded in `verify-report.md`.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for verify.
+- Ready for PR handoff.
 
 ## Sources
 
