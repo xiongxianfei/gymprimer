@@ -1,6 +1,6 @@
 change_id: 2026-07-07-advanced-rowing-machine-tutorial
 status: accepted
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-07
 
 proposal: docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
@@ -25,12 +25,12 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/test-spec-review-r2.md
 
 current_code_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r2.md
-current_code_review_status: clean-with-notes
+current_code_review_status: m1-clean-with-notes-m2-pending
 
 review_resolution: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md
 review_resolution_status: closed
 
-next_stage: implement
+next_stage: code-review
 
 open_findings: []
 
@@ -55,6 +55,7 @@ notes:
   - Code-review R1 requested changes for CR1 and CR2; M1 is in review-resolution.
   - Review-resolution implemented fixes for CR1 and CR2; M1 is routed back to code-review.
   - Code-review R2 accepted CR1 and CR2 fixes and closed M1.
+  - M2 advanced rowing Markdown content implemented and routed to code-review.
 
 validation:
   - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/proposal-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
@@ -63,6 +64,24 @@ validation:
   - command: python3 tools/checks/check_privacy.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
     result: pass
     evidence: checked 1 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported
+  - command: python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_links_to_advanced_page tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_page_shape_and_prerequisites tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_concepts_are_static_and_source_backed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_workout_types_force_system_and_sources
+    result: fail
+    evidence: initial M2 test-first run failed because exercises/rowing-machine-advanced.md and the beginner-page link were missing
+  - command: python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_links_to_advanced_page tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_page_shape_and_prerequisites tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_concepts_are_static_and_source_backed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_workout_types_force_system_and_sources
+    result: pass
+    evidence: ran 4 focused M2 real-page tests
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: ran 234 tests
+  - command: python3 tools/checks/check_markdown_first.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md
+    result: pass
+    evidence: checked 4 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 17 file(s): privacy pass
   - command: git diff --check
     result: pass
     evidence: no whitespace errors reported

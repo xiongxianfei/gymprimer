@@ -182,6 +182,8 @@ Stop for sharp pain, symptoms that worsen, or numbness. Use the Red Flags page i
 
 Stop the round if technique becomes painful or the movement turns jerky or uncontrolled. Proper technique should stay controlled, and exercise that causes pain should stop. [Mayo Clinic][mayo-weight-training]
 
+Next: [Advanced rowing machine technique and workouts](rowing-machine-advanced.md)
+
 ## Sources
 
 - [Concept2 indoor rowing technique][concept2-rowing-technique]

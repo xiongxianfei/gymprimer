@@ -18,7 +18,7 @@ The implementation adds a static advanced companion page, a scoped image-rich me
 - Spec review: `../changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/spec-review-r1.md`
 - Architecture: `../architecture/system/architecture.md`
 - Architecture review: `../changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/architecture-review-r1.md`
-- Test spec: pending
+- Test spec: `../../specs/advanced-rowing-machine-tutorial.test.md`
 
 ## Context and orientation
 
@@ -55,13 +55,13 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 ## Current Handoff Summary
 
 - Current milestone: M2. Advanced Rowing Markdown Content
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1. Validation and Test Scaffolding
-- Review status: code-review R2 clean-with-notes; M1 closed
-- Remaining in-scope implementation milestones: M2, M3, M4
-- Next stage: implement
+- Review status: M2 implementation complete; code-review pending
+- Remaining in-scope open milestones: M2 code-review, M3 implementation, M4 implementation
+- Next stage: code-review
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M2-M4 implementation, later review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M2 still needs code-review, and M3-M4 implementation, later review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -110,7 +110,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 
 ### M2. Advanced Rowing Markdown Content
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Create the advanced companion page and link it from the beginner rowing page after validation support exists.
 - Requirements: R1-R21, R47-R50
 - Files/components likely touched:
@@ -279,6 +279,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: Code-review R1 requested changes for CR1 and CR2.
 - 2026-07-07: Review-resolution implemented fixes for CR1 and CR2 and routed M1 back to code-review.
 - 2026-07-07: Code-review R2 accepted the CR1 and CR2 fixes and closed M1.
+- 2026-07-07: M2 added `exercises/rowing-machine-advanced.md`, the beginner-page companion link, reused source-index entries, real-page regression tests, M2 source-audit evidence, and an aligned text-only row in the exercise-image audit.
 
 ## Decision log
 
@@ -289,10 +290,12 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 | 2026-07-07 | Keep the image-rich exception scoped to the advanced rowing page. | The spec and architecture do not globally raise exercise image limits. | Global image-count policy change. |
 | 2026-07-07 | Validate M1 through fixtures before the real advanced page exists. | The real page is created in M2, so M1 should prove checker behavior with tests and fixtures. | Running real-page validation before the page exists. |
 | 2026-07-07 | Scope M1 checker fixture commands to `tests/fixtures/advanced-rowing-machine-tutorial`. | The broader `tests/fixtures` tree intentionally contains invalid fixtures for other checker tests. | Scanning all fixture directories as one passing command. |
+| 2026-07-07 | Keep M2 media-free. | M2 proves the static advanced Markdown contract; M3 owns generated images, prompt records, provenance, visual-safety review, and grayscale review. | Referencing future generated image paths before media governance exists. |
 
 ## Surprises and discoveries
 
 - The canonical architecture package has pre-existing Markdown-first checker incompatibilities when scanned directly; the architecture-review record treats that as a validation gap rather than an amendment blocker.
+- Adding `exercises/rowing-machine-advanced.md` required updating the existing exercise-image audit row set because current tests enumerate every `exercises/*.md` page.
 
 ## Validation notes
 
@@ -310,16 +313,23 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - `python3 tools/checks/check_markdown_first.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md`: pass, checked 4 Markdown file(s).
 - `python3 tools/checks/check_privacy.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 14 file(s).
 - `git diff --check`: pass, no whitespace errors reported.
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_links_to_advanced_page tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_page_shape_and_prerequisites tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_concepts_are_static_and_source_backed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_workout_types_force_system_and_sources`: initial fail before implementation because `exercises/rowing-machine-advanced.md` and the beginner-page link were missing.
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_links_to_advanced_page tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_page_shape_and_prerequisites tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_concepts_are_static_and_source_backed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_workout_types_force_system_and_sources`: pass, 4 tests.
+- `python3 -m unittest discover -s tests`: pass, 234 tests.
+- `python3 tools/checks/check_markdown_first.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md`: pass, checked 4 Markdown file(s).
+- `python3 tools/checks/check_privacy.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 17 file(s).
+- `git diff --check`: pass, no whitespace errors reported.
 
 ## Outcome and retrospective
 
 - M1 implementation and review-resolution are closed.
-- M2-M4 remain pending.
+- M2 implementation is complete and review-requested.
+- M3-M4 remain pending.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implementation M2.
+- Ready for code-review M2.
 
 ## Sources
 
