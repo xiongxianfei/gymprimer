@@ -6,7 +6,7 @@
   - Status: reviewed
   - Plan lifecycle state: active
   - Current stage: implement
-  - Active context: M1 validation scaffolding closed after code-review R2 accepted CR1 and CR2 fixes; M2 advanced Markdown content is next.
+  - Active context: M2 advanced Markdown content closed after code-review R3; M3 governed media, prompt packets, and provenance is next.
 
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed

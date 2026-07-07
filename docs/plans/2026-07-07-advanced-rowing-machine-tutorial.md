@@ -54,14 +54,14 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 
 ## Current Handoff Summary
 
-- Current milestone: M2. Advanced Rowing Markdown Content
-- Current milestone state: review-requested
-- Last reviewed milestone: M1. Validation and Test Scaffolding
-- Review status: M2 implementation complete; code-review pending
-- Remaining in-scope open milestones: M2 code-review, M3 implementation, M4 implementation
-- Next stage: code-review
+- Current milestone: M3. Governed Media, Prompt Packets, and Provenance
+- Current milestone state: planned
+- Last reviewed milestone: M2. Advanced Rowing Markdown Content
+- Review status: code-review R3 clean-with-notes; M2 closed
+- Remaining in-scope open milestones: M3 implementation, M4 implementation
+- Next stage: implement
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M2 still needs code-review, and M3-M4 implementation, later review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M3-M4 implementation, later review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -110,7 +110,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 
 ### M2. Advanced Rowing Markdown Content
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Create the advanced companion page and link it from the beginner rowing page after validation support exists.
 - Requirements: R1-R21, R47-R50
 - Files/components likely touched:
@@ -280,6 +280,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: Review-resolution implemented fixes for CR1 and CR2 and routed M1 back to code-review.
 - 2026-07-07: Code-review R2 accepted the CR1 and CR2 fixes and closed M1.
 - 2026-07-07: M2 added `exercises/rowing-machine-advanced.md`, the beginner-page companion link, reused source-index entries, real-page regression tests, M2 source-audit evidence, and an aligned text-only row in the exercise-image audit.
+- 2026-07-07: Code-review R3 accepted the M2 implementation and closed M2.
 
 ## Decision log
 
@@ -319,17 +320,21 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - `python3 tools/checks/check_markdown_first.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md`: pass, checked 4 Markdown file(s).
 - `python3 tools/checks/check_privacy.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 17 file(s).
 - `git diff --check`: pass, no whitespace errors reported.
+- Code-review R3 reviewer-ran `python3 -m unittest discover -s tests`: pass, 234 tests.
+- Code-review R3 reviewer-ran `python3 tools/checks/check_markdown_first.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md`: pass, checked 4 Markdown file(s).
+- Code-review R3 reviewer-ran `python3 tools/checks/check_privacy.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 17 file(s).
+- Code-review R3 reviewer-ran `git diff --check`: pass, no whitespace errors reported.
 
 ## Outcome and retrospective
 
 - M1 implementation and review-resolution are closed.
-- M2 implementation is complete and review-requested.
+- M2 implementation is closed after clean code-review R3.
 - M3-M4 remain pending.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review M2.
+- Ready for implementation M3.
 
 ## Sources
 
