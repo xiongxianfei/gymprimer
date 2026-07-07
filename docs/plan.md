@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Top-Five Generated Images for Fewer-Than-Five Exercise Documents](plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md)
+  - Status: reviewed
+  - Plan lifecycle state: active
+  - Current stage: pr
+  - Active context: PR #16 opened from `proposal/top-five-generated-images` to `main`; hosted CI is pending/not observed.
+
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
   - Plan lifecycle state: active

@@ -16,9 +16,15 @@ Bird dog is a beginner coordination exercise. It trains the reader to keep the t
 
 Primary: gluteus maximus, trunk stabilizers, and shoulder stabilizers. Secondary: hamstrings, lumbar extensors, and upper-back muscles.
 
+![Bird dog muscle-attention reference with broad highlights on glutes, trunk, shoulder support, and hamstring regions](../media/exercises/bird-dog/muscle-attention.png)
+
+Use the image as a broad attention-region reference. Keep the muscle wording and citations in the Markdown text above.
+
 ## Equipment and setup
 
 Use the floor or a firm exercise mat. Start on hands and knees with hands under shoulders and knees under hips.
+
+![Bird dog setup reference on hands and knees with hands under shoulders, knees under hips, and a long spine](../media/exercises/bird-dog/setup.png)
 
 ## Movement phases
 
@@ -27,9 +33,13 @@ Use the floor or a firm exercise mat. Start on hands and knees with hands under 
 3. Pause without rotating the pelvis.
 4. Return slowly and switch sides.
 
+![Bird dog movement reference with opposite arm and leg reaching while the pelvis stays level](../media/exercises/bird-dog/level-pelvis-reach.png)
+
 ## Important notes
 
 Move slowly enough that the pelvis stays level. A shorter reach is better than twisting or dropping the hip. General strength-exercise guidance applies: use controlled repetitions and stop for sharp, worsening, unusual, or unsafe symptoms. [Mayo Clinic][mayo-weight-training]
+
+![Bird dog shorter-reach reference showing a smaller arm and leg reach with a steady trunk](../media/exercises/bird-dog/short-reach.png)
 
 ## Example pictures
 

@@ -66,6 +66,8 @@ Treat this as broad exercise literacy, not a precise muscle-activation test.
 
 ## Movement breakdown
 
+![Rowing machine drive reference with legs pressing and handle moving toward the body](../media/exercises/rowing-machine/drive-crop.png)
+
 Core sequence:
 
 ```text
@@ -104,6 +106,8 @@ cleared the knees, let the knees bend and slide forward under control.
 [Concept2][concept2-rowing-technique]
 
 ## What you should feel
+
+![Rowing machine finish reference with tall posture and handle close to the lower ribs](../media/exercises/rowing-machine/finish-crop.png)
 
 You may feel a smooth leg-driven push, a steady trunk position, and a light
 upper-back and arm finish. Pay attention to a connected stroke rather than a

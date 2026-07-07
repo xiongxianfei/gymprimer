@@ -18,6 +18,10 @@ The band pull-apart is a light upper-back and shoulder-blade exercise. It helps 
 
 Use a light resistance band. Stand tall with the arms extended in front at chest height and a bit of slack in the band. [Source][local-band-pull-apart-instruction]
 
+![Band pull-apart setup reference with arms forward at chest height and light band slack](../media/exercises/band-pull-apart/setup.png)
+
+Use the image as a setup reference. Keep the written instructions as the source of truth for exact positioning.
+
 ## Muscles involved
 
 | Role | Muscle region | What it helps do |
@@ -55,6 +59,10 @@ Let the band come back under control. [Source][local-band-pull-apart-instruction
 ## What you should feel
 
 You may feel the upper-back and rear-shoulder region working, with a light stretch across the chest. Try to keep the neck relaxed, ribs quiet, and arms near chest height. [Source][local-band-pull-apart-instruction]
+
+![Band pull-apart posture reference with relaxed neck, quiet ribs, and open arms at chest height](../media/exercises/band-pull-apart/quiet-ribs-neck.png)
+
+Use the image as a posture-control reference for the written neck, rib, and arm-height cues.
 
 ## Common mistakes
 

@@ -4,11 +4,14 @@ import unittest
 
 from tools.checks.exercise_document_image_prioritization import (
     ACCEPTED_REPLACEMENT_REASONS,
+    NAMED_TOP_FIVE_EXERCISE_DOCUMENTS,
     evaluation_population,
     image_count_by_exercise,
+    top_five_image_need,
     validate_slice_scope,
     validate_audit_record,
     validate_closeout_proof,
+    validate_named_top_five_population,
 )
 
 
@@ -36,7 +39,7 @@ def candidate(rank: int, **overrides: object) -> dict[str, object]:
         "why_it_matters": "Clarifies a beginner setup point.",
         "scores": {
             "beginner_comprehension": 4,
-            "safety_setup_value": 4,
+            "setup_value": 4,
             "muscle_attention_value": 1,
             "page_value": 3,
             "readiness": 5,
@@ -80,6 +83,40 @@ def valid_audit_record(**overrides: object) -> dict[str, object]:
         "top_five_are_backlog": True,
         "template_update_status": "deferred",
     }
+    record.update(overrides)
+    return record
+
+
+def valid_top_five_audit_record(**overrides: object) -> dict[str, object]:
+    record = valid_audit_record(
+        initiative="top_five_generated_images_for_fewer_than_five_exercise_documents",
+        exercise_document="exercises/bird-dog.md",
+        current_image_count=1,
+        accepted_existing_image_count=1,
+        accepted_older_sequence_image_count=1,
+        existing_image_purposes=["exercise_movement_illustration"],
+        new_generated_image_need=4,
+        candidate_table=[
+            candidate(rank, disposition="generate_now" if rank <= 4 else "preserve_existing" if rank == 5 else "later_candidate")
+            for rank in range(1, 11)
+        ],
+        top_five_generation_target=[1, 2, 3, 4, 5],
+        coverage_limit_outcome={
+            "target_total_images": 5,
+            "reason": "five_distinct_supported_purposes",
+        },
+        generation_decision={
+            "selected_count": 4,
+            "decision": "generate_to_top_five_total",
+            "rationale": "Named population targets five total accepted images.",
+            "selected_purposes": [
+                "exercise_setup_illustration",
+                "exercise_movement_illustration",
+                "exercise_movement_illustration",
+                "exercise_muscle_attention_illustration",
+            ],
+        },
+    )
     record.update(overrides)
     return record
 
@@ -140,6 +177,23 @@ def valid_closeout_proof(**overrides: object) -> dict[str, object]:
 
 
 class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
+    def test_named_top_five_population_is_exact_and_excludes_baduanjin(self) -> None:
+        errors = validate_named_top_five_population(NAMED_TOP_FIVE_EXERCISE_DOCUMENTS)
+
+        self.assertEqual(errors, [])
+        self.assertIn(
+            "named_top_five_population_excludes_baduanjin: exercises/baduanjin-basics.md",
+            validate_named_top_five_population(
+                [*NAMED_TOP_FIVE_EXERCISE_DOCUMENTS, "exercises/baduanjin-basics.md"]
+            ),
+        )
+        self.assertIn(
+            "named_top_five_population_missing: exercises/bird-dog.md",
+            validate_named_top_five_population(
+                [path for path in NAMED_TOP_FIVE_EXERCISE_DOCUMENTS if path != "exercises/bird-dog.md"]
+            ),
+        )
+
     def test_evaluation_population_uses_fewer_than_five_trigger(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -155,6 +209,41 @@ class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
         self.assertEqual(counts["exercises/zero-image.md"], 0)
         self.assertEqual(counts["exercises/four-image.md"], 4)
         self.assertEqual(population, sorted([zero, one, four]))
+
+    def test_top_five_need_counts_existing_and_older_sequence_images(self) -> None:
+        self.assertEqual(top_five_image_need(valid_top_five_audit_record(accepted_existing_image_count=1)), 4)
+        self.assertEqual(top_five_image_need(valid_top_five_audit_record(accepted_existing_image_count=2)), 3)
+        self.assertEqual(top_five_image_need(valid_top_five_audit_record(accepted_existing_image_count=3)), 2)
+        self.assertEqual(
+            validate_audit_record(
+                valid_top_five_audit_record(
+                    accepted_existing_image_count=1,
+                    accepted_older_sequence_image_count=2,
+                )
+            ),
+            ["accepted_older_sequence_count_exceeds_existing_count"],
+        )
+
+    def test_named_top_five_audit_uses_setup_value_score_field(self) -> None:
+        setup_value_record = valid_top_five_audit_record()
+        missing_setup_value = valid_top_five_audit_record(
+            candidate_table=[
+                candidate(
+                    1,
+                    scores={
+                        "beginner_comprehension": 4,
+                        "muscle_attention_value": 1,
+                        "page_value": 3,
+                        "readiness": 5,
+                    },
+                    score=13,
+                ),
+                *[candidate(rank) for rank in range(2, 11)],
+            ]
+        )
+
+        self.assertEqual(validate_audit_record(setup_value_record), [])
+        self.assertIn("candidate_score_out_of_range: rank 1 setup_value", validate_audit_record(missing_setup_value))
 
     def test_fewer_than_five_can_record_no_generation_needed(self) -> None:
         errors = validate_audit_record(valid_audit_record())
@@ -199,6 +288,47 @@ class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
         self.assertIn("top_five_candidate_must_not_select_generation_directly: rank 1", validate_audit_record(generate_now_top_five))
         self.assertIn("top_five_candidate_must_not_select_generation_directly: rank 1", validate_audit_record(first_generation_top_five))
         self.assertIn("sixth_candidate_generation_missing_churn_rationale: rank 6", validate_audit_record(sixth_without_rationale))
+
+    def test_named_top_five_target_accepts_rank_one_to_five_generation_only(self) -> None:
+        generate_now = valid_top_five_audit_record()
+        first_generation = valid_top_five_audit_record(
+            candidate_table=[
+                candidate(rank, disposition="first_generation_candidate" if rank <= 4 else "preserve_existing" if rank == 5 else "later_candidate")
+                for rank in range(1, 11)
+            ]
+        )
+        automatic_generation = valid_top_five_audit_record(
+            candidate_table=[
+                candidate(rank, disposition="automatic_generation" if rank == 1 else "generate_now" if rank <= 4 else "preserve_existing" if rank == 5 else "later_candidate")
+                for rank in range(1, 11)
+            ]
+        )
+        sixth = valid_top_five_audit_record(
+            candidate_table=[
+                *[
+                    candidate(rank, disposition="generate_now" if rank <= 4 else "preserve_existing")
+                    for rank in range(1, 6)
+                ],
+                candidate(6, disposition="generate_now"),
+            ],
+            generation_decision={
+                "selected_count": 5,
+                "decision": "generate_to_top_five_total",
+                "rationale": "Fixture tries to add a sixth image candidate.",
+                "selected_purposes": [
+                    "exercise_setup_illustration",
+                    "exercise_movement_illustration",
+                    "exercise_movement_illustration",
+                    "exercise_muscle_attention_illustration",
+                    "exercise_movement_illustration",
+                ],
+            },
+        )
+
+        self.assertEqual(validate_audit_record(generate_now), [])
+        self.assertEqual(validate_audit_record(first_generation), [])
+        self.assertIn("top_five_candidate_must_not_be_automatic_generation: rank 1", validate_audit_record(automatic_generation))
+        self.assertIn("sixth_candidate_generation_not_allowed: rank 6", validate_audit_record(sixth))
 
     def test_style_only_replacement_fails_but_concrete_replacement_reason_passes(self) -> None:
         style_only = valid_audit_record(
@@ -335,6 +465,22 @@ class ExerciseDocumentImagePrioritizationTest(unittest.TestCase):
         errors = validate_closeout_proof(generated_without_review)
 
         self.assertIn("visual_safety_review_required_for_generated_images", errors)
+
+    def test_top_five_closeout_proof_does_not_require_repository_visual_review(self) -> None:
+        generated_without_review = valid_closeout_proof(
+            initiative="top_five_generated_images_for_fewer_than_five_exercise_documents",
+            exercise_documents=["exercises/bird-dog.md"],
+            generated_image_count=1,
+            generated_image_paths=["media/exercises/bird-dog/setup.png"],
+            visual_safety_review={
+                "status": "not_required_named_top_five_initiative",
+                "reviewed_items": [],
+            },
+        )
+
+        errors = validate_closeout_proof(generated_without_review)
+
+        self.assertEqual(errors, [])
 
 
 if __name__ == "__main__":

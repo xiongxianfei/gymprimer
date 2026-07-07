@@ -31,12 +31,16 @@ Use the floor or a firm exercise mat. Set elbows under the shoulders and extend 
 
 ## Movement phases
 
+![Plank full-position reference with straight body line from head to heels](../media/exercises/plank/full-plank-crop.png)
+
 1. Brace lightly around the trunk while breathing.
 2. Lift the knees so the body forms a long line from shoulders to heels.
 3. Hold without letting the hips sag or the ribs flare.
 4. Lower before form changes.
 
 ## What you should feel
+
+![Plank knee-option reference with knees down and trunk steady](../media/exercises/plank/knee-plank-crop.png)
 
 You may feel steady effort around the abdomen and side trunk while breathing
 stays normal. Pay attention to keeping the ribs and pelvis connected instead of
@@ -55,6 +59,8 @@ Progression: Add a few seconds before choosing a harder variation. [Mayo Clinic]
 Stop if: Stop the hold when the hips sag, the ribs flare, breathing gets stuck, or the position feels sharp or unsafe. [Mayo Clinic][mayo-weight-training]
 
 ## Important notes
+
+![Plank hip-control reference showing a steady line without hips dropping](../media/exercises/plank/hip-control-crop.png)
 
 Use a shorter hold or a knee plank when the hips sag. The useful version is the one the reader can control. General strength-exercise guidance applies: move and hold with control, use a repeatable difficulty, and stop for sharp, worsening, unusual, or unsafe symptoms. [Mayo Clinic][mayo-weight-training]
 

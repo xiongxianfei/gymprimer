@@ -1009,7 +1009,7 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
             ),
         }
 
-        self.assertEqual(text.count("![Brisk walking "), 2)
+        self.assertEqual(text.count("![Brisk walking "), 5)
         self.assertIn("Use these images as broad visual references.", text)
 
         for asset_path, (purpose, alt_text) in expected.items():

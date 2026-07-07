@@ -16,6 +16,8 @@ The chin nod is a low-load neck-control drill. It helps a beginner practice a sm
 
 ## Equipment setup
 
+![Chin nod setup reference showing seated upright posture with head level and neck long](../media/exercises/chin-nod/setup.png)
+
 Sit upright with the neck and back straight. Keep the setup easy enough that the head can move a small amount while the shoulders stay relaxed. [Source][local-chin-nod-instruction]
 
 ## Muscles involved
@@ -30,6 +32,8 @@ Treat this as a beginner orientation cue, not a diagnostic anatomy test.
 Use the image as a broad attention-region reference. Keep the muscle wording and citations in the Markdown text above.
 
 ## Movement breakdown
+
+![Chin nod start reference with head level and gaze forward](../media/exercises/chin-nod/start-crop.png)
 
 ![Chin nod movement reference with separate start and small chin-in finish positions](../media/exercises/chin-nod/movement.png)
 
@@ -52,6 +56,8 @@ Pause only while the motion still feels light and controlled.
 Return to the starting position slowly. Keep the shoulders quiet instead of shrugging. [Source][local-chin-nod-instruction]
 
 ## What you should feel
+
+![Chin nod finish reference showing a small chin-in motion with neck long](../media/exercises/chin-nod/chin-in-crop.png)
 
 You may feel light effort near the front of the neck or a mild stretch around the neck. Try to keep the jaw, shoulders, and push effort quiet. [Source][local-chin-nod-instruction]
 

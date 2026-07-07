@@ -50,6 +50,8 @@ Treat this as broad body-awareness guidance, not a test of exact muscle effort.
 
 ## Movement breakdown
 
+![Tai Chi slow arm-path reference with rounded arms moving gently at chest height](../media/exercises/tai-chi-basics/slow-arm-path.png)
+
 ### 1. Ready stance
 
 Stand in the setup position. Let the knees stay soft, the shoulders settle, and the breath stay quiet. [NCCIH][nccih-tai-chi]
@@ -95,6 +97,8 @@ Stop if: Stop if balance, posture, or breathing no longer feels controlled. Stop
 These are general starter labels for a low-load control drill, not a personal schedule.
 
 ## Easier version
+
+![Tai Chi smaller-range option reference with small weight shift and arms close to the body](../media/exercises/tai-chi-basics/smaller-range.png)
 
 Make the weight shift smaller. Keep both feet fully on the floor and stay close to a wall or stable chair. Seated Tai Chi or instructor-guided options may be more appropriate when standing practice is uncertain. [VA][va-tai-chi-qigong]
 

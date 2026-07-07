@@ -26,6 +26,8 @@ Five beginner use cases:
 
 ## Equipment setup
 
+![Seated row setup reference with feet supported, trunk upright, and hands on handles](../media/exercises/seated-row/setup.png)
+
 Set the seat so you can hold the handles with your shoulders relaxed and your
 torso steady. If the machine has a chest pad, adjust it so you can reach the
 handles without rounding forward.
@@ -50,6 +52,8 @@ muscle guidance stays in the table and source notes.
 
 ## Movement breakdown
 
+![Seated row start-position reference with arms extended and trunk upright](../media/exercises/seated-row/start-position.png)
+
 ### 1. Set up
 
 Sit tall, place your feet on the supports, and start with your arms long.
@@ -69,6 +73,8 @@ and lowering are part of proper weight-training technique.
 [Mayo Clinic][mayo-weight-training]
 
 ## What you should feel
+
+![Seated row finish-position reference with handles near lower ribs and elbows close](../media/exercises/seated-row/finish-position.png)
 
 You may feel a steady pull across the upper back while the arms help finish the
 movement. Pay attention to keeping the torso quiet; if your torso rocks to move

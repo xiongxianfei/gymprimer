@@ -26,6 +26,8 @@ Five beginner use cases:
 
 ## Equipment setup
 
+![Lat pulldown setup reference seated under the bar with thighs supported and hands on the bar](../media/exercises/lat-pulldown/setup.png)
+
 Adjust the thigh pad so your legs are held down without feeling pinned. Choose
 a light load you can move without swinging. Sit tall, hold the bar with both
 hands, and let your arms reach up under control.
@@ -36,6 +38,8 @@ Use the image only to recognize the main parts of the machine. The exact shape
 of equipment can vary by gym.
 
 ## Muscles involved
+
+![Lat pulldown muscle-attention reference with broad highlights on lats, upper back, rear shoulders, arms, grip, and trunk](../media/exercises/lat-pulldown/muscle-attention.png)
 
 You should mostly notice work through the sides of the upper back and the front
 of the upper arms. Treat this as a practical feel cue, not a body-map test.
@@ -67,6 +71,8 @@ controlled instead of letting the weight pull you up.
 [Mayo Clinic][mayo-weight-training]
 
 ## What you should feel
+
+![Lat pulldown controlled-finish reference with bar near upper chest and elbows down](../media/exercises/lat-pulldown/controlled-finish.png)
 
 You should feel effort in your upper back and arms while your torso stays
 steady. If you mainly feel momentum, reduce the load and slow the repetition.

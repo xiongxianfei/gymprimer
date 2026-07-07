@@ -16,6 +16,8 @@ The wall slide is a shoulder-blade and overhead-reaching awareness drill. This p
 
 ## Equipment setup
 
+![Wall slide setup reference facing the wall with forearms on the wall and ribs quiet](../media/exercises/wall-slide/setup.png)
+
 Use a clear wall. Place the forearms against the wall and start with a range that lets the arms move smoothly. [Source][local-wall-slide-instruction]
 
 ## Muscles involved
@@ -27,6 +29,8 @@ Primary: serratus anterior activity during wall-slide reaching. Secondary: other
 Use the image as a broad attention-region reference. Keep the muscle wording and citations in the Markdown text above.
 
 ## Movement breakdown
+
+![Wall slide start reference with forearms on the wall at shoulder height](../media/exercises/wall-slide/start-crop.png)
 
 ![Wall slide movement reference with separate forearms-on-wall start and raised finish positions](../media/exercises/wall-slide/movement.png)
 
@@ -49,6 +53,8 @@ Pause briefly at the highest controlled point.
 Slide back down slowly. [Source][local-wall-slide-instruction]
 
 ## What you should feel
+
+![Wall slide raised-finish reference with arms sliding upward while shoulders stay relaxed](../media/exercises/wall-slide/raised-finish-crop.png)
 
 You may feel the shoulders, arms, and upper back working. [Source][local-wall-slide-instruction]
 
