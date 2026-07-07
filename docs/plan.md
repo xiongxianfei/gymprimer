@@ -5,8 +5,8 @@
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: implement
-  - Active context: M1 is closed after code-review M1 R2; M2 Markdown page and source contract implementation is next.
+  - Current stage: code-review
+  - Active context: M2 added the text-only safer-running page, source audit, real-page tests, and current exercise-image audit inventory row; code-review M2 is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

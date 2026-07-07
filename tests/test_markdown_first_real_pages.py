@@ -26,11 +26,13 @@ BRISK_WALKING_PAGE = ROOT / "exercises/brisk-walking.md"
 EVERYDAY_WALKING_PAGE = ROOT / "principles/everyday-walking.md"
 TAI_CHI_PAGE = ROOT / "exercises/tai-chi-basics.md"
 BADUANJIN_PAGE = ROOT / "exercises/baduanjin-basics.md"
+SAFER_RUNNING_PAGE = ROOT / "exercises/safer-running-basics.md"
 WALKING_CHANGE_ROOT = ROOT / "docs/changes/2026-07-05-brisk-walking-and-everyday-walking"
 WALKING_MANUAL_PROOF_ROOT = WALKING_CHANGE_ROOT / "manual-proof"
 WALKING_VALIDATION_LEDGER = WALKING_CHANGE_ROOT / "validation-ledger.md"
 TAI_CHI_CHANGE_ROOT = ROOT / "docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise"
 BADUANJIN_CHANGE_ROOT = ROOT / "docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise"
+SAFER_RUNNING_CHANGE_ROOT = ROOT / "docs/changes/2026-07-06-safer-running-basics-and-running-images"
 BADUANJIN_IMAGE_ASSETS = (
     (
         "media/exercises/baduanjin-basics/setup.png",
@@ -152,6 +154,21 @@ TAI_CHI_REQUIRED_SECTIONS = (
     "## Sources",
 )
 BADUANJIN_REQUIRED_SECTIONS = TAI_CHI_REQUIRED_SECTIONS
+SAFER_RUNNING_REQUIRED_SECTIONS = (
+    "## What this is for",
+    "## What this page cannot promise",
+    "## Before you start",
+    "## Warm up",
+    "## Running form basics",
+    "## Muscles involved",
+    "## What you should feel",
+    "## How much to do",
+    "## Common mistakes",
+    "## Easier version",
+    "## Harder version",
+    "## Safety notes",
+    "## Sources",
+)
 
 
 class MarkdownFirstRealPagesTest(unittest.TestCase):
@@ -249,6 +266,9 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
 
     def baduanjin_text(self) -> str:
         return BADUANJIN_PAGE.read_text(encoding="utf-8")
+
+    def safer_running_text(self) -> str:
+        return SAFER_RUNNING_PAGE.read_text(encoding="utf-8")
 
     def test_walking_pages_exist_and_have_required_shape(self) -> None:
         expected = {
@@ -487,6 +507,142 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
             "movement",
             "muscle",
             "feel",
+            "stop-condition",
+        ):
+            with self.subTest(claim_type=claim_type):
+                self.assertIn(claim_type, text)
+
+        for token in ("page_path", "claim_type", "supporting_source", "source_fit", "outcome", "residual_risk"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_safer_running_page_exists_and_has_required_shape(self) -> None:
+        self.assertTrue(SAFER_RUNNING_PAGE.is_file())
+        text = self.safer_running_text()
+
+        self.assertTrue(text.startswith("# Safer Running Basics\n"))
+        self.assertIn(
+            "Also searched as: injury-free running, beginner running, running without getting hurt",
+            text,
+        )
+        self.assertNotIn("# Injury-Free Running", text)
+        for section in SAFER_RUNNING_REQUIRED_SECTIONS:
+            with self.subTest(section=section):
+                self.assertIn(section, text)
+        self.assertLess(text.index("Also searched as:"), text.index("## What this is for"))
+        self.assertNotIn("](../media/exercises/safer-running-basics/", text)
+
+    def test_safer_running_method_guidance_matches_beginner_contract(self) -> None:
+        text = self.safer_running_text()
+        lower = text.lower()
+        finding_codes = [
+            finding.code for finding in validate_exercise_method_guidance(SAFER_RUNNING_PAGE, text)
+        ]
+
+        self.assertEqual(finding_codes, [])
+        for term in (
+            "method type: basic_cardio_activity",
+            "run/walk",
+            "10-20 minutes",
+            "speak in short sentences",
+            "rest day",
+            "3-5 minutes",
+            "10%",
+            "avoid adding distance, speed, hills, and extra running days all at once",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, lower)
+
+    def test_safer_running_broad_muscle_feel_and_stop_guidance(self) -> None:
+        text = self.safer_running_text()
+        muscle_section = section_text(text, "## Muscles involved")
+        feel_section = section_text(text, "## What you should feel")
+        finding_codes = [
+            finding.code for finding in validate_exercise_muscle_guidance(SAFER_RUNNING_PAGE, text)
+        ]
+
+        self.assertEqual(finding_codes, [])
+        self.assertIn("| Role | Muscle region | What it helps do |", muscle_section)
+        for term in (
+            "Support and push-off",
+            "Landing control",
+            "Posture and transfer",
+            "Rhythm and balance",
+            "Glutes, thighs, and calves",
+            "Feet, ankles, calves, and thighs",
+            "Trunk",
+            "Shoulders, upper back, and arms",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, muscle_section)
+        for term in (
+            "warm and slightly out of breath",
+            "not panicked or strained",
+            "chest pain",
+            "dizziness",
+            "fainting",
+            "unusual shortness of breath",
+            "sharp pain",
+            "numbness",
+            "weakness",
+            "../RED-FLAGS.md",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, feel_section)
+
+    def test_safer_running_scope_and_source_ids_are_page_local_and_indexed(self) -> None:
+        text = self.safer_running_text()
+        lower = text.lower()
+        sources = (ROOT / "SOURCES.md").read_text(encoding="utf-8")
+
+        for term in (
+            "personalized running plan",
+            "return-to-running",
+            "diagnosis",
+            "treatment plan",
+            "injury-free running guarantee",
+            "everyone must forefoot strike",
+        ):
+            with self.subTest(term=term):
+                self.assertNotIn(term, lower)
+
+        for source_id in (
+            "nhs-couch-to-5k",
+            "mchs-better-runner",
+            "cdc-adult-activity",
+            "acsm-running-form",
+            "mayo-exercise-chronic-disease",
+            "pubmed-running-injury-exercise-prevention",
+            "pmc-running-injury-support",
+        ):
+            with self.subTest(source_id=source_id):
+                self.assertIn(f"[{source_id}]:", text)
+                self.assertIn(f"][{source_id}]", text)
+                self.assertIn(f"[{source_id}]:", sources)
+
+    def test_safer_running_m2_source_audit_records_required_claim_samples(self) -> None:
+        path = SAFER_RUNNING_CHANGE_ROOT / "source-audit.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for heading in (
+            "# Safer Running Source Audit",
+            "## Scope",
+            "## Claim Samples",
+            "## Disposition",
+            "## Residual Risk",
+        ):
+            with self.subTest(heading=heading):
+                self.assertIn(heading, text)
+
+        for claim_type in (
+            "title-alias",
+            "run-walk-frequency",
+            "warm-up",
+            "progression",
+            "form",
+            "muscle",
+            "strength-evidence-limit",
             "stop-condition",
         ):
             with self.subTest(claim_type=claim_type):
