@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
+  - Status: reviewed
+  - Plan lifecycle state: active
+  - Current stage: pr
+  - Active context: PR #17 opened from `safer-running-basics-and-running-images` to `main`; GitHub reported no checks yet on the branch at handoff.
+
 - [Top-Five Generated Images for Fewer-Than-Five Exercise Documents](plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md)
   - Status: reviewed
   - Plan lifecycle state: active
@@ -100,5 +106,7 @@
 ## Sources
 
 - `docs/plans/2026-07-06-necessary-images-and-baduanjin-exercise.md`
+- `docs/plans/2026-07-06-safer-running-basics-and-running-images.md`
 - `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/test-spec-review-r1.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/review-log.md`
 - `docs/workflows.md`

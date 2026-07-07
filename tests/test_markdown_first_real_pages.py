@@ -26,11 +26,13 @@ BRISK_WALKING_PAGE = ROOT / "exercises/brisk-walking.md"
 EVERYDAY_WALKING_PAGE = ROOT / "principles/everyday-walking.md"
 TAI_CHI_PAGE = ROOT / "exercises/tai-chi-basics.md"
 BADUANJIN_PAGE = ROOT / "exercises/baduanjin-basics.md"
+SAFER_RUNNING_PAGE = ROOT / "exercises/safer-running-basics.md"
 WALKING_CHANGE_ROOT = ROOT / "docs/changes/2026-07-05-brisk-walking-and-everyday-walking"
 WALKING_MANUAL_PROOF_ROOT = WALKING_CHANGE_ROOT / "manual-proof"
 WALKING_VALIDATION_LEDGER = WALKING_CHANGE_ROOT / "validation-ledger.md"
 TAI_CHI_CHANGE_ROOT = ROOT / "docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise"
 BADUANJIN_CHANGE_ROOT = ROOT / "docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise"
+SAFER_RUNNING_CHANGE_ROOT = ROOT / "docs/changes/2026-07-06-safer-running-basics-and-running-images"
 BADUANJIN_IMAGE_ASSETS = (
     (
         "media/exercises/baduanjin-basics/setup.png",
@@ -56,6 +58,38 @@ BADUANJIN_IMAGE_ASSETS = (
         "media/exercises/baduanjin-basics/muscle-attention.png",
         "exercise_muscle_attention_illustration",
         "Baduanjin muscle-attention image showing broad leg trunk shoulder upper-back foot and ankle regions",
+    ),
+)
+SAFER_RUNNING_IMAGE_ASSETS = (
+    (
+        "media/exercises/safer-running-basics/posture.png",
+        "exercise_movement_illustration",
+        "Safer running posture image showing tall posture and relaxed arm swing",
+    ),
+    (
+        "media/exercises/safer-running-basics/landing.png",
+        "exercise_movement_illustration",
+        "Safer running landing image showing the foot close to the body with a short quiet stride",
+    ),
+    (
+        "media/exercises/safer-running-basics/run-walk.png",
+        "exercise_movement_illustration",
+        "Safer running run-walk image showing easy running alternating with walking recovery",
+    ),
+    (
+        "media/exercises/safer-running-basics/warm-up.png",
+        "exercise_movement_illustration",
+        "Safer running warm-up image showing brisk walking and easy jogging before running",
+    ),
+    (
+        "media/exercises/safer-running-basics/muscle-attention.png",
+        "exercise_muscle_attention_illustration",
+        "Safer running muscle-attention image showing broad glute thigh calf foot ankle trunk shoulder and arm regions",
+    ),
+    (
+        "media/exercises/safer-running-basics/overstride-comparison.png",
+        "exercise_movement_illustration",
+        "Safer running overstride comparison image showing an overreaching step beside a shorter step with neutral framing",
     ),
 )
 MUSCLE_GUIDANCE_PROOF_SLICE = {
@@ -152,6 +186,21 @@ TAI_CHI_REQUIRED_SECTIONS = (
     "## Sources",
 )
 BADUANJIN_REQUIRED_SECTIONS = TAI_CHI_REQUIRED_SECTIONS
+SAFER_RUNNING_REQUIRED_SECTIONS = (
+    "## What this is for",
+    "## What this page cannot promise",
+    "## Before you start",
+    "## Warm up",
+    "## Running form basics",
+    "## Muscles involved",
+    "## What you should feel",
+    "## How much to do",
+    "## Common mistakes",
+    "## Easier version",
+    "## Harder version",
+    "## Safety notes",
+    "## Sources",
+)
 
 
 class MarkdownFirstRealPagesTest(unittest.TestCase):
@@ -249,6 +298,9 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
 
     def baduanjin_text(self) -> str:
         return BADUANJIN_PAGE.read_text(encoding="utf-8")
+
+    def safer_running_text(self) -> str:
+        return SAFER_RUNNING_PAGE.read_text(encoding="utf-8")
 
     def test_walking_pages_exist_and_have_required_shape(self) -> None:
         expected = {
@@ -493,6 +545,323 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
                 self.assertIn(claim_type, text)
 
         for token in ("page_path", "claim_type", "supporting_source", "source_fit", "outcome", "residual_risk"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_safer_running_page_exists_and_has_required_shape(self) -> None:
+        self.assertTrue(SAFER_RUNNING_PAGE.is_file())
+        text = self.safer_running_text()
+
+        self.assertTrue(text.startswith("# Safer Running Basics\n"))
+        self.assertIn(
+            "Also searched as: injury-free running, beginner running, running without getting hurt",
+            text,
+        )
+        self.assertNotIn("# Injury-Free Running", text)
+        for section in SAFER_RUNNING_REQUIRED_SECTIONS:
+            with self.subTest(section=section):
+                self.assertIn(section, text)
+        self.assertLess(text.index("Also searched as:"), text.index("## What this is for"))
+
+    def test_safer_running_method_guidance_matches_beginner_contract(self) -> None:
+        text = self.safer_running_text()
+        lower = text.lower()
+        finding_codes = [
+            finding.code for finding in validate_exercise_method_guidance(SAFER_RUNNING_PAGE, text)
+        ]
+
+        self.assertEqual(finding_codes, [])
+        for term in (
+            "method type: basic_cardio_activity",
+            "run/walk",
+            "10-20 minutes",
+            "speak in short sentences",
+            "rest day",
+            "3-5 minutes",
+            "10%",
+            "avoid adding distance, speed, hills, and extra running days all at once",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, lower)
+
+    def test_safer_running_broad_muscle_feel_and_stop_guidance(self) -> None:
+        text = self.safer_running_text()
+        muscle_section = section_text(text, "## Muscles involved")
+        feel_section = section_text(text, "## What you should feel")
+        finding_codes = [
+            finding.code for finding in validate_exercise_muscle_guidance(SAFER_RUNNING_PAGE, text)
+        ]
+
+        self.assertEqual(finding_codes, [])
+        self.assertIn("| Role | Muscle region | What it helps do |", muscle_section)
+        for term in (
+            "Support and push-off",
+            "Landing control",
+            "Posture and transfer",
+            "Rhythm and balance",
+            "Glutes, thighs, and calves",
+            "Feet, ankles, calves, and thighs",
+            "Trunk",
+            "Shoulders, upper back, and arms",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, muscle_section)
+        for term in (
+            "warm and slightly out of breath",
+            "not panicked or strained",
+            "chest pain",
+            "dizziness",
+            "fainting",
+            "unusual shortness of breath",
+            "sharp pain",
+            "numbness",
+            "weakness",
+            "persistent pain",
+            "../RED-FLAGS.md",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, feel_section)
+
+    def test_safer_running_scope_and_source_ids_are_page_local_and_indexed(self) -> None:
+        text = self.safer_running_text()
+        lower = text.lower()
+        sources = (ROOT / "SOURCES.md").read_text(encoding="utf-8")
+
+        for term in (
+            "personalized running plan",
+            "return-to-running",
+            "diagnosis",
+            "treatment plan",
+            "injury-free running guarantee",
+            "everyone must forefoot strike",
+        ):
+            with self.subTest(term=term):
+                self.assertNotIn(term, lower)
+
+        for source_id in (
+            "nhs-couch-to-5k",
+            "mchs-better-runner",
+            "cdc-adult-activity",
+            "acsm-running-form",
+            "mayo-exercise-chronic-disease",
+            "pubmed-running-injury-exercise-prevention",
+            "pmc-running-injury-support",
+        ):
+            with self.subTest(source_id=source_id):
+                self.assertIn(f"[{source_id}]:", text)
+                self.assertIn(f"][{source_id}]", text)
+                self.assertIn(f"[{source_id}]:", sources)
+
+    def test_safer_running_m2_source_audit_records_required_claim_samples(self) -> None:
+        path = SAFER_RUNNING_CHANGE_ROOT / "source-audit.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for heading in (
+            "# Safer Running Source Audit",
+            "## Scope",
+            "## Claim Samples",
+            "## Disposition",
+            "## Residual Risk",
+        ):
+            with self.subTest(heading=heading):
+                self.assertIn(heading, text)
+
+        for claim_type in (
+            "title-alias",
+            "run-walk-frequency",
+            "warm-up",
+            "progression",
+            "form",
+            "muscle",
+            "strength-evidence-limit",
+            "stop-condition",
+        ):
+            with self.subTest(claim_type=claim_type):
+                self.assertIn(claim_type, text)
+
+        for token in ("page_path", "claim_type", "supporting_source", "source_fit", "outcome", "residual_risk"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_safer_running_m3_images_are_local_prompt_backed_and_reviewed(self) -> None:
+        text = self.safer_running_text()
+        provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
+
+        self.assertEqual(
+            text.count("](../media/exercises/safer-running-basics/"),
+            6,
+        )
+        self.assertIn("Use these images as broad visual references.", text)
+        purpose_counts: dict[str, int] = {}
+        for asset_path, purpose, alt_text in SAFER_RUNNING_IMAGE_ASSETS:
+            with self.subTest(asset_path=asset_path):
+                prompt_record = asset_path.replace("media/exercises/", "media/prompts/exercises/").replace(".png", ".md")
+                purpose_counts[purpose] = purpose_counts.get(purpose, 0) + 1
+                self.assertTrue((ROOT / asset_path).is_file())
+                self.assertTrue((ROOT / prompt_record).is_file())
+                self.assertIn(f"![{alt_text}](../{asset_path})", text)
+                self.assertIn(asset_path, provenance)
+                rows = provenance[asset_path]
+                self.assertEqual(len(rows), 1)
+                row = rows[0]
+                self.assertEqual(row.get("asset_type"), "ai_generated_raster")
+                self.assertEqual(row.get("media_purpose"), purpose)
+                self.assertEqual(row.get("prompt_record"), prompt_record)
+                self.assertEqual(row.get("review_status"), "approved")
+                self.assertIn("exercises/safer-running-basics.md", split_page_refs(row.get("page_refs", "")))
+                prompt_text = (ROOT / prompt_record).read_text(encoding="utf-8")
+                self.assertIn(f"asset_path: {asset_path}", prompt_text)
+                self.assertIn(f"purpose: {purpose}", prompt_text)
+                self.assertIn("## Exact prompt", prompt_text)
+                self.assertIn("no in-image text", prompt_text.lower())
+                self.assertIn("no labels", prompt_text.lower())
+                self.assertIn("no badges", prompt_text.lower())
+                self.assertIn("no brand marks", prompt_text.lower())
+                self.assertIn("no identifiable person", prompt_text.lower())
+                self.assertIn("no medical framing", prompt_text.lower())
+                self.assertIn("no pain marks", prompt_text.lower())
+                self.assertIn("no correct/wrong framing", prompt_text.lower())
+
+        self.assertEqual(purpose_counts["exercise_muscle_attention_illustration"], 1)
+        self.assertEqual(purpose_counts["exercise_movement_illustration"], 5)
+
+    def test_safer_running_m3_preserves_top_10_image_ranking(self) -> None:
+        path = SAFER_RUNNING_CHANGE_ROOT / "reviews/visual-safety-review.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for rank, asset_path in enumerate(
+            [asset_path for asset_path, _, _ in SAFER_RUNNING_IMAGE_ASSETS],
+            start=1,
+        ):
+            with self.subTest(rank=rank, asset_path=asset_path):
+                self.assertIn(f"| {rank} |", text)
+                self.assertIn(asset_path, text)
+                self.assertIn("Generate first", text)
+
+        for deferred in (
+            "Easy-effort / talk-test visual",
+            "Running surface and route setup",
+            "Cool-down walk",
+            "Shoe and clothing setup",
+        ):
+            with self.subTest(deferred=deferred):
+                self.assertIn(deferred, text)
+                self.assertIn("Later candidate", text)
+
+    def test_safer_running_m3_visual_safety_review_records_required_criteria(self) -> None:
+        path = SAFER_RUNNING_CHANGE_ROOT / "reviews/visual-safety-review.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for heading in (
+            "# Safer Running Visual-Safety Review",
+            "## Scope",
+            "## Top-10 Ranking Preservation",
+            "## Review Table",
+            "## Criteria Notes",
+            "## Disposition",
+            "## Residual Risk",
+        ):
+            with self.subTest(heading=heading):
+                self.assertIn(heading, text)
+
+        for token in (
+            "one concept",
+            "matches nearby Markdown",
+            "no in-image text",
+            "no labels",
+            "no badges",
+            "no red pain marks",
+            "no medical framing",
+            "no brand mark",
+            "no identifiable person",
+            "neutral overstride framing",
+            "broad muscle highlighting",
+            "approved",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_safer_running_m4_beginner_comprehension_records_required_prompts(self) -> None:
+        path = SAFER_RUNNING_CHANGE_ROOT / "reviews/beginner-comprehension-proof.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for prompt in (
+            "what the page can help them do",
+            "whether the page can guarantee injury-free running",
+            "how to start a first running session",
+            "what run/walk means",
+            "what effort should feel like",
+            "what the posture image teaches",
+            "what the landing image teaches",
+            "what would make them stop or seek help",
+            "images helped more than text alone",
+            "non-identifying",
+            "residual confusion",
+            "exercises/safer-running-basics.md",
+            "media/exercises/safer-running-basics/posture.png",
+            "media/exercises/safer-running-basics/landing.png",
+            "media/exercises/safer-running-basics/run-walk.png",
+            "media/exercises/safer-running-basics/warm-up.png",
+            "media/exercises/safer-running-basics/muscle-attention.png",
+            "media/exercises/safer-running-basics/overstride-comparison.png",
+        ):
+            with self.subTest(prompt=prompt):
+                self.assertIn(prompt, text)
+
+    def test_safer_running_m4_rollback_proof_records_text_only_cleanup(self) -> None:
+        path = SAFER_RUNNING_CHANGE_ROOT / "reviews/rollback-proof.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for token in (
+            "text-only",
+            "temporary review state",
+            "remove image references",
+            "unused safer-running assets",
+            "prompt records",
+            "provenance rows",
+            "exercises/safer-running-basics.md",
+            "media/exercises/safer-running-basics/posture.png",
+            "media/exercises/safer-running-basics/landing.png",
+            "media/exercises/safer-running-basics/run-walk.png",
+            "media/exercises/safer-running-basics/warm-up.png",
+            "media/exercises/safer-running-basics/muscle-attention.png",
+            "media/exercises/safer-running-basics/overstride-comparison.png",
+            "media/prompts/exercises/safer-running-basics/posture.md",
+            "media/prompts/exercises/safer-running-basics/landing.md",
+            "media/prompts/exercises/safer-running-basics/run-walk.md",
+            "media/prompts/exercises/safer-running-basics/warm-up.md",
+            "media/prompts/exercises/safer-running-basics/muscle-attention.md",
+            "media/prompts/exercises/safer-running-basics/overstride-comparison.md",
+            "python3 tools/checks/check_markdown_first.py",
+            "python3 tools/checks/check_privacy.py",
+            "pass",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_safer_running_m4_validation_ledger_records_final_handoff_commands(self) -> None:
+        path = SAFER_RUNNING_CHANGE_ROOT / "validation-ledger.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for token in (
+            "M4 Comprehension Proof and Final Readiness",
+            "python3 -m unittest tests.test_exercise_method_guidance",
+            "python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages",
+            "python3 -m unittest discover -s tests",
+            "python3 tools/checks/check_markdown_first.py",
+            "python3 tools/checks/check_privacy.py",
+            "git diff --check",
+            "CI was not observed",
+            "docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/beginner-comprehension-proof.md",
+            "docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/rollback-proof.md",
+            "pass",
+        ):
             with self.subTest(token=token):
                 self.assertIn(token, text)
 

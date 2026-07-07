@@ -1,0 +1,373 @@
+# Plan: Safer Running Basics and High-Quality Running Images
+
+Status: active
+
+Plan lifecycle state: active
+
+Change ID: `2026-07-06-safer-running-basics-and-running-images`
+
+Proposal: `docs/proposals/2026-07-06-safer-running-basics-and-running-images.md`
+
+Spec: `specs/safer-running-basics-and-running-images.md`
+
+Architecture assessment: `docs/changes/2026-07-06-safer-running-basics-and-running-images/architecture-assessment.md`
+
+Review log: `docs/changes/2026-07-06-safer-running-basics-and-running-images/review-log.md`
+
+## Current Handoff Summary
+
+Current milestone: M4
+
+Current state: closed
+
+Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved; code-review M2 R2 clean-with-notes; code-review M3 R1 changes-requested for GP-SRB-M3-CR1; GP-SRB-M3-CR1 resolved; code-review M3 R2 clean-with-notes; code-review M4 R1 changes-requested for GP-SRB-M4-CR1; code-review M4 R2 withdrew GP-SRB-M4-CR1 as over-strict and closed M4 with notes; final holistic code-review R1 clean-with-notes.
+
+Next required gate: hosted CI observation and PR review.
+
+Implementation status: M1 closed; M2 closed; M3 closed; M4 closed.
+
+Final closeout status: PR #17 opened; hosted CI was not yet reported at handoff.
+
+## Scope
+
+This plan implements the approved spec for a static beginner running page and its governed six-image first batch.
+
+The implementation MUST NOT add a hosted app, adaptive coaching, video, animation, race plan, individualized program, or condition-specific pain-care page.
+
+## Milestones
+
+### M1. Validation and Contract Fixtures
+
+Goal: make the existing validation surface able to enforce the approved page and media contract before adding production content.
+
+Tasks:
+
+- Add or update tests for `basic_cardio_activity` coverage on the safer-running page.
+- Add or update tests for the page-specific six-image exception.
+- Add or update tests for the exact six required asset paths, prompt-record paths, and provenance rows.
+- Add or update tests for required page headings, alias treatment, image alt text, and source registration.
+- Add fixtures only when needed to prove the checker behavior before the real page exists.
+
+Acceptance evidence:
+
+- Failing tests demonstrate the missing safer-running page and media contract before production content is added.
+- The tests trace to R1 through R12 in the approved spec.
+
+Progress:
+
+- State: closed.
+- Added a `basic_cardio_activity` path-scope test for `exercises/safer-running-basics.md`.
+- Added fixture tests proving the six approved running image paths pass with the page-specific exception.
+- Added fixture tests proving a seventh running image, a second muscle-attention image, and an unapproved running asset fail.
+- Activated `basic_cardio_activity` validation for `exercises/safer-running-basics.md`.
+- Added the page-specific six-image exception and allowed first-batch asset set to the Markdown-first checker.
+- Code-review M1 R1 recorded GP-SRB-M1-CR1: M1 still needs required page heading, alias-boundary, required-section, and source-registration test coverage or an upstream plan/test-spec revision.
+- Review-resolution added fixture-backed page contract tests for the approved H1, alias line, required headings, page-local source definitions, and shared source registration.
+- Review-resolution added checker enforcement for the safer-running title, alias line, and required sections.
+- Review-resolution updated the safer-running image fixture so image-exception tests continue to exercise a valid page shape.
+- Code-review M1 R2 accepted the review-resolution and closed M1.
+
+Tests-first evidence:
+
+- `python3 -m unittest tests.test_exercise_method_guidance` failed before the checker update with `exercise_method_inactive_type` for `exercises/safer-running-basics.md`.
+- `python3 -m unittest tests.test_exercise_image_standard` failed before the checker update because the running fixture still used the default three-image limit and lacked the new unapproved-asset finding.
+
+Validation notes:
+
+- `python3 -m unittest tests.test_exercise_method_guidance` passed: 20 tests.
+- `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 67 tests.
+- `python3 -m unittest discover -s tests` passed: 201 tests.
+- Review-resolution validation passed: `python3 -m unittest tests.test_markdown_first_page_structure`, `python3 -m unittest tests.test_exercise_method_guidance`, `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages`, and `python3 -m unittest discover -s tests`.
+- Artifact Markdown, privacy, and diff checks are recorded in the M1 handoff.
+
+Decisions and discoveries:
+
+- M1 stays validation-only. It does not create `exercises/safer-running-basics.md`, generated images, prompt records, provenance rows, visual review, or beginner comprehension proof.
+- The image exception is path-scoped to `exercises/safer-running-basics.md` and stricter than the generic exception: it allows only the six approved first-batch asset paths.
+- Existing Baduanjin and Tai Chi image tests remain unchanged and continue to pass.
+
+### M2. Markdown Page and Source Contract
+
+Goal: add `exercises/safer-running-basics.md` as a source-backed beginner cardio page before image generation is treated as accepted.
+
+Tasks:
+
+- Create the page with the approved H1, alias line, method type, and required sections.
+- Write beginner-facing text for run/walk, easy effort, rest days, warm-up, gradual loading, form cues, muscle roles, common mistakes, variants, and safety routing.
+- Keep `injury-free running` as alias/search language only.
+- Keep strength guidance as general capacity support, not guaranteed injury prevention.
+- Add page-local sources and any required `SOURCES.md` registrations.
+- Link to `RED-FLAGS.md` from safety-facing text.
+
+Acceptance evidence:
+
+- Page-level checker passes for section structure, source coverage, privacy, and safety boundaries.
+- Tests from M1 that can pass without final images now pass.
+
+Progress:
+
+- State: closed.
+- Added `exercises/safer-running-basics.md` with the approved H1, alias line, required sections, and `Method type: basic_cardio_activity`.
+- Added beginner-facing run/walk, easy-effort, rest-day, warm-up, progression, form-cue, muscle-role, common-mistake, variant, and safety-routing guidance.
+- Kept `injury-free running` as alias/search language and stated that no page can guarantee injury-free running.
+- Added page-local source definitions for all cited running sources already registered in `SOURCES.md`.
+- Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/source-audit.md`.
+- Added real-page M2 tests for the page shape, method contract, muscle/feel route guidance, source IDs, and source audit.
+- Updated the exercise-image M4 inventory audit with the new text-only running page because its test covers every current exercise page.
+- Code-review M2 R1 recorded GP-SRB-M2-CR1: M2 omits the R5.4 persistent-pain safety-routing term from the page and real-page tests.
+- Review-resolution added concise persistent-pain routing to `What you should feel` and a direct real-page test assertion.
+- Code-review M2 R2 accepted the review-resolution and closed M2.
+
+Tests-first evidence:
+
+- `python3 -m unittest tests.test_markdown_first_real_pages` failed before production content with missing `exercises/safer-running-basics.md` and missing source-audit artifact.
+
+Validation notes:
+
+- `python3 -m unittest tests.test_markdown_first_real_pages` passed: 44 tests.
+- `python3 tools/checks/check_markdown_first.py exercises/safer-running-basics.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-06-safer-running-basics-and-running-images` passed.
+- `python3 tools/checks/check_privacy.py exercises/safer-running-basics.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-06-safer-running-basics-and-running-images` passed.
+- `python3 -m unittest discover -s tests` passed: 209 tests.
+
+Decisions and discoveries:
+
+- M2 remains text-only. It does not create generated images, prompt records, provenance rows, visual review, or beginner comprehension proof.
+- The full test suite required the existing exercise-image audit to list the new current exercise page; the added row records zero current images and defers the six-image batch to M3.
+
+### M3. Governed Image Batch
+
+Goal: add the six approved generated images with prompt records, provenance, page references, and visual-safety evidence.
+
+Tasks:
+
+- Prepare exact prompts for the six approved assets.
+- Generate or add only the approved six raster files under `media/exercises/safer-running-basics/`.
+- Add prompt records under `media/prompts/exercises/safer-running-basics/`.
+- Add approved provenance rows in `media/PROVENANCE.md`.
+- Reference the images from the page using local relative paths and meaningful alt text.
+- Record manual visual-safety review evidence under the change directory.
+
+Acceptance evidence:
+
+- Every referenced image has a prompt record and provenance row.
+- Visual-safety review confirms no in-image text, labels, badges, red pain marks, medical framing, logos, identifiable people, or correct/wrong framing.
+- The page publishes no first-batch image beyond the six approved paths.
+
+Progress:
+
+- State: closed.
+- Added the six approved generated raster files under `media/exercises/safer-running-basics/`.
+- Added exact prompt records under `media/prompts/exercises/safer-running-basics/`.
+- Added approved `media/PROVENANCE.md` rows mapping each asset to its prompt record and `exercises/safer-running-basics.md`.
+- Referenced all six images from `exercises/safer-running-basics.md` with local relative paths and meaningful alt text.
+- Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/visual-safety-review.md`.
+- Added M3 real-page tests for exact page image references, prompt records, provenance rows, top-10 ranking preservation, first-batch deferral of candidates 7 through 10, image purposes, and visual-safety criteria.
+- Updated `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` so the current exercise inventory reflects six safer-running images.
+- Code-review M3 R1 recorded GP-SRB-M3-CR1: the visual-review artifact path and tests conflict with the approved proof-map path.
+- Review-resolution moved the visual-review artifact to the approved proof-map path and updated M3 tests and current plan references.
+- Code-review M3 R2 accepted the review-resolution and closed M3.
+
+Tests-first evidence:
+
+- `python3 -m unittest tests.test_markdown_first_real_pages` failed before image implementation because the page had zero safer-running image references and no visual-safety review artifact.
+- After adding images, `python3 -m unittest tests.test_markdown_first_real_pages` failed once on a stale M2 text-only assertion; M3 replaced that proof with exact six-image assertions.
+
+Validation notes:
+
+- `python3 -m unittest tests.test_markdown_first_real_pages` passed: 47 tests.
+- `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 75 tests.
+- `python3 tools/checks/check_markdown_first.py exercises/safer-running-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images` passed.
+- `python3 tools/checks/check_privacy.py exercises/safer-running-basics.md media/PROVENANCE.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images` passed.
+- `git diff --check` passed.
+
+Decisions and discoveries:
+
+- M3 uses built-in `image_gen` via the imagegen skill and copies the selected outputs into the workspace.
+- The generated outputs remain broad visual references; Markdown remains authoritative for form, effort, progression, safety, and muscle caveats.
+- The existing exercise-image audit is an inventory of current exercise pages, so M3 updates the safer-running row from text-only to six images.
+- M3 does not add beginner comprehension proof; that remains assigned to M4.
+
+### M4. Comprehension Proof and Final Readiness
+
+Goal: prove that the page and image set meet the beginner education goal and are ready for review.
+
+Tasks:
+
+- Record beginner comprehension proof under the change directory.
+- Confirm the proof covers the questions required by R12.3.
+- Run the full validation command set.
+- Update the plan handoff summary, review log, and any change evidence.
+- Hand off to code-review with exact command outputs summarized.
+
+Acceptance evidence:
+
+- Beginner proof shows the reader understands what the page can and cannot promise, how to start, what run/walk means, what effort should feel like, what the posture and landing images teach, and what would make them stop or seek help. [Mayo Clinic][mayo-exercise-chronic-disease]
+- All local validation commands pass or any gap is explicitly recorded.
+
+Progress:
+
+- State: closed.
+- Added focused M4 proof tests for beginner comprehension, text-only rollback, and validation-ledger handoff evidence.
+- Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/beginner-comprehension-proof.md`.
+- Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/rollback-proof.md`.
+- Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/validation-ledger.md`.
+- Exercised a temporary text-only rollback state at `/tmp/gymprimer-safer-running-rollback.m4` without editing the live page or media.
+- Updated `docs/changes/2026-07-06-safer-running-basics-and-running-images/explain-change.md` with M4 proof rationale.
+
+Tests-first evidence:
+
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_rollback_proof_records_text_only_cleanup tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_validation_ledger_records_final_handoff_commands` failed before proof records were added because the proof files did not exist.
+
+Validation notes:
+
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_rollback_proof_records_text_only_cleanup tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_validation_ledger_records_final_handoff_commands` passed.
+- Temporary rollback rehearsal passed: `GYMPRIMER_ROOT=/tmp/gymprimer-safer-running-rollback.m4 python3 tools/checks/check_markdown_first.py /tmp/gymprimer-safer-running-rollback.m4/exercises/safer-running-basics.md /tmp/gymprimer-safer-running-rollback.m4/media/PROVENANCE.md /tmp/gymprimer-safer-running-rollback.m4/SOURCES.md /tmp/gymprimer-safer-running-rollback.m4/RED-FLAGS.md` checked 4 Markdown files.
+- Temporary rollback rehearsal passed: `GYMPRIMER_ROOT=/tmp/gymprimer-safer-running-rollback.m4 python3 tools/checks/check_privacy.py /tmp/gymprimer-safer-running-rollback.m4/exercises/safer-running-basics.md /tmp/gymprimer-safer-running-rollback.m4/media/PROVENANCE.md /tmp/gymprimer-safer-running-rollback.m4/SOURCES.md /tmp/gymprimer-safer-running-rollback.m4/RED-FLAGS.md` checked 4 files.
+- `python3 -m unittest tests.test_exercise_method_guidance` passed: 20 tests.
+- `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 78 tests.
+- `python3 tools/checks/check_markdown_first.py exercises/safer-running-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images docs/plans/2026-07-06-safer-running-basics-and-running-images.md docs/plan.md` passed after adding the validation-ledger `## Sources` section: checked 27 Markdown files.
+- `python3 tools/checks/check_privacy.py exercises/safer-running-basics.md media/PROVENANCE.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images docs/plans/2026-07-06-safer-running-basics-and-running-images.md docs/plan.md` passed: checked 32 files.
+- `python3 -m unittest discover -s tests` passed: 215 tests.
+- `git diff --check` passed.
+
+Decisions and discoveries:
+
+- M4 uses a non-identifying reviewer simulation, matching the existing Tai Chi and Baduanjin proof pattern, so no private reader or health data is stored.
+- Text-only rollback was rehearsed in a temporary root rather than by removing live approved images and then restoring them.
+- CI was not observed, and no hosted CI pass is claimed.
+- Code-review M4 R1 recorded GP-SRB-M4-CR1: the text-only rollback proof leaves stale image-reference prose in the temporary page and lacks a regression assertion.
+- Code-review M4 R2 withdrew GP-SRB-M4-CR1 after owner clarification that rollback proof should remain lightweight and should not require exhaustive regression coverage.
+- Final holistic code-review R1 found no blocking or required-change findings.
+- Explain-change was updated after final holistic code-review.
+- Final local verification passed; hosted CI was not observed and is not claimed.
+- PR #17 opened from `safer-running-basics-and-running-images` to `main`; GitHub reported no checks yet on the branch at handoff.
+
+## Validation Commands
+
+Run these during implementation as the relevant files come into existence:
+
+```bash
+python3 -m unittest tests.test_exercise_method_guidance
+python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages
+python3 -m unittest discover -s tests
+python3 tools/checks/check_markdown_first.py exercises/safer-running-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images
+python3 tools/checks/check_privacy.py exercises/safer-running-basics.md media/PROVENANCE.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images
+git diff --check
+```
+
+For workflow-artifact-only validation before implementation, run the scoped checks listed in the test spec.
+
+## M1 Handoff
+
+State: closed
+
+Implemented surfaces:
+
+- `tools/checks/check_markdown_first.py`
+- `tests/test_exercise_method_guidance.py`
+- `tests/test_exercise_image_standard.py`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/explain-change.md`
+
+Unchanged with rationale:
+
+- `exercises/safer-running-basics.md`: deferred to M2 by plan.
+- `media/exercises/safer-running-basics/`: deferred to M3 by plan.
+- `media/prompts/exercises/safer-running-basics/`: deferred to M3 by plan.
+- `media/PROVENANCE.md`: deferred to M3 by plan.
+- Visual-safety review and beginner comprehension proof: deferred to M3 and M4 by plan.
+
+Ready for: implementation M2.
+
+## M2 Handoff
+
+State: closed
+
+Implemented surfaces:
+
+- `exercises/safer-running-basics.md`
+- `tests/test_markdown_first_real_pages.py`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/source-audit.md`
+- `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/explain-change.md`
+
+Unchanged with rationale:
+
+- `media/exercises/safer-running-basics/`: deferred to M3 by plan.
+- `media/prompts/exercises/safer-running-basics/`: deferred to M3 by plan.
+- `media/PROVENANCE.md`: deferred to M3 by plan.
+- Visual-safety review: deferred to M3 by plan.
+- Beginner comprehension proof: deferred to M4 by plan.
+
+Ready for: implementation M3.
+
+## M3 Handoff
+
+State: closed
+
+Implemented surfaces:
+
+- `exercises/safer-running-basics.md`
+- `tests/test_markdown_first_real_pages.py`
+- `media/exercises/safer-running-basics/`
+- `media/prompts/exercises/safer-running-basics/`
+- `media/PROVENANCE.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/visual-safety-review.md`
+- `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/explain-change.md`
+
+Unchanged with rationale:
+
+- Beginner comprehension proof: deferred to M4 by plan.
+- Text-only rollback proof: deferred unless image review fails or M4 requires rollback evidence.
+
+Ready for: implementation M4.
+
+## M4 Handoff
+
+State: closed
+
+Implemented surfaces:
+
+- `tests/test_markdown_first_real_pages.py`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/beginner-comprehension-proof.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/rollback-proof.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/validation-ledger.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/explain-change.md`
+- `docs/plans/2026-07-06-safer-running-basics-and-running-images.md`
+- `docs/plan.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/change.yaml`
+
+Unchanged with rationale:
+
+- `exercises/safer-running-basics.md`: unchanged because M4 validates comprehension and rollback for the already reviewed page.
+- `media/exercises/safer-running-basics/`: unchanged because all six generated assets were reviewed in M3.
+- `media/prompts/exercises/safer-running-basics/`: unchanged because prompt records were reviewed in M3.
+- `media/PROVENANCE.md`: unchanged because provenance rows were reviewed in M3.
+
+Ready for: hosted CI observation and PR review.
+
+## Recovery
+
+If image generation fails review, remove failed page references, prompt records, and provenance rows for those images before handoff.
+
+If the six-image batch is too dense, keep the highest-priority approved images and record the reduction in review evidence.
+
+If content drifts toward individualized programming or condition-specific pain care, remove that content and return to the approved beginner education contract.
+
+## Risks
+
+| Risk | Mitigation |
+|---|---|
+| The title implies a guarantee | Use `Safer Running Basics` as H1 and keep `injury-free running` only as alias text. |
+| The page becomes a race plan | Keep progression general and avoid performance programming. |
+| Images add unsupported claims | Keep Markdown as source of truth and require prompt records, provenance, alt text, and manual review. |
+| Six images exceed the normal default | Enforce the page-specific exception and exact six approved paths. |
+| Validation cannot enforce the media contract | Add focused tests/checker coverage in M1 before production content. |
+
+## Sources
+
+- `specs/safer-running-basics-and-running-images.md`
+- `docs/proposals/2026-07-06-safer-running-basics-and-running-images.md`
+- [Mayo Clinic exercise and chronic disease guidance][mayo-exercise-chronic-disease]
+
+[mayo-exercise-chronic-disease]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/exercise-and-chronic-disease/art-20046049

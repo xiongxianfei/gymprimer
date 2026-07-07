@@ -1,0 +1,48 @@
+change_id: 2026-07-06-safer-running-basics-and-running-images
+title: Safer Running Basics and High-Quality Running Images
+status: in_progress
+proposal:
+  path: docs/proposals/2026-07-06-safer-running-basics-and-running-images.md
+  status: accepted
+reviews:
+  log: docs/changes/2026-07-06-safer-running-basics-and-running-images/review-log.md
+workflow:
+  autoprogression:
+    mode: review_fix
+    target_stage: test-spec-review
+    authorized_by: user
+    authorized_on: 2026-07-06
+    stop_before: implementation
+current_stage: pr
+current_milestone: M4
+milestone_state: closed
+required_review_resolution: false
+open_findings: []
+notes:
+  - Owner accepted the proposal after proposal-review round 1 approved it with no findings.
+  - Spec-review round 1 approved the feature spec with no findings.
+  - Architecture assessment recorded architecture-not-required.
+  - Plan-review round 1 approved the execution plan with no findings.
+  - Test-spec-review round 1 approved the proof map with no findings.
+  - M1 code-review round 1 requested changes for GP-SRB-M1-CR1.
+  - GP-SRB-M1-CR1 resolved and accepted by code-review M1 R2.
+  - M1 is closed.
+  - M2 added the text-only safer-running page, source audit, and real-page tests.
+  - Code-review M2 R1 requested changes for GP-SRB-M2-CR1.
+  - GP-SRB-M2-CR1 resolution added concise persistent-pain routing and is ready for rereview.
+  - GP-SRB-M2-CR1 resolved and accepted by code-review M2 R2.
+  - M2 is closed.
+  - M3 added the governed six-image batch, prompt records, provenance rows, page references, and visual-safety review.
+  - Code-review M3 R1 requested changes for GP-SRB-M3-CR1.
+  - GP-SRB-M3-CR1 resolution moved the visual-review artifact to the approved proof-map path and updated tests and plan references.
+  - GP-SRB-M3-CR1 resolved and accepted by code-review M3 R2.
+  - M3 is closed.
+  - M4 added beginner comprehension proof, text-only rollback proof, validation-ledger evidence, and focused M4 tests.
+  - Code-review M4 R1 requested changes for GP-SRB-M4-CR1.
+  - Code-review M4 R2 withdrew GP-SRB-M4-CR1 as over-strict for the intended lightweight rollback proof.
+  - M4 is closed and ready for final verification.
+  - Final holistic code-review R1 found no blocking or required-change findings.
+  - Explain-change was updated after final holistic code-review.
+  - Final local verification passed and the branch is ready for PR handoff; hosted CI was not observed.
+  - PR #17 opened at https://github.com/xiongxianfei/gymprimer/pull/17.
+  - GitHub reported no checks yet on the branch at PR handoff.

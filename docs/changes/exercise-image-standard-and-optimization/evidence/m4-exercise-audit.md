@@ -36,6 +36,7 @@ or page review identifies a concrete beginner comprehension gap.
 | `exercises/plank.md` | 1 | `key_movement_illustration` | keep existing image | Keep legacy-compatible sequence image; no migration-only edit. |
 | `exercises/prone-y-t.md` | 2 | `exercise_muscle_attention_illustration`, `exercise_movement_illustration` | keep existing image | No additional image needed now; keep M3 images. |
 | `exercises/rowing-machine.md` | 3 | `exercise_setup_illustration`, `exercise_muscle_attention_illustration`, `exercise_movement_illustration` | follow-up images added | Follow-up rowing media enhancement added setup, muscle-attention, and movement images with provenance, prompt records, and visual-safety review. |
+| `exercises/safer-running-basics.md` | 6 | `exercise_movement_illustration`, `exercise_muscle_attention_illustration` | follow-up images added | Safer Running Basics M3 adds the governed six-image first batch with exact prompt records, approved provenance rows, and visual-safety review. |
 | `exercises/seated-row.md` | 1 | `equipment_identification` | keep existing image | Keep legacy-compatible machine image; future setup/movement work needs a reviewed batch. |
 | `exercises/tai-chi-basics.md` | 0 | none | text-only page | Necessary Images and Tai Chi Exercise M2 adds the page text-only; first image batch remains deferred to the governed three-image loop. |
 | `exercises/thoracic-extension.md` | 2 | `exercise_muscle_attention_illustration`, `exercise_movement_illustration` | keep existing image | No additional image needed now; keep M3 images. |

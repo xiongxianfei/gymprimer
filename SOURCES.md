@@ -20,6 +20,8 @@ Rules:
 - [Mayo Clinic stretching basics][mayo-stretching]
 - [Mayo Clinic walking guidance][mayo-walking]
 - [NHS walking for health][nhs-walking-for-health]
+- [NHS Couch to 5K running plan][nhs-couch-to-5k]
+- [Mayo Clinic Health System running guidance][mchs-better-runner]
 - [NCCIH tai chi overview][nccih-tai-chi]
 - [NCCIH qigong overview][nccih-qigong]
 - [Baduanjin qigong systematic review][baduanjin-review]
@@ -27,6 +29,10 @@ Rules:
 - [Veterans Affairs Tai Chi and Qigong overview][va-tai-chi-qigong]
 - [NHS balance exercises][nhs-balance-exercises]
 - [ACSM resistance training guidance][acsm-resistance-training]
+- [ACSM distance running form guidance][acsm-running-form]
+- [Mayo Clinic exercise and chronic disease guidance][mayo-exercise-chronic-disease]
+- [PubMed: exercise-based prevention programs and running-related injuries][pubmed-running-injury-exercise-prevention]
+- [PMC: running-centred injury prevention support scoping review][pmc-running-injury-support]
 - [CDC plain-language communication resources][cdc-plain-language]
 - [NHS back pain patient guidance][nhs-back-pain]
 - [NHS Inform back problems guidance][nhs-inform-back-problems]
@@ -55,6 +61,8 @@ Each page still needs its own matching reference definition so the page renders 
 [mayo-stretching]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/stretching/art-20546848
 [mayo-walking]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/walking/art-20046261
 [nhs-walking-for-health]: https://www.nhs.uk/live-well/exercise/walking-for-health/
+[nhs-couch-to-5k]: https://www.nhs.uk/better-health/get-active/get-running-with-couch-to-5k/couch-to-5k-running-plan/
+[mchs-better-runner]: https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/how-can-i-become-a-better-runner-and-avoid-injury
 [nccih-tai-chi]: https://www.nccih.nih.gov/health/tai-chi-what-you-need-to-know
 [nccih-qigong]: https://www.nccih.nih.gov/health/qigong-what-you-need-to-know
 [baduanjin-review]: https://pmc.ncbi.nlm.nih.gov/articles/PMC5359459/
@@ -62,6 +70,10 @@ Each page still needs its own matching reference definition so the page renders 
 [va-tai-chi-qigong]: https://www.va.gov/WHOLEHEALTH/cih/Tai_Chi_and_Qigong.asp
 [nhs-balance-exercises]: https://www.nhs.uk/live-well/exercise/balance-exercises/
 [acsm-resistance-training]: https://acsm.org/resistance-training-guidelines-update-2026/
+[acsm-running-form]: https://acsm.org/distance-running-form-tips/
+[mayo-exercise-chronic-disease]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/exercise-and-chronic-disease/art-20046049
+[pubmed-running-injury-exercise-prevention]: https://pubmed.ncbi.nlm.nih.gov/38261240/
+[pmc-running-injury-support]: https://pmc.ncbi.nlm.nih.gov/articles/PMC11986186/
 [cdc-plain-language]: https://www.cdc.gov/health-literacy/php/develop-materials/plain-language.html
 [nhs-back-pain]: https://www.nhs.uk/conditions/back-pain/
 [nhs-inform-back-problems]: https://www.nhsinform.scot/illnesses-and-conditions/muscle-bone-and-joints/back-problems/back-problems/

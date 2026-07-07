@@ -92,6 +92,38 @@ BADUANJIN_ASSETS = (
         "Baduanjin muscle-attention image showing broad leg trunk shoulder upper-back foot and ankle regions",
     ),
 )
+SAFER_RUNNING_ASSETS = (
+    (
+        "posture",
+        "exercise_movement_illustration",
+        "Safer running posture image showing tall posture and relaxed arm swing",
+    ),
+    (
+        "landing",
+        "exercise_movement_illustration",
+        "Safer running landing image showing the foot close to the body with a short quiet stride",
+    ),
+    (
+        "run-walk",
+        "exercise_movement_illustration",
+        "Safer running run-walk image showing easy running and walking recovery",
+    ),
+    (
+        "warm-up",
+        "exercise_movement_illustration",
+        "Safer running warm-up image showing walking easy jogging and dynamic preparation",
+    ),
+    (
+        "muscle-attention",
+        "exercise_muscle_attention_illustration",
+        "Safer running muscle-attention image showing broad glute thigh calf foot ankle trunk and shoulder regions",
+    ),
+    (
+        "overstride-comparison",
+        "exercise_movement_illustration",
+        "Safer running overstride comparison image showing an overreaching step beside a shorter neutral step",
+    ),
+)
 TOP_FIVE_M3_ASSETS = {
     "brisk-walking": {
         "expected_count": 5,
@@ -456,7 +488,155 @@ def write_baduanjin_image_fixture(root: Path, assets: tuple[tuple[str, str, str]
     return write_exercise_page(root, "\n".join(image_blocks), slug="baduanjin-basics")
 
 
+def write_safer_running_image_fixture(root: Path, assets: tuple[tuple[str, str, str], ...] = SAFER_RUNNING_ASSETS) -> Path:
+    rows = []
+    image_blocks = []
+    for stem, purpose, alt_text in assets:
+        asset_path = f"media/exercises/safer-running-basics/{stem}.png"
+        prompt_record = f"media/prompts/exercises/safer-running-basics/{stem}.md"
+        write_asset(root, asset_path)
+        rows.append(
+            {
+                "asset_path": asset_path,
+                "media_purpose": purpose,
+                "prompt_record": prompt_record,
+                "page_refs": "exercises/safer-running-basics.md",
+            }
+        )
+        image_blocks.append(f"![{alt_text}](../{asset_path})")
+    write_provenance(root, rows)
+    (root / "exercises").mkdir(exist_ok=True)
+    page = root / "exercises/safer-running-basics.md"
+    page.write_text(
+        (
+            "# Safer Running Basics\n\n"
+            "Author: Fixture Maintainer\n"
+            "Created: 2026-07-06\n"
+            "Last reviewed: 2026-07-06\n"
+            "Next review due: 2027-07-06\n"
+            "Review scope: safer running image validation\n\n"
+            "Also searched as: injury-free running, beginner running, running without getting hurt\n\n"
+            "General beginner running education. [Fixture][fixture-training]\n\n"
+            + "\n".join(image_blocks)
+            + "\n\n"
+            "## What this is for\n\n"
+            "Use this page to learn a simple beginner running start. [Fixture][fixture-training]\n\n"
+            "## What this page cannot promise\n\n"
+            "No page can guarantee injury-free running; this is general education. [Fixture][fixture-setup]\n\n"
+            "## Before you start\n\n"
+            "Start easy and stop for unusual symptoms. [Fixture][fixture-training]\n\n"
+            "## Warm up\n\n"
+            "Begin with easy walking before running. [Fixture][fixture-setup]\n\n"
+            "## Running form basics\n\n"
+            "Run tall, keep the shoulders relaxed, and avoid forcing a specific foot strike. [Fixture][fixture-movement]\n\n"
+            "## Muscles involved\n\n"
+            "| Role | Muscle region | What it helps do |\n"
+            "|---|---|---|\n"
+            "| Support and push-off | Glutes, thighs, and calves | Help support each step. [Fixture][fixture-movement] |\n"
+            "| Landing control | Feet, ankles, calves, and thighs | Help control each landing. |\n"
+            "| Posture and transfer | Trunk | Helps you stay tall. |\n"
+            "| Rhythm and balance | Shoulders, upper back, and arms | Help arm swing stay relaxed. |\n\n"
+            "## What you should feel\n\n"
+            "You should feel warm and slightly out of breath. Stop for chest pain, dizziness, unusual shortness of breath, sharp pain, or worsening symptoms. [Fixture][fixture-training]\n\n"
+            "## How much to do\n\n"
+            "Method type: basic_cardio_activity\n\n"
+            "Beginner starting point: Try 10-20 minutes total with short easy running intervals and walking breaks.\n"
+            "Effort: Keep the running portions easy enough that you could speak in short sentences.\n"
+            "Progression: First make running feel smoother, then add a little total time.\n"
+            "Stop if: Stop for chest pain, dizziness, unusual shortness of breath, sharp pain, or worsening symptoms. [Fixture][fixture-training]\n\n"
+            "## Common mistakes\n\n"
+            "| Mistake | Safer framing |\n"
+            "|---|---|\n"
+            "| Running too far too soon | Use run/walk intervals and increase gradually. [Fixture][fixture-training] |\n"
+            "| Ignoring sharp or worsening symptoms | Stop and use the safety guidance. [Fixture][fixture-training] |\n\n"
+            "## Easier version\n\n"
+            "Use shorter total time, more walking, flatter routes, and fewer running days.\n\n"
+            "## Harder version\n\n"
+            "First add a little total time or a little more easy running inside the same session.\n\n"
+            "## Safety notes\n\n"
+            "Use the central [red flags](../RED-FLAGS.md) page for chest pain, dizziness, fainting, unusual shortness of breath, numbness, weakness, sharp pain, or worsening symptoms. [Fixture][fixture-training]\n\n"
+            "## Sources\n\n"
+            "- [Fixture training][fixture-training]\n"
+            "- [Fixture setup][fixture-setup]\n"
+            "- [Fixture movement][fixture-movement]\n\n"
+            "[fixture-training]: https://example.org/fixture-training\n"
+            "[fixture-setup]: https://example.org/fixture-setup\n"
+            "[fixture-movement]: https://example.org/fixture-movement\n"
+        ),
+        encoding="utf-8",
+    )
+    return page
+
+
 class ExerciseImageStandardTest(unittest.TestCase):
+    def test_safer_running_first_batch_six_images_passes_with_path_scoped_exception(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_safer_running_image_fixture(root)
+
+            result = run_check_with_root(root, page)
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_safer_running_seventh_image_second_muscle_and_unapproved_asset_fail(self) -> None:
+        seventh_image_assets = SAFER_RUNNING_ASSETS + (
+            (
+                "shoes",
+                "exercise_setup_illustration",
+                "Safer running shoe and clothing setup image showing simple running gear",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_safer_running_image_fixture(root, seventh_image_assets)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_count_exceeded", result.stdout)
+        self.assertIn("exercise_image_unapproved_exception_asset", result.stdout)
+
+        second_muscle_assets = SAFER_RUNNING_ASSETS + (
+            (
+                "second-muscle-attention",
+                "exercise_muscle_attention_illustration",
+                "Safer running second muscle-attention image showing another broad body-region reference",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_safer_running_image_fixture(root, second_muscle_assets)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_count_exceeded", result.stdout)
+        self.assertIn("exercise_muscle_attention_limit", result.stdout)
+
+        unapproved_within_limit = SAFER_RUNNING_ASSETS[:5] + (
+            (
+                "shoes",
+                "exercise_setup_illustration",
+                "Safer running shoe and clothing setup image showing simple running gear",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_sources(root)
+            write_red_flags(root)
+            page = write_safer_running_image_fixture(root, unapproved_within_limit)
+
+            result = run_check_with_root(root, page)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("exercise_image_unapproved_exception_asset", result.stdout)
+
     def test_baduanjin_candidate_pool_records_deferred_alternatives(self) -> None:
         evidence = (ROOT / "docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/image-candidate-pool.md").read_text(encoding="utf-8")
 
