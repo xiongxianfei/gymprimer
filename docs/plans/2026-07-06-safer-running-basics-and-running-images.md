@@ -18,13 +18,13 @@ Review log: `docs/changes/2026-07-06-safer-running-basics-and-running-images/rev
 
 Current milestone: M3
 
-Current state: review-requested
+Current state: resolution-needed
 
-Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved; code-review M2 R2 clean-with-notes.
+Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved; code-review M2 R2 clean-with-notes; code-review M3 R1 changes-requested for GP-SRB-M3-CR1.
 
-Next required gate: code-review M3.
+Next required gate: review-resolution for GP-SRB-M3-CR1.
 
-Implementation status: M1 closed; M2 closed; M3 implemented; M4 not started.
+Implementation status: M1 closed; M2 closed; M3 resolution-needed; M4 not started.
 
 Final closeout status: not ready.
 
@@ -163,6 +163,7 @@ Progress:
 - Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/visual-safety-review.md`.
 - Added M3 real-page tests for exact page image references, prompt records, provenance rows, top-10 ranking preservation, first-batch deferral of candidates 7 through 10, image purposes, and visual-safety criteria.
 - Updated `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md` so the current exercise inventory reflects six safer-running images.
+- Code-review M3 R1 recorded GP-SRB-M3-CR1: the visual-review artifact path and tests conflict with the approved proof-map path.
 
 Tests-first evidence:
 
@@ -261,7 +262,7 @@ Ready for: implementation M3.
 
 ## M3 Handoff
 
-State: review-requested
+State: resolution-needed
 
 Implemented surfaces:
 
@@ -279,7 +280,7 @@ Unchanged with rationale:
 - Beginner comprehension proof: deferred to M4 by plan.
 - Text-only rollback proof: deferred unless image review fails or M4 requires rollback evidence.
 
-Ready for: code-review M3.
+Ready for: review-resolution for GP-SRB-M3-CR1.
 
 ## Recovery
 

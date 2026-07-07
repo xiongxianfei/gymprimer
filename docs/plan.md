@@ -5,8 +5,8 @@
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M3 added the governed six-image batch, exact prompt records, provenance rows, page references, and visual-safety review; code-review M3 is next.
+  - Current stage: review-resolution
+  - Active context: Code-review M3 R1 requested GP-SRB-M3-CR1 resolution because the visual-review artifact path and tests conflict with the approved proof-map path.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
