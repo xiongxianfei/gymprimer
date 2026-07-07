@@ -6,7 +6,7 @@
   - Status: reviewed
   - Plan lifecycle state: active
   - Current stage: pr
-  - Active context: final local verification passed with branch-ready evidence; hosted CI was not observed and PR handoff is next.
+  - Active context: PR #17 opened from `safer-running-basics-and-running-images` to `main`; GitHub reported no checks yet on the branch at handoff.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

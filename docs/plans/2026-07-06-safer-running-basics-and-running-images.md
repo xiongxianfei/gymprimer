@@ -22,11 +22,11 @@ Current state: closed
 
 Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved; code-review M2 R2 clean-with-notes; code-review M3 R1 changes-requested for GP-SRB-M3-CR1; GP-SRB-M3-CR1 resolved; code-review M3 R2 clean-with-notes; code-review M4 R1 changes-requested for GP-SRB-M4-CR1; code-review M4 R2 withdrew GP-SRB-M4-CR1 as over-strict and closed M4 with notes; final holistic code-review R1 clean-with-notes.
 
-Next required gate: PR handoff.
+Next required gate: hosted CI observation and PR review.
 
 Implementation status: M1 closed; M2 closed; M3 closed; M4 closed.
 
-Final closeout status: branch-ready for PR handoff after local final verification.
+Final closeout status: PR #17 opened; hosted CI was not yet reported at handoff.
 
 ## Scope
 
@@ -240,6 +240,7 @@ Decisions and discoveries:
 - Final holistic code-review R1 found no blocking or required-change findings.
 - Explain-change was updated after final holistic code-review.
 - Final local verification passed; hosted CI was not observed and is not claimed.
+- PR #17 opened from `safer-running-basics-and-running-images` to `main`; GitHub reported no checks yet on the branch at handoff.
 
 ## Validation Commands
 
@@ -343,7 +344,7 @@ Unchanged with rationale:
 - `media/prompts/exercises/safer-running-basics/`: unchanged because prompt records were reviewed in M3.
 - `media/PROVENANCE.md`: unchanged because provenance rows were reviewed in M3.
 
-Ready for: PR handoff.
+Ready for: hosted CI observation and PR review.
 
 ## Recovery
 

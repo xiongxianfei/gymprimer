@@ -44,3 +44,5 @@ notes:
   - Final holistic code-review R1 found no blocking or required-change findings.
   - Explain-change was updated after final holistic code-review.
   - Final local verification passed and the branch is ready for PR handoff; hosted CI was not observed.
+  - PR #17 opened at https://github.com/xiongxianfei/gymprimer/pull/17.
+  - GitHub reported no checks yet on the branch at PR handoff.
