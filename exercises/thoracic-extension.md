@@ -16,6 +16,8 @@ Thoracic extension is a simple upper-back mobility drill. It gives beginners a w
 
 ## Equipment setup
 
+![Thoracic extension setup reference seated tall with upper back lightly against the chair edge](../media/exercises/thoracic-extension/setup.png)
+
 Use a sturdy chair with a back rest. Sit upright, slide the hips back in the chair, and keep the feet on the floor. [Source][local-thoracic-extension-instruction]
 
 ## Muscles involved
@@ -30,6 +32,8 @@ Treat the muscle wording as a movement cue, not a claim that the drill changes p
 Use the image as a broad attention-region reference. Keep the muscle wording and citations in the Markdown text above.
 
 ## Movement breakdown
+
+![Thoracic extension upright-start reference with ribs quiet and head supported](../media/exercises/thoracic-extension/upright-start-crop.png)
 
 ![Thoracic extension movement reference with separate upright start and gentle chair-extension finish positions](../media/exercises/thoracic-extension/movement.png)
 
@@ -52,6 +56,8 @@ Pause briefly if the position still feels controlled. [Source][local-thoracic-ex
 Return to the upright starting position with control. [Source][local-thoracic-extension-instruction]
 
 ## What you should feel
+
+![Thoracic extension finish reference showing gentle upper-back extension over the chair](../media/exercises/thoracic-extension/extension-finish-crop.png)
 
 You may feel light movement or stretch through the upper back. Pay attention to a gentle upper-back motion rather than forcing the neck backward or arching the low back. [Source][local-thoracic-extension-instruction]
 

@@ -16,6 +16,8 @@ Prone Y/T is a light shoulder-blade control exercise. It helps beginners notice 
 
 ## Equipment setup
 
+![Prone Y/T setup reference lying face down with gaze down and arms relaxed near the sides](../media/exercises/prone-y-t/setup.png)
+
 Use the floor or a firm mat. Start without weights. Use the Y and T versions as separate options rather than blending them into one position. [Source][local-prone-y-t-y-instruction] [Source][local-prone-y-t-t-instruction]
 
 ## Muscles involved
@@ -27,6 +29,8 @@ Primary: lower and middle trapezius emphasis during prone arm-raise variations. 
 Use the image as a broad attention-region reference. Keep the muscle wording and citations in the Markdown text above.
 
 ## Movement breakdown
+
+![Prone Y reference with arms lifted diagonally overhead while the neck stays relaxed](../media/exercises/prone-y-t/prone-y-crop.png)
 
 ![Prone Y/T movement reference with separate prone Y and prone T arm positions](../media/exercises/prone-y-t/movement.png)
 
@@ -49,6 +53,8 @@ Pause when the shoulder blades feel controlled.
 Lower the arms slowly to the floor or mat. [Source][local-prone-y-t-t-instruction]
 
 ## What you should feel
+
+![Prone T reference with arms lifted out to the sides while the neck stays relaxed](../media/exercises/prone-y-t/prone-t-crop.png)
 
 You may feel light work around the shoulder blades and upper back. [Source][local-prone-y-t-y-instruction] [Source][local-prone-y-t-t-instruction]
 

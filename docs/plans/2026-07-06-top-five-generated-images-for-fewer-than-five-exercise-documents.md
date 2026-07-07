@@ -47,14 +47,14 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 
 ## Current Handoff Summary
 
-- Current milestone: M2
-- Current milestone state: closed
-- Last reviewed milestone: M1
-- Review status: code-review R4 clean-with-notes; M2 closed
-- Remaining in-scope implementation milestones: M3
-- Next stage: implement M3
+- Current milestone: M3
+- Current milestone state: review-requested
+- Last reviewed milestone: M2
+- Review status: M3 implementation complete; code-review requested
+- Remaining in-scope implementation milestones: none
+- Next stage: code-review M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 implementation, code-review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M3 code-review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -108,7 +108,7 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 
 ### M3. Remaining Milestone Batch Images and Closeout Evidence
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Complete the remaining included exercise documents and record final batch-level comprehension and rollback evidence.
 - Requirements: R1-R30
 - Files/components likely touched:
@@ -160,6 +160,8 @@ Each milestone must report exact commands and outcomes before code-review.
 - M1 added change-local audit framework evidence at `docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/m1-audit-framework.md`.
 - M2 selected `exercises/band-pull-apart.md` and `exercises/bird-dog.md` as the first generated-image batch.
 - M2 promoted two new band pull-apart images and four new bird dog images with prompt records, provenance rows, page references, and batch audit evidence.
+- M3 promoted the remaining top-five batch images for `brisk-walking`, `chest-press`, `chin-nod`, `dead-bug`, `glute-bridge`, `hip-hinge`, `incline-push-up`, `kneeling-hip-flexor-stretch`, `lat-pulldown`, `plank`, `prone-y-t`, `rowing-machine`, `seated-row`, `tai-chi-basics`, `thoracic-extension`, and `wall-slide`.
+- M3 added prompt records, provenance rows, page references, and final remaining-batch audit evidence at `docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/evidence/m3-remaining-batch-audit.md`.
 
 ## Decision log
 
@@ -169,12 +171,14 @@ Each milestone must report exact commands and outcomes before code-review.
 | 2026-07-06 | Keep reviewer exception path-scoped. | Prevents accidental global weakening of the exercise-image standard. | Global removal of reviewer fields. |
 | 2026-07-06 | Use band pull-apart and bird dog for M2. | Exercises cover an existing modern-media page and an older sequence-image page while keeping the generated batch reviewable. | Starting with a large all-page generated-media batch. |
 | 2026-07-06 | Leave band pull-apart at four total images for M2. | The fifth generated candidate duplicated existing movement coverage, so it would add count without distinct page value. | Promoting the duplicate chest-height movement candidate solely to reach five images. |
+| 2026-07-06 | Use deterministic crops from accepted generated sequence and movement images where they improve single-position readability. | Crops preserve accepted older images while adding clearer page-local references without replacing the sequence source. | Replacing accepted sequence images for style alone. |
 
 ## Surprises and discoveries
 
 - `tests/test_exercise_image_standard.py` contained temporary-directory checks that ran after fixture cleanup in two older branches; M1 moved those checks inside the fixture lifetime while preserving their original validation purpose.
 - `exercises/tai-chi-basics.md` is part of the named top-five population, so its older fourth-image failure fixture was updated to allow four images while still rejecting a second muscle-attention image.
 - `exercises/band-pull-apart.md` did not need five promoted images in M2 because the generated fifth candidate overlapped the existing movement image.
+- M3 had no local image-library dependency available for scripted cropping, so deterministic `ffmpeg` crops were used for derived support images.
 
 ## Validation notes
 
@@ -216,6 +220,12 @@ Each milestone must report exact commands and outcomes before code-review.
 - M2 code-review R4: `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed with 35 Markdown files.
 - M2 code-review R4: `python3 tools/checks/check_privacy.py exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed with 63 files.
 - M2 code-review R4: `git diff --check` passed.
+- M3 red test before implementation: `python3 -m unittest tests.test_exercise_image_standard.ExerciseImageStandardTest.test_top_five_m3_remaining_batch_has_page_images_prompt_records_and_audit_evidence` failed because `m3-remaining-batch-audit.md` did not exist.
+- M3 targeted regression after implementation: `python3 -m unittest tests.test_exercise_image_standard.ExerciseImageStandardTest.test_top_five_m3_remaining_batch_has_page_images_prompt_records_and_audit_evidence` passed.
+- M3 broad unit validation: `python3 -m unittest discover -s tests` passed with 207 tests.
+- M3 markdown validation: `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed with 37 Markdown files.
+- M3 privacy validation: `python3 tools/checks/check_privacy.py exercises media media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed with 214 files.
+- M3 whitespace validation: `git diff --check` passed.
 
 ## Outcome and retrospective
 

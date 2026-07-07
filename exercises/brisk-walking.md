@@ -26,6 +26,8 @@ remain the source of truth for effort, technique, muscles, and safety.
 
 ## Before you start
 
+![Brisk walking setup reference showing upright posture before starting on a flat path](../media/exercises/brisk-walking/setup.png)
+
 Choose a route where you can pay attention to traffic, surfaces, weather, and
 lighting. Wear comfortable supportive shoes and start at an easy pace before
 you pick up speed. [Mayo Clinic][mayo-walking]
@@ -63,6 +65,8 @@ activation.
 ![Brisk walking muscle-attention reference with broad highlights on glutes, thighs, calves, trunk, shoulders, upper back, feet, and ankles](../media/exercises/brisk-walking/muscle-attention.png)
 
 ## Walking technique
+
+![Brisk walking posture reference with forward gaze, relaxed shoulders, and natural arm swing](../media/exercises/brisk-walking/brisk-pace-posture.png)
 
 - Look forward instead of staring down. [Mayo Clinic][mayo-walking]
 - Keep the neck and shoulders relaxed. [Mayo Clinic][mayo-walking]
@@ -114,6 +118,8 @@ Sets and reps are not the main shape for brisk walking. These are static
 examples, not a schedule.
 
 ## Easier version
+
+![Brisk walking shorter-walk option reference on a flat path with a comfortable stride](../media/exercises/brisk-walking/shorter-walk-option.png)
 
 Walk at an easy pace for most of the time and add one short brisk section. Keep
 the talk test comfortable.

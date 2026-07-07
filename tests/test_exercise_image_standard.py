@@ -92,6 +92,139 @@ BADUANJIN_ASSETS = (
         "Baduanjin muscle-attention image showing broad leg trunk shoulder upper-back foot and ankle regions",
     ),
 )
+TOP_FIVE_M3_ASSETS = {
+    "brisk-walking": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/brisk-walking/setup.png": ("exercise_setup_illustration", "Brisk walking setup reference showing upright posture before starting on a flat path"),
+            "media/exercises/brisk-walking/brisk-pace-posture.png": ("exercise_movement_illustration", "Brisk walking posture reference with forward gaze, relaxed shoulders, and natural arm swing"),
+            "media/exercises/brisk-walking/shorter-walk-option.png": ("exercise_movement_illustration", "Brisk walking shorter-walk option reference on a flat path with a comfortable stride"),
+        },
+    },
+    "chest-press": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/chest-press/setup.png": ("exercise_setup_illustration", "Chest press setup reference with back against pad, feet flat, and hands on handles"),
+            "media/exercises/chest-press/start-position.png": ("exercise_movement_illustration", "Chest press start-position reference with elbows bent and handles near chest height"),
+            "media/exercises/chest-press/finish-position.png": ("exercise_movement_illustration", "Chest press finish-position reference with handles pressed forward and elbows not locked"),
+        },
+    },
+    "chin-nod": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/chin-nod/setup.png": ("exercise_setup_illustration", "Chin nod setup reference showing seated upright posture with head level and neck long"),
+            "media/exercises/chin-nod/start-crop.png": ("exercise_movement_illustration", "Chin nod start reference with head level and gaze forward"),
+            "media/exercises/chin-nod/chin-in-crop.png": ("exercise_movement_illustration", "Chin nod finish reference showing a small chin-in motion with neck long"),
+        },
+    },
+    "dead-bug": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/dead-bug/setup-crop.png": ("exercise_setup_illustration", "Dead bug setup reference lying on back with hips and knees bent and arms reaching up"),
+            "media/exercises/dead-bug/opposite-reach-crop.png": ("exercise_movement_illustration", "Dead bug opposite-reach reference with one arm and opposite leg moving away from center"),
+            "media/exercises/dead-bug/range-limit-crop.png": ("exercise_movement_illustration", "Dead bug smaller-range reference showing controlled reach while the low back stays quiet"),
+            "media/exercises/dead-bug/muscle-attention.png": ("exercise_muscle_attention_illustration", "Dead bug muscle-attention reference with broad highlights on trunk, hip, and shoulder support regions"),
+        },
+    },
+    "glute-bridge": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/glute-bridge/setup-crop.png": ("exercise_setup_illustration", "Glute bridge setup reference lying on back with knees bent and feet flat"),
+            "media/exercises/glute-bridge/bridge-top-crop.png": ("exercise_movement_illustration", "Glute bridge top-position reference with hips lifted and ribs quiet"),
+            "media/exercises/glute-bridge/rib-control-crop.png": ("exercise_movement_illustration", "Glute bridge rib-control reference showing a smaller lift with steady trunk position"),
+            "media/exercises/glute-bridge/muscle-attention.png": ("exercise_muscle_attention_illustration", "Glute bridge muscle-attention reference with broad highlights on glutes, hamstrings, and trunk support"),
+        },
+    },
+    "hip-hinge": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/hip-hinge/tall-start-crop.png": ("exercise_setup_illustration", "Hip hinge tall-start reference standing upright with soft knees and long spine"),
+            "media/exercises/hip-hinge/hips-back-crop.png": ("exercise_movement_illustration", "Hip hinge hips-back reference showing hips moving back with a long spine"),
+            "media/exercises/hip-hinge/spine-change-crop.png": ("exercise_movement_illustration", "Hip hinge control reference showing range limited before spine position changes"),
+            "media/exercises/hip-hinge/muscle-attention.png": ("exercise_muscle_attention_illustration", "Hip hinge muscle-attention reference with broad highlights on hamstrings, glutes, trunk, upper back, and lat regions"),
+        },
+    },
+    "incline-push-up": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/incline-push-up/start-crop.png": ("exercise_movement_illustration", "Incline push-up start reference with hands on a stable surface and body in a straight line"),
+            "media/exercises/incline-push-up/lowered-crop.png": ("exercise_movement_illustration", "Incline push-up lowered-position reference with elbows bending under control"),
+            "media/exercises/incline-push-up/muscle-attention.png": ("exercise_muscle_attention_illustration", "Incline push-up muscle-attention reference with broad highlights on chest, shoulders, triceps, and trunk"),
+            "media/exercises/incline-push-up/higher-surface.png": ("exercise_setup_illustration", "Incline push-up easier setup reference using a higher stable surface"),
+        },
+    },
+    "kneeling-hip-flexor-stretch": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/kneeling-hip-flexor-stretch/setup-crop.png": ("exercise_setup_illustration", "Kneeling hip flexor stretch setup reference in a half-kneeling position with upright trunk"),
+            "media/exercises/kneeling-hip-flexor-stretch/stretch-position-crop.png": ("exercise_movement_illustration", "Kneeling hip flexor stretch position reference with hips gently shifting forward"),
+            "media/exercises/kneeling-hip-flexor-stretch/low-back-control-crop.png": ("exercise_movement_illustration", "Kneeling hip flexor stretch control reference showing smaller range with steady low back"),
+            "media/exercises/kneeling-hip-flexor-stretch/muscle-attention.png": ("exercise_muscle_attention_illustration", "Kneeling hip flexor stretch muscle-attention reference with broad highlights on rear hip, thigh, glute, trunk, and front-leg support"),
+        },
+    },
+    "lat-pulldown": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/lat-pulldown/setup.png": ("exercise_setup_illustration", "Lat pulldown setup reference seated under the bar with thighs supported and hands on the bar"),
+            "media/exercises/lat-pulldown/muscle-attention.png": ("exercise_muscle_attention_illustration", "Lat pulldown muscle-attention reference with broad highlights on lats, upper back, rear shoulders, arms, grip, and trunk"),
+            "media/exercises/lat-pulldown/controlled-finish.png": ("exercise_movement_illustration", "Lat pulldown controlled-finish reference with bar near upper chest and elbows down"),
+        },
+    },
+    "plank": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/plank/full-plank-crop.png": ("exercise_movement_illustration", "Plank full-position reference with straight body line from head to heels"),
+            "media/exercises/plank/knee-plank-crop.png": ("exercise_movement_illustration", "Plank knee-option reference with knees down and trunk steady"),
+            "media/exercises/plank/hip-control-crop.png": ("exercise_movement_illustration", "Plank hip-control reference showing a steady line without hips dropping"),
+        },
+    },
+    "prone-y-t": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/prone-y-t/setup.png": ("exercise_setup_illustration", "Prone Y/T setup reference lying face down with gaze down and arms relaxed near the sides"),
+            "media/exercises/prone-y-t/prone-y-crop.png": ("exercise_movement_illustration", "Prone Y reference with arms lifted diagonally overhead while the neck stays relaxed"),
+            "media/exercises/prone-y-t/prone-t-crop.png": ("exercise_movement_illustration", "Prone T reference with arms lifted out to the sides while the neck stays relaxed"),
+        },
+    },
+    "rowing-machine": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/rowing-machine/drive-crop.png": ("exercise_movement_illustration", "Rowing machine drive reference with legs pressing and handle moving toward the body"),
+            "media/exercises/rowing-machine/finish-crop.png": ("exercise_movement_illustration", "Rowing machine finish reference with tall posture and handle close to the lower ribs"),
+        },
+    },
+    "seated-row": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/seated-row/setup.png": ("exercise_setup_illustration", "Seated row setup reference with feet supported, trunk upright, and hands on handles"),
+            "media/exercises/seated-row/start-position.png": ("exercise_movement_illustration", "Seated row start-position reference with arms extended and trunk upright"),
+            "media/exercises/seated-row/finish-position.png": ("exercise_movement_illustration", "Seated row finish-position reference with handles near lower ribs and elbows close"),
+        },
+    },
+    "tai-chi-basics": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/tai-chi-basics/slow-arm-path.png": ("exercise_movement_illustration", "Tai Chi slow arm-path reference with rounded arms moving gently at chest height"),
+            "media/exercises/tai-chi-basics/smaller-range.png": ("exercise_movement_illustration", "Tai Chi smaller-range option reference with small weight shift and arms close to the body"),
+        },
+    },
+    "thoracic-extension": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/thoracic-extension/setup.png": ("exercise_setup_illustration", "Thoracic extension setup reference seated tall with upper back lightly against the chair edge"),
+            "media/exercises/thoracic-extension/upright-start-crop.png": ("exercise_movement_illustration", "Thoracic extension upright-start reference with ribs quiet and head supported"),
+            "media/exercises/thoracic-extension/extension-finish-crop.png": ("exercise_movement_illustration", "Thoracic extension finish reference showing gentle upper-back extension over the chair"),
+        },
+    },
+    "wall-slide": {
+        "expected_count": 5,
+        "assets": {
+            "media/exercises/wall-slide/setup.png": ("exercise_setup_illustration", "Wall slide setup reference facing the wall with forearms on the wall and ribs quiet"),
+            "media/exercises/wall-slide/start-crop.png": ("exercise_movement_illustration", "Wall slide start reference with forearms on the wall at shoulder height"),
+            "media/exercises/wall-slide/raised-finish-crop.png": ("exercise_movement_illustration", "Wall slide raised-finish reference with arms sliding upward while shoulders stay relaxed"),
+        },
+    },
+}
 
 
 def run_check_with_root(root: Path, *paths: Path) -> subprocess.CompletedProcess[str]:
@@ -1066,7 +1199,7 @@ class ExerciseImageStandardTest(unittest.TestCase):
             ),
         }
 
-        self.assertEqual(page_text.count("![Tai Chi "), 3)
+        self.assertEqual(page_text.count("![Tai Chi "), 5)
         self.assertIn("Use these images as broad visual references.", page_text)
 
         for asset_path, (purpose, alt_text) in expected.items():
@@ -1217,6 +1350,74 @@ class ExerciseImageStandardTest(unittest.TestCase):
         ):
             with self.subTest(token=token):
                 self.assertIn(token, audit_text)
+
+    def test_top_five_m3_remaining_batch_has_page_images_prompt_records_and_audit_evidence(self) -> None:
+        provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
+        audit_path = ROOT / "docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/evidence/m3-remaining-batch-audit.md"
+        self.assertTrue(audit_path.is_file())
+        audit_text = audit_path.read_text(encoding="utf-8")
+        self.assertIn("Scores use 1-5 values", audit_text)
+        self.assertNotIn("Scores use 0-3 values", audit_text)
+        self.assertIn("Rollback proof", audit_text)
+        self.assertIn("beginner_comprehension", audit_text)
+        self.assertIn("setup_value", audit_text)
+        self.assertIn("muscle_attention_value", audit_text)
+        self.assertIn("page_value", audit_text)
+        self.assertIn("readiness", audit_text)
+
+        score_rows = [
+            row
+            for row in audit_text.splitlines()
+            if re.match(r"\| \d+ \|", row)
+        ]
+        self.assertGreaterEqual(len(score_rows), 160)
+        for row in score_rows:
+            cells = [cell.strip() for cell in row.strip("|").split("|")]
+            scores = [int(value) for value in cells[2:7]]
+            with self.subTest(row=row):
+                self.assertTrue(all(1 <= score <= 5 for score in scores))
+                self.assertNotIn(0, scores)
+
+        for slug, expected in TOP_FIVE_M3_ASSETS.items():
+            with self.subTest(slug=slug):
+                page_path = ROOT / f"exercises/{slug}.md"
+                page_text = page_path.read_text(encoding="utf-8")
+                self.assertEqual(page_text.count(f"](../media/exercises/{slug}/"), expected["expected_count"])
+                muscle_assets = [
+                    path
+                    for path, (purpose, _alt_text) in expected["assets"].items()
+                    if purpose == "exercise_muscle_attention_illustration"
+                ]
+                page_assets = re.findall(r"\]\(\.\./(media/exercises/[^)]+)\)", page_text)
+                page_muscle_count = sum(
+                    1
+                    for asset_path in page_assets
+                    for row in provenance.get(asset_path, [])
+                    if row.get("media_purpose") == "exercise_muscle_attention_illustration"
+                )
+                self.assertLessEqual(page_muscle_count, 1)
+
+                for asset_path, (purpose, alt_text) in expected["assets"].items():
+                    self.assertIn(f"![{alt_text}](../{asset_path})", page_text)
+                    self.assertTrue((ROOT / asset_path).is_file())
+                    rows = provenance.get(asset_path, [])
+                    self.assertEqual(len(rows), 1)
+                    row = rows[0]
+                    self.assertEqual(row.get("asset_type"), "ai_generated_raster")
+                    self.assertEqual(row.get("media_purpose"), purpose)
+                    self.assertEqual(row.get("human_reviewer"), "")
+                    self.assertEqual(row.get("review_status"), "approved")
+                    self.assertIn(f"exercises/{slug}.md", split_page_refs(row.get("page_refs", "")))
+                    prompt_record = row.get("prompt_record", "")
+                    self.assertEqual(prompt_record, f"media/prompts/exercises/{slug}/{Path(asset_path).stem}.md")
+                    self.assertTrue((ROOT / prompt_record).is_file())
+                    prompt_text = (ROOT / prompt_record).read_text(encoding="utf-8")
+                    self.assertIn(f"asset_path: {asset_path}", prompt_text)
+                    self.assertIn("## Exact prompt", prompt_text)
+
+                self.assertIn(f"`exercises/{slug}.md`", audit_text)
+                for asset_path in expected["assets"]:
+                    self.assertIn(Path(asset_path).name, audit_text)
 
     def test_m4_exercise_audit_covers_current_exercise_pages(self) -> None:
         audit_path = ROOT / "docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md"

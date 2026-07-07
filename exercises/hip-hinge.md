@@ -16,9 +16,13 @@ The hip hinge is a beginner movement pattern for bending at the hips while keepi
 
 Primary: hamstrings and gluteus maximus. Secondary: spinal erectors, trunk muscles, lats, and upper-back muscles.
 
+![Hip hinge muscle-attention reference with broad highlights on hamstrings, glutes, trunk, upper back, and lat regions](../media/exercises/hip-hinge/muscle-attention.png)
+
 ## Equipment and setup
 
 Use bodyweight first. Stand tall with feet about hip-width apart and hands on the hips or ribs.
+
+![Hip hinge tall-start reference standing upright with soft knees and long spine](../media/exercises/hip-hinge/tall-start-crop.png)
 
 ## Movement phases
 
@@ -27,9 +31,13 @@ Use bodyweight first. Stand tall with feet about hip-width apart and hands on th
 3. Keep the torso quiet and stop before the spine changes shape. [Mayo Clinic][mayo-weight-training]
 4. Drive the floor away and stand tall.
 
+![Hip hinge hips-back reference showing hips moving back with a long spine](../media/exercises/hip-hinge/hips-back-crop.png)
+
 ## Important notes
 
 The hinge comes from the hips, not from collapsing or over-arching the low back. Use a shorter range until the movement is repeatable. General strength-exercise guidance applies: control each repetition and stop for sharp, worsening, unusual, or unsafe symptoms. [Mayo Clinic][mayo-weight-training]
+
+![Hip hinge control reference showing range limited before spine position changes](../media/exercises/hip-hinge/spine-change-crop.png)
 
 ## Example pictures
 

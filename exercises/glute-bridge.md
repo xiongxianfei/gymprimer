@@ -16,9 +16,13 @@ The glute bridge is a beginner hip-extension exercise. It trains the gluteus max
 
 Primary: gluteus maximus. Secondary: hamstrings, trunk muscles, and hip adductors.
 
+![Glute bridge muscle-attention reference with broad highlights on glutes, hamstrings, and trunk support](../media/exercises/glute-bridge/muscle-attention.png)
+
 ## Equipment and setup
 
 Use the floor or a firm exercise mat. Lie on the back with knees bent, feet flat, and arms relaxed at the sides.
+
+![Glute bridge setup reference lying on back with knees bent and feet flat](../media/exercises/glute-bridge/setup-crop.png)
 
 ## Movement phases
 
@@ -27,9 +31,13 @@ Use the floor or a firm exercise mat. Lie on the back with knees bent, feet flat
 3. Stop when the hips are extended and the glutes are working. [Mayo Clinic][mayo-weight-training]
 4. Lower with control.
 
+![Glute bridge top-position reference with hips lifted and ribs quiet](../media/exercises/glute-bridge/bridge-top-crop.png)
+
 ## Important notes
 
 Do not finish the repetition by driving the ribs up or over-arching the low back. The top position should feel like hip extension, not a backbend. General strength-exercise guidance applies: control the movement and stop for sharp, worsening, unusual, or unsafe symptoms. [Mayo Clinic][mayo-weight-training]
+
+![Glute bridge rib-control reference showing a smaller lift with steady trunk position](../media/exercises/glute-bridge/rib-control-crop.png)
 
 ## Example pictures
 
