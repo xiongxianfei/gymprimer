@@ -15,6 +15,7 @@
 | 2026-07-06 | code-review | [code-review-r3](reviews/code-review-r3.md) | changes-requested | CR-T5IMG-M2-1, CR-T5IMG-M2-2 | M2 needs review-resolution before M3 implementation. |
 | 2026-07-06 | review-resolution | [review-resolution](review-resolution.md) | resolved | CR-T5IMG-M2-1, CR-T5IMG-M2-2 | M2 findings resolved; rerun code-review is next. |
 | 2026-07-06 | code-review | [code-review-r4](reviews/code-review-r4.md) | clean-with-notes | none | M2 closed; M3 implementation is next. |
+| 2026-07-06 | code-review | [code-review-r5](reviews/code-review-r5.md) | clean-with-notes | none | M3 closed; explain-change is next. |
 
 ## Sources
 
@@ -28,3 +29,4 @@
 - `docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/code-review-r2.md`
 - `docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/code-review-r3.md`
 - `docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/code-review-r4.md`
+- `docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/code-review-r5.md`

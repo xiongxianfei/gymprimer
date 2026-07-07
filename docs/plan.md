@@ -5,8 +5,8 @@
 - [Top-Five Generated Images for Fewer-Than-Five Exercise Documents](plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M1 is closed after clean code-review R2; M2 closed after clean code-review R4. M3 implementation is complete and code-review is next.
+  - Current stage: explain-change
+  - Active context: M1 is closed after clean code-review R2; M2 closed after clean code-review R4; M3 closed after clean code-review R5. Explain-change is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

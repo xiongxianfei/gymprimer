@@ -48,13 +48,13 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: review-requested
-- Last reviewed milestone: M2
-- Review status: M3 implementation complete; code-review requested
+- Current milestone state: closed
+- Last reviewed milestone: M3
+- Review status: code-review R5 clean-with-notes; M3 closed
 - Remaining in-scope implementation milestones: none
-- Next stage: code-review M3
-- Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 code-review, explain-change, verify, and PR handoff remain.
+- Next stage: explain-change
+- Final closeout readiness: ready to start final closeout
+- Reason final closeout is or is not ready: all implementation milestones are closed; explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -108,7 +108,7 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 
 ### M3. Remaining Milestone Batch Images and Closeout Evidence
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Complete the remaining included exercise documents and record final batch-level comprehension and rollback evidence.
 - Requirements: R1-R30
 - Files/components likely touched:
@@ -229,11 +229,12 @@ Each milestone must report exact commands and outcomes before code-review.
 
 ## Outcome and retrospective
 
-Not started.
+M3 code-review R5 closed the remaining generated-image batch with no material findings.
+Final closeout is not complete until explain-change, verify, and PR handoff finish.
 
 ## Readiness
 
-M2 is closed. M3 is ready for implementation.
+M1, M2, and M3 are closed. The next stage is explain-change.
 
 ## Sources
 
