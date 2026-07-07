@@ -18,13 +18,13 @@ Review log: `docs/changes/2026-07-06-safer-running-basics-and-running-images/rev
 
 Current milestone: M2
 
-Current state: review-requested
+Current state: resolution-needed
 
-Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes.
+Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1.
 
-Next required gate: code-review M2.
+Next required gate: review-resolution for GP-SRB-M2-CR1.
 
-Implementation status: M1 closed; M2 implemented; M3 not started.
+Implementation status: M1 closed; M2 has one required review finding; M3 not started.
 
 Final closeout status: not ready.
 
@@ -112,8 +112,9 @@ Progress:
 - Kept `injury-free running` as alias/search language and stated that no page can guarantee injury-free running.
 - Added page-local source definitions for all cited running sources already registered in `SOURCES.md`.
 - Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/source-audit.md`.
-- Added real-page M2 tests for the page shape, method contract, muscle/feel/stop guidance, source IDs, and source audit.
+- Added real-page M2 tests for the page shape, method contract, muscle/feel route guidance, source IDs, and source audit.
 - Updated the exercise-image M4 inventory audit with the new text-only running page because its test covers every current exercise page.
+- Code-review M2 R1 recorded GP-SRB-M2-CR1: M2 omits the R5.4 persistent-pain safety-routing term from the page and real-page tests.
 
 Tests-first evidence:
 
@@ -205,7 +206,7 @@ Ready for: implementation M2.
 
 ## M2 Handoff
 
-State: review-requested
+State: resolution-needed
 
 Implemented surfaces:
 
@@ -223,7 +224,7 @@ Unchanged with rationale:
 - Visual-safety review: deferred to M3 by plan.
 - Beginner comprehension proof: deferred to M4 by plan.
 
-Ready for: code-review M2.
+Ready for: review-resolution for GP-SRB-M2-CR1.
 
 ## Recovery
 

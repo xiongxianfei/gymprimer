@@ -5,8 +5,8 @@
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M2 added the text-only safer-running page, source audit, real-page tests, and current exercise-image audit inventory row; code-review M2 is next.
+  - Current stage: review-resolution
+  - Active context: Code-review M2 R1 requested changes for GP-SRB-M2-CR1; resolve the persistent-pain safety-routing gap in the page and real-page tests before rereview.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
