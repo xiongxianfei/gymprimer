@@ -35,7 +35,7 @@ REQUIRED_CANDIDATE_FIELDS = {
 
 SCORE_FIELDS = (
     "beginner_comprehension",
-    "safety_setup_value",
+    "setup_value",
     "muscle_attention_value",
     "page_value",
     "readiness",
@@ -104,6 +104,35 @@ GENERATE_DISPOSITIONS = {
     "automatic_generation",
 }
 
+TOP_FIVE_INITIATIVE = "top_five_generated_images_for_fewer_than_five_exercise_documents"
+NAMED_TOP_FIVE_EXERCISE_DOCUMENTS = (
+    "exercises/band-pull-apart.md",
+    "exercises/bird-dog.md",
+    "exercises/brisk-walking.md",
+    "exercises/chest-press.md",
+    "exercises/chin-nod.md",
+    "exercises/dead-bug.md",
+    "exercises/glute-bridge.md",
+    "exercises/hip-hinge.md",
+    "exercises/incline-push-up.md",
+    "exercises/kneeling-hip-flexor-stretch.md",
+    "exercises/lat-pulldown.md",
+    "exercises/plank.md",
+    "exercises/prone-y-t.md",
+    "exercises/rowing-machine.md",
+    "exercises/seated-row.md",
+    "exercises/tai-chi-basics.md",
+    "exercises/thoracic-extension.md",
+    "exercises/wall-slide.md",
+)
+TOP_FIVE_REQUIRED_AUDIT_FIELDS = {
+    "accepted_existing_image_count",
+    "accepted_older_sequence_image_count",
+    "new_generated_image_need",
+    "top_five_generation_target",
+    "coverage_limit_outcome",
+}
+
 
 def markdown_image_count(text: str) -> int:
     return len(IMAGE_REFERENCE_RE.findall(text))
@@ -128,11 +157,41 @@ def evaluation_population(root: Path, threshold: int = 5) -> list[Path]:
     return population
 
 
+def is_top_five_initiative(record: Mapping[str, object]) -> bool:
+    return record.get("initiative") == TOP_FIVE_INITIATIVE
+
+
+def validate_named_top_five_population(exercise_documents: Sequence[str]) -> list[str]:
+    expected = set(NAMED_TOP_FIVE_EXERCISE_DOCUMENTS)
+    actual = set(exercise_documents)
+    errors: list[str] = []
+    for path in sorted(expected - actual):
+        errors.append(f"named_top_five_population_missing: {path}")
+    for path in sorted(actual - expected):
+        if path == "exercises/baduanjin-basics.md":
+            errors.append(f"named_top_five_population_excludes_baduanjin: {path}")
+        else:
+            errors.append(f"named_top_five_population_unexpected: {path}")
+    return errors
+
+
+def top_five_image_need(record: Mapping[str, object]) -> int | None:
+    accepted_existing = record.get("accepted_existing_image_count")
+    if not isinstance(accepted_existing, int):
+        return None
+    return max(0, 5 - accepted_existing)
+
+
 def validate_audit_record(record: Mapping[str, object]) -> list[str]:
     errors: list[str] = []
     for field in sorted(REQUIRED_AUDIT_FIELDS):
         if field not in record:
             errors.append(f"audit_missing_required_field: {field}")
+    if is_top_five_initiative(record):
+        for field in sorted(TOP_FIVE_REQUIRED_AUDIT_FIELDS):
+            if field not in record:
+                errors.append(f"audit_missing_required_field: {field}")
+        errors.extend(validate_top_five_audit_record(record))
 
     candidate_table = record.get("candidate_table")
     if isinstance(candidate_table, Sequence) and not isinstance(candidate_table, (str, bytes)):
@@ -157,6 +216,55 @@ def validate_audit_record(record: Mapping[str, object]) -> list[str]:
     return errors
 
 
+def validate_top_five_audit_record(record: Mapping[str, object]) -> list[str]:
+    errors: list[str] = []
+    exercise_document = record.get("exercise_document")
+    if isinstance(exercise_document, str):
+        if exercise_document not in NAMED_TOP_FIVE_EXERCISE_DOCUMENTS:
+            if exercise_document == "exercises/baduanjin-basics.md":
+                errors.append(f"named_top_five_population_excludes_baduanjin: {exercise_document}")
+            else:
+                errors.append(f"named_top_five_population_unexpected: {exercise_document}")
+
+    accepted_existing = record.get("accepted_existing_image_count")
+    if not isinstance(accepted_existing, int):
+        if "accepted_existing_image_count" in record:
+            errors.append("accepted_existing_image_count_must_be_integer")
+        return errors
+    if accepted_existing < 0 or accepted_existing > 5:
+        errors.append("accepted_existing_image_count_out_of_range")
+
+    accepted_older_sequence = record.get("accepted_older_sequence_image_count", 0)
+    if not isinstance(accepted_older_sequence, int):
+        errors.append("accepted_older_sequence_image_count_must_be_integer")
+    elif accepted_older_sequence < 0:
+        errors.append("accepted_older_sequence_image_count_out_of_range")
+    elif accepted_older_sequence > accepted_existing:
+        errors.append("accepted_older_sequence_count_exceeds_existing_count")
+
+    expected_need = max(0, 5 - accepted_existing)
+    if record.get("new_generated_image_need") != expected_need:
+        errors.append("new_generated_image_need_mismatch")
+
+    target = record.get("top_five_generation_target")
+    if not isinstance(target, Sequence) or isinstance(target, (str, bytes)):
+        errors.append("top_five_generation_target_must_be_list")
+    elif len(target) > 5:
+        errors.append("top_five_generation_target_exceeds_five")
+
+    coverage_limit = record.get("coverage_limit_outcome")
+    if not isinstance(coverage_limit, Mapping):
+        if "coverage_limit_outcome" in record:
+            errors.append("coverage_limit_outcome_must_be_mapping")
+    else:
+        target_total = coverage_limit.get("target_total_images")
+        if not isinstance(target_total, int):
+            errors.append("coverage_limit_target_total_images_must_be_integer")
+        elif target_total > 5:
+            errors.append("coverage_limit_target_exceeds_five")
+    return errors
+
+
 def validate_candidate_table(candidate_table: Sequence[object], record: Mapping[str, object]) -> list[str]:
     errors: list[str] = []
     if len(candidate_table) < 10 and not record.get("fewer_than_ten_rationale"):
@@ -178,10 +286,13 @@ def validate_candidate_table(candidate_table: Sequence[object], record: Mapping[
         errors.extend(validate_forbidden_claims(raw_candidate, rank))
         if isinstance(rank, int) and rank <= 5 and disposition == "automatic_generation":
             errors.append(f"top_five_candidate_must_not_be_automatic_generation: rank {rank}")
-        elif isinstance(rank, int) and rank <= 5 and disposition in GENERATE_DISPOSITIONS:
+        elif isinstance(rank, int) and rank <= 5 and disposition in GENERATE_DISPOSITIONS and not is_top_five_initiative(record):
             errors.append(f"top_five_candidate_must_not_select_generation_directly: rank {rank}")
         if isinstance(rank, int) and rank > 5 and disposition in GENERATE_DISPOSITIONS:
-            if not raw_candidate.get("downstream_churn_rationale"):
+            if is_top_five_initiative(record):
+                if not raw_candidate.get("later_approved_sixth_image_authorization"):
+                    errors.append(f"sixth_candidate_generation_not_allowed: rank {rank}")
+            elif not raw_candidate.get("downstream_churn_rationale"):
                 errors.append(f"sixth_candidate_generation_missing_churn_rationale: rank {rank}")
     return errors
 
@@ -205,7 +316,7 @@ def validate_generation_decision(record: Mapping[str, object]) -> list[str]:
         return errors
 
     final_image_count = current_image_count + selected_count
-    if final_image_count in {4, 5} and not record.get("image_count_exception_approval"):
+    if final_image_count in {4, 5} and not is_top_five_initiative(record) and not record.get("image_count_exception_approval"):
         errors.append("image_count_exception_required_for_four_or_five_images")
     if final_image_count > 5:
         errors.append("image_count_exceeds_first_slice_limit")
@@ -292,13 +403,14 @@ def validate_closeout_proof(proof: Mapping[str, object]) -> list[str]:
     if generated_count != len(generated_paths):
         errors.append("generated_image_count_path_mismatch")
 
+    top_five_initiative = is_top_five_initiative(proof)
     visual_review = proof.get("visual_safety_review")
     if isinstance(visual_review, Mapping):
         visual_status = visual_review.get("status")
         reviewed_items = visual_review.get("reviewed_items", [])
         if generated_count > 0 and visual_status == "not_triggered_no_generated_images":
             errors.append("visual_safety_review_required_for_generated_images")
-        if generated_count > 0 and len(reviewed_items) != generated_count:
+        if generated_count > 0 and len(reviewed_items) != generated_count and not top_five_initiative:
             errors.append("visual_safety_review_item_count_mismatch")
     elif "visual_safety_review" in proof:
         errors.append("visual_safety_review_must_be_mapping")

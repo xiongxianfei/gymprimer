@@ -23,10 +23,14 @@ a straight line from head to heels.
 
 ## Muscles involved
 
+![Incline push-up muscle-attention reference with broad highlights on chest, shoulders, triceps, and trunk](../media/exercises/incline-push-up/muscle-attention.png)
+
 You should mostly notice work across the chest, front of the shoulders, backs
 of the upper arms, and trunk muscles that help keep your body steady.
 
 ## Movement breakdown
+
+![Incline push-up start reference with hands on a stable surface and body in a straight line](../media/exercises/incline-push-up/start-crop.png)
 
 ![Incline push-up start and finish positions using a stable raised surface](../media/exercises/incline-push-up/incline-push-up-phases-example.png)
 
@@ -54,6 +58,8 @@ Controlled movement is part of good weight-training technique.
 
 ## What you should feel
 
+![Incline push-up lowered-position reference with elbows bending under control](../media/exercises/incline-push-up/lowered-crop.png)
+
 You should feel a steady push through the front of the upper body while your
 torso stays firm. If your hips sag or the surface shifts, use a higher or more
 stable surface.
@@ -66,6 +72,8 @@ stable surface.
 - Moving faster than you can control.
 
 ## Easier version
+
+![Incline push-up easier setup reference using a higher stable surface](../media/exercises/incline-push-up/higher-surface.png)
 
 Use a higher surface so less of your body weight is involved.
 

@@ -14,13 +14,19 @@ The kneeling hip-flexor stretch is a beginner mobility exercise for the front of
 
 ## Used muscles
 
+![Kneeling hip flexor stretch muscle-attention reference with broad highlights on rear hip, thigh, glute, trunk, and front-leg support](../media/exercises/kneeling-hip-flexor-stretch/muscle-attention.png)
+
 Primary stretch target: iliopsoas and rectus femoris on the rear leg. Positioning muscles: gluteus maximus, trunk muscles, and quadriceps.
 
 ## Equipment and setup
 
+![Kneeling hip flexor stretch setup reference in a half-kneeling position with upright trunk](../media/exercises/kneeling-hip-flexor-stretch/setup-crop.png)
+
 Use a mat or pad under the rear knee. Set up in a half-kneeling position with one knee down and the other foot flat in front.
 
 ## Movement phases
+
+![Kneeling hip flexor stretch position reference with hips gently shifting forward](../media/exercises/kneeling-hip-flexor-stretch/stretch-position-crop.png)
 
 1. Lightly squeeze the rear glute.
 2. Tuck the pelvis just enough to reduce low-back arching.
@@ -40,6 +46,8 @@ Progression: Progress by finding the position more consistently before adding ti
 Stop if: Stop or back off if the stretch becomes painful, sharp, worsening, or moves into the low back. [Mayo Clinic][mayo-stretching]
 
 ## Important notes
+
+![Kneeling hip flexor stretch control reference showing smaller range with steady low back](../media/exercises/kneeling-hip-flexor-stretch/low-back-control-crop.png)
 
 Do not chase a stronger stretch by arching the low back. The stretch should stay near the front of the rear hip. General mobility guidance applies: use a mild, controllable position and stop for sharp, worsening, unusual, or unsafe symptoms. [Mayo Clinic][mayo-weight-training]
 

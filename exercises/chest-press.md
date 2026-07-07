@@ -26,6 +26,8 @@ Five beginner use cases:
 
 ## Equipment setup
 
+![Chest press setup reference with back against pad, feet flat, and hands on handles](../media/exercises/chest-press/setup.png)
+
 Set the seat so the handles start near mid-chest height. Choose a light load,
 place your feet flat, and hold the handles with your wrists stacked over your
 hands.
@@ -50,6 +52,8 @@ Use the muscle-attention image only as a broad region reference.
 
 ## Movement breakdown
 
+![Chest press start-position reference with elbows bent and handles near chest height](../media/exercises/chest-press/start-position.png)
+
 ### 1. Set up
 
 Sit tall against the pad, hold both handles, and keep your wrists steady.
@@ -68,6 +72,8 @@ Bring the handles back slowly until they reach the starting position. Avoid
 rushed repetitions. [Mayo Clinic][mayo-weight-training]
 
 ## What you should feel
+
+![Chest press finish-position reference with handles pressed forward and elbows not locked](../media/exercises/chest-press/finish-position.png)
 
 You may feel a controlled push across the front of the upper body while the
 arms help finish. Try to keep the shoulders low and the handles steady; if the

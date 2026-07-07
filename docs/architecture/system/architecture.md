@@ -40,6 +40,9 @@ The Tai Chi Basics image-priority amendment was approved by
 `docs/changes/2026-07-05-necessary-images-and-tai-chi-exercise/reviews/architecture-review-r1.md`.
 The Baduanjin Basics image-priority amendment was approved by
 `docs/changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/architecture-review-r1.md`.
+The top-five generated images for fewer-than-five exercise documents amendment
+was approved by
+`docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/architecture-review-r1.md`.
 
 ## Related artifacts
 
@@ -110,6 +113,13 @@ The Baduanjin Basics image-priority amendment was approved by
   - Spec: `../../../specs/necessary-images-and-baduanjin-exercise.md`
   - Spec review:
     `../../changes/2026-07-06-necessary-images-and-baduanjin-exercise/reviews/spec-review-r1.md`
+- Top-five generated images for fewer-than-five exercise documents:
+  - Proposal:
+    `../../proposals/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md`
+  - Spec:
+    `../../../specs/top-five-generated-images-for-fewer-than-five-exercise-documents.md`
+  - Spec review:
+    `../../changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/spec-review-r1.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
@@ -215,6 +225,11 @@ Goals:
   with one matching row in `media/PROVENANCE.md`. Generated raster exercise
   images governed by the prompt-record amendment also require a repository-local
   prompt record linked by the provenance row's `prompt_record` field.
+- The accepted top-five generated-image initiative creates a named-population
+  exception for repository-local reviewer fields and visual-safety-review
+  evidence: for its named exercise documents only, generated raster rows may
+  omit `human_reviewer` and repository-local review evidence when the approved
+  spec and validation checks for that initiative allow it.
 - Safety claims require claim-level citations and page-local sources.
 - Markdown pages must remain readable without generated HTML, JavaScript, a local server, or search index.
 - Existing structured-platform artifacts are historical when they conflict with current governance.

@@ -16,9 +16,13 @@ Dead bug is a beginner trunk-control exercise. It teaches the reader to move the
 
 Primary: rectus abdominis, obliques, and transverse abdominis. Secondary: hip flexors, shoulder flexors, and breathing muscles.
 
+![Dead bug muscle-attention reference with broad highlights on trunk, hip, and shoulder support regions](../media/exercises/dead-bug/muscle-attention.png)
+
 ## Equipment and setup
 
 Use the floor or a firm exercise mat. Lie on the back with knees bent over the hips and arms reaching toward the ceiling.
+
+![Dead bug setup reference lying on back with hips and knees bent and arms reaching up](../media/exercises/dead-bug/setup-crop.png)
 
 ## Movement phases
 
@@ -27,9 +31,13 @@ Use the floor or a firm exercise mat. Lie on the back with knees bent over the h
 3. Stop before the low back lifts or the ribs flare. [Mayo Clinic][mayo-weight-training]
 4. Return slowly and repeat on the other side.
 
+![Dead bug opposite-reach reference with one arm and opposite leg moving away from center](../media/exercises/dead-bug/opposite-reach-crop.png)
+
 ## Important notes
 
 Shorten the arm or leg reach if the low back lifts. The goal is smooth trunk control, not a long reach. General strength-exercise guidance applies: move with control, use a range that can be repeated, and stop for sharp, worsening, unusual, or unsafe symptoms. [Mayo Clinic][mayo-weight-training]
+
+![Dead bug smaller-range reference showing controlled reach while the low back stays quiet](../media/exercises/dead-bug/range-limit-crop.png)
 
 ## Example pictures
 
