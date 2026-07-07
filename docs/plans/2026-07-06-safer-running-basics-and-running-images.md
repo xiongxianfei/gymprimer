@@ -18,13 +18,13 @@ Review log: `docs/changes/2026-07-06-safer-running-basics-and-running-images/rev
 
 Current milestone: M4
 
-Current state: planned
+Current state: review-requested
 
 Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved; code-review M2 R2 clean-with-notes; code-review M3 R1 changes-requested for GP-SRB-M3-CR1; GP-SRB-M3-CR1 resolved; code-review M3 R2 clean-with-notes.
 
-Next required gate: implementation M4.
+Next required gate: code-review M4.
 
-Implementation status: M1 closed; M2 closed; M3 closed; M4 not started.
+Implementation status: M1 closed; M2 closed; M3 closed; M4 implemented.
 
 Final closeout status: not ready.
 
@@ -155,7 +155,7 @@ Acceptance evidence:
 
 Progress:
 
-- State: review-requested.
+- State: closed.
 - Added the six approved generated raster files under `media/exercises/safer-running-basics/`.
 - Added exact prompt records under `media/prompts/exercises/safer-running-basics/`.
 - Added approved `media/PROVENANCE.md` rows mapping each asset to its prompt record and `exercises/safer-running-basics.md`.
@@ -203,6 +203,38 @@ Acceptance evidence:
 
 - Beginner proof shows the reader understands what the page can and cannot promise, how to start, what run/walk means, what effort should feel like, what the posture and landing images teach, and what would make them stop or seek help. [Mayo Clinic][mayo-exercise-chronic-disease]
 - All local validation commands pass or any gap is explicitly recorded.
+
+Progress:
+
+- State: review-requested.
+- Added focused M4 proof tests for beginner comprehension, text-only rollback, and validation-ledger handoff evidence.
+- Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/beginner-comprehension-proof.md`.
+- Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/rollback-proof.md`.
+- Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/validation-ledger.md`.
+- Exercised a temporary text-only rollback state at `/tmp/gymprimer-safer-running-rollback.m4` without editing the live page or media.
+- Updated `docs/changes/2026-07-06-safer-running-basics-and-running-images/explain-change.md` with M4 proof rationale.
+
+Tests-first evidence:
+
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_rollback_proof_records_text_only_cleanup tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_validation_ledger_records_final_handoff_commands` failed before proof records were added because the proof files did not exist.
+
+Validation notes:
+
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_rollback_proof_records_text_only_cleanup tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_validation_ledger_records_final_handoff_commands` passed.
+- Temporary rollback rehearsal passed: `GYMPRIMER_ROOT=/tmp/gymprimer-safer-running-rollback.m4 python3 tools/checks/check_markdown_first.py /tmp/gymprimer-safer-running-rollback.m4/exercises/safer-running-basics.md /tmp/gymprimer-safer-running-rollback.m4/media/PROVENANCE.md /tmp/gymprimer-safer-running-rollback.m4/SOURCES.md /tmp/gymprimer-safer-running-rollback.m4/RED-FLAGS.md` checked 4 Markdown files.
+- Temporary rollback rehearsal passed: `GYMPRIMER_ROOT=/tmp/gymprimer-safer-running-rollback.m4 python3 tools/checks/check_privacy.py /tmp/gymprimer-safer-running-rollback.m4/exercises/safer-running-basics.md /tmp/gymprimer-safer-running-rollback.m4/media/PROVENANCE.md /tmp/gymprimer-safer-running-rollback.m4/SOURCES.md /tmp/gymprimer-safer-running-rollback.m4/RED-FLAGS.md` checked 4 files.
+- `python3 -m unittest tests.test_exercise_method_guidance` passed: 20 tests.
+- `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed: 78 tests.
+- `python3 tools/checks/check_markdown_first.py exercises/safer-running-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images docs/plans/2026-07-06-safer-running-basics-and-running-images.md docs/plan.md` passed after adding the validation-ledger `## Sources` section: checked 27 Markdown files.
+- `python3 tools/checks/check_privacy.py exercises/safer-running-basics.md media/PROVENANCE.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images docs/plans/2026-07-06-safer-running-basics-and-running-images.md docs/plan.md` passed: checked 32 files.
+- `python3 -m unittest discover -s tests` passed: 215 tests.
+- `git diff --check` passed.
+
+Decisions and discoveries:
+
+- M4 uses a non-identifying reviewer simulation, matching the existing Tai Chi and Baduanjin proof pattern, so no private reader or health data is stored.
+- Text-only rollback was rehearsed in a temporary root rather than by removing live approved images and then restoring them.
+- CI was not observed, and no hosted CI pass is claimed.
 
 ## Validation Commands
 
@@ -283,6 +315,30 @@ Unchanged with rationale:
 - Text-only rollback proof: deferred unless image review fails or M4 requires rollback evidence.
 
 Ready for: implementation M4.
+
+## M4 Handoff
+
+State: review-requested
+
+Implemented surfaces:
+
+- `tests/test_markdown_first_real_pages.py`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/beginner-comprehension-proof.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/rollback-proof.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/validation-ledger.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/explain-change.md`
+- `docs/plans/2026-07-06-safer-running-basics-and-running-images.md`
+- `docs/plan.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/change.yaml`
+
+Unchanged with rationale:
+
+- `exercises/safer-running-basics.md`: unchanged because M4 validates comprehension and rollback for the already reviewed page.
+- `media/exercises/safer-running-basics/`: unchanged because all six generated assets were reviewed in M3.
+- `media/prompts/exercises/safer-running-basics/`: unchanged because prompt records were reviewed in M3.
+- `media/PROVENANCE.md`: unchanged because provenance rows were reviewed in M3.
+
+Ready for: code-review M4.
 
 ## Recovery
 

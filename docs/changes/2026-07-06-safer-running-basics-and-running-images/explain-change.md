@@ -1,10 +1,63 @@
-# Explain Change: Safer Running Basics and High-Quality Running Images M1-M3
+# Explain Change: Safer Running Basics and High-Quality Running Images M1-M4
 
 Change ID: `2026-07-06-safer-running-basics-and-running-images`
 
-Milestone: M1 Validation and Contract Fixtures; M2 Markdown Page and Source Contract; M3 Governed Image Batch
+Milestone: M1 Validation and Contract Fixtures; M2 Markdown Page and Source Contract; M3 Governed Image Batch; M4 Comprehension Proof and Final Readiness
 
 Status: review-requested
+
+## M4 What Changed
+
+M4 records final milestone proof for the safer-running page and image batch before code-review.
+
+Changed surfaces:
+
+- `tests/test_markdown_first_real_pages.py`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/beginner-comprehension-proof.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/rollback-proof.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/validation-ledger.md`
+- `docs/plans/2026-07-06-safer-running-basics-and-running-images.md`
+- `docs/plan.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/change.yaml`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/explain-change.md`
+
+## M4 Why
+
+The approved spec requires beginner comprehension proof for the final published page and image set. The proof confirms that a beginner can answer what the page helps with, whether it guarantees injury-free running, how to start, what run/walk means, what effort should feel like, what the posture and landing images teach, and the required safety-route prompt. [Spec](../../../specs/safer-running-basics-and-running-images.md)
+
+The test spec also requires rollback proof. M4 records a text-only rollback rehearsal that removes image references and safer-running provenance rows in a temporary root, then reruns Markdown-first and privacy checks without destructively editing the live page.
+
+The validation ledger records the exact local commands and states that CI was not observed.
+
+## M4 Tests First
+
+The M4 proof tests were added before proof records were created.
+
+Observed red state:
+
+- `python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_rollback_proof_records_text_only_cleanup tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_validation_ledger_records_final_handoff_commands` failed because the beginner-comprehension proof, rollback proof, and validation ledger did not exist.
+
+After adding the proof records and validation ledger, the targeted proof tests passed.
+
+## M4 Scope Boundaries
+
+M4 does not change the page text, generated images, prompt records, or provenance rows.
+
+Those surfaces were implemented and reviewed in M2 and M3. M4 only records final proof and local validation evidence for the already approved page and image set.
+
+## M4 Validation
+
+Passed locally:
+
+```bash
+python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_beginner_comprehension_records_required_prompts tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_rollback_proof_records_text_only_cleanup tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_safer_running_m4_validation_ledger_records_final_handoff_commands
+python3 -m unittest tests.test_exercise_method_guidance
+python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages
+python3 tools/checks/check_markdown_first.py exercises/safer-running-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images docs/plans/2026-07-06-safer-running-basics-and-running-images.md docs/plan.md
+python3 tools/checks/check_privacy.py exercises/safer-running-basics.md media/PROVENANCE.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images docs/plans/2026-07-06-safer-running-basics-and-running-images.md docs/plan.md
+python3 -m unittest discover -s tests
+git diff --check
+```
 
 ## M3 What Changed
 

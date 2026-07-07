@@ -784,6 +784,87 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
             with self.subTest(token=token):
                 self.assertIn(token, text)
 
+    def test_safer_running_m4_beginner_comprehension_records_required_prompts(self) -> None:
+        path = SAFER_RUNNING_CHANGE_ROOT / "reviews/beginner-comprehension-proof.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for prompt in (
+            "what the page can help them do",
+            "whether the page can guarantee injury-free running",
+            "how to start a first running session",
+            "what run/walk means",
+            "what effort should feel like",
+            "what the posture image teaches",
+            "what the landing image teaches",
+            "what would make them stop or seek help",
+            "images helped more than text alone",
+            "non-identifying",
+            "residual confusion",
+            "exercises/safer-running-basics.md",
+            "media/exercises/safer-running-basics/posture.png",
+            "media/exercises/safer-running-basics/landing.png",
+            "media/exercises/safer-running-basics/run-walk.png",
+            "media/exercises/safer-running-basics/warm-up.png",
+            "media/exercises/safer-running-basics/muscle-attention.png",
+            "media/exercises/safer-running-basics/overstride-comparison.png",
+        ):
+            with self.subTest(prompt=prompt):
+                self.assertIn(prompt, text)
+
+    def test_safer_running_m4_rollback_proof_records_text_only_cleanup(self) -> None:
+        path = SAFER_RUNNING_CHANGE_ROOT / "reviews/rollback-proof.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for token in (
+            "text-only",
+            "temporary review state",
+            "remove image references",
+            "unused safer-running assets",
+            "prompt records",
+            "provenance rows",
+            "exercises/safer-running-basics.md",
+            "media/exercises/safer-running-basics/posture.png",
+            "media/exercises/safer-running-basics/landing.png",
+            "media/exercises/safer-running-basics/run-walk.png",
+            "media/exercises/safer-running-basics/warm-up.png",
+            "media/exercises/safer-running-basics/muscle-attention.png",
+            "media/exercises/safer-running-basics/overstride-comparison.png",
+            "media/prompts/exercises/safer-running-basics/posture.md",
+            "media/prompts/exercises/safer-running-basics/landing.md",
+            "media/prompts/exercises/safer-running-basics/run-walk.md",
+            "media/prompts/exercises/safer-running-basics/warm-up.md",
+            "media/prompts/exercises/safer-running-basics/muscle-attention.md",
+            "media/prompts/exercises/safer-running-basics/overstride-comparison.md",
+            "python3 tools/checks/check_markdown_first.py",
+            "python3 tools/checks/check_privacy.py",
+            "pass",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_safer_running_m4_validation_ledger_records_final_handoff_commands(self) -> None:
+        path = SAFER_RUNNING_CHANGE_ROOT / "validation-ledger.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for token in (
+            "M4 Comprehension Proof and Final Readiness",
+            "python3 -m unittest tests.test_exercise_method_guidance",
+            "python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages",
+            "python3 -m unittest discover -s tests",
+            "python3 tools/checks/check_markdown_first.py",
+            "python3 tools/checks/check_privacy.py",
+            "git diff --check",
+            "CI was not observed",
+            "docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/beginner-comprehension-proof.md",
+            "docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/rollback-proof.md",
+            "pass",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
     def test_baduanjin_m4_beginner_comprehension_records_required_prompts(self) -> None:
         path = BADUANJIN_CHANGE_ROOT / "beginner-comprehension-proof.md"
         self.assertTrue(path.is_file())

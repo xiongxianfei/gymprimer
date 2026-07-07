@@ -13,9 +13,9 @@ workflow:
     authorized_by: user
     authorized_on: 2026-07-06
     stop_before: implementation
-current_stage: implement
+current_stage: code-review
 current_milestone: M4
-milestone_state: planned
+milestone_state: review-requested
 required_review_resolution: false
 open_findings: []
 notes:
@@ -37,4 +37,5 @@ notes:
   - GP-SRB-M3-CR1 resolution moved the visual-review artifact to the approved proof-map path and updated tests and plan references.
   - GP-SRB-M3-CR1 resolved and accepted by code-review M3 R2.
   - M3 is closed.
-  - M4 is ready for implementation.
+  - M4 added beginner comprehension proof, text-only rollback proof, validation-ledger evidence, and focused M4 tests.
+  - M4 is ready for code-review.
