@@ -5,8 +5,8 @@
 - [Advanced Rowing Machine Tutorial](plans/2026-07-07-advanced-rowing-machine-tutorial.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M1 validation scaffolding is implemented and ready for code-review; M2-M4 remain pending.
+  - Current stage: review-resolution
+  - Active context: code-review R1 requested changes for M1 findings CR1 and CR2; M2-M4 remain pending.
 
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed

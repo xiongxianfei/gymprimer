@@ -55,19 +55,19 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 ## Current Handoff Summary
 
 - Current milestone: M1. Validation and Test Scaffolding
-- Current milestone state: review-requested
-- Last reviewed milestone: none
-- Review status: test-spec-review R2 approved
-- Remaining in-scope implementation milestones: M2, M3, M4
-- Next stage: code-review
+- Current milestone state: resolution-needed
+- Last reviewed milestone: M1. Validation and Test Scaffolding
+- Review status: code-review R1 changes-requested
+- Remaining in-scope implementation milestones: M1 review-resolution, M2, M3, M4
+- Next stage: review-resolution
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M1 awaits code-review; M2-M4 implementation, later review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: code-review R1 found CR1 and CR2; M1 review-resolution, M2-M4 implementation, later review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
 ### M1. Validation and Test Scaffolding
 
-- Milestone state: review-requested
+- Milestone state: resolution-needed
 - Goal: Add focused validation and tests for the advanced rowing page contract, image-rich exception, image-instruction packets, force-intensity overlays, and forbidden-scope wording.
 - Requirements: R1-R9, R18-R32, R39-R46, R50
 - Files/components likely touched:
@@ -276,6 +276,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: Plan-review R2 approved the TSR1 plan-command revision.
 - 2026-07-07: Test-spec-review R2 approved the proof map and resolved TSR1.
 - 2026-07-07: M1 implemented scoped advanced rowing checker validation, focused unittest coverage, and the passing fixture directory required by ART-CMD2.
+- 2026-07-07: Code-review R1 requested changes for CR1 and CR2.
 
 ## Decision log
 
@@ -305,13 +306,13 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 
 ## Outcome and retrospective
 
-- M1 implementation is complete and ready for code-review.
+- M1 implementation needs review-resolution for CR1 and CR2.
 - M2-M4 remain pending.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M1 code-review.
+- Ready for M1 review-resolution.
 
 ## Sources
 

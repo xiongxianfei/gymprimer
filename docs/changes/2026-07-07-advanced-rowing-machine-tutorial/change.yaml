@@ -1,6 +1,6 @@
 change_id: 2026-07-07-advanced-rowing-machine-tutorial
 status: accepted
-current_stage: code-review
+current_stage: review-resolution
 created_date: 2026-07-07
 
 proposal: docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
@@ -24,9 +24,14 @@ current_test_spec: specs/advanced-rowing-machine-tutorial.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/test-spec-review-r2.md
 
-next_stage: code-review
+current_code_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r1.md
+current_code_review_status: changes-requested
 
-open_findings: []
+next_stage: review-resolution
+
+open_findings:
+  - CR1
+  - CR2
 
 notes:
   - Proposal-review R1 approved the direction with no material findings.
@@ -46,6 +51,7 @@ notes:
   - Plan-review R2 approved the TSR1 plan-command revision.
   - Test-spec-review R2 approved the proof map and resolved TSR1.
   - M1 validation scaffolding implemented and routed to code-review; M2-M4 remain pending.
+  - Code-review R1 requested changes for CR1 and CR2; M1 is in review-resolution.
 
 validation:
   - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/proposal-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
