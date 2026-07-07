@@ -5,8 +5,8 @@
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: review-resolution
-  - Active context: Code-review M4 R1 requested GP-SRB-M4-CR1 resolution because the text-only rollback proof leaves stale image-reference prose in the temporary page.
+  - Current stage: verify
+  - Active context: Code-review M4 R2 withdrew GP-SRB-M4-CR1 as over-strict for the intended lightweight rollback proof; M4 is closed and final verification is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

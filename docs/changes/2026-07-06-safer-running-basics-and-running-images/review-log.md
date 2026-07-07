@@ -17,6 +17,7 @@
 | 2026-07-07 | review-resolution | M3 R1 | resolved-pending-rereview | `review-resolution.md` | GP-SRB-M3-CR1 | Moved the visual-review artifact to the approved proof-map path and updated M3 tests and plan references. |
 | 2026-07-07 | code-review | M3 R2 | clean-with-notes | `reviews/code-review-m3-r2.md` | none | GP-SRB-M3-CR1 resolved; M3 is closed and M4 implementation is next. |
 | 2026-07-07 | code-review | M4 R1 | changes-requested | `reviews/code-review-m4-r1.md` | GP-SRB-M4-CR1 | Text-only rollback proof leaves stale image-reference prose in the temporary page and lacks a regression assertion. |
+| 2026-07-07 | code-review | M4 R2 | clean-with-notes | `reviews/code-review-m4-r2.md` | none | GP-SRB-M4-CR1 withdrawn as over-strict for the intended lightweight rollback proof; M4 is closed. |
 
 ## Sources
 
@@ -37,3 +38,4 @@
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m3-r1.md`
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m3-r2.md`
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m4-r1.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m4-r2.md`

@@ -13,12 +13,11 @@ workflow:
     authorized_by: user
     authorized_on: 2026-07-06
     stop_before: implementation
-current_stage: review-resolution
+current_stage: verify
 current_milestone: M4
-milestone_state: resolution-needed
-required_review_resolution: true
-open_findings:
-  - GP-SRB-M4-CR1
+milestone_state: closed
+required_review_resolution: false
+open_findings: []
 notes:
   - Owner accepted the proposal after proposal-review round 1 approved it with no findings.
   - Spec-review round 1 approved the feature spec with no findings.
@@ -40,4 +39,5 @@ notes:
   - M3 is closed.
   - M4 added beginner comprehension proof, text-only rollback proof, validation-ledger evidence, and focused M4 tests.
   - Code-review M4 R1 requested changes for GP-SRB-M4-CR1.
-  - M4 needs review-resolution before rereview.
+  - Code-review M4 R2 withdrew GP-SRB-M4-CR1 as over-strict for the intended lightweight rollback proof.
+  - M4 is closed and ready for final verification.
