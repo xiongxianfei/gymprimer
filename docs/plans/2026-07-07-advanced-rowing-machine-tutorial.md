@@ -54,20 +54,20 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 
 ## Current Handoff Summary
 
-- Current milestone: not-started
-- Current milestone state: planned
+- Current milestone: M1. Validation and Test Scaffolding
+- Current milestone state: review-requested
 - Last reviewed milestone: none
 - Review status: test-spec-review R2 approved
-- Remaining in-scope implementation milestones: M1, M2, M3, M4
-- Next stage: implement
+- Remaining in-scope implementation milestones: M2, M3, M4
+- Next stage: code-review
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: plan-review, test-spec, test-spec-review, implementation, code-review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M1 awaits code-review; M2-M4 implementation, later review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
 ### M1. Validation and Test Scaffolding
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Add focused validation and tests for the advanced rowing page contract, image-rich exception, image-instruction packets, force-intensity overlays, and forbidden-scope wording.
 - Requirements: R1-R9, R18-R32, R39-R46, R50
 - Files/components likely touched:
@@ -101,7 +101,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
   - progress updated
   - decision log updated if needed
   - validation notes updated
-  - milestone committed
+  - milestone committed after this handoff update
 - Risks:
   - checker logic may accidentally raise image limits globally
   - prompt packet validation may become too rigid for future media workflows
@@ -275,6 +275,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: TSR1 required a plan command revision; M1 fixture validation now uses `tests/fixtures/advanced-rowing-machine-tutorial`.
 - 2026-07-07: Plan-review R2 approved the TSR1 plan-command revision.
 - 2026-07-07: Test-spec-review R2 approved the proof map and resolved TSR1.
+- 2026-07-07: M1 implemented scoped advanced rowing checker validation, focused unittest coverage, and the passing fixture directory required by ART-CMD2.
 
 ## Decision log
 
@@ -296,15 +297,21 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - `python3 tools/checks/check_privacy.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial specs/advanced-rowing-machine-tutorial.md docs/architecture/system/architecture.md`: pass, checked 7 file(s).
 - `git diff --check`: pass, no whitespace errors reported.
 - `python3 tools/checks/check_markdown_first.py docs/architecture/system/architecture.md specs/advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/spec-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md`: fail on pre-existing canonical architecture checker incompatibilities.
+- `python3 -m unittest tests.test_advanced_rowing_machine_tutorial`: pass, 5 tests.
+- `python3 -m unittest discover -s tests`: pass, 229 tests.
+- `python3 tools/checks/check_markdown_first.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md`: pass, checked 4 Markdown file(s).
+- `python3 tools/checks/check_privacy.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 13 file(s).
+- `git diff --check`: pass, no whitespace errors reported.
 
 ## Outcome and retrospective
 
-- Pending implementation and closeout.
+- M1 implementation is complete and ready for code-review.
+- M2-M4 remain pending.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implementation M1.
+- Ready for M1 code-review.
 
 ## Sources
 
