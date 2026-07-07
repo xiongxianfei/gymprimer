@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -1187,6 +1188,21 @@ class ExerciseImageStandardTest(unittest.TestCase):
 
         audit_path = ROOT / "docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/evidence/m2-first-batch-audit.md"
         audit_text = audit_path.read_text(encoding="utf-8")
+        self.assertIn("Scores use 1-5 values", audit_text)
+        self.assertNotIn("Scores use 0-3 values", audit_text)
+        score_rows = [
+            row
+            for row in audit_text.splitlines()
+            if re.match(r"\| \d+ \|", row)
+        ]
+        self.assertGreaterEqual(len(score_rows), 20)
+        for row in score_rows:
+            cells = [cell.strip() for cell in row.strip("|").split("|")]
+            scores = [int(value) for value in cells[2:7]]
+            with self.subTest(row=row):
+                self.assertTrue(all(1 <= score <= 5 for score in scores))
+                self.assertNotIn(0, scores)
+
         for token in (
             "`exercises/band-pull-apart.md`",
             "`exercises/bird-dog.md`",

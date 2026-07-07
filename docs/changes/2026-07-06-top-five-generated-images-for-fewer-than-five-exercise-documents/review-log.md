@@ -13,6 +13,7 @@
 | 2026-07-06 | review-resolution | [review-resolution](review-resolution.md) | resolved | CR-T5IMG-M1-1, CR-T5IMG-M1-2 | M1 code-review findings resolved; rerun code-review is next. |
 | 2026-07-06 | code-review | [code-review-r2](reviews/code-review-r2.md) | clean-with-notes | none | M1 closed; M2 implementation is next. |
 | 2026-07-06 | code-review | [code-review-r3](reviews/code-review-r3.md) | changes-requested | CR-T5IMG-M2-1, CR-T5IMG-M2-2 | M2 needs review-resolution before M3 implementation. |
+| 2026-07-06 | review-resolution | [review-resolution](review-resolution.md) | resolved | CR-T5IMG-M2-1, CR-T5IMG-M2-2 | M2 findings resolved; rerun code-review is next. |
 
 ## Sources
 
