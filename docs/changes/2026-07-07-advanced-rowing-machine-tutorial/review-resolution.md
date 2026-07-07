@@ -4,16 +4,16 @@ Change ID: `2026-07-07-advanced-rowing-machine-tutorial`
 
 Current milestone: M1
 
-Status: re-review-needed
+Status: closed
 
-Closeout status: pending code-review
+Closeout status: closed
 
 ## Findings
 
 | Finding ID | Source review | Severity | Status | Required outcome |
 | --- | --- | --- | --- | --- |
-| CR1 | `reviews/code-review-r1.md` | major | fixed-pending-rereview | Added advanced-rowing media forbidden text checks and temporary-root tests for copied PM5 UI, screenshots, logos or brand marks, identifiable people, correct/wrong badges, red pain marks, elite/race-win framing, and unsupported promises. |
-| CR2 | `reviews/code-review-r1.md` | major | fixed-pending-rereview | Extended advanced-rowing forbidden-scope checks and tests for calculated personal targets, personal watts or paces, full benchmark plans, competition programming, active recovery protocols, and clinical protocol wording. |
+| CR1 | `reviews/code-review-r1.md` | major | resolved | Added advanced-rowing media forbidden text checks and temporary-root tests for copied PM5 UI, screenshots, logos or brand marks, identifiable people, correct/wrong badges, red pain marks, elite/race-win framing, and unsupported promises; accepted by code-review R2. |
+| CR2 | `reviews/code-review-r1.md` | major | resolved | Extended advanced-rowing forbidden-scope checks and tests for calculated personal targets, personal watts or paces, full benchmark plans, competition programming, active recovery protocols, and clinical protocol wording; accepted by code-review R2. |
 
 ## Resolution Notes
 
@@ -28,7 +28,7 @@ CR2 fix applied:
 - Extended `ADVANCED_ROWING_FORBIDDEN_SCOPE_PATTERNS` for calculated personal targets, personal watts or paces, full benchmark plans, competition programming, active recovery protocols, medical judgment, treatment plans, and injury-specific protocols.
 - Added temporary-root tests for the missing forbidden-scope cases.
 
-Both findings require code-review re-run before they can be marked resolved.
+Code-review R2 accepted both finding resolutions.
 
 ## Validation Evidence
 
