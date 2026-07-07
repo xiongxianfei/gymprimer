@@ -5,8 +5,8 @@
 - [Advanced Rowing Machine Tutorial](plans/2026-07-07-advanced-rowing-machine-tutorial.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: implement
-  - Active context: M3 governed media, prompt packets, provenance, page integration, visual-safety proof, and grayscale proof are closed after code-review R4; M4 manual proof and closeout preparation is next.
+  - Current stage: code-review
+  - Active context: M4 manual proof, comprehension proof, validation ledger, and final local validation evidence are implemented and routed to code-review.
 
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed

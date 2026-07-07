@@ -1,6 +1,6 @@
 change_id: 2026-07-07-advanced-rowing-machine-tutorial
 status: accepted
-current_stage: implement
+current_stage: code-review
 created_date: 2026-07-07
 
 proposal: docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
@@ -25,12 +25,12 @@ current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/test-spec-review-r2.md
 
 current_code_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r4.md
-current_code_review_status: clean-with-notes
+current_code_review_status: m4-pending
 
 review_resolution: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md
 review_resolution_status: closed
 
-next_stage: implement
+next_stage: code-review
 
 open_findings: []
 
@@ -59,6 +59,8 @@ notes:
   - Code-review R3 accepted the M2 implementation and closed M2.
   - M3 governed media, prompt packets, provenance, page image integration, visual-safety proof, grayscale proof, and media regression tests implemented and routed to code-review.
   - Code-review R4 accepted the M3 implementation and closed M3.
+  - M4 manual proof and closeout preparation implementation started.
+  - M4 final source-audit proof, advanced-reader comprehension proof, validation ledger, and broad local validation evidence implemented and routed to code-review.
 
 validation:
   - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/proposal-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
@@ -82,6 +84,21 @@ validation:
   - command: git diff --check
     result: pass
     evidence: code-review R4 reviewer-ran whitespace check with no errors
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: ran 237 tests
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: fail
+    evidence: initial M4 broad check failed because proof documents needed Sources sections, source-linked safety rows, and existing global source IDs for non-local source references
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 44 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md exercises media docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 249 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported
   - command: python3 -m unittest discover -s tests
     result: pass
     evidence: code-review R3 reviewer-ran 234 tests

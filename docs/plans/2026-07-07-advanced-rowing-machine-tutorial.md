@@ -55,13 +55,13 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 ## Current Handoff Summary
 
 - Current milestone: M4. Manual Proof, Review Evidence, and Closeout Preparation
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M3. Governed Media, Prompt Packets, and Provenance
-- Review status: code-review R4 clean-with-notes; M3 closed
-- Remaining in-scope open milestones: M4 implementation
-- Next stage: implement
+- Review status: M4 implementation complete; code-review pending
+- Remaining in-scope open milestones: M4 code-review
+- Next stage: code-review
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M4 implementation, later review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M4 code-review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -196,7 +196,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 
 ### M4. Manual Proof, Review Evidence, and Closeout Preparation
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Record source audit, visual-safety review, grayscale review, advanced-reader comprehension proof, and final local validation evidence before code-review and later verification.
 - Requirements: R20-R21, R45-R50, AC1-AC10
 - Files/components likely touched:
@@ -283,6 +283,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: Code-review R3 accepted the M2 implementation and closed M2.
 - 2026-07-07: M3 implemented eight governed advanced-rowing image assets, image-instruction prompt packets, provenance rows, page image integration, visual-safety proof, grayscale proof, and real-page media regression tests.
 - 2026-07-07: Code-review R4 accepted the M3 implementation and closed M3.
+- 2026-07-07: M4 recorded final source-audit proof, advanced-reader comprehension proof, validation ledger, broad local validation evidence, and routed the milestone to code-review.
 
 ## Decision log
 
@@ -302,6 +303,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - The canonical architecture package has pre-existing Markdown-first checker incompatibilities when scanned directly; the architecture-review record treats that as a validation gap rather than an amendment blocker.
 - Adding `exercises/rowing-machine-advanced.md` required updating the existing exercise-image audit row set because current tests enumerate every `exercises/*.md` page.
 - M3 full-suite validation caught that using the exact forbidden phrase in rule text can trip the media-forbidden checker; the page and prompt packets now use `unsupported outcome claims` for the instructional boundary.
+- M4 broad Markdown-first validation requires change-local proof documents to include `## Sources` and to reuse global source IDs exactly for non-local links.
 
 ## Validation notes
 
@@ -340,18 +342,23 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - Code-review R4 reviewer-ran `python3 tools/checks/check_markdown_first.py exercises/rowing-machine-advanced.md media/PROVENANCE.md media/prompts/exercises/rowing-machine-advanced`: pass, checked 2 Markdown file(s).
 - Code-review R4 reviewer-ran `python3 tools/checks/check_privacy.py exercises/rowing-machine-advanced.md media/prompts/exercises/rowing-machine-advanced media/PROVENANCE.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 26 file(s).
 - Code-review R4 reviewer-ran `git diff --check`: pass, no whitespace errors reported.
+- `python3 -m unittest discover -s tests`: pass, 237 tests.
+- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: initial M4 fail because proof documents needed `## Sources`, source-linked safety rows, and existing global source IDs for non-local source references.
+- `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 44 Markdown file(s).
+- `python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md exercises media docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 249 file(s).
+- `git diff --check`: pass, no whitespace errors reported.
 
 ## Outcome and retrospective
 
 - M1 implementation and review-resolution are closed.
 - M2 implementation is closed after clean code-review R3.
 - M3 implementation is closed after clean code-review R4.
-- M4 remains pending.
+- M4 implementation is routed to code-review.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implementation M4.
+- Ready for code-review of M4.
 
 ## Sources
 

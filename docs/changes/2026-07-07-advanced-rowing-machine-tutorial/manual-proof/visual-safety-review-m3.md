@@ -24,3 +24,9 @@ Each asset was checked for one teaching purpose, local page fit, neutral exercis
 ## Disposition
 
 All eight assets are accepted for M3 page integration with prompt packets, provenance rows, alt text, and nearby Markdown explanations. No asset was deferred during this review.
+
+## Sources
+
+[local-advanced-rowing-page]: ../../../../exercises/rowing-machine-advanced.md
+[local-advanced-rowing-test-spec]: ../../../../specs/advanced-rowing-machine-tutorial.test.md
+[local-advanced-rowing-provenance]: ../../../../media/PROVENANCE.md

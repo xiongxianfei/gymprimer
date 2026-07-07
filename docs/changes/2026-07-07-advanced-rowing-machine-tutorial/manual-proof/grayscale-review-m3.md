@@ -24,3 +24,9 @@ The monitor, stroke-rate ladder, damper/drag-factor, and interval-structure asse
 ## Disposition
 
 All four force-intensity assets meet the M3 accessibility expectation that instructional emphasis remains understandable in grayscale. The page keeps the four-level legend in Markdown so color is not the only source of meaning.
+
+## Sources
+
+[local-advanced-rowing-page]: ../../../../exercises/rowing-machine-advanced.md
+[local-advanced-rowing-test-spec]: ../../../../specs/advanced-rowing-machine-tutorial.test.md
+[w3c-use-of-color]: https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html
