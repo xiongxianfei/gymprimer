@@ -5,8 +5,8 @@
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: code-review
-  - Active context: M4 added beginner comprehension proof, text-only rollback proof, validation-ledger evidence, and focused proof tests; code-review M4 is next.
+  - Current stage: review-resolution
+  - Active context: Code-review M4 R1 requested GP-SRB-M4-CR1 resolution because the text-only rollback proof leaves stale image-reference prose in the temporary page.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

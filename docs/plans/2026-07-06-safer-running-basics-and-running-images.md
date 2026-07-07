@@ -18,13 +18,13 @@ Review log: `docs/changes/2026-07-06-safer-running-basics-and-running-images/rev
 
 Current milestone: M4
 
-Current state: review-requested
+Current state: resolution-needed
 
-Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved; code-review M2 R2 clean-with-notes; code-review M3 R1 changes-requested for GP-SRB-M3-CR1; GP-SRB-M3-CR1 resolved; code-review M3 R2 clean-with-notes.
+Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved; code-review M2 R2 clean-with-notes; code-review M3 R1 changes-requested for GP-SRB-M3-CR1; GP-SRB-M3-CR1 resolved; code-review M3 R2 clean-with-notes; code-review M4 R1 changes-requested for GP-SRB-M4-CR1.
 
-Next required gate: code-review M4.
+Next required gate: review-resolution for GP-SRB-M4-CR1.
 
-Implementation status: M1 closed; M2 closed; M3 closed; M4 implemented.
+Implementation status: M1 closed; M2 closed; M3 closed; M4 resolution-needed.
 
 Final closeout status: not ready.
 
@@ -235,6 +235,7 @@ Decisions and discoveries:
 - M4 uses a non-identifying reviewer simulation, matching the existing Tai Chi and Baduanjin proof pattern, so no private reader or health data is stored.
 - Text-only rollback was rehearsed in a temporary root rather than by removing live approved images and then restoring them.
 - CI was not observed, and no hosted CI pass is claimed.
+- Code-review M4 R1 recorded GP-SRB-M4-CR1: the text-only rollback proof leaves stale image-reference prose in the temporary page and lacks a regression assertion.
 
 ## Validation Commands
 
@@ -318,7 +319,7 @@ Ready for: implementation M4.
 
 ## M4 Handoff
 
-State: review-requested
+State: resolution-needed
 
 Implemented surfaces:
 
@@ -338,7 +339,7 @@ Unchanged with rationale:
 - `media/prompts/exercises/safer-running-basics/`: unchanged because prompt records were reviewed in M3.
 - `media/PROVENANCE.md`: unchanged because provenance rows were reviewed in M3.
 
-Ready for: code-review M4.
+Ready for: review-resolution for GP-SRB-M4-CR1.
 
 ## Recovery
 
