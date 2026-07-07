@@ -2,15 +2,16 @@
 
 Change ID: `2026-07-06-safer-running-basics-and-running-images`
 
-Current milestone: M1
+Current milestone: M2
 
-Status: resolved
+Status: resolved-pending-rereview
 
 ## Findings
 
 | Finding ID | Source review | Severity | Status | Required outcome |
 |---|---|---|---|---|
 | GP-SRB-M1-CR1 | `reviews/code-review-m1-r1.md` | major | resolved | Added active M1 fixture coverage for page heading, alias line, required headings, page-local sources, and shared source registration; accepted by code-review M1 R2. |
+| GP-SRB-M2-CR1 | `reviews/code-review-m2-r1.md` | major | resolved-pending-rereview | Added explicit persistent-pain routing to the required `What you should feel` route and added a direct real-page test assertion. |
 
 ## Resolution Notes
 
@@ -21,6 +22,14 @@ Fixes applied:
 - Updated the safer-running image fixture so image exception tests also satisfy the page-shape contract.
 
 Code-review M1 R2 accepted the resolution.
+
+M2 fix applied:
+
+- Added `persistent pain` to the `What you should feel` safety route in `exercises/safer-running-basics.md`.
+- Kept the added language concise because `RED-FLAGS.md` remains the central safety route.
+- Added a direct `persistent pain` assertion to the M2 real-page feel-guidance test.
+
+M2 is ready for code-review rereview.
 
 ## Validation Evidence
 

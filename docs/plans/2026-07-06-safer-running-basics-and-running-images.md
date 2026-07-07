@@ -18,13 +18,13 @@ Review log: `docs/changes/2026-07-06-safer-running-basics-and-running-images/rev
 
 Current milestone: M2
 
-Current state: resolution-needed
+Current state: review-requested
 
-Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1.
+Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved pending rereview.
 
-Next required gate: review-resolution for GP-SRB-M2-CR1.
+Next required gate: code-review M2 rereview.
 
-Implementation status: M1 closed; M2 has one required review finding; M3 not started.
+Implementation status: M1 closed; M2 review-resolution applied; M3 not started.
 
 Final closeout status: not ready.
 
@@ -115,6 +115,7 @@ Progress:
 - Added real-page M2 tests for the page shape, method contract, muscle/feel route guidance, source IDs, and source audit.
 - Updated the exercise-image M4 inventory audit with the new text-only running page because its test covers every current exercise page.
 - Code-review M2 R1 recorded GP-SRB-M2-CR1: M2 omits the R5.4 persistent-pain safety-routing term from the page and real-page tests.
+- Review-resolution added concise persistent-pain routing to `What you should feel` and a direct real-page test assertion.
 
 Tests-first evidence:
 
@@ -206,7 +207,7 @@ Ready for: implementation M2.
 
 ## M2 Handoff
 
-State: resolution-needed
+State: review-requested
 
 Implemented surfaces:
 
@@ -224,7 +225,7 @@ Unchanged with rationale:
 - Visual-safety review: deferred to M3 by plan.
 - Beginner comprehension proof: deferred to M4 by plan.
 
-Ready for: review-resolution for GP-SRB-M2-CR1.
+Ready for: code-review M2 rereview.
 
 ## Recovery
 

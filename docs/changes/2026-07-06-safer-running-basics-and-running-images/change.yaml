@@ -13,12 +13,11 @@ workflow:
     authorized_by: user
     authorized_on: 2026-07-06
     stop_before: implementation
-current_stage: review-resolution
+current_stage: code-review
 current_milestone: M2
-milestone_state: resolution-needed
-required_review_resolution: true
-open_findings:
-  - GP-SRB-M2-CR1
+milestone_state: review-requested
+required_review_resolution: false
+open_findings: []
 notes:
   - Owner accepted the proposal after proposal-review round 1 approved it with no findings.
   - Spec-review round 1 approved the feature spec with no findings.
@@ -30,3 +29,4 @@ notes:
   - M1 is closed.
   - M2 added the text-only safer-running page, source audit, and real-page tests.
   - Code-review M2 R1 requested changes for GP-SRB-M2-CR1.
+  - GP-SRB-M2-CR1 resolution added concise persistent-pain routing and is ready for rereview.

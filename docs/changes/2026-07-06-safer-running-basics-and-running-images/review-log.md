@@ -11,6 +11,7 @@
 | 2026-07-06 | review-resolution | M1 R1 | resolved-pending-rereview | `review-resolution.md` | GP-SRB-M1-CR1 | Added focused M1 fixture tests and checker enforcement for safer-running page shape, alias, sections, and source-registration proof. |
 | 2026-07-06 | code-review | M1 R2 | clean-with-notes | `reviews/code-review-m1-r2.md` | none | GP-SRB-M1-CR1 resolved; M1 is closed and M2 implementation is next. |
 | 2026-07-06 | code-review | M2 R1 | changes-requested | `reviews/code-review-m2-r1.md` | GP-SRB-M2-CR1 | M2 omits the R5.4 persistent-pain safety-routing term from the page and real-page tests. |
+| 2026-07-07 | review-resolution | M2 R1 | resolved-pending-rereview | `review-resolution.md` | GP-SRB-M2-CR1 | Added concise persistent-pain routing to the required page route and a direct real-page test assertion. |
 
 ## Sources
 

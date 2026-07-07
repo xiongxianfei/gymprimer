@@ -585,6 +585,7 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
             "sharp pain",
             "numbness",
             "weakness",
+            "persistent pain",
             "../RED-FLAGS.md",
         ):
             with self.subTest(term=term):

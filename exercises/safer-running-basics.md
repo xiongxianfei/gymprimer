@@ -91,7 +91,7 @@ At an easy beginner effort, you should be able to speak in short sentences.
 Your legs and calves may feel like they are working. Your shoulders, hands,
 jaw, and neck should stay relaxed.
 
-Use the central [Red Flags](../RED-FLAGS.md) page and appropriate professional guidance for chest pain, dizziness, fainting, unusual shortness of breath, sharp pain, numbness, weakness, symptoms that worsen, or symptoms that do not settle. [Mayo Clinic][mayo-exercise-chronic-disease]
+Use the central [Red Flags](../RED-FLAGS.md) page and appropriate professional guidance for chest pain, dizziness, fainting, unusual shortness of breath, sharp pain, numbness, weakness, symptoms that worsen, persistent pain, or symptoms that do not settle. [Mayo Clinic][mayo-exercise-chronic-disease]
 
 ## How much to do
 

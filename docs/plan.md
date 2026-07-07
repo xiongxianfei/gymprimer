@@ -5,8 +5,8 @@
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: review-resolution
-  - Active context: Code-review M2 R1 requested changes for GP-SRB-M2-CR1; resolve the persistent-pain safety-routing gap in the page and real-page tests before rereview.
+  - Current stage: code-review
+  - Active context: GP-SRB-M2-CR1 resolution added concise persistent-pain routing to the required page route and a direct real-page test assertion; code-review M2 rereview is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed
