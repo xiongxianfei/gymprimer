@@ -2,9 +2,23 @@
 
 Change ID: `2026-07-06-safer-running-basics-and-running-images`
 
-Milestone: M1 Validation and Contract Fixtures; M2 Markdown Page and Source Contract; M3 Governed Image Batch; M4 Comprehension Proof and Final Readiness
+Milestone: M1 Validation and Contract Fixtures; M2 Markdown Page and Source Contract; M3 Governed Image Batch; M4 Comprehension Proof and Final Readiness; final holistic code review
 
-Status: review-requested
+Status: ready-for-verify
+
+## Summary
+
+This change adds `exercises/safer-running-basics.md` as a beginner-facing running education page, keeps `injury-free running` as search alias language rather than a promise, and publishes a governed six-image first batch with prompt records, provenance rows, visual-safety review, beginner comprehension proof, and local validation evidence.
+
+The implementation stays Markdown-first: the page text remains authoritative for effort, progression, muscle roles, form cues, and safety routing, while generated images serve as broad visual references.
+
+## Current Closeout State
+
+All implementation milestones are closed.
+Material code-review findings were resolved, accepted, or withdrawn through recorded review rounds.
+Final holistic code-review R1 found no blocking or required-change findings and routed the change to final closeout and verification.
+
+CI has not been observed and is not claimed.
 
 ## M4 What Changed
 
@@ -58,6 +72,17 @@ python3 tools/checks/check_privacy.py exercises/safer-running-basics.md media/PR
 python3 -m unittest discover -s tests
 git diff --check
 ```
+
+## Final Code Review
+
+Final holistic code-review R1 reviewed the complete branch diff from merge base `66370f1af687ca30e444b4c13376393a51239758` to `HEAD`.
+It inspected the page, tests, prompt records, provenance rows, review evidence, local validation, and the six generated images.
+
+Result: `clean-with-notes`.
+
+No blocking or required-change findings were recorded.
+
+The review record is `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-final-r1.md`.
 
 ## M3 What Changed
 
