@@ -1,0 +1,85 @@
+change_id: 2026-07-07-advanced-rowing-machine-tutorial
+status: accepted
+current_stage: implement
+created_date: 2026-07-07
+
+proposal: docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
+proposal_status: accepted
+proposal_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/proposal-review-r1.md
+review_log: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
+
+current_spec: specs/advanced-rowing-machine-tutorial.md
+current_spec_status: approved
+current_spec_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/spec-review-r1.md
+
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/architecture-review-r1.md
+
+current_plan: docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md
+current_plan_status: reviewed
+current_plan_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/plan-review-r2.md
+
+current_test_spec: specs/advanced-rowing-machine-tutorial.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/test-spec-review-r2.md
+
+next_stage: implement
+
+open_findings: []
+
+notes:
+  - Proposal-review R1 approved the direction with no material findings.
+  - Proposal status normalized to accepted after user requested workflow autoprogression to test-spec-review.
+  - Draft spec created and routed to spec-review under workflow routing.
+  - Spec-review R1 approved the spec with no material findings.
+  - Spec status normalized to approved for downstream architecture assessment.
+  - Architecture amendment recorded in the canonical architecture package.
+  - Architecture-review R1 approved the amendment with no material findings.
+  - Architecture status normalized to approved for downstream planning.
+  - Draft execution plan created and routed to plan-review.
+  - Plan-review R1 approved the execution plan with no material findings.
+  - Plan status normalized to reviewed for test-spec authoring.
+  - Draft test spec created and routed to test-spec-review.
+  - Test-spec-review R1 requested changes for TSR1 because M1 fixture validation used the whole intentionally invalid `tests/fixtures` tree.
+  - Plan and test spec revised for TSR1 to use `tests/fixtures/advanced-rowing-machine-tutorial`.
+  - Plan-review R2 approved the TSR1 plan-command revision.
+  - Test-spec-review R2 approved the proof map and resolved TSR1.
+
+validation:
+  - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/proposal-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
+    result: pass
+    evidence: checked 3 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
+    result: pass
+    evidence: checked 1 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported
+  - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.md
+    result: pass
+    evidence: checked 2 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 5 file(s): privacy pass
+  - command: python3 tools/checks/check_markdown_first.py docs/architecture/system/architecture.md specs/advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/spec-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
+    result: fail
+    evidence: canonical architecture package has pre-existing checker incompatibilities, including stale historical path references, missing architecture-local Sources section shape, and safety-link findings
+  - command: python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md specs/advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 6 file(s): privacy pass
+  - command: python3 tools/checks/check_markdown_first.py docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/architecture-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md specs/advanced-rowing-machine-tutorial.md
+    result: pass
+    evidence: checked 5 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial specs/advanced-rowing-machine-tutorial.md
+    result: pass
+    evidence: checked 8 file(s): privacy pass
+  - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.test.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/spec-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/architecture-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/plan-review-r2.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/test-spec-review-r2.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
+    result: pass
+    evidence: checked 10 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.test.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial docs/architecture/system/architecture.md
+    result: pass
+    evidence: checked 15 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported

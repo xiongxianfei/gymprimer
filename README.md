@@ -2,11 +2,11 @@
 
 <!-- vision:start -->
 
-GymPrimer is an open-source Markdown primer for gym beginners. It teaches exercise, movement, and training literacy through short, citation-backed pages that explain what an exercise is for, how to set up equipment, what movement should feel like, what common problems may mean in general, how basic training structure works, and when to stop and seek help.
+GymPrimer is an open-source Markdown primer for exercise, movement, and training literacy. It teaches people how to understand exercises, equipment, movement patterns, common training questions, and general training structure through short, citation-backed pages.
 
-The repository is the primary product. GymPrimer trades breadth, polish, and personalization for verifiable beginner understanding: Markdown-first pages, plain language, citation discipline, honest authorship, practical next steps, and calm safety routing. Optional mdBook HTML can improve navigation later, but Markdown remains the source of truth.
+The repository is the primary product. GymPrimer trades personalization, media polish, and quick prescriptions for verifiable understanding: Markdown-first pages, plain language, citation discipline, honest authorship, practical next steps, and calm safety routing. Optional mdBook HTML can improve navigation later, but Markdown remains the source of truth.
 
-It is for adults in their first ninety days of regular gym training, or returning after a long break, who feel lost around machines, simple dumbbell movements, bodyweight progressions, recurring aches, common posture patterns, or basic training structure. It is also for maintainers, authors, translators, illustrators, and reviewers who want to improve beginner exercise education in public.
+It is for people who want to train with more understanding: first-time gym users, people returning after a long break, recreational exercisers, and experienced readers who want clearer explanations of technique, equipment, pacing, programming concepts, or common training questions. It is also for maintainers, authors, translators, illustrators, and reviewers who want to improve exercise education in public.
 
 <!-- vision:end -->
 

@@ -2,27 +2,27 @@
 
 ## Pitch
 
-GymPrimer is an open-source Markdown primer for gym beginners. It teaches exercise, movement, and training literacy through short, citation-backed pages that explain what an exercise is for, how to set up equipment, what movement should feel like, what common problems may mean in general, how basic training structure works, and when to stop and seek help.
+GymPrimer is an open-source Markdown primer for exercise, movement, and training literacy. It teaches people how to understand exercises, equipment, movement patterns, common training questions, and general training structure through short, citation-backed pages.
 
-The repository is the primary product. A beginner can read a page directly on GitHub, clone the files, or browse optional generated HTML without needing an app, account, database, coach, or personalized intake.
+The repository is the primary product. A reader can open a page directly on GitHub, clone the files, or browse optional generated HTML without needing an app, account, database, coach, or personalized intake.
 
 ## What makes this different
 
-Most fitness resources teach in fragments. Short videos show motion but often skip setup and safety context. Exercise databases list muscles but rarely teach the beginner standing in front of the machine. Workout apps prescribe sets and reps before the user understands the exercises. Health pages explain pain but often do not connect it to beginner training decisions. AI assistants can sound confident without being reliably grounded.
+Most fitness resources teach in fragments. Short videos show motion but often skip setup, safety context, and source support. Exercise databases list muscles but rarely explain how the movement should feel. Workout apps prescribe sessions before the user understands the exercises. Health pages explain pain but often do not connect it to training decisions. AI assistants can sound confident without being reliably grounded.
 
-GymPrimer trades breadth, polish, and personalization for verifiable beginner understanding. It stays Markdown-first, plain-language, citation-heavy, practical, and honest about authorship. It can cover common patterns, well-studied conditions, and basic programming literacy, but only as static education with calm safety routing, recommended next steps, and clear limits.
+GymPrimer trades personalization, media polish, and quick prescriptions for verifiable understanding. It stays Markdown-first, plain-language, citation-heavy, practical, and honest about authorship. It can cover beginner basics, advanced technique literacy, common patterns, well-studied conditions, and training principles, but only as static education with calm safety routing and clear limits.
 
 ## Who it is for
 
-GymPrimer is for adults in their first ninety days of regular gym training, or returning after a long break, who feel lost around machines, simple dumbbell movements, bodyweight progressions, recurring aches, common posture patterns, or basic training structure.
+GymPrimer is for people who want to train with more understanding: first-time gym users, people returning after a long break, recreational exercisers, and experienced readers who want clearer explanations of technique, equipment, pacing, programming concepts, or common training questions.
 
-It is also for maintainers, authors, translators, illustrators, and reviewers who want to improve beginner exercise education in public. Launch content is English-first. Chinese aliases may help recognition, and full Chinese translation can come later as a separate locale path after the English format is proven.
+It is also for maintainers, authors, translators, illustrators, and reviewers who want to improve exercise education in public. Launch content is English-first. Chinese aliases may help recognition, and full Chinese translation can come later as a separate locale path after the English format is proven.
 
 ## Who it is not for
 
-GymPrimer is not for advanced lifters seeking optimized programming, athletes preparing for sport-specific competition, patients in active rehabilitation, or users who want personalized workout plans.
+GymPrimer is not for users who want a personalized workout plan, a coach replacement, a clinical care pathway, sport-specific competition programming, or a guaranteed performance outcome.
 
-It is not a coach replacement, medical product, injury-diagnosis tool, posture-correction protocol, rehabilitation pathway, or substitute for professional care.
+It is not a medical product, injury-assessment tool, posture-correction protocol, recovery pathway, or substitute for professional care.
 
 ## What it commits to
 
@@ -36,16 +36,16 @@ Code and tooling stay Apache-2.0. Written content and original educational diagr
 
 ## What it refuses to be
 
-GymPrimer will not diagnose injuries, treat pain, provide individualized medical advice, prescribe personalized workouts, generate training plans, or provide rehabilitation protocols. It will not publish AI-generated exercise guidance as source of truth.
+GymPrimer does not diagnose injuries, treat pain, provide individualized medical advice, prescribe personalized workouts, generate training plans, or provide recovery protocols. It does not publish AI-generated exercise guidance as source of truth.
 
-It will not cover acute injury, post-surgical care, pediatric training, pregnancy, oncology-related training, mental-health treatment, sport-specific programming, or other specialized contexts without a new accepted direction.
+It does not cover acute injury, post-surgical care, pediatric training, pregnancy, oncology-related training, mental-health treatment, sport-specific competition programming, or other specialized contexts without a new accepted direction.
 
-It will not start with barbell lifts, Olympic lifting, kettlebell ballistic lifts, plyometrics, sprint programming, or advanced performance programming. It will not depend on a hosted web app, CMS, user accounts, tracking, or formal expert-review promises before reviewers exist.
+It does not depend on a hosted web app, CMS, user accounts, tracking, video, animation, or formal expert-review promises before reviewers exist.
 
-It will not let mdBook, generated output, or future website work replace the Markdown corpus as the product.
+It does not let mdBook, generated output, or future website work replace the Markdown corpus as the product.
 
 ## What would prove this wrong
 
-The project has failed if a beginner cannot read one page and explain what the exercise, pattern, condition, principle, or example is for; what it does and does not claim; what to try only in general terms; when the page is not enough; and where the sources are.
+The project has failed if a reader cannot read one page and explain what the exercise, pattern, condition, principle, or example is for; what it does and does not claim; what to try only in general terms; when the page is not enough; and where the sources are.
 
-It has also failed if safety claims cannot be traced to public sources, if contributors cannot tell what is in scope, if pattern or condition pages read like diagnosis, if program examples read like prescriptions, if media rights are unclear, if Markdown pages are not useful without a renderer, or if the project spends more effort on platform machinery than on understandable beginner education.
+It has also failed if safety claims cannot be traced to public sources, if contributors cannot tell what is in scope, if pattern or condition pages read like diagnosis, if program examples read like prescriptions, if advanced pages read like coaching plans, if media rights are unclear, if Markdown pages are not useful without a renderer, or if the project spends more effort on platform machinery than on understandable education.

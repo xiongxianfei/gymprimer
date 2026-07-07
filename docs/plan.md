@@ -2,6 +2,12 @@
 
 ## Active
 
+- [Advanced Rowing Machine Tutorial](plans/2026-07-07-advanced-rowing-machine-tutorial.md)
+  - Status: reviewed
+  - Plan lifecycle state: active
+  - Current stage: implement
+  - Active context: test-spec-review R2 approved the proof map and resolved TSR1; implementation M1 is next, but not started in the current workflow run.
+
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active

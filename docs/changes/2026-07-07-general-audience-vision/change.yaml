@@ -1,0 +1,44 @@
+change_id: 2026-07-07-general-audience-vision
+status: draft
+current_stage: vision-constitution-update
+created_date: 2026-07-07
+
+vision: VISION.md
+constitution: CONSTITUTION.md
+strategic_positioning: docs/vision/strategic-positioning.md
+explain_change: docs/changes/2026-07-07-general-audience-vision/explain-change.md
+
+trigger:
+  - User requested that GymPrimer no longer be limited only to beginners and should be usable by everyone.
+
+scope:
+  - Update top-ranked governance and vision artifacts from beginner-only to general-audience exercise literacy.
+  - Preserve Markdown-first, citation-backed, static-education, non-clinical, non-personalized boundaries.
+  - Synchronize README vision front matter and contributor-facing scope language.
+
+validation:
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: 224 tests passed
+  - command: python3 tools/checks/check_markdown_first.py README.md docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
+    result: pass
+    evidence: checked 2 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py AGENTS.md CONSTITUTION.md VISION.md README.md CONTRIBUTING.md docs/project-map.md docs/vision/strategic-positioning.md docs/changes/2026-07-07-general-audience-vision docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
+    result: pass
+    evidence: checked 10 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md principles exercises patterns
+    result: pass
+    evidence: checked 29 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md docs specs tools tests principles exercises patterns
+    result: pass
+    evidence: checked 565 file(s): privacy pass
+  - command: wc -w VISION.md
+    result: pass
+    evidence: VISION.md is 693 words, below the 900-word hard limit
+
+notes:
+  - This is a substantive project-scope repositioning.
+  - Existing beginner-facing content remains valid; beginner-only language should no longer block advanced exercise-literacy proposals by itself.

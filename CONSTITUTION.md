@@ -4,9 +4,9 @@ This constitution defines the durable rules for GymPrimer. It governs agentic de
 
 ## Project Purpose
 
-GymPrimer is an open-source Markdown primer for gym beginners. It teaches exercise and training literacy before personalization through short, citation-backed pages that a beginner can read directly in the repository.
+GymPrimer is an open-source Markdown primer for exercise, movement, and training literacy. It teaches before personalization through short, citation-backed pages that a reader can open directly in the repository.
 
-The project serves adults in their first ninety days of regular gym training, people returning after a long break, and the maintainers, authors, translators, illustrators, and reviewers who improve the Markdown corpus. It MAY publish static, citation-based consumer education about common exercises, non-diagnostic patterns, well-studied common conditions, programming principles, and generic program examples when an accepted proposal, spec, architecture, and validation plan define the boundaries. It MUST NOT become a workout planner, clinical rehabilitation product, injury-diagnosis tool, AI coach, or video-first source of truth.
+The project serves people learning to train more intelligently at any experience level, from first-time gym users to returning exercisers and experienced readers who want clearer technique, equipment, safety, and training-principle literacy. It also serves the maintainers, authors, translators, illustrators, and reviewers who improve the Markdown corpus. It MAY publish static, citation-based consumer education about common exercises, non-diagnostic patterns, well-studied common conditions, programming principles, generic program examples, and advanced exercise-literacy topics when an accepted proposal, spec, architecture, and validation plan define the boundaries. It MUST NOT become a workout planner, clinical rehabilitation product, injury-diagnosis tool, AI coach, or video-first source of truth.
 
 Markdown source is the primary product. Optional generated HTML, generated validation output, future search indexes, and future websites are derived conveniences unless a later accepted proposal changes that boundary.
 
@@ -54,7 +54,7 @@ Architecture decisions are required before implementation when a change affects 
 
 Architecture artifacts MUST record tradeoffs, rejected options, migration implications, compatibility surfaces, and how the decision preserves the refusals in `VISION.md`. Implementation details belong in architecture or plans, not in the vision.
 
-The active content model MUST preserve these commitments unless a later accepted proposal revises them: GitHub-readable Markdown pages as source of truth, citation-based authority, page-local sources, global reusable source index, prominent disclaimers, conservative beginner scope, no diagnosis, no individualized medical advice or treatment, original or clearly licensed media only, and optional derived HTML.
+The active content model MUST preserve these commitments unless a later accepted proposal revises them: GitHub-readable Markdown pages as source of truth, citation-based authority, page-local sources, global reusable source index, prominent disclaimers, conservative static-education scope, no diagnosis, no individualized medical advice or treatment, original or clearly licensed media only, and optional derived HTML.
 
 ## Security And Privacy Rules
 
@@ -62,7 +62,7 @@ Secrets, credentials, private keys, personal contact details, private machine pa
 
 Health-adjacent content MAY describe static, citation-based consumer education for common patterns and well-studied conditions when a reviewed spec defines page contracts, source quality, safety routing, review cadence, and proof obligations. It MUST avoid diagnosis, individualized medical advice, treatment plans, return-to-training prescriptions, active rehabilitation protocols, posture-correction promises, and injury-specific protocols. It MUST distinguish general education from personalized care, route clear safety concerns to qualified professionals or emergency care, and use claim-level citations from public, named sources for safety warnings. Safety routing SHOULD use calm plain language and SHOULD NOT dominate the page when a concise "when this page is not enough" note and a central safety reference are enough for the topic.
 
-Pattern, condition, principle, and exercise pages SHOULD foreground the beginner's pain point and provide a useful recommended next step when the evidence and page contract allow it. Recommendations MAY include general starter ranges such as sets, reps, hold times, rest, weekly frequency, and progression cues when they are framed as static education for beginners, tied to cited principles or source-backed exercise pages, and not adapted to an individual reader. These practical recommendations MUST remain menus, examples, or literacy guidance rather than personal prescriptions, guaranteed fixes, or treatment plans.
+Pattern, condition, principle, and exercise pages SHOULD foreground the reader's practical question and provide a useful recommended next step when the evidence and page contract allow it. Recommendations MAY include general starter ranges such as sets, reps, hold times, rest, weekly frequency, technique ranges, pacing examples, and progression cues when they are framed as static education, tied to cited principles or source-backed pages, and not adapted to an individual reader. These practical recommendations MUST remain menus, examples, or literacy guidance rather than personal prescriptions, guaranteed fixes, or treatment plans.
 
 AI-generated exercise guidance MUST NOT become source-of-truth content. AI MAY assist drafting only when a human author verifies the wording, sources, scope, and safety claims before the content is treated as project material.
 
@@ -142,7 +142,7 @@ Workflow completion claims require durable evidence: changed files, linked artif
 
 ## Current Assumptions And Gaps
 
-This repository has accepted a Markdown-first direction and the Responsible Breadth direction. The prior structured content-schema platform, validator, generated-output pipeline, and related reviews are historical evidence unless explicitly reactivated.
+This repository has accepted a Markdown-first direction, the Responsible Breadth direction, and a general-audience vision that is no longer limited to beginners. The prior structured content-schema platform, validator, generated-output pipeline, and related reviews are historical evidence unless explicitly reactivated.
 
 The Responsible Breadth direction still requires ADR supersession, spec and architecture updates, planning, proof-map updates, validation changes, and review before expanded pattern, condition, principle, or program-example content may rely on it. The repository also still needs a refreshed workflow guide, updated project map, content contribution rules for the broader scope, license-file clarification for CC BY 4.0 content, Markdown templates for the expanded page types, lightweight Markdown/content checks, and a non-canonical expanded-scope proof slice before broad implementation.
 
