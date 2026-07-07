@@ -16,15 +16,15 @@ Review log: `docs/changes/2026-07-06-safer-running-basics-and-running-images/rev
 
 ## Current Handoff Summary
 
-Current milestone: M2
+Current milestone: M3
 
-Current state: review-requested
+Current state: planned
 
-Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved pending rereview.
+Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved; code-review M2 R2 clean-with-notes.
 
-Next required gate: code-review M2 rereview.
+Next required gate: implementation M3.
 
-Implementation status: M1 closed; M2 review-resolution applied; M3 not started.
+Implementation status: M1 closed; M2 closed; M3 not started.
 
 Final closeout status: not ready.
 
@@ -116,6 +116,7 @@ Progress:
 - Updated the exercise-image M4 inventory audit with the new text-only running page because its test covers every current exercise page.
 - Code-review M2 R1 recorded GP-SRB-M2-CR1: M2 omits the R5.4 persistent-pain safety-routing term from the page and real-page tests.
 - Review-resolution added concise persistent-pain routing to `What you should feel` and a direct real-page test assertion.
+- Code-review M2 R2 accepted the review-resolution and closed M2.
 
 Tests-first evidence:
 
@@ -207,7 +208,7 @@ Ready for: implementation M2.
 
 ## M2 Handoff
 
-State: review-requested
+State: closed
 
 Implemented surfaces:
 
@@ -225,7 +226,7 @@ Unchanged with rationale:
 - Visual-safety review: deferred to M3 by plan.
 - Beginner comprehension proof: deferred to M4 by plan.
 
-Ready for: code-review M2 rereview.
+Ready for: implementation M3.
 
 ## Recovery
 
