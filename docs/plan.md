@@ -5,8 +5,8 @@
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: implement
-  - Active context: M2 is closed after code-review M2 R2 accepted GP-SRB-M2-CR1 resolution; M3 governed image batch implementation is next.
+  - Current stage: code-review
+  - Active context: M3 added the governed six-image batch, exact prompt records, provenance rows, page references, and visual-safety review; code-review M3 is next.
 
 - [Brisk Walking and Everyday Walking Guidance](plans/2026-07-05-brisk-walking-and-everyday-walking.md)
   - Status: reviewed

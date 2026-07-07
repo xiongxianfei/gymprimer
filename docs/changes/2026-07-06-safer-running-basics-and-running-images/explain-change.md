@@ -1,10 +1,64 @@
-# Explain Change: Safer Running Basics and High-Quality Running Images M1-M2
+# Explain Change: Safer Running Basics and High-Quality Running Images M1-M3
 
 Change ID: `2026-07-06-safer-running-basics-and-running-images`
 
-Milestone: M1 Validation and Contract Fixtures; M2 Markdown Page and Source Contract
+Milestone: M1 Validation and Contract Fixtures; M2 Markdown Page and Source Contract; M3 Governed Image Batch
 
 Status: review-requested
+
+## M3 What Changed
+
+M3 adds the approved six-image first batch for `exercises/safer-running-basics.md`.
+
+Changed surfaces:
+
+- `exercises/safer-running-basics.md`
+- `tests/test_markdown_first_real_pages.py`
+- `media/exercises/safer-running-basics/`
+- `media/prompts/exercises/safer-running-basics/`
+- `media/PROVENANCE.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/visual-safety-review.md`
+- `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`
+- `docs/plans/2026-07-06-safer-running-basics-and-running-images.md`
+- `docs/plan.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/change.yaml`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/explain-change.md`
+
+## M3 Why
+
+The approved spec authorizes exactly six first-batch generated images for the running page because running is dynamic, whole-body, and commonly misunderstood by beginners.
+
+The six images cover the approved top-six concepts: posture, landing, run/walk structure, warm-up, broad muscle attention, and neutral overstride comparison.
+
+Each generated asset has a matching prompt record and an approved provenance row, and the page references only local relative paths with meaningful alt text. The images remain broad visual references; Markdown remains the source of truth for effort, progression, form cues, muscle roles, and safety routing.
+
+## M3 Tests First
+
+The M3 real-page tests were added before image implementation.
+
+Observed red state:
+
+- `python3 -m unittest tests.test_markdown_first_real_pages` failed because the page had zero safer-running image references and no visual-safety review artifact.
+
+After adding the image batch, prompt records, provenance rows, page references, and review evidence, the targeted suite passed. One stale M2 text-only assertion was removed because M3 replaces it with exact six-image assertions.
+
+## M3 Scope Boundaries
+
+M3 intentionally does not create beginner comprehension proof.
+
+That remains assigned to M4 in the active plan.
+
+## M3 Validation
+
+Passed locally:
+
+```bash
+python3 -m unittest tests.test_markdown_first_real_pages
+python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages
+python3 tools/checks/check_markdown_first.py exercises/safer-running-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images
+python3 tools/checks/check_privacy.py exercises/safer-running-basics.md media/PROVENANCE.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images
+git diff --check
+```
 
 ## M2 What Changed
 

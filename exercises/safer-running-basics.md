@@ -22,6 +22,9 @@ This is an exercise-literacy page, not a race plan or individual coaching
 program. The Markdown text is the source of truth for effort, progression,
 muscles, and safety.
 
+Use these images as broad visual references. The Markdown instructions below
+remain the source of truth for effort, form, muscles, progression, and safety.
+
 ## What this page cannot promise
 
 No page can guarantee injury-free running. This page teaches general
@@ -55,6 +58,8 @@ raise effort gradually, not to rush into a hard first step.
 If the first few minutes feel rushed, keep walking longer before you add short
 running intervals.
 
+![Safer running warm-up image showing brisk walking and easy jogging before running](../media/exercises/safer-running-basics/warm-up.png)
+
 ## Running form basics
 
 Use simple cues instead of forcing a rigid style.
@@ -70,6 +75,10 @@ ACSM running-form guidance discusses reducing overreaching mechanics and
 staying relaxed, but GymPrimer keeps those ideas as broad beginner education,
 not formal gait retraining. [ACSM][acsm-running-form]
 
+![Safer running posture image showing tall posture and relaxed arm swing](../media/exercises/safer-running-basics/posture.png)
+
+![Safer running landing image showing the foot close to the body with a short quiet stride](../media/exercises/safer-running-basics/landing.png)
+
 ## Muscles involved
 
 | Role | Muscle region | What it helps do |
@@ -81,6 +90,8 @@ not formal gait retraining. [ACSM][acsm-running-form]
 
 Treat this as broad body-awareness guidance, not a test of exact muscle
 activation.
+
+![Safer running muscle-attention image showing broad glute thigh calf foot ankle trunk shoulder and arm regions](../media/exercises/safer-running-basics/muscle-attention.png)
 
 ## What you should feel
 
@@ -116,6 +127,8 @@ Stop if: Stop the run for chest pain, dizziness, fainting, unusual shortness of 
 This method uses time, effort, rest, repeatability, progression, and back-off
 rules. It is not a pace target or race schedule.
 
+![Safer running run-walk image showing easy running alternating with walking recovery](../media/exercises/safer-running-basics/run-walk.png)
+
 ## Common mistakes
 
 | Mistake | Safer framing |
@@ -126,6 +139,8 @@ rules. It is not a pace target or race schedule.
 | Overstriding | Keep steps short enough that the foot does not reach far in front of the body. [ACSM][acsm-running-form] |
 | Tense shoulders and hands | Keep arms relaxed and rhythmical. [ACSM][acsm-running-form] |
 | Ignoring sharp or worsening symptoms | Use the central [Red Flags](../RED-FLAGS.md) page when symptoms need more than exercise education. [Mayo Clinic][mayo-exercise-chronic-disease] |
+
+![Safer running overstride comparison image showing an overreaching step beside a shorter step with neutral framing](../media/exercises/safer-running-basics/overstride-comparison.png)
 
 ## Easier version
 
