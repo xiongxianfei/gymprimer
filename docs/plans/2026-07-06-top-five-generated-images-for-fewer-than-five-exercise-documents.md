@@ -48,13 +48,13 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: review-requested
+- Current milestone state: closed
 - Last reviewed milestone: M1
-- Review status: code-review R3 changes-requested; M2 review-resolution completed
-- Remaining in-scope implementation milestones: M2, M3
-- Next stage: code-review M2 rereview
+- Review status: code-review R4 clean-with-notes; M2 closed
+- Remaining in-scope implementation milestones: M3
+- Next stage: implement M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M2 needs rereview and M3 implementation, code-review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M3 implementation, code-review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -86,7 +86,7 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 
 ### M2. First Milestone Batch Images
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Audit and implement generated-image gaps for the first batch of included exercise documents.
 - Requirements: R1-R30
 - Files/components likely touched:
@@ -212,6 +212,10 @@ Each milestone must report exact commands and outcomes before code-review.
 - M2 review-resolution for CR-T5IMG-M2-2: `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents` passed.
 - M2 review-resolution for CR-T5IMG-M2-2: `python3 tools/checks/check_privacy.py exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents` passed.
 - M2 review-resolution for CR-T5IMG-M2-2: `git diff --check` passed.
+- M2 code-review R4: `python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages` passed with 68 tests.
+- M2 code-review R4: `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed with 35 Markdown files.
+- M2 code-review R4: `python3 tools/checks/check_privacy.py exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed with 63 files.
+- M2 code-review R4: `git diff --check` passed.
 
 ## Outcome and retrospective
 
@@ -219,7 +223,7 @@ Not started.
 
 ## Readiness
 
-M2 review-resolution is complete and ready for rerun code-review. M3 remains pending and must not start until M2 passes rereview.
+M2 is closed. M3 is ready for implementation.
 
 ## Sources
 

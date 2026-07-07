@@ -1,6 +1,6 @@
 change_id: 2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents
 status: active
-current_stage: code-review
+current_stage: implement
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md
@@ -19,8 +19,8 @@ current_plan_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer
 current_test_spec: specs/top-five-generated-images-for-fewer-than-five-exercise-documents.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/test-spec-review-r1.md
-current_code_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/code-review-r3.md
-next_stage: code-review
+current_code_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/code-review-r4.md
+next_stage: implement
 
 open_findings: []
 
@@ -43,4 +43,5 @@ notes:
   - Code-review R3 requested changes for M2 audit score range and bird dog shorter-reach image purpose.
   - CR-T5IMG-M2-1 was resolved by updating the M2 audit to the approved 1-5 score range and adding regression checks.
   - CR-T5IMG-M2-2 was resolved by replacing bird-dog short-reach with a visibly smaller-range image and updating its prompt record.
-  - M2 is ready for rerun code-review.
+  - Code-review R4 closed M2 with clean-with-notes.
+  - M3 implementation is next.
