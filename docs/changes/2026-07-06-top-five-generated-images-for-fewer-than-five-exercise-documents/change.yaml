@@ -1,6 +1,6 @@
 change_id: 2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents
-status: active
-current_stage: pr
+status: completed
+current_stage: done
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md
@@ -14,7 +14,7 @@ current_architecture: docs/architecture/system/architecture.md
 current_architecture_status: approved
 current_architecture_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/architecture-review-r1.md
 current_plan: docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md
-current_plan_status: reviewed
+current_plan_status: completed
 current_plan_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/plan-review-r1.md
 current_test_spec: specs/top-five-generated-images-for-fewer-than-five-exercise-documents.test.md
 current_test_spec_status: active
@@ -22,7 +22,8 @@ current_test_spec_review: docs/changes/2026-07-06-top-five-generated-images-for-
 current_code_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/code-review-r5.md
 verify_report: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/verify-report.md
 pull_request: https://github.com/xiongxianfei/gymprimer/pull/16
-next_stage: pr
+merge_commit: e01293c6c2873a5eb9973b8434c5fcfef463b549
+next_stage: none
 
 open_findings: []
 
@@ -52,3 +53,4 @@ notes:
   - Explain-change recorded the reviewed-diff rationale in `explain-change.md`.
   - Final local verify passed with branch-ready evidence; hosted CI was not observed.
   - PR #16 opened from `proposal/top-five-generated-images` to `main`; hosted CI is pending/not observed.
+  - PR #16 merged to `main` at merge commit `e01293c6c2873a5eb9973b8434c5fcfef463b549` after GitHub Actions `Validation checks` passed.

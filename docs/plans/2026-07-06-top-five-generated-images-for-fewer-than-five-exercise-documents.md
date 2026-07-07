@@ -2,9 +2,9 @@
 
 ## Status
 
-- Status: reviewed
-- Plan lifecycle state: active
-- Terminal disposition: not terminal
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed by PR #16
 
 ## Purpose / big picture
 
@@ -47,14 +47,14 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: closed
+- Current milestone: Lifecycle Closeout
+- Current milestone state: completed
 - Last reviewed milestone: M3
 - Review status: code-review R5 clean-with-notes; M3 closed
 - Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: PR #16 opened
-- Reason final closeout is or is not ready: all implementation milestones are closed, explain-change is recorded, final local verify passed, and PR #16 is open; hosted CI is pending/not observed.
+- Next stage: none
+- Final closeout readiness: complete
+- Reason final closeout is or is not ready: implementation milestones, explain-change, final local verify, CI validation, PR handoff, merge, and lifecycle cleanup are complete.
 
 ## Milestones
 
@@ -226,16 +226,17 @@ Each milestone must report exact commands and outcomes before code-review.
 - M3 markdown validation: `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed with 37 Markdown files.
 - M3 privacy validation: `python3 tools/checks/check_privacy.py exercises media media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md` passed with 214 files.
 - M3 whitespace validation: `git diff --check` passed.
+- PR #16 CI validation passed in GitHub Actions `Validation checks`.
 
 ## Outcome and retrospective
 
 M3 code-review R5 closed the remaining generated-image batch with no material findings.
 Explain-change recorded the reviewed-diff rationale in `docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/explain-change.md`.
-Final closeout is not complete until PR handoff finishes.
+PR #16 merged and lifecycle closeout is complete.
 
 ## Readiness
 
-M1, M2, and M3 are closed. Explain-change is recorded. Final local verify passed. PR #16 is open.
+M1, M2, and M3 are closed. Explain-change is recorded. Final local verify passed. PR #16 merged after CI validation.
 
 ## Sources
 
