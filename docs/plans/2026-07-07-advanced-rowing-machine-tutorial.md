@@ -61,7 +61,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - Remaining in-scope open milestones: none
 - Next stage: pr
 - Final closeout readiness: ready for PR handoff
-- Reason final closeout is or is not ready: implementation milestones, code-review, review-resolution, explain-change, and final local verification are complete; PR handoff remains.
+- Reason final closeout is or is not ready: PR #18 is open; hosted CI was pending at handoff, and review/merge/closeout remain.
 
 ## Milestones
 
@@ -287,6 +287,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: Code-review R5 accepted the M4 implementation and closed M4.
 - 2026-07-07: Explain-change recorded the reviewed-diff rationale in `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md` and routed the change to verify.
 - 2026-07-07: Final local verification passed, recorded `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md`, and routed the change to PR handoff. Hosted CI was not observed.
+- 2026-07-07: PR #18 opened from `2026-07-07-advanced-rowing-machine-tutorial` to `main`; GitHub Actions `Validation checks` was pending at handoff.
 
 ## Decision log
 
@@ -380,11 +381,12 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - M4 implementation is closed after clean code-review R5.
 - Explain-change is complete.
 - Final local verification is complete and branch-ready is recorded in `verify-report.md`.
+- PR #18 is open; hosted CI was pending at handoff.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for PR handoff.
+- Ready for PR review after hosted CI reports.
 
 ## Sources
 
