@@ -52,9 +52,9 @@ Repository-local `human_reviewer`, review-owner, visual-safety-review evidence, 
 - Last reviewed milestone: M3
 - Review status: code-review R5 clean-with-notes; M3 closed
 - Remaining in-scope implementation milestones: none
-- Next stage: verify
-- Final closeout readiness: ready to start final closeout
-- Reason final closeout is or is not ready: all implementation milestones are closed and explain-change is recorded; verify and PR handoff remain.
+- Next stage: pr
+- Final closeout readiness: ready for PR handoff
+- Reason final closeout is or is not ready: all implementation milestones are closed, explain-change is recorded, and final local verify passed; PR handoff remains.
 
 ## Milestones
 
@@ -231,11 +231,11 @@ Each milestone must report exact commands and outcomes before code-review.
 
 M3 code-review R5 closed the remaining generated-image batch with no material findings.
 Explain-change recorded the reviewed-diff rationale in `docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/explain-change.md`.
-Final closeout is not complete until verify and PR handoff finish.
+Final closeout is not complete until PR handoff finishes.
 
 ## Readiness
 
-M1, M2, and M3 are closed. Explain-change is recorded. The next stage is verify.
+M1, M2, and M3 are closed. Explain-change is recorded. Final local verify passed. The next stage is pr.
 
 ## Sources
 

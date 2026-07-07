@@ -4,6 +4,8 @@
 
 resolved
 
+Closeout status: closed
+
 ## Open Findings
 
 | Finding ID | Status | Required resolution |
@@ -23,11 +25,19 @@ resolved
 - Added regression coverage that a named top-five audit using `setup_value` passes and a candidate missing `setup_value` fails.
 - 2026-07-06: Resolved CR-T5IMG-M1-2 by making rank 1-5 `automatic_generation` fail before the named-initiative allowance for `generate_now` and `first_generation_candidate`.
 - Added named-initiative regression coverage proving `automatic_generation` fails while `generate_now` and `first_generation_candidate` pass.
-- M1 is ready for rerun code-review.
+- Code-review R2 closed M1 with clean-with-notes.
 - 2026-07-06: Code-review R3 opened CR-T5IMG-M2-1 and CR-T5IMG-M2-2. M2 is in review-resolution before M3 can start.
 - 2026-07-06: Resolved CR-T5IMG-M2-1 by updating the M2 audit evidence to the approved 1-5 scale and adding regression assertions that reject the old 0-3 scale text and any `0` candidate score cells.
 - 2026-07-06: Resolved CR-T5IMG-M2-2 by replacing `media/exercises/bird-dog/short-reach.png` with a newly generated shorter-range image and updating the prompt record selected-output notes.
-- M2 is ready for rerun code-review.
+- Code-review R4 closed M2 with clean-with-notes.
+- Code-review R5 closed M3 with clean-with-notes and no material findings.
+
+## Closeout Checklist
+
+- All material findings have final dispositions.
+- No finding remains `needs-decision`.
+- Review log records closing review rounds for M1, M2, and M3.
+- Explain-change and verify are recorded, and PR handoff is next.
 
 ## Validation
 

@@ -1,6 +1,6 @@
 change_id: 2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents
 status: active
-current_stage: verify
+current_stage: pr
 created_date: 2026-07-06
 
 proposal: docs/proposals/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md
@@ -20,7 +20,8 @@ current_test_spec: specs/top-five-generated-images-for-fewer-than-five-exercise-
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/test-spec-review-r1.md
 current_code_review: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/code-review-r5.md
-next_stage: verify
+verify_report: docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/verify-report.md
+next_stage: pr
 
 open_findings: []
 
@@ -48,4 +49,5 @@ notes:
   - M3 local validation passed: `python3 -m unittest discover -s tests`, `python3 tools/checks/check_markdown_first.py exercises media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md`, `python3 tools/checks/check_privacy.py exercises media media/PROVENANCE.md docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents docs/plan.md docs/plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md`, and `git diff --check`.
   - Code-review R5 closed M3 with clean-with-notes.
   - Explain-change recorded the reviewed-diff rationale in `explain-change.md`.
-  - Verify is next.
+  - Final local verify passed with branch-ready evidence; hosted CI was not observed.
+  - PR handoff is next.
