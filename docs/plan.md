@@ -5,8 +5,8 @@
 - [Advanced Rowing Machine Tutorial](plans/2026-07-07-advanced-rowing-machine-tutorial.md)
   - Status: reviewed
   - Plan lifecycle state: active
-  - Current stage: explain-change
-  - Active context: M1-M4 implementation milestones are closed after code-review R5; final closeout starts with explain-change, then verify and PR handoff remain.
+  - Current stage: verify
+  - Active context: M1-M4 implementation milestones, code-review, review-resolution, and explain-change are complete; final verification is next and PR handoff remains.
 
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed

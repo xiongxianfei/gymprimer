@@ -59,9 +59,9 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - Last reviewed milestone: M3. Governed Media, Prompt Packets, and Provenance
 - Review status: code-review R5 clean-with-notes; M4 closed
 - Remaining in-scope open milestones: none
-- Next stage: explain-change
-- Final closeout readiness: ready for explain-change
-- Reason final closeout is or is not ready: implementation milestones and code-review are complete; explain-change, verify, and PR handoff remain.
+- Next stage: verify
+- Final closeout readiness: ready for verify
+- Reason final closeout is or is not ready: implementation milestones, code-review, review-resolution, and explain-change are complete; verify and PR handoff remain.
 
 ## Milestones
 
@@ -285,6 +285,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: Code-review R4 accepted the M3 implementation and closed M3.
 - 2026-07-07: M4 recorded final source-audit proof, advanced-reader comprehension proof, validation ledger, broad local validation evidence, and routed the milestone to code-review.
 - 2026-07-07: Code-review R5 accepted the M4 implementation and closed M4.
+- 2026-07-07: Explain-change recorded the reviewed-diff rationale in `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md` and routed the change to verify.
 
 ## Decision log
 
@@ -352,6 +353,10 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - Code-review R5 reviewer-ran `python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 44 Markdown file(s).
 - Code-review R5 reviewer-ran `python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md exercises media docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 249 file(s).
 - Code-review R5 reviewer-ran `git diff --check`: pass, no whitespace errors reported.
+- Explain-change validation passed with `python3 tools/checks/check_markdown_first.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md`: checked 3 Markdown file(s).
+- Explain-change validation passed with `python3 tools/checks/check_privacy.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml`: checked 4 file(s).
+- Explain-change state-sync inspection passed with `rg -n 'Current stage: verify|Next stage: verify|current_stage: verify|next_stage: verify|Explain-change recorded|Ready for verify|open_findings: \[\]|review_resolution_status: closed|Final verification has not run yet|Hosted CI has not been observed' docs/plan.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md`.
+- Explain-change validation passed with `git diff --check`: no whitespace errors reported.
 
 ## Outcome and retrospective
 
@@ -359,11 +364,12 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - M2 implementation is closed after clean code-review R3.
 - M3 implementation is closed after clean code-review R4.
 - M4 implementation is closed after clean code-review R5.
+- Explain-change is complete.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for explain-change.
+- Ready for verify.
 
 ## Sources
 
