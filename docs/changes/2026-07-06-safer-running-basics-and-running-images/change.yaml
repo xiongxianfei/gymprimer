@@ -41,3 +41,4 @@ notes:
   - Code-review M4 R1 requested changes for GP-SRB-M4-CR1.
   - Code-review M4 R2 withdrew GP-SRB-M4-CR1 as over-strict for the intended lightweight rollback proof.
   - M4 is closed and ready for final verification.
+  - Final holistic code-review R1 found no blocking or required-change findings.

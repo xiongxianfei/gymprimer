@@ -20,9 +20,9 @@ Current milestone: M4
 
 Current state: closed
 
-Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved; code-review M2 R2 clean-with-notes; code-review M3 R1 changes-requested for GP-SRB-M3-CR1; GP-SRB-M3-CR1 resolved; code-review M3 R2 clean-with-notes; code-review M4 R1 changes-requested for GP-SRB-M4-CR1; code-review M4 R2 withdrew GP-SRB-M4-CR1 as over-strict and closed M4 with notes.
+Review status: proposal-review R1 approved; spec-review R1 approved; architecture assessment recorded `architecture-not-required`; plan-review R1 approved; test-spec-review R1 approved; code-review M1 R1 changes-requested; GP-SRB-M1-CR1 resolved; code-review M1 R2 clean-with-notes; code-review M2 R1 changes-requested for GP-SRB-M2-CR1; GP-SRB-M2-CR1 resolved; code-review M2 R2 clean-with-notes; code-review M3 R1 changes-requested for GP-SRB-M3-CR1; GP-SRB-M3-CR1 resolved; code-review M3 R2 clean-with-notes; code-review M4 R1 changes-requested for GP-SRB-M4-CR1; code-review M4 R2 withdrew GP-SRB-M4-CR1 as over-strict and closed M4 with notes; final holistic code-review R1 clean-with-notes.
 
-Next required gate: final verification.
+Next required gate: final closeout and verification.
 
 Implementation status: M1 closed; M2 closed; M3 closed; M4 closed.
 
@@ -206,7 +206,7 @@ Acceptance evidence:
 
 Progress:
 
-- State: review-requested.
+- State: closed.
 - Added focused M4 proof tests for beginner comprehension, text-only rollback, and validation-ledger handoff evidence.
 - Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/beginner-comprehension-proof.md`.
 - Added `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/rollback-proof.md`.
@@ -237,6 +237,7 @@ Decisions and discoveries:
 - CI was not observed, and no hosted CI pass is claimed.
 - Code-review M4 R1 recorded GP-SRB-M4-CR1: the text-only rollback proof leaves stale image-reference prose in the temporary page and lacks a regression assertion.
 - Code-review M4 R2 withdrew GP-SRB-M4-CR1 after owner clarification that rollback proof should remain lightweight and should not require exhaustive regression coverage.
+- Final holistic code-review R1 found no blocking or required-change findings.
 
 ## Validation Commands
 
@@ -340,7 +341,7 @@ Unchanged with rationale:
 - `media/prompts/exercises/safer-running-basics/`: unchanged because prompt records were reviewed in M3.
 - `media/PROVENANCE.md`: unchanged because provenance rows were reviewed in M3.
 
-Ready for: final verification.
+Ready for: final closeout and verification.
 
 ## Recovery
 
