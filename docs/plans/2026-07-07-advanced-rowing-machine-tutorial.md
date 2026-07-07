@@ -55,19 +55,19 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 ## Current Handoff Summary
 
 - Current milestone: M1. Validation and Test Scaffolding
-- Current milestone state: resolution-needed
+- Current milestone state: review-requested
 - Last reviewed milestone: M1. Validation and Test Scaffolding
-- Review status: code-review R1 changes-requested
-- Remaining in-scope implementation milestones: M1 review-resolution, M2, M3, M4
-- Next stage: review-resolution
+- Review status: review-resolution implemented for code-review R1 findings CR1 and CR2
+- Remaining in-scope implementation milestones: M1 code-review rerun, M2, M3, M4
+- Next stage: code-review
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: code-review R1 found CR1 and CR2; M1 review-resolution, M2-M4 implementation, later review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M1 review-resolution needs code-review rerun; M2-M4 implementation, later review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
 ### M1. Validation and Test Scaffolding
 
-- Milestone state: resolution-needed
+- Milestone state: review-requested
 - Goal: Add focused validation and tests for the advanced rowing page contract, image-rich exception, image-instruction packets, force-intensity overlays, and forbidden-scope wording.
 - Requirements: R1-R9, R18-R32, R39-R46, R50
 - Files/components likely touched:
@@ -277,6 +277,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: Test-spec-review R2 approved the proof map and resolved TSR1.
 - 2026-07-07: M1 implemented scoped advanced rowing checker validation, focused unittest coverage, and the passing fixture directory required by ART-CMD2.
 - 2026-07-07: Code-review R1 requested changes for CR1 and CR2.
+- 2026-07-07: Review-resolution implemented fixes for CR1 and CR2 and routed M1 back to code-review.
 
 ## Decision log
 
@@ -303,16 +304,21 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - `python3 tools/checks/check_markdown_first.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md`: pass, checked 4 Markdown file(s).
 - `python3 tools/checks/check_privacy.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 13 file(s).
 - `git diff --check`: pass, no whitespace errors reported.
+- `python3 -m unittest tests.test_advanced_rowing_machine_tutorial`: pass, 6 tests.
+- `python3 -m unittest discover -s tests`: pass, 230 tests.
+- `python3 tools/checks/check_markdown_first.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md`: pass, checked 4 Markdown file(s).
+- `python3 tools/checks/check_privacy.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 14 file(s).
+- `git diff --check`: pass, no whitespace errors reported.
 
 ## Outcome and retrospective
 
-- M1 implementation needs review-resolution for CR1 and CR2.
+- M1 review-resolution fixes for CR1 and CR2 are implemented and ready for code-review rerun.
 - M2-M4 remain pending.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for M1 review-resolution.
+- Ready for M1 code-review rerun.
 
 ## Sources
 

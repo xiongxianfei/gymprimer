@@ -367,9 +367,16 @@ ADVANCED_ROWING_PACKET_REQUIRED_BLOCKS = (
 )
 ADVANCED_ROWING_FORBIDDEN_SCOPE_PATTERNS = (
     re.compile(r"\b(?:provides?|gives?|creates?|builds?|adds?) (?:a )?personalized (?:pace|target|plan|program|coaching)\b", re.IGNORECASE),
+    re.compile(r"\bcalculat(?:e|es|ed|ing) (?:a |the )?(?:personal|personalized) (?:pace|paces|watts|target|targets)\b", re.IGNORECASE),
     re.compile(r"\badaptive (?:program|plan|progression|coaching|intervals?)\b", re.IGNORECASE),
     re.compile(r"\brace strateg(?:y|ies)\b", re.IGNORECASE),
+    re.compile(r"\bcompetition programming\b", re.IGNORECASE),
+    re.compile(r"\bfull benchmark plan\b", re.IGNORECASE),
+    re.compile(r"\bactive recovery protocols?\b", re.IGNORECASE),
     re.compile(r"\breturn-to-rowing\b", re.IGNORECASE),
+    re.compile(r"\bmedical judgment\b", re.IGNORECASE),
+    re.compile(r"\btreatment plans?\b", re.IGNORECASE),
+    re.compile(r"\binjury-specific protocols?\b", re.IGNORECASE),
     re.compile(r"\bperformance guarantee\b", re.IGNORECASE),
     re.compile(
         r"\b(?:adds?|builds?|creates?|provides?|launches?|uses?) (?:a |an )?(?:calculator|tracker|wearable integration|pm5 data analysis app|video product|coaching engine)\b",
@@ -379,6 +386,10 @@ ADVANCED_ROWING_FORBIDDEN_SCOPE_PATTERNS = (
 )
 ADVANCED_ROWING_FORCE_FORBIDDEN_TEXT_RE = re.compile(
     r"\b(?:shows?|measures?|maps?|proves?) (?:the )?(?:exact force|EMG activation|injury risk|correct form)\b|\bproof of correct form\b",
+    re.IGNORECASE,
+)
+ADVANCED_ROWING_FORBIDDEN_MEDIA_TEXT_RE = re.compile(
+    r"\b(?:cop(?:y|ied) PM5 UI|cop(?:y|ied) monitor UI|screenshot|borrowed screenshot|with logo|visible logo|brand mark|branded UI|identifiable person|correct/wrong badge|wrong badge|red pain mark|red injury mark|race-win|elite-race|elite race|unsupported promise|performance promise)\b",
     re.IGNORECASE,
 )
 TOP_FIVE_REVIEWER_EXCEPTION_EXERCISE_PAGES = {
@@ -842,6 +853,23 @@ def validate_advanced_rowing_prompt_packet(
                 page_path,
                 "advanced_rowing_prompt_packet_mismatch",
                 f"advanced rowing packet media_purpose must match provenance for {asset_path}: {media_purpose}",
+            )
+        )
+
+    media_text = " ".join(
+        (
+            text,
+            provenance_row.get("prompt_or_creation_notes", ""),
+            provenance_row.get("notes", ""),
+        )
+    )
+    match = ADVANCED_ROWING_FORBIDDEN_MEDIA_TEXT_RE.search(media_text)
+    if match:
+        findings.append(
+            Finding(
+                page_path,
+                "advanced_rowing_media_text_forbidden",
+                f"advanced rowing media must not use copied UI, screenshots, brand marks, identifiable people, badges, pain marks, race framing, or unsupported promises: {match.group(0)}",
             )
         )
 

@@ -371,6 +371,31 @@ class AdvancedRowingMachineTutorialTest(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("advanced_rowing_body_label_disallowed", result.stdout)
 
+    def test_advanced_prompt_packet_excluded_media_text_fails(self) -> None:
+        cases = (
+            "copied PM5 UI with logo and identifiable person",
+            "borrowed screenshot with brand mark",
+            "correct/wrong badge and red pain mark",
+            "elite-race framing with unsupported promise",
+        )
+        for review_note in cases:
+            with self.subTest(review_note=review_note), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                write_sources(root)
+                write_red_flags(root)
+                write_asset(root, "media/exercises/rowing-machine-advanced/monitor-metrics.png")
+                write_advanced_prompt_packet(root, "monitor-metrics", extra=f"review_notes: {review_note}\n")
+                write_advanced_provenance(root, ("monitor-metrics",))
+                page = write_advanced_rowing_page(
+                    root,
+                    image_markdown="![Advanced rowing monitor metrics image teaching split watts stroke rate and distance concepts](../media/exercises/rowing-machine-advanced/monitor-metrics.png)",
+                )
+
+                result = run_check_with_root(root, page)
+
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("advanced_rowing_media_text_forbidden", result.stdout)
+
     def test_advanced_rowing_page_sections_and_forbidden_scope_fail(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -386,6 +411,13 @@ class AdvancedRowingMachineTutorialTest(unittest.TestCase):
 
         forbidden_cases = (
             "This page provides a personalized pace target.",
+            "This page calculates personal watts and paces.",
+            "This page writes a full benchmark plan for the reader.",
+            "This page gives competition programming for a 2k race.",
+            "This page provides active recovery protocols.",
+            "This page provides medical judgment.",
+            "This page provides a treatment plan.",
+            "This page gives injury-specific protocols.",
             "This page gives race strategy for a 2k test.",
             "This page creates a tracker for PM5 data.",
             "Method type: advanced_basic_cardio_equipment",
