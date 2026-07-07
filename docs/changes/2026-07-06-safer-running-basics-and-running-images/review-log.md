@@ -15,6 +15,7 @@
 | 2026-07-07 | code-review | M2 R2 | clean-with-notes | `reviews/code-review-m2-r2.md` | none | GP-SRB-M2-CR1 resolved; M2 is closed and M3 implementation is next. |
 | 2026-07-07 | code-review | M3 R1 | changes-requested | `reviews/code-review-m3-r1.md` | GP-SRB-M3-CR1 | M3 visual-review evidence exists, but the artifact path and tests conflict with the approved proof-map path. |
 | 2026-07-07 | review-resolution | M3 R1 | resolved-pending-rereview | `review-resolution.md` | GP-SRB-M3-CR1 | Moved the visual-review artifact to the approved proof-map path and updated M3 tests and plan references. |
+| 2026-07-07 | code-review | M3 R2 | clean-with-notes | `reviews/code-review-m3-r2.md` | none | GP-SRB-M3-CR1 resolved; M3 is closed and M4 implementation is next. |
 
 ## Sources
 
@@ -33,3 +34,4 @@
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m2-r1.md`
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m2-r2.md`
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m3-r1.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m3-r2.md`

@@ -4,7 +4,7 @@ Change ID: `2026-07-06-safer-running-basics-and-running-images`
 
 Current milestone: M3
 
-Status: resolved-pending-rereview
+Status: resolved
 
 ## Findings
 
@@ -12,7 +12,7 @@ Status: resolved-pending-rereview
 |---|---|---|---|---|
 | GP-SRB-M1-CR1 | `reviews/code-review-m1-r1.md` | major | resolved | Added active M1 fixture coverage for page heading, alias line, required headings, page-local sources, and shared source registration; accepted by code-review M1 R2. |
 | GP-SRB-M2-CR1 | `reviews/code-review-m2-r1.md` | major | resolved | Added explicit persistent-pain routing to the required `What you should feel` route and added a direct real-page test assertion; accepted by code-review M2 R2. |
-| GP-SRB-M3-CR1 | `reviews/code-review-m3-r1.md` | major | resolved-pending-rereview | Moved the visual-review artifact to the approved proof-map path and updated M3 tests and plan references. |
+| GP-SRB-M3-CR1 | `reviews/code-review-m3-r1.md` | major | resolved | Moved the visual-review artifact to the approved proof-map path and updated M3 tests and plan references; accepted by code-review M3 R2. |
 
 ## Resolution Notes
 
@@ -38,7 +38,7 @@ M3 fix applied:
 - Updated the M3 real-page tests to assert the approved proof-map path.
 - Updated current plan and workflow references to point at the approved proof-map path.
 
-Code-review M3 rereview is pending.
+Code-review M3 R2 accepted the resolution.
 
 ## Validation Evidence
 
@@ -69,5 +69,6 @@ git diff --check
 
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m1-r1.md`
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m3-r1.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m3-r2.md`
 - `docs/plans/2026-07-06-safer-running-basics-and-running-images.md`
 - `specs/safer-running-basics-and-running-images.test.md`
