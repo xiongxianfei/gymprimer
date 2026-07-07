@@ -54,14 +54,14 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 
 ## Current Handoff Summary
 
-- Current milestone: M3. Governed Media, Prompt Packets, and Provenance
-- Current milestone state: review-requested
-- Last reviewed milestone: M2. Advanced Rowing Markdown Content
-- Review status: M3 implementation complete; code-review pending
-- Remaining in-scope open milestones: M3 code-review, M4 implementation
-- Next stage: code-review
+- Current milestone: M4. Manual Proof, Review Evidence, and Closeout Preparation
+- Current milestone state: planned
+- Last reviewed milestone: M3. Governed Media, Prompt Packets, and Provenance
+- Review status: code-review R4 clean-with-notes; M3 closed
+- Remaining in-scope open milestones: M4 implementation
+- Next stage: implement
 - Final closeout readiness: not-ready
-- Reason final closeout is or is not ready: M3 code-review, M4 implementation, later review, explain-change, verify, and PR handoff remain.
+- Reason final closeout is or is not ready: M4 implementation, later review, explain-change, verify, and PR handoff remain.
 
 ## Milestones
 
@@ -151,7 +151,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 
 ### M3. Governed Media, Prompt Packets, and Provenance
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Prepare and integrate the approved first-batch advanced rowing images only through governed prompt records, provenance rows, alt text, and visual review.
 - Requirements: R22-R46, R50
 - Files/components likely touched:
@@ -282,6 +282,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: M2 added `exercises/rowing-machine-advanced.md`, the beginner-page companion link, reused source-index entries, real-page regression tests, M2 source-audit evidence, and an aligned text-only row in the exercise-image audit.
 - 2026-07-07: Code-review R3 accepted the M2 implementation and closed M2.
 - 2026-07-07: M3 implemented eight governed advanced-rowing image assets, image-instruction prompt packets, provenance rows, page image integration, visual-safety proof, grayscale proof, and real-page media regression tests.
+- 2026-07-07: Code-review R4 accepted the M3 implementation and closed M3.
 
 ## Decision log
 
@@ -335,18 +336,22 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - `python3 tools/checks/check_markdown_first.py exercises/rowing-machine-advanced.md media/PROVENANCE.md media/prompts/exercises/rowing-machine-advanced`: pass, checked 2 Markdown file(s).
 - `python3 tools/checks/check_privacy.py exercises/rowing-machine-advanced.md media/prompts/exercises/rowing-machine-advanced media/PROVENANCE.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 26 file(s).
 - `git diff --check`: pass, no whitespace errors reported.
+- Code-review R4 reviewer-ran `python3 -m unittest discover -s tests`: pass, 237 tests.
+- Code-review R4 reviewer-ran `python3 tools/checks/check_markdown_first.py exercises/rowing-machine-advanced.md media/PROVENANCE.md media/prompts/exercises/rowing-machine-advanced`: pass, checked 2 Markdown file(s).
+- Code-review R4 reviewer-ran `python3 tools/checks/check_privacy.py exercises/rowing-machine-advanced.md media/prompts/exercises/rowing-machine-advanced media/PROVENANCE.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial`: pass, checked 26 file(s).
+- Code-review R4 reviewer-ran `git diff --check`: pass, no whitespace errors reported.
 
 ## Outcome and retrospective
 
 - M1 implementation and review-resolution are closed.
 - M2 implementation is closed after clean code-review R3.
-- M3 implementation is routed to code-review.
+- M3 implementation is closed after clean code-review R4.
 - M4 remains pending.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M3.
+- Ready for implementation M4.
 
 ## Sources
 

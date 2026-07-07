@@ -1,6 +1,6 @@
 change_id: 2026-07-07-advanced-rowing-machine-tutorial
 status: accepted
-current_stage: code-review
+current_stage: implement
 created_date: 2026-07-07
 
 proposal: docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
@@ -24,13 +24,13 @@ current_test_spec: specs/advanced-rowing-machine-tutorial.test.md
 current_test_spec_status: active
 current_test_spec_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/test-spec-review-r2.md
 
-current_code_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r3.md
-current_code_review_status: m3-pending
+current_code_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r4.md
+current_code_review_status: clean-with-notes
 
 review_resolution: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md
 review_resolution_status: closed
 
-next_stage: code-review
+next_stage: implement
 
 open_findings: []
 
@@ -58,6 +58,7 @@ notes:
   - M2 advanced rowing Markdown content implemented and routed to code-review.
   - Code-review R3 accepted the M2 implementation and closed M2.
   - M3 governed media, prompt packets, provenance, page image integration, visual-safety proof, grayscale proof, and media regression tests implemented and routed to code-review.
+  - Code-review R4 accepted the M3 implementation and closed M3.
 
 validation:
   - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/proposal-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
@@ -69,6 +70,18 @@ validation:
   - command: git diff --check
     result: pass
     evidence: no whitespace errors reported
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: code-review R4 reviewer-ran 237 tests
+  - command: python3 tools/checks/check_markdown_first.py exercises/rowing-machine-advanced.md media/PROVENANCE.md media/prompts/exercises/rowing-machine-advanced
+    result: pass
+    evidence: code-review R4 reviewer-ran focused Markdown-first check over 2 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py exercises/rowing-machine-advanced.md media/prompts/exercises/rowing-machine-advanced media/PROVENANCE.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: code-review R4 reviewer-ran focused privacy check over 26 file(s)
+  - command: git diff --check
+    result: pass
+    evidence: code-review R4 reviewer-ran whitespace check with no errors
   - command: python3 -m unittest discover -s tests
     result: pass
     evidence: code-review R3 reviewer-ran 234 tests

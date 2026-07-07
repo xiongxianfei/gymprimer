@@ -12,6 +12,7 @@
 | 2026-07-07 | code-review | R1 | changes-requested | `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r1.md` | CR1, CR2 |
 | 2026-07-07 | code-review | R2 | clean-with-notes | `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r2.md` | none |
 | 2026-07-07 | code-review | R3 | clean-with-notes | `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r3.md` | none |
+| 2026-07-07 | code-review | R4 | clean-with-notes | `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r4.md` | none |
 
 ## Sources
 
@@ -25,3 +26,4 @@
 [local-2026-07-07-advanced-rowing-machine-tutorial-review-log-code-review-r1]: reviews/code-review-r1.md
 [local-2026-07-07-advanced-rowing-machine-tutorial-review-log-code-review-r2]: reviews/code-review-r2.md
 [local-2026-07-07-advanced-rowing-machine-tutorial-review-log-code-review-r3]: reviews/code-review-r3.md
+[local-2026-07-07-advanced-rowing-machine-tutorial-review-log-code-review-r4]: reviews/code-review-r4.md
