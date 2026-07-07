@@ -13,12 +13,11 @@ workflow:
     authorized_by: user
     authorized_on: 2026-07-06
     stop_before: implementation
-current_stage: review-resolution
+current_stage: code-review
 current_milestone: M3
-milestone_state: resolution-needed
-required_review_resolution: true
-open_findings:
-  - GP-SRB-M3-CR1
+milestone_state: review-requested
+required_review_resolution: false
+open_findings: []
 notes:
   - Owner accepted the proposal after proposal-review round 1 approved it with no findings.
   - Spec-review round 1 approved the feature spec with no findings.
@@ -35,4 +34,5 @@ notes:
   - M2 is closed.
   - M3 added the governed six-image batch, prompt records, provenance rows, page references, and visual-safety review.
   - Code-review M3 R1 requested changes for GP-SRB-M3-CR1.
-  - M3 needs review-resolution before rereview.
+  - GP-SRB-M3-CR1 resolution moved the visual-review artifact to the approved proof-map path and updated tests and plan references.
+  - M3 is ready for code-review rereview.

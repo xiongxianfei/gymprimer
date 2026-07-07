@@ -17,7 +17,7 @@ Changed surfaces:
 - `media/exercises/safer-running-basics/`
 - `media/prompts/exercises/safer-running-basics/`
 - `media/PROVENANCE.md`
-- `docs/changes/2026-07-06-safer-running-basics-and-running-images/visual-safety-review.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/visual-safety-review.md`
 - `docs/changes/exercise-image-standard-and-optimization/evidence/m4-exercise-audit.md`
 - `docs/plans/2026-07-06-safer-running-basics-and-running-images.md`
 - `docs/plan.md`

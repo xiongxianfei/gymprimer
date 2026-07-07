@@ -61,6 +61,6 @@ Beginner comprehension proof remains a downstream M4 obligation.
 
 ## Sources
 
-- [Safer Running Basics and High-Quality Running Images spec](../../../specs/safer-running-basics-and-running-images.md)
-- [Safer Running Basics and High-Quality Running Images test spec](../../../specs/safer-running-basics-and-running-images.test.md)
-- [Safer Running Basics page](../../../exercises/safer-running-basics.md)
+- [Safer Running Basics and High-Quality Running Images spec](../../../../specs/safer-running-basics-and-running-images.md)
+- [Safer Running Basics and High-Quality Running Images test spec](../../../../specs/safer-running-basics-and-running-images.test.md)
+- [Safer Running Basics page](../../../../exercises/safer-running-basics.md)

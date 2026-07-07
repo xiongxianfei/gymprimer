@@ -727,7 +727,7 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
         self.assertEqual(purpose_counts["exercise_movement_illustration"], 5)
 
     def test_safer_running_m3_preserves_top_10_image_ranking(self) -> None:
-        path = SAFER_RUNNING_CHANGE_ROOT / "visual-safety-review.md"
+        path = SAFER_RUNNING_CHANGE_ROOT / "reviews/visual-safety-review.md"
         self.assertTrue(path.is_file())
         text = path.read_text(encoding="utf-8")
 
@@ -751,7 +751,7 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
                 self.assertIn("Later candidate", text)
 
     def test_safer_running_m3_visual_safety_review_records_required_criteria(self) -> None:
-        path = SAFER_RUNNING_CHANGE_ROOT / "visual-safety-review.md"
+        path = SAFER_RUNNING_CHANGE_ROOT / "reviews/visual-safety-review.md"
         self.assertTrue(path.is_file())
         text = path.read_text(encoding="utf-8")
 

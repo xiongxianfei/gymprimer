@@ -2,9 +2,9 @@
 
 Change ID: `2026-07-06-safer-running-basics-and-running-images`
 
-Current milestone: M2
+Current milestone: M3
 
-Status: resolved
+Status: resolved-pending-rereview
 
 ## Findings
 
@@ -12,6 +12,7 @@ Status: resolved
 |---|---|---|---|---|
 | GP-SRB-M1-CR1 | `reviews/code-review-m1-r1.md` | major | resolved | Added active M1 fixture coverage for page heading, alias line, required headings, page-local sources, and shared source registration; accepted by code-review M1 R2. |
 | GP-SRB-M2-CR1 | `reviews/code-review-m2-r1.md` | major | resolved | Added explicit persistent-pain routing to the required `What you should feel` route and added a direct real-page test assertion; accepted by code-review M2 R2. |
+| GP-SRB-M3-CR1 | `reviews/code-review-m3-r1.md` | major | resolved-pending-rereview | Moved the visual-review artifact to the approved proof-map path and updated M3 tests and plan references. |
 
 ## Resolution Notes
 
@@ -31,6 +32,14 @@ M2 fix applied:
 
 Code-review M2 R2 accepted the resolution.
 
+M3 fix applied:
+
+- Moved `docs/changes/2026-07-06-safer-running-basics-and-running-images/visual-safety-review.md` to `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/visual-safety-review.md`.
+- Updated the M3 real-page tests to assert the approved proof-map path.
+- Updated current plan and workflow references to point at the approved proof-map path.
+
+Code-review M3 rereview is pending.
+
 ## Validation Evidence
 
 Passed locally:
@@ -40,6 +49,9 @@ python3 -m unittest tests.test_markdown_first_page_structure
 python3 -m unittest tests.test_exercise_method_guidance
 python3 -m unittest tests.test_exercise_image_standard tests.test_markdown_first_real_pages
 python3 -m unittest discover -s tests
+python3 tools/checks/check_markdown_first.py exercises/safer-running-basics.md media/PROVENANCE.md SOURCES.md RED-FLAGS.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images docs/plans/2026-07-06-safer-running-basics-and-running-images.md docs/plan.md
+python3 tools/checks/check_privacy.py exercises/safer-running-basics.md media/PROVENANCE.md media/prompts/exercises/safer-running-basics/ docs/changes/2026-07-06-safer-running-basics-and-running-images docs/plans/2026-07-06-safer-running-basics-and-running-images.md docs/plan.md
+git diff --check
 ```
 
 ## Required Validation After Fix
@@ -56,5 +68,6 @@ git diff --check
 ## Sources
 
 - `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m1-r1.md`
+- `docs/changes/2026-07-06-safer-running-basics-and-running-images/reviews/code-review-m3-r1.md`
 - `docs/plans/2026-07-06-safer-running-basics-and-running-images.md`
 - `specs/safer-running-basics-and-running-images.test.md`
