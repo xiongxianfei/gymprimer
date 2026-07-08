@@ -4,13 +4,13 @@
 
 - Map status: current
 - Scope: repository
-- Baseline: `2c0c41a`
-- Last reviewed: 2026-06-30
+- Baseline: `1fd3909`
+- Last reviewed: 2026-07-07
 - Coverage: root governance and product references; Markdown content directories; media provenance; templates; validation scripts; tests; specs; architecture, ADR, workflow, plan, change, and learning artifact locations.
 - Exclusions: `.git/` internals, `.agents/` skill implementation files, binary media contents beyond path/provenance inventory, Python bytecode caches, historical change-record details not needed for repository orientation, network/hosted services, and uncreated future implementation areas.
 - Parent map: not-applicable
-- Known gaps: no hosted CI workflow, package manifest, deployment configuration, mdBook configuration, CMS integration, database, runtime application, public release process, or formal expert-review board observed.
-- Inspected uncommitted paths: none
+- Known gaps: no package manifest, deployment configuration, mdBook configuration, CMS integration, database, runtime application, public release process, or formal expert-review board observed.
+- Inspected uncommitted paths: root governance, vision, README front matter, contributor scope, project-map scope notes, strategic positioning, general-audience change record, and advanced rowing proposal.
 
 ## Purpose and scope
 
@@ -20,11 +20,11 @@ The mapped scope is the repository root. No area maps exist because the current 
 
 ## System overview
 
-Observed: GymPrimer is a Markdown-first beginner primer. `README.md` says the repository is the primary product, Markdown pages are the source of truth, and no app, database, generated HTML, account, local server, or generated JSON package is required to use promoted content.
+Observed: GymPrimer is a Markdown-first exercise, movement, and training-literacy primer for a general audience. `README.md` says the repository is the primary product, Markdown pages are the source of truth, and no app, database, generated HTML, account, local server, or generated JSON package is required to use promoted content.
 
 Observed: `CONSTITUTION.md` defines the durable source-of-truth order, requires specs before material Markdown contract, citation, safety, media, validation, licensing, or generated-output changes, and states that Markdown remains canonical while generated HTML and future websites are derived unless a later accepted proposal changes that boundary.
 
-Observed: `VISION.md` defines the product as an open-source Markdown primer for beginners in their first ninety days of regular gym training or returning after a long break. It rejects diagnosis, individualized coaching, rehabilitation pathways, workout planning, video-first source of truth, and platform machinery that outranks the Markdown corpus.
+Observed: `VISION.md` defines the product as an open-source Markdown primer for readers who want to train with more understanding, from first-time gym users to experienced readers. It rejects diagnosis, individualized coaching, recovery pathways, workout planning, video-first source of truth, and platform machinery that outranks the Markdown corpus.
 
 Observed: `docs/architecture/system/architecture.md` is the approved current architecture package. It describes five logical blocks: project references, content, media, governance, and tooling/operations.
 
@@ -46,7 +46,7 @@ Inferred: The next material content expansion should start through proposal/spec
 - `docs/architecture/`, `docs/adr/`: current architecture and durable decision records.
 - `docs/proposals/`, `docs/plans/`, `docs/changes/`, `docs/learn/`: lifecycle artifacts, plans, reviews, proof records, verification reports, and learning records.
 
-Not observed: active `content/`, `schemas/`, `generated/`, numbered content directories, `about/red-flags.md`, package manifests, `.github/workflows/`, build config, deployment config, or mdBook config.
+Not observed: active `content/`, `schemas/`, `generated/`, numbered content directories, `about/red-flags.md`, package manifests, build config, deployment config, or mdBook config.
 
 ## Runtime flow
 
@@ -123,7 +123,7 @@ Executed commands during this mapping session:
 - `sed -n '1,140p' docs/workflows.md`: exit 0
 - `git rev-parse --short HEAD && git status --short --branch`: exit 0
 - `rg --files -g '!/.git/**' -g '!/.agents/**' | sort`: exit 0
-- `find .github -maxdepth 3 -type f -print 2>/dev/null | sort`: exit 0, no files printed
+- `find .github -maxdepth 3 -type f -print 2>/dev/null | sort`: exit 0, printed `.github/workflows/ci.yml`
 - `find . -maxdepth 2 \( -name 'package.json' -o -name 'pyproject.toml' -o -name 'requirements*.txt' -o -name 'Makefile' -o -name 'tox.ini' -o -name 'pytest.ini' -o -name 'setup.cfg' -o -name 'Cargo.toml' -o -name 'go.mod' \) -print | sort`: exit 0, no files printed
 - `find patterns conditions principles programs exercises media tools tests specs docs/templates -maxdepth 3 -type f -print 2>/dev/null | sort`: exit 0
 - `sed -n '1,220p' README.md`: exit 0
@@ -140,9 +140,11 @@ No build, hosted CI, network, mdBook, full test suite, or mutating validation co
 
 ## CI and release map
 
-Not observed in the mapped scope. No `.github/workflows/` files, package manifest scripts, release workflow, deployment configuration, mdBook configuration, or release process file were observed.
+Observed: `.github/workflows/ci.yml` defines a GitHub Actions validation workflow for pull requests, pushes to `main`, manual dispatch, and a weekly schedule.
 
-Observed: `README.md` explicitly says no hosted CI workflow is configured yet.
+The workflow runs the full Python unittest suite, Markdown-first checks, privacy checks, and `git diff --check`.
+
+Not observed: package manifest scripts, release workflow, deployment configuration, mdBook configuration, or release process file.
 
 Observed: `CONSTITUTION.md` says agents must not claim CI passed unless a CI run was observed and that CI, when present, should run the same core checks expected locally.
 
@@ -174,7 +176,7 @@ Observed from active checks:
 - `docs/workflows.md` still has a `Current change` section naming `markdown-first-gym-primer` as branch-ready for `pr`, while `docs/plan.md` and change metadata now show no active work after PR #5. Treat the workflow guide's current-change section as stale until refreshed.
 - `CONSTITUTION.md` still says Responsible Breadth requires ADR/spec/architecture/plan/test/validation updates before relying on expanded content, but those artifacts now exist and PR #5 completed the proof slice. Treat that current-assumptions paragraph as stale relative to the completed lifecycle artifacts unless it is intentionally preserving a broader-scaling warning.
 - `README.md` marks the five original exercise/principle pages as draft first-slice pages, while additional APT-support exercise pages also exist in `exercises/`. Downstream content work should inspect exact page status instead of assuming all `exercises/` pages are promoted or draft.
-- No hosted CI exists, so validation relies on local commands and recorded validation evidence.
+- Hosted CI exists, but agents still must not claim it passed unless a run result was actually observed.
 - No package manifest pins Python version or dependencies; active tests use the standard library plus repository scripts.
 - `SECURITY.md` and `CODE_OF_CONDUCT.md` still contain placeholder reporting contacts.
 - `tests/__pycache__/` exists in the working tree filesystem during inspection, but it is generated bytecode cache and not part of the tracked product surface.
@@ -184,7 +186,7 @@ Observed from active checks:
 - Should `docs/workflows.md` be refreshed now that PR #5 has merged and all active plans are closed?
 - Should `CONSTITUTION.md` current-assumptions wording be normalized after the Responsible Breadth proof slice?
 - Which next content slice should be proposed, and should it expand pattern pages, exercise pages, conditions, or programming literacy first?
-- What minimum hosted CI workflow should run the local Python tests and Markdown-first/privacy checks?
+- Should the hosted CI workflow expand its Markdown-first check path list to include `programs`, `conditions`, media provenance, and governance files?
 - When should placeholder security and conduct contacts be replaced for public release operations?
 - Should mdBook remain deferred, or should a future proposal add minimal derived HTML output?
 
@@ -215,6 +217,6 @@ Rationale: The repository map is now refreshed, but it identifies stale workflow
 | `tests/test_responsible_breadth_m1.py` | source | Observed Responsible Breadth fixture/checker coverage. |
 | `tests/test_repository_layout_normalization.py` | source | Observed canonical path and layout-normalization fixture/checker coverage. |
 | `rg --files -g '!/.git/**' -g '!/.agents/**' \| sort` | executed command | Exit 0; found current product, governance, specs, tests, media, and lifecycle artifact inventory. |
-| `find .github -maxdepth 3 -type f -print 2>/dev/null \| sort` | executed command | Exit 0; no hosted CI workflow files printed. |
+| `find .github -maxdepth 3 -type f -print 2>/dev/null \| sort` | executed command | Exit 0; current inspection found `.github/workflows/ci.yml`. |
 | `find . -maxdepth 2 \( -name 'package.json' -o -name 'pyproject.toml' -o -name 'requirements*.txt' -o -name 'Makefile' -o -name 'tox.ini' -o -name 'pytest.ini' -o -name 'setup.cfg' -o -name 'Cargo.toml' -o -name 'go.mod' \) -print \| sort` | executed command | Exit 0; no package/build manifest files printed. |
 | `git rev-parse --short HEAD && git status --short --branch` | executed command | Exit 0; baseline `2c0c41a`, branch `main...origin/main`, no uncommitted paths before map edit. |

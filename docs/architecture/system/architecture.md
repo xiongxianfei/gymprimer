@@ -43,6 +43,8 @@ The Baduanjin Basics image-priority amendment was approved by
 The top-five generated images for fewer-than-five exercise documents amendment
 was approved by
 `docs/changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/architecture-review-r1.md`.
+This advanced rowing-machine tutorial amendment was approved by
+`docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/architecture-review-r1.md`.
 
 ## Related artifacts
 
@@ -120,6 +122,13 @@ was approved by
     `../../../specs/top-five-generated-images-for-fewer-than-five-exercise-documents.md`
   - Spec review:
     `../../changes/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents/reviews/spec-review-r1.md`
+- Advanced rowing-machine tutorial:
+  - Proposal:
+    `../../proposals/2026-07-07-advanced-rowing-machine-tutorial.md`
+  - Spec:
+    `../../../specs/advanced-rowing-machine-tutorial.md`
+  - Spec review:
+    `../../changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/spec-review-r1.md`
 - ADRs:
   - `../../adr/2026-06-27-markdown-first-citation-based-authority.md`
   - `../../adr/2026-06-28-ai-generated-raster-media-provenance.md`
@@ -169,6 +178,10 @@ Goals:
 - Add Tai Chi Basics as a static beginner exercise page with a ranked
   page-local image candidate pool and exactly three first-batch generated
   support images.
+- Add an advanced rowing-machine companion page as static exercise literacy
+  with monitor, drag-factor, rhythm, force-curve, workout-type, and governed
+  image-rich support without adding coaching, personalization, or runtime
+  training tools.
 - Preserve old platform artifacts as historical context without treating them as active implementation guidance.
 
 ## Architecture Constraints
@@ -272,6 +285,24 @@ Goals:
 - Muscle roles, feel cues, compensation cues, caveats, and source support stay
   in Markdown. Optional muscle-attention images remain support assets governed
   by the exercise-image standard.
+- Advanced rowing-machine guidance is a separate companion page at
+  `exercises/rowing-machine-advanced.md`. It preserves
+  `exercises/rowing-machine.md` as the beginner entry point, uses
+  `Method type: basic_cardio_equipment` when method-style examples appear, and
+  keeps all examples static rather than adaptive.
+- The advanced rowing page is a scoped image-rich exception. It may reference
+  up to eight first-batch generated raster images under
+  `media/exercises/rowing-machine-advanced/` only when the approved spec, plan,
+  prompt records, provenance rows, visual-safety evidence, and validation
+  evidence allow those assets.
+- Advanced rowing prompt records function as image-instruction packets under
+  `media/prompts/exercises/rowing-machine-advanced/`. They preserve the exact
+  prompt and also record the teaching goal, instructional layer, visual rules,
+  review notes, and force-intensity map when a force overlay is used.
+- Force-intensity overlays are relative teaching aids only. They use a 0-3
+  broad-region scale, non-color cues, Markdown legends, alt text, phase
+  explanation, and grayscale review; they do not represent exact force, EMG,
+  injury risk, or correctness.
 
 ## Context and Scope
 
@@ -398,6 +429,22 @@ Logical containers:
   governed cardio-equipment exercise page. It uses the same visible method
   section contract while adding cardio-specific time, effort, reset,
   progression, and stop-condition wording.
+- **Advanced rowing-machine companion page**:
+  `exercises/rowing-machine-advanced.md` is a static advanced-literacy page
+  linked from the beginner rowing page only after downstream approval. It
+  teaches monitor metrics, drag factor, rhythm, force curve, stroke-rate
+  control, workout-type literacy, and benchmark-preparation boundaries without
+  becoming a personalized plan or race program.
+- **Advanced rowing-machine media**:
+  `media/exercises/rowing-machine-advanced/` may hold up to eight first-batch
+  generated raster support assets for the advanced page. The assets use the
+  existing exercise image purposes and require prompt records, exact
+  provenance, local page references, alt text, visual-safety review, and manual
+  source/comprehension proof before promotion.
+- **Advanced rowing image-instruction packets**:
+  `media/prompts/exercises/rowing-machine-advanced/<asset-stem>.md` records
+  the exact prompt plus the image teaching goal, media purpose, instructional
+  layer, visual rules, review notes, and force-intensity map when applicable.
 - **Basic cardio activity page**: `exercises/brisk-walking.md` is the first
   governed non-equipment cardio activity exercise page. It uses visible
   `## How much to do` guidance with `Method type: basic_cardio_activity`, time,
@@ -651,6 +698,34 @@ Basic cardio equipment authoring flow:
    image and generated raster prompt-record architecture governs path,
    purpose, provenance, prompt records, alt text, and visual-safety evidence.
 
+Advanced rowing-machine companion authoring and media flow:
+
+1. A contributor drafts `exercises/rowing-machine-advanced.md` under the
+   approved advanced rowing spec while preserving `exercises/rowing-machine.md`
+   as the beginner page.
+2. The advanced page keeps Markdown as the source of truth and includes the
+   required sections for prerequisites, damper and drag factor, monitor basics,
+   rhythm, force curve, stroke-rate control, workout types, muscles, common
+   mistakes, image guide, force-intensity system, phase force map, safety, and
+   sources.
+3. The page may link from the beginner page only after downstream approval, and
+   it uses `Method type: basic_cardio_equipment` for method-style examples
+   without introducing `advanced_basic_cardio_equipment`.
+4. First-batch media is limited to the eight advanced rowing asset stems named
+   by the spec. The page may defer any image when text alone is sufficient.
+5. Force-intensity overlays are allowed only on the selected movement or force
+   concept images named by the spec. `monitor-metrics.png`,
+   `damper-drag-factor.png`, and `interval-structure.png` do not use muscle
+   force-intensity overlays.
+6. Each generated asset requires an image-instruction packet prompt record, an
+   approved provenance row, local Markdown integration, meaningful alt text,
+   visual-safety review, and page-local source support before promotion.
+7. Manual proof records source audit, visual safety, grayscale review for force
+   overlays, and advanced-reader comprehension outcomes.
+8. Rollback removes the beginner-page link and any failed image references,
+   prompt records, and provenance rows while preserving the beginner rowing
+   page and any valid text-only advanced draft.
+
 Basic cardio activity authoring flow:
 
 1. A contributor drafts `exercises/brisk-walking.md` and
@@ -792,6 +867,11 @@ Packaging boundaries:
   deployment, runtime, CMS, API, search index, user-input flow, account system,
   analytics, hidden metadata package, generated public data package, workout
   tracker, or calculator.
+- Advanced rowing-machine guidance is Markdown-only. It introduces no
+  deployment, runtime, CMS, API, search index, user-input flow, account system,
+  analytics, hidden metadata package, generated public data package, PM5
+  data-analysis app, workout tracker, calculator, wearable integration, video
+  product, or personalized coaching engine.
 - Exercise muscle guidance is Markdown-only. It introduces no deployment,
   runtime, CMS, API, search index, user-input flow, account system, analytics,
   hidden metadata package, generated public data package, anatomy database, EMG
@@ -860,6 +940,12 @@ Scope control:
 - Cardio-equipment examples remain static examples. They must not become
   personalized conditioning plans, race plans, heart-rate-zone prescriptions,
   workout trackers, calculators, or adaptive programming.
+- Advanced rowing-machine examples remain static exercise literacy for readers
+  who already understand the beginner stroke. They may teach monitor concepts,
+  drag factor, rhythm, force-curve feedback, rate control, and workout types,
+  but they must not become individualized training, racing strategy,
+  return-to-rowing guidance, performance guarantees, or sport-specific
+  competition programming.
 - Basic cardio activity examples remain static education. They must not become
   personalized walking plans, weight-loss prescriptions, calorie targets,
   universal step-count mandates, heart-rate-zone prescriptions, race-walking
@@ -929,6 +1015,11 @@ Media:
   exercise document. For brisk walking, `exercises/brisk-walking.md` requires
   exactly one movement image and one muscle-attention image; this requirement
   does not change the default text-only validity of unrelated exercise pages.
+- A downstream approved spec may also create a scoped image-rich exception for
+  a specific technical exercise document. For advanced rowing,
+  `exercises/rowing-machine-advanced.md` may use up to eight first-batch
+  generated images, but the exception is local to that page and does not raise
+  the normal image-count limit for unrelated exercise pages.
 - Original Markdown-first v0.1 media purposes are `equipment_identification`
   and `key_movement_illustration`.
 - Expanded Responsible Breadth media purposes add
@@ -957,6 +1048,13 @@ Media:
 - Prompt-record validation resolves `prompt_record`, reads the prompt record,
   and checks that the record points back to the same normalized `asset_path` and
   preserves exact full prompt text or an explicit redaction note.
+- Advanced rowing prompt records are also image-instruction packets. For that
+  page, validation and manual review check asset path, page reference, media
+  purpose, instructional layer, teaching goal, visual rules, exact prompt,
+  review notes, and a force-intensity map when applicable.
+- Force-intensity overlays use the existing exercise image purpose values, not
+  a new media purpose. Their `instructional_layer` may be recorded in prompt
+  records and provenance notes for review and validation.
 - `pattern_alignment_illustration` is limited to non-diagnostic visual
   comparison or alignment education on pattern pages.
 - `anatomical_region_illustration` is limited to plain anatomical region
@@ -975,6 +1073,13 @@ Media:
 - Full exercise-document images may not contain in-image labels, correctness
   labels, citations, safety warnings, long written cues, diagnosis claims,
   treatment claims, or warning badges.
+- Advanced rowing body, movement, muscle, and force-intensity images may not
+  contain in-image labels. Monitor, graph, and interval technical diagrams may
+  use only minimal labels when the approved spec allows them and the same
+  information appears in Markdown and alt text.
+- Force-intensity images must use color plus non-color visual cues, avoid red
+  pain-map styling, remain understandable in grayscale, and be explained by
+  nearby Markdown legends and phase tables.
 - The forward-head-posture proof slice uses no exercise thumbnails on the
   pattern page in its first implementation slice.
 - Original raster drawings, original photos, third-party licensed raster
@@ -1074,6 +1179,16 @@ Observability:
   stroke sequence, damper, beginner method, weekly activity, and stop
   conditions, plus non-identifying beginner-comprehension outcomes for the
   rowing-specific questions defined by the spec.
+- Advanced rowing-machine validation reports missing required advanced
+  sections, forbidden personalized-programming or race-coaching wording,
+  unsupported monitor or workout claims, image-count exceptions, missing
+  image-instruction packets, missing or non-approved provenance, missing prompt
+  records, generic alt text, missing force-intensity legends, missing phase
+  maps, and missing technical-diagram label duplication.
+- Advanced rowing-machine manual evidence records source audit for damper, drag
+  factor, monitor metrics, stroke rate, force curve, workout-type examples, and
+  safety boundaries; visual-safety review for each generated image; grayscale
+  review for force overlays; and advanced-reader comprehension outcomes.
 
 ## Architecture Decisions
 
@@ -1089,12 +1204,13 @@ Observability:
 
 No new ADR is required for exercise method guidance, rowing-machine
 `basic_cardio_equipment`, brisk-walking `basic_cardio_activity`, everyday
-walking guidance, or exercise muscle guidance. These changes extend the
-accepted Markdown-first and Responsible Breadth architecture by adding visible
-Markdown sections and repository-local validation/review evidence. They do not
-introduce a new source-of-truth mechanism, runtime boundary, generated package,
-taxonomy store, anatomy database, cueing engine, tracker, calculator, or
-deployment architecture.
+walking guidance, exercise muscle guidance, or the advanced rowing-machine
+tutorial. These changes extend the accepted Markdown-first, media provenance,
+prompt-record, exercise-image, and Responsible Breadth architecture by adding
+visible Markdown sections and repository-local validation/review evidence. They
+do not introduce a new source-of-truth mechanism, runtime boundary, generated
+package, taxonomy store, anatomy database, cueing engine, tracker, calculator,
+or deployment architecture.
 
 ## Quality Requirements
 
@@ -1125,6 +1241,10 @@ deployment architecture.
 | Exercise method source of truth | An exercise page is updated under the exercise-method spec. | The page has visible `## How much to do` and `Method type:` text; hidden metadata is not required or authoritative. |
 | Exercise method enum | A page declares an exercise method type. | The value is active under `specs/exercise-method-guidance.md` or an approved downstream method-type amendment such as the rowing-machine spec. |
 | Basic cardio method boundary | A page declares `Method type: basic_cardio_equipment`. | The page is `exercises/rowing-machine.md` or another cardio-equipment page governed by a later approved spec or amendment. |
+| Advanced rowing companion boundary | `exercises/rowing-machine-advanced.md` is promoted. | The beginner page remains the entry point, the advanced page is static literacy, and the page does not provide a personalized plan, race strategy, clinical guidance, or adaptive programming. |
+| Advanced rowing image-rich exception | The advanced rowing page references generated raster images. | The page uses no more than the eight first-batch assets named by the spec, each with a local image-instruction packet, approved provenance, page reference, meaningful alt text, visual-safety evidence, and source/comprehension proof. |
+| Force-intensity overlay safety | An advanced rowing image uses a force-intensity overlay. | The overlay uses a 0-3 relative scale, non-color cues, nearby Markdown legend and phase explanation, grayscale review, no red pain-map styling, and no exact force, EMG, injury-risk, or correctness claim. |
+| Technical diagram label exception | An advanced rowing monitor, graph, or interval diagram uses labels. | Labels are minimal, necessary, duplicated in Markdown, and covered by alt text; body, muscle, and force-intensity images remain label-free. |
 | Basic cardio activity boundary | A page declares `Method type: basic_cardio_activity`. | The page is `exercises/brisk-walking.md` or another non-equipment cardio activity page governed by a later approved spec or amendment. |
 | Loaded carry deferral | A page declares `Method type: loaded_carry`. | The page fails until a later approved spec or amendment activates `loaded_carry`. |
 | Rowing method source support | The rowing-machine page gives setup, stroke sequence, damper, beginner method, weekly activity, or stop-condition guidance. | Manual source-audit evidence records support for the claim category before promotion. |
@@ -1210,6 +1330,19 @@ deployment architecture.
   programming. Static examples, source audit, forbidden-language checks, and
   beginner comprehension evidence mitigate but do not eliminate this semantic
   risk.
+- Advanced rowing-machine content can drift into coaching, benchmark plans,
+  race strategy, or adaptive performance programming. The separate companion
+  page, static examples, official-plan links, forbidden-language checks, source
+  audit, and advanced-reader comprehension evidence mitigate but do not
+  eliminate this risk.
+- Force-intensity overlays can look more precise than the project can support.
+  The 0-3 relative scale, broad-region maps, non-color cues, Markdown legends,
+  grayscale review, no exact-force wording, and visual-safety evidence mitigate
+  but do not eliminate this risk.
+- Advanced rowing's eight-image exception can create visual noise or precedent
+  drift. The exception is scoped to one technical cardio-equipment page,
+  first-batch asset names are fixed by the spec, and other exercise pages still
+  need their own approved exception.
 - Brisk walking guidance can drift into a personalized walking plan,
   weight-loss prescription, step-count mandate, or medical walking program.
   Static wording, forbidden-language checks, source audit, safety routing, and
@@ -1286,6 +1419,16 @@ deployment architecture.
 - **Basic cardio equipment**: A visible exercise method type for approved
   cardio-equipment pages that use static beginner guidance for time, effort,
   reset/rest, progression, and stop conditions.
+- **Advanced exercise literacy**: Static education for readers who already
+  understand a beginner exercise page and want better concept, technique,
+  monitor, or training-structure understanding without personalized coaching.
+- **Force-intensity overlay**: A generated image instructional layer that uses
+  a 0-3 relative scale to show broad muscle effort or attention emphasis for a
+  phase, not exact force or correctness.
+- **Image-instruction packet**: An advanced prompt record that preserves exact
+  prompt text and also records asset path, page reference, media purpose,
+  instructional layer, teaching goal, visual rules, review notes, and
+  force-intensity map when relevant.
 - **Basic cardio activity**: A visible exercise method type for approved
   non-equipment aerobic activity pages that use static beginner guidance for
   time, talk-test effort, repeatability, progression, and stop conditions.
@@ -1302,7 +1445,7 @@ deployment architecture.
 
 ## Next artifacts
 
-- Execution plan for exercise muscle guidance.
+- Architecture review for the advanced rowing-machine tutorial amendment.
 
 ## Follow-on artifacts
 
@@ -1343,6 +1486,10 @@ deployment architecture.
   `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/proposal-review-r3.md`.
 - Brisk walking and everyday walking amended spec review:
   `../../changes/2026-07-05-brisk-walking-and-everyday-walking/reviews/spec-review-r3.md`.
+- Advanced rowing-machine tutorial spec:
+  `../../../specs/advanced-rowing-machine-tutorial.md`.
+- Advanced rowing-machine tutorial spec review:
+  `../../changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/spec-review-r1.md`.
 
 ## Readiness
 
@@ -1359,5 +1506,8 @@ The original brisk-walking and everyday-walking amendment has completed
 architecture review. The required brisk-walking media amendment has completed
 architecture review.
 
-Walking image implementation is not implementation-ready until planning,
-test-spec, and required downstream reviews are complete.
+The advanced rowing-machine tutorial amendment has completed architecture
+review. Advanced rowing implementation, image generation, prompt records,
+provenance rows, checker changes, and beginner-page linking are not
+implementation-ready until planning, test-spec, and required downstream
+reviews are complete.

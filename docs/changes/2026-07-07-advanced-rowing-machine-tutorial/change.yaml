@@ -1,0 +1,279 @@
+change_id: 2026-07-07-advanced-rowing-machine-tutorial
+status: accepted
+current_stage: pr
+created_date: 2026-07-07
+
+proposal: docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
+proposal_status: accepted
+proposal_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/proposal-review-r1.md
+review_log: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
+
+current_spec: specs/advanced-rowing-machine-tutorial.md
+current_spec_status: approved
+current_spec_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/spec-review-r1.md
+
+current_architecture: docs/architecture/system/architecture.md
+current_architecture_status: approved
+current_architecture_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/architecture-review-r1.md
+
+current_plan: docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md
+current_plan_status: reviewed
+current_plan_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/plan-review-r2.md
+
+current_test_spec: specs/advanced-rowing-machine-tutorial.test.md
+current_test_spec_status: active
+current_test_spec_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/test-spec-review-r2.md
+
+current_code_review: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/code-review-r5.md
+current_code_review_status: clean-with-notes
+current_verification: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md
+current_verification_status: branch-ready
+pull_request: https://github.com/xiongxianfei/gymprimer/pull/18
+
+review_resolution: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md
+review_resolution_status: closed
+
+next_stage: pr
+
+open_findings: []
+
+notes:
+  - Proposal-review R1 approved the direction with no material findings.
+  - Proposal status normalized to accepted after user requested workflow autoprogression to test-spec-review.
+  - Draft spec created and routed to spec-review under workflow routing.
+  - Spec-review R1 approved the spec with no material findings.
+  - Spec status normalized to approved for downstream architecture assessment.
+  - Architecture amendment recorded in the canonical architecture package.
+  - Architecture-review R1 approved the amendment with no material findings.
+  - Architecture status normalized to approved for downstream planning.
+  - Draft execution plan created and routed to plan-review.
+  - Plan-review R1 approved the execution plan with no material findings.
+  - Plan status normalized to reviewed for test-spec authoring.
+  - Draft test spec created and routed to test-spec-review.
+  - Test-spec-review R1 requested changes for TSR1 because M1 fixture validation used the whole intentionally invalid `tests/fixtures` tree.
+  - Plan and test spec revised for TSR1 to use `tests/fixtures/advanced-rowing-machine-tutorial`.
+  - Plan-review R2 approved the TSR1 plan-command revision.
+  - Test-spec-review R2 approved the proof map and resolved TSR1.
+  - M1 validation scaffolding implemented and routed to code-review; M2-M4 remain pending.
+  - Code-review R1 requested changes for CR1 and CR2; M1 is in review-resolution.
+  - Review-resolution implemented fixes for CR1 and CR2; M1 is routed back to code-review.
+  - Code-review R2 accepted CR1 and CR2 fixes and closed M1.
+  - M2 advanced rowing Markdown content implemented and routed to code-review.
+  - Code-review R3 accepted the M2 implementation and closed M2.
+  - M3 governed media, prompt packets, provenance, page image integration, visual-safety proof, grayscale proof, and media regression tests implemented and routed to code-review.
+  - Code-review R4 accepted the M3 implementation and closed M3.
+  - M4 manual proof and closeout preparation implementation started.
+  - M4 final source-audit proof, advanced-reader comprehension proof, validation ledger, and broad local validation evidence implemented and routed to code-review.
+  - Code-review R5 accepted the M4 implementation and closed M4.
+  - Explain-change recorded the reviewed-diff rationale and routed the change to verify.
+  - Final local verification passed and routed the branch to PR handoff. Hosted CI was not observed.
+  - PR #18 opened from `2026-07-07-advanced-rowing-machine-tutorial` to `main`; GitHub Actions `Validation checks` was pending at handoff.
+
+validation:
+  - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/proposal-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
+    result: pass
+    evidence: checked 3 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
+    result: pass
+    evidence: checked 1 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: code-review R5 reviewer-ran 237 tests
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: code-review R5 reviewer-ran broad Markdown-first check over 44 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md exercises media docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: code-review R5 reviewer-ran broad privacy check over 249 file(s)
+  - command: git diff --check
+    result: pass
+    evidence: code-review R5 reviewer-ran whitespace check with no errors
+  - command: python3 tools/checks/check_markdown_first.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md
+    result: pass
+    evidence: checked 3 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml
+    result: pass
+    evidence: checked 4 file(s): privacy pass
+  - command: rg -n 'Current stage: verify|Next stage: verify|current_stage: verify|next_stage: verify|Explain-change recorded|Ready for verify|open_findings: \[\]|review_resolution_status: closed|Final verification has not run yet|Hosted CI has not been observed' docs/plan.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md
+    result: pass
+    evidence: lifecycle routing scan found verify routing, closed review-resolution, no open findings, and explicit no-final-verify/no-hosted-CI language
+  - command: git diff --check
+    result: pass
+    evidence: explain-change whitespace validation reported no errors
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: final verify ran 237 tests
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md principles exercises patterns
+    result: pass
+    evidence: final verify checked 30 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md RED-FLAGS.md docs specs tools tests principles exercises patterns
+    result: pass
+    evidence: final verify checked 594 file(s): privacy pass
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: final verify checked 46 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md exercises media docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: final verify checked 251 file(s): privacy pass
+  - command: python3 tools/checks/check_markdown_first.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md
+    result: pass
+    evidence: final verify checked 4 Markdown file(s)
+  - command: python3 tools/checks/check_markdown_first.py exercises/rowing-machine-advanced.md media/PROVENANCE.md media/prompts/exercises/rowing-machine-advanced
+    result: pass
+    evidence: final verify checked 2 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: final verify checked 26 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: final verify whitespace check reported no errors
+  - command: python3 tools/checks/check_markdown_first.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md
+    result: pass
+    evidence: verify-report validation checked 4 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml
+    result: pass
+    evidence: verify-report validation checked 5 file(s): privacy pass
+  - command: rg -n 'Current stage: pr|Next stage: pr|current_stage: pr|next_stage: pr|current_verification_status: branch-ready|Ready for PR handoff|branch-ready|open_findings: \[\]|review_resolution_status: closed|Hosted CI was not observed|PR body/open readiness is not claimed' docs/plan.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/change.yaml docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md
+    result: pass
+    evidence: verify-report lifecycle scan found PR routing, branch-ready status, closed review-resolution, no open findings, and no hosted-CI or PR-body/open-readiness claim
+  - command: git diff --check
+    result: pass
+    evidence: verify-report whitespace validation reported no errors
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: code-review R4 reviewer-ran 237 tests
+  - command: python3 tools/checks/check_markdown_first.py exercises/rowing-machine-advanced.md media/PROVENANCE.md media/prompts/exercises/rowing-machine-advanced
+    result: pass
+    evidence: code-review R4 reviewer-ran focused Markdown-first check over 2 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py exercises/rowing-machine-advanced.md media/prompts/exercises/rowing-machine-advanced media/PROVENANCE.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: code-review R4 reviewer-ran focused privacy check over 26 file(s)
+  - command: git diff --check
+    result: pass
+    evidence: code-review R4 reviewer-ran whitespace check with no errors
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: ran 237 tests
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: fail
+    evidence: initial M4 broad check failed because proof documents needed Sources sections, source-linked safety rows, and existing global source IDs for non-local source references
+  - command: python3 tools/checks/check_markdown_first.py README.md SOURCES.md RED-FLAGS.md exercises media/PROVENANCE.md media/prompts docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 44 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py README.md SOURCES.md CONTRIBUTING.md RED-FLAGS.md exercises media docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 249 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: code-review R3 reviewer-ran 234 tests
+  - command: python3 tools/checks/check_markdown_first.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md
+    result: pass
+    evidence: code-review R3 reviewer-ran focused Markdown-first check over 4 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: code-review R3 reviewer-ran focused privacy check over 17 file(s)
+  - command: git diff --check
+    result: pass
+    evidence: code-review R3 reviewer-ran whitespace check with no errors
+  - command: python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_media_batch_is_local_prompt_backed_and_reviewed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_prompt_packets_record_force_and_label_boundaries tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_media_markdown_has_legends_and_label_duplication
+    result: fail
+    evidence: initial M3 focused tests failed before page integration because image guide sections and assets were not complete
+  - command: python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_media_batch_is_local_prompt_backed_and_reviewed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_prompt_packets_record_force_and_label_boundaries tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_media_markdown_has_legends_and_label_duplication
+    result: pass
+    evidence: ran 3 focused M3 real-page media tests
+  - command: python3 -m unittest discover -s tests
+    result: fail
+    evidence: initial M3 full-suite run failed because media-forbidden validation caught exact forbidden phrase text in rule and prompt wording
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: ran 237 tests
+  - command: python3 tools/checks/check_markdown_first.py exercises/rowing-machine-advanced.md media/PROVENANCE.md media/prompts/exercises/rowing-machine-advanced
+    result: pass
+    evidence: checked 2 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py exercises/rowing-machine-advanced.md media/prompts/exercises/rowing-machine-advanced media/PROVENANCE.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 26 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported
+  - command: python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_links_to_advanced_page tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_page_shape_and_prerequisites tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_concepts_are_static_and_source_backed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_workout_types_force_system_and_sources
+    result: fail
+    evidence: initial M2 test-first run failed because exercises/rowing-machine-advanced.md and the beginner-page link were missing
+  - command: python3 -m unittest tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_rowing_machine_links_to_advanced_page tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_page_shape_and_prerequisites tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_concepts_are_static_and_source_backed tests.test_markdown_first_real_pages.MarkdownFirstRealPagesTest.test_advanced_rowing_workout_types_force_system_and_sources
+    result: pass
+    evidence: ran 4 focused M2 real-page tests
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: ran 234 tests
+  - command: python3 tools/checks/check_markdown_first.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md
+    result: pass
+    evidence: checked 4 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py exercises/rowing-machine.md exercises/rowing-machine-advanced.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 17 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported
+  - command: python3 -m unittest tests.test_advanced_rowing_machine_tutorial
+    result: pass
+    evidence: ran 6 focused advanced rowing checker tests
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: ran 230 tests
+  - command: python3 tools/checks/check_markdown_first.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md
+    result: pass
+    evidence: checked 4 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 14 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported
+  - command: python3 -m unittest tests.test_advanced_rowing_machine_tutorial
+    result: pass
+    evidence: ran 5 focused advanced rowing checker tests
+  - command: python3 -m unittest discover -s tests
+    result: pass
+    evidence: ran 229 tests
+  - command: python3 tools/checks/check_markdown_first.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md
+    result: pass
+    evidence: checked 4 Markdown file(s)
+  - command: python3 tools/checks/check_privacy.py tests/fixtures/advanced-rowing-machine-tutorial media/PROVENANCE.md SOURCES.md RED-FLAGS.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 13 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported
+  - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.md
+    result: pass
+    evidence: checked 2 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 5 file(s): privacy pass
+  - command: python3 tools/checks/check_markdown_first.py docs/architecture/system/architecture.md specs/advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/spec-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
+    result: fail
+    evidence: canonical architecture package has pre-existing checker incompatibilities, including stale historical path references, missing architecture-local Sources section shape, and safety-link findings
+  - command: python3 tools/checks/check_privacy.py docs/architecture/system/architecture.md specs/advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial
+    result: pass
+    evidence: checked 6 file(s): privacy pass
+  - command: python3 tools/checks/check_markdown_first.py docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/architecture-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md specs/advanced-rowing-machine-tutorial.md
+    result: pass
+    evidence: checked 5 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial specs/advanced-rowing-machine-tutorial.md
+    result: pass
+    evidence: checked 8 file(s): privacy pass
+  - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.test.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/spec-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/architecture-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/plan-review-r2.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/test-spec-review-r2.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md
+    result: pass
+    evidence: checked 10 Markdown file(s): pass
+  - command: python3 tools/checks/check_privacy.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.md specs/advanced-rowing-machine-tutorial.test.md docs/plans/2026-07-07-advanced-rowing-machine-tutorial.md docs/plan.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial docs/architecture/system/architecture.md
+    result: pass
+    evidence: checked 15 file(s): privacy pass
+  - command: git diff --check
+    result: pass
+    evidence: no whitespace errors reported

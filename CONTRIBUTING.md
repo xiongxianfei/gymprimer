@@ -2,7 +2,7 @@
 
 Thanks for contributing.
 
-GymPrimer is a Markdown-first, citation-based beginner primer. The repository Markdown files are the product source of truth; generated output and old structured-platform artifacts are not active v0.1 guidance.
+GymPrimer is a Markdown-first, citation-based exercise, movement, and training-literacy primer for a general audience. The repository Markdown files are the product source of truth; generated output and old structured-platform artifacts are not active v0.1 guidance.
 
 ## Pull requests
 
@@ -14,9 +14,9 @@ GymPrimer is a Markdown-first, citation-based beginner primer. The repository Ma
 
 ## Content scope
 
-v0.1 accepts beginner training principles, common machine exercises, low-risk bodyweight progressions, simple dumbbell patterns, and basic cardio equipment.
+GymPrimer accepts static education for common exercises, low-risk bodyweight progressions, simple dumbbell patterns, basic cardio equipment, advanced technique literacy, common patterns, well-studied conditions, programming principles, and generic program examples when the governing artifacts approve the scope.
 
-Do not add barbell lifts, Olympic lifting, kettlebell ballistic lifts, plyometrics, sprint programming, sport-specific programming, injury-specific advice, posture-correction protocols, pain treatment, diagnosis, or rehabilitation pathways.
+Do not add specialized competition programming, personalized plans, injury-specific advice, posture-correction protocols, pain treatment, diagnosis, or recovery pathways unless a higher-ranked accepted direction explicitly changes that scope.
 
 Responsible Breadth pages add static consumer education for accepted patterns,
 conditions, programming principles, and program examples. Pattern, condition,
@@ -41,8 +41,9 @@ Use page-local `Sources` sections and reference-style links for v0.1 citations. 
 
 ## Media
 
-Images are optional in v0.1. Use them only when they materially help a beginner
-identify equipment or understand a key movement position.
+Images are optional. Use them only when they materially help a reader identify
+equipment, understand a key movement position, or learn a distinct concept that
+Markdown alone does not explain well.
 
 Preferred order:
 
@@ -64,7 +65,7 @@ Equipment identification example:
 
 ![Lat pulldown machine example](./media/exercises/lat-pulldown/lat-pulldown-machine-example.png)
 
-This kind of image helps a beginner recognize the machine. It should not
+This kind of image helps a reader recognize the machine. It should not
 replace setup instructions, safety notes, or sources.
 
 Key movement illustration example:

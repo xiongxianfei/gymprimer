@@ -19,6 +19,8 @@ Rules:
 - [Mayo Clinic weight training technique guidance][mayo-weight-training]
 - [Mayo Clinic stretching basics][mayo-stretching]
 - [Mayo Clinic walking guidance][mayo-walking]
+- [Mayo Clinic heart attack symptoms reference][mayo-heart-attack-symptoms]
+- [Mayo Clinic exercise and arthritis pain guidance][mayo-exercise-arthritis-pain]
 - [NHS walking for health][nhs-walking-for-health]
 - [NHS Couch to 5K running plan][nhs-couch-to-5k]
 - [Mayo Clinic Health System running guidance][mchs-better-runner]
@@ -50,6 +52,14 @@ Rules:
 - [Concept2 RowErg foot position guidance][concept2-foot-position]
 - [Concept2 damper setting guidance][concept2-damper-setting]
 - [Concept2 getting started workouts][concept2-getting-started-workouts]
+- [Concept2 PM5 how-to guide][concept2-pm5-how-to-use]
+- [Concept2 Understanding the PM5][concept2-understanding-pm5]
+- [Concept2 stroke-rate explanation][concept2-stroke-rate-explained]
+- [Concept2 damper setting and drag factor guidance][concept2-advanced-damper-drag-factor]
+- [Concept2 Workout of the Day guidance][concept2-workout-of-day]
+- [Concept2 2k erg test training plan][concept2-2k-plan]
+- [British Rowing technique guide][british-rowing-technique]
+- [W3C Use of Color guidance][w3c-use-of-color]
 
 Each page still needs its own matching reference definition so the page renders as standalone Markdown.
 
@@ -60,6 +70,8 @@ Each page still needs its own matching reference definition so the page renders 
 [mayo-weight-training]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842
 [mayo-stretching]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/stretching/art-20546848
 [mayo-walking]: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/walking/art-20046261
+[mayo-heart-attack-symptoms]: https://www.mayoclinic.org/diseases-conditions/heart-attack/in-depth/heart-attack-symptoms/art-20047744
+[mayo-exercise-arthritis-pain]: https://www.mayoclinic.org/diseases-conditions/arthritis/in-depth/arthritis/art-20047971
 [nhs-walking-for-health]: https://www.nhs.uk/live-well/exercise/walking-for-health/
 [nhs-couch-to-5k]: https://www.nhs.uk/better-health/get-active/get-running-with-couch-to-5k/couch-to-5k-running-plan/
 [mchs-better-runner]: https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/how-can-i-become-a-better-runner-and-avoid-injury
@@ -91,3 +103,11 @@ Each page still needs its own matching reference definition so the page renders 
 [concept2-foot-position]: https://concept2.com/blog/find-your-optimal-foot-position-on-the-rowerg
 [concept2-damper-setting]: https://concept2.com/blog/what-is-the-best-damper-setting-for-me
 [concept2-getting-started-workouts]: https://concept2.com/blog/getting-started-try-these-workouts
+[concept2-pm5-how-to-use]: https://concept2.com/support/monitors/pm5/how-to-use
+[concept2-understanding-pm5]: https://concept2.com/training/articles/understanding-pm5
+[concept2-stroke-rate-explained]: https://concept2.com/blog/rowing-stroke-rate-explained
+[concept2-advanced-damper-drag-factor]: https://concept2.com/training/articles/damper-setting
+[concept2-workout-of-day]: https://concept2.com/training/wod
+[concept2-2k-plan]: https://concept2.com/training/plans/2k-erg-test-12-week
+[british-rowing-technique]: https://www.britishrowing.org/indoor-rowing/go-row-indoor/how-to-indoor-row/british-rowing-technique/
+[w3c-use-of-color]: https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html

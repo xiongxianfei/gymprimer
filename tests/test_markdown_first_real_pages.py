@@ -5,6 +5,7 @@ import unittest
 
 from tools.checks.check_markdown_first import (
     load_media_provenance,
+    parse_prompt_record_fields,
     section_text,
     split_page_refs,
     validate_exercise_method_guidance,
@@ -22,6 +23,7 @@ FIRST_SLICE = (
     "exercises/incline-push-up.md",
 )
 ROWING_MACHINE_PAGE = ROOT / "exercises/rowing-machine.md"
+ROWING_MACHINE_ADVANCED_PAGE = ROOT / "exercises/rowing-machine-advanced.md"
 BRISK_WALKING_PAGE = ROOT / "exercises/brisk-walking.md"
 EVERYDAY_WALKING_PAGE = ROOT / "principles/everyday-walking.md"
 TAI_CHI_PAGE = ROOT / "exercises/tai-chi-basics.md"
@@ -145,6 +147,73 @@ ROWING_REQUIRED_SECTIONS = (
     "## Safety notes",
     "## Sources",
 )
+ADVANCED_ROWING_REQUIRED_SECTIONS = (
+    "## What this page is for",
+    "## What this page is not",
+    "## Prerequisites",
+    "## Advanced setup: damper and drag factor",
+    "## Monitor basics: split, watts, stroke rate, and distance",
+    "## Rhythm and recovery ratio",
+    "## Force curve and power application",
+    "## Stroke-rate control",
+    "## Workout types",
+    "## Muscles involved",
+    "## What you should feel",
+    "## Common advanced mistakes",
+    "## High-quality image guide",
+    "## Force-intensity visual system",
+    "## Rowing phase force map",
+    "## Safety notes",
+    "## Sources",
+)
+ADVANCED_ROWING_IMAGE_ASSETS = {
+    "stroke-timing": (
+        "exercise_movement_illustration",
+        "force_intensity_overlay",
+        "Advanced rowing stroke timing image showing relative effort shifting from catch through drive finish and recovery",
+    ),
+    "rhythm-ratio": (
+        "exercise_movement_illustration",
+        "force_intensity_overlay",
+        "Advanced rowing rhythm ratio image showing stronger drive effort and controlled lower-effort recovery",
+    ),
+    "monitor-metrics": (
+        "exercise_setup_illustration",
+        "technical_diagram",
+        "Advanced rowing monitor metrics diagram showing split watts stroke rate distance time and force curve concepts",
+    ),
+    "force-curve": (
+        "exercise_movement_illustration",
+        "force_intensity_overlay",
+        "Advanced rowing force curve image showing smooth power application with relative effort emphasis",
+    ),
+    "stroke-rate-ladder": (
+        "exercise_movement_illustration",
+        "technical_diagram",
+        "Advanced rowing stroke rate ladder image showing rate changes as structured practice blocks",
+    ),
+    "damper-drag-factor": (
+        "exercise_setup_illustration",
+        "technical_diagram",
+        "Advanced rowing damper and drag factor image showing machine feel versus measured flywheel feedback",
+    ),
+    "power-per-stroke": (
+        "exercise_movement_illustration",
+        "force_intensity_overlay",
+        "Advanced rowing power per stroke image showing a controlled low-rate drive with relative effort emphasis",
+    ),
+    "interval-structure": (
+        "exercise_movement_illustration",
+        "technical_diagram",
+        "Advanced rowing interval structure image showing static work and easy-rowing rest blocks",
+    ),
+}
+ADVANCED_ROWING_FORCE_OVERLAY_STEMS = {
+    "stroke-timing",
+    "rhythm-ratio",
+    "force-curve",
+    "power-per-stroke",
+}
 BRISK_WALKING_REQUIRED_SECTIONS = (
     "## What this is for",
     "## Before you start",
@@ -286,6 +355,9 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
 
     def rowing_text(self) -> str:
         return ROWING_MACHINE_PAGE.read_text(encoding="utf-8")
+
+    def advanced_rowing_text(self) -> str:
+        return ROWING_MACHINE_ADVANCED_PAGE.read_text(encoding="utf-8")
 
     def brisk_walking_text(self) -> str:
         return BRISK_WALKING_PAGE.read_text(encoding="utf-8")
@@ -1475,6 +1547,15 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
             with self.subTest(term=term):
                 self.assertNotIn(term, text)
 
+    def test_rowing_machine_links_to_advanced_page(self) -> None:
+        text = self.rowing_text()
+
+        self.assertTrue(ROWING_MACHINE_ADVANCED_PAGE.is_file())
+        self.assertIn(
+            "Next: [Advanced rowing machine technique and workouts](rowing-machine-advanced.md)",
+            text,
+        )
+
     def test_rowing_machine_stroke_sequence_setup_and_method(self) -> None:
         text = self.rowing_text().lower()
         compact = " ".join(text.split())
@@ -1498,6 +1579,215 @@ class MarkdownFirstRealPagesTest(unittest.TestCase):
         self.assertIn("stop condition:", text)
         self.assertIn("3-5 minutes", text)
         self.assertIn("technique first, then time, then moderate effort", text)
+
+    def test_advanced_rowing_page_shape_and_prerequisites(self) -> None:
+        self.assertTrue(ROWING_MACHINE_ADVANCED_PAGE.is_file())
+        text = self.advanced_rowing_text()
+        lower = text.lower()
+
+        self.assertTrue(text.startswith("# Rowing Machine: Advanced Technique and Workouts\n"))
+        self.assertIn("Disclaimer: GymPrimer is educational content", text)
+        for section in ADVANCED_ROWING_REQUIRED_SECTIONS:
+            with self.subTest(section=section):
+                self.assertIn(section, text)
+
+        self.assertIn("10-15 minutes", text)
+        self.assertIn("legs -> body -> arms", text)
+        self.assertIn("arms -> body -> legs", text)
+        self.assertIn("editorial boundary", lower)
+
+        for term in (
+            "JavaScript",
+            "database",
+            "user account",
+            "local server",
+            "calculator",
+            "tracker",
+            "wearable",
+            "video platform",
+        ):
+            with self.subTest(term=term):
+                self.assertNotIn(term, text)
+
+    def test_advanced_rowing_concepts_are_static_and_source_backed(self) -> None:
+        text = self.advanced_rowing_text()
+        lower = text.lower()
+
+        for term in (
+            "damper",
+            "drag factor",
+            "damper 10",
+            "split",
+            "pace per 500m",
+            "watts",
+            "stroke rate",
+            "distance/time",
+            "force curve",
+            "feedback",
+            "not a form verdict",
+            "not automatically higher quality",
+            "not automatically higher intensity",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, lower)
+
+        for source_id in (
+            "concept2-pm5-how-to-use",
+            "concept2-understanding-pm5",
+            "concept2-stroke-rate-explained",
+            "concept2-advanced-damper-drag-factor",
+            "british-rowing-technique",
+        ):
+            with self.subTest(source_id=source_id):
+                self.assertIn(f"][{source_id}]", text)
+                self.assertIn(f"[{source_id}]:", text)
+
+        for forbidden in (
+            "personalized pace",
+            "personal target",
+            "calculate your target",
+            "race strategy",
+            "return-to-rowing",
+            "performance guarantee",
+            "advanced_basic_cardio_equipment",
+        ):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotIn(forbidden, lower)
+
+    def test_advanced_rowing_workout_types_force_system_and_sources(self) -> None:
+        text = self.advanced_rowing_text()
+        lower = text.lower()
+        sources = (ROOT / "SOURCES.md").read_text(encoding="utf-8")
+
+        for term in (
+            "method type: basic_cardio_equipment",
+            "steady aerobic rows",
+            "rate ladders",
+            "power-per-stroke",
+            "intervals",
+            "benchmark preparation",
+            "static examples",
+            "not a training plan",
+            "official plans",
+            "0-3 relative scale",
+            "relative instructional emphasis",
+            "not exact force",
+            "emg activation",
+            "injury risk",
+            "proof of correct form",
+            "outline",
+            "texture",
+            "grayscale",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, lower)
+
+        for source_id in (
+            "concept2-workout-of-day",
+            "concept2-2k-plan",
+            "w3c-use-of-color",
+        ):
+            with self.subTest(source_id=source_id):
+                self.assertIn(f"][{source_id}]", text)
+                self.assertIn(f"[{source_id}]:", text)
+                self.assertIn(f"[{source_id}]:", sources)
+
+    def test_advanced_rowing_media_batch_is_local_prompt_backed_and_reviewed(self) -> None:
+        text = self.advanced_rowing_text()
+        provenance = load_media_provenance(ROOT / "media/PROVENANCE.md")
+
+        for stem, (purpose, layer, alt_text) in ADVANCED_ROWING_IMAGE_ASSETS.items():
+            asset_path = f"media/exercises/rowing-machine-advanced/{stem}.png"
+            prompt_record = f"media/prompts/exercises/rowing-machine-advanced/{stem}.md"
+            with self.subTest(stem=stem):
+                self.assertIn(f"![{alt_text}](../{asset_path})", text)
+                self.assertTrue((ROOT / asset_path).is_file())
+
+                rows = provenance.get(asset_path, [])
+                self.assertEqual(len(rows), 1)
+                row = rows[0]
+                self.assertEqual(row.get("asset_type"), "ai_generated_raster")
+                self.assertEqual(row.get("media_purpose"), purpose)
+                self.assertEqual(row.get("prompt_record"), prompt_record)
+                self.assertEqual(row.get("review_status"), "approved")
+                self.assertIn("exercises/rowing-machine-advanced.md", split_page_refs(row.get("page_refs", "")))
+
+                packet_path = ROOT / prompt_record
+                self.assertTrue(packet_path.is_file())
+                fields = parse_prompt_record_fields(packet_path.read_text(encoding="utf-8"))
+                self.assertEqual(fields.get("asset_path"), asset_path)
+                self.assertEqual(fields.get("page_reference"), "exercises/rowing-machine-advanced.md")
+                self.assertEqual(fields.get("media_purpose"), purpose)
+                self.assertEqual(fields.get("instructional_layer"), layer)
+
+    def test_advanced_rowing_prompt_packets_record_force_and_label_boundaries(self) -> None:
+        for stem, (_purpose, layer, _alt_text) in ADVANCED_ROWING_IMAGE_ASSETS.items():
+            with self.subTest(stem=stem):
+                prompt_record = ROOT / f"media/prompts/exercises/rowing-machine-advanced/{stem}.md"
+                text = prompt_record.read_text(encoding="utf-8").lower()
+                fields = parse_prompt_record_fields(prompt_record.read_text(encoding="utf-8"))
+
+                for token in (
+                    "teaching_goal",
+                    "visual_rules",
+                    "review_notes",
+                    "no copied ui",
+                    "no logos",
+                    "no identifiable people",
+                    "no red pain-map styling",
+                    "no unsupported outcome claims",
+                    "in_image_labels: no",
+                ):
+                    self.assertIn(token, text)
+
+                if stem in ADVANCED_ROWING_FORCE_OVERLAY_STEMS:
+                    self.assertEqual(layer, "force_intensity_overlay")
+                    self.assertIn("force-intensity map", text)
+                    self.assertIn("0-3 relative scale", text)
+                    self.assertIn("relative instructional emphasis", text)
+                    self.assertIn("not exact force", text)
+                    self.assertIn("emg activation", text)
+                    self.assertIn("injury risk", text)
+                    self.assertIn("correctness claim", text)
+                    self.assertRegex(text, r"\b(outline|texture|opacity|grayscale|alt text|phase table)\b")
+                else:
+                    self.assertNotEqual(fields.get("instructional_layer"), "force_intensity_overlay")
+                    self.assertIn("no force-intensity map applies", text)
+
+    def test_advanced_rowing_media_markdown_has_legends_and_label_duplication(self) -> None:
+        text = self.advanced_rowing_text()
+
+        def subsection_text(source: str, heading: str) -> str:
+            start = source.index(heading)
+            next_start = source.find("\n### ", start + len(heading))
+            next_top = source.find("\n## ", start + len(heading))
+            candidates = [idx for idx in (next_start, next_top) if idx != -1]
+            end = min(candidates) if candidates else len(source)
+            return source[start:end]
+
+        for heading in (
+            "### Stroke timing image guide",
+            "### Rhythm ratio image guide",
+            "### Force curve image guide",
+            "### Power per stroke image guide",
+        ):
+            with self.subTest(heading=heading):
+                section = subsection_text(text, heading)
+                self.assertIn("Color intensity guide:", section)
+                self.assertIn("Level 0", section)
+                self.assertIn("Level 3", section)
+                self.assertIn("relative teaching guide", section.lower())
+
+        for heading in (
+            "### Monitor metrics image guide",
+            "### Stroke-rate ladder image guide",
+            "### Damper and drag factor image guide",
+            "### Interval structure image guide",
+        ):
+            with self.subTest(heading=heading):
+                section = subsection_text(text, heading)
+                self.assertIn("No in-image labels are required", section)
+                self.assertIn("Markdown and alt text carry the labels", section)
 
     def test_rowing_machine_media_is_local_prompt_backed_and_reviewed(self) -> None:
         text = self.rowing_text()

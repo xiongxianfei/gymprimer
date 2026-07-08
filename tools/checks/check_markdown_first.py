@@ -169,6 +169,7 @@ EXERCISE_METHOD_DEFERRED_TYPES = {
 }
 EXERCISE_METHOD_BASIC_CARDIO_PATHS = {
     "exercises/rowing-machine.md",
+    "exercises/rowing-machine-advanced.md",
 }
 EXERCISE_METHOD_BASIC_CARDIO_ACTIVITY_PATHS = {
     "exercises/brisk-walking.md",
@@ -306,6 +307,91 @@ REQUIRED_PROVENANCE_FIELDS = (
 )
 PROMPT_RECORD_COMPATIBILITY_NOTE = "M3 pre-amendment prompt unavailable; compatibility limitation recorded"
 DEFAULT_EXERCISE_IMAGE_LIMIT = 3
+ADVANCED_ROWING_PAGE = "exercises/rowing-machine-advanced.md"
+ADVANCED_ROWING_REQUIRED_SECTIONS = (
+    "## What this page is for",
+    "## What this page is not",
+    "## Prerequisites",
+    "## Advanced setup: damper and drag factor",
+    "## Monitor basics: split, watts, stroke rate, and distance",
+    "## Rhythm and recovery ratio",
+    "## Force curve and power application",
+    "## Stroke-rate control",
+    "## Workout types",
+    "## Muscles involved",
+    "## What you should feel",
+    "## Common advanced mistakes",
+    "## High-quality image guide",
+    "## Force-intensity visual system",
+    "## Rowing phase force map",
+    "## Safety notes",
+    "## Sources",
+)
+ADVANCED_ROWING_IMAGE_STEMS = (
+    "stroke-timing",
+    "rhythm-ratio",
+    "monitor-metrics",
+    "force-curve",
+    "stroke-rate-ladder",
+    "damper-drag-factor",
+    "power-per-stroke",
+    "interval-structure",
+)
+ADVANCED_ROWING_IMAGE_ASSETS = {
+    f"media/exercises/rowing-machine-advanced/{stem}.png" for stem in ADVANCED_ROWING_IMAGE_STEMS
+}
+ADVANCED_ROWING_FORCE_OVERLAY_STEMS = {
+    "stroke-timing",
+    "rhythm-ratio",
+    "force-curve",
+    "power-per-stroke",
+}
+ADVANCED_ROWING_FORCE_OVERLAY_WITH_RATIONALE_STEMS = {"stroke-rate-ladder"}
+ADVANCED_ROWING_NO_FORCE_OVERLAY_STEMS = {
+    "monitor-metrics",
+    "damper-drag-factor",
+    "interval-structure",
+}
+ADVANCED_ROWING_TECHNICAL_LABEL_STEMS = {
+    "monitor-metrics",
+    "force-curve",
+    "interval-structure",
+}
+ADVANCED_ROWING_PACKET_REQUIRED_BLOCKS = (
+    "page_reference",
+    "media_purpose",
+    "instructional_layer",
+    "teaching_goal",
+    "visual_rules",
+    "review_notes",
+)
+ADVANCED_ROWING_FORBIDDEN_SCOPE_PATTERNS = (
+    re.compile(r"\b(?:provides?|gives?|creates?|builds?|adds?) (?:a )?personalized (?:pace|target|plan|program|coaching)\b", re.IGNORECASE),
+    re.compile(r"\bcalculat(?:e|es|ed|ing) (?:a |the )?(?:personal|personalized) (?:pace|paces|watts|target|targets)\b", re.IGNORECASE),
+    re.compile(r"\badaptive (?:program|plan|progression|coaching|intervals?)\b", re.IGNORECASE),
+    re.compile(r"\brace strateg(?:y|ies)\b", re.IGNORECASE),
+    re.compile(r"\bcompetition programming\b", re.IGNORECASE),
+    re.compile(r"\bfull benchmark plan\b", re.IGNORECASE),
+    re.compile(r"\bactive recovery protocols?\b", re.IGNORECASE),
+    re.compile(r"\breturn-to-rowing\b", re.IGNORECASE),
+    re.compile(r"\bmedical judgment\b", re.IGNORECASE),
+    re.compile(r"\btreatment plans?\b", re.IGNORECASE),
+    re.compile(r"\binjury-specific protocols?\b", re.IGNORECASE),
+    re.compile(r"\bperformance guarantee\b", re.IGNORECASE),
+    re.compile(
+        r"\b(?:adds?|builds?|creates?|provides?|launches?|uses?) (?:a |an )?(?:calculator|tracker|wearable integration|pm5 data analysis app|video product|coaching engine)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"\badvanced_basic_cardio_equipment\b", re.IGNORECASE),
+)
+ADVANCED_ROWING_FORCE_FORBIDDEN_TEXT_RE = re.compile(
+    r"\b(?:shows?|measures?|maps?|proves?) (?:the )?(?:exact force|EMG activation|injury risk|correct form)\b|\bproof of correct form\b",
+    re.IGNORECASE,
+)
+ADVANCED_ROWING_FORBIDDEN_MEDIA_TEXT_RE = re.compile(
+    r"\b(?:cop(?:y|ied) PM5 UI|cop(?:y|ied) monitor UI|screenshot|borrowed screenshot|with logo|visible logo|brand mark|branded UI|identifiable person|correct/wrong badge|wrong badge|red pain mark|red injury mark|race-win|elite-race|elite race|unsupported promise|performance promise)\b",
+    re.IGNORECASE,
+)
 TOP_FIVE_REVIEWER_EXCEPTION_EXERCISE_PAGES = {
     "exercises/band-pull-apart.md",
     "exercises/bird-dog.md",
@@ -327,10 +413,12 @@ TOP_FIVE_REVIEWER_EXCEPTION_EXERCISE_PAGES = {
     "exercises/wall-slide.md",
 }
 EXERCISE_IMAGE_LIMIT_EXCEPTIONS = {
+    ADVANCED_ROWING_PAGE: 8,
     "exercises/baduanjin-basics.md": 5,
     SAFER_RUNNING_BASICS_PAGE: 6,
 } | {page_ref: 5 for page_ref in TOP_FIVE_REVIEWER_EXCEPTION_EXERCISE_PAGES}
 EXERCISE_IMAGE_EXCEPTION_ALLOWED_ASSETS = {
+    ADVANCED_ROWING_PAGE: ADVANCED_ROWING_IMAGE_ASSETS,
     SAFER_RUNNING_BASICS_PAGE: {
         "media/exercises/safer-running-basics/posture.png",
         "media/exercises/safer-running-basics/landing.png",
@@ -692,11 +780,189 @@ def prompt_record_section(text: str, heading: str) -> str:
     return text[match.end() : end].strip()
 
 
+def prompt_record_labeled_block(text: str, label: str) -> str:
+    pattern = re.compile(rf"^\s*{re.escape(label)}:\s*(.*)$", re.IGNORECASE | re.MULTILINE)
+    match = pattern.search(text)
+    if match is None:
+        return ""
+    lines = [match.group(1).strip()]
+    for line in text[match.end() :].splitlines():
+        if not line.strip():
+            break
+        if line.startswith("#") or re.match(r"^\s*[A-Za-z_][A-Za-z0-9_ -]*:\s*", line):
+            break
+        lines.append(line.strip())
+    return "\n".join(line for line in lines if line).strip()
+
+
+def prompt_record_has_block(text: str, fields: dict[str, str], name: str) -> bool:
+    normalized = name.lower().replace(" ", "_").replace("-", "_")
+    return bool(fields.get(normalized, "").strip() or prompt_record_labeled_block(text, name) or prompt_record_section(text, name))
+
+
 def has_prompt_record_text_or_redaction(text: str) -> bool:
     exact_prompt = prompt_record_section(text, "Exact prompt")
     if exact_prompt:
         return True
     return bool(prompt_record_section(text, "Redaction note"))
+
+
+def validate_advanced_rowing_prompt_packet(
+    page_path: Path,
+    asset_path: str,
+    provenance_row: dict[str, str],
+    prompt_record: str,
+    text: str,
+    fields: dict[str, str],
+) -> list[Finding]:
+    if not asset_path.startswith("media/exercises/rowing-machine-advanced/"):
+        return []
+
+    findings: list[Finding] = []
+    stem = Path(asset_path).stem
+
+    missing_blocks = [
+        block
+        for block in ADVANCED_ROWING_PACKET_REQUIRED_BLOCKS
+        if not prompt_record_has_block(text, fields, block.replace("_", " "))
+    ]
+    if missing_blocks:
+        findings.append(
+            Finding(
+                page_path,
+                "advanced_rowing_prompt_packet_incomplete",
+                f"advanced rowing image-instruction packet is incomplete for {asset_path} at {prompt_record}: {', '.join(missing_blocks)}",
+            )
+        )
+
+    page_reference = fields.get("page_reference", "").strip()
+    if page_reference and page_reference != ADVANCED_ROWING_PAGE:
+        findings.append(
+            Finding(
+                page_path,
+                "advanced_rowing_prompt_packet_mismatch",
+                f"advanced rowing packet page_reference must be {ADVANCED_ROWING_PAGE} for {asset_path}: {page_reference}",
+            )
+        )
+
+    media_purpose = fields.get("media_purpose", "").strip()
+    provenance_purpose = provenance_row.get("media_purpose", "").strip()
+    if media_purpose and provenance_purpose and media_purpose != provenance_purpose:
+        findings.append(
+            Finding(
+                page_path,
+                "advanced_rowing_prompt_packet_mismatch",
+                f"advanced rowing packet media_purpose must match provenance for {asset_path}: {media_purpose}",
+            )
+        )
+
+    media_text = " ".join(
+        (
+            text,
+            provenance_row.get("prompt_or_creation_notes", ""),
+            provenance_row.get("notes", ""),
+        )
+    )
+    match = ADVANCED_ROWING_FORBIDDEN_MEDIA_TEXT_RE.search(media_text)
+    if match:
+        findings.append(
+            Finding(
+                page_path,
+                "advanced_rowing_media_text_forbidden",
+                f"advanced rowing media must not use copied UI, screenshots, brand marks, identifiable people, badges, pain marks, race framing, or unsupported promises: {match.group(0)}",
+            )
+        )
+
+    layer = fields.get("instructional_layer", "").strip()
+    force_map_present = prompt_record_has_block(text, fields, "force-intensity map")
+    force_overlay = layer == "force_intensity_overlay"
+    if force_overlay:
+        if stem in ADVANCED_ROWING_NO_FORCE_OVERLAY_STEMS:
+            findings.append(
+                Finding(
+                    page_path,
+                    "advanced_rowing_force_overlay_disallowed",
+                    f"advanced rowing asset must not use a muscle force-intensity overlay: {asset_path}",
+                )
+            )
+        if stem not in ADVANCED_ROWING_FORCE_OVERLAY_STEMS | ADVANCED_ROWING_FORCE_OVERLAY_WITH_RATIONALE_STEMS:
+            findings.append(
+                Finding(
+                    page_path,
+                    "advanced_rowing_force_overlay_disallowed",
+                    f"advanced rowing force-intensity overlay is not approved for asset: {asset_path}",
+                )
+            )
+        if stem in ADVANCED_ROWING_FORCE_OVERLAY_WITH_RATIONALE_STEMS and not prompt_record_has_block(text, fields, "force overlay rationale"):
+            findings.append(
+                Finding(
+                    page_path,
+                    "advanced_rowing_force_overlay_rationale_missing",
+                    f"stroke-rate-ladder force overlay requires downstream rationale: {asset_path}",
+                )
+            )
+        if not force_map_present:
+            findings.append(
+                Finding(
+                    page_path,
+                    "advanced_rowing_force_map_missing",
+                    f"force-intensity overlay packet must include a force-intensity map: {asset_path}",
+                )
+            )
+        if not re.search(r"\b0\s*[-–]\s*3\b", text):
+            findings.append(
+                Finding(
+                    page_path,
+                    "advanced_rowing_force_scale_missing",
+                    f"force-intensity overlay packet must record the 0-3 relative scale: {asset_path}",
+                )
+            )
+        if "relative" not in text.lower():
+            findings.append(
+                Finding(
+                    page_path,
+                    "advanced_rowing_force_relative_missing",
+                    f"force-intensity overlay packet must frame intensity as relative instructional emphasis: {asset_path}",
+                )
+            )
+        if not re.search(r"\b(outline|texture|opacity|grayscale|alt text|phase table)\b", text, re.IGNORECASE):
+            findings.append(
+                Finding(
+                    page_path,
+                    "advanced_rowing_force_non_color_cue_missing",
+                    f"force-intensity overlay packet must include a non-color cue or grayscale review rule: {asset_path}",
+                )
+            )
+        match = ADVANCED_ROWING_FORCE_FORBIDDEN_TEXT_RE.search(text)
+        if match:
+            findings.append(
+                Finding(
+                    page_path,
+                    "advanced_rowing_force_claim_forbidden",
+                    f"force-intensity packet must not imply exact measurement, injury risk, form verdict, or pain-map styling: {match.group(0)}",
+                )
+            )
+
+    labels = fields.get("in_image_labels", "").strip().lower()
+    if labels in {"yes", "true", "allowed"}:
+        if stem not in ADVANCED_ROWING_TECHNICAL_LABEL_STEMS:
+            findings.append(
+                Finding(
+                    page_path,
+                    "advanced_rowing_body_label_disallowed",
+                    f"body, movement, muscle, and force-intensity images must not use in-image labels: {asset_path}",
+                )
+            )
+        if not prompt_record_has_block(text, fields, "label duplication"):
+            findings.append(
+                Finding(
+                    page_path,
+                    "advanced_rowing_technical_label_duplication_missing",
+                    f"technical diagram labels must be duplicated in Markdown and alt text: {asset_path}",
+                )
+            )
+
+    return findings
 
 
 def validate_prompt_record(
@@ -792,7 +1058,7 @@ def validate_prompt_record(
             )
         ]
 
-    return []
+    return validate_advanced_rowing_prompt_packet(page_path, asset_path, provenance_row, prompt_record, text, fields)
 
 
 def pattern_alignment_text_contract_violation(alt_text: str, provenance_row: dict[str, str]) -> str | None:
@@ -1139,6 +1405,7 @@ def validate_responsible_breadth_page(
         findings.extend(validate_safer_running_basics_contract(path, text))
 
     if page_class == "expanded_exercise_page":
+        findings.extend(validate_advanced_rowing_page(path, text))
         findings.extend(validate_exercise_method_guidance(path, text))
         findings.extend(validate_exercise_muscle_guidance(path, text))
 
@@ -1154,6 +1421,76 @@ def validate_responsible_breadth_page(
         match = pattern.search(text)
         if match:
             findings.append(Finding(path, "RB006", f"Responsible Breadth forbidden scope language found: {match.group(0)}"))
+            break
+
+    return findings
+
+
+def validate_advanced_rowing_page(path: Path, text: str, root: Path = ROOT) -> list[Finding]:
+    if repo_relative_path(path, root) != ADVANCED_ROWING_PAGE:
+        return []
+
+    findings: list[Finding] = []
+    for section in ADVANCED_ROWING_REQUIRED_SECTIONS:
+        if heading_position(text, section) == -1:
+            findings.append(
+                Finding(
+                    path,
+                    "advanced_rowing_section_missing",
+                    f"advanced rowing page section is missing: {section.removeprefix('## ')}",
+                )
+            )
+
+    prerequisites = section_text(text, "## Prerequisites")
+    prerequisite_lower = prerequisites.lower()
+    if "10-15 minutes" not in prerequisite_lower or "legs" not in prerequisite_lower or "body" not in prerequisite_lower or "arms" not in prerequisite_lower:
+        findings.append(
+            Finding(
+                path,
+                "advanced_rowing_prerequisite_missing",
+                "advanced rowing prerequisites must include 10-15 minutes and the legs -> body -> arms stroke sequence",
+            )
+        )
+    if prerequisites and not re.search(r"\beditorial boundary\b", prerequisites, re.IGNORECASE):
+        findings.append(
+            Finding(
+                path,
+                "advanced_rowing_prerequisite_boundary_missing",
+                "advanced rowing prerequisite threshold must be framed as an editorial boundary",
+            )
+        )
+
+    force_system = section_text(text, "## Force-intensity visual system")
+    if force_system:
+        required_terms = ("0-3", "relative", "not exact force", "emg", "injury risk", "correct")
+        missing_terms = [term for term in required_terms if term not in force_system.lower()]
+        if missing_terms:
+            findings.append(
+                Finding(
+                    path,
+                    "advanced_rowing_force_system_incomplete",
+                    f"force-intensity visual system is missing required boundary terms: {', '.join(missing_terms)}",
+                )
+            )
+        if not re.search(r"\b(outline|texture|opacity|grayscale|alt text|phase table)\b", force_system, re.IGNORECASE):
+            findings.append(
+                Finding(
+                    path,
+                    "advanced_rowing_force_non_color_cue_missing",
+                    "force-intensity visual system must not rely on color alone",
+                )
+            )
+
+    for pattern in ADVANCED_ROWING_FORBIDDEN_SCOPE_PATTERNS:
+        match = pattern.search(text)
+        if match:
+            findings.append(
+                Finding(
+                    path,
+                    "advanced_rowing_forbidden_scope",
+                    f"advanced rowing page must not become personalized coaching, clinical care, race programming, or a product surface: {match.group(0)}",
+                )
+            )
             break
 
     return findings
