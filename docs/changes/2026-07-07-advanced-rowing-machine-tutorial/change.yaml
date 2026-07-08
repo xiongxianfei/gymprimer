@@ -1,6 +1,6 @@
 change_id: 2026-07-07-advanced-rowing-machine-tutorial
-status: accepted
-current_stage: pr
+status: completed
+current_stage: done
 created_date: 2026-07-07
 
 proposal: docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md
@@ -29,11 +29,12 @@ current_code_review_status: clean-with-notes
 current_verification: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md
 current_verification_status: branch-ready
 pull_request: https://github.com/xiongxianfei/gymprimer/pull/18
+merge_commit: eb57f0fbc6d3e78d0b1a38907f984fb29268bf9f
 
 review_resolution: docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-resolution.md
 review_resolution_status: closed
 
-next_stage: pr
+next_stage: none
 
 open_findings: []
 
@@ -68,6 +69,7 @@ notes:
   - Explain-change recorded the reviewed-diff rationale and routed the change to verify.
   - Final local verification passed and routed the branch to PR handoff. Hosted CI was not observed.
   - PR #18 opened from `2026-07-07-advanced-rowing-machine-tutorial` to `main`; GitHub Actions `Validation checks` was pending at handoff.
+  - PR #18 merged to `main` at merge commit `eb57f0fbc6d3e78d0b1a38907f984fb29268bf9f` after GitHub Actions `Validation checks` passed.
 
 validation:
   - command: python3 tools/checks/check_markdown_first.py docs/proposals/2026-07-07-advanced-rowing-machine-tutorial.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/reviews/proposal-review-r1.md docs/changes/2026-07-07-advanced-rowing-machine-tutorial/review-log.md

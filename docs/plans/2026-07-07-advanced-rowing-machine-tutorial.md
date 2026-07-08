@@ -2,9 +2,9 @@
 
 ## Status
 
-- Status: reviewed
-- Plan lifecycle state: active
-- Terminal disposition: not-terminal
+- Status: completed
+- Plan lifecycle state: completed
+- Terminal disposition: completed by PR #18
 
 ## Purpose / big picture
 
@@ -59,9 +59,9 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - Last reviewed milestone: M3. Governed Media, Prompt Packets, and Provenance
 - Review status: code-review R5 clean-with-notes; M4 closed
 - Remaining in-scope open milestones: none
-- Next stage: pr
-- Final closeout readiness: ready for PR handoff
-- Reason final closeout is or is not ready: PR #18 is open; hosted CI was pending at handoff, and review/merge/closeout remain.
+- Next stage: none
+- Final closeout readiness: complete
+- Reason final closeout is or is not ready: PR #18 merged to `main` after GitHub Actions `Validation checks` passed.
 
 ## Milestones
 
@@ -288,6 +288,7 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - 2026-07-07: Explain-change recorded the reviewed-diff rationale in `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/explain-change.md` and routed the change to verify.
 - 2026-07-07: Final local verification passed, recorded `docs/changes/2026-07-07-advanced-rowing-machine-tutorial/verify-report.md`, and routed the change to PR handoff. Hosted CI was not observed.
 - 2026-07-07: PR #18 opened from `2026-07-07-advanced-rowing-machine-tutorial` to `main`; GitHub Actions `Validation checks` was pending at handoff.
+- 2026-07-08: PR #18 merged to `main` at merge commit `eb57f0fbc6d3e78d0b1a38907f984fb29268bf9f` after GitHub Actions `Validation checks` passed.
 
 ## Decision log
 
@@ -381,12 +382,12 @@ Images, force-intensity overlays, technical diagrams, prompt records, provenance
 - M4 implementation is closed after clean code-review R5.
 - Explain-change is complete.
 - Final local verification is complete and branch-ready is recorded in `verify-report.md`.
-- PR #18 is open; hosted CI was pending at handoff.
+- PR #18 merged after GitHub Actions `Validation checks` passed.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for PR review after hosted CI reports.
+- Complete.
 
 ## Sources
 

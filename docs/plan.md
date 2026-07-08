@@ -2,12 +2,6 @@
 
 ## Active
 
-- [Advanced Rowing Machine Tutorial](plans/2026-07-07-advanced-rowing-machine-tutorial.md)
-  - Status: reviewed
-  - Plan lifecycle state: active
-  - Current stage: pr
-  - Active context: PR #18 opened from `2026-07-07-advanced-rowing-machine-tutorial` to `main`; GitHub Actions `Validation checks` was pending at handoff.
-
 - [Safer Running Basics and High-Quality Running Images](plans/2026-07-06-safer-running-basics-and-running-images.md)
   - Status: reviewed
   - Plan lifecycle state: active
@@ -38,6 +32,12 @@
   - Active context: retained only as historical context for the structured-platform implementation path; it is not active execution guidance.
 
 ## Done (recent)
+
+- [Advanced Rowing Machine Tutorial](plans/2026-07-07-advanced-rowing-machine-tutorial.md)
+  - Status: completed
+  - Plan lifecycle state: completed
+  - Completed by: PR #18
+  - Active context: proposal/spec/architecture/plan/test-spec review, M1-M4, explain-change, final local verification, CI validation, PR handoff, and merge/closeout are complete.
 
 - [Top-Five Generated Images for Fewer-Than-Five Exercise Documents](plans/2026-07-06-top-five-generated-images-for-fewer-than-five-exercise-documents.md)
   - Status: completed
